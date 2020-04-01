@@ -1,14 +1,14 @@
 # Project information
 site_name: Gluu Server 3.1.5 Docs
-site_description: Documentation for Gluu Server Community Edition
+site_description: Documentation for Gluu Server
 
 # Copyright
 copyright: Copyright &copy; 2020, Gluu, Inc.
 
 # Repository
 docs_dir: source
-repo_name: GluuFederation/docs-ce-prod
-repo_url: https://github.com/GluuFederation/docs-ce-prod/
+repo_name: GluuFederation/docs-gluu-server-prod
+repo_url: https://github.com/GluuFederation/docs-gluu-server-prod/
 edit_uri: edit/3.1.5/docs/source
 
 # Configuration
@@ -38,19 +38,19 @@ google_analytics:
 # Navigation
 nav:
 - 'Versions':
-    - '3.1.5': 'https://gluu.org/docs/ce/3.1.5/'
-    - '4.1': 'https://gluu.org/docs/ce/4.1/'    
-    - '4.0': 'https://gluu.org/docs/ce/4.0/'    
-    - '3.1.6': 'https://gluu.org/docs/ce/3.1.6/'
-    - '3.1.4': 'https://gluu.org/docs/ce/3.1.4/'
-    - '3.1.3.1': 'https://gluu.org/docs/ce/3.1.3.1/'
-    - '3.1.3': 'https://gluu.org/docs/ce/3.1.3/'
-    - '3.1.2': 'https://gluu.org/docs/ce/3.1.2/'
-    - '3.1.1': 'https://gluu.org/docs/ce/3.1.1/'
-    - '3.1.0': 'https://gluu.org/docs/ce/3.1.0/'
-    - '3.0.2': 'https://gluu.org/docs/ce/3.0.2/'
-    - '3.0.1': 'https://gluu.org/docs/ce/3.0.1/'
-    - '2.4.4': 'https://gluu.org/docs/ce/2.4.4/'
+    - '3.1.5': 'https://gluu.org/docs/gluu-server/3.1.5/'
+    - '4.1': 'https://gluu.org/docs/gluu-server/4.1/'    
+    - '4.0': 'https://gluu.org/docs/gluu-server/4.0/'    
+    - '3.1.6': 'https://gluu.org/docs/gluu-server/3.1.6/'
+    - '3.1.4': 'https://gluu.org/docs/gluu-server/3.1.4/'
+    - '3.1.3.1': 'https://gluu.org/docs/gluu-server/3.1.3.1/'
+    - '3.1.3': 'https://gluu.org/docs/gluu-server/3.1.3/'
+    - '3.1.2': 'https://gluu.org/docs/gluu-server/3.1.2/'
+    - '3.1.1': 'https://gluu.org/docs/gluu-server/3.1.1/'
+    - '3.1.0': 'https://gluu.org/docs/gluu-server/3.1.0/'
+    - '3.0.2': 'https://gluu.org/docs/gluu-server/3.0.2/'
+    - '3.0.1': 'https://gluu.org/docs/gluu-server/3.0.1/'
+    - 'EOL Versions': 'https://gluu.org/docs/eol/'
 - ' ': 'https://gluu.org/docs'
 - ' ': 'https://gluu.org/docs'
 - Home: 'index.md'
