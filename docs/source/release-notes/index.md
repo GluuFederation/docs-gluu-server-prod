@@ -1,7 +1,7 @@
 ## Notice
 
 This document, also known as the Gluu Release Note, 
-relates to the Gluu Server Release versioned 3.1.7. The work is licensed under “The MIT License” 
+relates to the Gluu Server Release versioned 3.1.8. The work is licensed under “The MIT License” 
 allowing the use, copy, modify, merge, publish, distribute, sub-license and sale without 
 limitation and liability. This document extends only to the aforementioned release version 
 in the heading.
@@ -18,11 +18,11 @@ Status: Active Release
 
 | Released | Community EOL | Enterprise EOL |
 | --- | --- | --- |
-| November 2019 | October 2020 | April 2021 |
+| April 2020 | October 2021 | October 2022 |
 
 ## Purpose
 
-The document is released with the Version 3.1.7 of the Gluu Software. The purpose of this document is to provide the changes made/new features included in this release of the Gluu Software. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered. 
+The document is released with the Version 3.1.8 of the Gluu Software. The purpose of this document is to provide the changes made/new features included in this release of the Gluu Software. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered. 
 
 ## Background
 
@@ -35,8 +35,8 @@ The most common use cases for the Gluu Server include single sign-on (SSO), mobi
 Please visit the [Gluu Documentation Page](http://www.gluu.org/docs/ce) for the complete 
 documentation and administrative guide. 
 
-## Available components in Gluu Server 3.1.7
-- oxAuth, oxTrust, oxCore v3.1.7
+## Available components in Gluu Server 3.1.8
+- oxAuth, oxTrust, oxCore v3.1.8
 - Gluu OpenLDAP v2.4.44-5
 - Gluu OpenDJ v3.0
 - Shibboleth v3.2.1
@@ -50,59 +50,21 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
-## 3.1.7 Changes
+## 3.1.8 Changes
 
-### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.7+)
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.8+)
 
-- [#1184](https://github.com/GluuFederation/oxAuth/issues/1184) Added proper validation of access token on /clientinfo endpoint
+-[#1193](https://github.com/GluuFederation/oxAuth/pull/1193) Fix oidc session change detection
 
-- [#1177](https://github.com/GluuFederation/oxAuth/issues/1177) Backport session script changes
+-[#1217](https://github.com/GluuFederation/oxAuth/issues/1217) Forced session object push to cache on modification inside Authorization Endpoint.
 
-- [#1153](https://github.com/GluuFederation/oxAuth/issues/1153) allowPostLogoutRedirectWithoutValidation oxAuth feature doesn't work
 
--  [#1109](https://github.com/GluuFederation/oxAuth/issues/1109) oxauth does not take care requested scopes while creating client dynamically
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.8+)
 
--  [#1088](https://github.com/GluuFederation/oxAuth/issues/1088) id_token contains wrong hash of access_token for RS512 (and possibly other algorithms)
+- Fix password reset
 
-- [#1083](https://github.com/GluuFederation/oxAuth/issues/1083) `invalidateSessionCookiesAfterAuthorizationFlow=true` leads to authorization failure
+- Fix relax constraints on redirect_uri when subject type is public
 
-- [#1063](https://github.com/GluuFederation/oxAuth/issues/1063) Add a config value to allow to share the same subject identifier between two Clients with the same sector identifier
+- Fix redirect issue in registration
 
-- [#1078](https://github.com/GluuFederation/oxAuth/issues/1078) Check expiration of JWT encoded profile used in passport flows
-
-- [#1052](https://github.com/GluuFederation/oxAuth/issues/1052) Resource Owner Password Credential Grant Interception Script Buggy Logic
-
-- [#1003](https://github.com/GluuFederation/oxAuth/issues/1003) Allow to refresh 'ID Token' with grant_type refresh_token
-
-- Update jackson-databind library
-
-- Backported ROPC flow update from CE 4.0
-
-- Added secure flag to `org.gluu.i18n.Locale` cookie
-
-- Disabled request host redirect to authorization page
-
-- Set unauthenticated session state when applicaiton session script returns false
-
-### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.7+)
-
-- [#1646](https://github.com/GluuFederation/oxTrust/pull/1646) Add a config value to allow to share the same subject identifier between two Clients with the same sector identifier
-
-- [#1061](https://github.com/GluuFederation/oxTrust/issues/1061) Add search box to attribute inventory
-
-- Update jackson-databind library
-
-- Fixed metadata validation
-
-### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxShibboleth/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.7+)
-
-- Update Shibboleth from 3.3.3 to 3.4.4
-
-### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.7+)
-
-- [#534](https://github.com/GluuFederation/community-edition-setup/pull/534) Add a config value to allow to share the same subject identifier between two Clients with the same sector identifier
-
-- Migrate to amazon-corretto
-
-- Update keystore creation for latest Shibboleth
-
+- [#1928](https://github.com/GluuFederation/oxTrust/pull/1928) SAML metadata validation issue in all 4.x instances #1928
