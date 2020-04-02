@@ -1,21 +1,20 @@
-# How to reach the one billion authentication per day with Gluu Server
+# How to reach one billion authentications per day with the Gluu Server
 
-The Gluu server has been optimized with several container strategies that allow scaling micro-services and orchestrating them using kubernetes.
+The Gluu Server has been optimized with several container strategies that allow scaling micro-services and orchestrating them using Kubernetes.
 
 ## Overview
 
 This tutorial will walk through installation of Gluu on AWS EKS (Elastic Kuberentes service ) and will detail the results of the most recent load-test done on Gluu.
 
-## How to install
+## Installation
 
-### Setup Cluster
+### Set up the cluster
 
 #### Resources
 
-Couchbase needs sufficient resources to run and under higher loads this becomes critical as timeouts in connections can occur resulting in failed authentications or cut offs. 
+Couchbase needs sufficient resources to run and under higher loads. This becomes critical as timeouts in connections can occur, resulting in failed authentications or cut offs.
 
--  Follow this [guide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
- to install a cluster with worker nodes. We used `c5.12xlarge`(48 vCPU, 96 Memory(GiB)) instance type. Please make sure that you have all the `IAM` policies for the AWS user that will be creating the cluster and volumes.
+-  Follow this [guide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to install a cluster with worker nodes. We used the `c5.12xlarge`(48 vCPU, 96 GB Memory) instance type. Please make sure that you have all the `IAM` policies for the AWS user that will be creating the cluster and volumes.
  
 #### Requirements
 
@@ -36,8 +35,8 @@ Couchbase needs sufficient resources to run and under higher loads this becomes 
 | oxAuth                                   | 100         |  2.5     | 2.5 | 250           | 250       |
 | Grand Total                              |             |          |     | 610 GB        | 434       |
 
-!!!note
-    This hits `/token`. Hence the minimum TPS(Transactions per second) must be 11.5K to achieve one billion authentications in a day.
+!!!Note
+    This hits the `/token` endpoint. Therefore the minimum TPS(Transactions per second) must be 11.5K to achieve one billion authentications in a day.
    
 ##### Example EKS cluster create command used:
 
@@ -443,8 +442,8 @@ spec:
 | oxAuth                                   | 500         |  2.5     | 2.5 | 1000           | 1000      |
 | Grand Total                              |             |          |     | 1850 GB        | 1406      |
 
-!!!note
-    This needs a lot more resources as it hits  a total of 5 steps, 3 authorization steps `/token` , `/authorize`, `/oxauth/login` and 2 redirects. Hence the minimum TPS(Transactions per second) must be 60K to achieve one billion authentications in a day.
+!!!Note
+    This needs a lot more resources as it hits a total of 5 steps, 3 authorization steps `/token`, `/authorize`, `/oxauth/login` and 2 redirects. Hence the minimum TPS(Transactions per second) must be 60K to achieve one billion authentications in a day.
 
 ##### Example EKS cluster create command used:
 
@@ -860,7 +859,7 @@ spec:
     ./pygluu-kubernetes.pyz install-couchbase
     ```
    
-1. Once couchbase is up and running. Open the file `settings.json` and change `"INSTALL_COUCHBASE"` to `"N"` as seen [below](#example-settingsjson-used). Then, install Gluu.  :
+1. Once Couchbase is up and running, open the file `settings.json` and change `"INSTALL_COUCHBASE"` to `"N"` as seen [below](#example-settingsjson-used). Then, install Gluu.  :
 
     ```bash
     ./pygluu-kubernetes.pyz install
