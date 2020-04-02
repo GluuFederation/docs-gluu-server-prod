@@ -54,9 +54,9 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.8+)
 
--[#1193](https://github.com/GluuFederation/oxAuth/pull/1193) Fix oidc session change detection
+- [#1193](https://github.com/GluuFederation/oxAuth/pull/1193) Fix oidc session change detection
 
--[#1217](https://github.com/GluuFederation/oxAuth/issues/1217) Forced session object push to cache on modification inside Authorization Endpoint.
+- [#1217](https://github.com/GluuFederation/oxAuth/issues/1217) Forced session object push to cache on modification inside Authorization Endpoint.
 
 
 ### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.8+)
