@@ -23,12 +23,57 @@ For Docker deployments, provision a VM with:
 
 ### Obtain files for deployment
 
-```
-wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.0.0/pygluu-compose.pyz
-mv pygluu-compose.pyz pygluu-compose
+Download the `pygluu-compose.pyz` executable:
+
+```sh
+wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.0.2/pygluu-compose.pyz
+chmod +x pygluu-compose.pyz
 ```
 
-### Choose services
+!!!Note
+    `pygluu-compose.pyz` requires Python 3.6+ (and `python3-distutils` package if Ubuntu/Debian is used).
+
+Run the following command to generate manifests for deployment:
+
+```sh
+./pygluu-compose.pyz config
+```
+
+The generated files are similar to example below:
+
+```sh
+tree
+.
+├── couchbase.crt
+├── couchbase_password
+├── docker-compose.yml
+├── gcp_kms_creds.json
+├── gcp_kms_stanza.hcl
+├── pygluu-compose.pyz
+├── svc.casa.yml
+├── svc.cr_rotate.yml
+├── svc.key_rotation.yml
+├── svc.ldap.yml
+├── svc.oxauth.yml
+├── svc.oxd_server.yml
+├── svc.oxpassport.yml
+├── svc.oxshibboleth.yml
+├── svc.oxtrust.yml
+├── svc.radius.yml
+├── svc.redis.yml
+├── svc.vault_autounseal.yml
+├── vault_gluu_policy.hcl
+├── vault_role_id.txt
+└── vault_secret_id.txt
+
+0 directories, 21 files
+```
+
+Proceed to [deployment section](./#deploy-the-gluu-server) for basic setup of Gluu Server deployment or read the [customizing section](./#customizing-installation) for advance setup.
+
+### Customizing installation
+
+#### Choose services
 
 The following services are available during deployment:
 
@@ -60,7 +105,7 @@ SVC_VAULT_AUTOUNSEAL = True     # enable Vault auto-unseal with GCP KMS API
 
 Any services not specified in `settings.py` will follow the default settings.
 
-To override manifests (i.e. changing oxAuth service definition), add `ENABLE_OVERRIDE=yes` in `settings.sh`, for example:
+To override manifests (i.e. changing oxAuth service definition), add `ENABLE_OVERRIDE = True` in `settings.py`, for example:
 
 ```python
 ENABLE_OVERRIDE = True
@@ -78,7 +123,7 @@ services:
 
 If `docker-compose.override.yml` exists, this file will be added as the last Compose file. For reference on multiple Compose file, please take a look at [https://docs.docker.com/compose/extends/#multiple-compose-files](https://docs.docker.com/compose/extends/#multiple-compose-files).
 
-### Choose persistence backends
+#### Choose persistence backends
 
 Supported backends are LDAP, Couchbase, or mix of both (hybrid). The following config control which persistence backend is selected:
 
@@ -100,9 +145,9 @@ If `couchbase` or `hybrid` is selected, there are 2 additional steps required to
 - put Couchbase password into the `couchbase_password` file
 - the Couchbase cluster must have `data`, `index`, and `query` services at minimum
 
-### Set up Vault auto-unseal
+#### Set up Vault auto-unseal
 
-In this example, Google Cloud Platform (GCP) KMS is used to automatically unseal Vault. The following is an example of how to obtain [GCP KMS credentials](https://shadow-soft.com/vault-auto-unseal/) JSON file, and save it as `gcp_kms_creds.json` in the same directory where `run_all.sh` is located:
+In this example, Google Cloud Platform (GCP) KMS is used to automatically unseal Vault. The following is an example of how to obtain [GCP KMS credentials](https://shadow-soft.com/vault-auto-unseal/) JSON file, and save it as `gcp_kms_creds.json` in the same directory where `pygluu-compose.pyz` is located:
 
 ```json
 {
@@ -119,7 +164,7 @@ In this example, Google Cloud Platform (GCP) KMS is used to automatically unseal
 }
 ```
 
-Then, create `gcp_kms_stanza.hcl` in the same directory where `run_all.sh` is located. For example:
+Then, create `gcp_kms_stanza.hcl` in the same directory where `pygluu-compose.pyz` is located. For example:
 
 ```
 seal "gcpckms" {
@@ -137,23 +182,23 @@ seal "gcpckms" {
 Run the following command to install the Gluu Server:
 
 ```sh
-./pygluu-compose up
+./pygluu-compose.pyz up
 ```
 
 The startup process may take some time. You can keep track of the deployment by using the following command:
 
 ```sh
-./pygluu-compose logs -f
+./pygluu-compose.pyz logs -f
 ```
 
-On initial deployment, since Vault has not been configured yet, the `run_all.sh` will generate a root token and key to interact with Vault API, saved as `vault_key_token.txt`. Secure this file, as it contains the recovery key and root token.
+On initial deployment, since Vault has not been configured yet, the `pygluu-compose.pyz` will generate a root token and key to interact with Vault API, saved as `vault_key_token.txt`. Secure this file, as it contains the recovery key and root token.
 
 ### Uninstall the Gluu Server
 
 Run the following command to delete all objects during the deployment:
 
 ```sh
-./pygluu-compose down
+./pygluu-compose.pyz down
 ```
 
 ## FAQ
