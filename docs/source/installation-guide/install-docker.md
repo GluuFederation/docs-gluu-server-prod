@@ -185,13 +185,82 @@ Run the following command to install the Gluu Server:
 ./pygluu-compose.pyz up
 ```
 
-The startup process may take some time. You can keep track of the deployment by using the following command:
+Running the command above will show the deployment process:
+
+```text
+[I] Attempting to gather external IP address
+[I] Using 192.168.100.4 as external IP address
+```
+
+!!!Note
+    `pygluu-compose.pyz up` command will try to detect external IP address of the host.
+    In the example above, `192.168.100.4` is detected automatically.
+    If somehow the IP is incorrect, stop current process and set the IP address explicitly in `settings.py` (create the file if not exist).
+
+    ```python
+    # settings.py
+    HOST_IP = "192.168.100.10"  # set the external IP address explicitly
+    ```
+
+    Re-run the `pygluu-compose.pyz up` command to load new settings.
+
+```text
+Creating consul ... done
+Creating vault  ... done
+```
+
+The `consul` and `vault` services are required to provide config and secret layers used by the rest of Gluu Server services.
+
+```text
+[I] Checking Vault status
+[W] Unable to get seal status in Vault; retrying ...
+[I] Initializing Vault with 1 recovery key and token
+[I] Vault recovery key and root token saved to vault_key_token.txt
+[I] Unsealing Vault manually
+[I] Creating Vault policy for Gluu
+[I] Enabling Vault AppRole auth
+```
+
+On initial deployment, since Vault has not been configured yet, the `pygluu-compose.pyz` will generate a root token and key to interact with Vault API, saved as `vault_key_token.txt` (secure this file, as it contains the recovery key and root token).
+`pygluu-compose.pyz` will also setup Vault AppRole for interaction between other services to Vault. Note that by enabling AppRole, there will be `vault_role_id.txt` and `vault_secret_id.txt` files under working directory.
+
+```text
+[I] Attempting to gather FQDN from Consul
+[W] Unable to get FQDN from Consul; retrying ...
+[W] Unable to get FQDN from Consul; retrying ...
+[W] Unable to get FQDN from Consul; retrying ...
+Enter hostname [demoexample.gluu.org]:
+Enter country code [US]:
+Enter state [TX]:
+Enter city [Austin]:
+Enter oxTrust admin password: ***********
+Repeat password: ***********
+Enter LDAP admin password: ***********
+Repeat password: ***********
+Enter email [support@demoexample.gluu.org]:
+Enter organization [Gluu]:
+```
+
+After `consul` and `vault` have been deployed, the next things is getting config from `consul`. If there's no existing config, a series of config will be prompted to user as seen above.
+
+!!!Note
+    When prompted for hostname (which will be used as `https://<hostname>` address), using a public FQDN is highly recommended.
+    If somehow there's no way to use public FQDN, map the VM IP address and the FQDN in `/etc/hosts` file.
+
+    ```text
+    # /etc/hosts
+    192.168.100.4 demoexample.gluu.org
+    ```
+
+Wait for few seconds and the deployment will continue the rest of the processes. See [checkings logs](./#checking-the-deployment-logs) section on how to track the progress.
+
+### Checking the deployment logs
+
+The deployment process may take some time. You can keep track of the deployment by using the following command:
 
 ```sh
 ./pygluu-compose.pyz logs -f
 ```
-
-On initial deployment, since Vault has not been configured yet, the `pygluu-compose.pyz` will generate a root token and key to interact with Vault API, saved as `vault_key_token.txt`. Secure this file, as it contains the recovery key and root token.
 
 ### Uninstall the Gluu Server
 
