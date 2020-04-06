@@ -298,11 +298,11 @@
 
 ### Quickstart
 
-1) Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](#build-pygluu-kubernetespyz-manually).
+1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](#build-pygluu-kubernetespyz-manually).
 
 1. **Optional:** If using couchbase as the persistence backend. Download the couchbase [kubernetes](https://www.couchbase.com/downloads) operator package for linux and place it in the same directory as `pygluu-kubernetes.pyz`
 
-1) Run :
+1. Run :
 
   ```bash
   ./pygluu-kubernetes.pyz helm-install
@@ -310,7 +310,7 @@
 
 #### Installing Gluu using Helm manually
 
-1) Install [nginx-ingress](https://github.com/kubernetes/ingress-nginx) Helm [Chart](https://github.com/helm/charts/tree/master/stable/nginx-ingress).
+1. Install [nginx-ingress](https://github.com/kubernetes/ingress-nginx) Helm [Chart](https://github.com/helm/charts/tree/master/stable/nginx-ingress).
 
    ```bash
    helm repo add stable https://kubernetes-charts.storage.googleapis.com
@@ -318,11 +318,11 @@
    helm install <nginx-release-name> stable/nginx-ingress --namespace=<nginx-namespace>
    ```
 
-1)  - If the FQDN for gluu i.e `demoexample.gluu.org` is registered and globally resolvable, forward it to the loadbalancers address created in the previous step by nginx-ingress. A record can be added on most cloud providers to forward the domain to the loadbalancer. Forexample, on AWS assign a CNAME record for the LoadBalancer DNS name, or use Amazon Route 53 to create a hosted zone. More details in this [AWS guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html?icmpid=docs_elb_console). Another example on [GCE](https://medium.com/@kungusamuel90/custom-domain-name-mapping-for-k8s-on-gcp-4dc263b2dabe).
+1.  - If the FQDN for gluu i.e `demoexample.gluu.org` is registered and globally resolvable, forward it to the loadbalancers address created in the previous step by nginx-ingress. A record can be added on most cloud providers to forward the domain to the loadbalancer. Forexample, on AWS assign a CNAME record for the LoadBalancer DNS name, or use Amazon Route 53 to create a hosted zone. More details in this [AWS guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html?icmpid=docs_elb_console). Another example on [GCE](https://medium.com/@kungusamuel90/custom-domain-name-mapping-for-k8s-on-gcp-4dc263b2dabe).
 
     - If the FQDN is not registered acquire the loadbalancers ip if on **GCE**, or **Azure** using `kubectl get svc <release-name>-nginx-ingress-controller --output jsonpath='{.status.loadBalancer.ingress[0].ip}'` and if on **AWS** get the loadbalancers addresss using `kubectl -n ingress-nginx get svc ingress-nginx \--output jsonpath='{.status.loadBalancer.ingress[0].hostname}'`.
 
-1)  - If deploying on the cloud make sure to take a look at the helm cloud specific notes before continuing.
+1.  - If deploying on the cloud make sure to take a look at the helm cloud specific notes before continuing.
 
       * [EKS](#eks-helm-notes)
       * [GKE](#gke-helm-notes)
@@ -332,21 +332,21 @@
       * [Minikube](#minikube-helm-notes)
       * [MicroK8s](#microk8s-helm-notes)
 
-1)  **Optional:** If using couchbase as the persistence backend.
+1.  **Optional:** If using couchbase as the persistence backend.
     
-    1) Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](#build-pygluu-kubernetespyz-manually).
+    1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](#build-pygluu-kubernetespyz-manually).
     
-    1) Download the couchbase [kubernetes](https://www.couchbase.com/downloads) operator package for linux and place it in the same directory as `pygluu-kubernetes.pyz`
+    1. Download the couchbase [kubernetes](https://www.couchbase.com/downloads) operator package for linux and place it in the same directory as `pygluu-kubernetes.pyz`
 
-    1) Run:
+    1.  Run:
     
        ```bash
        ./pygluu-kubernetes.pyz couchbase-install
        ```
        
-    1) Open `settings.json` file generated from the previous step and copy over the values of `COUCHBASE_URL` and `COUCHBASE_USER`   to `global.gluuCouchbaseUrl` and `global.gluuCouchbaseUser` in `values.yaml` respectively. 
+    1. Open `settings.json` file generated from the previous step and copy over the values of `COUCHBASE_URL` and `COUCHBASE_USER`   to `global.gluuCouchbaseUrl` and `global.gluuCouchbaseUser` in `values.yaml` respectively. 
 
-1)  Make sure you are in the same directory as the `values.yaml` file and run:
+1.  Make sure you are in the same directory as the `values.yaml` file and run:
 
    ```bash
    helm install <release-name> -f values.yaml -n <namespace> .
