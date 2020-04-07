@@ -100,7 +100,6 @@ To enable/disable non-mandatory services listed above, create a file called `set
 ```python
 SVC_LDAP = True                 # will be enabled
 SVC_OXPASSPORT = False          # will be disabled
-SVC_VAULT_AUTOUNSEAL = True     # enable Vault auto-unseal with GCP KMS API
 ```
 
 Any services not specified in `settings.py` will follow the default settings.
@@ -147,7 +146,14 @@ If `couchbase` or `hybrid` is selected, there are 2 additional steps required to
 
 #### Set up Vault auto-unseal
 
-In this example, Google Cloud Platform (GCP) KMS is used to automatically unseal Vault. The following is an example of how to obtain [GCP KMS credentials](https://shadow-soft.com/vault-auto-unseal/) JSON file, and save it as `gcp_kms_creds.json` in the same directory where `pygluu-compose.pyz` is located, for example:
+Enable Vault auto-unseal with GCP KMS API by specifying it in `settings.py`:
+
+```python
+# settings.py
+SVC_VAULT_AUTOUNSEAL = True     # enable Vault auto-unseal with GCP KMS API
+```
+
+The following is an example of how to obtain [GCP KMS credentials](https://shadow-soft.com/vault-auto-unseal/) JSON file, and save it as `gcp_kms_creds.json` in the same directory where `pygluu-compose.pyz` is located, for example:
 
 ```json
 {
@@ -164,9 +170,9 @@ In this example, Google Cloud Platform (GCP) KMS is used to automatically unseal
 }
 ```
 
-Then, create `gcp_kms_stanza.hcl` in the same directory where `pygluu-compose.pyz` is located; for example:
+Afterwards, create `gcp_kms_stanza.hcl` in the same directory where `pygluu-compose.pyz` is located; for example:
 
-```
+```hcl
 seal "gcpckms" {
     credentials = "/vault/config/creds.json"
     project     = "vault-project-1234"
