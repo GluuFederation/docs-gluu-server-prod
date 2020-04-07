@@ -86,8 +86,8 @@ The following services are available during deployment:
 | `oxauth`            | `SVC_OXAUTH`           | no        | yes     |
 | `oxtrust`           | `SVC_OXTRUST`          | no        | yes     |
 | `ldap`              | `SVC_LDAP`             | no        | yes     |
-| `oxpassport`        | `SVC_OXPASSPORT`       | no        | no     |
-| `oxshibboleth`      | `SVC_OXSHIBBOLETH`     | no        | no     |
+| `oxpassport`        | `SVC_OXPASSPORT`       | no        | no      |
+| `oxshibboleth`      | `SVC_OXSHIBBOLETH`     | no        | no      |
 | `redis`             | `SVC_REDIS`            | no        | no      |
 | `radius`            | `SVC_RADIUS`           | no        | no      |
 | `vault` auto-unseal | `SVC_VAULT_AUTOUNSEAL` | no        | no      |
@@ -111,7 +111,7 @@ To override manifests (i.e. changing oxAuth service definition), add `ENABLE_OVE
 ENABLE_OVERRIDE = True
 ```
 
-Then define overrides in `docker-compose.override.yml` (create the file if not exists):
+Then define overrides in `docker-compose.override.yml` (create the file if not exist):
 
 ```yaml
 version: "2.4"
@@ -147,7 +147,7 @@ If `couchbase` or `hybrid` is selected, there are 2 additional steps required to
 
 #### Set up Vault auto-unseal
 
-In this example, Google Cloud Platform (GCP) KMS is used to automatically unseal Vault. The following is an example of how to obtain [GCP KMS credentials](https://shadow-soft.com/vault-auto-unseal/) JSON file, and save it as `gcp_kms_creds.json` in the same directory where `pygluu-compose.pyz` is located:
+In this example, Google Cloud Platform (GCP) KMS is used to automatically unseal Vault. The following is an example of how to obtain [GCP KMS credentials](https://shadow-soft.com/vault-auto-unseal/) JSON file, and save it as `gcp_kms_creds.json` in the same directory where `pygluu-compose.pyz` is located, for example:
 
 ```json
 {
@@ -164,20 +164,22 @@ In this example, Google Cloud Platform (GCP) KMS is used to automatically unseal
 }
 ```
 
-Then, create `gcp_kms_stanza.hcl` in the same directory where `pygluu-compose.pyz` is located. For example:
+Then, create `gcp_kms_stanza.hcl` in the same directory where `pygluu-compose.pyz` is located; for example:
 
 ```
 seal "gcpckms" {
     credentials = "/vault/config/creds.json"
-    project     = "<PROJECT_NAME>"
-    region      = "<REGION_NAME>"
-    key_ring    = "<KEYRING_NAME>"
-    crypto_key  = "<KEY_NAME>"
+    project     = "vault-project-1234"
+    region      = "us-east1"
+    key_ring    = "vault-keyring"
+    crypto_key  = "vault-key"
 }
 ```
 
-### Deploy the Gluu Server
+!!!Note
+    Adjust the contents of `gcp_kms_stanza.hcl` except the `credentials` value as it is mapped in `svc.vault_autounseal.yml` file.
 
+### Deploy the Gluu Server
 
 Run the following command to install the Gluu Server:
 
@@ -252,7 +254,14 @@ After `consul` and `vault` have been deployed, the next things is getting config
     192.168.100.4 demoexample.gluu.org
     ```
 
-Wait for few seconds and the deployment will continue the rest of the processes. See [checkings logs](./#checking-the-deployment-logs) section on how to track the progress.
+Wait for few seconds and the deployment will continue the rest of the processes.
+
+```
+[I] Launching Gluu Server .........................................
+[I] Gluu Server installed successfully; please visit https://demoexample.gluu.org
+```
+
+See [checkings logs](./#checking-the-deployment-logs) section on how to track the progress.
 
 ### Checking the deployment logs
 
@@ -272,7 +281,7 @@ Run the following command to delete all objects during the deployment:
 
 ## FAQ
 
-### **How to use ldapsearch**
+### How to use ldapsearch
 
 ```sh
 docker exec -ti ldap /opt/opendj/bin/ldapsearch \
@@ -286,12 +295,14 @@ docker exec -ti ldap /opt/opendj/bin/ldapsearch \
     -T "objectClass=*"
 ```
 
-### **Locked out of your Gluu deployment? This is how Vault can be manually unlocked**
+### How to unseal Vault
 
-1. Get Unseal key from `vault_key_token.txt`
+There are several ways to unseal Vault:
 
-1. Log in to the Vault container: `docker exec -it vault sh`
-
-1. Run this command : `vault operator unseal`
-
-1. Wait for about 10 mins for the containers to get back to work.
+1.  Use [auto-unseal](./#set-up-vault-auto-unseal)
+1.  Re-run `pygluu-compose up` command.
+1.  Quick manual unseal
+    1. Get unseal key from `vault_key_token.txt` file.
+    1. Log in to the Vault container: `docker exec -it vault sh`.
+    1. Run `vault operator unseal` command (a prompt will appear). Enter the unseal key.
+    1. Wait for few seconds for the containers to get back to work.
