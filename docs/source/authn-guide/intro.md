@@ -37,7 +37,7 @@ If a default ACR is not specified, oxAuth will determine it based on enabled scr
 
 ## Basic Authentication
 
-Gluu will default to Basic Authentcation, which is username and password authentication against the local Gluu LDAP. If [LDAP synchronization](../user-management/ldap-sync.md) has been configured, an existing backend LDAP server can be used for authentication.
+Gluu will default to Basic Authentication, which is username and password authentication against the local Gluu LDAP. If [LDAP synchronization](../user-management/ldap-sync.md) has been configured, an existing backend LDAP server can be used for authentication.
 
 Learn how to [configure basic authentication](./basic.md).
 
