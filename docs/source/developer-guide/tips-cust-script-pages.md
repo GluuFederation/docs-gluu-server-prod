@@ -46,7 +46,7 @@ Relevant methods:
 |boolean authenticate()|Makes the authentication flow proceed by calling the `authenticate` method of the custom script|
 |String prepareAuthenticationForStep()|Makes the authentication flow proceed by calling the `prepareForStep` method of the custom script|
 
-See also: [Person authentication](/admin-guide/custom-script.md#person-authentication)
+See also: [Person authentication](../admin-guide/custom-script.md#person-authentication)
 
 ### Category: User Management
 
