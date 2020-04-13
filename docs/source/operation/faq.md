@@ -173,11 +173,13 @@ Ports other than 443 are not supported as the port is used by Apache Web Server.
     Please use a virtual ethernet interface and a different IP address on your server
 
 ## Request email instead of username for login
-In oxTrust navigate to the Manage Authentication tab within the Configuration section. By default the Primary Key and Local Key are set to `uid`. Set those va    lues to `mail` and now your Gluu Server will expect email as the identifier instead of username.
+In oxTrust navigate to the Manage Authentication tab within the Configuration section. By default, the Primary Key and Local Key are set to `uid`. Set those values to `mail` and now your Gluu Server will expect email as the identifier instead of username.
 
 ![change2mail](../img/admin-guide/faq/change2mail.png)
 
-Now you will want to update your IDP login page to display `Email Address` as the requested identifier. In order to do that you need to modify the `login.xhtm    l` file, which is located in `/opt/jetty-x.x/temp/jetty-localhost-xxxx-oxauth.war-_oxauth-any-1234.dir/webapp`. Insert `Email Address` as the value for `outputLabel`; this snippet is under the `dialog` class. S    ee the screenshot below. Alternative solution is to put customized `login.xhtml` into /opt/gluu/jetty/oxauth/custom/pages and [restart](./services.md#restart) `oxauth` service.
+1. Click the 'Activate' button
+1. Open the 'Default Authentication' tab. Select 'auth_ldap_server'
+1. Now you will want to update your IDP login page to display `Email Address` as the requested identifier. In order to do that you need to modify the `login.xhtm    l` file, which is located in `/opt/jetty-x.x/temp/jetty-localhost-xxxx-oxauth.war-_oxauth-any-1234.dir/webapp`. Insert `Email Address` as the value for `outputLabel`; this snippet is under the `dialog` class. S    ee the screenshot below. Alternative solution is to put customized `login.xhtml` into /opt/gluu/jetty/oxauth/custom/pages and [restart](./services.md#restart) `oxauth` service.
 
 ![update-login](../img/admin-guide/faq/update-login.png)
 
