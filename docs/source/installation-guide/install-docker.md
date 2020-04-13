@@ -135,14 +135,25 @@ To choose a persistence backend, create a file called `settings.py` (if it wasn'
 PERSISTENCE_TYPE = "couchbase"      # Couchbase will be selected
 PERSISTENCE_LDAP_MAPPING = "user"   # store user mapping in LDAP
 COUCHBASE_USER = "admin"            # Couchbase user
-COUCHBASE_URL = "192.168.100.4"     # Host or IP address of Couchbase
+COUCHBASE_URL = "192.168.100.4"     # Host/IP address of Couchbase server; omit the port
 ```
 
-If `couchbase` or `hybrid` is selected, there are 2 additional steps required to satisfy dependencies:
+If `couchbase` or `hybrid` is selected, there are additional steps required to satisfy dependencies:
 
-- put Couchbase cluster certificate into the `couchbase.crt` file
-- put Couchbase password into the `couchbase_password` file
-- the Couchbase cluster must have `data`, `index`, and `query` services at minimum
+-   put Couchbase cluster certificate into the `couchbase.crt` file
+
+-   put Couchbase password into the `couchbase_password` file
+
+-   the Couchbase cluster must have `data`, `index`, and `query` services at minimum
+
+-   if `COUCHBASE_URL` is set to hostname, make sure it can be reached by DNS query; alternatively add the extra host into `docker-compose.override.yml` file, for example:
+
+    ```yaml
+    services:
+      oxauth:
+        extra_hosts:
+        - "${COUCHBASE_HOSTNAME}:${COUCHBASE_IP}"
+    ```
 
 #### Set up Vault auto-unseal
 
