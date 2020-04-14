@@ -60,6 +60,13 @@ AS redirect to `post_logout_redirect_uri` or OK (200) response indicates that AS
 
 Read the [OpenID Connect Backchannel Logout Specifications](https://openid.net/specs/openid-connect-backchannel-1_0.html) to learn more about logout with OpenID Connect.
 
+## Error response
+
+There are following types of error responses from End Session Endpoint:
+1. By default AS returns error as http code and json entity.
+2. If `allowPostLogoutRedirectWithoutValidation=true` and `clientWhiteList` matches `post_logout_redirect_uri` then AS redirects to `post_logout_redirect_uri` **without** error.
+3. If in addition to point 2 there is `errorHandlingMethod=remote` then AS redirects to `post_logout_redirect_uri` **with** error encoded as query parameters.
+
 ## SAML Logout
 Gluu Server now supports SAML Single Logout. Once it's [enabled by the administrator](../admin-guide/saml.md#saml-single-logout), the logout URL is `https://[hostname]/idp/Authn/oxAuth/logout`.
 
