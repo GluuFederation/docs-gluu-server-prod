@@ -18,8 +18,6 @@ There are a few system specific notes to follow:
 
 - **CentOS**: selinux must be set to permissive in /etc/selinux/config
 
-- **Debian 8**: make sure the `apt-transport-https` package is already installed on the target system before the `gluu-repo.list` is added. Otherwise the installation might be hindered.
-
 - **Linux containers (e.g. Docker)**: This guide does not support installation via Linux containers. See [Gluu Server Docker Edition (DE)](https://gluu.org/docs/de) documentation for detailed instructions.
   
 
@@ -53,44 +51,11 @@ The Gluu Server will create its file system under `/root/` and will be installed
 | Update/Clean Repo       | `# apt-get update`                         |
 | Install Gluu Server     | `# apt-get install gluu-server-3.1.8`      |
 
-
-#### Ubuntu Server 14.04.x
-
-!!! Important
-    Ubuntu Server 14.x has an official End of Life date of April 2019. It will not be supported in future versions of the Gluu Server.
-
-| Command Description     |               Trusty Commands         |
-|-------------------------|---------------------------------------|
-| Add Gluu Repository     | `# echo "deb https://repo.gluu.org/ubuntu/ trusty main" > /etc/apt/sources.list.d/gluu-repo.list` |
-| Add Gluu GPG Key        | `# curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -` |
-| Update/Clean Repo       | `# apt-get update`                         |
-| Install Gluu Server     | `# apt-get install gluu-server-3.1.8`      |
-
-#### CentOS 6.x
-
-| Command Description     |               CentOS 6.x              |
-|-------------------------|---------------------------------------|
-| Add Gluu Repository     | `# wget https://repo.gluu.org/centos/Gluu-centos6.repo -O /etc/yum.repos.d/Gluu.repo`|
-| Add Gluu GPG Key        | `# wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU`|
-| Import GPG Key          | `# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU`|
-| Update/Clean Repo       | `# yum clean all`                          |
-| Install Gluu Server     | `# yum install gluu-server-3.1.8`          |
-
 #### CentOS 7.x
 
 | Command Description     |               CentOS 7.2              |
 |-------------------------|---------------------------------------|
 | Add Gluu Repository     | `# wget https://repo.gluu.org/centos/Gluu-centos7.repo -O /etc/yum.repos.d/Gluu.repo` |
-| Add Gluu GPG Key        | `# wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU`|
-| Import GPG Key          | `# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU` |
-| Update/Clean Repo       | `# yum clean all`                          |
-| Install Gluu Server     | `# yum install gluu-server-3.1.8`          |
-
-#### RHEL 6.x
-
-| Command Description     |               RHEL 6.x              |
-|-------------------------------|---------------------------------------|
-| Add Gluu Repository     | `# wget https://repo.gluu.org/rhel/Gluu-rhel6.repo -O /etc/yum.repos.d/Gluu.repo` |
 | Add Gluu GPG Key        | `# wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU`|
 | Import GPG Key          | `# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU` |
 | Update/Clean Repo       | `# yum clean all`                          |
@@ -106,16 +71,6 @@ The Gluu Server will create its file system under `/root/` and will be installed
 | Update/Clean Repo       | `# yum clean all`                          |
 | Install Gluu Server     | `# yum install gluu-server-3.1.8`          |
 
-#### Debian 8 (Jessie)
-
-| Command Description     |               Jessie Commands         |
-|-------------------------|---------------------------------------|
-| Add Gluu Repository     | `# echo "deb https://repo.gluu.org/debian/ stable main" > /etc/apt/sources.list.d/gluu-repo.list`|
-| Add Gluu GPG Key        | `# curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -` |
-| Update/Clean Repo       | `# apt-get update`                         |
-| Install Gluu Server     | `# apt-get install gluu-server-3.1.8`      |
-
-
 #### Debian 9 (Stretch)
 
 | Command Description     |              Stretch Commands         |
@@ -130,7 +85,7 @@ The Gluu Server will create its file system under `/root/` and will be installed
 
 The Gluu Server is a chroot container, which must be started to proceed. 
 
-For Centos 6.x, Red Hat 6.x, Ubuntu 14/16, and Debian 8, run the following commands:
+For Ubuntu 16, run the following commands:
 
 ```
 # service gluu-server-3.1.8 start
@@ -234,19 +189,11 @@ For Ubuntu/Debian:
 Sometimes things go wrong! It can be difficult to troubleshoot issues if the steps to reproduce the issue are not clearly documented. This is why we **always** recommend creating [backups of your Gluu Server](../operation/backup.md). 
 
 ## Uninstallation
-For Ubuntu 14/16, and Debian 8:
+For Ubuntu 16 and Debian 9:
 
 ```
 # service gluu-server-3.1.8 stop
 # apt-get remove gluu-server-3.1.8
-# rm -rf /opt/gluu-server-3.1.8.save
-```
-
-For Centos 6.x, Red Hat 6.x: 
-
-```
-# service gluu-server-3.1.8 stop
-# yum remove gluu-server-3.1.8
 # rm -rf /opt/gluu-server-3.1.8.save
 ```
 
