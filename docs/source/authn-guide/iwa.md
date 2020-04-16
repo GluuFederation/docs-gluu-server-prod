@@ -6,7 +6,7 @@ SPNEGO is a technology by Microsoft that allows users to log in with their Windo
 When properly configured, the user's browser sends the user's credentials in the `Authorization` header. In this document we explain how to configure IWA to work with Gluu Server, using the [SPNEGO](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) custom script. 
 
 ## Prerequisites
-- A [Gluu Server](../installation-guide/index.md))
+- A [Gluu Server](../installation-guide/index.md)
 - An Active Directory Installation with administrative access to the server 
 - [SPNEGO Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py)
 - [Gluu SPNEGO Authentication Java Library] (https://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar)
