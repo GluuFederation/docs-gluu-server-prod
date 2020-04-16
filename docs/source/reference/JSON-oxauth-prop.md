@@ -143,7 +143,7 @@ authorizationRequestCustomAllowedParameters        | This list details the allow
 legacyDynamicRegistrationScopeParam                | Choose whether to allow legacy dynamic registration JSON array parameters
 openidScopeBackwardCompatability                   | Set to false to only allow token endpoint request for openid scope with grant type equals to authorization_code, restrict access to userinfo to scope openid and only return id_token if scope contains openid
 skipAuthorizationForOpenIdScopeAndPairwiseId       | Choose whether to skip authorization if a client has an OpenId scope and a pairwise ID
-allowPostLogoutRedirectWithoutValidation           | Allows post-logout redirect without validation for the End Session endpoint
+allowPostLogoutRedirectWithoutValidation           | Allows post-logout redirect without validation for the End Session endpoint (still AS validates it against `clientWhiteList` url pattern property)
 httpLoggingEnabled                                 | Enable/disable request/response logging filter
 httpLoggingExcludePaths                            | This list details the base URIs for which the request/response logging filter will not record activity
 externalLoggerConfiguration                        | The path to the external log4j2 logging configuration

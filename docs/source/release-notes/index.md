@@ -20,7 +20,7 @@ Status: In Development
 
 | Released | Community EOL | Enterprise EOL |
 | --- | --- | --- |
-| Upcoming | TBD | TBD |
+| May 2020 | October 2021 | October 2022 |
 
 ## Purpose
 
