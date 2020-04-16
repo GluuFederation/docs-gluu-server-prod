@@ -9,7 +9,7 @@ When properly configured, the user's browser sends the user's credentials in the
 - A [Gluu Server](../installation-guide/index.md)
 - An Active Directory Installation with administrative access to the server 
 - [SPNEGO Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py)
-- [Gluu SPNEGO Authentication Java Library] (https://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar)
+- [Gluu SPNEGO Authentication Java Library](https://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar)
 
 
 ## Active Directory Configuration 
@@ -70,19 +70,19 @@ directory, i.e. `/etc/krb5.conf`
 1. Copy the file into the Gluu server container , in the directory `/opt/gluu/jetty/oxauth/custom/libs/`
 1. Open the file `/opt/gluu/jetty/oxauth/webapps/oxauth.xml` and modify it as follows:
 
-   ```
-   <?xml version="1.0"  encoding="ISO-8859-1"?>
-   <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd">
+    ```
+    <?xml version="1.0"  encoding="ISO-8859-1"?>
+    <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd"> 
 
-   <Configure class="org.eclipse.jetty.webapp.WebAppContext">
-      <Set name="contextPath">/oxauth</Set>
-        <Set name="war">
-            <Property name="jetty.webapps" default="." />/oxauth.war
-        </Set>
-        <Set name="extractWAR">true</Set>
-        <Set name="extraClasspath">/opt/gluu/jetty/oxauth/custom/libs/gluu-spnego-auth-1.0.Final.jar</Set>
-   </Configure>
-   ```
+    <Configure class="org.eclipse.jetty.webapp.WebAppContext">
+       <Set name="contextPath">/oxauth</Set>
+         <Set name="war">
+             <Property name="jetty.webapps" default="." />/oxauth.war
+         </Set>
+         <Set name="extractWAR">true</Set>
+         <Set name="extraClasspath">/opt/gluu/jetty/oxauth/custom/libs/gluu-spnego-auth-1.0.Final.jar</Set>
+    </Configure>
+    ```
    
 1. Download the [SPNEGO Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) and install it as described [here](./customauthn.md). Name the script `spnego` make sure it is not enabled until the mandatory custom script properties which will be described further below are set. 
 
