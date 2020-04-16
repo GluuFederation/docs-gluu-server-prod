@@ -3,13 +3,13 @@
 ## Overview 
 [Integrated Windows Authentication](https://en.wikipedia.org/wiki/Integrated_Windows_Authentication) , also known as 
 SPNEGO is a technology by Microsoft that allows users to log in with their Windows Credentials to web applications. 
-When properly configured, the user's browser sends the user's credentials in the `Authorization` header. In this document we explain how to configure IWA to work with Gluu Server, using the [spnego](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) custom script. 
+When properly configured, the user's browser sends the user's credentials in the `Authorization` header. In this document we explain how to configure IWA to work with Gluu Server, using the [SPNEGO](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) custom script. 
 
 ## Prerequisites
 - A [Gluu Server](../installation-guide/index.md))
 - An Active Directory Installation with administrative access to the server 
-- [Spnego Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py)
-- [Gluu Spnego Authentication Java Library] (https://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar)
+- [SPNEGO Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py)
+- [Gluu SPNEGO Authentication Java Library] (https://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar)
 
 
 ## Active Directory Configuration 
@@ -66,7 +66,7 @@ directory, i.e. `/etc/krb5.conf`
 
  In principle, the script and it's dependencies should come pre-installed with Gluu Server. But it may happen that it's not, which is the case for previous versions of Gluu Server which weren't bundled with the script. If your Gluu Server installation comes with the script installed, skip this step. To find out if the script is already installed is to go to `Configuration` > `Manage Custom Scripts` > `Person Authentication` and look for the script called `spnego`.
 
-1. [Download](https://oxhttps://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar) the Gluu Java library for Spnego Authentication.
+1. [Download](https://oxhttps://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar) the Gluu Java library for SPNEGO Authentication.
 1. Copy the file into the Gluu server container , in the directory `/opt/gluu/jetty/oxauth/custom/libs/`
 1. Open the file `/opt/gluu/jetty/oxauth/webapps/oxauth.xml` and modify it as follows:
 
@@ -84,7 +84,7 @@ directory, i.e. `/etc/krb5.conf`
    </Configure>
    ```
    
-1. Download the [Spnego Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) and install it as described [here](./customauthn.md). Name the script `spnego` make sure it is not enabled until the mandatory custom script properties which will be described further below are set. 
+1. Download the [SPNEGO Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) and install it as described [here](./customauthn.md). Name the script `spnego` make sure it is not enabled until the mandatory custom script properties which will be described further below are set. 
 
 ## Properties 
 
@@ -105,11 +105,11 @@ There are a few properties in the SPNEGO Authentication Script:
 
 ## Configure oxTrust 
 
-Follow the steps below to configure the spnego script in the oxTrust Admin GUI.
+Follow the steps below to configure the `spnego` script in the oxTrust Admin GUI.
 
 1. Navigate to `Configuration` > `Manage Custom Scripts`.
 1. Click on the `Person Authentication` tab.
-1. Scroll down to the Spnego authentication script   
+1. Scroll down to the SPNEGO authentication script   
 
     ![spnego-script](../img/admin-guide/iwa/spnego-script.png)
 
@@ -124,10 +124,10 @@ Follow the steps below to configure the spnego script in the oxTrust Admin GUI.
 
     ![enable-script](../img/admin-guide/enable.png)
 
-Now SPNEGO is an available authentication mechanism for your Gluu Server. This means that, using OpenID Connect `acr_values`, applications can now request Spnego authentication for users. 
+Now SPNEGO is an available authentication mechanism for your Gluu Server. This means that, using OpenID Connect `acr_values`, applications can now request SPNEGO authentication for users. 
 
 !!! Note 
-    To make sure Spnego has been enabled successfully, you can check your Gluu Server's OpenID Connect configuration by navigating to the following URL: `https://<hostname>/.well-known/openid-configuration`. Find `"acr_values_supported":` and you should see `"spnego"`. 
+    To make sure SPNEGO has been enabled successfully, you can check your Gluu Server's OpenID Connect configuration by navigating to the following URL: `https://<hostname>/.well-known/openid-configuration`. Find `"acr_values_supported":` and you should see `"spnego"`. 
 
 ## Make SPNEGO the Default Authentication Mechanism
 
