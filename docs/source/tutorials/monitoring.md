@@ -7,8 +7,8 @@
 ## Instructions
 
 1. Install Gluu server using one of the following
-  - [Kustomize](https://github.com/GluuFederation/enterprise-edition/blob/4.1/pygluu/kubernetes/templates/README.md#install-gluu-using-pygluu-kubernetes-with-kustomize)
-  - [Helm](https://github.com/GluuFederation/enterprise-edition/blob/4.1/pygluu/kubernetes/templates/README.md#install-gluu-using-helm)
+  - [Kustomize](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/pygluu/kubernetes/templates/README.md#install-gluu-using-pygluu-kubernetes-with-kustomize)
+  - [Helm](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/pygluu/kubernetes/templates/README.md#install-gluu-using-helm)
   
 1. Create a directory called monitoring for the manifests needed. 
   
@@ -19,7 +19,7 @@
 1. Get zip file of manifests and unzip
 
       ```bash
-      wget https://github.com/GluuFederation/enterprise-edition/raw/4.1/monitoring.zip
+      wget https://github.com/GluuFederation/cloud-native-edition/raw/4.1/monitoring.zip
       unzip monitoring.zip
       ```
 

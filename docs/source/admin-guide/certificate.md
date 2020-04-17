@@ -189,7 +189,7 @@ The following table shows all the keys that can be replaced inside the gluu secr
     and pasted the new key content i.e `-----BEGIN RSA PRIVATE KEY-----...-----END RSA PRIVATE KEY-----`
     
 
-1. Download latest [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases) and run `update-secret` command.
+1. Download latest [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases) and run `update-secret` command.
 
     ```bash
     ./pygluu-kubernetes.pyz update-secret

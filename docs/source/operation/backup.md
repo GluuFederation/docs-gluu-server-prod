@@ -161,9 +161,9 @@ This guide introduces how to backup data and restore from a backup file.
 
 #### Install backup strategy
 
-A typical installation of Gluu using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases)  will automatiically install a backup strategy that will backup Couchbase every 5 mins to a persistent volume. However, the Couchbase backup can be setup manually:
+A typical installation of Gluu using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases)  will automatiically install a backup strategy that will backup Couchbase every 5 mins to a persistent volume. However, the Couchbase backup can be setup manually:
 
-1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](https://github.com/GluuFederation/enterprise-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
 
 1.  Run :
 
@@ -265,7 +265,7 @@ kubectl get secret gluu -n <Gluu-namespace> -o yaml > secrets-<date>.yaml
     
 ##### Gluu restore step
 
-1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](https://github.com/GluuFederation/enterprise-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
 
 1.  Run :
 
@@ -277,9 +277,9 @@ kubectl get secret gluu -n <Gluu-namespace> -o yaml > secrets-<date>.yaml
 
 #### Install backup strategy
 
-A typical installation of Gluu using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases)  will automatiically install a backup strategy that will backup opendj / wren:ds every 10 mins `/opt/opendj/ldif`. However, the couchbase backup can be setup manually:
+A typical installation of Gluu using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases)  will automatiically install a backup strategy that will backup opendj / wren:ds every 10 mins `/opt/opendj/ldif`. However, the couchbase backup can be setup manually:
 
-1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](https://github.com/GluuFederation/enterprise-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
 
 1.  Run :
 

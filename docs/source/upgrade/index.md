@@ -103,7 +103,7 @@ This guide introduces how to upgrade from one version to another.
 
 #### Kustomize
 
-1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](https://github.com/GluuFederation/enterprise-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
 
 1.  **If using LDAP**: Create configmap for `101-ox.ldif` file.
 
@@ -111,7 +111,7 @@ This guide introduces how to upgrade from one version to another.
     kubectl create cm oxldif -n gluu --from-file=101-ox.ldif
     ```
     
-1.  **If using LDAP**: Mount [101-ox.ldif](https://raw.githubusercontent.com/GluuFederation/enterprise-edition/4.1/pygluu/kubernetes/templates/ldap/base/101-ox.ldif) in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset opendj -n gluu`
+1.  **If using LDAP**: Mount [101-ox.ldif](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.1/pygluu/kubernetes/templates/ldap/base/101-ox.ldif) in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset opendj -n gluu`
 
     ```yaml
       volumes:
@@ -204,7 +204,7 @@ This guide introduces how to upgrade from one version to another.
               secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
     ```
 
-1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/enterprise-edition/4.1/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/enterprise-edition/4.1/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
+1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.1/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.1/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
 
 1.  **If using LDAP**: Create configmap for `101-ox.ldif` file.
 
@@ -212,7 +212,7 @@ This guide introduces how to upgrade from one version to another.
     kubectl create cm oxldif -n gluu --from-file=101-ox.ldif
     ```
     
-1.  **If using LDAP**: Mount [101-ox.ldif](https://raw.githubusercontent.com/GluuFederation/enterprise-edition/4.1/pygluu/kubernetes/templates/ldap/base/101-ox.ldif) in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset opendj -n gluu`
+1.  **If using LDAP**: Mount [101-ox.ldif](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.1/pygluu/kubernetes/templates/ldap/base/101-ox.ldif) in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset opendj -n gluu`
 
     ```yaml
       volumes:

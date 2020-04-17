@@ -849,7 +849,7 @@ spec:
 
 ### Install Gluu using `pygluu-kubernetes` with Kustomize
 
-1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/enterprise-edition/releases). This package can be built [manually](https://github.com/GluuFederation/enterprise-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
 
 1. Configure `couchbase-cluster.yaml`. The file is used to create the couchbase cluster. Two examples of `couchbase-cluster.yaml` are provided above according to  [ROPC-flow](#example-couchbase-clusteryaml-used-with-ropc-flow) and [Authorization-flow](#example-couchbase-clusteryaml--used-with-authorization-code-flow). Notice that `COUCHBASE_CLUSTER_FILE_OVERRIDE` is set to `Y` [below](#example-settingsjson-used). This file is placed in the same directory as `./pygluu-kubernetes.pyz`
 
@@ -866,7 +866,7 @@ spec:
     ```  
 
 !!!note
-    Prompts will ask for the rest of the information needed. You may generate the manifests (yaml files) and continue to deployment or just generate the  manifests (yaml files) during the execution of `pygluu-kubernetes.pyz`. `pygluu-kubernetes.pyz` will output a file called `settings.json` holding all the parameters. More information about this file and the vars it holds is [here](../installation-guide/install-kubernetes.md#settingsjson-parameters-file-contents) but  please don't manually create this file as the script can generate it using [`pygluu-kubernetes.pyz generate-settings`](https://github.com/GluuFederation/enterprise-edition/releases). 
+    Prompts will ask for the rest of the information needed. You may generate the manifests (yaml files) and continue to deployment or just generate the  manifests (yaml files) during the execution of `pygluu-kubernetes.pyz`. `pygluu-kubernetes.pyz` will output a file called `settings.json` holding all the parameters. More information about this file and the vars it holds is [here](../installation-guide/install-kubernetes.md#settingsjson-parameters-file-contents) but  please don't manually create this file as the script can generate it using [`pygluu-kubernetes.pyz generate-settings`](https://github.com/GluuFederation/cloud-native-edition/releases). 
 
 #### Example `settings.json` used.
 
