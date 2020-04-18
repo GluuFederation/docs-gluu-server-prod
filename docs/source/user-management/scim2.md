@@ -576,7 +576,7 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 
 ```
 <properties>
-	<scim.client.version>4.1.Final</scim.client.version>
+	<scim.client.version>4.2.Final</scim.client.version>
 </properties>
 ...
 <repositories>
@@ -588,15 +588,15 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 </repositories>
 ...
 <dependency>
-  <groupId>gluu.scim.client</groupId>
-  <artifactId>scim-client2</artifactId>
+  <groupId>org.gluu</groupId>
+  <artifactId>scim-client</artifactId>
   <version>${scim.client.version}</version>
 </dependency>
 ```
 
-Ideally, the SCIM-Client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.1, you should also use SCIM-Client v4.1.
+Ideally, the SCIM-Client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use SCIM-Client v4.2.
 
-If you don't want to use Maven, you can download the jar file for SCIM-Client here: [https://ox.gluu.org/maven/gluu/scim/client/SCIM-Client](https://ox.gluu.org/maven/gluu/scim/client/SCIM-Client). This may require you to add other libraries (jar files dependencies) manually.
+If you don't want to use Maven, you can download the jar file for SCIM-Client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
 ### Simple Retrieval
 
@@ -616,21 +616,21 @@ import java.util.List;
 
 public class TestScimClient {
 
-    private String domainURL="https://<host-name>/identity/restv1";
-    private String OIDCMetadataUrl="https://<host-name>/.well-known/openid-configuration";
+    private String domainURL = "https://<host-name>/identity/restv1";
+    private String OIDCMetadataUrl = "https://<host-name>/.well-known/openid-configuration";
     
     private Logger logger = LogManager.getLogger(getClass());
 
     private void simpleSearch() throws Exception {
 
-        ClientSideService client=ScimClientFactory.getTestClient(domainURL, OIDCMetadataUrl);
+        ClientSideService client = ScimClientFactory.getTestClient(domainURL, OIDCMetadataUrl);
         String filter = "userName eq \"admin\"";
 
         Response response = client.searchUsers(filter, 1, 1, null, null, null, null);
-        List<BaseScimResource> resources=response.readEntity(ListResponse.class).getResources();
+        List<BaseScimResource> resources = response.readEntity(ListResponse.class).getResources();
 
         logger.info("Length of results list is: {}", resources.size());
-        UserResource admin=(UserResource) resources.get(0);
+        UserResource admin = (UserResource) resources.get(0);
         logger.info("First user in the list is: {}", admin.getDisplayName());
         
         client.close();
@@ -674,9 +674,6 @@ The following lists the steps required to switch the java client to support acce
 - **IMPORTANT**: Check RPT connection pooling is enabled in oxTrust. Login to oxTrust and go to `Configuration` > `JSON Configuration`. Scroll down to `rptConnectionPoolUseConnectionPooling` and set the flag to true. To finish press `Save configuration` at the bottom of the page.
 
 #### Supplying custom request headers
-
-!!! Note
-    This feature is only available in artifact 4.1.1.Final
 
 You can make the client send extra header parameters upon every request by setting some Java system variables:
 
@@ -743,7 +740,7 @@ Create a project in your favorite IDE, and if using maven add the following snip
 
 ```
 <properties>
-	<scim.client.version>4.1.Final</scim.client.version>
+	<scim.client.version>4.2.Final</scim.client.version>
 </properties>
 ...
 <repositories>
@@ -755,15 +752,15 @@ Create a project in your favorite IDE, and if using maven add the following snip
 </repositories>
 ...
 <dependency>
-  <groupId>gluu.scim.client</groupId>
-  <artifactId>scim-client2</artifactId>
+  <groupId>org.gluu</groupId>
+  <artifactId>scim-client</artifactId>
   <version>${scim.client.version}</version>
 </dependency>
 ```
 
-Ideally the SCIM-Client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.1, you should also use SCIM-Client v4.1.
+Ideally the SCIM-Client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use SCIM-Client v4.2.
 
-If you don't want to use Maven, you can download the jar file for SCIM-Client here: [https://ox.gluu.org/maven/gluu/scim/client/SCIM-Client](https://ox.gluu.org/maven/gluu/scim/client/SCIM-Client). This may require you to add other libraries (jar files dependencies) manually.
+If you don't want to use Maven, you can download the jar file for SCIM-Client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
 #### Simple Retrieval
 
@@ -783,7 +780,7 @@ import java.util.List;
 
 public class TestScimClient {
 
-    private String domainURL="https://<host-name>/identity/restv1";
+    private String domainURL = "https://<host-name>/identity/restv1";
     private String umaAatClientId = "<requesting-party-client-id>";
     private String umaAatClientJksPath = "<path-to-RP-jks>/scim-rp.jks";
     private String umaAatClientJksPassword = "<jks-password>";
@@ -793,14 +790,14 @@ public class TestScimClient {
 
     private void simpleSearch() throws Exception {
 
-        ClientSideService client=ScimClientFactory.getClient(domainURL, umaAatClientId, umaAatClientJksPath, umaAatClientJksPassword, umaAatClientKeyId);
+        ClientSideService client = ScimClientFactory.getClient(domainURL, umaAatClientId, umaAatClientJksPath, umaAatClientJksPassword, umaAatClientKeyId);
         String filter = "userName eq \"admin\"";
 
         Response response = client.searchUsers(filter, 1, 1, null, null, null, null);
-        List<BaseScimResource> resources=response.readEntity(ListResponse.class).getResources();
+        List<BaseScimResource> resources = response.readEntity(ListResponse.class).getResources();
 
         logger.info("Length of results list is: {}", resources.size());
-        UserResource admin=(UserResource) resources.get(0);
+        UserResource admin = (UserResource) resources.get(0);
         logger.info("First user in the list is: {}" + admin.getDisplayName());
         
         client.close();
