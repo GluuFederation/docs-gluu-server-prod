@@ -110,7 +110,7 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `ldap_ssl_cacert`                         | pyDes + base64          | /etc/certs/opendj.pem             |
 | `ldap_ssl_cert`                           | pyDes + base64          | /etc/certs/opendj.crt             |
 | `ldap_ssl_key`                            | pyDes + base64          | /etc/certs/opendj.key             |
-| `ldap_truststore_pass`                    | pyDes + base64          |                                   |
+| `ldap_truststore_pass`                    | base64                  |                                   |
 | `oxauthClient_encoded_pw`                 | pyDes + base64          |                                   |
 | `oxauth_jks_base64`                       | pyDes + base64          | /etc/certs/oxauth-keys.jks        |
 | `oxauth_openid_jks_pass`                  | base64                  |                                   |
@@ -207,3 +207,33 @@ kubectl get configmap  gluu -n <namespace> -o yaml
     ```bash
     keytool -list -v -keystore /etc/certs/scim-rp.jks --storepass scim_rs_client_jks_pass_decoded
     ```
+
+### Opening `/etc/certs/opendj.pkcs12` file
+
+!!! Note
+    We assume Gluu is installed in a namespace called `gluu`
+
+1. Make a directory called `delete_me`
+
+    ```bash
+    mkdir delete_me && cd delete_me
+    ```
+   
+1. Get the `ldap_truststore_pass`  from backend secret and save `ldap_truststore_pass`  in a file called `ldap_truststore_pass`
+
+    ```bash
+    kubectl get secret gluu -o json -n gluu | grep '"ldap_truststore_pass":' | sed -e 's#.*:\(\)#\1#' | tr -d '"' | tr -d "," | tr -d '[:space:]' > ldap_truststore_pass
+    ```
+
+1. Base64 decode the `ldap_truststore_pass` and save the decoded `ldap_truststore_pass` in a file called `ldap_truststore_pass_decoded`
+
+    ```bash
+    base64 -d ldap_truststore_pass > ldap_truststore_pass_decoded
+    ```
+
+1. Use `ldap_truststore_pass_decoded` to unlock `/etc/certs/opendj.pkcs12` in opendj pod.
+
+    ```bash
+    keytool -list -v -keystore /etc/certs/opendj.pkcs12 --storepass ldap_truststore_pass_decoded
+    ```
+    
