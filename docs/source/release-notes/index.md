@@ -43,9 +43,58 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
-## New features
+<!--
 
-## Fixes / Enhancements
+## Version 4.1.1
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup)
+1. Allow post-install RADIUS.
+2. Remove `del`, `exp` indexes in `gluu_cache` and `gluu_token` Couchbase buckets
+3. Fix database connections issues in Casa/SAML scripts
+4. Add missing `exp` index (LDAP only)
+5. Fix IDP3 `idp-metadata.xml` template
+6. Fix OpenDJ schema
+
+### [GluuFederation/oxCore](https://github.com/GluuFederation/oxCore)
+
+1. Couchbase TTL support.
+2. Use TTL in Native Cache (Couchbase only)
+3. Don't try to delete expired cache entry in Native Cache on get operation (Couchbase only)
+4. Document store support: Local/JCA
+5. Introduce more connection parameters for jedis client to get better performance #182
+6. Fix bind connection creation when LDAP server not requires password
+7. Fix scan consistency check if filter uses LOWER keyword
+8. Use Jython 2.7.2
+
+### [GluuFederation/Casa](https://github.com/GluuFederation/casa)
+
+1. Fix DB connections issue
+
+### [GluuFederation/oxidp](https://github.com/GluuFederation/oxidp)
+
+1. Fix Gluu cache entry update.
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust)
+
+1. SAML metadata validation issue in all 4.x instances #1928
+2. Added new redis configuration properties to UI (oxCore #182)
+3. Fix custom script properties scope
+4. Added provisional code for attributes cache clearing #1934
+5. Added jwksAlgorithmsSupported oxAuth json conf property #1933
+6. Update unsecure uri error message in client form
+7. GUI for Store IDP/SP files in configurable document store #1939
+8. Fix custom script SAML ACR selection
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth)
+
+1. Remove bootfaces on default login page.
+2. Add JSON Configuration properties to control JWKS endpoint algorithms #1292
+3. Fixed bug with keyRegenerationInterval which did not work if value is more then 595 (due to type overflow) #1299
+
+-->
+
+## 4.1 
+
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.1+)
 
 - [#1237](https://github.com/GluuFederation/oxAuth/issues/1237) Overlap in QR code scanning for super gluu authentication
