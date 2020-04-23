@@ -422,3 +422,4 @@ The FacesMessage service can be used to pass specific error conditions to be dis
     ```
     if user_name is None
     facesMessages.add(FacesMessage.SEVERITY_ERROR, "Please enter the username")
+    ```
