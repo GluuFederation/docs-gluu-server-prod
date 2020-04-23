@@ -21,7 +21,7 @@ To enable user registration via the Gluu Server, follow these steps:
     
 1. To add an email activation sequence, also enable the `user_confirm_registration` script and [configure SMTP](https://gluu.org/docs/ce/admin-guide/oxtrust-ui/#smtp-server-configuration).   
 
-1. New users will now be able to register for accounts at: `https://<hostname>/identity/register`.     
+1. New users will now be able to register for accounts at: `https://<hostname>/identity/register.htm`.     
 
 ## Adding Attributes to Registration  
 A limited number of attributes are present in the default registration form. More attributes can be added as needed by following the doc for [adding attributes](../admin-guide/oxtrust-ui.md#manage-registration).  
