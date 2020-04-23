@@ -88,9 +88,9 @@ and look for the script called `spnego`.
    ```
 1. Download the [Spnego Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) and install it as described [here](./customauthn.md). Name the script `spnego` make 
 sure it is not enabled until the mandatory custom script properties which will be described further below are set. 
-1. Download the html pages [here](https://github.com/GluuFederation/gluu-spnego-auth/tree/master/pages/spnego)
+1. Download the HTML pages [here](https://github.com/GluuFederation/gluu-spnego-auth/tree/master/pages/spnego)
 1. Login into your Gluu installation (chroot)
-1. Create a directory called `spnego` under `/opt/gluu/jetty/oxauth/custom/pages/` and copy the html pages downloaded above
+1. Create a directory called `spnego` under `/opt/gluu/jetty/oxauth/custom/pages/` and copy the HTML pages downloaded above
 1. Restart oxauth
 
 ## Properties 
@@ -138,7 +138,7 @@ Now SPNEGO is an available authentication mechanism for your Gluu Server. This m
 
 ## Make SPNEGO the Default Authentication Mechanism
 
-Now applications can request SPNEGO authentication, but what if you want to make Duo your default authentication mechanism? You can follow these instructions: 
+Now applications can request SPNEGO authentication, but what if you want to make it your default authentication mechanism? You can follow these instructions: 
 
 1. Navigate to `Configuration` > `Manage Authentication`. 
 1. Select the `Default Authentication Method` tab. 
