@@ -6,11 +6,11 @@ SPNEGO is a technology by Microsoft that allows users to log in with their Windo
 When properly configured, the user's browser sends the user's credentials in the `Authorization` header. In this document we explain how to configure IWA to work with Gluu Server, using the [SPNEGO](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) custom script. 
 
 ## Prerequisites
-- A [Gluu Server](../installation-guide/index.md)
-- An Active Directory Installation with administrative access to the server 
-- [SPNEGO Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py)
-- [Gluu SPNEGO Authentication Java Library](https://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar)
-
+- An Active Directory Installation with administrative access to the server
+- A Gluu Server ([installation instructions](../installation-guide/index.md)) which has been configured 
+  fopr authentication against the AD server. See [ldap sync](https://gluu.org/docs/gluu-server/user-management/ldap-sync/)
+- [Spnego Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py)
+- [Gluu Spnego Authentication Java Library] (https://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar)
 
 ## Active Directory Configuration 
 
@@ -62,29 +62,36 @@ The main entries to change are the following:
 Once done , transfer the krb5.conf file to the Gluu Server instance. A good idea would be to place it in the `/etc`
 directory, i.e. `/etc/krb5.conf` 
 
-## Manually installing the script and it's dependencies 
+## Manually installing the script and it's dependencies
+ In principle, the script and it's dependencies should come pre-installed with Gluu Server. But it may happen 
+ that it's not , which is the case for previous versions of Gluu Server which weren't bundled with the script.
+ If your Gluu Server installation comes with the script installed, skip this step. 
+ To find out if the script is already installed is to go to `Configuration` > `Manage Custom Scripts` > `Person Authentication`
+and look for the script called `spnego`. 
 
- In principle, the script and it's dependencies should come pre-installed with Gluu Server. But it may happen that it's not, which is the case for previous versions of Gluu Server which weren't bundled with the script. If your Gluu Server installation comes with the script installed, skip this step. To find out if the script is already installed is to go to `Configuration` > `Manage Custom Scripts` > `Person Authentication` and look for the script called `spnego`.
-
-1. [Download](https://oxhttps://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar) the Gluu Java library for SPNEGO Authentication.
+1. [Download](https://ox.gluu.org/maven/org/gluu/gluu-spnego-auth/1.0.Final/gluu-spnego-auth-1.0.Final.jar) the Gluu Java library for Spnego Authentication.
+1. Login into your Gluu installation (chroot)
 1. Copy the file into the Gluu server container , in the directory `/opt/gluu/jetty/oxauth/custom/libs/`
-1. Open the file `/opt/gluu/jetty/oxauth/webapps/oxauth.xml` and modify it as follows:
+1. Open the file `/opt/gluu/jetty/oxauth/webapps/oxauth.xml` and modify it as follows
+   ```
+   <?xml version="1.0"  encoding="ISO-8859-1"?>
+   <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd">
 
-    ```
-    <?xml version="1.0"  encoding="ISO-8859-1"?>
-    <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd"> 
-
-    <Configure class="org.eclipse.jetty.webapp.WebAppContext">
-       <Set name="contextPath">/oxauth</Set>
-         <Set name="war">
-             <Property name="jetty.webapps" default="." />/oxauth.war
-         </Set>
-         <Set name="extractWAR">true</Set>
-         <Set name="extraClasspath">/opt/gluu/jetty/oxauth/custom/libs/gluu-spnego-auth-1.0.Final.jar</Set>
-    </Configure>
-    ```
-   
-1. Download the [SPNEGO Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) and install it as described [here](./customauthn.md). Name the script `spnego` make sure it is not enabled until the mandatory custom script properties which will be described further below are set. 
+   <Configure class="org.eclipse.jetty.webapp.WebAppContext">
+      <Set name="contextPath">/oxauth</Set>
+        <Set name="war">
+            <Property name="jetty.webapps" default="." />/oxauth.war
+        </Set>
+        <Set name="extractWAR">true</Set>
+        <Set name="extraClasspath">/opt/gluu/jetty/oxauth/custom/libs/gluu-spnego-auth-1.0.Final.jar</Set>
+   </Configure>
+   ```
+1. Download the [Spnego Authentication Script](https://github.com/GluuFederation/gluu-spnego-auth/blob/master/scripts/SpnegoExternalAuthenticator.py) and install it as described [here](./customauthn.md). Name the script `spnego` make 
+sure it is not enabled until the mandatory custom script properties which will be described further below are set. 
+1. Download the HTML pages [here](https://github.com/GluuFederation/gluu-spnego-auth/tree/master/pages/spnego)
+1. Login into your Gluu installation (chroot)
+1. Create a directory called `spnego` under `/opt/gluu/jetty/oxauth/custom/pages/` and copy the HTML pages downloaded above
+1. Restart oxauth
 
 ## Properties 
 
@@ -131,7 +138,7 @@ Now SPNEGO is an available authentication mechanism for your Gluu Server. This m
 
 ## Make SPNEGO the Default Authentication Mechanism
 
-Now applications can request Duo authentication, but what if you want to make Duo your default authentication mechanism? You can follow these instructions: 
+Now applications can request SPNEGO authentication, but what if you want to make it your default authentication mechanism? You can follow these instructions: 
 
 1. Navigate to `Configuration` > `Manage Authentication`. 
 1. Select the `Default Authentication Method` tab. 
