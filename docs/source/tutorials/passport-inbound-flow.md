@@ -1,264 +1,243 @@
-# Inbound SAML Tutorial
+# End to End Passport-SAML Proof of Concept with Gluu Server
 
 ## Overview
 
 This tutorial offers a step-by-step guide for setting up a basic proof-of-concept environment showcasing an Inbound SAML user authentication flow. Refer to general documentation describing each component for more details.
 
-## Foreword
-
-For the sake of illustration we'll use the following three abstract servers:
-
- - `[passport_dns_name]` is the host where Gluu Server v4.1 with Shibboleth IDP and Passport components is installed
- 
- - `[remote_idp_dns_name]` is another Gluu Server v4.1 instance with Shibboleth IDP installed which will serve as remote IDP in this example
- 
- - `[sp_dns_name]` is the remote SP Gluu Server with the Shibboleth SP v2.6.1 installed
-
-Whenever you see any of the three placeholders in the text below, you'll have to substitute them with real DNS names used for corresponding machines in your environment. 
-
-You also need to make sure those names can be resolved at all three server machines, plus the device that will be used as the user's machine during the test (the device where web browser used to access servers is running), either through enlisting them in DNS server's registry, or by adding them to `hosts` files at each of the machine. 
-
-In case of Gluu Server machine(s), it needs to be done inside container, not outside of it.
-
-!!! Warning  
-    Ensure that clocks are perfectly synced between all participating machines so the flow works without issues. An NTP daemon running on each machine is the easiest solution to this problem.
-
-!!! Warning  
-    The setup described here uses minimalistic configuration developed with the sole purpose of showcasing how end-to-end Passport-driven inbound SAML flow functions in Passport. It is thus strongly discouraged to leave all involved applications running longer than they are needed for the sake of showcasing without taking additional measures to secure the setup.
-
-## Configure `[sp_dns_name]` host
-
-We'll need Shibboleth SP v3.x and Apache running on the `[sp_dns_name]` machine to procceed.
-
-### Install and configure Apache
-
-#### Installation
-
-Install the required package:
-
-```
-yum install httpd mod_ssl
-```
-
-[Start](../operation/services.md#start) the `httpd` service and [stop](../operation/services.md#stop) the `iptables` service.
-
-#### Configuration
-
-1. Issue a new self-signed certificate:
-    - `# mkdir /etc/httpd/ssl`
-    - Run this command to create a certificate;  and : `# openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/httpd/ssl/apache.key -out /etc/httpd/ssl/apache.crt`
-    - When asked for a "Common Name", provide `[sp_dns_name]`
-1. Prepare the directory/files layout for the test VirtualHost:
-    - `# mkdir /var/www/html/test_shib_protected_site`
-    - `# mkdir /var/www/html/test_shib_protected_site/protected_dir`
-    - `# echo "Hello I'm a public page"'!' > /var/www/html/test_shib_protected_site/index.html`
-    - `# echo "Hi I'm a hidden page"'!' > /var/www/html/test_shib_protected_site/protected_dir/hidden.html`
-    - `# chown -R apache:apache /var/www/html/test_shib_protected_site/`
-1. Find the default "VirtualHost" definition in `/etc/httpd/conf.d/ssl.conf` (if present), and enclose it in "IfDefine" clause to not meddle with our custom VHost, as shown below:
-
-    ```
-      <IfDefine DontIgnoreDefaultVHost>
-      <VirtualHost _default_:443>
-  
-        ...
-
-      </VirtualHost>
-      </IfDefine>
-    ```
-
-1. Create `/etc/httpd/conf.d/test_site.conf` file with contents provided below:
-
-    ```
-      <VirtualHost 0.0.0.0:443>
-          DocumentRoot /var/www/html/test_shib_protected_site/
-          ServerName [sp_dns_name]:443
-      
-          SSLEngine on
-          SSLProtocol -ALL +TLSv1
-          SSLCipherSuite EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+SHA384:EECDH:EDH+aRSA:HIGH:!MEDIUM
-          SSLCertificateFile /etc/httpd/ssl/apache.crt
-          SSLCertificateKeyFile /etc/httpd/ssl/apache.key
-          UseCanonicalName On
-          <Directory /var/www/html/test_shib_protected_site>
-          AllowOverride All
-          </Directory>
-
-          <Location /protected_dir>
-            AuthType shibboleth
-            ShibRequestSetting requireSession 1
-      #       require shib-session
-            require valid-user
-          </Location>
-      </VirtualHost>
-    ```
+!!! Warning
+    This configuration is PURELY FOR SANDBOX / POC. NO ELEMENT OF THIS DOC SHOULD BE USED IN PRODUCTION SETTINGS WITHOUT THOROUGH TESTING. If a reader of this doc uses any element in their production environment, they do so at their own risk.
     
-1. [Restart](../operation/services.md#restart) the `httpd` service
+If you have further questions or confusion, feel free to open ticket in https://support.gluu.org portal. 
 
-#### Testing
+## Before we begin..
 
-Access `https://[sp_dns_name]/index.html` with your browser - you should see the welcome text of the public page you created before.
+We have three servers here in this setup. 
 
-### Install and configure Shibboleth SP v3.x in CentOS 6
+ - Gluu Server 4.1 which has Passport.js. Test FQDN: "https://test41.gluu.org" 
+ - Gluu Server 3.1.7 which will act as 'remote authentication server'. Test FQDN: "https://test317.gluu.org" 
+ - A simple Shibboleth SP which is protecting its resource. Test FQDN: "https://testappsaml.gluu.org" 
+ 
+After configuration and setup, the whole flow will look like this: https://youtu.be/WnzIVSvqhRQ
 
-#### Installation
+!!! Note
+    The Gluu Server versions can match if desired. We used an existing authentication server in this proof of concept.
 
-Run these commands to install the required packages:
+## Configure Passport Server ( Gluu Server ) 
+
+Install Gluu Server 4.1 while selecting: 
+  - Install Shibboleth SAML IDP?: Yes
+  - Install Passport?: Yes
+
+## Configure SAML SP
+
+### Used components
+
+ - Shibboleth SP 3.1.0
+ - OS: CentOS 7
+
+### Shibboleth SP installation and configuration
+
+#### Install and configure Self Signed certificate along with Apache
+
+ - `yum update`
+ - `yum install httpd`
+ - `yum install openssl`
+ - `mkdir /etc/certs/`
+ -  `yum install mod_ssl`
+ -  Create a Self signed cert with command: `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/certs/apache-selfsigned.key -out /etc/certs/apache-selfsigned.crt`
+ - `vim -N /etc/httpd/conf.d/ssl.conf`
+
+    ```
+    ....
+    ....
+    SSLCryptoDevice builtin
+    #SSLCryptoDevice ubsec
+
+    ##
+    ## SSL Virtual Host Context
+    ##
+
+    <VirtualHost _default_:443>
+
+    # General setup for the virtual host, inherited from global configuration
+    #DocumentRoot "/var/www/html"
+    ServerName testappsaml.gluu.org
+
+    #   Server Certificate:
+    # Point SSLCertificateFile at a PEM encoded certificate.  If
+    # the certificate is encrypted, then you will be prompted for a
+    # pass phrase.  Note that a kill -HUP will prompt again.  A new
+    # certificate can be generated using the genkey(1) command.
+    SSLCertificateFile /etc/certs/apache-selfsigned.crt
+
+    #   Server Private Key:
+    #   If the key is not combined with the certificate, use this
+    #   directive to point at the key file.  Keep in mind that if
+    #   you've both a RSA and a DSA private key you can configure
+    #   both in parallel (to also allow the use of DSA ciphers, etc.)
+    SSLCertificateKeyFile /etc/certs/apache-selfsigned.key
+
+
+    ```
+ - `apachectl configtest`
+ 
+ - Check if mod_headers enabled or not: 
+   ```
+   [root@ip-xxxx ~]# httpd -t -D DUMP_MODULES | grep header
+   headers_module (shared)
+   [root@ip-xxxx ~]#
+   ```
+ - `service httpd restart`  
+ 
+ - Test your Apache and cert with `https://testappsaml.gluu.org` in a web browser. You should get the Apache2 default page. 
+
+#### Install Shibboleth SP
+
+ - Configure Shibboleth SP: 
+ 
+   - Prepare repo: 
+     - Create a file named "Shib_SP.repo" inside `/etc/yum.repos.d`
+     - Add below snippet there
+       ```
+       [shibboleth]
+       name=Shibboleth (CentOS_7)
+       # Please report any problems to https://issues.shibboleth.net
+       type=rpm-md
+       mirrorlist=https://shibboleth.net/cgi-bin/mirrorlist.cgi/CentOS_7
+       gpgcheck=1
+       gpgkey=https://shibboleth.net/downloads/service-provider/RPMS/repomd.xml.key
+               https://shibboleth.net/downloads/service-provider/RPMS/cantor.repomd.xml.key
+       enabled=1
+
+       ```
+     - `yum update`
+   - `yum install shibboleth.x86_64` 
+
+
+ - Generate the cert and key for Shibboleth SP: 
+ 
+   - `cd /etc/certs/`
+   - `openssl genrsa -des3 -out sp.key 2048`
+   - `openssl rsa -in sp.key -out sp.key.insecure`
+   - `mv sp.key.insecure sp.key`
+   - `openssl req -new -key sp.key -out sp.csr`
+   - `openssl x509 -req -days 365 -in sp.csr -signkey sp.key -out sp.crt`
+ - `vim -N /etc/shibboleth/shibboleth2.xml`
+
+   - Add your SP name here: 
+   
+     ```
+     <ApplicationDefaults entityID="https://testappsaml.gluu.org/shibboleth"
+        REMOTE_USER="eppn subject-id pairwise-id persistent-id"
+        cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
+     ```
+   - Add the location of SP key and cert like below: 
+   
+     ```
+     <!-- Simple file-based resolvers for separate signing/encryption keys. -->
+        <CredentialResolver type="File" use="signing"
+            key="/etc/certs/sp.key" certificate="/etc/certs/sp.crt"/>
+        <CredentialResolver type="File" use="encryption"
+            key="/etc/certs/sp.key" certificate="/etc/certs/sp.crt"/>
+     ```
+ - `service shibd restart`
+ - `service httpd restart`
+     
+### Connect Shibboleth SP with Gluu Server
+
+ - Download your Gluu Server's metadata
+ - `shibboleth2.xml` configuration. Location: `/etc/shibboleth` in SP server: 
+   - Provide your Gluu Server's address like below: 
+
+     ```
+     <SSO entityID="https://test41.gluu.org/idp/shibboleth"
+          discoveryProtocol="SAMLDS" discoveryURL="https://ds.example.org/DS/WAYF">
+          SAML2 SAML1
+     </SSO>
+     ```
+   - Assuming your Gluu Server's metadata is downloaded in same directory ( /etc/shibboleth/ ): 
+
+     ```
+     <MetadataProvider type="XML" file="test41_gluu_org_metadata.xml"/>
+     
+     ```
+ - `service shibd restart`
+ - `service httpd restart`
+ 
+### Create and configure sample protected page
+
+ - `yum install epel-release`
+ - `yum install php`
+ - `mkdir /var/www/html/secure`
+ - `touch /var/www/html/secure/index.php`
+ - Edit index.php, add this sample script: 
 
 ```
-# cd /etc/yum.repos.d
-# wget http://download.opensuse.org/repositories/security:/shibboleth/CentOS_CentOS-6/security:shibboleth.repo
-# yum install shibboleth
-# service shibd start
-# chkconfig shibd on
+<html>
+<head><title>Shibboleth test</title></head>
+<body><pre><?php print_r($_SERVER); ?></pre></body>
+</html>
 ```
 
-#### Configuration
+ - Restart shibd and httpd again. 
 
-Edit `/etc/shibboleth/shibboleth2.xml`:
+### Connect Gluu Server with Shibboleth SP
 
-  - In "ApplicationDefaults" element change "entityID" property to "https://[sp_dns_name]/shibboleth"
-  - Within the "Sessions" element find "SSO" child element and change its "entityID" property to "https://[passport_dns_name]/idp/shibboleth"
-  - Right after "Sessions" element find a section where "MetadataProvider" elements are grouped, and add element provided below:
-    ```
-            <MetadataProvider type="XML"
-                url="https://[passport_dns_name]/idp/shibboleth"
-                backingFilePath="[passport_dns_name].metadata.xml"
-                maxRefreshDelay="7200"/>
-    ```
-  - [Restart](../operation/services.md#restart) the `shibd` service
-  - Make sure it's started with no critical issues by checking `/var/log/shibboleth/shibd.log` and running the [status](../operation/services.md#status) command on the `shibd` service
+ - Grab your Shibboleth SP's metadata. Shibboleth SP metadata can be loaded by calling this URL: `https://testappsaml.hostname/Shibboleth.sso/Metadata`
+ - Create a trust relationship like below. 
+ 
+![image](../../img/4.1/passport_saml/Trust_relationship.PNG)
+ 
+### Test SSO
 
-#### Testing combined Apache + Shibboleth SP setup
+ - Point your browser to `https://testappsaml.gluu.org/secure/index.php`. If everything goes well, you will be redirected to your Gluu Server, after successful authentication you will land in to SP's 'Environment Variable' page.
 
-Access `https://[sp_dns_name]/protected_dir/hidden.html` with your browser - you should be sent to your Gluu Server (`[passport_dns_name]`) machine;  it will respond with an error page, as it's not yet prepared to serve such a request.
+## Configure Passport Server
 
-Make sure you've achieved the described result before proceeding further.
+### Enable Passport: 
 
-## Configure `[passport_dns_name]` host
-
-### Install Passport (if needed)
-
-Passport is available as an optional component during [Gluu Server installation](https://gluu.org/docs/ce/installation-guide/). If it's missing in your instance, you can add it by performing the following actions (requires Internet access):
-
-1. Move into Gluu Server's container
-
-1. `# cd /install/community-edition-setup/`
-
-1. `wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/master/post-setup-add-components.py`
-
-1. `# chmod +x post-setup-add-components.py` 
-
-1. Run `# ./post-setup-add-components.py -addpassport`
-
-1. Run `# runuser -l node -c "cd /opt/gluu/node/passport/&&PATH=$PATH:/opt/node/bin npm install -P"`
-
-### Enable Passport
-
-1. Enable the required custom scripts:    
-
-    - In oxTrust, navigate to `Configuration` > `Custom scripts`          
-    - Navigate to the `Person Authentication` tab, expand the script labelled `passport_saml`, check `enabled`, and click `Update`  
-    - Navigate to the `UMA RPT Policies` tab, expand the script labelled `scim_access_policy`, check `enabled`, and click `Update`       
-      
-1. Enable Passport support:    
-
-    - In oxTrust navigate to `Configuration` > `Organization configuration` > `System configuration`    
-    - For `Passport support` choose `Enabled`    
-    - Click `Update`    
+As we installed 'Passport' during the installation of Gluu Server, Passport and itss required scripts are already enabled. 
 
 ### Configure SAML authentication strategy in Passport
 
-Passport expects to find information about supported remote SAML IDPs in the configuration file at `/etc/gluu/conf/passport-saml-config.json`. Every supported external IDP should be added as a separate JSON object.
+ - From oxTrust, go to `Passport` > `Providers` 
+ - Hit "Add New Provider" 
+   - `Provider ID`: anything you can recognize. 
+   - `Display Name`: same .. anything you / your end user can recognize
+   - `Type`: Select `saml`
+   - Most of the box will be automatically populated and new option list will appear below where you have to put some information of your remote authentication server. In our case, our remote authentication server is a Gluu Server 3.1.7. 
+     - `entryPoint`: `https://test317.gluu.org/idp/profile/SAML2/POST/SSO`
+     - `identifierFormat`: `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
+     - `authnRequestBinding`: `HTTP-POST`
+     - `issuer`: `urn:test:example`
+     - `cert`: The IDP's public PEM-encoded X.509 certificate used to validate incoming SAML responses. Include only the body of the certificate: suppress the BEGIN CERTIFICATE and END CERTIFICATE lines, any whitespace, and all line breaking characters (new line/carriage return). As for example if your remote IDP is another Gluu Server, you need to grab the idp-signing.crt from that server. Command can be used: `cat /etc/certs/idp-signing.crt | grep -v '^---' | tr -d '\n'`; 
+     - `skipRequestCompression` : `true` ![image](../../img/4.1/passport_saml/Add_provider_in_passport.PNG)
 
-Copy the default file into a safe location in case you need it later, clear its contents and put the following structure into it:
+## Configure Remote Authentication Server
+
+Passport will automatically generate SP metadata for every enabled IDP that is added through the admin UI. The next step is to register this metadata at every external IDP.
+
+Metadata can be accessed in a browser at https://[your-gluu-host-which-has-passport]/passport/auth/meta/idp/[PROVIDER-ID] where "PROVIDER-ID" is the identifier assigned to the IDP added. For our case it will be `https://test41.gluu.org/passport/auth/meta/idp/test317` 
+
+In oxTrust for the Gluu-passport server, navigate to Passport > Providers and see the ID column in the providers table. Metadata can also be found in the Gluu chroot under /opt/gluu/node/passport/server/idp-metadata.
+
+Registering metadata contents at remote IDPs is a process that may differ across IDP implementations. As an example, when the remote IDP is another Gluu Server, a trust relationship should be created. Review the corresponding documentation for your IDPs. 
+
+![image](../../img/4.1/passport_saml/Gluu317_TR.PNG)
+
+## Test Passport-SAML
+
+Now it's time to test our Passport-SAML workflow....
+
+### Work in Gluu-passport Server ( test41.gluu.org ) 
+
+Change Authentication method: `Configuration` > `Manage Authentication` > `Default Authentication Method` tab: select "passport_saml". And "Update" configuration. 
+
+### Work in Remote Authentication Server ( test317.gluu.org )
+
+Make sure to create a sample user. We are not going to use  'admin' for testing SSO. 
+
+### Finally...
+
+Hit `https://testappsaml.gluu.org/secure/index.php` and you will see rest like already shared video. 
  
-```
-{
-  "idp1": {
-    "entryPoint": "https://[remote_idp_dns_name]/idp/profile/SAML2/POST/SSO",
-    "issuer": "urn:test:pass-saml:showcase",
-    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
-    "authnRequestBinding": "HTTP-POST",
-    "additionalAuthorizeParams": "",
-    "skipRequestCompression": "true",
-    "logo_img": "",
-    "enable": "true",
-    "cert": "MIIDbDCCAlQCCQCuwqx2PNP....SEE.BELOW.......YsMw==",
-    "reverseMapping": {
-      "email": "email",
-      "username": "urn:oid:0.9.2342.19200300.100.1.1",
-      "displayName": "urn:oid:2.16.840.1.113730.3.1.241",
-      "id": "urn:oid:0.9.2342.19200300.100.1.1",
-      "name": "urn:oid:2.5.4.42",
-      "givenName": "urn:oid:2.5.4.42",
-      "familyName": "urn:oid:2.5.4.4",
-      "provider": "issuer"
-    }
-  }
-}
-```
-
-To acquire the value for the "cert" property in the structure above, SSH into `[remote_idp_dns_name]` host, move into the Gluu Server's container and execute this command: `# cat /etc/certs/idp-signing.crt | grep -v '^---' | tr -d '\n'; echo`
-It will return a single-string representation of the remote IDP's signing certificate you need.
-
-Now [restart](../operation/services.md#restart) the `passport` service and check its [status](../operation/services.md#status) to make sure it starts with no errors and is running.
-
-Once configuration is successfully validated, Passport will automatically generate SAML SP metadata for the single IDP listed in `passport-saml-config.json` under `/opt/gluu/node/passport/server/idp-metadata/` and will publish it at a URL like `https://[passport_dns_name]/passport/auth/meta/idp/idp1` - you'll need this metadata for one of the next steps. This IDP will also be displayed on the selector pane located at the right on Passport's login page.
-
-### Configure Trust Relationship between `[passport_dns_name]` and `[sp_dns_name]` hosts
-
-1. Download metadata of the Shibboleth SP you configured before at `https://[sp_dns_name]/Shibboleth.sso/Metadata` and save it as `gluu_shibboleth_sp_metadata.xml`
-1. Log in to oxTrust at `[passport_dns_name]`
-1. Move to `SAML` > `Trust Relationships` page
-1. Create a new trust relationship using the metadata you've just downloaded
-1. Check "Configure Relying Party", add the "SAML2SSO" profile to the list and configure it as follows:
-    - signResponses: conditional
-    - signAssertions: never
-    - signRequests: conditional
-    - encryptAssertions: never
-    - encryptNameIds: never
-    
-1. Release the "transientID", "email" and "Username" attributes
-
-## Test the bond you've created between `[passport_dns_name]` and `[sp_dns_name]` hosts
-
-So far the regular SAML Trust Relationship is formed between those two. To test it, wait a few minutes until IDP loads the updated configuration and access `https://[sp_dns_name]/protected_dir/hidden.html` again. You'll have to be redirected to `[passport_dns_name]` and land at the default oxAuth's login page this time. Log in as any user there, and you'll have to be sent back to `[sp_dns_name]` and be able to see the welcome text of the `hidden.html` page.
-
-Don't proceed further until this flow is fully functional.
-
-## Configure `[remote_idp_dns_name]` host
-
-1. Create [Trust Relationship](https://gluu.org/docs/ce/admin-guide/saml/#create-a-trust-relationship) with Passport running at `[passport_dns_name]`:
-    - Download metadata of the SP Passport created for this remote IDP published at `https://[passport_dns_name]/passport/auth/meta/idp/idp1` and save it as 'gluu_passport_sp_metadata.xml'
-    - Log in to oxTrust at `[remote_idp_dns_name]`
-    - Move to `SAML` > `Trust Relationships` page
-    - Create a new trust relationship using the metadata you've just downloaded
-    - Check "Configure Relying Party", add "SAML2SSO" profile to the list and configure it as follows:
-        - signResponses: conditional
-        - signAssertions: never
-        - signRequests: conditional
-        - encryptAssertions: never
-        - encryptNameIds: never
-    - Release "transientID", "email" and "Username" attributes
-1. Move to `Users` > `Manage People` page, locate the user you intend to log in with during the test phase and make sure it has non-empty and unique values for "email" and "Username" attributes. Both of the values ideally must not match corresponding attributes for any user at the `[passport_dns_name]` (thus it's not recommended to use the default "admin" user as a test account)
-1. Log out of the web UI to prevent the "admin" session from providing user attributes in future tests
-
-## Test the end-to-end flow from `[sp_dns_name]` through `[passport_dns_name]` to `[remote_idp_dns_name]` (and back)
-
-Two different browsers must be installed on your personal machine that you use to access all three mentioned hosts. Before proceeding with the final test, it's strongly recommended to clear all cookies still remaining in your browser(s) related to all three machines participating in this flow. Then follow these steps to enable Passport-SAML authentication method and test your completed setup:
-
-1. In your first browser, log in to the oxTrust web UI of `[passport_dns_name]` as administrator and leave this session running. You'll need it as an emergency backdoor if anything goes wrong, to revert your authentication settings. Make sure this session won't be terminated due to inactivity!
-1. In your second browser, log in to oxTrust web UI of `[passport_dns_name]` as administrator. From now on it will be your main working session
-1. Move to `Configuration` > `Manage Authentication` > `Default Authentication Method`
-1. Choose "passport_saml" for "Default acr" and click the "Update" button
-1. Log out from this session (remember to keep you other browser's session running!) and wait for a minute
-1. Access `https://[sp_dns_name]/protected_dir/hidden.html` again 
-
-If everything is working as expected after step 6, you must be redirected to the `[passport_dns_name]` host for authentication. You must land at Passport's login page and see "idp1" authentication option in the selector pane to the right. When selected, it must send you to `[remote_idp_dns_name]` host where you'll have to log in as your test user, then you'll be sent back to `[passport_dns_name]` host and be logged in there automatically (it will auto-enroll an user entry for you). Finally you must be sent back to `[sp_dns_name]` host and be able to see the welcome text of the `hidden.html` page. 
-
-In case it doesn't work, you probably will want to revert your authentication settings changes and resort to troubleshooting:
-
-1. Use the still active admin session at `[passport_dns_name]` host in your first browser 
-2. Move to `Configuration` > `Manage Authentication` > `Default Authentication Method`
-3. Choose "auth_ldap_server" for "Default acr" and click the "Update" button
-
