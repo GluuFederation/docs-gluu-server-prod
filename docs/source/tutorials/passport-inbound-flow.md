@@ -186,7 +186,7 @@ Install Gluu Server 4.1 while selecting:
  - Grab your Shibboleth SP's metadata. Shibboleth SP metadata can be loaded by calling this URL: `https://testappsaml.hostname/Shibboleth.sso/Metadata`
  - Create a trust relationship like below. 
  
-![image](../../img/4.1/passport_saml/Trust_relationship.PNG)
+![image](../img/tutorial/Trust_relationship.png)
  
 ### Test SSO
 
@@ -211,7 +211,9 @@ As we installed 'Passport' during the installation of Gluu Server, Passport and 
      - `authnRequestBinding`: `HTTP-POST`
      - `issuer`: `urn:test:example`
      - `cert`: The IDP's public PEM-encoded X.509 certificate used to validate incoming SAML responses. Include only the body of the certificate: suppress the BEGIN CERTIFICATE and END CERTIFICATE lines, any whitespace, and all line breaking characters (new line/carriage return). As for example if your remote IDP is another Gluu Server, you need to grab the idp-signing.crt from that server. Command can be used: `cat /etc/certs/idp-signing.crt | grep -v '^---' | tr -d '\n'`; 
-     - `skipRequestCompression` : `true` ![image](../../img/4.1/passport_saml/Add_provider_in_passport.PNG)
+     - `skipRequestCompression` : `true` 
+     
+     ![image](../img/tutorial/Add_provider_in_passport.png)
 
 ## Configure Remote Authentication Server
 
@@ -223,7 +225,7 @@ In oxTrust for the Gluu-passport server, navigate to Passport > Providers and se
 
 Registering metadata contents at remote IDPs is a process that may differ across IDP implementations. As an example, when the remote IDP is another Gluu Server, a trust relationship should be created. Review the corresponding documentation for your IDPs. 
 
-![image](../../img/4.1/passport_saml/Gluu317_TR.PNG)
+![image](../img/tutorial/Gluu317_TR.png)
 
 ## Test Passport-SAML
 
