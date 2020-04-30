@@ -25,6 +25,7 @@ After configuration and setup, the whole flow will look like this: https://youtu
 ## Configure Passport Server ( Gluu Server ) 
 
 Install Gluu Server 4.1 while selecting: 
+
   - Install Shibboleth SAML IDP?: Yes
   - Install Passport?: Yes
 
