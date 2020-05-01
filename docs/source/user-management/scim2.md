@@ -818,7 +818,7 @@ public class TestScimClient {
 }
 ```
 
-You can supply an alias from `scim-rp.jks` for `umaClientKeyId`. The first key from the file is used automatically when this value is left empty.
+You can supply an entry alias from `scim-rp.jks` for `umaClientKeyId`. The first key from the file is used automatically when this value is left empty. When providing `umaClientKeyId` explicitly, ensure it is associated to an RSA algorithm.
 
 Create a main method for class `TestScimClient` and call `simpleSearch` from there. When running, you will see the output of retrieving one user (admin) and see his `displayName` on the screen.
 
