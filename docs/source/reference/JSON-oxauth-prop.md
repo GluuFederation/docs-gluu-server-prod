@@ -152,6 +152,7 @@ disableJdkLogger                                   | Choose whether to disable J
 errorHandlingMethod                                | A list of possible error handling methods
 useLocalCache                                      | Cache in local memory cache attributes, scopes, clients and organization entry with expiration 60 seconds
 jwksAlgorithmsSupported                            | A list of algorithms that will be used in JWKS endpoint.
+returnClientSecretOnRead                           | Boolean value specifying whether a client_secret is returned on client GET or PUT. Set to false by default which means to not return secret.
 
 ### Brute Force Protection
 
