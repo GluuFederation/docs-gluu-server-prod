@@ -154,6 +154,7 @@ useLocalCache                                      | Cache in local memory cache
 jwksAlgorithmsSupported                            | A list of algorithms that will be used in JWKS endpoint.
 returnClientSecretOnRead                           | Boolean value specifying whether a client_secret is returned on client GET or PUT. Set to false by default which means to not return secret.
 changeSessionIdOnAuthentication                    | Boolean value specifying whether change session_id on authentication. Default value is true.
+forceOfflineAccessScopeToEnableRefreshToken        | Boolean value specifying whether force offline_access scope to enable refresh_token grant type. Default value is true.
 
 ### Brute Force Protection
 
