@@ -177,8 +177,9 @@ In oxTrust navigate to the Manage Authentication tab within the Configuration se
 
 ![change2mail](../img/admin-guide/faq/change2mail.png)
 
-1. Click the 'Activate' button
 1. Open the 'Default Authentication' tab. Select 'auth_ldap_server'
+1. Change the `Primary Key` and `Local Primary Key` to `mail`
+1. Click the 'Activate' button
 1. Now you will want to update your IDP login page to display `Email Address` as the requested identifier. In order to do that you need to modify the `login.xhtm    l` file, which is located in `/opt/jetty-x.x/temp/jetty-localhost-xxxx-oxauth.war-_oxauth-any-1234.dir/webapp`. Insert `Email Address` as the value for `outputLabel`; this snippet is under the `dialog` class. S    ee the screenshot below. Alternative solution is to put customized `login.xhtml` into /opt/gluu/jetty/oxauth/custom/pages and [restart](./services.md#restart) `oxauth` service.
 
 ![update-login](../img/admin-guide/faq/update-login.png)
