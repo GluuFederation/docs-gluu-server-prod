@@ -156,6 +156,7 @@ returnClientSecretOnRead                           | Boolean value specifying wh
 changeSessionIdOnAuthentication                    | Boolean value specifying whether change session_id on authentication. Default value is true.
 forceOfflineAccessScopeToEnableRefreshToken        | Boolean value specifying whether force offline_access scope to enable refresh_token grant type. Default value is true.
 errorReasonEnabled                                 | Boolean value specifying whether to return detailed reason of the error from AS. Default value is false.
+removeRefreshTokensForClientOnLogout               | Boolean value specifying whether to remove Refresh Tokens on logout. Default value is false.
 
 ### Brute Force Protection
 
