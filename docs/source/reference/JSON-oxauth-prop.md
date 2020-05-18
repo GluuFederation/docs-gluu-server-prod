@@ -152,7 +152,7 @@ disableJdkLogger                                   | Choose whether to disable J
 errorHandlingMethod                                | A list of possible error handling methods
 useLocalCache                                      | Cache in local memory cache attributes, scopes, clients and organization entry with expiration 60 seconds
 jwksAlgorithmsSupported                            | A list of algorithms that will be used in JWKS endpoint.
-returnClientSecretOnRead                           | Boolean value specifying whether a client_secret is returned on client GET or PUT. Set to false by default which means to not return secret.
+returnClientSecretOnRead                           | Boolean value specifying whether a client_secret is returned on client GET or PUT. Set to true by default which means to return secret.
 changeSessionIdOnAuthentication                    | Boolean value specifying whether change session_id on authentication. Default value is true.
 forceOfflineAccessScopeToEnableRefreshToken        | Boolean value specifying whether force offline_access scope to enable refresh_token grant type. Default value is true.
 errorReasonEnabled                                 | Boolean value specifying whether to return detailed reason of the error from AS. Default value is false.
