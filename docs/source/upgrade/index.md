@@ -40,10 +40,10 @@ Your upgrade directory will be the current directory. The script will create the
 
 When the upgrade script prompts:  
     
-    ```
-    If you have custom ldap schema, add them now and press c  
-    If you don't have any custom schema you can continue with pressing c
-    ```
+```
+If you have custom ldap schema, add them now and press c  
+If you don't have any custom schema you can continue with pressing c
+```
     
 Put the schema file in `/opt/opendj/config/schema/`
 
