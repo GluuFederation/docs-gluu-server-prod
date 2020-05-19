@@ -17,11 +17,13 @@ Community Edition version 4.1 must be upgraded from version 4.0.x. Explanations 
 The upgrade script can download all needed software and applications from the internet. [Skip this step](#upgrade-40-to-41) if already using 4.0. You can perform an online upgrade by following these steps:
 
 * Create directory
+
 ```
 mkdir /root/upg40
 ```
 
 * Download the upgrade script
+
 ```
 wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.0/update.py -O /root/upg40/update.py
 ```
