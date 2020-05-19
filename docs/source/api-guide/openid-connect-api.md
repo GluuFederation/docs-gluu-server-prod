@@ -927,12 +927,16 @@ For more details on [client Authentication](http://openid.net/specs/openid-conne
             <td>OpenID Connect requests MUST contain the openid scope value. If the openid scope value is not present, the behavior is entirely unspecified. Other scope values MAY be present. Scope values used that are not understood by an implementation SHOULD be ignored.</td>
             <td>string</td>
         </tr>
-        <tr>
-            <th>assertion</th>
-            <td>false</td>
-            <td>Assertion.</td>
+	<tr>
+            <th>client_assertion</th>
+            <td>true</td>
+            <td>The assertion being used to authenticate the client. Specific serialization of the assertion is defined by profile documents.</td>
             <td>string</td>
         </tr>
+	<tr>
+            <th>client_assertion_type</th>
+            <td>true</td>
+            <td>The format of the assertion as defined by the authorization server.  The value will be an absolute URI.</td>
         <tr>
             <th>refresh_token</th>
             <td>false</td>
