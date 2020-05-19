@@ -18,18 +18,22 @@ The upgrade script can download all needed software and applications from the in
 
 * Create directory
 ```
-# mkdir /root/upg40
+mkdir /root/upg40
 ```
 
 * Download the upgrade script
 ```
-# wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.0/update.py -O /root/upg40/update.py
+wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.0/update.py -O /root/upg40/update.py
 ```
 
 * Execute the script with `-o` argument
+
 ```
-# cd /root/upg40
-# python update.py -o
+cd /root/upg40
+```
+
+```
+python update.py -o
 ```
 
 Your upgrade directory will be the current directory. The script will create these directories: `app`, `war`, `temp`, `setup`
@@ -55,19 +59,22 @@ Put the schema file in `/opt/opendj/config/schema/`
 
 * Create directory
 ```
-# mkdir /root/upg410
+mkdir /root/upg410
 ```
 
 * Download the upgrade script
 ```
-# wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.1.0/upg40to410.py -O /root/upg410/upg40to410.py
+wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.1.0/upg40to410.py -O /root/upg410/upg40to410.py
 ```
 
 * Execute the script:
 
 ```
-# cd /root/upg410/
-# python upg40to410.py
+cd /root/upg410/
+```
+
+```
+python upg40to410.py
 ```
 ### 4.0 upgrade script details
 
