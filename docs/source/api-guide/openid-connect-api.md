@@ -928,9 +928,15 @@ For more details on [client Authentication](http://openid.net/specs/openid-conne
             <td>string</td>
         </tr>
         <tr>
-            <th>assertion</th>
-            <td>false</td>
-            <td>Assertion.</td>
+            <th>client_assertion</th>
+            <td>true</td>
+            <td>The assertion being used to authenticate the client. Specific serialization of the assertion is defined by profile documents.</td>
+            <td>string</td>
+        </tr>
+	<tr>
+            <th>client_assertion_type</th>
+            <td>true</td>
+            <td>The format of the assertion as defined by the authorization server.  The value will be an absolute URI.</td>
             <td>string</td>
         </tr>
         <tr>
