@@ -937,7 +937,9 @@ For more details on [client Authentication](http://openid.net/specs/openid-conne
             <th>client_assertion_type</th>
             <td>true</td>
             <td>The format of the assertion as defined by the authorization server.  The value will be an absolute URI.</td>
-        <tr>
+            <td>string</td>
+	</tr>
+	<tr>
             <th>refresh_token</th>
             <td>false</td>
             <td>Refresh token.</td>
