@@ -59,10 +59,7 @@ documentation and administrative guide.
 - [#1088](https://github.com/GluuFederation/oxAuth/issues/1088) id_token contains wrong hash of access_token for RS512
 - Don't allow user to log in with client authorization basic browser prompt
 - [#1199](https://github.com/GluuFederation/oxAuth/issues/1199) Better handling for requested scopes while creating client dynamically
-
-### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.6+)
-
-- Removed non-required redirect when the user logins, added prefix .htm for all pages
+- [#1356](https://github.com/GluuFederation/oxAuth/issues/1356) Removed non-required redirect when the user logins, added prefix .htm for all pages
 
 ## 3.1.6.sp1 Changes
 
