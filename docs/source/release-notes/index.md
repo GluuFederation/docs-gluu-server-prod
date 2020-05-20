@@ -50,11 +50,24 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
-## 3.1.6.sp1 Changes
+## 3.1.6.sp2 Changes
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.6+)
 
 - [#1063](https://github.com/GluuFederation/oxAuth/issues/1063) Add a config value to allow to share the same subject identifier between two Clients with the same sector identifier
+- [#1083](https://github.com/GluuFederation/oxAuth/issues/1083) `invalidateSessionCookiesAfterAuthorizationFlow=true` leads to authorization failure
+- [#1088](https://github.com/GluuFederation/oxAuth/issues/1088) id_token contains wrong hash of access_token for RS512
+- Don't allow user to log in with client authorization basic browser prompt
+- [#1199](https://github.com/GluuFederation/oxAuth/issues/1199) Better handling for requested scopes while creating client dynamically
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.6+)
+
+- Removed non-required redirect when the user logins, added prefix .htm for all pages
+
+## 3.1.6.sp1 Changes
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A3.1.6+)
+
 - [#1047](https://github.com/GluuFederation/oxAuth/issues/1047) Add option to KeyGenerator to specify `expiration_hours`
 - [#1076](https://github.com/GluuFederation/oxAuth/issues/1076) authorization.xhtml page no longer requires session
 
