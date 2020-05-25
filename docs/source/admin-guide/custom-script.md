@@ -129,6 +129,20 @@ Users will be prompted for consent as below.
 
 - view a [sample Consent Gathering Script](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/authz/ConsentGatheringSample.py)
 
+## Post Authn 
+
+After the browser has a session, if a person visits a website, the RP can obtain a code without the user having to authenticate or authorize. In some cases, it is desirable to insert custom business logic before granting the code or tokens from the authorization endpoint.
+Post Authn script allows to force re-authentication or re-authorization (even if client is "Pre-authorized" or client authorization persistence is on).
+
+Consent Gathering can be added via oxTrust UI and added to RP's client as shown below
+![postauthn1](../img/admin-guide/postauthn1.png)
+
+Associate Post Authn script with client (Update button must be clicked to persist changes)
+![postauthn2](../img/admin-guide/postauthn2.png)
+
+View a [Post Authn Script Sample](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/postauthn/postauthn.py)
+
+
 ## Update User     
 
 oxTrust allows an admin to add and modify users which belong to groups. In order to simplify this process and apply repeating actions, oxTrust supports an Update User script. In this script it is possible to modify a person entry before it is stored in the database.
