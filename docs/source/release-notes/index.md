@@ -43,7 +43,6 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
-<!--
 ## Version 4.1.1
 
 ### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup)
@@ -89,7 +88,6 @@ documentation and administrative guide.
 1. Remove bootfaces on default login page.
 2. Add JSON Configuration properties to control JWKS endpoint algorithms #1292
 3. Fixed bug with keyRegenerationInterval which did not work if value is more then 595 (due to type overflow) #1299
--->
 
 ## 4.1 
 
