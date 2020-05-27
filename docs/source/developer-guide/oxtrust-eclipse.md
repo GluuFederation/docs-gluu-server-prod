@@ -1,5 +1,8 @@
 # How to Build oxTrust with Eclipse
 
+!!! Important
+This page is being rewritten. The information it contains is out of date. Please bear with us until the new page is finished.
+
 ## Overview
 
 This section of the document discusses how to build oxTrust using Eclipse. This guide can be followed by developers and architects to code and customize oxTrust.
