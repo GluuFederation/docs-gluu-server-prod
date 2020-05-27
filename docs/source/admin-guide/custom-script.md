@@ -121,6 +121,10 @@ Consent Gathering can be enabled via oxTrust UI as shown below
 
 ![consent](../img/admin-guide/consentgatheringv4.png)
 
+Consent Gathering Script should be associated with client in order to be run. Otherwise it's possible to set `consentGatheringScriptBackwardCompatibility` global AS configuration property to `true`, in this case AS will look up for script with higher level globally (ignoring client configuration).
+
+![consent3](../img/admin-guide/consent3.png)
+
 Users will be prompted for consent as below.
 
 ![consent1](../img/admin-guide/consent1.png)
