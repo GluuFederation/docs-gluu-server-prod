@@ -108,6 +108,7 @@ sessionIdRequestParameterEnabled                   | Boolean value specifying wh
 sessionIdPersistOnPromptNone                       | Boolean value specifying whether to persist session ID on prompt none
 fapiCompatibility                                  | Boolean value specifying whether to turn on FAPI compatibility mode. If true AS behaves in more strict mode.
 consentGatheringScriptBackwardCompatibility        | Boolean value specifying whether to turn on Consent Gathering Script backward compatibility mode. If true AS will pick up script with higher level globally. If false (default) AS will pick up script based on client configuration.
+rejectJwtWithNoneAlg                               | Boolean value specifying whether reject JWT requested or validated with algorithm None. Default value is true.
 spontaneousScopeLifetime                           | The lifetime of spontaneous scope in seconds.
 configurationUpdateInterval                        | The interval for configuration update in seconds
 cssLocation                                        | The location for CSS files
