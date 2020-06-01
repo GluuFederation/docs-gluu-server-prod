@@ -314,6 +314,10 @@ More on SCIM can be found [here](../user-management/scim2.md)
 
 Introspection scripts allows to modify response of Introspection Endpoint ([spec](https://tools.ietf.org/html/rfc7662)).
 
+Introspection script should be associated with client in order to be run. Otherwise it's possible to set `introspectionScriptBackwardCompatibility` global AS configuration property to `true`, in this case AS will run all scripts (ignoring client configuration).
+
+![introspectionClientsConfig](../img/admin-guide/introspectionClientsConfig.png)
+
 The introspection interception script extends the base script type with the `init`, `destroy` and `getApiVersion` methods but also adds the following method(s):
 
 |Method|`def modifyResponse(self, responseAsJsonObject, context)`|
