@@ -10,7 +10,7 @@ With this procedure, we got the following result:
 
 <div>
     <a href="https://plotly.com/~git-gluu/1/?share_key=jqcylzHdH4hoDYwJ1bqy4h" target="_blank" title="load_test" style="display: block; text-align: center;"><img src="https://plotly.com/~git-gluu/1.png?share_key=jqcylzHdH4hoDYwJ1bqy4h" alt="load_test" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
-    <script data-plotly="git-gluu:1" sharekey-plotly="jqcylzHdH4hoDYwJ1bqy4h" src="https://plotly.com/embed.js" async>   </script>
+    <script data-plotly="git-gluu:1" sharekey-plotly="jqcylzHdH4hoDYwJ1bqy4h" src="https://plotly.com/embed.js" async></script>
 </div>
 
 ## Installation
