@@ -6,6 +6,13 @@ The Gluu Server has been optimized with several container strategies that allow 
 
 This tutorial will walk through installation of Gluu on AWS EKS (Elastic Kuberentes service ) and will detail the results of the most recent load-test done on Gluu.
 
+With this procedure, we got the following result:
+
+<div>
+    <a href="https://plotly.com/~git-gluu/1/?share_key=jqcylzHdH4hoDYwJ1bqy4h" target="_blank" title="load_test" style="display: block; text-align: center;"><img src="https://plotly.com/~git-gluu/1.png?share_key=jqcylzHdH4hoDYwJ1bqy4h" alt="load_test" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
+    <script data-plotly="git-gluu:1" sharekey-plotly="jqcylzHdH4hoDYwJ1bqy4h" src="https://plotly.com/embed.js" async>   </script>
+</div>
+
 ## Installation
 
 ### Set up the cluster
@@ -1316,11 +1323,3 @@ Our tests used 50 million users that were loaded to our `gluu_user` bucket. We h
 1. Login into the URL of Grafana or the ip of the loadbalancer created as `admin` and `myPasswOrd` in our example. Several dashboards can be added but the most important one here is pod monitoring. After login, press `+` on the left panel, select `Import`, and enter `6417` for the dashboard id , `Prometheus` as the data source endpoint then press `Import`.
 
 1. Create a dashbord to track requests to pods using the `nginx` metrics in the query section. The metrics are tuned as needed.
-
-### Results
-
-<div>
-    <a href="https://plotly.com/~git-gluu/1/?share_key=jqcylzHdH4hoDYwJ1bqy4h" target="_blank" title="load_test" style="display: block; text-align: center;"><img src="https://plotly.com/~git-gluu/1.png?share_key=jqcylzHdH4hoDYwJ1bqy4h" alt="load_test" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
-    <script data-plotly="git-gluu:1" sharekey-plotly="jqcylzHdH4hoDYwJ1bqy4h" src="https://plotly.com/embed.js" async></script>
-</div>
-
