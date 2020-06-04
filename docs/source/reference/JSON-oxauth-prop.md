@@ -97,7 +97,7 @@ dynamicRegistrationCustomObjectClass               | LDAP custom object class fo
 personCustomObjectClassList                        | This list details LDAP custom object classes for dynamic person enrollment
 authenticationFiltersEnabled                       | Boolean value specifying whether to enable user authentication filters
 clientAuthenticationFiltersEnabled                 | Boolean value specifying whether to enable client authentication filters
-clientRegDefaultToCodeFlowWithRefresh              | Boolean value specifying default behaviour for code flow about grant and response types.
+clientRegDefaultToCodeFlowWithRefresh              | Boolean value specifying whether to add Authorization Code Flow with Refresh grant during client registration.
 authenticationFilters                              | This list details filters for user authentication
 clientAuthenticationFilters                        | This list details filters for client authentication
 sessionIdUnusedLifetime                            | The lifetime for unused session states
