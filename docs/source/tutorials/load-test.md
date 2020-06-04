@@ -1,10 +1,8 @@
 # How to reach one billion authentications per day with the Gluu Server
 
-The Gluu Server has been optimized with several container strategies that allow scaling micro-services and orchestrating them using Kubernetes.
-
 ## Overview
 
-This tutorial will walk through installation of Gluu on AWS EKS (Elastic Kuberentes service ) and will detail the results of the most recent load-test done on Gluu.
+The Gluu Server has been optimized with several container strategies that allow scaling micro-services and orchestrating them using Kubernetes. This tutorial will walk through installation of Gluu on AWS EKS (Elastic Kuberentes service ) and will detail the results of the most recent load-test done on Gluu.
 
 With this procedure, we got the following result:
 
