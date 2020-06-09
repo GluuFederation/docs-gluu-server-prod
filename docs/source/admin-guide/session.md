@@ -97,6 +97,8 @@ HTTP/1.1 200 OK
 ```
 Similar to Token Revocation, response is always 200 even if no sessions were found. Idea is to not disclose internal information. 
 
+Swagger description can be found [here](https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/GluuFederation/oxAuth/master/docs/oxAuthSwagger.yaml#/Session%20Management/revoke-session).
+
 ## FAQ
 
 ### How can we force the user to log out if the user is idle on the RP for 4 hours?

@@ -294,3 +294,7 @@ Generates ID for given prefix and type.
     </tr>
 </table>
 - - -
+
+## Session Revocation Endpoint
+
+Swagger description can be found [here](https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/GluuFederation/oxAuth/master/docs/oxAuthSwagger.yaml#/Session%20Management/revoke-session).
