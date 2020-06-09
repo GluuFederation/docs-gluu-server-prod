@@ -75,6 +75,28 @@ It is important to note that the OP session `lastUsedAt` property is not updated
 A list of oxAuth Properties for reference can be found in 
 [oxAuth JSON Properties](../reference/JSON-oxauth-prop.md)
 
+## Session Revocation Endpoint
+
+There are traditional End Session endpoint (`/end_session`) where user can end own session. To end another user's session Session Revocation Endpoint can be used (`/revoke_session`).
+
+It requires client authentication same as Token Endpoint. Session Revocation endpoint requires `revoke_session` scope for authenticated client, otherwise request is rejected.
+Endpoint is advertised on `.well-known/openid-configuration` via `session_revocation_endpoint`.
+
+Sample request:
+```
+POST /revoke_session HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+
+user_criterion_key=uid&user_criterion_value=yuriy
+```
+
+Sample response:
+```
+HTTP/1.1 200 OK
+```
+Similar to Token Revocation, response is always 200 even if no sessions were found. Idea is to not disclose internal information. 
+
 ## FAQ
 
 ### How can we force the user to log out if the user is idle on the RP for 4 hours?
