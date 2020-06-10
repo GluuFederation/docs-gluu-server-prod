@@ -16,7 +16,7 @@ As a summary, these are the verbs a compliant SCIM server implementation (like G
 |--------|------------------------------|
 |GET|Retrieves one or more resources (e.g. Users/Groups)|
 |POST|Creates new resources, executes searches, send bulk requests (batches)|
-|PUT|Modifies resources by adding and replacing attributes|
+|PUT|Modifies resources by adding and replacing attributes only|
 |DELETE|Deletes a resource|
 |PATCH|Modifies a resource using a client-provided specific set of changes (additions, removals, and updates)|
 

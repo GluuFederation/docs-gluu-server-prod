@@ -26,7 +26,7 @@ By default, the API is not active, so the first step is just to enable it:
 
 Then, enable UMA protection mode:
 
-- Activate the UMA SCIM custom script in oxTrust admin GUI: Go to `Configuration` > `Manage Custom Scripts`, and in the tab for `UMA RPT policies` check "Enabled" for the script labeled "scim_access_policy". Finally press the "Update" button
+- Activate the UMA SCIM custom script in oxTrust admin GUI: Go to `Configuration` > `Other Custom Scripts`, and in the tab for `UMA RPT policies` check "Enabled" for the script labeled "scim_access_policy". Finally press the "Update" button
 
 ![enable uma](../img/scim/enable_uma.png)
 
@@ -82,7 +82,7 @@ To interact with the service in test mode, you will have to:
 
     - It's convenient to set the logging level for both applications to **TRACE** while in Test Mode. See the [log management](../operation/logs.md) page for more information
 
-- If familiar with the Java programming language, skip the steps listed above and simply use the [SCIM-Client](#testing-with-the-scim-client): a Java library developed by Gluu. Those steps are already implemented in the library, so usage of the service is more straightforward  
+- If familiar with the Java programming language, skip the steps listed above and simply use the [scim-client](#testing-with-the-scim-client): a Java library developed by Gluu. Those steps are already implemented in the library, so usage of the service is more straightforward  
 
 ### Create an OpenID Client
 
@@ -105,22 +105,10 @@ The more pleasant second alternative is using the Gluu server administration web
     - Client secret: Think of it as a password. Choose something safe but comfortable for your testing exercise
 
     - Application type: Native
-
-    - Persist Client Authorizations: true
-
-    - Subject type: pairwise
-
+    
     - Authentication method for the Token Endpoint: client_secret_basic
 
-    - Require Auth Time: false
-
-    - Logout Session Required: false
-
-    - Include Claims In ID Token: false
-
-    - Client Secret Expires: Choose a future date (one week ahead is fine)
-
-- Scroll down to the bottom of the page and click the "Add Scope" button, type openid in the text field, and press search. Select the row whose "display name" is **openid**, and click OK
+- Scroll down and click the "Add Scope" button, type openid in the text field, and press search. Select the row whose "display name" is **openid**, and click OK
 
 - Repeat the previous step to add the **permission** scope
 
@@ -244,7 +232,7 @@ Remember that in section [Raw HTTP requests](#raw-http-requests) below, there ar
 
 An access token lifetime is around 5 minutes, so after a short period you will start getting a small JSON response saying you are not authorized (HTTP 401) for all subsequent invocations made. This means it's time to request for a newer token.
 
-To do this, just do the same as in [this section above](https://github.com/jgomer2001/testing#request-an-access-token-to-token-endpoint) where we were issued the access token for the first time. Extract the token from the response and you can continue playing around with the SCIM API endpoints.
+To do this, just do the same as in [this section above](#request-an-access-token-to-token-endpoint) where we were issued the access token for the first time. Extract the token from the response and you can continue playing around with the SCIM API endpoints.
 
 !!! Note 
     To request an access token, the OpenId client acting on your behalf must be current: its password expiration also counts. Update your client expiration or create a new client if necessary. Just proceed as you did the first time.
@@ -394,7 +382,7 @@ As the response, you will have a JSON file that looks like this:
 ### Updating a User (PUT)
 
 !!! Note
-    The SCIM spec defines two ways to update resources: HTTP PUT and PATCH.
+    The SCIM spec defines two ways to update resources: HTTP PUT and PATCH. In Gluu Server, PUT is only intended to set and replace attribute values. PATCH supports setting, replacing and removing attribute values.
 
 Overwrite your `input.json` with the following. Replace content in angle brackets accordingly:
 
@@ -433,7 +421,7 @@ Please verify changes were applied whether by inspecting LDAP or issuing a GET. 
 
 With patching, you can be very precise about the modifications you want to apply. Patching syntax follows JSON Patch spec (RFC 6902) closely. While it's not a must to read the RFC to learn how patch works, see section 3.5.2 of SCIM protocol (RFC 7644) to get the grasp.
 
-If you prefer reading code, [patch test cases](https://github.com/GluuFederation/SCIM-Client/blob/version_4.1/scim-client2/src/test/java/gluu/scim2/client/patch) found in the Java SCIM-Client project are worth to look at.
+If you prefer reading code, [patch test cases](https://github.com/GluuFederation/scim/tree/master/scim-client/src/test/java/gluu/scim2/client/patch) found in the Java scim-client project are worth to look at.
 
 The following is a simple example that illustrates the kind of modifications developers can achieve via PATCH. Overwrite your `input.json` with the following:
 
@@ -536,7 +524,7 @@ So far, our resource should look like:
 
 Note the `primary` subattribute accompanying email "my@own.mail" is false but when inserted we provided true. This is because the SCIM specification states that after modifications are applied to resources (PUT or PATCH), there cannot be more than one item in a multi-valued attribute with primary value set as true.
 
-To see more sample JSON payloads, check the `.json` files used by the SCIM-Client test cases referenced above.
+To see more sample JSON payloads, check the `.json` files used by the scim-client test cases referenced above.
 
 In conjunction with bulk operations, patch becomes a very powerful tool to transform data.
 
@@ -556,9 +544,9 @@ Use the `inum` of our dummy user, Average Joe.
 Check your LDAP or via oxTrust to see that Joe is gone.
 
 
-## Testing with the SCIM-Client
+## Testing with the scim-client
 
-If you code in Java, you can take advantage of the ready-to-use client library [SCIM-Client](https://github.com/GluuFederation/SCIM-Client) developed by Gluu. With this client, you will be able to interact with your SCIM endpoints with no need to craft requests by hand, creating clients or requesting/refreshing access tokens. You can even use the client when your endpoints are protected by UMA: all authorization steps are handled for you.
+If you code in Java, you can take advantage of the ready-to-use client library [scim-client](https://github.com/GluuFederation/scim/tree/master/scim-client) developed by Gluu. With this client, you will be able to interact with your SCIM endpoints with no need to craft requests by hand, creating clients or requesting/refreshing access tokens. You can even use the client when your endpoints are protected by UMA: all authorization steps are handled for you.
 
 ### Requisites
 
@@ -568,7 +556,7 @@ If you code in Java, you can take advantage of the ready-to-use client library [
 
 - Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. There are lots of articles around the Web on how to import a certificate to the keystore. An utility called [Key Store Explorer](http://keystore-explorer.sourceforge.net) makes this task super easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server-<gluu-version>/etc/certs/httpd.crt`
 
-- Online Java-docs for SCIM-Client are available [here](https://ox.gluu.org/scim-javadocs/apidocs/index.html). You can generate java-docs locally too using Maven; just run `mvn javadoc:javadoc`
+- Online Java-docs for scim-client are available [here](https://ox.gluu.org/scim-javadocs/apidocs/index.html). You can generate java-docs locally too using Maven; just run `mvn javadoc:javadoc -pl scim-client`
 
 ### Start a Simple Project
 
@@ -594,9 +582,9 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 </dependency>
 ```
 
-Ideally, the SCIM-Client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use SCIM-Client v4.2.
+Ideally, the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use scim-client v4.2.
 
-If you don't want to use Maven, you can download the jar file for SCIM-Client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
+If you don't want to use Maven, you can download the jar file for scim-client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
 ### Simple Retrieval
 
@@ -652,11 +640,11 @@ The [SCIM protected by UMA section](#scim-protected-by-UMA) contains examples fo
 
 #### OpenID clients
 
-When running your code in test mode, some new OpenID clients are created (they are employed to request short-lived tokens to access the service). In oxTrust, you can see those by navigating to `OpenId Connect` > `Clients`; they are named as "SCIM-Client". These clients won't clutter your LDAP, they are also short-lived (one day) so they are cleaned up automatically.
+When running your code in test mode, some new OpenID clients are created (they are employed to request short-lived tokens to access the service). In oxTrust, you can see those by navigating to `OpenId Connect` > `Clients`; they are named as "SCIM-Client". These clients won't clutter your database, they are also short-lived (one day) so they are cleaned up automatically.
 
 #### HTTP connections and concurrent support
 
-`scim-client2` project uses the JAX-RS 2.0 Client API and RestEasy framework. Under the hood network communication between client and server is handled by HttpClient from the Apache HttpComponents project which by default makes use of `org.apache.http.impl.conn.SingleClientConnManager`. This connection manager manipulates a single socket at any given time and supports the use case in which one or more invocations are made serially from a single thread.
+`scim-client` project uses the JAX-RS 2.0 Client API and RestEasy framework. Under the hood network communication between client and server is handled by HttpClient from the Apache HttpComponents project which by default makes use of `org.apache.http.impl.conn.SingleClientConnManager`. This connection manager manipulates a single socket at any given time and supports the use case in which one or more invocations are made serially from a single thread.
 
 The above means that by default, instances obtained via `ScimClientFactory` do not support concurrent calls in a safe manner. Starting with version 4.1, multithread support was added by employing the thread safe connection manager `org.apache.http.impl.conn.PoolingHttpClientConnectionManager`.
 
@@ -665,7 +653,7 @@ The above means that by default, instances obtained via `ScimClientFactory` do n
 
 The following lists the steps required to switch the java client to support access in a multithreaded environment:
 
-- Set a Java variable of name `httpclient.multithreaded` with any value. This will make the `scim-client2` use the `PoolingHttpClientConnectionManager`.
+- Set a Java variable of name `httpclient.multithreaded` with any value. This will make the `scim-client` use the `PoolingHttpClientConnectionManager`.
 
 - To override the default maximum number of total connections the manager uses, supply variable `httpclient.multithreaded.maxtotal` with the value of your choosing.
 
@@ -708,7 +696,7 @@ This section condenses some important concepts of UMA. It's good to familiarize 
 
 - Requesting party is generally an end-user that seeks access to a protected resource. Only in certain use cases the requesting party and resource owner are the same person. To achieve the task, the requesting party uses a client
 
-- The client is usually an application capable of making requests for protected resources on the requesting party's behalf. A good example is the [SCIM-client](https://github.com/GluuFederation/SCIM-Client)
+- The client is usually an application capable of making requests for protected resources on the requesting party's behalf. A good example is the [scim-client](https://github.com/GluuFederation/scim/tree/master/scim-client)
 
 - The resource server hosts the resources to be protected, and thus is capable of dealing with requests for them. We can think of oxTrust as the resource server (at least as a front-end resource server because users and groups are not hosted per se by oxTrust though it has functionalities to able to access and modify data stored in LDAP)
 
@@ -716,9 +704,9 @@ This section condenses some important concepts of UMA. It's good to familiarize 
 
 Now you may have a richer perspective of what the protection process entails, so let's proceed with a real setup.
 
-### Testing with the SCIM-Client (UMA)
+### Testing with the scim-client (UMA)
 
-The following instructions show how to interact with the UMA-protected SCIM service using the [SCIM-Client](https://github.com/GluuFederation/SCIM-Client) Java library.
+The following instructions show how to interact with the UMA-protected SCIM service using the [scim-client](https://github.com/GluuFederation/scim/tree/master/scim-client) Java library.
 
 #### Requisites
 
@@ -732,7 +720,7 @@ The following instructions show how to interact with the UMA-protected SCIM serv
 
 - Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. There are lots of articles around the Web on how to import a certificate to the keystore. An utility called [Key Store Explorer](http://keystore-explorer.sourceforge.net) makes this task super-easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server-<gluu-version>/etc/certs/httpd.crt`
 
-- Online Java-docs for SCIM-Client are available [here](https://ox.gluu.org/scim-javadocs/apidocs/index.html). You can generate java-docs locally using Maven; just run `mvn javadoc:javadoc`
+- Online Java-docs for scim-client are available [here](https://ox.gluu.org/scim-javadocs/apidocs/index.html). You can generate java-docs locally using Maven; just run `mvn javadoc:javadoc -pl scim-client`
 
 #### Start a Simple Project
 
@@ -758,9 +746,9 @@ Create a project in your favorite IDE, and if using maven add the following snip
 </dependency>
 ```
 
-Ideally the SCIM-Client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use SCIM-Client v4.2.
+Ideally the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use scim-client v4.2.
 
-If you don't want to use Maven, you can download the jar file for SCIM-Client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
+If you don't want to use Maven, you can download the jar file for scim-client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
 #### Simple Retrieval
 
@@ -874,7 +862,7 @@ UserResource user=response.readEntity(UserResource.class);
 
 ##### User Object
 
-You may also use an "*objectual*" approach to dealing with users. The following code snippet employs the class `org.gluu.oxtrust.model.scim2.User` of SCIM-Client.
+You may also use an "*objectual*" approach to dealing with users. The following code snippet employs the class `org.gluu.oxtrust.model.scim2.User` of scim-client.
 
 ```
 UserResource user = new UserResource();
@@ -933,7 +921,7 @@ assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
 
 Coding service interactions when SCIM endpoints are being protected by UMA is more involved than using test mode. If you are planning to code for a SCIM service protected by UMA, it is advisable to check the flow depicted in section 3 of the [UMA 2.0 spec](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html). Focus only on the interactions of client vs. another party (resource server or authorization server). In a previous [section](#actors-involved-in-protection), we talked about the actors involved in UMA protection; this will save you time when reading the specification.
 
-As a guideline for your own implementation, you can take ideas from the Java class [UmaScimClient](https://github.com/GluuFederation/SCIM-Client/blob/version_4.1/scim-client2/src/main/java/gluu/scim2/client/UmaScimClient.java) found in SCIM-Client. Starting at the `authorize` method, you will see how steps in the spec flow are being followed there.
+As a guideline for your own implementation, you can take ideas from the Java class [UmaScimClient](https://github.com/GluuFederation/scim/blob/master/scim-client/src/main/java/gluu/scim2/client/UmaScimClient.java) found in scim-client. Starting at the `authorize` method, you will see how steps in the spec flow are being followed there.
 
 Check the metadata URL of UMA 2 to discover the oxAuth endpoint that issues tokens. Visit `https://<host-name>/.well-known/uma2-configuration`.
 
@@ -988,7 +976,7 @@ The following is an example of a user resource with custom attributes set:
 }
 ```
 
-Thus, a similar syntax should be used in order to supply values for modifications in the case of update (PUT) operations. On the other hand this [file](https://github.com/GluuFederation/SCIM-Client/blob/master/src/test/resources/single/patch/user_patch_ext.json) contains an example of patches being performed upon custom attributes.
+Thus, a similar syntax should be used in order to supply values for modifications in the case of update (PUT) operations. On the other hand this [file](https://github.com/GluuFederation/scim/blob/master/scim-client/src/test/resources/single/patch/user_patch_ext.json) contains an example of patches being performed upon custom attributes.
 
 A retrieval using a filter where extended attributes are involved may look like:
 
@@ -1000,17 +988,17 @@ $ curl -G -H 'Authorization: Bearer ...access token...'  -o output.json
 
 which queries all users whose extended attribute `customAttr3` is greater than 2000 (this accounts the attribute was properly configured as numeric). Note how the attribute is prefixed with the schema URN of the user extension followed by a colon.
 
-### Handling Custom Attributes in SCIM-Client
+### Handling Custom Attributes in scim-client
 
 To access the name/values of custom attributes please use the `getCustomAttributes` method of your SCIM resource and pass the `URI` of the extension that these custom attributes are associated to. Likewise, to set the values for your custom attributes, call the `addCustomAttributes` and pass a `CustomAttributes` instance. 
 
 The following test cases contain illustrative examples:
 
-* [FullUserTest](https://github.com/GluuFederation/SCIM-Client/blob/version_4.1/scim-client2/src/test/java/gluu/scim2/client/singleresource/FullUserTest.java)
+* [FullUserTest](https://github.com/GluuFederation/scim/blob/master/scim-client/src/test/java/gluu/scim2/client/singleresource/FullUserTest.java)
 
-* [QueryParamCreateUpdateTest](https://github.com/GluuFederation/SCIM-Client/blob/version_4.1/scim-client2/src/test/java/gluu/scim2/client/singleresource/QueryParamCreateUpdateTest.java)
+* [QueryParamCreateUpdateTest](https://github.com/GluuFederation/scim/blob/master/scim-client/src/test/java/gluu/scim2/client/singleresource/QueryParamCreateUpdateTest.java)
 
-* [PatchUserExtTest](https://github.com/GluuFederation/SCIM-Client/blob/version_4.1/scim-client2/src/test/java/gluu/scim2/client/patch/PatchUserExtTest.java)
+* [PatchUserExtTest](https://github.com/GluuFederation/scim/blob/master/scim-client/src/test/java/gluu/scim2/client/patch/PatchUserExtTest.java)
 
 
 ## Error Handling
@@ -1044,7 +1032,7 @@ The following are sample response errors:
 }
 ```
 
-### Custom Error Handling using SCIM-Client
+### Custom Error Handling using scim-client
 
 The following snippet sends a user creation request and shows how to check if the status code is appropriate. If not, the error details are parsed using the `ErrorResponse` class.
 
@@ -1086,8 +1074,6 @@ public void handleError(String title, String description, String scimType) {
     //For a list of possible values of scimType, see table 9 of RFC7644
 }
 ```
-
-Former SCIM-Client versions used to deal with `BaseClientResponse<T>` objects and it was not possible to read the entity as an instance of a class other than `T` (usually `T` being User or Group) because the response was already fully consumed. This usually led to errors like "Stream closed". Newer client allows you to read the response as many times as you need without restriction of type parameter `T` as the underlying response stream is buffered by default.
 
 ## Additional Features of SCIM Service
 
@@ -1247,9 +1233,9 @@ In previous sections, we covered thoroughly what needs to be done for test mode 
 
 If you are unsure of how to code a particular step, take a look at the Java client. These two classes do the job:
 
-- [TestModeScimClient](https://github.com/GluuFederation/SCIM-Client/blob/version_4.1/scim-client2/src/main/java/gluu/scim2/client/TestModeScimClient.java)
+- [TestModeScimClient](https://github.com/GluuFederation/scim/blob/master/scim-client/src/main/java/gluu/scim2/client/TestModeScimClient.java)
 
-- [UmaScimClient](https://github.com/GluuFederation/SCIM-Client/blob/version_4.1/scim-client2/src/main/java/gluu/scim2/client/UmaScimClient.java)
+- [UmaScimClient](https://github.com/GluuFederation/scim/blob/master/scim-client/src/main/java/gluu/scim2/client/UmaScimClient.java)
 
 To test your authorization code, use a simple GET retrieval request.
 
