@@ -22,6 +22,7 @@ theme:
     favicon: 'favicon.ico'
 extra:
     version: '4.2'
+extra_css: css/tabs.css    
 
 # Tracking
 google_analytics:
@@ -35,6 +36,7 @@ markdown_extensions:
      permalink: '#'
 - codehilite     
 - pymdownx.superfences
+- pymdownx.tabbed
 
 # Navigation
 nav:
