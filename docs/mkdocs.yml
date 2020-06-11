@@ -59,6 +59,7 @@ nav:
         - 'Installation': 
 #            - 'Start here': 'installation-guide/install.md'
             - 'Test Drive': 'installation-guide/test-drive.md'
+            - 'Kubernetes': 'installation-guide/install-kubernetes.md'
             - 'Docker': 'installation-guide/install-docker.md'
             - 'Ubuntu': 'installation-guide/install-ubuntu.md'
             - 'Debian': 'installation-guide/install-debian.md'
