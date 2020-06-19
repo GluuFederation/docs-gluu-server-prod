@@ -107,4 +107,9 @@ The OP doesn't know anything about end-user activity on the RP. Therefore, the R
 
 ### How can we force the user to log out if the browser is closed?
 
-Setting `sessionIdLifetime` to `-1` value sets the `session_id` cookie value to `expires=session`, and sets the OP session object to not have an expiration time. Most browsers clear cookies with `expires=session` when the browser is closed, removing the session object at that time. 
+Setting `sessionIdLifetime` to `-1` value sets the `session_id` cookie value to `expires=session`, and sets the OP session object to not have an expiration time. Most browsers clear cookies with `expires=session` when the browser is closed, removing the session object at that time.
+
+### Is is possible to intercept different session events ?
+
+Yes, please check Application Session interception scripts description [here](./custom-script.md#application-session-management).
+ 

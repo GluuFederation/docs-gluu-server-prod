@@ -278,15 +278,15 @@ This script can be used in an oxAuth application only.
 
 ## Application Session Management      
 
-This script allows an admin to notify 3rd party systems about requests to end an OAuth session. This method is triggered by an oxAuth call to the `end_session` endpoint. It's possible to add multiple scripts with this type. The application should call all of them according to the level.
+This script allows an admin to get notification about various session lifetime events. It's possible to add multiple scripts with this type. The application should call all of them according to the level.
 
-This script type adds only one method to the base script type:
+This script has following methods:
 
-|Method|`def endSession(self, httpRequest, authorizationGrant, configurationAttributes)`|
-|---|---|
-|**Method Parameter**|`httpRequest` is `javax.servlet.http.HttpServletRequest`<br/>`authorizationGrant` is `org.gluu.oxauth.model.common.AuthorizationGrant`<br/>`configurationAttributes` is `java.util.Map<String, SimpleCustomProperty>`|
+- `startSession` - Application calls it at start session request (creation) to allow notify 3rd part systems
+- `endSession` - This method is triggered by an oxAuth call to the `end_session` endpoint.
+- `onEvent` - Invoked on different session events. Event types: AUTHENTICATED, UNAUTHENTICATED, UPDATED (update pushed to persistence), GONE (it can be time out, or expired or ended by /end_session endpoint)
 
-This script can be used in an oxAuth application only.
+This script can be used in an oxAuth application only. Please check sample below.
 
 - [Sample Application Session Management Script](./sample-application-session-script.py)
 
