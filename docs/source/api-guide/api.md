@@ -120,7 +120,6 @@ HTTP/1.1 200
 Cache-Control: no-store
 Content-Length: 0
 Pragma: no-cache
-Server: Jetty(9.4.11.v20180605)
 ```
 
 **Errors**
@@ -128,7 +127,7 @@ Server: Jetty(9.4.11.v20180605)
 Status Code | Reason
 --- | ---
 400 | Bad request if request is malformed
-401 | Client authentication fails if client is invalid
+401 | Client authentication fails
 
 ## ID Generation API 
 This section will discuss a few APIs used in the Gluu Server for ID generation.
