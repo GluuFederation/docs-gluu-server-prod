@@ -1,7 +1,7 @@
 # IDM Synchronization
 
 ## Overview
-Gluu exposes a REST service to obtain user entries that have been updated or have been added in the local Gluu database after a specified timestamp. The endpoint resides alongside the [SCIM endpoints](../api-guide/scim-api.md/) and reuses the same [protection policy](./scim2.md/#api-protection), however, it is not part of the SCIM standard itself.
+Gluu exposes a REST service to obtain user entries that have been updated or have been added in the local Gluu database after a specified timestamp. The endpoint resides alongside the [SCIM endpoints](../api-guide/scim-api.md) and reuses the same [protection policy](./scim2.md/#api-protection), however, it is not part of the SCIM standard itself.
 
 ## Service specification
 
