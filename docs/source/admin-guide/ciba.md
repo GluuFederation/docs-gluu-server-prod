@@ -343,6 +343,7 @@ Server: Jetty(9.4.19.v20190610)
 
 {"auth_req_id": "2dc59a83b2318d2486c61a1c8015472f11711a5bba3ec40d"}
 ```
+Response of this request is not processed by Gluu Server based on specs.
 
 ## Push Callback
 
