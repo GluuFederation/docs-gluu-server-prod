@@ -8,7 +8,7 @@ For your reference, the current version of the standard is governed by the follo
 
 ## Installation
 
-The API is available as a component of Gluu Server. Upon [installation](../installation-guide/instañll.md) you can select if you want SCIM included in your environment. To add SCIM post-install do the following:
+The API is available as a component of Gluu Server. Upon [installation](../installation-guide/install.md) you can select if you want SCIM included in your environment. To add SCIM post-install do the following:
 
 1. Login to chroot
 1. `cd /install/community-edition-setup`
