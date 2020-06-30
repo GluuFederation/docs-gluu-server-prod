@@ -6,6 +6,14 @@ Developers can think of **SCIM** merely as a **REST API** with endpoints exposin
 
 For your reference, the current version of the standard is governed by the following documents: [RFC 7642](https://tools.ietf.org/html/rfc7642), [RFC 7643](https://tools.ietf.org/html/rfc7643), and [RFC 7644](https://tools.ietf.org/html/rfc7644).
 
+## Installation
+
+The API is available as a component of Gluu Server. Upon [installation](../installation-guide/install.md) you can select if you want SCIM included in your environment. To add SCIM post-install do the following:
+
+1. Login to chroot
+1. `cd /install/community-edition-setup`
+1. Run `python3  post-setup-add-components.py -addscim`  
+
 ## API Protection
 
 Clearly, this API must not be anonymously accessed. However, the basic SCIM standard does not define a specific mechanism to prevent unauthorized requests to endpoints. There are just a few guidelines in section 2 of [RFC 7644](https://tools.ietf.org/html/rfc7644) concerned with authentication and authorization. 

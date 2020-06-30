@@ -187,6 +187,7 @@ Host: idp.example.com
   "grant_types" : [ "urn:openid:params:grant-type:ciba" ],
   "application_type" : "web",
   "backchannel_client_notification_endpoint" : "https://idp.example.com:8443/oxauth-ciba-client-test/client-notification-endpoint",
+  "jwks_uri" : "https://idp.example.com:8443/oxauth/restv1/jwks",
   "backchannel_user_code_parameter" : true,
   "backchannel_authentication_request_signing_alg" : "RS256",
   "client_name" : "oxAuth test app",
@@ -221,6 +222,7 @@ Server: Jetty(9.4.11.v20180605)
     "grant_types": ["urn:openid:params:grant-type:ciba"],
     "subject_type": "pairwise",
     "client_secret_expires_at": 1574917571,
+    "jwks_uri" : "https://idp.example.com:8443/oxauth/restv1/jwks",
     "backchannel_client_notification_endpoint": "https://idp.example.com:8443/oxauth-ciba-client-test/client-notification-endpoint",
     "access_token_signing_alg": "RS256",
 }
