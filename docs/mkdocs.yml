@@ -165,6 +165,7 @@ nav:
         - 'Localization': 'developer-guide/localization.md'
         - 'Script Debugging': 'developer-guide/script-debugging.md'
 - Tutorials:
+        - 'The billion load test': 'tutorials/load-test.md'
         - 'Attributes mapping and transformation in Passport': 'tutorials/passport-attributes-mapping.md'
         - 'Inbound Identity with Apple Sign In': 'tutorials/passport-apple.md'
         - 'Inbound SAML with Passport': 'tutorials/passport-inbound-flow.md'
