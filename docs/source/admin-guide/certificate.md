@@ -1,6 +1,6 @@
 # Certificates 
 
-== Gluu Community Edition
+=== "Gluu Community Edition"
 
     ## Certificates in Chroot
     
@@ -110,7 +110,7 @@
       `SSLCertificateChainFile /etc/certs/name_of_your_interm_root_cert.crt`.
     4. [Restart](../operation/services.md#restart) the `httpd` service.
 
-== Gluu Cloud Native Edition
+=== "Gluu Cloud Native Edition"
 
     ## Rotating Certificates and Keys in Kubernetes setup
     
@@ -118,14 +118,14 @@
         `gluu-config-cm` in all examples refer to gluus installation configuration parameters. This name is correct in Kustomization installation, however in Helm the name is in the format of `<helms release name>-config-cm` and must be changed.
     
     
-    == web (ingress)
+    === "web (ingress)"
         
         | Associated certificates and keys |
         | -------------------------------- |
         | /etc/certs/gluu_https.crt        |
         | /etc/certs/gluu_https.key        |
         
-        == Rotate
+        === "Rotate"
         
             1. Create a file named `web-key-rotation.yaml` with the following contents :
         
@@ -155,7 +155,7 @@
                     kubectl apply -f web-key-rotation.yaml -n <gluu-namespace>
                 ```            
         
-        == Load from exisitng source
+        === "Load from exisitng source"
         
             !!! Note
                 This will load `gluu_https.crt` and `gluu_https.key` from `/etc/certs`.
@@ -214,7 +214,7 @@
                     kubectl apply -f load-web-key-rotation.yaml -n <gluu-namespace>
                 ```            
             
-    == oxAuth
+    === "oxAuth"
     
         !!! Warning
             Key rotation cronJob is usually installed with Gluu. Please make sure before deploying `kubectl get cronjobs -n <gluu-namespace>`.
@@ -263,7 +263,7 @@
                 kubectl apply -f oxauth-key-rotation.yaml -n <gluu-namespace>
             ```
                 
-    == oxShibboleth
+    === "oxShibboleth"
     
         | Associated certificates and keys |
         | -------------------------------- |
@@ -305,7 +305,7 @@
                 kubectl apply -f oxshibboleth-key-rotation.yaml -n <gluu-namespace>
             ```   
     
-    == oxd oAuth client
+    === "oxd oAuth client"
     
         | Associated certificates and keys    |
         | ----------------------------------- |
@@ -347,7 +347,7 @@
             ```bash
                 kubectl apply -f oxd-key-rotation.yaml -n <gluu-namespace>
             ```         
-    == ldap
+    === "ldap"
     
         | Associated certificates and keys    |
         | ----------------------------------- |
@@ -384,7 +384,7 @@
                 kubectl apply -f ldap-key-rotation.yaml -n <gluu-namespace>
             ```               
        
-    == passport
+    === "passport"
     
         | Associated certificates and keys    |
         | ----------------------------------- |
@@ -424,7 +424,7 @@
                 kubectl apply -f passport-key-rotation.yaml -n <gluu-namespace>
             ```          
         
-    == scim
+    === "scim"
     
         | Associated certificates and keys    |
         | ----------------------------------- |
