@@ -346,7 +346,8 @@
         
             ```bash
                 kubectl apply -f oxd-key-rotation.yaml -n <gluu-namespace>
-            ```         
+            ```
+                     
     === "ldap"
     
         | Associated certificates and keys    |
