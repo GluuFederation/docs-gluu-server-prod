@@ -268,6 +268,16 @@ This script can be used in an oxAuth application only.
 
 - [Sample RPT Authorization Policy Script](./sample-uma-authorization-script.py)
 
+## UMA 2 RPT Claims 
+
+Script which allows to modify claims of RPT. It effects both RPT Introspection and RPT as JWT claims. 
+
+Associate RPT Claims script with client (Update button must be clicked to persist changes).
+
+View a [RPT Claims Script Sample](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/uma_rpt_claims/uma_rpt_claims.py)
+
+
+
 ## UMA 2 Claims-Gathering     
 
 This is a special script for UMA 2. It allows an admin to code logic for gathering additional claims (required by UMA RPT Authorization Policy).
