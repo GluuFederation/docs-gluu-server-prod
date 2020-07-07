@@ -61,7 +61,7 @@ SCIM 2.0 is governed by the [SCIM:Core Schema](https://tools.ietf.org/html/rfc76
 
 * Unless otherwise stated, all endpoints are protected via [UMA 2.0](../user-management/scim2.md#protection-using-uma) or [test mode](../user-management/scim2.md#protection-using-test-mode).
 
-* All payloads sent to endpoints using POST or PUT should be supplied using *Content-Type:* `application/scim+json` or `application/json`, and using UTF-8 encoding. Liwewise, output is sent from server in UTF-8.
+* All payloads sent to endpoints using POST or PUT should be supplied using *Content-Type:* `application/scim+json` or `application/json`, and using UTF-8 encoding. Likewise, output is sent from server in UTF-8.
 
 ## Conformance matrix
 
