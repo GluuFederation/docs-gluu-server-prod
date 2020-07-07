@@ -274,6 +274,8 @@ Script which allows to modify claims of RPT. It effects both RPT Introspection a
 
 Associate RPT Claims script with client (Update button must be clicked to persist changes).
 
+![rptclaims](../img/admin-guide/rptclaims.png)
+
 View a [RPT Claims Script Sample](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/uma_rpt_claims/uma_rpt_claims.py)
 
 
