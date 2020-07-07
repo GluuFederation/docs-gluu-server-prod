@@ -2,10 +2,6 @@
 
 The Gluu Server is designed to be easy to deploy. Its default security settings may not be strict enough for certain organizations or use cases. This document highlights important security controls and offers best practices for increasing security related to a Gluu Server infrastructure
 
-## Storing setup.properties.last 
-
-The `setup.properties.last` file created under the `/install/community-edition-setup/` directory during `setup.py` phase of initial installation contains sensitive data like credentials and keystore passwords. The original file should be removed from inside the container and a copy of its contents should be stored securely for future reference.
-
 ## Apache config
 
 Apache is the frontend web server in a default Gluu Server setup. Its configuration will greatly impact security for the whole instance. Of particular interest are items found inside the container under `/etc/httpd/` (CentOS/RHEL) and `/etc/apache2/` (Ubuntu/Debian). 
