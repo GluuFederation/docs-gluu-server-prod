@@ -82,6 +82,15 @@ The administrator can use the following command line options to include addition
 
 Example Command: `# ./setup.py -ps` This command will install Gluu Server with Passport and Shibboleth IDP.
 
+
+!!! Note
+    `setup.py` will save an encrypted properties file named `setup.properties.last.enc`. The password is the same as the oxTrust admin password. Retain this password to use this file for future installations. To reuse the file, it needs to be decrypted with the following command:
+    ```
+    openssl enc -d -aes-256-cbc -in setup.properties.last.enc -out setup.properties.last
+    ```
+    When prompted, enter the oxTrust admin password.
+
+
 <!-- 
 #### Couchbase Server Setup (Experimental)
 Starting in CE 4.1, Gluu Server supports Couchbase Server as a database backend. To install with Couchbase, you need to download the OS-specific Couchbase package from https://www.couchbase.com/downloads (Enterprise version only), and save to `/opt/dist/couchbase`. For example, for Ubuntu 18,
