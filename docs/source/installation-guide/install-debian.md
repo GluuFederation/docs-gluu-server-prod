@@ -34,11 +34,11 @@ curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
 ```
 
 ```
-apt-get update
+apt update
 ```
 
 ```
-apt-get install gluu-server
+apt install gluu-server
 ```
 
 For **Debian 10 (Buster)**, run the following commands:
@@ -52,11 +52,11 @@ curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
 ```
 
 ```
-apt-get update
+apt update
 ```
 
 ```
-apt-get install gluu-server
+apt install gluu-server
 ```
 
 ### Start the server and log in
@@ -120,7 +120,7 @@ service gluu-server stop
 ```
 
 ```
-apt-get remove gluu-server
+apt remove gluu-server
 ```
 
 ```
