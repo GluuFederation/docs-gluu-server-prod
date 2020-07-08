@@ -32,11 +32,11 @@ curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 ```
 
 ```
-apt-get update
+apt update
 ```
 
 ```
-apt-get install gluu-server
+apt install gluu-server
 ```
 
 For **Ubuntu 16.04.x** run the following commands:  
@@ -50,11 +50,11 @@ curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 ```
 
 ```
-apt-get update
+apt update
 ```
 
 ```
-apt-get install gluu-server
+apt install gluu-server
 ```
 
 ### Start the server and log in
@@ -132,7 +132,7 @@ For **Ubuntu Server 18.04.x**, run the following commands:
 ```
 
 ```
-apt-get remove gluu-server
+apt remove gluu-server
 ```
 
 ```
@@ -146,7 +146,7 @@ service gluu-server stop
 ```
 
 ```
-apt-get remove gluu-server
+apt remove gluu-server
 ```
 
 ```
