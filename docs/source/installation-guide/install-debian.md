@@ -34,11 +34,11 @@ echo "deb https://repo.gluu.org/debian/ stretch-stable main" > /etc/apt/sources.
 ```
 
 ```
-apt-get update
+apt update
 ```
 
 ```
-apt-get install gluu-server
+apt install gluu-server
 ```
 
 ### Start the server and log in
@@ -102,7 +102,7 @@ service gluu-server stop
 ```
 
 ```
-apt-get remove gluu-server
+apt remove gluu-server
 ```
 
 ```
