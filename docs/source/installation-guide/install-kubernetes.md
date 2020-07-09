@@ -669,47 +669,19 @@ Please calculate the minimum required resources as per services deployed. The fo
         | `oxauth-key-rotation.resources.requests.cpu`            | oxAuth Key Rotation memory request                                                                                          | `300Mi`                             |
         | `oxauth-key-rotation.resources.requests.memory`         | oxAuth Key Rotation cpu request                                                                                             | `300m`                              |     
 
-    ### Persistence
-    
-    !!!NOTE
-        Enabling support of `oxtrust API` and `oxtrust TEST_MODE`. To enable `oxtrust API` support and or `oxtrust TEST_MODE` , set  `gluuOxtrustApiEnabled`  and `gluuOxtrustApiTestMode` true respectively.
-    
-     ```yaml
-     # persistence layer
-     persistence:
-       configmap:
-          gluuOxtrustApiEnabled: true
-          gluuOxtrustApiTestMode: true
-    
-     ```   
     
     ### Instructions on how to install different services
     
     Enabling the following services automatically install the corresponding associated chart. To enable/disable them set `true` or `false` in the persistence configs as shown below.  
     
     ```yaml
-    # persistence layer
-    persistence:
-      enabled: true
+    config:
       configmap:
         # Auto install other services. If enabled the respective service chart will be installed
         gluuPassportEnabled: false
         gluuCasaEnabled: false
         gluuRadiusEnabled: false
         gluuSamlEnabled: false
-    ```
-    
-    ### oxd-server
-    
-    > **_NOTE:_** If these two are not provided `oxd-server` will fail to start.   
-    > **_NOTE:_** For these passwords, stick to digits and numbers only.
-    
-    ```yaml
-    oxd-server:
-      configmap:
-        adminKeystorePassword: admin-example-password
-        applicationKeystorePassword: app-example-pass
-    
     ```
     
     ### Casa
