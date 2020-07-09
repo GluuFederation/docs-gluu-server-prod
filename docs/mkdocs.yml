@@ -98,6 +98,9 @@ nav:
         - 'RADIUS':
             - 'Gluu Radius': 'admin-guide/radius-server/gluu-radius.md'
             - 'Radiator Plugin': 'admin-guide/radius-server/gluu-radiator.md'
+        - 'CIBA':
+            - 'OpenID Connect CIBA': 'admin-guide/ciba.md'
+            - 'FAPI-CIBA': 'admin-guide/fapi-ciba.md'
         - 'Attributes': 'admin-guide/attribute.md'
         - 'SAML IDP': 'admin-guide/saml.md'
         - 'OpenID Connect Provider (OP)': 'admin-guide/openid-connect.md'
