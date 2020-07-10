@@ -55,6 +55,16 @@ documentation and administrative guide.
 ## Fixes / Enhancements
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2+)
 
+- [#1410](https://github.com/GluuFederation/oxAuth/issues/1410) Failed to start redisProvider
+
+- [#1408](https://github.com/GluuFederation/oxAuth/issues/1408) BUG : Introspection script is not identified by client which was used during obtaining access_token
+
+- [#1406](https://github.com/GluuFederation/oxAuth/issues/1406) oxauth slows down in 4 times when CIBA is turned on.
+
+- [#1397](https://github.com/GluuFederation/oxAuth/issues/1397) Add 'RPT Claims' script to add/modify RPT claims.
+
+- [#1396](https://github.com/GluuFederation/oxAuth/issues/1396) Add support to use any client authentication for revoke token endpoint (currently it works only with basic client authentication)
+
 - [#1391](https://github.com/GluuFederation/oxAuth/issues/1391) oxAuth fail to prepare JMS
 
 - [#1385](https://github.com/GluuFederation/oxAuth/issues/1385) Check and possibly remove oxInvolvedClients attribute from session
@@ -405,6 +415,10 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.2+)
 
+- [#1991](https://github.com/GluuFederation/oxTrust/issues/1991) Add ability to add RPT Claims script to client
+
+- [#1987](https://github.com/GluuFederation/oxTrust/issues/1987) Gluu 4.1.1 and 4.2: getting same Pairwise ID ( first generated one ) for rest of the users
+
 - [#1973](https://github.com/GluuFederation/oxTrust/issues/1973) Can u2f and fido2 dates be shown using the same format?
 
 - [#1967](https://github.com/GluuFederation/oxTrust/issues/1967) Use JSON Property to allow extra attributes for person status
@@ -417,13 +431,15 @@ documentation and administrative guide.
 
 - [#1930](https://github.com/GluuFederation/oxTrust/issues/1930) Break out SCIM into a separate service
 
+- [#1927](https://github.com/GluuFederation/oxTrust/issues/1927) SAML TR / "Attributes Published" column buggy
+
 - [#1924](https://github.com/GluuFederation/oxTrust/issues/1924) FAPI compatibility
 
 - [#1923](https://github.com/GluuFederation/oxTrust/issues/1923) Fix error form too large for custom scripts page
 
 - [#1922](https://github.com/GluuFederation/oxTrust/issues/1922) Use ui_locales_supported from confguration instead of JSF locales list
 
-- [#1907](https://github.com/GluuFederation/oxTrust/issues/1907) Enhanced management for redirect_uri lists
+- [#1907](https://github.com/GluuFederation/oxTrust/issues/1907) Ehanced management for redirect_uri lists
 
 - [#1891](https://github.com/GluuFederation/oxTrust/issues/1891) Re-visit differences between single-SP and federation types of SAML TR
 
@@ -466,36 +482,3 @@ documentation and administrative guide.
 - [#1583](https://github.com/GluuFederation/oxTrust/issues/1583) Invalid Birthdate Format
 
 - [#1551](https://github.com/GluuFederation/oxTrust/issues/1551) Disallow the use of a user's username in their password
-
-- [#1460](https://github.com/GluuFederation/oxTrust/issues/1460) After CE install with pasport enabled there are lot of Passport specific messages
-
-- [#1429](https://github.com/GluuFederation/oxTrust/issues/1429) Password requirement feature
-
-- [#1423](https://github.com/GluuFederation/oxTrust/issues/1423) Nav bar doesn't stick to tab in Custom Scripts
-
-- [#1402](https://github.com/GluuFederation/oxTrust/issues/1402) [org.gluu.oxtrust.ldap.service.StatusCheckerTimer] (StatusCheckerTimer.java:216) - Can not download ssl certificate
-
-- [#1365](https://github.com/GluuFederation/oxTrust/issues/1365) Add support for granular permission management
-
-- [#1362](https://github.com/GluuFederation/oxTrust/issues/1362) i18n support for password reset/registration mails content.
-
-- [#1331](https://github.com/GluuFederation/oxTrust/issues/1331) Random dashboard statistics in Gluu Server cluster
-
-- [#1168](https://github.com/GluuFederation/oxTrust/issues/1168) oxTrust logout improvements
-
-- [#1147](https://github.com/GluuFederation/oxTrust/issues/1147) Users Should Be Able to Add Custom ClientID On Client Creation
-
-- [#1096](https://github.com/GluuFederation/oxTrust/issues/1096) User sync (cache refresh) in a containerised environment
-
-- [#1066](https://github.com/GluuFederation/oxTrust/issues/1066) Password Reset page Improvement
-
-- [#1017](https://github.com/GluuFederation/oxTrust/issues/1017) Configurable logout.jsp button
-
-- [#885](https://github.com/GluuFederation/oxTrust/issues/885) SCIM interception script: add handler for GET
-
-- [#843](https://github.com/GluuFederation/oxTrust/issues/843) Use decorator for input elements
-
-- [#769](https://github.com/GluuFederation/oxTrust/issues/769) Try to use JSF2 as mail templates
-
-- [#531](https://github.com/GluuFederation/oxTrust/issues/531) Translate resource bundles
-
