@@ -81,6 +81,7 @@ The administrator can use the following command line options to include addition
 * __-w__ get the development head war files
 * __-t__ Load test data
 * __-x__ Load test data and exit
+* __-properties-password__ Provide password to decode `setup.properties.last.enc`
 * __--import-ldif=custom-ldif-dir__ Render ldif templates from custom-ldif-dir and import them in LDAP
 * __--listen_all_interfaces__ Allow the LDAP server to listen on all server interfaces. This is required for clustered installations to replicate between LDAP servers. If not enabled, the LDAP server listens only to localhost
 * __---allow-pre-released-features__ Enable options to install experimental features, not yet officially supported.
