@@ -1,6 +1,6 @@
 # CentOS Installation 
 ## Overview
-Single-node Gluu Server Linux packages are available for CentOS 7. Follow the instructions below: 
+Single-node Gluu Server Linux packages are available for CentOS 8 and 7. Follow the instructions below: 
 
 1. [Install the Linux package](#install-the-package)
 2. [Start the Server and log in to the container](#start-the-server-and-log-in)
@@ -22,6 +22,28 @@ Single-node Gluu Server Linux packages are available for CentOS 7. Follow the in
 ### Install the package
 
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
+
+For **CentOS 8**, run the following commands to install:
+
+```
+wget https://repo.gluu.org/centos/Gluu-centos8.repo -O /etc/yum.repos.d/Gluu.repo
+```
+
+```
+wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+yum clean all
+```
+
+```
+yum install gluu-server
+```
 
 For **CentOS 7**, run the following commands to install:
 
