@@ -42,7 +42,7 @@ yum clean all
 ```
 
 ```
-yum install gluu-server
+yum install gluu-server-4.1-centos7
 ```
 
 ### Start the server and log in
