@@ -1,6 +1,12 @@
 # Setup Script
 
-## Setup Prompt
+## Setup TUI
+Setup script uses tui for collect information to install Gluu Server. If TUI is not available on your environment, it switches to command line. If you want to use command line, execute with `-c` argument:
+```
+/install/community-edition-setup/setup.py -c
+```
+
+## Setup Command Line
 
 The setup script will bring up a prompt to provide information for certificate as well as the IP Address and the hostname for the Gluu Server.  Hit `Enter` to accept the default values. 
 
@@ -62,6 +68,7 @@ The setup script can be used to configure your Gluu Server and to add initial da
 
 The administrator can use the following command line options to include additional components:
 
+* __-c__ Switches to command line
 * __-r__ Install oxAuth RP
 * __-p__ Install Passport
 * __-d__ specify the directory where community-edition-setup is located. Defaults to '.'
