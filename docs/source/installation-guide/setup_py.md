@@ -1,7 +1,8 @@
 # Setup Script
 
 ## Setup TUI
-Setup script uses tui for collect information to install Gluu Server. If TUI is not available on your environment, it switches to command line. If you want to use command line, execute with `-c` argument:
+Setup script uses a TUI to collect information to install Gluu Server. If TUI is not available on your environment, it switches to command line. If you want to use command line, execute with `-c` argument:
+
 ```
 /install/community-edition-setup/setup.py -c
 ```
