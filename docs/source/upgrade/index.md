@@ -61,7 +61,7 @@ wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/
 * Execute the script:
 
 ```
-python3 update.py
+python3 upg4xto420.py
 ```
 
 Your upgrade directory will be the current directory. The script will create these directories: `app`, `war`, `temp`, `setup`
