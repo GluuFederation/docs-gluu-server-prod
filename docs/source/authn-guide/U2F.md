@@ -1,5 +1,8 @@
 # FIDO U2F
 
+!!! Important
+    The FIDO2 Interception script now handles both U2F and FIDO2 keys. This interception script will be deprecated in future versions.
+
 ## Overview
 FIDO Universal 2nd Factor (U2F) is an open authentication standard that strengthens and simplifies two-factor authentication using specialized USB or NFC devices. 
 
