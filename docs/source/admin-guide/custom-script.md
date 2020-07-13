@@ -207,10 +207,10 @@ The dynamic scope custom script allows to generate list of claims (and their val
 
 Two parameters are passed to the script:
 
-- `dynamicScopeContext` is [org.gluu.oxauth.service.external.context.DynamicScopeExternalContext class](https://github.com/GluuFederation/oxAuth/blob/master/Server/src/main/java/org.gluu/oxauth/service/external/context/DynamicScopeExternalContext.java) 
+- `dynamicScopeContext` is [org.gluu.oxauth.service.external.context.DynamicScopeExternalContext class](https://github.com/GluuFederation/oxAuth/blob/master/Server/src/main/java/org/gluu/oxauth/service/external/context/DynamicScopeExternalContext.java) 
 - `configurationAttributes` is java.util.Map<String, SimpleCustomProperty> dictionary carring script's custom properties
-
-In order to configure a dynamic scope next steps are required:
+                                      
+In order to configure a dynamic scope the following steps are required:
 
 - Dynamic scope custom script must be configured and enabled at "Manage custom scripts" page, "Dynamic scopes" tab
 - A scope has to be defined at the "OpenID Connect -> Scopes" page
