@@ -23,6 +23,24 @@ Single-node Gluu Server Linux packages are available for Debian 8. Follow the in
 
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
 
+For **Debian 10 (Buster)**, run the following commands:
+
+```
+echo "deb https://repo.gluu.org/debian/ buster-stable main" > /etc/apt/sources.list.d/gluu-repo.list
+```
+
+```
+# curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
+```
+
+```
+apt update
+```
+
+```
+apt install gluu-server
+```
+
 For **Debian 9 (Stretch)**, run the following commands:
 
 ```
