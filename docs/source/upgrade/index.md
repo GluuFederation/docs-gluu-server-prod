@@ -45,22 +45,27 @@ another way.
 There are two options to perform the upgrade (both methods work inside the container):
 
 #### Online Upgrade
-The upgrade script can download all needed software and applications from the internet. You can perform an online upgrade by following these steps:
+!!! Note
+    Upgrade script runs on Python 3. You need to install Python 3 before running the script.
+    * On CentoOS/RHEL: `yum install -y python3`
+    * On Ubuntu/Debian: `apt-get update && apt-get install -y python3`
+
+The upgrade script downloads all needed software and applications from the internet. You can perform an online upgrade by following these steps:
 
 * Download the upgrade script
 
 ```
-wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.2/update.py
+wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.2.0/upg4xto420.py
 ```
 
-* Execute the script with `-o` argument
+* Execute the script:
 
 ```
-python update.py -o
+python3 update.py
 ```
 
 Your upgrade directory will be the current directory. The script will create these directories: `app`, `war`, `temp`, `setup`
-
+<!--
 #### Static Upgrade
 The static, self-extracting upgrade package contains all components for the upgrade. You still need an internet connection to install the libraries that are needed by the upgrade script. To perform a static upgrade, follow these steps:
 
@@ -77,3 +82,4 @@ sh 4.2-upg.sh
 ```
 
 The upgrade directory will be `/opt/upd/4.2-upg`
+-->
