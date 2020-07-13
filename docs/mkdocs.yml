@@ -61,6 +61,7 @@ nav:
             - 'RHEL': 'installation-guide/install-rhel.md'
             - 'CentOS': 'installation-guide/install-centos.md'
         - 'Setup Script Options': 'installation-guide/setup_py.md'
+        - 'Upgrade to 4.1': 'upgrade/index.md'
         - 'Clustering': 'installation-guide/cluster.md'
 - Administration Guide:
         - 'oxTrust admin UI': 'admin-guide/oxtrust-ui.md'
@@ -147,7 +148,6 @@ nav:
             - 'Image References': 'reference/container-image-refs.md'
 - Operation Guide:
         - 'Service Commands': 'operation/services.md'
-        - 'Upgrades': 'upgrade/index.md'
         - 'Patches': 'upgrade/patches.md'
         - 'Backups': 'operation/backup.md'
         - 'Security tips': 'operation/security.md'
