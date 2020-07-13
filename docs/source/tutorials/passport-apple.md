@@ -27,61 +27,139 @@ You will be prompted to enter a redirect URL. Please provide `https://<your-gluu
 
 For domain verification purposes you will be given a file that it is supposed to be accessible at `https://<your-gluu-domain>/.well-known/apple-developer-domain-association.txt`. To do so follow the steps below:
 
-1. SSH to your Gluu server
-1. Copy the file to `/opt/gluu/jetty/oxauth/custom/static` inside chroot
-1. In chroot, locate the Apache config file. In most cases it is `/etc/apache2/sites-available/https_gluu.conf`
-1. At the bottom, near to a directive like `ProxyPass /.well-known/openid-configuration` add a new one this way:
+=== "Community Edition - VM"
+    1. SSH to your Gluu server
+    1. Copy the file to `/opt/gluu/jetty/oxauth/custom/static` inside chroot
+    1. In chroot, locate the Apache config file. In most cases it is `/etc/apache2/sites-available/https_gluu.conf`
+    1. At the bottom, near to a directive like `ProxyPass /.well-known/openid-configuration` add a new one this way:
+    
+        ```
+        ProxyPass /.well-known/apple-developer-domain-association.txt http://localhost:8081/oxauth/ext/resources/apple-developer-domain-association.txt
+        ```
+    
+    1. Save the file and [restart](../operation/services.md#restart) Apache, eg. `# service apache2 restart`
+    1. Ensure the file is correctly loaded. Open a browser, and hit `https://<your-gluu-domain>/.well-known/apple-developer-domain-association.txt`
 
-    ```
-    ProxyPass /.well-known/apple-developer-domain-association.txt http://localhost:8081/oxauth/ext/resources/apple-developer-domain-association.txt
-    ```
+=== "Cloud Native Edition - Kubernetes"
 
-1. Save the file and [restart](../operation/services.md#restart) Apache, eg. `# service apache2 restart`
-1. Ensure the file is correctly loaded. Open a browser, and hit `https://<your-gluu-domain>/.well-known/apple-developer-domain-association.txt`
+    1. Create file `apple-ing.yaml` with the following content.
+    
+        ```yaml
+        apiVersion: extensions/v1beta1
+        kind: Ingress
+        metadata:
+          annotations:
+            kubernetes.io/ingress.class: nginx
+            nginx.ingress.kubernetes.io/configuration-snippet: rewrite /.well-known/apple-developer-domain-association.txt
+              /oxauth/ext/resources/apple-developer-domain-association.txt$1 break;
+            nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+            nginx.ingress.kubernetes.io/rewrite-target: /oxauth/ext/resources/apple-developer-domain-association.txt
+            nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          generation: 3
+          name: gluu-ingress-apple-configuration
+          namespace: gluu
+        spec:
+          rules:
+          - host: demoexample.gluu.org
+            http:
+              paths:
+              - backend:
+                  serviceName: oxauth
+                  servicePort: 8080
+                path: /.well-known/apple-developer-domain-association.txt
+          tls:
+          - hosts:
+            - demoexample.gluu.org
+            secretName: tls-certificate
+        ```
+    
+    1. Apply the ing in the namespace where Gluu is installed in:
+    
+        ```bash
+        kubectl apply -f apple-ing.yaml -n gluu
+        ```
+    
+    1. Mount `apple-developer-domain-association.txt` in oxauth pods by first creating the configmap.
+    
+        ```bash
+        kubectl create configmap apple-developer-domain-association-cm -n gluu --from-file=apple-developer-domain-association.txt
+        ```
+        
+    1. Mount the `apple-developer-domain-association-cm` inside the oxauth pods.
+    
+        ```yaml
+            volumeMounts:
+            - mountPath: /opt/gluu/jetty/oxauth/custom/static/apple-developer-domain-association.txt
+              name: apple-developer-domain-association
+              subPath: apple-developer-domain-association.txt                
+          volumes: 
+          - name: apple-developer-domain-association
+            configMap:
+              name: apple-developer-domain-association-cm 
+        ```
 
 ## Low level configurations
 
-SSH to your Gluu server and copy the **key file** to `/etc/certs` inside chroot. 
+=== "Community Edition - VM"
 
-### Install nicokaiser's passport-apple strategy
-
-!!! Note
-    Skip this section if your Gluu version is 4.2 or higher
-
-Next, let's add the passport strategy that allows us to "talk" to Apple identity provider:
-
-1. Ensure the VM has Internet access. 
-1. Backup passport folder, eg. `tar -zcf backup.tar.gz /opt/gluu/node/passport`
-1. [Stop](../operation/services.md#stop) passport, eg. `# systemctl stop passport`
-1. Switch to node user: `su - node`
-1. Add the node executable to path: `$ export PATH=$PATH:/opt/node/bin`
-1. `cd` to `/opt/gluu/node/passport`
-1. Install the strategy: `$ npm install @nicokaiser/passport-apple --save`. No errors should arise here, at most, warnings.
-1. Switch back to root: `exit`
-1. [Start](../operation/services.md#start) passport, eg. `# systemctl start passport`
-
-### Add/Patch javascript files
-
-!!! Note
-    Skip this section if your Gluu version is 4.2 or higher
+    SSH to your Gluu server and copy the **key file** to `/etc/certs` inside chroot.
     
-Apple doesn't redirect the users' browsers to the callback URL (`redirect_uri`) once they login sucessfully, but makes a POST to the URL. This is not an expected behavior for and Oauth2 authorization server, so it requires adding support for this kind of custom behavior.
+    ### Install nicokaiser's passport-apple strategy
 
-1. `cd` to `/opt/gluu/node/passport/server`
-1. Replace file `providers.js` using the one found [here](https://raw.githubusercontent.com/GluuFederation/gluu-passport/master/server/providers.js)
-1. Add to file `routes.js` the following snippet (around line 21) and save:
-
-    ``` 
-    router.post('/auth/:provider/callback',
-	 validateProvider,
-	 require('express').urlencoded(),
-	 authenticateRequestCallback,
-       callbackResponse)
-    ```
+    Next, let's add the passport strategy that allows us to "talk" to Apple identity provider:
     
-1. Copy this [file](https://github.com/GluuFederation/gluu-passport/raw/master/server/mappings/apple.js) to `/opt/gluu/node/passport/server/mappings`.
+    1. Ensure the VM has Internet access. 
+    1. Backup passport folder, eg. `tar -zcf backup.tar.gz /opt/gluu/node/passport`
+    1. [Stop](../operation/services.md#stop) passport, eg. `# systemctl stop passport`
+    1. Switch to node user: `su - node`
+    1. Add the node executable to path: `$ export PATH=$PATH:/opt/node/bin`
+    1. `cd` to `/opt/gluu/node/passport`
+    1. Install the strategy: `$ npm install @nicokaiser/passport-apple --save`. No errors should arise here, at most, warnings.
+    1. Switch back to root: `exit`
+    1. [Start](../operation/services.md#start) passport, eg. `# systemctl start passport`
+    
+    ### Add/Patch javascript files
+    
+    Apple doesn't redirect the users' browsers to the callback URL (`redirect_uri`) once they login sucessfully, but makes a POST to the URL. This is not an expected behavior for and Oauth2 authorization server, so it requires adding support for this kind of custom behavior.
+    
+    1. `cd` to `/opt/gluu/node/passport/server`
+    1. Replace file `providers.js` using the one found [here](https://raw.githubusercontent.com/GluuFederation/gluu-passport/master/server/providers.js)
+    1. Add to file `routes.js` the following snippet (around line 21) and save:
+    
+        ``` 
+        router.post('/auth/:provider/callback',
+         validateProvider,
+         require('express').urlencoded(),
+         authenticateRequestCallback,
+           callbackResponse)
+        ```
+        
+    1. Copy this [file](https://github.com/GluuFederation/gluu-passport/raw/master/server/mappings/apple.js) to `/opt/gluu/node/passport/server/mappings`.
+     
 
+=== "Cloud Native Edition - Kubernetes"
 
+    Mount **key file** into `/etc/certs` inside oxpassport pod.
+    
+    1. Mount `AuthKey_88EXAMPLE.p8` in oxpassport pods by first creating the configmap.
+    
+        ```bash
+        kubectl create configmap apple-auth-key-cm -n gluu --from-file=AuthKey_88EXAMPLE.p8
+        ```
+        
+    1. Mount the `apple-auth-key-cm` inside the oxpassport pods.
+    
+        ```yaml
+            volumeMounts:
+            - mountPath: /etc/certs/AuthKey_88EXAMPLE.p8
+              name: apple-auth-key
+              subPath: AuthKey_88EXAMPLE.p8                
+          volumes: 
+          - name: apple-auth-key
+            configMap:
+              name: apple-auth-key-cm
+        ```
+        
 ## Add Apple Sign In to supported identity providers
 
 In this section we'll onboard Apple to the list of known providers for inbound identity.
