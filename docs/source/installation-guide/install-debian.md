@@ -38,7 +38,7 @@ apt update
 ```
 
 ```
-apt install gluu-server
+apt install gluu-server=4.1~stretch
 ```
 
 For **Debian 10 (Buster)**, run the following commands:
@@ -56,7 +56,7 @@ apt update
 ```
 
 ```
-apt install gluu-server
+apt install gluu-server=4.1~buster
 ```
 
 ### Start the server and log in
