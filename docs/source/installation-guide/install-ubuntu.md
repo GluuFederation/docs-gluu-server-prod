@@ -1,6 +1,6 @@
 # Ubuntu Installation 
 ## Overview
-Single-node Gluu Server Linux packages are available for Ubuntu 18.04.x and 16.04.x. Follow the instructions below: 
+Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 18.04.x and 16.04.x. Follow the instructions below: 
 
 1. [Install the Linux package](#install-the-package)
 2. [Start the Server and log in to the container](#start-the-server-and-log-in)
@@ -13,12 +13,31 @@ Single-node Gluu Server Linux packages are available for Ubuntu 18.04.x and 16.0
 
 ## Prerequisites
 - Make sure the target server or VM meets **all minimum requirements** specified in the [VM Preparation Guide](../installation-guide/index.md). 
-- **Ubuntu 18**: The Universe repository must be enabled.
+- **Ubuntu 18 or 20**: The Universe repository must be enabled.
 
 ## Instructions
 
 ### Install the package
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
+
+
+For **Ubuntu 20.x** run the following commands: 
+
+```
+echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
+```
+
+```
+curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+
+```
+apt update
+```
+
+```
+apt install gluu-server
+```
 
 
 For **Ubuntu 18.04.x** run the following commands: 
@@ -61,7 +80,7 @@ apt install gluu-server
 
 The Gluu Server is a chroot container, which must be started to proceed. 
 
-For **Ubuntu 18.04.x** run the following commands: 
+For **Ubuntu 20.x and 18.04.x** run the following commands: 
 
 ```
 /sbin/gluu-serverd enable
