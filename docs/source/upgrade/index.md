@@ -64,7 +64,8 @@ wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/
 python3 upg4xto420.py
 ```
 
-Your upgrade directory will be the current directory. The script will create these directories: `app`, `war`, `temp`, `setup`
+Your upgrade directory will be the current directory. The script will create these directories: `app`, and `ces_current`, and writes Gluu cacerts.
+
 <!--
 #### Static Upgrade
 The static, self-extracting upgrade package contains all components for the upgrade. You still need an internet connection to install the libraries that are needed by the upgrade script. To perform a static upgrade, follow these steps:
