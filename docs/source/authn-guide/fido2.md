@@ -36,7 +36,7 @@ The script has the following properties
 
 Follow the steps below to enable FIDO2 authentication:
 
-1. Navigate to `Configuration` > `Manage Custom Scripts` > `Person Authentication`.    
+1. Navigate to `Configuration` > `Person Authentication Scripts`.    
 
 1. Find the `fido2` script       
 ![fido2-script](../img/admin-guide/multi-factor/fido2-script.png)
