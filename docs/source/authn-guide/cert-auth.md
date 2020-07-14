@@ -33,8 +33,8 @@ The script has a few properties:
 
 To get started, log into the Gluu Server dashboard (a.k.a. oxTrust) and do the following: 
 
-1. Navigate to `Configuration` > `Manage Custom Scripts`.
-2. In the `Person Authentication` tab find the `cert` authentication module.  
+1. Navigate to `Configuration` > `Person Authentication Scripts`.
+2. Find the `cert` authentication module.  
 3. Scroll down and find the `Enable` check box. 
 4. Enable the script by clicking the check box.
 5. Scroll to the bottom of the page and click `Update`. 
