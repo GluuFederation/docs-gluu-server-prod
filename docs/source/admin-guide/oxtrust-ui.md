@@ -58,8 +58,8 @@ There are four tabs in the organization configuration page:
 
 1. [System Configuration](#system-configuration)         
 1. [SMTP Server Configuration](#smtp-server-configuration)         
-1. [oxTrust Settings](#oxtrust-settings)             
-1. [oxAuth Settings](#oxauth-settings)
+1. [Organization Settings](#organization-settings)             
+1. [Extra Libraries](#extra-libraries)
 
 #### System Configuration
 
@@ -101,6 +101,12 @@ The Gluu Server needs a mail server in order to send notifications. All fields i
 ![Organization Settings](../img/admin-guide/oxtrust/42_org_settings.PNG)
 
 From the Organization Settings page, the administrator can manage the organization name, logo, and favicon. This page also contains the name of the Gluu Server manager group. Users added to this group will have administrator access to the Gluu Server.
+
+#### Extra Libraries
+
+![Organization Settings](../img/admin-guide/oxtrust/add_libs.png)
+
+In the Extra Libs tab, the administrator can add any needed additional libraries for use in both oxAuth and oxTrust.
 
 ## JSON Configuration      
 The following tabs are included in the `JSON Configuration` menu:
