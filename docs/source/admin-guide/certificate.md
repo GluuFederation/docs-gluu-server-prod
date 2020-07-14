@@ -350,6 +350,9 @@
                      
     === "ldap"
     
+        !!! Note
+            Subject Alt Name must match opendj service.
+            
         | Associated certificates and keys    |
         | ----------------------------------- |
         | /etc/certs/opendj.crt               |
@@ -376,15 +379,17 @@
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
-                      args: ["patch", "ldap"]
+                      args: ["patch", "ldap", "--opts", "subj-alt-name:opendj"] 
             ```
         
         1. Apply job
         
             ```bash
                 kubectl apply -f ldap-key-rotation.yaml -n <gluu-namespace>
-            ```               
-       
+            ```   
+                        
+       1. Restart pods.
+
     === "passport"
     
         | Associated certificates and keys    |
