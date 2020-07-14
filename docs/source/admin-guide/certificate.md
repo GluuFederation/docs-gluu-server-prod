@@ -388,7 +388,7 @@
                 kubectl apply -f ldap-key-rotation.yaml -n <gluu-namespace>
             ```   
                         
-       1. Restart pods.
+        1. Restart pods.
 
     === "passport"
     
