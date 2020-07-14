@@ -114,8 +114,7 @@ There are a few properties in the SPNEGO Authentication Script:
 
 Follow the steps below to configure the `spnego` script in the oxTrust Admin GUI.
 
-1. Navigate to `Configuration` > `Manage Custom Scripts`.
-1. Click on the `Person Authentication` tab.
+1. Navigate to `Configuration` > `Person Authentication Scripts`
 1. Scroll down to the SPNEGO authentication script   
 
     ![spnego-script](../img/admin-guide/iwa/spnego-script.png)
