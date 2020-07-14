@@ -110,7 +110,7 @@ The following tabs are included in the `JSON Configuration` menu:
 * [Cache Provider Configuration](#cache-provider-configuration)
 * [oxTrust Import Configuration](#oxtrust-import-configuration)
 
-![JSON Configuration Headers](../img/admin-guide/oxtrust/json-config-head.png)
+![JSON Configuration Headers](../img/admin-guide/oxtrust/42_oxtrust_json_configuration.PNG)
 
 ### oxTrust Configuration
 From this tab, you can access and edit the oxTrust JSON configuration file. 
@@ -127,7 +127,7 @@ An administrator can allow or deny access to URIs by updating JSON properties in
 
 ### oxAuth Configuration
 
-![oxAuth Configuration](../img/admin-guide/oxtrust/oxauth-configurationv4.png)
+![oxAuth Configuration](../img/admin-guide/oxtrust/42_oxauth_json_configuration.PNG)
 
 The oxAuth JSON configuration page gives easy access to the different endpoints used by Gluu Server CE. 
 This page also contains the supported response, grants, and algorithms. 
@@ -138,7 +138,7 @@ The Gluu Server administrator can manage oxAuth sessions by adding the desired s
 
 ### Cache Provider Configuration
 
-![Cache Provider Configuration](../img/admin-guide/oxtrust/cache-provider-configv4.png)
+![Cache Provider Configuration](../img/admin-guide/oxtrust/42_cacheProvider.PNG)
 
 The following cache providers are now supported and can be selected via the `cacheProviderType` combo box field:
 
@@ -151,7 +151,7 @@ Full configuration options can be found at the [Cache Provider Reference doc](..
 
 ### oxTrust Import Configuration
 
-![oxtrustimport](../img/admin-guide/oxtrust/oxtrust-importv4.png)
+![oxtrustimport](../img/admin-guide/oxtrust/42_oxTrust_import_configuration.PNG)
 
 The oxTrust Import Person Configuration page contains attribute values that are available for import via file. If importing users via file, all attributes included in the file should be specified in this table. 
 
@@ -169,7 +169,7 @@ Learn how to import users via file in the [User Management guide](../user-manage
 ### Manage LDAP Authentication
 This section allows the Gluu Server administrator to define how and where the server should connect to authenticate users. If it is a remote LDAP/Active Directory server, the values are required. Put the details of the data source that you are trying to connect with Gluu Server. For example, the data source can be your back-end Active Directory, or your local LDAP server.
 
-![Manage LDAP Authentication](../img/admin-guide/oxtrust/admin_manage_ldapv4.png)
+![Manage LDAP Authentication](../img/admin-guide/oxtrust/42_Manage_Authentication.PNG)
 
 * _Name:_ This field contains the name of the authentication server
 
