@@ -1,4 +1,4 @@
-# Upgrade to Gluu Server 4.2 Beta
+# Upgrade to Gluu Server 4.2
 
 ## Overview
 The Gluu Server **cannot** be upgraded with a simple `apt-get upgrade`. You will need to either use our in-place upgrade script or explicitly install the new version and export/import your data. Find the existing version below for upgrade instructions to Gluu Server 4.2. 
@@ -7,10 +7,35 @@ The Gluu Server **cannot** be upgraded with a simple `apt-get upgrade`. You will
 
 - Before upgrading, make sure to [back up](../operation/backup.md) the Gluu container or LDAP LDIF. 
 - Upgrades should always be thoroughly scoped and tested on a development environment *first*.
+- This upgrade process only upgrades versions 4.0.x and 4.1.x. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
 
+#### Online Upgrade from 4.x to 4.2
+
+!!! Note
+    Upgrade script runs on Python 3. You need to install Python 3 before running the script.
+    * On CentoOS/RHEL: `yum install -y python3`
+    * On Ubuntu/Debian: `apt-get update && apt-get install -y python3`
+
+The upgrade script downloads all needed software and applications from the internet. You can perform an online upgrade by following these steps:
+
+* Download the upgrade script
+
+```
+wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.2.0/upg4xto420.py
+```
+
+* Execute the script:
+
+```
+python3 upg4xto420.py
+```
+
+Your upgrade directory will be the current directory. The script will create these directories: `app`, and `ces_current`, and writes Gluu cacerts.
+
+<!--
 ### Upgrading from 3.1.x to 4.2
 
-At this time, only Gluu Server version 3.1.x can be upgraded to version 4.2 Beta. The upgrade script works on CentOS 7, Ubuntu 16, and RedHat 7. Upgrade script performs the following steps:
+At this time, only Gluu Server version 3.1.x can be upgraded to version 4.2. The upgrade script works on CentOS 7, Ubuntu 16, and RedHat 7. Upgrade script performs the following steps:
 
 - Upgrades Java to Amazon Corretto. Extracts certificates from the existing Java keystore to `hostname_service.crt` in the upgrade directory. After upgrading Java, imports to keystore
 - Upgrades all Gluu WAR files, NodeJS, and Passport components
@@ -66,7 +91,6 @@ python3 upg4xto420.py
 
 Your upgrade directory will be the current directory. The script will create these directories: `app`, and `ces_current`, and writes Gluu cacerts.
 
-<!--
 #### Static Upgrade
 The static, self-extracting upgrade package contains all components for the upgrade. You still need an internet connection to install the libraries that are needed by the upgrade script. To perform a static upgrade, follow these steps:
 

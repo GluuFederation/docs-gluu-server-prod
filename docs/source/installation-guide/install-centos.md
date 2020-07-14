@@ -23,6 +23,7 @@ Single-node Gluu Server Linux packages are available for CentOS 8 and 7. Follow 
 
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
 
+<!---
 For **CentOS 8**, run the following commands to install:
 
 ```
@@ -44,6 +45,7 @@ yum clean all
 ```
 yum install gluu-server
 ```
+--->
 
 For **CentOS 7**, run the following commands to install:
 
