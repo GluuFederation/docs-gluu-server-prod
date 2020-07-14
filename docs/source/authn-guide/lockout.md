@@ -12,7 +12,7 @@ The script uses authentication settings provided in the `Manage LDAP Authenticat
 The login counter will also be reset to zero if several unsuccessful login attempts are finally followed by a successful one (before exceeding the limit). 
 
 ## Configure Account Lockout
-To configure this feature navigate to `Configuration` > `Manage custom scripts` and find `basic_lock` script on the `Person Authentication` tab. 
+To configure this feature navigate to `Configuration` > `Person Authentication Scripts` and find `basic_lock` script. 
 
 There are 3 configurable properties:
 
