@@ -206,7 +206,9 @@ It is possible to use the Context to return a message to the user, which could b
 
 ## Adding Libraries
 
-Pure Python libraries can be added to `/opt/gluu/python/libs`, and jar files can be added to  `/opt/gluu/jetty/oxauth/lib/ext`.
+Additional libraries can be added as needed in oxTrust. Navigate to `Configuration` > `Organization configuration`.
+
+If preferred, pure Python libraries can also be added to `/opt/gluu/python/libs`, and jar files can be added to  `/opt/gluu/jetty/oxauth/lib/ext`.
 
 !!! Note
     jar files should be added within chroot. 
