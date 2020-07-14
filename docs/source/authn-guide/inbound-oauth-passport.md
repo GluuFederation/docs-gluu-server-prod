@@ -9,8 +9,8 @@ Make sure the Gluu Server installation already has [Passport installed](./passpo
 
 1. Enable the custom script
 
-    - In oxTrust, navigate to `Configuration` > `Custom scripts`          
-    - Navigate to the `Person Authentication` tab, expand the script labelled `passport_social`, check `enabled`, and click `Update`    
+    - In oxTrust, navigate to `Configuration` > `Person Authentication Scripts`          
+    - Expand the script labelled `passport_social`, check `enabled`, and click `Update`    
     ![Enable passport_social](../img/user-authn/passport/enable-passport_social.png)     
     - Navigate to the `UMA RPT Policies` tab, expand the script labelled `scim_access_policy`, check `enabled`, and click `Update`       
       
