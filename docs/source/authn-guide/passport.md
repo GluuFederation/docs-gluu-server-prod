@@ -186,8 +186,8 @@ In some cases, administrators might not want to show a selection list of externa
     
 1. Parameterize the Passport custom script to read the custom parameter
 
-    - Navigate to `Configuration` > `Custom scripts`   
-    - In the `Person Authentication` tab, expand the script labelled `passport_social` (or `passport_saml` if you are using inbound SAML)   
+    - Navigate to `Configuration` > `Person Authentication Scripts`   
+    - Expand the script labelled `passport_social` (or `passport_saml` if you are using inbound SAML)   
     - Click `Add new property` and enter `authz_req_param_provider` in the left field      
     - In the right field, enter the name of the custom parameter (e.g. `preselectedExternalProvider`)
 
