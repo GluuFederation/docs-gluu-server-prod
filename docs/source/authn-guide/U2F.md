@@ -40,7 +40,7 @@ The script has the following properties
 
 Follow the steps below to enable U2F authentication:
 
-1. Navigate to `Configuration` > `Manage Custom Scripts` > `Person Authentication`.    
+1. Navigate to `Configuration` > `Person Authentication Scripts`.    
 
 1. Find the U2F script       
 ![u2f-script](../img/admin-guide/multi-factor/u2f-script.png)
