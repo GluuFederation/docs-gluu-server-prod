@@ -22,7 +22,7 @@ The first time user can log in with his/her LDAP credentials and then can regist
   
 ### Enable custom scripts for ThumbSignIn
   
-  1. Log into the Gluu admin dashboard -> Manage Custom Scripts -> Click "Add Custom Script Configuration" button
+  1. Log into the Gluu admin dashboard -> `Person Authentication Scripts` -> Click "Add Custom Script Configuration" button
   1. Add the custom ThumbSignIn interception script and select the "Enabled" option
   1. Add the following custom parameters and save the custom script configuration:
   
