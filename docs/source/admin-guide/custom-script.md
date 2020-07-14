@@ -3,7 +3,7 @@
 ## Overview
 Interception scripts can be used to implement custom business logic for authentication, authorization and more in a way that is upgrade-proof and doesn't require forking the Gluu Server code. Each type of script is described by a Java interface -- i.e. which methods are required.
 
-The web interface for Custom Scripts can be accessed by navigating to `Configuration` > `Manage Custom Scripts`.
+The web interface for Custom Scripts can be accessed by navigating to `Configuration` > `Person Authentication Scripts` or `Other Custom Scripts`.
 
 ### Jython
 Interception scripts are written in [Jython](http://www.jython.org), enabling Java or Python classes to be imported.
@@ -212,7 +212,7 @@ Two parameters are passed to the script:
                                       
 In order to configure a dynamic scope the following steps are required:
 
-- Dynamic scope custom script must be configured and enabled at "Manage custom scripts" page, "Dynamic scopes" tab
+- Dynamic scope custom script must be configured and enabled at "Other custom scripts" page, "Dynamic scopes" tab
 - A scope has to be defined at the "OpenID Connect -> Scopes" page
   - Scope's type must be set to "Dynamic"
   - Corresponding dynamic script must be linked to that scope (Add dynamic script button)
@@ -310,7 +310,7 @@ SCIM script allows you to execute custom logic when certain SCIM API operations 
 
 To enable this feature, SCIM script needs to be enabled from the SCIM tab:
 
-1. Click on `Manage Custom Scripts` > `SCIM`
+1. Click on `Person Authentication Scripts` > `SCIM`
 
 1. Click on `Enabled` check box
 
