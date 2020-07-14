@@ -53,9 +53,7 @@ The custom script has the following properties:
 
 Follow the steps below to enable SMS OTP authentication:
 
-1. Navigate to `Configuration` > `Manage Custom Scripts`.    
-
-1. Click on the `Person Authentication` tab       
+1. Navigate to `Configuration` > `Person Authentication Scripts`   
 
 1. Find the `twilio_sms` script.
 
