@@ -17,7 +17,7 @@ Gluu Server custom scripts are written in [Jython](http://www.jython.org/). We r
 
 The GUI for custom authentication scripts can be found by navigating to 
 
-`Configuration` > `Manage Custom Scripts` > `Person Authentication`. 
+`Configuration` > `Person Authentication Scripts`. 
 
 Custom scripts can either be inserted directly into the GUI or you can 
 specify a path to the script. We recommend specifying a path in order to 
@@ -68,7 +68,7 @@ Steps to add a custom template and pass values between 2 steps of authentication
 [Twilio script](https://raw.githubusercontent.com/GluuFederation/oxAuth/master/Server/integrations/twilio_sms/twilio2FA.py):
 
 1. Login to Gluu UI;
-1. Navigate to `Configuration` > `Manage Custom Scripts`;
+1. Navigate to `Configuration` > `Person Authentication Scripts`;
 1. Scroll to the end of the page and click `Add custom script configuration`;
 1. Enter the Name, Description, and Programming Language (Python will be by default);
 1. Select the Level to set a security level;
