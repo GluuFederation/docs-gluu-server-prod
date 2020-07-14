@@ -45,8 +45,7 @@ The Super Gluu authentication script has the following properties:
 
 Follow the steps below to enable Super Gluu authentication:
 
-1. In oxTrust, navigate to `Configuration` > `Manage Custom Scripts`.
-1. Click on the `Person Authentication` tab
+1. In oxTrust, navigate to `Configuration` > `Person Authentication Scripts`
 1. Find the Super Gluu script
 1. Enable the script by checking the box 
 1. Scroll to the bottom of the page and click `Update`
