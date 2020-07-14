@@ -79,7 +79,7 @@ Learn how to [configure social login](./passport.md), [inbound SAML providers](.
 ## Multiple Authentication Mechanisms
 The Gluu Server can concurrently support multiple authentication mechanisms, enabling Web and mobile apps ("clients") to request a specific type of authentication using the standard OpenID Connect request parameter: `acr_value`. 
 
-In oxTrust, navigate to `Configuration` > `Manage Custom Scripts` > `Person Authentication` and check the `Enabled` box for each applicable authentication interception script. Click the `Update` button at the bottom of the page to save the changes. 
+In oxTrust, navigate to `Configuration` > `Person Authentication Scripts` and check the `Enabled` box for each applicable authentication interception script. Click the `Update` button at the bottom of the page to save the changes. 
 
 By default, users will get the default authentication mechanism as specified [above](#default-authentication-mechanism). However, using the OpenID Connect `acr_values` parameter, web and mobile clients can request any *enabled* authentication mechanism. 
 
