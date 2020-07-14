@@ -964,6 +964,49 @@ Examples:
     ```
     kubectl scale --replicas=2 statefulset oxtrust
     ```
+### Working with Jackrabbit
+
+=== "File managers"
+
+    !!!note
+        You can use any client to connect to Jackrabbit. We assume Gluu is installed in `gluu` namespace
+
+    1. Port forward Jackrabbit at `localhost` on port `8080`
+    
+        ```bash
+            kubectl port-forward jackrabbit-0 --namespace gluu 8080:8080
+        ```
+    
+    
+    1. Optional: If your managing VM is in the cloud you must forward the connection to the mac, linux or windows computer you are working from.
+    
+        ```bash
+            ssh -i <key.pem> -L 8080:localhost:8080 user-of-managing-vm@ip-of-managing-vm
+        ```
+        
+    1. Use any filemanager to connect to Jackrabbit. Here are some examples:
+    
+        === "Linux"
+        
+            Open file manager which maybe `Nautilus` and gind `Connect to Server` place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
+        
+        === "Windows"
+        
+            Open  `My PC` and inside the address that might read your `C` drive place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
+            
+        === "Mac"
+        
+            Open `Finder` , `Go` then `Connect to Server` and place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`. 
+        
+=== "Script"
+
+    !!!warning
+        This is not recommonded. Used for quick testing with Jackrabbit.
+
+    1. Copy files to Jackrabbit container at `/opt/webdav`
+    
+    1. Run `python3 /app/scripts/jca_sync.py` .
+
 
 ## Build pygluu-kubernetes installer
 
