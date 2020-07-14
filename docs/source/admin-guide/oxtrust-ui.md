@@ -9,7 +9,7 @@ The Gluu Server administration interface is accessible by navigating to `https:/
 ## Dashboard
 After successful authentication, the administrator is taken to the Dashboard. Some basic information about the VM/server is displayed, as well as the server version, free memory, and disk space. A metrics graph is shown to report some quick statistics about user authentications handled by the service. In the top right, there is a user icon which can be used to log out of oxTrust. The left-hand menu is used to navigate the admin interface.
 
-![Welcome to Gluu Server](../img/admin-guide/oxtrust/welcome-pagev4.png)
+![Welcome to Gluu Server](../img/admin-guide/oxtrust/42_homePage.PNG)
 
 ## Localization of oxTrust UI
 
@@ -63,7 +63,7 @@ There are four tabs in the organization configuration page:
 
 #### System Configuration
 
-![system-config-options](../img/admin-guide/oxtrust/system-config-optionsv4.png)
+![system-config-options](../img/admin-guide/oxtrust/42_org_configuration.PNG)
 
 - Self-service password reset: Allow users to trigger the password reset sequence by following a URL like `https://your.idp.host/identity/person/passwordReminder.htm`. A new password will be sent to the email box provided in "Email" attribute of their user entry (if any). In order for this feature to work, the admin will also need to perform [SMTP Server Configuration](#smtp-server-configuration)      
 
@@ -81,7 +81,7 @@ There are four tabs in the organization configuration page:
 
 #### SMTP Server Configuration     
 
-![SMTP Configuration](../img/admin-guide/oxtrust/smtp-configv4.png)
+![SMTP Configuration](../img/admin-guide/oxtrust/42_smtp_configuration.PNG)
 
 The Gluu Server needs a mail server in order to send notifications. All fields in this form are mandatory and the configuration can be tested before confirmation.
 
@@ -98,7 +98,7 @@ The Gluu Server needs a mail server in order to send notifications. All fields i
      
 #### Organization Settings  
 
-![Organization Settings](../img/admin-guide/oxtrust/organization-settingsv4.png)
+![Organization Settings](../img/admin-guide/oxtrust/42_org_settings.PNG)
 
 From the Organization Settings page, the administrator can manage the organization name, logo, and favicon. This page also contains the name of the Gluu Server manager group. Users added to this group will have administrator access to the Gluu Server.
 
