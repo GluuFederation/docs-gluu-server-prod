@@ -988,7 +988,7 @@ Examples:
     
         === "Linux"
         
-            Open file manager which maybe `Nautilus` and gind `Connect to Server` place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
+            Open file manager which maybe `Nautilus` and find `Connect to Server` place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
         
         === "Windows"
         
