@@ -23,6 +23,7 @@ Single-node Gluu Server Linux packages are available for RHEL 7 and 8. Follow th
 
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
 
+<!---
 For **RHEL 8**, run the following commands:
 
 ```
@@ -44,6 +45,7 @@ yum clean all
 ```
 yum install gluu-server
 ```
+--->
 
 For **RHEL 7**, run the following commands:
 
