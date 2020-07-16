@@ -1,6 +1,6 @@
 # RHEL Installation 
 ## Overview
-Single-node Gluu Server Linux packages are available for RHEL 7. Follow the instructions below:
+Single-node Gluu Server Linux packages are available for RHEL 7 and 8. Follow the instructions below:
 
 1. [Install the Linux package](#install-the-package)
 2. [Start the Server and log in to the container](#start-the-server-and-log-in)
@@ -22,6 +22,28 @@ Single-node Gluu Server Linux packages are available for RHEL 7. Follow the inst
 ### Install the package
 
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
+
+For **RHEL 8**, run the following commands:
+
+```
+wget https://repo.gluu.org/rhel/Gluu-rhel8.repo -O /etc/yum.repos.d/Gluu.repo
+```
+
+```
+wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+yum clean all
+```
+
+```
+yum install gluu-server
+```
 
 For **RHEL 7**, run the following commands:
 
