@@ -233,7 +233,7 @@ cp /opt/jetty-9.3/temp/jetty-localhost-8081-oxauth.war-_oxauth-any-9071517269463
 
   Don't forget to apply appropriate file system permissions if needed. [Restart](./services.md#restart) the `oxauth` service inside the chroot.`   
 
-## Custom oxAuth Login Page Example Using Kubernetes ConfigMaps
+## Custom oxAuth Login Page Example in Cloud Native edition ConfigMaps
 
 
 This guide will show how to customize HTML pages and CSS in oxAuth for Gluu Server EE.
@@ -244,53 +244,72 @@ Here's the screenshot of the default oxAuth login page.
 
 As an example, add text to the top of the form and change the color of the button by following these steps:
 
-1.  Get the `login.xhtml` from oxAuth pod:
+=== "ConfigMaps"
 
-    ```sh
-    kubectl cp oxauth:opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml ./login.xhtml
-    ```
+    1.  Get the `login.xhtml` from oxAuth pod:
+    
+        ```sh
+        kubectl cp oxauth:opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml ./login.xhtml
+        ```
+    
+    1.  Copy the following text and save it as `./custom.css`:
+    
+        ```css
+        #loginForm .btn-primary {
+            background: #1a9db2
+        }
+        ```
+    
+    1. Create a config file to store the content of `login.xhtml` and `custom.css`.
+    
+       ```sh
+       kubectl create cm oxauth-custom-html --from-file=login.xhtml
+       kubectl create cm oxauth-custom-css --from-file=custom.css
+       ```
+    
+    1. Attach the config to Pod using YAML file:
+    
+        ```yaml
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: oxauth
+        spec:
+          containers:
+          - name: oxauth
+            image: gluufederation/oxauth:4.2.0_01
+            volumeMounts:
+              - name: oxauth-pages-volume
+                mountPath: /opt/gluu/jetty/oxauth/custom/pages # login.xthml will be mounted under this directory
+              - name: oxauth-static-volume
+                mountPath: /opt/gluu/jetty/oxauth/custom/static # custom.css will be mounted under this directory
+            volumes:
+              - name: oxauth-pages-volume
+                configMap:
+                  name: oxauth-custom-html
+              - name: oxauth-static-volume
+                configMap:
+                  name: oxauth-custom-css       
+        ```
+    
+        Save the file and login to oxAuth/oxTrust UI via browser.
 
-1.  Copy the following text and save it as `./custom.css`:
+=== "Jackrabbit"
 
-    ```css
-    #loginForm .btn-primary {
-        background: #1a9db2
-    }
-    ```
+    1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
+    
+    1. Inside Jackrabbit direcotry create the directory `/opt/gluu/jetty/identity/custom/pages` and `/opt/gluu/jetty/identity/custom/static`.
 
-1. Create a config file to store the content of `login.xhtml` and `custom.css`.
-
-   ```sh
-   kubectl create cm oxauth-custom-html --from-file=login.xhtml
-   kubectl create cm oxauth-custom-css --from-file=custom.css
-   ```
-
-1. Attach the config to Pod using YAML file:
-
-    ```yaml
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: oxauth
-    spec:
-      containers:
-      - name: oxauth
-        image: gluufederation/oxauth:4.2.0_01
-        volumeMounts:
-          - name: oxauth-pages-volume
-            mountPath: /opt/gluu/jetty/oxauth/custom/pages # login.xthml will be mounted under this directory
-          - name: oxauth-static-volume
-            mountPath: /opt/gluu/jetty/oxauth/custom/static # custom.css will be mounted under this directory
-        volumes:
-          - name: oxauth-pages-volume
-            configMap:
-              name: oxauth-custom-html
-          - name: oxauth-static-volume
-            configMap:
-              name: oxauth-custom-css       
-    ```
-
-    Save the file and login to oxAuth/oxTrust UI via browser.
+    1. Place the following `custom.css` in `/opt/gluu/jetty/identity/custom/static`.
+    
+        ```css
+        .lockscreen-wrapper .btn-primary {
+            background-color: #b79933 !important;
+        }
+        ```
+    1. Place a custom `login.xhtml` which you may find in `opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml` inside your oxauth pod  at `/opt/gluu/jetty/identity/custom/pages` in Jackrabbit.
+    
+    
 
 Here's the screenshot of customized oxAuth login page.
 
