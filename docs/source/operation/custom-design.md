@@ -236,7 +236,7 @@ cp /opt/jetty-9.3/temp/jetty-localhost-8081-oxauth.war-_oxauth-any-9071517269463
 ## Custom oxAuth Login Page Example in Cloud Native edition ConfigMaps
 
 
-This guide will show how to customize HTML pages and CSS in oxAuth for Gluu Server EE.
+This guide will show how to customize HTML pages and CSS in oxAuth for Gluu Server cloud native edition.
 
 Here's the screenshot of the default oxAuth login page.
 
@@ -317,7 +317,7 @@ Here's the screenshot of customized oxAuth login page.
 
 ## Custom oxTrust Logout Page Example Using Kubernetes ConfigMaps
 
-This guide will show examples of how to customize HTML pages and CSS in oxTrust for Gluu Server EE.
+This guide will show examples of how to customize HTML pages and CSS in oxTrust for Gluu Server cloud native edition.
 
 Here's the screenshot of default oxTrust logout page.
 
