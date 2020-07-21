@@ -1001,7 +1001,7 @@ Examples:
 === "Script"
 
     !!!warning
-        This is not recommonded. Used for quick testing with Jackrabbit.
+        Used for quick testing with Jackrabbit and should be avoided. 
 
     1. Copy files to Jackrabbit container at `/opt/webdav`
     

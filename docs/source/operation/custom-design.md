@@ -263,34 +263,34 @@ As an example, add text to the top of the form and change the color of the butto
     1. Create a config file to store the content of `login.xhtml` and `custom.css`.
     
        ```sh
-       kubectl create cm oxauth-custom-html --from-file=login.xhtml
-       kubectl create cm oxauth-custom-css --from-file=custom.css
+           kubectl create cm oxauth-custom-html --from-file=login.xhtml
+           kubectl create cm oxauth-custom-css --from-file=custom.css
        ```
     
     1. Attach the config to Pod using YAML file:
     
-        ```yaml
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          name: oxauth
-        spec:
-          containers:
-          - name: oxauth
-            image: gluufederation/oxauth:4.2.0_01
-            volumeMounts:
-              - name: oxauth-pages-volume
-                mountPath: /opt/gluu/jetty/oxauth/custom/pages # login.xthml will be mounted under this directory
-              - name: oxauth-static-volume
-                mountPath: /opt/gluu/jetty/oxauth/custom/static # custom.css will be mounted under this directory
-            volumes:
-              - name: oxauth-pages-volume
-                configMap:
-                  name: oxauth-custom-html
-              - name: oxauth-static-volume
-                configMap:
-                  name: oxauth-custom-css       
-        ```
+       ```yaml
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         name: oxauth
+       spec:
+         containers:
+         - name: oxauth
+           image: gluufederation/oxauth:4.2.0_01
+           volumeMounts:
+             - name: oxauth-pages-volume
+               mountPath: /opt/gluu/jetty/oxauth/custom/pages # login.xthml will be mounted under this directory
+             - name: oxauth-static-volume
+               mountPath: /opt/gluu/jetty/oxauth/custom/static # custom.css will be mounted under this directory
+           volumes:
+             - name: oxauth-pages-volume
+               configMap:
+                 name: oxauth-custom-html
+             - name: oxauth-static-volume
+               configMap:
+                 name: oxauth-custom-css       
+       ```
     
         Save the file and login to oxAuth/oxTrust UI via browser.
 
@@ -298,7 +298,7 @@ As an example, add text to the top of the form and change the color of the butto
 
     1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
     
-    1. Inside Jackrabbit direcotry create the directory `/opt/gluu/jetty/identity/custom/pages` and `/opt/gluu/jetty/identity/custom/static`.
+    1. After connecting to  Jackrabbit create  directories `/opt/gluu/jetty/identity/custom/pages` and `/opt/gluu/jetty/identity/custom/static`.
 
     1. Place the following `custom.css` in `/opt/gluu/jetty/identity/custom/static`.
     
