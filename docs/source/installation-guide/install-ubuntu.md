@@ -1,6 +1,6 @@
 # Ubuntu Installation 
 ## Overview
-Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 18.04.x and 16.04.x. Follow the instructions below: 
+Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 18.04.x. Follow the instructions below: 
 
 1. [Install the Linux package](#install-the-package)
 2. [Start the Server and log in to the container](#start-the-server-and-log-in)
@@ -58,24 +58,6 @@ apt update
 apt install gluu-server
 ```
 
-For **Ubuntu 16.04.x** run the following commands:  
-
-```
-echo "deb https://repo.gluu.org/ubuntu/ xenial main" > /etc/apt/sources.list.d/gluu-repo.list
-```
-
-```
-curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
-```
-
-```
-apt update
-```
-
-```
-apt install gluu-server
-```
-
 ### Start the server and log in
 
 The Gluu Server is a chroot container, which must be started to proceed. 
@@ -94,16 +76,6 @@ For **Ubuntu 20.x and 18.04.x** run the following commands:
 /sbin/gluu-serverd login
 ```
 
-For **Ubuntu 16.04.x**, run the following commands:
-
-```
-service gluu-server start
-```
-
-```
-service gluu-server login
-```
-
 ### Run the setup script
 
 Configuration is completed by running the setup script from inside the chroot container. This generates certificates, salt values, and renders configuration files. Run the script with the following commands:
@@ -115,7 +87,6 @@ cd /install/community-edition-setup
 ```
 ./setup.py
 ```
-
 
 See the [Setup Script Documentation](./setup_py.md#setup-prompt) for more detail on setup script options.
 
@@ -156,20 +127,6 @@ apt remove gluu-server
 
 ```
 rm -fr /opt/gluu-server.save
-```
-
-For **Ubuntu Server 16.04.x**, run the following commands:
-
-```
-service gluu-server stop
-```
-
-```
-apt remove gluu-server
-```
-
-```
-rm -rf /opt/gluu-server.save
 ```
 
 
