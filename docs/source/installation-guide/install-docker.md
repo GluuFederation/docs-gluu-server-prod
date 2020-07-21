@@ -26,7 +26,7 @@ For Docker deployments, provision a VM with:
 Download the `pygluu-compose.pyz` executable:
 
 ```sh
-wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.0.2/pygluu-compose.pyz
+wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.2.0/pygluu-compose.pyz
 chmod +x pygluu-compose.pyz
 ```
 
@@ -54,7 +54,6 @@ tree
 ├── svc.cr_rotate.yml
 ├── svc.fido2.yml
 ├── svc.jackrabbit.yml
-├── svc.key_rotation.yml
 ├── svc.ldap.yml
 ├── svc.oxauth.yml
 ├── svc.oxd_server.yml
@@ -93,7 +92,6 @@ The following services are available during deployment:
 | `radius`            | `SVC_RADIUS`           | no        | no      |
 | `vault` auto-unseal | `SVC_VAULT_AUTOUNSEAL` | no        | no      |
 | `oxd_server`        | `SVC_OXD_SERVER`       | no        | no      |
-| `key_rotation`      | `SVC_KEY_ROTATION`     | no        | no      |
 | `cr_rotate`         | `SVC_CR_ROTATE`        | no        | no      |
 | `casa`              | `SVC_CASA`             | no        | no      |
 | `scim`              | `SVC_SCIM`             | no        | no      |
