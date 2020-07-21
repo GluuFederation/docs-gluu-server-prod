@@ -102,40 +102,7 @@ For domain verification purposes you will be given a file that it is supposed to
 
 === "Community Edition - VM"
 
-    SSH to your Gluu server and copy the **key file** to `/etc/certs` inside chroot.
-    
-    ### Install nicokaiser's passport-apple strategy
-
-    Next, let's add the passport strategy that allows us to "talk" to Apple identity provider:
-    
-    1. Ensure the VM has Internet access. 
-    1. Backup passport folder, eg. `tar -zcf backup.tar.gz /opt/gluu/node/passport`
-    1. [Stop](../operation/services.md#stop) passport, eg. `# systemctl stop passport`
-    1. Switch to node user: `su - node`
-    1. Add the node executable to path: `$ export PATH=$PATH:/opt/node/bin`
-    1. `cd` to `/opt/gluu/node/passport`
-    1. Install the strategy: `$ npm install @nicokaiser/passport-apple --save`. No errors should arise here, at most, warnings.
-    1. Switch back to root: `exit`
-    1. [Start](../operation/services.md#start) passport, eg. `# systemctl start passport`
-    
-    ### Add/Patch javascript files
-    
-    Apple doesn't redirect the users' browsers to the callback URL (`redirect_uri`) once they login sucessfully, but makes a POST to the URL. This is not an expected behavior for and Oauth2 authorization server, so it requires adding support for this kind of custom behavior.
-    
-    1. `cd` to `/opt/gluu/node/passport/server`
-    1. Replace file `providers.js` using the one found [here](https://raw.githubusercontent.com/GluuFederation/gluu-passport/master/server/providers.js)
-    1. Add to file `routes.js` the following snippet (around line 21) and save:
-    
-        ``` 
-        router.post('/auth/:provider/callback',
-         validateProvider,
-         require('express').urlencoded(),
-         authenticateRequestCallback,
-           callbackResponse)
-        ```
-        
-    1. Copy this [file](https://github.com/GluuFederation/gluu-passport/raw/master/server/mappings/apple.js) to `/opt/gluu/node/passport/server/mappings`.
-     
+    SSH to your Gluu server and copy the **key file** to `/etc/certs` inside chroot.     
 
 === "Cloud Native Edition - Kubernetes"
 
@@ -170,8 +137,8 @@ In this section we'll onboard Apple to the list of known providers for inbound i
 1. Enter a Display Name (eg. Apple Sign In)
 1. For type choose `oauth`
 1. For strategy enter `@nicokaiser/passport-apple`
-1. For mapping enter `apple` (it references file `apple.js` previously added)
-1. Supply a logo location if desired. More info [here](../authn-guide/passport.md#about-logo-images). If you Gluu server version is 4.2 or higher, you can simply use `img/apple.png`.
+1. For mapping enter `apple`
+1. Supply a logo location if desired. More info [here](../authn-guide/passport.md#about-logo-images)
 1. Enter the **service ID** in `client ID` field
 1. Remove `Client Secret`.
 1. Add a new property `keyID` and fill its value with the **key id** you collected [earlier](#creating-an-apple-application)
