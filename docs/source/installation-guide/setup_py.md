@@ -1,13 +1,29 @@
 # Setup Script
 
 ## Setup TUI
-Setup script uses a TUI to collect information to install Gluu Server. If TUI is not available on your environment, it switches to command line. If you want to use command line, execute with `-c` argument:
+
+After installation, executing `setup.py` will launch the Setup TUI by default. The TUI will walk through the setup process step-by-step.
+
+1. A warning will pop up if the free disk space is less than the recommended 40 GB.
+
+1. The TUI will detect which operating system, init type, and Apache version are currently on the server.
+
+1. The third screen will gather some basic information to generate certificates.
+
+1. Next, pick which services should be installed for this deployment. 
+    ![select services](../img/admin-guide/installation-guide/setup-py-4.png)
+
+1. Next, pick a persistence mechanism. Choose from WrenDS, an LDAP that can be installed locally or remotely, or [Couchbase](https://www.couchbase.com/), an enterprise NoSQL cloud database.
+
+1. Finally, review the summary screen that gives an overview of the selections made during the setup process.
+
+## Setup Command Line
+
+If TUI is not available on your environment, it switches to command line. If you want to use command line, execute with `-c` argument:
 
 ```
 /install/community-edition-setup/setup.py -c
 ```
-
-## Setup Command Line
 
 The setup script will bring up a prompt to provide information for certificate as well as the IP Address and the hostname for the Gluu Server.  Hit `Enter` to accept the default values. 
 
