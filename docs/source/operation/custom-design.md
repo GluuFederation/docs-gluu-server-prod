@@ -307,6 +307,7 @@ As an example, add text to the top of the form and change the color of the butto
             background-color: #b79933 !important;
         }
         ```
+        
     1. Place a custom `login.xhtml` which you may find in `opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml` inside your oxauth pod  at `/opt/gluu/jetty/identity/custom/pages` in Jackrabbit.
     
     
