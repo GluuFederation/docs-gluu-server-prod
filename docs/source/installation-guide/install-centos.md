@@ -45,6 +45,12 @@ yum clean all
 yum install gluu-server-4.1.1-centos7
 ```
 
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+yum versionlock gluu-server
+```
+
 ### Start the server and log in
 
 The Gluu Server is a chroot container, which must be started to proceed. 
