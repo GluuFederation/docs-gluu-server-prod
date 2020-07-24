@@ -41,6 +41,12 @@ apt update
 apt install gluu-server=4.1.1~stretch
 ```
 
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+apt-mark hold gluu-server
+```
+
 For **Debian 10 (Buster)**, run the following commands:
 
 ```
@@ -57,6 +63,12 @@ apt update
 
 ```
 apt install gluu-server=4.1.1~buster
+```
+
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+apt-mark hold gluu-server
 ```
 
 ### Start the server and log in
