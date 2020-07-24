@@ -45,6 +45,12 @@ yum clean all
 yum install gluu-server
 ```
 
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+yum versionlock gluu-server
+```
+
 For **RHEL 7**, run the following commands:
 
 ```
@@ -65,6 +71,12 @@ yum clean all
 
 ```
 yum install gluu-server
+```
+
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+yum versionlock gluu-server
 ```
 
 ### Start the server and log in
