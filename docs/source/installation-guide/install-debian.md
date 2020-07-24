@@ -41,6 +41,12 @@ apt-get update
 apt-get install gluu-server=4.0~stretch
 ```
 
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+apt-mark hold gluu-server
+```
+
 ### Start the server and log in
 
 The Gluu Server is a chroot container, which must be started to proceed. 
