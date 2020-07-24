@@ -39,6 +39,12 @@ apt update
 apt install gluu-server=4.1.1~bionic
 ```
 
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+apt-mark hold gluu-server
+```
+
 For **Ubuntu 16.04.x** run the following commands:  
 
 ```
@@ -55,6 +61,12 @@ apt update
 
 ```
 apt install gluu-server=4.1.1~xenial
+```
+
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+apt-mark hold gluu-server
 ```
 
 ### Start the server and log in
