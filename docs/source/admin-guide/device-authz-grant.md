@@ -1,6 +1,6 @@
 # OAuth 2.0 Device Authorization Grant
 
-Signing into apps and services on devices such as smart TVs, media consoles, printers and others can be difficult to process, since those kind of devices don't have rich interfaces to process a whole authorization flow, in these cases this grant type try to use another agent like a browser in a computer or a smartphone.
+Signing into apps and services on devices such as smart TVs, media consoles, printers and others can be difficult to process, since those kind of devices don't have rich interfaces to process a whole authorization flow, in these cases this grant type tries to use another agent like a browser in a computer or a smartphone.
 
 This OAuth 2.0 protocol extension enables OAuth clients to request user authorization from applications on devices that have limited input capabilities or lack a suitable browser. The authorization flow defined by this specification, sometimes referred to as the "device flow", instructs the user to review the authorization request on a secondary device, such as a smartphone, which does have the requisite input and browser capabilities to complete the user interaction.
 
@@ -8,25 +8,25 @@ Specs are written in RFC8628: https://tools.ietf.org/html/rfc8628
 
 ## User Experience
 
-First, user requests authorization from the device:
+First, the user requests authorization from the device:
 
 ![DeviceFlow1](../img/admin-guide/device-authz/device-flow-1.png)
 
-At the URL displayed on the screen you see an input to put code displayed also in the device.
+At the URL displayed on the screen, the user can input the displayed code in the device.
 
 ![DeviceFlow2](../img/admin-guide/device-authz/device-flow-2.png)
 
-After that, user could need to authenticate and later he has to decide whether permissions will be granted.
+After that, user could need to authenticate, then decide whether permissions will be granted.
 
 ![DeviceFlow3](../img/admin-guide/device-authz/device-flow-3.png)
 
-Finally, confirmation screen will be shown.
+Finally, the confirmation screen will be shown.
 
 ![DeviceFlow4](../img/admin-guide/device-authz/device-flow-4.png)
 
 ## How it works
 
-This flow is processed between device and another richer user-agent like browser and different messages are sent to the authorization server between them.
+This flow is processed between the device and another richer user-agent like the browser. Different messages are sent to the authorization server between them.
 
 ![Diagram](../img/admin-guide/device-authz/diagram.png)
 
@@ -36,11 +36,11 @@ The flow has the following steps:
 2. Gluu server responds with different fields used in the following steps, mainly `user_code` and `device_code`.
 3. Device displays `user_code` and `verification_url` to the user.
 4. User should open `verification_url` using a different user-agent like a web browser from a computer, login and authorize.
-5. Device continuously request the token from Gluu server every N seconds until server has a result, it could be many results like: `access_denied`, `expired_token`, `authorization_pending` or it could be also the token generated when user grants the permissions.
+5. Device continuously requests the token from Gluu server every N seconds until server has a result, it could be many results like: `access_denied`, `expired_token`, `authorization_pending` or it could be also the token generated when user grants the permissions.
 
-## 1. Request user and device codes
+## Request user and device codes
 
-This first step, device sends an HTTP POST request to Gluu authorization server, at `/oxauth/restv1/device_authorization` which is also presented in the `Discovery url` published by Gluu server, this endpoint could process common authentication method or it also couldn't do any authentication, it would depend on the configuration done for the client in Gluu server.
+This first step, device sends an HTTP POST request to Gluu authorization server, at `/oxauth/restv1/device_authorization` which is also presented in the `Discovery url` published by Gluu Server, this endpoint could process a common authentication method or it could also not do any authentication, depending on the configuration for the client in Gluu Server.
 
 #### Parameters
 
@@ -60,9 +60,9 @@ Authorization: Basic MTIzLTEyMy0xMjM6WkE1aWxpTFFDYUR4
 client_id=123-123-123&scope=openid+profile+address+email+phone
 ```
 
-## 2. Device Request response
+## Device Request response
 
-In response, Gluu authorization server generates a unique device verification code and an end-user code that are valid for a limited time and includes them in the HTTP response body using the "application/json" format with a 200 (OK) status code.  The response contains the following parameters:
+In response, the Gluu authorization server generates a unique device verification code and an end-user code that are valid for a limited time and includes them in the HTTP response body using the "application/json" format with a 200 (OK) status code.  The response contains the following parameters:
 
 | Parameter | Description |
 |--|--|
@@ -91,31 +91,31 @@ Server: Jetty(9.4.19.v20190610)
 }
 ```
 
-## 3. Device Display
+## Device Display
 
-Common flow, device should display `verification_url` and `user_code` received from Gluu server. The content that the device displays to the user should instruct the user to navigate to the `verification_url` on a separate device and enter the `user_code`.
+Common flow, the device should display `verification_url` and `user_code` received from Gluu server. The content that the device displays to the user should instruct the user to navigate to the `verification_url` on a separate device and enter the `user_code`.
 
 Design device interface following these rules:
 
 1. `user_code` has the following format: XXXX-XXXX where Xs represent to any ASCII character, for example: *RTXD-HTLK*. The length of the `user_code` will be always the same, therefore it's highly recommended to show it as clear and big that the user can read it easly.
 
-2. `verification_url` should be displayed also in a way that the user can read it easly. Normal length should be around 40 characters, however it could depends also on the domain used for the server. Remember that the user will need to write the whole url manually in the web browser, therefore it's recommended to user a short url.
+2. `verification_url` should be displayed also in a way that the user can read it easily. The normal length should be around 40 characters, however it could depends also on the domain used for the server. Remember that the user will need to write the whole URL manually in the web browser, therefore it's recommended to use a short URL.
 
 3. `verification_url_complete` will be used for those cases where device can show QR (Quick Response) codes or NFC (Near Field Communication) to save the user from typing the whole URI. Interaction between device and Gluu server will be the same, however user can process the authorization faster. For example:
 
 ![DeviceFlowQR](../img/admin-guide/device-authz/device-flow-qr.png)
 
-## 4. User Login & Authorization
+## User Login & Authorization
 
-User will need to put `user_code` value in the browser and after that, he will be redirected to the common authorization flow, it requires login whether there is no session between the user-agent and the Gluu server and grant the permissions based on the device request.
+The user will need to put `user_code` value in the browser and after that, he will be redirected to the common authorization flow, it requires login whether there is no session between the user-agent and the Gluu server and grant the permissions based on the device request.
 
-## 5. Poll Token
+## Poll Token
 
-Since the user will be using a separate device to navigate to the `verification_url` and grant or deny access, the requesting device is not automatically notified when the user responds to the access request. For that reason, the requesting device needs to poll Gluu server to determine when the user has responded to the request.
+Since the user will be using a separate device to navigate to the `verification_url` and grant or deny access, the requesting device is not automatically notified when the user responds to the access request. For that reason, the requesting device needs to poll the Gluu Server to determine when the user has responded to the request.
 
 The requesting device should continue sending polling requests until it receives a response indicating that the user has responded to the access request or until the `device_code` expires. The parameter `interval` returned in step 2 specifies the amount of time, in seconds, to wait between requests.
 
-The Url of the endpoint to poll is `/oxauth/restv1/token`. The polling request contains the following parameters:
+The URL of the endpoint to poll is `/oxauth/restv1/token`. The polling request contains the following parameters:
 
 #### Parameters
 
@@ -138,9 +138,9 @@ Authorization: Basic MTIzLTEyMy0xMjM6WkE1aWxpTFFDYUR4
 grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=0bd7068e7fdab4bb91b313296a96462256a7370d12f073f0
 ```
 
-### 5.1. Token Response
+### Token Response
 
-Gluu authorization server responds to each polling request with one of the following responses:
+The Gluu authorization server responds to each polling request with one of the following responses:
 
 **Access granted**
 
