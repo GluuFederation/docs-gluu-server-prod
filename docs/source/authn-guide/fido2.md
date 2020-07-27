@@ -59,7 +59,7 @@ By default, the FIDO2 endpoints are disabled in the Gluu Server for compatibilit
 
 1. Navigate to `Configuration` > `JSON Configuration`
 
-1. Click on the `FIDO2` tab
+1. Click on the `FIDO2 Configuration` tab
 
 1. Set the `disable` field to `False`
 
