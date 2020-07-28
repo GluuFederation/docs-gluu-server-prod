@@ -110,7 +110,7 @@ sessionIdPersistOnPromptNone                       | Boolean value specifying wh
 fapiCompatibility                                  | Boolean value specifying whether to turn on FAPI compatibility mode. If true AS behaves in more strict mode.
 consentGatheringScriptBackwardCompatibility        | Boolean value specifying whether to turn on Consent Gathering Script backward compatibility mode. If true AS will pick up script with higher level globally. If false (default) AS will pick up script based on client configuration.
 introspectionScriptBackwardCompatibility           | Boolean value specifying whether switch off client's introspection scripts (true value) and run all scripts that exists on server. Default value is false.
-clientAuthorizationBackwardCompatibility           | Boolean value specifying whether switch to old way of fetching client authorizations (querying by `userInum=<v>&clientId=<c>` filter instead of getting by key `v_c` instroduced in 4.2.1 which impacts performance). 
+clientAuthorizationBackwardCompatibility           | Boolean value specifying whether switch to old way of fetching client authorizations (querying by `userInum=<v>&clientId=<c>` filter instead of getting by key `v_c` introduced in 4.2.1 which impacts performance). 
 rejectJwtWithNoneAlg                               | Boolean value specifying whether reject JWT requested or validated with algorithm None. Default value is true.
 spontaneousScopeLifetime                           | The lifetime of spontaneous scope in seconds.
 configurationUpdateInterval                        | The interval for configuration update in seconds
