@@ -478,6 +478,7 @@ This is the list of new properties or some others that have to be considered whe
 
 | Property | Values | Description |
 |----------|--------|-------------|
+| cibaEnabled | | Boolean value specifying whether turn on CIBA. If true AS will process CIBA requests. |
 | backchannelClientId | | Client identificator that will be used to associate end-user with a device. |
 | backchannelRedirectUri | | Url used to process the callback once the authentication/authorization is done |
 | backchannelAuthenticationEndpoint | | CIBA Endpoint used to initiate the authentication/authorization flow using CIBA flow. |
