@@ -4,7 +4,7 @@ Signing into apps and services on devices such as smart TVs, media consoles, pri
 
 This OAuth 2.0 protocol extension enables OAuth clients to request user authorization from applications on devices that have limited input capabilities or lack a suitable browser. The authorization flow defined by this specification, sometimes referred to as the "device flow", instructs the user to review the authorization request on a secondary device, such as a smartphone, which does have the requisite input and browser capabilities to complete the user interaction.
 
-Specs are written in RFC8628: https://tools.ietf.org/html/rfc8628
+Specs are written in [RFC8628](https://tools.ietf.org/html/rfc8628)
 
 ## User Experience
 
