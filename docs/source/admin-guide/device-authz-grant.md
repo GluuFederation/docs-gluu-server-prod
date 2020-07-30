@@ -4,7 +4,7 @@ Signing into apps and services on devices such as smart TVs, media consoles, pri
 
 This OAuth 2.0 protocol extension enables OAuth clients to request user authorization from applications on devices that have limited input capabilities or lack a suitable browser. The authorization flow defined by this specification, sometimes referred to as the "device flow", instructs the user to review the authorization request on a secondary device, such as a smartphone, which does have the requisite input and browser capabilities to complete the user interaction.
 
-Specs are written in RFC8628: https://tools.ietf.org/html/rfc8628
+Specs are written in [RFC8628](https://tools.ietf.org/html/rfc8628)
 
 ## User Experience
 
@@ -156,7 +156,7 @@ Content-Length: 858
 Content-Type: application/json
 Server: Jetty(9.4.19.v20190610)
 
-{"access_token":"c31fc092-453b-4275-a36f-b2740c3eb1a6","id_token":"eyJraWQiOiJlYTc4NDgxYy05OTJkLTRmN2UtYTkzMS03NjM2NTYyMzgwZjVfc2lnX3JzMjU2IiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoidWdMSnAzMkxXdnI4QUdlbmdNTlF3QSIsImF1ZCI6IjEyMy0xMjMtMTIzIiwic3ViIjoiM2M2M25HdWZnWFNkMWFwNU81NFZkVjlUUDdmdjJHc0YtLWl0eVBHeFJBTSIsImlzcyI6Imh0dHBzOi8vdGVzdC5nbHV1Lm9yZzo4NDQzIiwiZXhwIjoxNTk1NjQzOTg0LCJpYXQiOjE1OTU2NDAzODQsIm94T3BlbklEQ29ubmVjdFZlcnNpb24iOiJvcGVuaWRjb25uZWN0LTEuMCJ9.fElZtuUslhSSuqTOuvGeafG4QuQoHKLpya25RHWkC5V9Xf9ODYa6tD_Tdav2D9Gff2Zz7pt8WKso-WYOqmJ3NrgMoVU7d1SMj6pYGilTL1JokjB18Yw1TI6oR6Z4wegy8_ajftLLhqosI5-ZE36TzPwoAKzjPl-iZEpV2U1OPHWZrdwc9N3YOyO0I_IJGQmFnXC_oacitMV2VZaTxfuCew5cPwNp5durooFNvv3DPzc9JYEctmaLsiRtfqN7pCaV30B3hnYTYZ4p2HNsUbOewBI8_Brm1v1CByitQPUFqETgmPGbf4HCTEoaH-7DfaXnAsePt73blNwJrlTlUBieew","token_type":"bearer","expires_in":299}
+{"access_token":"c31fc092-453b-4275-a36f-b2740c3eb1a6","id_token":"eyJraWQiOiJlY4.2Tc4NDgxYy05OTJkLTRmN2UtYTkzMS03NjM2NTYyMzgwZjVfc2lnX3JzMjU2IiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoidWdMSnAzMkxXdnI4QUdlbmdNTlF3QSIsImF1ZCI6IjEyMy0xMjMtMTIzIiwic3ViIjoiM2M2M25HdWZnWFNkMWFwNU81NFZkVjlUUDdmdjJHc0YtLWl0eVBHeFJBTSIsImlzcyI6Imh0dHBzOi8vdGVzdC5nbHV1Lm9yZzo4NDQzIiwiZXhwIjoxNTk1NjQzOTg0LCJpYXQiOjE1OTU2NDAzODQsIm94T3BlbklEQ29ubmVjdFZlcnNpb24iOiJvcGVuaWRjb25uZWN0LTEuMCJ9.fElZtuUslhSSuqTOuvGeafG4QuQoHKLpya25RHWkC5V9Xf9ODYa6tD_Tdav2D9Gff2Zz7pt8WKso-WYOqmJ3NrgMoVU7d1SMj6pYGilTL1JokjB18Yw1TI6oR6Z4wegy8_ajftLLhqosI5-ZE36TzPwoAKzjPl-iZEpV2U1OPHWZrdwc9N3YOyO0I_IJGQmFnXC_oacitMV2VZaTxfuCew5cPwNp5durooFNvv3DPzc9JYEctmaLsiRtfqN7pCaV30B3hnYTYZ4p2HNsUbOewBI8_Brm1v1CByitQPUFqETgmPGbf4HCTEoaH-7DfaXnAsePt73blNwJrlTlUBieew","token_type":"bearer","expires_in":299}
 ```
 
 **Access denied**
