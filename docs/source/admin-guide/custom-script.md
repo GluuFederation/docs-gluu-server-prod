@@ -10,6 +10,10 @@ Interception scripts are written in [Jython](http://www.jython.org), enabling Ja
 
 While the syntax of the script requires Python, most of the functionality can be written in Java. If Python classes are imported, they must be "pure python." For example, a class that wraps C libraries can not be imported.
 
+!!! Note
+    If Python classes are imported, they must be "pure Python." For example, a class that wraps C libraries can not be imported. The same goes for Python packages which require `cython` during compiling.
+
+
 ### Methods
 There are three methods that inherit a base interface:
 
