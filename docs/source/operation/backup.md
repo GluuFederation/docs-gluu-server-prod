@@ -37,7 +37,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     1. First check your cache entries by running the following command:
     
         ```bash
-        /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" -w <password> -b 'o=gluu' -T 'oxAuthGrantId=*' dn | grep 'dn:' | wc -l
+        /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" -w <password> -b 'o=gluu' 'oxAuthGrantId=*' dn | grep 'dn:' | wc -l
         ```
         
     1. Dump the data as LDIF
@@ -146,7 +146,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     1. Finally, verify the cache entries have been removed:
     
         ```bash
-        /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" -w <password> -b 'o=gluu' -T 		'oxAuthGrantId=*' dn | grep 'dn:' | wc –l
+        /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" -w <password> -b 'o=gluu'  		'oxAuthGrantId=*' dn | grep 'dn:' | wc –l
         ```
 
     You should be done and everything should be working perfectly. You may notice your Gluu Server responding slower than before. That is expected -- your LDAP is adjusting to the new data, and indexing might be in process. Give it some time and it should be back to normal.
