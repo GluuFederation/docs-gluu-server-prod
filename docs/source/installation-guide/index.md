@@ -28,10 +28,10 @@ A few additional notes about system requirements:
 Deploy Gluu on a server or VM with one of the following supported operating systems:
 
 - [Docker](./install-docker.md)
-- [Ubuntu 16, 18](./install-ubuntu.md)
-- [CentOS 7.x](./install-centos.md)
-- [RHEL 7.x](./install-rhel.md)
-- [Debian 8, 9](./install-debian.md)
+- [Ubuntu 18, 20](./install-ubuntu.md)
+- [CentOS 7, 8](./install-centos.md)
+- [RHEL 7, 8](./install-rhel.md)
+- [Debian 9, 10](./install-debian.md)
 
 ## Ports
 
