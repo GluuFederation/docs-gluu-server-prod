@@ -71,7 +71,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
         - Now export the LDIF and save it somewhere safe. You will not be importing this if you choose to apply any filters as below:
     
         ```bash
-        /opt/opendj/bin/export-ldif -n userRoot -l exactdatabackup_date.ldif
+        /opt/opendj/bin/export-ldif -n userRoot -l exactdatabackup_date.ldif --offline
         ```
     
         - Now exclude `oxAuthGrantId` so the command becomes:
