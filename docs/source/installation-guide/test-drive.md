@@ -36,12 +36,12 @@ For Docker deployments on OS X, make sure you have the following:
 1. Obtain the files for deployment:
     
     ```
-    wget https://github.com/GluuFederation/community-edition-containers/archive/4.2.0.zip \
-        && unzip 4.2.0.zip
+    wget https://github.com/GluuFederation/community-edition-containers/archive/4.2.zip \
+        && unzip 4.2.zip
     ```
     
     ```
-    cd community-edition-containers-4.2.0/examples/single-host
+    cd community-edition-containers-4.2/examples/single-host
     ```
     
     ```
