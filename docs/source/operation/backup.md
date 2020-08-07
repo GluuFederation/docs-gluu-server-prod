@@ -295,7 +295,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     A file named `ldap-backup.yaml` will have been generated during installation of backup strategy. Use that as follows to remove the backup strategy:
     
     ```bash
-    kubectl delete -f ./couchbase-backup.yaml
+    kubectl delete -f ./ldap-backup.yaml
     ```
     
     #### Restore from backup
