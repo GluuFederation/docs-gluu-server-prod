@@ -165,6 +165,7 @@ nav:
         - 'Change IP Address': 'operation/changeip.md'
         - 'Server Clean-up': 'operation/cleanup.md'
         - 'Replacing Expired JKS Files': 'operation/replace-expired-jks-scim.md'
+        - 'Auto-enrolled users clean-up': 'operation/auto-enrolled-users-clean.md'
 - Developer Guide:
 #        - 'Build oxTrust with Eclipse': 'developer-guide/oxtrust-eclipse.md'
         - 'Coding custom scripts and pages': 'developer-guide/tips-cust-script-pages.md'
