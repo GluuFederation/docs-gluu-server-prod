@@ -20,6 +20,8 @@ $ snap install core
 $ snap install --dangerous gluu-server_4.1.1_amd64.snap
 $ gluu-server.setup
 ```
+
+
 Centos and RHEL:
 
 snapcraft repo:
