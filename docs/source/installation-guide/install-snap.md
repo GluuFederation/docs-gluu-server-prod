@@ -48,3 +48,8 @@ $ wget https://repo.gluu.org/snaps/gluu-server_4.1.1_amd64.snap
 $ snap install --dangerous gluu-server_4.1.1_amd64.snap
 $ gluu-server.setup
 ```
+
+Uninstall process
+```
+$ snap remove gluu-server
+```
