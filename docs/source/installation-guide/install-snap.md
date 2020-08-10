@@ -1,6 +1,6 @@
 # SNAP Installation
 
-Ubuntu and Debian:
+Ubuntu and Debian
 
 snapcraft repo:
 ```
@@ -22,7 +22,7 @@ $ gluu-server.setup
 ```
 
 
-Centos and RHEL:
+Centos and RHEL
 
 snapcraft repo:
 ```
