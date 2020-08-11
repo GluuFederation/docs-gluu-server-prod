@@ -163,6 +163,7 @@ forceOfflineAccessScopeToEnableRefreshToken        | Boolean value specifying wh
 errorReasonEnabled                                 | Boolean value specifying whether to return detailed reason of the error from AS. Default value is false.
 removeRefreshTokensForClientOnLogout               | Boolean value specifying whether to remove Refresh Tokens on logout. Default value is false.
 skipRefreshTokenDuringRefreshing                   | Boolean value specifying whether to return Refresh Tokens from Token Endpoint during refreshing (`grant_type=refresh_token`). Default value is false (return token).
+dynamicRegistrationAllowedPasswordGrantScopes      | Specifies allowed scopes if client has grant_type=password. Otherwise ignored. It's also ignored when list is empty.
 
 ### Brute Force Protection
 
