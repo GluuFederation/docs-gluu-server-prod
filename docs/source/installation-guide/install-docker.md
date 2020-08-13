@@ -26,7 +26,7 @@ For Docker deployments, provision a VM with:
 Download the `pygluu-compose.pyz` executable:
 
 ```sh
-wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.0.2/pygluu-compose.pyz
+wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.1.1/pygluu-compose.pyz
 chmod +x pygluu-compose.pyz
 ```
 
@@ -65,8 +65,6 @@ tree
 ├── vault_gluu_policy.hcl
 ├── vault_role_id.txt
 └── vault_secret_id.txt
-
-0 directories, 21 files
 ```
 
 Proceed to [deployment section](./#deploy-the-gluu-server) for basic setup of Gluu Server deployment or read the [customizing section](./#customizing-installation) for advance setup.
