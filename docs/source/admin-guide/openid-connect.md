@@ -104,7 +104,7 @@ A software statement is a JSON Web Token (JWT) that asserts metadata values abou
 
 There are following options for software statement validation:
  
-- `softwareStatementValidationType=script` - default one (since 4.2.1), jwks and hmac secret are returned by [dynamic client registration script](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.1/static/extension/client_registration/SampleScript.py)
+- `softwareStatementValidationType=script` - The default (since 4.2.1), JWKs and HMAC secret are returned by [dynamic client registration script](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.1/static/extension/client_registration/SampleScript.py)
 - `softwareStatementValidationType=jwks_uri`, allows to specify `jwks_uri` claim name from `software_statement`. Claim name specified by `softwareStatementValidationClaimName` configuration property
 - `softwareStatementValidationType=jwks`, allows to specify `jwks` claim name from `software_statement`. Claim name specified by `softwareStatementValidationClaimName` configuration property
 - `softwareStatementValidationType=none`, no validation
