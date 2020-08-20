@@ -23,7 +23,7 @@ While there are hundreds of classes available for reuse, the following summarize
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Allows to authenticate a user or obtain the current authenticated user|Yes (Stateless)|oxauth-server|`org.gluu.oxauth.service.AuthenticationService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.1.0/Server/src/main/java/org/gluu/oxauth/service/AuthenticationService.java)|
+|Allows to authenticate a user or obtain the current authenticated user|Yes (Stateless)|oxauth-server|`org.gluu.oxauth.service.AuthenticationService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/Server/src/main/java/org/gluu/oxauth/service/AuthenticationService.java)|
 
 Relevant methods:
 
@@ -37,7 +37,7 @@ Relevant methods:
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|This class is mainly used in facelets templates for authentication flows to proceed in the sequence of steps|Yes (RequestScoped)|oxauth-server|`org.gluu.oxauth.auth.Authenticator`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.1.0/Server/src/main/java/org/gluu/oxauth/auth/Authenticator.java)|
+|This class is mainly used in facelets templates for authentication flows to proceed in the sequence of steps|Yes (RequestScoped)|oxauth-server|`org.gluu.oxauth.auth.Authenticator`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/Server/src/main/java/org/gluu/oxauth/auth/Authenticator.java)|
 
 Relevant methods:
 
@@ -54,20 +54,20 @@ See also: [Person authentication](../admin-guide/custom-script.md#person-authent
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Allows CRUD of users in the local database|Yes (ApplicationScoped)|oxauth-common|`org.gluu.oxauth.service.UserService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.1.0/common/src/main/java/org/gluu/oxauth/service/UserService.java)|
+|Allows CRUD of users in the local database|Yes (ApplicationScoped)|oxauth-common|`org.gluu.oxauth.service.UserService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/common/src/main/java/org/gluu/oxauth/service/UserService.java)|
 
 Relevant methods:
 
 |Signature|Description|
 |-|-|
 |`User addUser(User user, boolean active)`|Creates a new user based on the representation passed as parameter. `active` parameter denotes whether user status (`gluuStatus` attribute) will be `active` or `register`|
-|`User addUserAttribute(String userId, String attributeName, String attributeValue)`|Adds an attribute to the user identified by `userId` in the database with the name and value passed. Returns a representation of the modified user or `null` in case of failure or if such name/attribute is already part of such user|
-|`boolean addUserAttribute(User user, String attributeName, String attributeValue)`|Adds an attribute to the `user` object with the name and value passed. This method only alters the `user` argument and does not persist changes. Returns `false` if such name/attribute is already part of `user`
-|`User addUserAttributeByUserInum(String userInum, String attributeName, String attributeValue)`|Adds an attribute to the user whose `inum`  attribute (in the database) equals to `userInum` using the name and value passed. Returns a representation of the modified user or `null` in case of failure or if such name/attribute is already part of such user|
-|`CustomAttribute getCustomAttribute(User user, String attributeName)`|Gets a representation of the attribute whose name is passed for the user in question (`user`). Returns `null` if no such attribute is populated|
+|`User addUserAttribute(String userId, String attributeName, Object attributeValue)`|Adds an attribute to the user identified by `userId` in the database with the name and value passed. Returns a representation of the modified user or `null` in case of failure or if such name/attribute is already part of such user|
+|`boolean addUserAttribute(User user, String attributeName, Object attributeValue)`|Adds an attribute to the `user` object with the name and value passed. This method only alters the `user` argument and does not persist changes. Returns `false` if such name/attribute is already part of `user`
+|`User addUserAttributeByUserInum(String userInum, String attributeName, Object attributeValue)`|Adds an attribute to the user whose `inum`  attribute (in the database) equals to `userInum` using the name and value passed. Returns a representation of the modified user or `null` in case of failure or if such name/attribute is already part of such user|
+|`CustomObjectAttribute getCustomAttribute(User user, String attributeName)`|Gets a representation of the attribute whose name is passed for the user in question (`user`). Returns `null` if no such attribute is populated|
 |`String getDnForUser(String inum)`|Obtains the DN (distinguished name) of the user whose `inum` attribute equals to `userInum` (no check that such user may exist is actually made)|
 |`User getUser(String userId, String... returnAttributes)`|Retrieves a user representation for the user identified with `userId` containing only the attributes requested (`returnAttributes`). `null` is returned if no such user exists|
-|`User getUserByAttribute(String attributeName, String attributeValue)`|Retrieves a user (first available) such that the attribute referenced (`attributeName`) has the value passed (`attributeValue`). `null` is returned if no such user exists|
+|`User getUserByAttribute(String attributeName, Object attributeValue)`|Retrieves a user (first available) such that the attribute referenced (`attributeName`) has the value passed (`attributeValue`). `null` is returned if no such user exists|
 |`String getUserInum(String userId)`|Retrieves the `inum` database attribute for the user identified with `userId`.`null` is returned if no such user exists|
 |`User removeUserAttribute(String userId, String attributeName, String attributeValue)`|Removes `attributeValue` from the values of the attribute whose name is passed (`attributeName`) for the user identified with `userId`|
 |`User replaceUserAttribute(String userId, String attributeName, String oldAttributeValue, String newAttributeValue)`|Updates the user identified with `userId` by replacing the value of the attribute `attributeName` with the value passed. `null` is returned if no such user exists|
@@ -77,19 +77,19 @@ Relevant methods:
 See also:
 
 - [User](#class-user) data object
-- [CustomAttribute](#class-customattribute) data object
+- [CustomObjectAttribute](#class-customattribute) data object
 
 #### Class: `User`
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|A class employed to represent a user entry in the database. Provides getters and setters to retrieve and assign value(s) for attributes|No|oxauth-common|`org.gluu.oxauth.model.common.User`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.1.0/common/src/main/java/org/gluu/oxauth/model/common/User.java)|
+|A class employed to represent a user entry in the database. Provides getters and setters to retrieve and assign value(s) for attributes|No|oxauth-common|`org.gluu.oxauth.model.common.User`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/common/src/main/java/org/gluu/oxauth/model/common/User.java)|
 
-#### Class: `CustomAttribute`
+#### Class: `CustomObjectAttribute`
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|A class that models an attribute. An attribute has a name and a collection of associated values|No|oxcore-persistence-model|`org.gluu.persist.model.base.CustomAttribute`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.1.0/persistence-model/src/main/java/org/gluu/persist/model/base/CustomAttribute.java)|
+|A class that models an attribute. An attribute has a name and a collection of associated values|No|oxcore-persistence-model|`org.gluu.persist.model.base.CustomObjectAttribute`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.2.0/persistence-model/src/main/java/org/gluu/persist/model/base/CustomObjectAttribute.java)|
 
 ### Category: Session Management
 
@@ -97,7 +97,7 @@ See also:
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Mainly used to carry data between steps of authentication flows|Yes (RequestScoped)|oxauth-server|`org.gluu.oxauth.security.Identity`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.1.0/Server/src/main/java/org/gluu/oxauth/security/Identity.java)|
+|Mainly used to carry data between steps of authentication flows|Yes (RequestScoped)|oxauth-server|`org.gluu.oxauth.security.Identity`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/Server/src/main/java/org/gluu/oxauth/security/Identity.java)|
 
 Relevant methods:
 
@@ -105,7 +105,7 @@ Relevant methods:
 |-|-|
 |`Object getWorkingParameter(String name)`|Retrieves a working parameter by name previously set via `setWorkingParameter`|
 |`void setWorkingParameter(String name, Object value)`|Binds data to a name for further use in an authentication flow. Recommended values to store are `String`s|
-|`SessionId getSessionId()`|Retrieves a reference to the associated server session object, see [SessionId](https://github.com/GluuFederation/oxAuth/blob/version_4.1.0/Server/src/main/java/org/gluu/oxauth/model/common/SessionId.java)|
+|`SessionId getSessionId()`|Retrieves a reference to the associated server session object, see [SessionId](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/Server/src/main/java/org/gluu/oxauth/model/common/SessionId.java)|
 
 <!-- SessionIdService --> 
 
@@ -114,13 +114,13 @@ Relevant methods:
 #### Class: `HttpService`
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Provides utility methods to execute HTTP requests, manipulate responses, etc.|Yes (ApplicationScoped)|oxauth-server|`org.gluu.oxauth.service.net.HttpService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.1.0/Server/src/main/java/org/gluu/oxauth/service/net/HttpService.java)|
+|Provides utility methods to execute HTTP requests, manipulate responses, etc.|Yes (ApplicationScoped)|oxauth-server|`org.gluu.oxauth.service.net.HttpService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/Server/src/main/java/org/gluu/oxauth/service/net/HttpService.java)|
 
 Relevant methods:
 
 |Signature|Description|
 |-|-|
-|`HttpClient getHttpsClient()`|Returns an instance of `org.apache.http.client.HttpClient` (see oxcore-util class [SslDefaultHttpClient](https://github.com/GluuFederation/oxCore/blob/version_4.1.0/oxUtil/src/main/java/org/gluu/net/SslDefaultHttpClient.java))|
+|`HttpClient getHttpsClient()`|Returns an instance of `org.apache.http.client.HttpClient` (see oxcore-util class [SslDefaultHttpClient](https://github.com/GluuFederation/oxCore/blob/version_4.2.0/oxUtil/src/main/java/org/gluu/net/SslDefaultHttpClient.java))|
 |`HttpServiceResponse executeGet(HttpClient httpClient, String requestUri)`|Perform a GET on the URI requested. Returns an instance of `org.gluu.oxauth.model.net.HttpServiceResponse` (a wrapper on `org.apache.http.HttpResponse`)|
 |`byte[] getResponseContent(HttpResponse httpResponse)`|Consumes the bytes of the associated response. Returns `null` if the response status code is not 200 (OK)|
 
@@ -130,7 +130,7 @@ Relevant methods:
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Provides a unified means to interact with the underlying cache provider configured in the Gluu Server|Yes (ApplicationScoped)|oxcore-service|`org.gluu.service.CacheService`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.1.0/oxService/src/main/java/org/gluu/service/CacheService.java)|
+|Provides a unified means to interact with the underlying cache provider configured in the Gluu Server|Yes (ApplicationScoped)|oxcore-service|`org.gluu.service.CacheService`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.2.0/oxService/src/main/java/org/gluu/service/CacheService.java)|
 
 Relevant methods:
 
@@ -150,7 +150,7 @@ See also: [Cache Provider](https://gluu.org/docs/ce/reference/cache-provider-pro
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Provides utilities to properly build encoded URLs and make redirections. This class is often used in custom scripts|Yes (RequestScoped)|oxcore-jsf-util|`org.gluu.jsf2.service.FacesService`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.1.0/oxJsfUtil/src/main/java/org/gluu/jsf2/service/FacesService.java)|
+|Provides utilities to properly build encoded URLs and make redirections. This class is often used in custom scripts|Yes (RequestScoped)|oxcore-jsf-util|`org.gluu.jsf2.service.FacesService`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.2.0/oxJsfUtil/src/main/java/org/gluu/jsf2/service/FacesService.java)|
 
 Relevant methods:
 
@@ -163,7 +163,7 @@ Relevant methods:
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Allows manipulation of JSF context messages|No|oxcore-jsf-util|`org.gluu.jsf2.message.FacesMessages`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.1.0/oxJsfUtil/src/main/java/org/gluu/jsf2/message/FacesMessages.java)|
+|Allows manipulation of JSF context messages|No|oxcore-jsf-util|`org.gluu.jsf2.message.FacesMessages`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.2.0/oxJsfUtil/src/main/java/org/gluu/jsf2/message/FacesMessages.java)|
 
 Relevant methods:
 
@@ -182,7 +182,7 @@ See also: ["Displaying error conditions to end-users"](#example-displaying-error
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Allows to obtain references of managed beans. This is particularly useful in custom scripts|No|oxcore-service|`org.gluu.service.cdi.util.CdiUtil`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.1.0/oxService/src/main/java/org/gluu/service/cdi/util/CdiUtil.java)|
+|Allows to obtain references of managed beans. This is particularly useful in custom scripts|No|oxcore-service|`org.gluu.service.cdi.util.CdiUtil`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.2.0/oxService/src/main/java/org/gluu/service/cdi/util/CdiUtil.java)|
 
 Relevant methods:
 
@@ -204,7 +204,7 @@ authenticationService = CdiUtil.bean(AuthenticationService)
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Provides many utility methods that often arise in the manipulation of Strings|No|oxcore-util|`org.gluu.util.StringHelper`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.1.0/oxUtil/src/main/java/org/gluu/util/StringHelper.java)|
+|Provides many utility methods that often arise in the manipulation of Strings|No|oxcore-util|`org.gluu.util.StringHelper`|[code](https://github.com/GluuFederation/oxCore/blob/version_4.2.0/oxUtil/src/main/java/org/gluu/util/StringHelper.java)|
 
 Relevant methods:see "References" column.
 
@@ -212,7 +212,7 @@ Relevant methods:see "References" column.
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Allows to encrypt/decrypt strings using a 3DES cipher whose salt is found in chroot at `/etc/gluu/conf/salt`|Yes (ApplicationScoped)|oxauth-server|`org.gluu.oxauth.service.EncryptionService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.1.0/Server/src/main/java/org/gluu/oxauth/service/EncryptionService.java)|
+|Allows to encrypt/decrypt strings using a 3DES cipher whose salt is found in chroot at `/etc/gluu/conf/salt`|Yes (ApplicationScoped)|oxauth-server|`org.gluu.oxauth.service.EncryptionService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/Server/src/main/java/org/gluu/oxauth/service/EncryptionService.java)|
 
 Relevant methods:
 
