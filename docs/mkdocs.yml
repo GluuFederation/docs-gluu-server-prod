@@ -58,6 +58,7 @@ nav:
             # - 'Test Drive': 'installation-guide/test-drive.md'
             - 'Kubernetes': 'installation-guide/install-kubernetes.md'
             - 'Docker': 'installation-guide/install-docker.md'
+            - 'Snap': 'installation-guide/install-snap.md'
             - 'Ubuntu': 'installation-guide/install-ubuntu.md'
             - 'Debian': 'installation-guide/install-debian.md'
             - 'RHEL': 'installation-guide/install-rhel.md'
