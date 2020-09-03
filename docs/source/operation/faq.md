@@ -33,16 +33,10 @@ The `post-setup-add-components.py` script enables you to install the Shibboleth 
     cd /install/community-edition-setup/
     ```
           
-1. Download the script:     
-
-    ```
-    wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/master/post-setup-add-components.py
-    ```
-          
 1. Run the script with arguments either `-addshib` or `-addpassport`  
 
     ```
-    python post-setup-add-components.py -addshib -addpassport
+    ./post-setup-add-components.py -addshib -addpassport
     ```
 
 ## Connect a remote debugger
