@@ -4,7 +4,7 @@
 
 In order to use this authentication mechanism your organization will need to register for a BioID account. 
 
-## Prerequisitesm
+## Prerequisites
 - A Gluu Server ([installation instructions](../installation-guide/index.md));
 - [BioID interception script](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/bioID/BioIDExternalAuthenticator.py) (included in the default Gluu Server distribution);
 - An account with [BioID](https://bwsportal.bioid.com/register).   
@@ -36,7 +36,7 @@ With the BWS Portal, you can do the following:
 
 You can find all API reference at https://developer.bioid.com/bwsreference. 
 Lots of useful information about BWS is available at https://developer.bioid.com/blog.
-If you intend to use liveness detection, you will find information about motion trigger helpful: https://developer.bioid.com/app-developer-guide/bioid-motion-detection
+For liveness detection, you will find information about motion trigger helpful: https://developer.bioid.com/app-developer-guide/bioid-motion-detection
 
 ## Configure oxTrust 
 
