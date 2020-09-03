@@ -69,4 +69,4 @@ Now applications can request BioID's biometric authentication. To make BioID bio
 
 You can change one or both fields to BioID authentication as you see fit. If you want BioID to be the default authentication mechanism for access to oxTrust and all other applications that leverage your Gluu Server, change both fields to bioid.  
  
-![BioID](../img/admin-guide/multi-factor/bioID.png)
+![BioID](../img/admin-guide/multi-factor/bioid.png)
