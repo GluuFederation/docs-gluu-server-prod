@@ -10,7 +10,7 @@ Specifically, custom pages can use EL expressions to get/bind values or call met
 
 In addition to that, there are the usual implicit JSP/JSF [objects](http://incepttechnologies.blogspot.com/p/jsf-implicit-objects.html) plus the `i18n` labels map (`msgs`) used for [localization](../operation/custom-design/#subdirectories) purposes.
 
-In the case of custom scripts, any class in oxAuth's classpath can be used as well as the standard Java 8 classes. 
+In the case of custom scripts, any class in oxAuth's classpath can be used as well as the standard Java 8 classes.
 
 !!! Note
     Find the javadocs here: [oxAuth](https://ox.gluu.org/javadocs/oxauth/) <!--and [oxCore](?)--> (choose the version matching your Gluu Server version).
@@ -54,7 +54,7 @@ See also: [Person authentication](../admin-guide/custom-script.md#person-authent
 
 |Description|Managed bean|Project|Full name|References|
 |-|-|-|-|-|
-|Allows CRUD of users in the local database|Yes (ApplicationScoped)|oxauth-common|`org.gluu.oxauth.service.UserService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/common/src/main/java/org/gluu/oxauth/service/UserService.java)|
+|Allows CRUD of users in the local database|Yes (ApplicationScoped)|oxauth-common|`org.gluu.oxauth.service.UserService`|[code](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/common/src/main/java/org/gluu/oxauth/service/common/UserService.java)|
 
 Relevant methods:
 
@@ -107,7 +107,7 @@ Relevant methods:
 |`void setWorkingParameter(String name, Object value)`|Binds data to a name for further use in an authentication flow. Recommended values to store are `String`s|
 |`SessionId getSessionId()`|Retrieves a reference to the associated server session object, see [SessionId](https://github.com/GluuFederation/oxAuth/blob/version_4.2.0/Server/src/main/java/org/gluu/oxauth/model/common/SessionId.java)|
 
-<!-- SessionIdService --> 
+<!-- SessionIdService -->
 
 ### Category: Networking
 
@@ -226,13 +226,13 @@ Relevant methods:
 
 When coding certain flows, it is important to be able to display errors in the xhtml templates based on conditions that occur as the  associated custom script runs. For this purposes, the `FacesMessage` bean can be used. Here is an example that adds an error message in the UI:
 
-``` 
+```
 from org.gluu.jsf2.message import FacesMessages
 from org.gluu.service.cdi.util import CdiUtil
 from javax.faces.application import FacesMessage
 ...
 
-facesMessages = CdiUtil.bean(FacesMessages) 
+facesMessages = CdiUtil.bean(FacesMessages)
 facesMessages.setKeepMessages()
 facesMessages.add(FacesMessage.SEVERITY_ERROR, "Please enter a valid username")
 ```
