@@ -33,6 +33,7 @@ google_analytics:
 # Extensions
 markdown_extensions:
 - admonition
+- attr_list
 - toc:
      permalink: '#'
 - codehilite
@@ -107,6 +108,7 @@ nav:
         - 'OpenID Connect Provider (OP)': 'admin-guide/openid-connect.md'
         - 'UMA Authorization Server (AS)': 'admin-guide/uma.md'
         - 'Central Authentication Service (CAS)': 'admin-guide/cas.md'
+        - 'OAuth2.0 Device Authorization Grant': admin-guide/device-authz-grant/
         - 'Session Management': 'admin-guide/session.md'
         - 'Certificate Management': 'admin-guide/certificate.md'
         - 'CORS Configuration': 'admin-guide/cors.md'
