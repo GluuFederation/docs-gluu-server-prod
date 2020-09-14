@@ -12,7 +12,7 @@ In order to use this authentication mechanism your organization will need to reg
 ## Properties
 The mandatory properties in the BioID authentication script are as follows
 |	Property	|	Description		|	Example	|
-|-----------------------|-------------------------------|---------------|
+|---------------|-------------------|---------------|
 |ENDPOINT 		|URL of the BioID Web Service|`https://bws.bioid.com/extension/`|
 |APP_IDENTIFIER 	|API key |`c20b04cc-776a-45ed-7a1f-06347f8edf6c`|
 |APP_SECRET 	|API secret |`sTGB4n4HAkvc2BnJp6KeNUTk`|
