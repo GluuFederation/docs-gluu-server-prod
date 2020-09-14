@@ -6,7 +6,7 @@ In order to use this authentication mechanism your organization will need to reg
 
 ## Prerequisites
 - A Gluu Server ([installation instructions](../installation-guide/index.md));
-- [BioID interception script](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/bioID/BioIDExternalAuthenticator.py) (included in the default Gluu Server distribution);
+- [BioID interception script](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/bioid/BioIDExternalAuthenticator.py) (included in the default Gluu Server distribution);
 - An account with [BioID](https://bwsportal.bioid.com/register).   
 
 ## Properties
@@ -70,3 +70,10 @@ Now applications can request BioID's biometric authentication. To make BioID bio
 You can change one or both fields to BioID authentication as you see fit. If you want BioID to be the default authentication mechanism for access to oxTrust and all other applications that leverage your Gluu Server, change both fields to bioid.  
  
 ![BioID](../img/admin-guide/multi-factor/bioid.png)
+
+## Testing the script
+If you use the default BioID interception script, a user's facial and periocular traits are enrolled during the first authentication attempt. Subsequently, the user's facial and periocular traits are verified.
+
+1. Enrolling Biometric traits
+
+2. Validating a user based on their biometric traits:
