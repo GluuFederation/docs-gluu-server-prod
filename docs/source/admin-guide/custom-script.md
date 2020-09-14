@@ -10,6 +10,10 @@ Interception scripts are written in [Jython](http://www.jython.org), enabling Ja
 
 While the syntax of the script requires Python, most of the functionality can be written in Java. If Python classes are imported, they must be "pure python." For example, a class that wraps C libraries can not be imported.
 
+!!! Note
+    If Python classes are imported, they must be "pure Python." For example, a class that wraps C libraries can not be imported. The same goes for Python packages which require `cython` during compiling.
+
+
 ### Methods
 There are three methods that inherit a base interface:
 
@@ -191,7 +195,11 @@ First oxTrust executes the `initRegistration` method to do an initial user entry
 
 oxAuth implements the [OpenID Connect dynamic client registration](https://openid.net/specs/openid-connect-registration-1_0.html) specification. All new clients have the same default access scopes and attributes except password and client ID. The Client Registration script allows an admin to modify this limitation. In this script it is possible to get a registration request, analyze it, and apply customizations to registered clients. For example, a script can give access to specified scopes if `redirect_uri` belongs to a specified service or domain.
 
-This script type adds only one method to the base script type:
+This script type adds following methods to the base script type:
+- `def createClient(self, registerRequest, client, configurationAttributes)` - called during client creation 
+- `def updateClient(self, registerRequest, client, configurationAttributes)` - called during client update
+- `def getSoftwareStatementHmacSecret(self, context)` - Returns secret key which will be used to validate Software Statement if HMAC algorithm is used (e.g. HS256, HS512). Invoked if oxauth conf property softwareStatementValidationType=SCRIPT which is default/fallback value. `context` is reference of `org.gluu.oxauth.service.external.context.DynamicClientRegistrationContext` (in https://github.com/GluuFederation/oxauth project )
+- `def getSoftwareStatementJwks(self, context)` - Returns JWKS which will be used to validate Software Statement if keys are used (e.g. RS256). Invoked if oxauth conf property softwareStatementValidationType=SCRIPT which is default/fallback value. `context` is reference of org.gluu.oxauth.service.external.context.DynamicClientRegistrationContext (in https://github.com/GluuFederation/oxauth project )
 
 |Method|`def updateClient(self, registerRequest, client, configurationAttributes)`|
 |---|---|
