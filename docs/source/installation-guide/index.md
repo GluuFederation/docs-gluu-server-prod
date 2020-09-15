@@ -135,7 +135,24 @@ ulimit -n 65535
     
 The Server or VM must be deployed on a static IP address. Cloud servers should already have that set. When installing the Gluu Server, make sure the server has a static IP.
 
-In Linux, open the following using any editor:
+### CentOS
+
+Create a file named /etc/sysconfig/network-scripts/ifcfg-eth0 containing the following information:
+
+```
+DEVICE=eth0
+BOOTPROTO=none
+ONBOOT=yes
+PREFIX=24
+IPADDR=192.168.2.203  <replace with your IP>
+```    
+    
+Restart the network service: systemctl restart network
+
+
+### Other Operating Systems
+
+Open the following using any editor:
 
 ```
 vi /etc/network/interfaces
