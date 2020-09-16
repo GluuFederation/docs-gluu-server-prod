@@ -58,6 +58,22 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.1+)
 
+- [#1467](https://github.com/GluuFederation/oxAuth/issues/1467) Not able to complete idp-initiated flow due session id / cookies issue
+
+- [#1466](https://github.com/GluuFederation/oxAuth/issues/1466) oxAuth tries to find session entry which led to exception
+
+- [#1459](https://github.com/GluuFederation/oxAuth/issues/1459) Remove log noise from passport-saml
+
+- [#1461](https://github.com/GluuFederation/oxAuth/issues/1461) JWKS published invalid key for "crv" : "P-421"
+
+- [#1456](https://github.com/GluuFederation/oxAuth/issues/1456) redirect_uri must be re-validated at authorize auction and on error redirect
+
+- [#1443](https://github.com/GluuFederation/oxAuth/issues/1443) Update passport scripts to store oxExternalUid as multivalued
+
+- [#1458](https://github.com/GluuFederation/oxAuth/issues/1458) Add clear sid support
+
+- [#1455](https://github.com/GluuFederation/oxAuth/issues/1455) Misleading WARNING message on non-expired key
+
 - [#1447](https://github.com/GluuFederation/oxAuth/issues/1447) If software_statement is present in dynamic registration request, plain claims are lost 
 
 - [#1449](https://github.com/GluuFederation/oxAuth/issues/1449) Do not extend refresh token lifetime on refresh token rotation 
@@ -98,6 +114,8 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.1+)
 
+- [#2025](https://github.com/GluuFederation/oxTrust/issues/2025) CR copy binary attributes to local LDAP as base64 string
+
 - [#2016](https://github.com/GluuFederation/oxTrust/issues/2016) oxTrust should not rely on configuration endpoint for scopes
 
 - [#2020](https://github.com/GluuFederation/oxTrust/issues/2020) Bug: GUI allows to persist redirect_uri with fragment
@@ -119,6 +137,8 @@ documentation and administrative guide.
 - [#2002](https://github.com/GluuFederation/oxTrust/issues/2002) Not able to delete `claims redirect uri` for any client
 
 ### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.1+)
+
+- [#713](https://github.com/GluuFederation/community-edition-setup/issues/713) offline_access scope should be created during setup
 
 - [#709](https://github.com/GluuFederation/community-edition-setup/issues/709) Update Casa scripts to store and retrieve oxExternalUid as multivalued
 
