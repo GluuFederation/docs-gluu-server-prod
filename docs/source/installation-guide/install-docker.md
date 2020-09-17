@@ -26,8 +26,8 @@ For Docker deployments, provision a VM with:
 Download the `pygluu-compose.pyz` executable:
 
 ```sh
-wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.2.0/pygluu-compose.pyz
-chmod +x pygluu-compose.pyz
+wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.2.3/pygluu-compose.pyz \
+    && chmod +x pygluu-compose.pyz
 ```
 
 !!!Note
@@ -49,7 +49,8 @@ tree
 ├── docker-compose.yml
 ├── gcp_kms_creds.json
 ├── gcp_kms_stanza.hcl
-├── pygluu-compose.pyz
+├── jackrabbit_admin_password
+├── job.persistence.yml
 ├── svc.casa.yml
 ├── svc.cr_rotate.yml
 ├── svc.fido2.yml
