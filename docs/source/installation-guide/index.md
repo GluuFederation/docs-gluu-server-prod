@@ -1,7 +1,4 @@
-# VM Preparation Guide
-
-!!! Note
-    For a quick demo deployment of the Gluu Server, skip the VM prep guide and try our new [Test Drive](./test-drive.md) installation process.  
+# VM Preparation Guide  
 
 ## Overview
 
