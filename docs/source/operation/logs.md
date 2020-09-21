@@ -121,7 +121,6 @@ The available log files for Gluu Server Community Edition inside the `chroot` en
 |-----|-----|
 |_/install/community-edition-setup_/**setup.log**|Setup detail log|
 |_/install/community-edition-setup_/**setup_error.log**|Setup error log|
-|_/install/community-edition-setup_/**os-changes.log**| Logs filesystem changes during setup |
 |_/opt/gluu/jetty/idp/logs_/**start.log**|Logs time-stamp when IDP starts|
 |_/opt/shibboleth-idp/logs_/**idp-warn.log**<br/>_/opt/shibboleth-idp/logs_/**idp-process.log**|IDP diagonostic log [Read more..](https://wiki.shibboleth.net/confluence/display/IDP30/LoggingConfiguration)|
 |_/opt/shibboleth-idp/logs_/**idp-audit.log**|General audit log [Read more..](https://wiki.shibboleth.net/confluence/display/IDP30/LoggingConfiguration)|

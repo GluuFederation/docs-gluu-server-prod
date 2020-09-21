@@ -162,11 +162,6 @@ changeSessionIdOnAuthentication                    | Boolean value specifying wh
 forceOfflineAccessScopeToEnableRefreshToken        | Boolean value specifying whether force offline_access scope to enable refresh_token grant type. Default value is true.
 errorReasonEnabled                                 | Boolean value specifying whether to return detailed reason of the error from AS. Default value is false.
 removeRefreshTokensForClientOnLogout               | Boolean value specifying whether to remove Refresh Tokens on logout. Default value is false.
-skipRefreshTokenDuringRefreshing                   | Boolean value specifying whether to return Refresh Tokens from Token Endpoint during refreshing (`grant_type=refresh_token`). Default value is false (return token).
-dynamicRegistrationAllowedPasswordGrantScopes      | Specifies allowed scopes if client has grant_type=password. Otherwise ignored. It's also ignored when list is empty.
-softwareStatementValidationType                    | Specifies validation type for software statement during Dynamic Client Registration. `script` - validate with help of Dynamic Client Registration custom script, `jwks_uri` - validate by JWKS fetched by uri where jwks_uri is specified as claim of software statement by name defined in softwareStatementValidationClaimName. `jwks` - validate by JWKS which are taken from sofware statement claims. Not recommended. Claim name specified by softwareStatementValidationClaimName. `none` - validation of software statement is skipped.
-softwareStatementValidationClaimName               | Specifies claim name within software statement. Used with `softwareStatementValidationType=jwks_uri` or `softwareStatementValidationType=jwks`.
-refreshTokenExtendLifetimeOnRotation               | Boolean value specifying whether to extend refresh token lifetime on rotation.
 
 ### Brute Force Protection
 

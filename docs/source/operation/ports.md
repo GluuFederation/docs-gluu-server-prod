@@ -8,9 +8,8 @@ The following ports are used by internal Gluu Server applications (i.e. oxAuth, 
 -----|-------------
 |8081| oxAuth Server|
 |8082| oxTrust Server|
-|8085| oxAuth-RP|
 |8086| Shibboleth IDP|
-|8087| SCIM|
+|8085| oxAuth-RP|
 |8090| Passport |
 |8091| Casa |
 

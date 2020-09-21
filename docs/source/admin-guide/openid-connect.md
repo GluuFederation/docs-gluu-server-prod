@@ -97,18 +97,6 @@ To manage this feature in oxTrust, navigate to `Configuration` > `JSON Configura
 
 Expiration of dynamically registered clients is controlled by the `dynamicRegistrationExpirationTime` property, which can also be found in the oxAuth configuration table. Find more details about these oxAuth properties and others in the [reference section](../reference/JSON-oxauth-prop.md).
 
-
-##### Software statement
-
-A software statement is a JSON Web Token (JWT) that asserts metadata values about the client software as a bundle and can be passed during registration.
-
-There are following options for software statement validation:
- 
-- `softwareStatementValidationType=script` - The default (since 4.2.1), JWKs and HMAC secret are returned by [dynamic client registration script](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.1/static/extension/client_registration/SampleScript.py)
-- `softwareStatementValidationType=jwks_uri`, allows to specify `jwks_uri` claim name from `software_statement`. Claim name specified by `softwareStatementValidationClaimName` configuration property
-- `softwareStatementValidationType=jwks`, allows to specify `jwks` claim name from `software_statement`. Claim name specified by `softwareStatementValidationClaimName` configuration property
-- `softwareStatementValidationType=none`, no validation
-
 ### Customizing client registration
 
 During client registration, custom interception scripts can be used to implement custom business logic. For instance, data could be validated, extra client claims could be populated, scopes could be modified, or APIs could be called to determine whether the client should get registered at all.

@@ -4,8 +4,16 @@ If your IP changes after initial setup, you need to change your Gluu Server's co
 
 1. Start the Gluu Server
 1. Log in to Gluu Server Chroot container
+1. Update the Apache Configuration 
+    - Navigate to `/etc/apache2/sites-available`
+    - Open `https_gluu.conf` in a text editor
+    - Change the IP address
+    - [Restart](./services.md#restart) the `apache2` service
+1. Update the LDAP Configuration
+    - Open the LDAP in an LDAP editor or browser
+    - Update 'gluuIpAddress', under the root ou=appliances DN
 1. Change the IP address in `/etc/hosts` file
-1. [Restart](./services.md#restart) the `opendj` service (or other service used for persistence)
+1. [Restart](./services.md#restart) the `opendj` service
 1. [Restart](./services.md#restart) the `httpd` service
 1. [Restart](./services.md#restart) the `idp` service
 1. [Restart](./services.md#restart) the `identity` service
