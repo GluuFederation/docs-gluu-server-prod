@@ -1,5 +1,9 @@
 # APIs
 
+## Swagger Documentation
+
+Current Swagger documentation for Gluu Server APIs can be found in the [oxAuth API doc](https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/GluuFederation/oxAuth/master/docs/oxAuthSwagger.yaml#/).
+
 ## Token Introspection
 This API defines a method for a protected resource to query an OAuth 2.0 authorization server to determine the active state of an OAuth 2.0 token and to determine meta-information about this token.
 
