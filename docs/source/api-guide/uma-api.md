@@ -1,4 +1,7 @@
-## UMA 2 API Document
+# UMA 2 API
+
+## Overview
+
 User-Managed Access (UMA) is a profile of OAuth 2.0. UMA defines how 
 resource owners can manipulate to protect the resources.
 The client can have access by arbitrary requesting parties, which means the 
@@ -54,6 +57,10 @@ Most of the documentation is based on UMA 2 specifications since implementation 
 
 - [UMA 2.0 Grant for OAuth 2.0 Authorization Specification](https://docs.kantarainitiative.org/uma/ed/oauth-uma-grant-2.0-06.html)
 - [Federated Authorization for UMA 2.0 Specification](https://docs.kantarainitiative.org/uma/ed/oauth-uma-federated-authz-2.0-07.html)
+
+## Swagger Documentation
+
+Current Swagger documentation for the UMA APIs can be found in the [oxAuth API doc](https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/GluuFederation/oxAuth/master/docs/oxAuthSwagger.yaml#/).
 
 ## UMA Discovery API
 
