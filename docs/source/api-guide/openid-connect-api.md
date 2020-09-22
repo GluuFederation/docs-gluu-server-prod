@@ -4,6 +4,10 @@
 
 This page provides an interface to request authorization through REST web services.
 
+## Swagger Documentation
+
+Current Swagger documentation for the OpenID APIs can be found in the [oxAuth API doc](https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/GluuFederation/oxAuth/master/docs/oxAuthSwagger.yaml#/).
+
 ## Authorization Endpoint
 
 `/.well-known/openid-configuration`
