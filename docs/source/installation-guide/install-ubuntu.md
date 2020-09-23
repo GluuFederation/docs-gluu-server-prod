@@ -123,7 +123,7 @@ Sometimes things go wrong! It can be difficult to troubleshoot issues if the ste
 
 ## Uninstallation
 
-For **Ubuntu Server 18.04.x**, run the following commands:
+For **Ubuntu Server 20.x and Ubuntu Server 18.04.x**, run the following commands:
 
 ```
 /sbin/gluu-serverd disable
