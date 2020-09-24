@@ -124,60 +124,61 @@
     
     #### Kustomize
     
-    1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+    - Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
     
     === "LDAP"
-    
-        1.  Run :
+
+        -  Run :
         
-             ```bash
-             ./pygluu-kubernetes.pyz upgrade
-             ```
+            ```bash
+            ./pygluu-kubernetes.pyz upgrade
+            ```
+         
     === "Couchbase | Hybrid"
      
         1. Add a new bucket  named `gluu_session`.
         
-        === "Couchbase Operator v1"
-        
-            Add the following to `couchbase-cluster.yaml` under the buckets section:
+            === "Couchbase Operator v1"
             
-            ```yaml
-              buckets:
-              - name: gluu_session   #DO NOT CHANGE THIS LINE
-                type: ephemeral
-                memoryQuota: 100 <-- Change this if necessary
-                replicas: 1
-                ioPriority: high
-                evictionPolicy: valueOnly
-                conflictResolution: seqno
-                enableFlush: true
-                enableIndexReplica: false
-                compressionMode: passive
-            ```
+                Add the following to `couchbase-cluster.yaml` under the buckets section:
+                
+                ```yaml
+                  buckets:
+                  - name: gluu_session   #DO NOT CHANGE THIS LINE
+                    type: ephemeral
+                    memoryQuota: 100 <-- Change this if necessary
+                    replicas: 1
+                    ioPriority: high
+                    evictionPolicy: valueOnly
+                    conflictResolution: seqno
+                    enableFlush: true
+                    enableIndexReplica: false
+                    compressionMode: passive
+                ```
+                
+            === "Couchbase Operator v2"
             
-        === "Couchbase Operator v2"
-        
-            Apply the following yaml in the couchbase namespace:
-            
-            ```yaml
-            cat <<EOF | kubectl apply -f -
-            apiVersion: couchbase.com/v2
-            kind: CouchbaseEphemeralBucket
-            metadata:
-              name: gluu-session
-              labels:
-                cluster: gluu-couchbase
-            spec:
-              name: gluu_session
-              memoryQuota: 100Mi <-- Change this if necessary
-              replicas: 1
-              ioPriority: high
-              evictionPolicy: nruEviction
-              conflictResolution: seqno
-              enableFlush: true
-              compressionMode: passive
-            EOF
-            ```
+                Apply the following yaml in the couchbase namespace:
+                
+                ```yaml
+                cat <<EOF | kubectl apply -f -
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseEphemeralBucket
+                metadata:
+                  name: gluu-session
+                  labels:
+                    cluster: gluu-couchbase
+                spec:
+                  name: gluu_session
+                  memoryQuota: 100Mi <-- Change this if necessary
+                  replicas: 1
+                  ioPriority: high
+                  evictionPolicy: nruEviction
+                  conflictResolution: seqno
+                  enableFlush: true
+                  compressionMode: passive
+                EOF
+                ```
           
         1.  Run :
         
@@ -189,394 +190,393 @@
 
     === "LDAP"
     
-    1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-     
-        ```yaml
-        apiVersion: v1
-        data:
-          DOMAIN: FQDN #<-- Change this to your FQDN
-          GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-          GLUU_CONFIG_ADAPTER: kubernetes
-          GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-          GLUU_LDAP_URL: opendj:1636
-          GLUU_PERSISTENCE_TYPE: ldap
-          GLUU_SECRET_ADAPTER: kubernetes
-          GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-        kind: ConfigMap
-        metadata:
-          labels:
-            app: gluu-upgrade
-          name: upgrade-cm
-        ---
-        apiVersion: batch/v1
-        kind: Job
-        metadata:
-          labels:
-            app: gluu-upgrade
-          name: gluu-upgrade-job
-        spec:
-          template:
+        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
+         
+            ```yaml
+            apiVersion: v1
+            data:
+              DOMAIN: FQDN #<-- Change this to your FQDN
+              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
+              GLUU_CONFIG_ADAPTER: kubernetes
+              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
+              GLUU_LDAP_URL: opendj:1636
+              GLUU_PERSISTENCE_TYPE: ldap
+              GLUU_SECRET_ADAPTER: kubernetes
+              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
+            kind: ConfigMap
             metadata:
               labels:
                 app: gluu-upgrade
+              name: upgrade-cm
+            ---
+            apiVersion: batch/v1
+            kind: Job
+            metadata:
+              labels:
+                app: gluu-upgrade
+              name: gluu-upgrade-job
             spec:
+              template:
+                metadata:
+                  labels:
+                    app: gluu-upgrade
+                spec:
+                  containers:
+                  - args:
+                    - --source
+                    - "4.1"
+                    - --target
+                    - "4.2"
+                    envFrom:
+                    - configMapRef:
+                        name: upgrade-cm
+                    image: gluufederation/upgrade:4.2.1_02
+                    name: gluu-upgrade-job
+                  restartPolicy: Never
+            ```
+            
+        1.  Clone latest stable manifests.
+        
+            ```bash
+            git clone https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
+            ```
+            
+        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. Also make sure your current `values.yaml` other options are moved correctly to the new values.yaml.
+        
+        1.  Create configmap for `101-ox.ldif` file.
+        
+            ```bash
+            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
+            ```
+            
+        1.  Delete `oxAuthExpiration` index
+        
+            ```bash
+            kubectl exec -ti gluu-opendj-0 -n <gluu-namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4444 --bindDN 'cn=Directory Manager' --trustAll -f
+            ```
+            
+        1.  Mount 101-ox.ldif in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset gluu-opendj -n gluu`
+        
+            ```yaml
+              volumes:
+              - name: ox-ldif-cm
+                configMap:
+                  name: oxldif
               containers:
-              - args:
-                - --source
-                - "4.1"
-                - --target
-                - "4.2"
-                envFrom:
-                - configMapRef:
-                    name: upgrade-cm
-                image: gluufederation/upgrade:4.2.1_02
-                name: gluu-upgrade-job
-              restartPolicy: Never
-        ```
+                image: gluufederation/opendj:4.2.1_01
+                ...
+                ...
+                volumeMounts:
+                - name: ox-ldif-cm
+                  mountPath: /opt/opendj/config/schema/101-ox.ldif
+                  subPath: 101-ox.ldif
         
-    1.  Clone latest stable manifests.
-    
-        ```bash
-        git clone https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
-        ```
+            ```
+            
+        1. Apply `upgrade.yaml`
         
-    1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. Also make sure your current `values.yaml` other options are moved correctly to the new values.yaml.
-    
-    1.  Create configmap for `101-ox.ldif` file.
-    
-        ```bash
-        kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
-        ```
+            ```bash
+            kubectl create -f upgrade.yaml -n <gluu-namespace>
+            ```
+           
+           Wait until upgrade job is finished and tail the logs of the upgrade pod.
+                   
+        1.  Run upgrade `Helm`
         
-    1.  Delete `oxAuthExpiration` index
-    
-        ```bash
-        kubectl exec -ti gluu-opendj-0 -n <gluu-namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4444 --bindDN 'cn=Directory Manager' --trustAll -f
-        ```
-        
-    1.  Mount 101-ox.ldif in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset gluu-opendj -n gluu`
-    
-        ```yaml
-          volumes:
-          - name: ox-ldif-cm
-            configMap:
-              name: oxldif
-          containers:
-            image: gluufederation/opendj:4.2.1_01
-            ...
-            ...
-            volumeMounts:
-            - name: ox-ldif-cm
-              mountPath: /opt/opendj/config/schema/101-ox.ldif
-              subPath: 101-ox.ldif
-    
-        ```
-        
-    1. Apply `upgrade.yaml`
-    
-        ```bash
-        kubectl create -f upgrade.yaml -n <gluu-namespace>
-        ```
-       
-       Wait until upgrade job is finished and tail the logs of the upgrade pod.
-    
-    1. Ma
-       
-    1.  Run upgrade `Helm`
-    
-        ```bash
-        helm upgrade -f values.yaml .
-        ```
+            ```bash
+            helm upgrade -f values.yaml .
+            ```
         
     === "Couchbase"
       
-    1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-     
-        ```yaml
-        apiVersion: v1
-        data:
-          DOMAIN: FQDN #<-- Change this to your FQDN
-          GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-          GLUU_CONFIG_ADAPTER: kubernetes
-          GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-          GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
-          GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password <-- super user password
-          GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
-          GLUU_COUCHBASE_USER: admin #<-- Change super user if necessary . 
-          GLUU_PERSISTENCE_TYPE: couchbase
-          GLUU_SECRET_ADAPTER: kubernetes
-          GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-        kind: ConfigMap
-        metadata:
-          labels:
-            app: gluu-upgrade
-          name: upgrade-cm
-        ---
-        apiVersion: batch/v1
-        kind: Job
-        metadata:
-          labels:
-            app: gluu-upgrade
-          name: gluu-upgrade-job
-        spec:
-          template:
+        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
+         
+            ```yaml
+            apiVersion: v1
+            data:
+              DOMAIN: FQDN #<-- Change this to your FQDN
+              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
+              GLUU_CONFIG_ADAPTER: kubernetes
+              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
+              GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
+              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password <-- super user password
+              GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
+              GLUU_COUCHBASE_USER: admin #<-- Change super user if necessary . 
+              GLUU_PERSISTENCE_TYPE: couchbase
+              GLUU_SECRET_ADAPTER: kubernetes
+              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
+            kind: ConfigMap
             metadata:
               labels:
                 app: gluu-upgrade
-            spec:
-              containers:
-              - args:
-                - --source
-                - "4.1"
-                - --target
-                - "4.2"
-                envFrom:
-                - configMapRef:
-                    name: upgrade-cm
-                image: gluufederation/upgrade:4.2.1_02
-                name: gluu-upgrade-job
-                volumeMounts:
-                - mountPath: /etc/gluu/conf/couchbase_password
-                  name: cb-pass
-                  subPath: couchbase_password
-                - mountPath: /etc/certs/couchbase.crt
-                  name: cb-crt
-                  subPath: couchbase.crt
-              restartPolicy: Never
-              volumes:
-              - name: cb-pass
-                secret:
-                  secretName: cb-pass #<-- Change this to the secret name holding couchbase superuser pass
-              - name: cb-crt
-                secret:
-                  secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
-        ```
-        
-    1. Add a new bucket  named `gluu_session`.
-        
-        === "Couchbase Operator v1"
-        
-            Add the following to `couchbase-cluster.yaml` under the buckets section:
-            
-            ```yaml
-              buckets:
-              - name: gluu_session   #DO NOT CHANGE THIS LINE
-                type: ephemeral
-                memoryQuota: 100 <-- Change this if necessary
-                replicas: 1
-                ioPriority: high
-                evictionPolicy: valueOnly
-                conflictResolution: seqno
-                enableFlush: true
-                enableIndexReplica: false
-                compressionMode: passive
-            ```
-            
-        === "Couchbase Operator v2"
-        
-            Apply the following yaml in the couchbase namespace:
-            
-            ```yaml
-            cat <<EOF | kubectl apply -f -
-            apiVersion: couchbase.com/v2
-            kind: CouchbaseEphemeralBucket
+              name: upgrade-cm
+            ---
+            apiVersion: batch/v1
+            kind: Job
             metadata:
-              name: gluu-session
               labels:
-                cluster: gluu-couchbase
+                app: gluu-upgrade
+              name: gluu-upgrade-job
             spec:
-              name: gluu_session
-              memoryQuota: 100Mi <-- Change this if necessary
-              replicas: 1
-              ioPriority: high
-              evictionPolicy: nruEviction
-              conflictResolution: seqno
-              enableFlush: true
-              compressionMode: passive
-            EOF
+              template:
+                metadata:
+                  labels:
+                    app: gluu-upgrade
+                spec:
+                  containers:
+                  - args:
+                    - --source
+                    - "4.1"
+                    - --target
+                    - "4.2"
+                    envFrom:
+                    - configMapRef:
+                        name: upgrade-cm
+                    image: gluufederation/upgrade:4.2.1_02
+                    name: gluu-upgrade-job
+                    volumeMounts:
+                    - mountPath: /etc/gluu/conf/couchbase_password
+                      name: cb-pass
+                      subPath: couchbase_password
+                    - mountPath: /etc/certs/couchbase.crt
+                      name: cb-crt
+                      subPath: couchbase.crt
+                  restartPolicy: Never
+                  volumes:
+                  - name: cb-pass
+                    secret:
+                      secretName: cb-pass #<-- Change this to the secret name holding couchbase superuser pass
+                  - name: cb-crt
+                    secret:
+                      secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
             ```
             
-    1.  Clone latest stable manifests.
-    
-        ```bash
-        git clone https://github.com/GluuFederation/cloud-native-edition/tree/v1.2.6 && cd pygluu/kubernetes/templates/helm/gluu
-        ```
-                    
-    1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
+        1. Add a new bucket  named `gluu_session`.
+            
+            === "Couchbase Operator v1"
+            
+                Add the following to `couchbase-cluster.yaml` under the buckets section:
+                
+                ```yaml
+                  buckets:
+                  - name: gluu_session   #DO NOT CHANGE THIS LINE
+                    type: ephemeral
+                    memoryQuota: 100 <-- Change this if necessary
+                    replicas: 1
+                    ioPriority: high
+                    evictionPolicy: valueOnly
+                    conflictResolution: seqno
+                    enableFlush: true
+                    enableIndexReplica: false
+                    compressionMode: passive
+                ```
+                
+            === "Couchbase Operator v2"
+            
+                Apply the following yaml in the couchbase namespace:
+                
+                ```yaml
+                cat <<EOF | kubectl apply -f -
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseEphemeralBucket
+                metadata:
+                  name: gluu-session
+                  labels:
+                    cluster: gluu-couchbase
+                spec:
+                  name: gluu_session
+                  memoryQuota: 100Mi <-- Change this if necessary
+                  replicas: 1
+                  ioPriority: high
+                  evictionPolicy: nruEviction
+                  conflictResolution: seqno
+                  enableFlush: true
+                  compressionMode: passive
+                EOF
+                ```
+                
+        1.  Clone latest stable manifests.
         
-    1. Apply `upgrade.yaml`
-    
-        ```bash
-        kubectl create -f upgrade.yaml -n <gluu-namespace>
-        ```
-       
-       Wait until upgrade job is finished and tail the logs of the upgrade pod.
-       
-    1.  Run upgrade `Helm`
-    
-        ```bash
-        helm upgrade -f values.yaml .
-        ```
+            ```bash
+            git clone https://github.com/GluuFederation/cloud-native-edition/tree/v1.2.6 && cd pygluu/kubernetes/templates/helm/gluu
+            ```
+                        
+        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
+            
+        1. Apply `upgrade.yaml`
+        
+            ```bash
+            kubectl create -f upgrade.yaml -n <gluu-namespace>
+            ```
+           
+           Wait until upgrade job is finished and tail the logs of the upgrade pod.
+           
+        1.  Run upgrade `Helm`
+        
+            ```bash
+            helm upgrade -f values.yaml .
+            ```
 
     === "Hybrid"
       
-    1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-     
-        ```yaml
-        apiVersion: v1
-        data:
-          DOMAIN: FQDN #<-- Change this to your FQDN
-          GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-          GLUU_CONFIG_ADAPTER: kubernetes
-          GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-          GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
-          GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password
-          GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
-          GLUU_COUCHBASE_USER: admin #<-- Change this if necessary
-          GLUU_LDAP_URL: opendj:1636
-          GLUU_PERSISTENCE_LDAP_MAPPING: "default" #<-- Change this if needed
-          GLUU_PERSISTENCE_TYPE: couchbase
-          GLUU_SECRET_ADAPTER: kubernetes
-          GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-        kind: ConfigMap
-        metadata:
-          labels:
-            app: gluu-upgrade
-          name: upgrade-cm
-        ---
-        apiVersion: batch/v1
-        kind: Job
-        metadata:
-          labels:
-            app: gluu-upgrade
-          name: gluu-upgrade-job
-        spec:
-          template:
+        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
+         
+            ```yaml
+            apiVersion: v1
+            data:
+              DOMAIN: FQDN #<-- Change this to your FQDN
+              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
+              GLUU_CONFIG_ADAPTER: kubernetes
+              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
+              GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
+              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password
+              GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
+              GLUU_COUCHBASE_USER: admin #<-- Change this if necessary
+              GLUU_LDAP_URL: opendj:1636
+              GLUU_PERSISTENCE_LDAP_MAPPING: "default" #<-- Change this if needed
+              GLUU_PERSISTENCE_TYPE: couchbase
+              GLUU_SECRET_ADAPTER: kubernetes
+              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
+            kind: ConfigMap
             metadata:
               labels:
                 app: gluu-upgrade
-            spec:
-              containers:
-              - args:
-                - --source
-                - "4.1"
-                - --target
-                - "4.2"
-                envFrom:
-                - configMapRef:
-                    name: upgrade-cm
-                image: gluufederation/upgrade:4.2.1_02
-                name: gluu-upgrade-job
-                volumeMounts:
-                - mountPath: /etc/gluu/conf/couchbase_password
-                  name: cb-pass
-                  subPath: couchbase_password
-                - mountPath: /etc/certs/couchbase.crt
-                  name: cb-crt
-                  subPath: couchbase.crt
-              restartPolicy: Never
-              volumes:
-              - name: cb-pass
-                secret:
-                  secretName: cb-pass #<-- Change this to the secret name holding couchbase pass
-              - name: cb-crt
-                secret:
-                  secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
-        ```
-        
-    1. Add a new bucket  named `gluu_session`.
-        
-        === "Couchbase Operator v1"
-        
-            Add the following to `couchbase-cluster.yaml` under the buckets section:
-            
-            ```yaml
-              buckets:
-              - name: gluu_session   #DO NOT CHANGE THIS LINE
-                type: ephemeral
-                memoryQuota: 100 <-- Change this if necessary
-                replicas: 1
-                ioPriority: high
-                evictionPolicy: valueOnly
-                conflictResolution: seqno
-                enableFlush: true
-                enableIndexReplica: false
-                compressionMode: passive
-            ```
-            
-        === "Couchbase Operator v2"
-        
-            Apply the following yaml in the couchbase namespace:
-            
-            ```yaml
-            cat <<EOF | kubectl apply -f -
-            apiVersion: couchbase.com/v2
-            kind: CouchbaseEphemeralBucket
+              name: upgrade-cm
+            ---
+            apiVersion: batch/v1
+            kind: Job
             metadata:
-              name: gluu-session
               labels:
-                cluster: gluu-couchbase
+                app: gluu-upgrade
+              name: gluu-upgrade-job
             spec:
-              name: gluu_session
-              memoryQuota: 100Mi <-- Change this if necessary
-              replicas: 1
-              ioPriority: high
-              evictionPolicy: nruEviction
-              conflictResolution: seqno
-              enableFlush: true
-              compressionMode: passive
-            EOF
+              template:
+                metadata:
+                  labels:
+                    app: gluu-upgrade
+                spec:
+                  containers:
+                  - args:
+                    - --source
+                    - "4.1"
+                    - --target
+                    - "4.2"
+                    envFrom:
+                    - configMapRef:
+                        name: upgrade-cm
+                    image: gluufederation/upgrade:4.2.1_02
+                    name: gluu-upgrade-job
+                    volumeMounts:
+                    - mountPath: /etc/gluu/conf/couchbase_password
+                      name: cb-pass
+                      subPath: couchbase_password
+                    - mountPath: /etc/certs/couchbase.crt
+                      name: cb-crt
+                      subPath: couchbase.crt
+                  restartPolicy: Never
+                  volumes:
+                  - name: cb-pass
+                    secret:
+                      secretName: cb-pass #<-- Change this to the secret name holding couchbase pass
+                  - name: cb-crt
+                    secret:
+                      secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
             ```
             
-    1.  Clone latest stable manifests.
-    
-        ```bash
-        git clone https://github.com/GluuFederation/cloud-native-edition/tree/v1.2.6 && cd pygluu/kubernetes/templates/helm/gluu
-        ```
-                    
-    1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
-
-    1.  Create configmap for `101-ox.ldif` file.
-    
-        ```bash
-        kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/v1.2.6/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
-        ```
-        
-    1.  Delete `oxAuthExpiration` index
-    
-        ```bash
-        kubectl exec -ti gluu-opendj-0 -n <gluu-namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4444 --bindDN 'cn=Directory Manager' --trustAll -f
-        ```
-    1.  Mount 101-ox.ldif in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset opendj -n gluu`
-    
-        ```yaml
-          volumes:
-          - name: ox-ldif-cm
-            configMap:
-              name: oxldif
-          containers:
-            image: gluufederation/opendj:4.2.1_01
-            ...
-            ...
-            volumeMounts:
-            - name: ox-ldif-cm
-              mountPath: /opt/opendj/config/schema/101-ox.ldif
-              subPath: 101-ox.ldif
-    
-        ```
+        1. Add a new bucket  named `gluu_session`.
+            
+            === "Couchbase Operator v1"
+            
+                Add the following to `couchbase-cluster.yaml` under the buckets section:
                 
-    1. Apply `upgrade.yaml`
+                ```yaml
+                  buckets:
+                  - name: gluu_session   #DO NOT CHANGE THIS LINE
+                    type: ephemeral
+                    memoryQuota: 100 <-- Change this if necessary
+                    replicas: 1
+                    ioPriority: high
+                    evictionPolicy: valueOnly
+                    conflictResolution: seqno
+                    enableFlush: true
+                    enableIndexReplica: false
+                    compressionMode: passive
+                ```
+                
+            === "Couchbase Operator v2"
+            
+                Apply the following yaml in the couchbase namespace:
+                
+                ```yaml
+                cat <<EOF | kubectl apply -f -
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseEphemeralBucket
+                metadata:
+                  name: gluu-session
+                  labels:
+                    cluster: gluu-couchbase
+                spec:
+                  name: gluu_session
+                  memoryQuota: 100Mi <-- Change this if necessary
+                  replicas: 1
+                  ioPriority: high
+                  evictionPolicy: nruEviction
+                  conflictResolution: seqno
+                  enableFlush: true
+                  compressionMode: passive
+                EOF
+                ```
+                
+        1.  Clone latest stable manifests.
+        
+            ```bash
+            git clone https://github.com/GluuFederation/cloud-native-edition/tree/v1.2.6 && cd pygluu/kubernetes/templates/helm/gluu
+            ```
+                        
+        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
     
-        ```bash
-        kubectl create -f upgrade.yaml -n <gluu-namespace>
-        ```
-       
-       Wait until upgrade job is finished and tail the logs of the upgrade pod.
-       
-    1.  Run upgrade `Helm`
-    
-        ```bash
-        helm upgrade -f values.yaml .
+        1.  Create configmap for `101-ox.ldif` file.
+        
+            ```bash
+            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/v1.2.6/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
+            ```
+            
+        1.  Delete `oxAuthExpiration` index
+        
+            ```bash
+            kubectl exec -ti gluu-opendj-0 -n <gluu-namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4444 --bindDN 'cn=Directory Manager' --trustAll -f
+            ```
+            
+        1.  Mount 101-ox.ldif in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset opendj -n gluu`
+        
+            ```yaml
+              volumes:
+              - name: ox-ldif-cm
+                configMap:
+                  name: oxldif
+              containers:
+                image: gluufederation/opendj:4.2.1_01
+                ...
+                ...
+                volumeMounts:
+                - name: ox-ldif-cm
+                  mountPath: /opt/opendj/config/schema/101-ox.ldif
+                  subPath: 101-ox.ldif
+        
+            ```
+                    
+        1. Apply `upgrade.yaml`
+        
+            ```bash
+            kubectl create -f upgrade.yaml -n <gluu-namespace>
+            ```
+           
+           Wait until upgrade job is finished and tail the logs of the upgrade pod.
+           
+        1.  Run upgrade `Helm`
+        
+            ```bash
+            helm upgrade -f values.yaml .
         ```    
     
     
