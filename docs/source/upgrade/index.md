@@ -242,7 +242,12 @@
             ```
             
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. Also make sure your current `values.yaml` other options are moved correctly to the new values.yaml.
-        
+            Move old `settings.json` that was used in 4.1 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
+            
+            ```bash
+            ./pygluu-kubernetes.pyz upgrade-values-yaml
+            ```
+            
         1.  Create configmap for `101-ox.ldif` file.
         
             ```bash
@@ -402,7 +407,12 @@
             ```
                         
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
+            Move old `settings.json` that was used in 4.1 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
             
+            ```bash
+            ./pygluu-kubernetes.pyz upgrade-values-yaml
+            ```
+                        
         1. Apply `upgrade.yaml`
         
             ```bash
@@ -534,7 +544,12 @@
             ```
                         
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
-    
+            Move old `settings.json` that was used in 4.1 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
+            
+            ```bash
+            ./pygluu-kubernetes.pyz upgrade-values-yaml
+            ```
+            
         1.  Create configmap for `101-ox.ldif` file.
         
             ```bash
