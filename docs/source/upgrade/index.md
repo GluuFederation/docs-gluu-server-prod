@@ -279,7 +279,7 @@
             kubectl create -f upgrade.yaml -n <gluu-namespace>
             ```
            
-           Wait until upgrade job is finished and tail the logs of the upgrade pod.
+            Wait until upgrade job is finished and tail the logs of the upgrade pod.
                    
         1.  Run upgrade `Helm`
         
@@ -409,7 +409,7 @@
             kubectl create -f upgrade.yaml -n <gluu-namespace>
             ```
            
-           Wait until upgrade job is finished and tail the logs of the upgrade pod.
+            Wait until upgrade job is finished and tail the logs of the upgrade pod.
            
         1.  Run upgrade `Helm`
         
@@ -571,7 +571,7 @@
             kubectl create -f upgrade.yaml -n <gluu-namespace>
             ```
            
-           Wait until upgrade job is finished and tail the logs of the upgrade pod.
+            Wait until upgrade job is finished and tail the logs of the upgrade pod.
            
         1.  Run upgrade `Helm`
         
