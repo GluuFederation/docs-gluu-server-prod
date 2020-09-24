@@ -52,11 +52,11 @@ documentation and administrative guide.
 
 ## New features
 
-<!---
-
 ## 4.2.1 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.1+)
+
+- [#1468](https://github.com/GluuFederation/oxAuth/issues/1468) Avoid redundant session load on `removeOutdatedCurrentSessions` if session id was changed (due to changeSessionIdOnAuthentication=true)
 
 - [#1467](https://github.com/GluuFederation/oxAuth/issues/1467) Not able to complete idp-initiated flow due session id / cookies issue
 
@@ -114,6 +114,8 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.1+)
 
+- [#2029](https://github.com/GluuFederation/oxTrust/issues/2029) Error Viewing InCommon Metadata
+
 - [#2025](https://github.com/GluuFederation/oxTrust/issues/2025) CR copy binary attributes to local LDAP as base64 string
 
 - [#2016](https://github.com/GluuFederation/oxTrust/issues/2016) oxTrust should not rely on configuration endpoint for scopes
@@ -147,8 +149,6 @@ documentation and administrative guide.
 - [#707](https://github.com/GluuFederation/community-edition-setup/issues/707) CB: Store sessions in new bucket `gluu_session`
 
 - [#703](https://github.com/GluuFederation/community-edition-setup/issues/703) Don't specify MaxMetaspaceSize java option
-
---->
 
 ## 4.2.0 Fixes / Enhancements
 
