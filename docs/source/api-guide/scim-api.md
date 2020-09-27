@@ -85,7 +85,7 @@ The following table lists characteristics of SCIM protocol (see section 3 of RFC
 |Resource versioning|-|-|Feature may be available upon explicit customer demand|
 
 !!! Attention
-    If you are using Couchbase as your DB for Gluu, please also review our list of [SCIM Considerations when using CB](https://gluu.org/docs/cb/#scim-consideration). 
+    If you are using Couchbase as your DB for Gluu, please also review our list of [SCIM Considerations when using CB](https://gluu.org/docs/cb/#scim-considerations). 
 
 ## `/identity/restv1/scim/v2/Users`
 
