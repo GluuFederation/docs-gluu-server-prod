@@ -638,6 +638,9 @@ public class TestScimClient {
 
 The first line of method `simpleSearch` is getting an object that conforms to the `ClientSideService` interface. This interface is a "mashup" of several interfaces and gives access to a rich number of methods that will allow you to do all CRUD you may need. Other methods in `ScimClientFactory` class allow to supply a specific interface class and so get an object that adheres to that interface.
 
+!!! Note
+    The variant of `getTestClient` used in the above example will attempt to register a client for you. For this purpose ensure your Gluu Server has dynamic registration of clients enabled. To avoid creating a new client everytime this method is called, or when dynamic registration is disabled, you can use `getTestClient(String, String, String, String)` where you can pass the ID and secret of an existing client for the third and fourth parameters respectively.
+
 Create a main method for class `TestScimClient` and call `simpleSearch` from there. When running, you will see the output of retrieving one user (admin) and see his `displayName` on the screen or wherever you have configured your logs to be written to. Here we are using `log4j2` as framework, but you may use the any other logging framework.
 
 Note the usage of `close` in the last statement. While it's not a requirement, it is recommended to call `close` whenever you know there will not be any other request associated to the client you obtained.
