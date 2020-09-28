@@ -26,7 +26,7 @@ For Docker deployments, provision a VM with:
 Download the `pygluu-compose.pyz` executable:
 
 ```sh
-wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.2.4/pygluu-compose.pyz \
+wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.2.5/pygluu-compose.pyz \
     && chmod +x pygluu-compose.pyz
 ```
 
