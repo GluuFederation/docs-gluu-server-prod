@@ -230,7 +230,7 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_02
+                    image: gluufederation/upgrade:4.2.1_03
                     name: gluu-upgrade-job
                   restartPolicy: Never
             ```
@@ -341,7 +341,7 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_02
+                    image: gluufederation/upgrade:4.2.1_03
                     name: gluu-upgrade-job
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
@@ -585,7 +585,7 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_02
+                    image: gluufederation/upgrade:4.2.1_03
                     name: gluu-upgrade-job
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
