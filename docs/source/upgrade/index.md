@@ -146,10 +146,10 @@
                   buckets:
                   - name: gluu_session   #DO NOT CHANGE THIS LINE
                     type: ephemeral
-                    memoryQuota: 100 <-- Change this if necessary
+                    memoryQuota: 100 #<-- Change this if necessary
                     replicas: 1
                     ioPriority: high
-                    evictionPolicy: valueOnly
+                    evictionPolicy: nruEviction
                     conflictResolution: seqno
                     enableFlush: true
                     enableIndexReplica: false
@@ -170,7 +170,7 @@
                     cluster: gluu-couchbase
                 spec:
                   name: gluu_session
-                  memoryQuota: 100Mi <-- Change this if necessary
+                  memoryQuota: 100Mi #<-- Change this if necessary
                   replicas: 1
                   ioPriority: high
                   evictionPolicy: nruEviction
@@ -248,6 +248,8 @@
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
             
+        1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
+        
         1.  Create configmap for `101-ox.ldif` file.
         
             ```bash
@@ -268,7 +270,7 @@
                 configMap:
                   name: oxldif
               containers:
-                image: gluufederation/opendj:4.2.1_01
+                image: gluufederation/opendj:4.2.1_02
                 ...
                 ...
                 volumeMounts:
@@ -289,7 +291,7 @@
         1.  Run upgrade `Helm`
         
             ```bash
-            helm upgrade -f values.yaml .
+            helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
             ```
         
     === "Couchbase"
@@ -304,7 +306,7 @@
               GLUU_CONFIG_ADAPTER: kubernetes
               GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
               GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
-              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password <-- super user password
+              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password #<-- super user password
               GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
               GLUU_COUCHBASE_USER: admin #<-- Change super user if necessary . 
               GLUU_PERSISTENCE_TYPE: couchbase
@@ -366,10 +368,10 @@
                   buckets:
                   - name: gluu_session   #DO NOT CHANGE THIS LINE
                     type: ephemeral
-                    memoryQuota: 100 <-- Change this if necessary
+                    memoryQuota: 100 #<-- Change this if necessary
                     replicas: 1
                     ioPriority: high
-                    evictionPolicy: valueOnly
+                    evictionPolicy: nruEviction
                     conflictResolution: seqno
                     enableFlush: true
                     enableIndexReplica: false
@@ -390,7 +392,7 @@
                     cluster: gluu-couchbase
                 spec:
                   name: gluu_session
-                  memoryQuota: 100Mi <-- Change this if necessary
+                  memoryQuota: 100Mi #<-- Change this if necessary
                   replicas: 1
                   ioPriority: high
                   evictionPolicy: nruEviction
@@ -403,7 +405,7 @@
         1.  Clone latest stable manifests.
         
             ```bash
-            git clone https://github.com/GluuFederation/cloud-native-edition/tree/v1.2.6 && cd pygluu/kubernetes/templates/helm/gluu
+            git clone https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
             ```
                         
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
@@ -412,6 +414,8 @@
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
+            
+        1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
                         
         1. Apply `upgrade.yaml`
         
@@ -424,7 +428,7 @@
         1.  Run upgrade `Helm`
         
             ```bash
-            helm upgrade -f values.yaml .
+            helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
             ```
 
     === "Hybrid"
@@ -439,7 +443,7 @@
               GLUU_CONFIG_ADAPTER: kubernetes
               GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
               GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
-              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password
+              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password #<-- super user password
               GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
               GLUU_COUCHBASE_USER: admin #<-- Change this if necessary
               GLUU_LDAP_URL: opendj:1636
@@ -503,10 +507,10 @@
                   buckets:
                   - name: gluu_session   #DO NOT CHANGE THIS LINE
                     type: ephemeral
-                    memoryQuota: 100 <-- Change this if necessary
+                    memoryQuota: 100 #<-- Change this if necessary
                     replicas: 1
                     ioPriority: high
-                    evictionPolicy: valueOnly
+                    evictionPolicy: nruEviction
                     conflictResolution: seqno
                     enableFlush: true
                     enableIndexReplica: false
@@ -540,7 +544,7 @@
         1.  Clone latest stable manifests.
         
             ```bash
-            git clone https://github.com/GluuFederation/cloud-native-edition/tree/v1.2.6 && cd pygluu/kubernetes/templates/helm/gluu
+            git clone https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
             ```
                         
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
@@ -549,6 +553,8 @@
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
+            
+        1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
             
         1.  Create configmap for `101-ox.ldif` file.
         
@@ -570,7 +576,7 @@
                 configMap:
                   name: oxldif
               containers:
-                image: gluufederation/opendj:4.2.1_01
+                image: gluufederation/opendj:4.2.1_02
                 ...
                 ...
                 volumeMounts:
@@ -591,8 +597,8 @@
         1.  Run upgrade `Helm`
         
             ```bash
-            helm upgrade -f values.yaml .
-        ```    
+            helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
+            ```    
     
     
     ### Exporting Data
