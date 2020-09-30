@@ -414,98 +414,98 @@
                 
                 1.  Create a secret that will hold `gluu` password in the couchbase namespace:
                 
-                    ```bash
-                    kubectl create secret generic gluu-couchbase-user-password --from-literal=password=P@ssw0rd --namespace cbns
-                    ```
+                ```bash
+                kubectl create secret generic gluu-couchbase-user-password --from-literal=password=P@ssw0rd --namespace cbns
+                ```
                 
                 1.  Apply the following yaml in the couchbase namespace:
                 
-                    ```yaml
-                    cat <<EOF | kubectl apply -f -
-                    apiVersion: couchbase.com/v2
+                ```yaml
+                cat <<EOF | kubectl apply -f -
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseGroup
+                metadata:
+                  name: gluu-group
+                  labels:
+                    cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
+                spec:
+                  roles:
+                  - name: query_select
+                    bucket: gluu
+                  - name: query_select
+                    bucket: gluu_site
+                  - name: query_select
+                    bucket: gluu_user
+                  - name: query_select
+                    bucket: gluu_cache
+                  - name: query_select
+                    bucket: gluu_token
+                  - name: query_select
+                    bucket: gluu_session
+                
+                  - name: query_update
+                    bucket: gluu
+                  - name: query_update
+                    bucket: gluu_site
+                  - name: query_update
+                    bucket: gluu_user
+                  - name: query_update
+                    bucket: gluu_cache
+                  - name: query_update
+                    bucket: gluu_token
+                  - name: query_update
+                    bucket: gluu_session
+                
+                  - name: query_insert
+                    bucket: gluu
+                  - name: query_insert
+                    bucket: gluu_site
+                  - name: query_insert
+                    bucket: gluu_user
+                  - name: query_insert
+                    bucket: gluu_cache
+                  - name: query_insert
+                    bucket: gluu_token
+                  - name: query_insert
+                    bucket: gluu_session
+                
+                  - name: query_delete
+                    bucket: gluu
+                  - name: query_delete
+                    bucket: gluu_site
+                  - name: query_delete
+                    bucket: gluu_user
+                  - name: query_delete
+                    bucket: gluu_cache
+                  - name: query_delete
+                    bucket: gluu_token
+                  - name: query_delete
+                    bucket: gluu_session
+                ---
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseRoleBinding
+                metadata:
+                  name: gluu-role-binding
+                spec:
+                  subjects:
+                  - kind: CouchbaseUser
+                    name: gluu
+                  roleRef:
                     kind: CouchbaseGroup
-                    metadata:
-                      name: gluu-group
-                      labels:
-                        cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
-                    spec:
-                      roles:
-                      - name: query_select
-                        bucket: gluu
-                      - name: query_select
-                        bucket: gluu_site
-                      - name: query_select
-                        bucket: gluu_user
-                      - name: query_select
-                        bucket: gluu_cache
-                      - name: query_select
-                        bucket: gluu_token
-                      - name: query_select
-                        bucket: gluu_session
-                    
-                      - name: query_update
-                        bucket: gluu
-                      - name: query_update
-                        bucket: gluu_site
-                      - name: query_update
-                        bucket: gluu_user
-                      - name: query_update
-                        bucket: gluu_cache
-                      - name: query_update
-                        bucket: gluu_token
-                      - name: query_update
-                        bucket: gluu_session
-                    
-                      - name: query_insert
-                        bucket: gluu
-                      - name: query_insert
-                        bucket: gluu_site
-                      - name: query_insert
-                        bucket: gluu_user
-                      - name: query_insert
-                        bucket: gluu_cache
-                      - name: query_insert
-                        bucket: gluu_token
-                      - name: query_insert
-                        bucket: gluu_session
-                    
-                      - name: query_delete
-                        bucket: gluu
-                      - name: query_delete
-                        bucket: gluu_site
-                      - name: query_delete
-                        bucket: gluu_user
-                      - name: query_delete
-                        bucket: gluu_cache
-                      - name: query_delete
-                        bucket: gluu_token
-                      - name: query_delete
-                        bucket: gluu_session
-                    ---
-                    apiVersion: couchbase.com/v2
-                    kind: CouchbaseRoleBinding
-                    metadata:
-                      name: gluu-role-binding
-                    spec:
-                      subjects:
-                      - kind: CouchbaseUser
-                        name: gluu
-                      roleRef:
-                        kind: CouchbaseGroup
-                        name: gluu-group
-                    ---
-                    apiVersion: couchbase.com/v2
-                    kind: CouchbaseUser
-                    metadata:
-                      name: gluu
-                      labels:
-                        cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
-                    spec:
-                      fullName: "Gluu Cloud Native"
-                      authDomain: local
-                      authSecret: gluu-couchbase-user-password
-                    EOF
-                    ```
+                    name: gluu-group
+                ---
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseUser
+                metadata:
+                  name: gluu
+                  labels:
+                    cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
+                spec:
+                  fullName: "Gluu Cloud Native"
+                  authDomain: local
+                  authSecret: gluu-couchbase-user-password
+                EOF
+                ```
                                 
         1.  Clone latest stable manifests.
         
@@ -524,7 +524,7 @@
             
         1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
                         
-        1. Apply `upgrade.yaml`
+        1.  Apply `upgrade.yaml`
         
             ```bash
             kubectl create -f upgrade.yaml -n <gluu-namespace>
@@ -657,98 +657,98 @@
                 
                 1.  Create a secret that will hold `gluu` password in the couchbase namespace:
                 
-                    ```bash
-                    kubectl create secret generic gluu-couchbase-user-password --from-literal=password=P@ssw0rd --namespace cbns
-                    ```
+                ```bash
+                kubectl create secret generic gluu-couchbase-user-password --from-literal=password=P@ssw0rd --namespace cbns
+                ```
                 
                 1.  Apply the following yaml in the couchbase namespace:
                 
-                    ```yaml
-                    cat <<EOF | kubectl apply -f -
-                    apiVersion: couchbase.com/v2
+                ```yaml
+                cat <<EOF | kubectl apply -f -
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseGroup
+                metadata:
+                  name: gluu-group
+                  labels:
+                    cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
+                spec:
+                  roles:
+                  - name: query_select
+                    bucket: gluu
+                  - name: query_select
+                    bucket: gluu_site
+                  - name: query_select
+                    bucket: gluu_user
+                  - name: query_select
+                    bucket: gluu_cache
+                  - name: query_select
+                    bucket: gluu_token
+                  - name: query_select
+                    bucket: gluu_session
+                
+                  - name: query_update
+                    bucket: gluu
+                  - name: query_update
+                    bucket: gluu_site
+                  - name: query_update
+                    bucket: gluu_user
+                  - name: query_update
+                    bucket: gluu_cache
+                  - name: query_update
+                    bucket: gluu_token
+                  - name: query_update
+                    bucket: gluu_session
+                
+                  - name: query_insert
+                    bucket: gluu
+                  - name: query_insert
+                    bucket: gluu_site
+                  - name: query_insert
+                    bucket: gluu_user
+                  - name: query_insert
+                    bucket: gluu_cache
+                  - name: query_insert
+                    bucket: gluu_token
+                  - name: query_insert
+                    bucket: gluu_session
+                
+                  - name: query_delete
+                    bucket: gluu
+                  - name: query_delete
+                    bucket: gluu_site
+                  - name: query_delete
+                    bucket: gluu_user
+                  - name: query_delete
+                    bucket: gluu_cache
+                  - name: query_delete
+                    bucket: gluu_token
+                  - name: query_delete
+                    bucket: gluu_session
+                ---
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseRoleBinding
+                metadata:
+                  name: gluu-role-binding
+                spec:
+                  subjects:
+                  - kind: CouchbaseUser
+                    name: gluu
+                  roleRef:
                     kind: CouchbaseGroup
-                    metadata:
-                      name: gluu-group
-                      labels:
-                        cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
-                    spec:
-                      roles:
-                      - name: query_select
-                        bucket: gluu
-                      - name: query_select
-                        bucket: gluu_site
-                      - name: query_select
-                        bucket: gluu_user
-                      - name: query_select
-                        bucket: gluu_cache
-                      - name: query_select
-                        bucket: gluu_token
-                      - name: query_select
-                        bucket: gluu_session
-                    
-                      - name: query_update
-                        bucket: gluu
-                      - name: query_update
-                        bucket: gluu_site
-                      - name: query_update
-                        bucket: gluu_user
-                      - name: query_update
-                        bucket: gluu_cache
-                      - name: query_update
-                        bucket: gluu_token
-                      - name: query_update
-                        bucket: gluu_session
-                    
-                      - name: query_insert
-                        bucket: gluu
-                      - name: query_insert
-                        bucket: gluu_site
-                      - name: query_insert
-                        bucket: gluu_user
-                      - name: query_insert
-                        bucket: gluu_cache
-                      - name: query_insert
-                        bucket: gluu_token
-                      - name: query_insert
-                        bucket: gluu_session
-                    
-                      - name: query_delete
-                        bucket: gluu
-                      - name: query_delete
-                        bucket: gluu_site
-                      - name: query_delete
-                        bucket: gluu_user
-                      - name: query_delete
-                        bucket: gluu_cache
-                      - name: query_delete
-                        bucket: gluu_token
-                      - name: query_delete
-                        bucket: gluu_session
-                    ---
-                    apiVersion: couchbase.com/v2
-                    kind: CouchbaseRoleBinding
-                    metadata:
-                      name: gluu-role-binding
-                    spec:
-                      subjects:
-                      - kind: CouchbaseUser
-                        name: gluu
-                      roleRef:
-                        kind: CouchbaseGroup
-                        name: gluu-group
-                    ---
-                    apiVersion: couchbase.com/v2
-                    kind: CouchbaseUser
-                    metadata:
-                      name: gluu
-                      labels:
-                        cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
-                    spec:
-                      fullName: "Gluu Cloud Native"
-                      authDomain: local
-                      authSecret: gluu-couchbase-user-password
-                    EOF
-                    ```
+                    name: gluu-group
+                ---
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseUser
+                metadata:
+                  name: gluu
+                  labels:
+                    cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
+                spec:
+                  fullName: "Gluu Cloud Native"
+                  authDomain: local
+                  authSecret: gluu-couchbase-user-password
+                EOF
+                ```
                                     
         1.  Clone latest stable manifests.
         
