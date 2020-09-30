@@ -412,13 +412,13 @@
                 
             === "Couchbase Operator v2"
                 
-                1. Create a secret that will hold `gluu` password in the couchbase namespace:
+                1.  Create a secret that will hold `gluu` password in the couchbase namespace:
                 
                     ```bash
                     kubectl create secret generic gluu-couchbase-user-password --from-literal=password=P@ssw0rd --namespace cbns
                     ```
                 
-                1. Apply the following yaml in the couchbase namespace:
+                1.  Apply the following yaml in the couchbase namespace:
                 
                     ```yaml
                     cat <<EOF | kubectl apply -f -
@@ -655,13 +655,13 @@
                 
             === "Couchbase Operator v2"
                 
-                1. Create a secret that will hold `gluu` password in the couchbase namespace:
+                1.  Create a secret that will hold `gluu` password in the couchbase namespace:
                 
                     ```bash
                     kubectl create secret generic gluu-couchbase-user-password --from-literal=password=P@ssw0rd --namespace cbns
                     ```
                 
-                1. Apply the following yaml in the couchbase namespace:
+                1.  Apply the following yaml in the couchbase namespace:
                 
                     ```yaml
                     cat <<EOF | kubectl apply -f -
