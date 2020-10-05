@@ -70,7 +70,7 @@ opTosUri                                           | URL that the OpenID Provide
 authorizationCodeLifetime                          | The lifetime of the Authorization Code
 refreshTokenLifetime                               | The lifetime of the Refresh Token
 idTokenLifetime                                    | The lifetime of the ID Token
-accessTokenLifetime                                | The lifetime of the short lived Access Token
+accessTokenLifetime                                | The lifetime of the Access Token
 umaRptLifetime                                     | UMA RPT lifetime
 umaTicketLifetime                                  | UMA ticket lifetime
 umaPctLifetime                                     | UMA PCT lifetime
