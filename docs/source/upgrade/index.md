@@ -126,6 +126,8 @@
     
     - Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
     
+    - Move your  `settings.json` that was used in installing 4.1 next to `./pygluu-kubernetes.pyz`. 
+    
     === "LDAP"
 
         -  Run :
@@ -135,6 +137,10 @@
             ```
          
     === "Couchbase | Hybrid"
+    
+        1. Make sure that the option `INSTALL_COUCHBASE` inside `settings.json` is set to `N` or if via prompt you answer `N` to that.
+        
+        1. Make sure that the option `COUCHBASE_CLUSTER_FILE_OVERRIDE` inside `settings.json` is set to `N` or if via prompt you answer `N` to that.
      
         1. Add a new bucket  named `gluu_session`.
         
