@@ -1131,7 +1131,7 @@ Couchbase needs sufficient resources to run and under higher loads. This becomes
   "VERIFY_EXT_IP": "",
   "AWS_LB_TYPE": "clb",
   "USE_ARN": "Y",
-  "ARN_AWS_IAM": "arn:aws:acm:eu-central-1:989705443609:certificate/3e6b782d-7396-4dd5-b6c5-136f7474766e",
+  "ARN_AWS_IAM": "arn:aws:acm:eu-central-1:234234234:certificate/3e6b782d-7396-4dd5-b6c5-asdv32a21",
   "LB_ADD": "",
   "REDIS_URL": "",
   "REDIS_TYPE": "",
