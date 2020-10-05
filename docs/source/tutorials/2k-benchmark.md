@@ -1,4 +1,4 @@
-# How to setup a 2k benchmark per day with the Gluu Server
+# How to setup a 2k transaction per second benchmark with the Gluu Server
 
 ## Overview
 
