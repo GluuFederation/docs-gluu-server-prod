@@ -36,7 +36,7 @@ chmod +x pygluu-compose.pyz
 Run the following command to generate manifests for deployment:
 
 ```sh
-./pygluu-compose.pyz config
+./pygluu-compose.pyz init
 ```
 
 The generated files are similar to example below:
