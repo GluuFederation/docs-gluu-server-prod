@@ -175,7 +175,7 @@ nav:
         - 'Script Debugging': 'developer-guide/script-debugging.md'
 - Tutorials:
         # - 'The billion load test': 'tutorials/load-test.md' # hide test until officially tested
-        - `A 2k Benchmark`: 'tutorials/2k-benchmark.md'
+        - 'A 2k Benchmark': 'tutorials/2k-benchmark.md'
         - 'Attributes mapping and transformation in Passport': 'tutorials/passport-attributes-mapping.md'
         - 'Inbound Identity with Apple Sign In': 'tutorials/passport-apple.md'
         - 'Inbound SAML with Passport': 'tutorials/passport-inbound-flow.md'
