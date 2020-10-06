@@ -137,15 +137,15 @@
             ```
          
     === "Couchbase | Hybrid"
-    
-        1. Make sure that the option `INSTALL_COUCHBASE` inside `settings.json` is set to `N` or if via prompt you answer `N` to that.
-        
-        1. Make sure that the option `COUCHBASE_CLUSTER_FILE_OVERRIDE` inside `settings.json` is set to `N` or if via prompt you answer `N` to that.
-     
+        !!! Note
+         * The upgrade method has no means of installing couchbase. You may be prompted for couchbase related settings, but that is only to update your current or new settings.json.        
+         
         1. Add a new bucket  named `gluu_session`.
         
             === "Couchbase Operator v1"
             
+                If you are using a custom `couchbase-cluster.yaml` that means that `COUCHBASE_CLUSTER_FILE_OVERRIDE` is set to `Y` inside settings.json. We advice you upgrade to the new couchbase operator and couchbase-server `6.6.0`. If you stick with the current operator please create two empty files `couchbase-buckets.yaml` and `couchbase-ephemeral-buckets.yaml` next to your custom `couchbase-cluster.yaml`.
+
                 Add the following to `couchbase-cluster.yaml` under the buckets section:
                 
                 ```yaml
