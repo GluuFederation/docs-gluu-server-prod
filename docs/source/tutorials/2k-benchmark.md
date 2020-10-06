@@ -67,9 +67,14 @@ Couchbase needs sufficient resources to run and under higher loads. This becomes
     ```bash
     ./pygluu-kubernetes.pyz install
     ```
-   
+    
+1. Some tweaks and optimizations  which can be done in the UI at `Configuration` > `JSON Configuration` > `oxAuth Configuration` can be needed such as changing `idTokenLifetime` to `600`, and setting `sessionIdUnusedLifetime` to `14400`.
+
 !!!note
     Prompts will ask for the rest of the information needed. You may generate the manifests (yaml files) and continue to deployment or just generate the  manifests (yaml files) during the execution of `pygluu-kubernetes.pyz`. `pygluu-kubernetes.pyz` will output a file called `settings.json` holding all the parameters. More information about this file and the vars it holds is [here](../installation-guide/install-kubernetes.md#settingsjson-parameters-file-contents) but  please don't manually create this file as the script can generate it using [`pygluu-kubernetes.pyz generate-settings`](https://github.com/GluuFederation/cloud-native-edition/releases). 
+
+!!!note
+    Keep an eye on the `gluu_token` and `gluu_session` buckets. If they get full you will begin to see oxAuth pods failing.
 
 #### Example `settings.json` used.
 
