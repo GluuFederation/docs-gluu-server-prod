@@ -60,7 +60,7 @@ Couchbase needs sufficient resources to run and under higher loads. This becomes
 
 1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.2/README.md#build-pygluu-kubernetespyz-manually).
 
-1. Configure [`couchbase-cluster.yaml`](#example-couchbase-clusteryaml), [`couchbase-ephemeral-buckets.yaml`](#example-couchbase-ephemeral-bucketsyaml) and [`couchbase-buckets.yaml`](#example-couchbase-bucketsyaml) . These files are used to create the couchbase cluster. Examples of these files are included below and may be used after editing the lines marked in each section to fit the setup intended.  These files are placed in the same directory as `./pygluu-kubernetes.pyz`
+1. Configure [`couchbase-cluster.yaml`](#example-couchbase-clusteryaml), [`couchbase-ephemeral-buckets.yaml`](#example-couchbase-ephemeral-bucketsyaml) and [`couchbase-buckets.yaml`](#example-couchbase-bucketsyaml) . These files are used to create the couchbase cluster. Examples of these files are included below and may be used after editing the lines marked in each section to fit the setup intended.  These files must be placed in the same directory as `./pygluu-kubernetes.pyz` and the prompt `Override couchbase-cluster.yaml with a custom couchbase-cluster.yaml` must be answered `Y` after running the next step in order to use the custom files as in our examples.
 
 1. Run :
 
