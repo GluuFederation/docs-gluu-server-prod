@@ -21,10 +21,23 @@ This is a tutorial to walk you through installing Gluu cloud native edition on R
       kubelet:
         extra_binds:
          - /var/openebs/local:/var/openebs/local
+         - /etc/iscsi:/etc/iscsi
+         - /bin/iscsiadm:/bin/iscsiadm
+         - /var/lib/iscsi:/var/lib/iscsi
+         - /lib/modules
+         - /var/openebs/sparse:/var/openebs/sparse
+         - /var/openebs/local:/var/openebs/local
+         - /mnt/openebs/local:/mnt/openebs/local
+         - /opt/openebs/local:/opt/openebs/local
     ```
+    
 1. Now you can bring your cluster up `./rke up`.
 
 1. You should have a running Kubernetes cluster now. You may add or remove nodes as necessary.
+
+1. Follow instructions [here](https://docs.openebs.io/docs/next/installation.html) to install openEBS.
+
+1. Make sure that the instances has permissions as required by RKE to fully communicate with the intended cloud. 
 
 1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](#build-pygluu-kubernetespyz-manually).
 
@@ -45,7 +58,7 @@ This is a tutorial to walk you through installing Gluu cloud native edition on R
 
 Exposing the UI is not necessary but you may do so by following these steps:
 
-1. Create a single point of entry ( Load balancer) for your cluster.
+1. Create a single point of entry ( Load balancer) for your cluster. Please note that if you have given the instances permissions to act on the cloud the load balancer should have already been created and hence the following steps are not needed, otherwise a `NodePort` would have been created and you would need to follow with the next steps..
 
 1. Get the port number nginx is using for forwarding `443` connections, here that would be `31822`
 
