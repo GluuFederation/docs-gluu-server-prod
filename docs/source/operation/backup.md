@@ -151,13 +151,13 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
 
 === "Kubernetes instructions"
     
-    ### Overview
+    ## Overview
     
     This guide introduces how to backup data and restore from a backup file.
     
-    ### Couchbase
+    ## Couchbase
     
-    #### Install backup strategy
+    ### Install backup strategy
     
     A typical installation of Gluu using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases)  will automatiically install a backup strategy that will backup Couchbase every 5 mins to a persistent volume. However, the Couchbase backup can be setup manually:
     
@@ -172,7 +172,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     !!! Note
         `./pygluu-kubernetes.pyz install-couchbase-backup` will not install couchbase.
     
-    #### Uninstall backup strategy
+    ### Uninstall backup strategy
     
     A file named `couchbase-backup.yaml` will have been generated during installation of backup strategy. Use that as follows to remove the backup strategy:
     
@@ -180,7 +180,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     kubectl delete -f ./couchbase-backup.yaml
     ```
     
-    #### Restore from backup
+    ### Restore from backup
     
     Please save a copy of the configurations to a file.
     
@@ -191,7 +191,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     !!! Note
         An existing Gluu setup must exist for this to work. Please do not attempt to delete any resources and be very careful in handling Gluu configurations and secrets.
     
-    ##### Couchbase restore step
+    #### Couchbase restore step
     
     1.  Install a new Couchbase if needed.
     
@@ -261,7 +261,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
         kubectl delete -f restore-cb-pod.yaml -n cbns
         ```
         
-    ##### Gluu restore step
+    #### Gluu restore step
     
     1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
     
@@ -271,9 +271,9 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
          ./pygluu-kubernetes.pyz restore
          ```
     
-    ### OpenDJ / Wren:DS
+    ## OpenDJ / Wren:DS
     
-    #### Install backup strategy
+    ### Install backup strategy
     
     A typical installation of Gluu using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases)  will automatiically install a backup strategy that will backup opendj / wren:ds every 10 mins `/opt/opendj/ldif`. However, the couchbase backup can be setup manually:
     
@@ -296,12 +296,12 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     kubectl delete -f ./couchbase-backup.yaml
     ```
     
-    #### Restore from backup
+    ### Restore from backup
     
     !!! Note
         An existing Gluu setup must exist for this to work. Please do not attempt to delete any resources and be very careful in handling Gluu configurations and secrets.
     
-    ##### OpenDJ / Wren:DS restore step
+    #### OpenDJ / Wren:DS restore step
     
     1.  Opendj volume attached should carry the backups at `/opt/opendj/ldif`
     
