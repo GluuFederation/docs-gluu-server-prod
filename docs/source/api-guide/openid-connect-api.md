@@ -895,7 +895,7 @@ For more details on [client Authentication](http://openid.net/specs/openid-conne
         <tr>
             <th>grant_type</th>
             <td>true</td>
-            <td>Grant type value, one of these: authorization_code, implicit, password, client_credentials, refresh_token as described in OAuth 2.0 [RFC6749].</td>
+            <td>Grant type value, one of these: authorization_code, implicit, password, client_credentials, refresh_token, urn:openid:params:grant-type:ciba, or urn:ietf:params:oauth:grant-type:device_code as described in OAuth 2.0 [RFC6749].</td>
             <td>string</td>
         </tr>
         <tr>
@@ -1060,7 +1060,7 @@ Registers new dynamic client in oxAuth.
 |---------|--------|
 |redirect_uris|Redirection URI values used by the Client. One of these registered Redirection URI values must exactly match the redirect_uri parameter value used in each Authorization Request|
 |response_types|A list of the OAuth 2.0 response_type values that the Client is declaring that it will restrict itself to using. If omitted, the default is that the Client will use only the code Response Type. Allowed values are code, token, id_token|
-|grant_types|A list of the OAuth 2.0 Grant Types that the Client is declaring that it will restrict itself to using. The Grant Type values used by OpenID Connect are:<ul><li>**authorization_code** The Authorization Code Grant Type</li><li>**implicit** The Implicit Grant Type</li><li>**refresh_token** The Refresh Token Grant Type</li></ul>The following table lists the correspondence between response_type values that the Client will use and grant_type values that MUST be included in the registered grant_types list:<ul><li>code: authorization_code</li><li>id_token: implicit</li><li>token id_token: implicit</li><li>code id_token: authorization_code, implicit</li><li>code token: authorization_code, implicit</li><li>code token id_token: authorization_code, implicit</li></ul>|
+|grant_types|A list of the OAuth 2.0 Grant Types that the Client is declaring that it will restrict itself to using. The Grant Type values used by OpenID Connect are:<ul><li>**authorization_code** The Authorization Code Grant Type</li><li>**implicit** The Implicit Grant Type</li><li>**refresh_token** The Refresh Token Grant Type</li><li>**urn:openid:params:grant-type:ciba** CIBA (Client Initiated Backchannel Authentication) Grant Type. </li><li> **urn:ietf:params:oauth:grant-type:device_code** Device Authorization Grant Type for OAuth 2.0</li></ul>The following table lists the correspondence between response_type values that the Client will use and grant_type values that MUST be included in the registered grant_types list:<ul><li>code: authorization_code</li><li>id_token: implicit</li><li>token id_token: implicit</li><li>code id_token: authorization_code, implicit</li><li>code token: authorization_code, implicit</li><li>code token id_token: authorization_code, implicit</li></ul>|
 |application_type|Kind of the application. The default, if omitted, is web. The defined values are native or web. Web Clients using the OAuth Implicit Grant Type must only register URLs using the HTTPS scheme as redirect_uris; they must not use localhost as the hostname. Native Clients must only register redirect_uris using custom URI schemes or URLs using the http: scheme with localhost as the hostname.|
 |contacts|e-mail addresses of people responsible for this Client.|
 |client_name|Name of the Client to be presented to the End-User.|
