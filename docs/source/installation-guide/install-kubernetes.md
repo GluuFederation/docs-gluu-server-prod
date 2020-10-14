@@ -753,7 +753,7 @@ Please calculate the minimum required resources as per services deployed. The fo
               restartPolicy: Never
               containers:
                 - name: cloud-native-installer
-                  image: gluufederation/cloud-native:4.2.1_dev
+                  image: gluufederation/cloud-native:4.2.1_a4
         ---
         kind: Service
         apiVersion: v1
