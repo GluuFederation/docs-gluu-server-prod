@@ -414,8 +414,10 @@
             
             === "Couchbase Operator v1"
             
-                Using the couchbase UI add a user `gluu` uwith permissions `query_select`, `query_update`, `query_insert`, and `query_delete` to gluu buckets `gluu`, `gluu_session`, `gluu_token`, `gluu_cache` and `gluu_site`.
-                
+                1. Inside the Couchbase UI create a group by going to `Security` --> `ADD GROUP` and call that `gluu-group`  and add `query_select`, `query_insert`, `query_update` and `query_delete` to gluu buckets `gluu`, `gluu_session`, `gluu_token`, `gluu_cache` and `gluu_site`.
+
+                1. Inside the Couchbase UI create a user by going to `Security` --> `ADD USER` and call that user `gluu` and choose a good password and remember that as you will need it later. Assign the group `gluu-group`  which was create in the previous step to that user.
+                                
             === "Couchbase Operator v2"
                 
                 1.  Create a secret that will hold `gluu` password in the couchbase namespace:
@@ -657,8 +659,10 @@
             
             === "Couchbase Operator v1"
             
-                Using the couchbase UI add a user `gluu` uwith permissions `query_select`, `query_update`, `query_insert`, and `query_delete` to gluu buckets `gluu`, `gluu_session`, `gluu_token`, `gluu_cache` and `gluu_site`.
-                
+                1. Inside the Couchbase UI create a group by going to `Security` --> `ADD GROUP` and call that `gluu-group`  and add `query_select`, `query_insert`, `query_update` and `query_delete` to gluu buckets `gluu`, `gluu_session`, `gluu_token`, `gluu_cache` and `gluu_site`.
+
+                1. Inside the Couchbase UI create a user by going to `Security` --> `ADD USER` and call that user `gluu` and choose a good password and remember that as you will need it later. Assign the group `gluu-group`  which was create in the previous step to that user.
+                           
             === "Couchbase Operator v2"
                 
                 1.  Create a secret that will hold `gluu` password in the couchbase namespace:
