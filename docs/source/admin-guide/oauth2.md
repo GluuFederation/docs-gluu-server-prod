@@ -43,7 +43,7 @@ the oxAuth-Client.jar API to interact with the authorization server.
 
 ```
 // Parameters
-String tokenUrl = "https://seed.gluu.org/oxauth/seam/resource/restv1/oxauth/token";
+String tokenUrl = "https://seed.gluu.org/oxauth/restv1/token";
  
 // Request
 TokenClient tokenClient = new TokenClient(tokenUrl);
@@ -59,7 +59,7 @@ The message sent to the authorization server is:
 * Request
 
 ```
-POST /oxauth/seam/resource/restv1/oxauth/token HTTP/1.1
+POST /oxauth/restv1/token HTTP/1.1
 Host: seed.gluu.org
 Authorization: Basic QCExMTExITAwMDghRkY4MSEyRDM5OjYyMTNlOWI5LWM0NmQtNDAwOC04YWYxLTAzZjkxOGE4YWRlNA==
 Content-Type: application/x-www-form-urlencoded
@@ -155,7 +155,7 @@ the oxAuth-Client.jar API to interact with the authorization server.
 
 ```
 // Parameters
-String tokenUrl = "https://seed.gluu.org/oxauth/seam/resource/restv1/oxauth/token";
+String tokenUrl = "https://seed.gluu.org/oxauth/restv1/token";
  
 // Call the service
 TokenClient tokenClient = new TokenClient(tokenUrl);
@@ -171,7 +171,7 @@ String refreshToken = response.getRefreshToken(); // aba91bd9-aa10-4fca-952b-50a
 * Request
 
 ```
-POST /oxauth/seam/resource/restv1/oxauth/token HTTP/1.1
+POST /oxauth/restv1/token HTTP/1.1
 Host: seed.gluu.org
 Authorization: Basic QCExMTExITAwMDghRkY4MSEyRDM5OjYyMTNlOWI5LWM0NmQtNDAwOC04YWYxLTAzZjkxOGE4YWRlNA==
 Content-Type: application/x-www-form-urlencoded

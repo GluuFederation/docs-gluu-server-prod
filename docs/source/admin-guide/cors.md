@@ -23,7 +23,7 @@ The minimal configuration required to use the CORS Filter is shown below, and is
     </filter-mapping>
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
-        <url-pattern>/seam/resource/restv1/oxauth/*</url-pattern>
+        <url-pattern>/restv1/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
