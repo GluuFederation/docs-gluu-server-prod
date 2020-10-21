@@ -98,12 +98,37 @@ The administrator can use the following command line options to include addition
 * __-w__ get the development head war files
 * __-t__ Load test data
 * __-x__ Load test data and exit
+* __-stm__ Enable Scim Test Mode
 * __-properties-password__ Provide password to decode `setup.properties.last.enc`
 * __--import-ldif=custom-ldif-dir__ Render ldif templates from custom-ldif-dir and import them in LDAP
 * __--listen_all_interfaces__ Allow the LDAP server to listen on all server interfaces. This is required for clustered installations to replicate between LDAP servers. If not enabled, the LDAP server listens only to localhost
 * __---allow-pre-released-features__ Enable options to install experimental features, not yet officially supported.
 * __--remote-ldap__ Allows use of a remote LDAP server.
+* __--install-local-opendj__ Installs a local OpenDJ LDAP server
 * __--remote-couchbase__ Allows use of a remote Couchbase server.
+* __--no-data__ Do not import any data to database backend, used for clustering
+* __--no-oxauth__ Do not install oxAuth OAuth2 Authorization Server
+* __--no-oxtrust__ "Do not install oxTrust Admin UI
+* __--install-gluu-radius__ Install oxTrust Admin UI
+* __-ip-address__ Used primarily by Apache httpd for the Listen directive
+* __-host-name__ Internet-facing FQDN that is used to generate certificates and metadata
+* __-org-name__ Organization name field used for generating X.509 certificates
+* __-email__ Email address for support at your organization used for generating X.509 certificates
+* __-city__ City field used for generating X.509 certificates
+* __-state__ State field used for generating X.509 certificates
+* __-country__ Two letters country coude used for generating X.509 certificates
+* __-oxtrust-admin-password__ Used as the default admin user for oxTrust
+* __-ldap-admin-password__ Used as the LDAP directory manager password
+* __-application-max-ram__ Sets the maximum RAM value to be used
+* __-properties-password__ Encoded setup.properties file password
+* __--install-casa__ Install Casa
+* __--install-oxd__ Install oxd Server
+* __--install-scim__ Install Scim Server
+* __--install-fido2__ Install Fido2
+* __--oxd-use-gluu-storage__ Use Gluu Storage for Oxd Server
+* __-couchbase-bucket-prefix__ Set prefix for couchbase buckets
+* __--generate-oxd-certificate__ Generate certificate for oxd based on hostname
+* __--load-passwords', help__ Load password from setup.properties
 
 Example Command: `# ./setup.py -ps` This command will install Gluu Server with Passport and Shibboleth IDP.
 
