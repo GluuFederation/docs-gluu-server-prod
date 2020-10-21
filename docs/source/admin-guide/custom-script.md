@@ -374,7 +374,7 @@ Snippet
         return ""
 ```
 
-Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.1/static/extension/end_session/end_session.py). 
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.2/static/extension/end_session/end_session.py). 
 
 ## Resource Owner Password Credentials
 
