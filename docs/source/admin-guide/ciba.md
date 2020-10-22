@@ -249,7 +249,7 @@ token endpoint using the new grant type.
 ![CIBA Poll Mode](../img/admin-guide/ciba/CIBAPollMode.png)
 
 ## Authentication Request
-CIBA authentication request contains a list of parameters that should be send depending on the mode(ping, poll, push), however here is the main list of parameters:
+CIBA authentication request contains a list of parameters that should be sent depending on the mode(ping, poll, push), however here is the main list of parameters:
 
 - *scope (required)* The scope of the access request as described by Section 3.3 of [RFC6749](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html#RFC6749). OpenID Connect implements authentication as an extension to OAuth 2.0 by including the openid scope value in the authorization requests.
 - *client_notification_token (required)* if the Client is registered to use Ping or Push modes. It is a bearer token provided by the Client that will be used by Gluu Server to authenticate the callback request to the Client.
