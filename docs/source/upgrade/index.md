@@ -124,7 +124,7 @@
     
     #### Kustomize
     
-    - Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+    - Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.2/README.md#build-pygluu-kubernetespyz-manually).
     
     - Move your  `settings.json` that was used in installing 4.1 next to `./pygluu-kubernetes.pyz`. 
     
@@ -185,7 +185,112 @@
                   compressionMode: passive
                 EOF
                 ```
-          
+                
+        1. Add a new user in couchbase  named `gluu`.
+            
+            === "Couchbase Operator v1"
+            
+                1. Inside the Couchbase UI create a group by going to `Security` --> `ADD GROUP` and call that `gluu-group`  and add `query_select`, `query_insert`, `query_update` and `query_delete` to gluu buckets `gluu`, `gluu_session`, `gluu_token`, `gluu_cache` and `gluu_site`.
+
+                1. Inside the Couchbase UI create a user by going to `Security` --> `ADD USER` and call that user `gluu` and choose a good password and remember that as you will be prompted for it later. Remember this is not the superuser password i.e admin. Assign the group `gluu-group`  which was create in the previous step to that user.
+                                
+            === "Couchbase Operator v2"
+                
+                1.  Create a secret that will hold `gluu` password in the couchbase namespace:
+                
+                ```bash
+                kubectl create secret generic gluu-couchbase-user-password --from-literal=password=P@ssw0rd --namespace cbns
+                ```
+                
+                1.  Apply the following yaml in the couchbase namespace:
+                
+                ```yaml
+                cat <<EOF | kubectl apply -f -
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseGroup
+                metadata:
+                  name: gluu-group
+                  labels:
+                    cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
+                spec:
+                  roles:
+                  - name: query_select
+                    bucket: gluu
+                  - name: query_select
+                    bucket: gluu_site
+                  - name: query_select
+                    bucket: gluu_user
+                  - name: query_select
+                    bucket: gluu_cache
+                  - name: query_select
+                    bucket: gluu_token
+                  - name: query_select
+                    bucket: gluu_session
+                
+                  - name: query_update
+                    bucket: gluu
+                  - name: query_update
+                    bucket: gluu_site
+                  - name: query_update
+                    bucket: gluu_user
+                  - name: query_update
+                    bucket: gluu_cache
+                  - name: query_update
+                    bucket: gluu_token
+                  - name: query_update
+                    bucket: gluu_session
+                
+                  - name: query_insert
+                    bucket: gluu
+                  - name: query_insert
+                    bucket: gluu_site
+                  - name: query_insert
+                    bucket: gluu_user
+                  - name: query_insert
+                    bucket: gluu_cache
+                  - name: query_insert
+                    bucket: gluu_token
+                  - name: query_insert
+                    bucket: gluu_session
+                
+                  - name: query_delete
+                    bucket: gluu
+                  - name: query_delete
+                    bucket: gluu_site
+                  - name: query_delete
+                    bucket: gluu_user
+                  - name: query_delete
+                    bucket: gluu_cache
+                  - name: query_delete
+                    bucket: gluu_token
+                  - name: query_delete
+                    bucket: gluu_session
+                ---
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseRoleBinding
+                metadata:
+                  name: gluu-role-binding
+                spec:
+                  subjects:
+                  - kind: CouchbaseUser
+                    name: gluu
+                  roleRef:
+                    kind: CouchbaseGroup
+                    name: gluu-group
+                ---
+                apiVersion: couchbase.com/v2
+                kind: CouchbaseUser
+                metadata:
+                  name: gluu
+                  labels:
+                    cluster: CLUSTERNAME # <--- change this to your cluster name i.e cbgluu
+                spec:
+                  fullName: "Gluu Cloud Native"
+                  authDomain: local
+                  authSecret: gluu-couchbase-user-password
+                EOF
+                ```
+                          
         1.  Run :
         
              ```bash
