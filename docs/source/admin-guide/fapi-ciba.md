@@ -157,7 +157,7 @@ Server: Jetty(9.4.19.v20190610)
 ```
 
 ## Token Request
-Token request MUST be gotten using also client authentication already configured for the client and the response will be the same than the the already defined in CIBA document.
+Token request MUST use the client authentication mode configured for the client and the response will be the same as defined in CIBA document.
 
 MTLS Request:
 ```
