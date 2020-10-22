@@ -8,7 +8,7 @@ The Gluu Server leverages [interception scripts](../admin-guide/custom-script.md
 
 Interception scripts are included for a number of authentication mechanisms, such as:
 
-- [FIDO U2F](./U2F.md)
+- [FIDO 2](./fido2.md)
 - [TOTP/HOTP](./otp.md)
 - [Super Gluu](./supergluu.md)  (Gluu's free 2FA mobile push app)   
 - [Duo Security](./duo.md)
