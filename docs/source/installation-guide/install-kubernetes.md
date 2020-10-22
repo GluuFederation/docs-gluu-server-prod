@@ -1,9 +1,19 @@
 # The Kubernetes recipes
 
+## Getting Started with Kubernetes
+
+The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edition, requires some special considerations compared to other deployments. This page details the installation and initial configuration of a CN deployment. More advanced configuration details are available on the appropriate pages throughout the Gluu documentation. For convenience, links to those documents follow:
+
+- [Certificate Management](../admin-guide/certificate)  
+- [Key Reference Guide](../reference/container-configs)  
+- [Image Reference Guide](../reference/container-image-refs)  
+- [Backup Strategy](../operation/backup/)  
+- [Upgrade](../upgrade)  
+
 ## System Requirements for cloud deployments
 
 !!!note
-    For local deployments like `minikube` and `microk8s`  or cloud installations for demoing  Gluu may set the resources to the minimum and hence  can have `8GB RAM`, `4 CPU`, and `50GB disk` in total to run all services.
+    For local deployments like `minikube` and `microk8s`  or cloud installations for demoing Gluu may set the resources to the minimum and hence7  can have `8GB RAM`, `4 CPU`, and `50GB disk` in total to run all services.
   
 Please calculate the minimum required resources as per services deployed. The following table contains default recommended resources to start with. Depending on the use of each service the resources may be increased or decreased. 
 
@@ -45,7 +55,7 @@ Please calculate the minimum required resources as per services deployed. The fo
             aws-cli
             kubectl version
     
-    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the address of loadblancer for use later during installation.
+    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the address of loadblancer for use later during installation.
 
     !!!note
         Default  AWS deployment will install a classic load balancer with an `IP` that is not static. Don't worry about the `IP` changing. All pods will be updated automatically with our script when a change in the `IP` of the load balancer occurs. However, when deploying in production, **DO NOT** use our script. Instead, assign a CNAME record for the LoadBalancer DNS name, or use Amazon Route 53 to create a hosted zone. More details in this [AWS guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html?icmpid=docs_elb_console).
@@ -76,7 +86,7 @@ Please calculate the minimum required resources as per services deployed. The fo
         
     1.  If a connection is not made to google consul using google account the call to the api will fail. Either connect to google consul using an associated google account and run any `kubectl` command like `kubectl get pod` or create a service account using a json key [file](https://cloud.google.com/docs/authentication/getting-started).
     
-    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
+    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
 
     
 === "DOKS"
@@ -86,7 +96,7 @@ Please calculate the minimum required resources as per services deployed. The fo
     
     -  Follow this [guide](https://www.digitalocean.com/docs/kubernetes/how-to/create-clusters/) to create digital ocean kubernetes service cluster and connect to it.
 
-    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
+    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
 
 === "AKS"
     ## Azure - AKS
@@ -104,7 +114,7 @@ Please calculate the minimum required resources as per services deployed. The fo
     
     -  Follow this [section](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#connect-to-the-cluster) to connect to the AKS cluster
     
-    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
+    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
 
       
 === "Minikube"
@@ -132,7 +142,7 @@ Please calculate the minimum required resources as per services deployed. The fo
         minikube addons enable ingress
         ```
         
-    1. **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports.Please note that at the moment Istio ingress is not supported with Minikube. 
+    1. **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports.Please note that at the moment Istio ingress is not supported with Minikube. 
     
 === "MicroK8s"
     ## MicroK8s
