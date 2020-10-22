@@ -135,10 +135,14 @@
             ```bash
             ./pygluu-kubernetes.pyz upgrade
             ```
-         
-    === "Couchbase | Hybrid"
+
         !!! Note
-         * The upgrade method has no means of installing couchbase. You may be prompted for couchbase related settings, but that is only to update your current or new settings.json.        
+            Compated to 4.1 , 4.2 has a centrialized `configMap` holding the necessary environment variables for all Gluu services. Hence, you will come to realize that the associated `configMaps` for each service that were defined previosuly such as `oxauth-cm` are no longer used. The upgrade process does not delete these unused `configMaps` as a rollout back to 4.1 might be needed. You may choose to discard these unused `configMaps` after full confirmation that your deployment fully functions. 
+                     
+    === "Couchbase | Hybrid"
+    
+        !!! Note
+            The upgrade method has no means of installing couchbase. You may be prompted for couchbase related settings, but that is only to update your current or new settings.json.        
          
         1. Add a new bucket  named `gluu_session`.
         
@@ -297,6 +301,13 @@
              ./pygluu-kubernetes.pyz upgrade
              ```
              
+        !!! Note
+            There is a new health check in 4.2 which may result in kubernetes rejecting the update of statefulsets describing that there are mulitple healthchecks defined. This does not affect the upgrade process itself. This is often only seen in oxtrust and hence  after the confirmation that most  services are up you may have to `kubectl delete -f oxtrust.yaml` and re-apply `kubectl apply -f oxtrust.yaml` to re-initiate the statefulset.
+
+        !!! Note
+            Compated to 4.1 , 4.2 has a centrialized `configMap` holding the necessary environment variables for all Gluu services. Hence, you will come to realize that the associated `configMaps` for each service that were defined previosuly such as `oxauth-cm` are no longer used. The upgrade process does not delete these unused `configMaps` as a rollout back to 4.1 might be needed. You may choose to discard these unused `configMaps` after full confirmation that your deployment fully functions.  
+                         
+             
     #### Helm
 
     === "LDAP"
@@ -406,6 +417,9 @@
             ```bash
             helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
             ```
+            
+        !!! Note
+            Compated to 4.1 , 4.2 has a centrialized `configMap` holding the necessary environment variables for all Gluu services. Hence, you will come to realize that the associated `configMaps` for each service that were defined previosuly such as `oxauth-cm` are no longer used. The upgrade process does not delete these unused `configMaps` as a rollout back to 4.1 might be needed. You may choose to discard these unused `configMaps` after full confirmation that your deployment fully functions.            
         
     === "Couchbase"
       
@@ -650,6 +664,9 @@
             ```bash
             helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
             ```
+            
+        !!! Note
+            Compated to 4.1 , 4.2 has a centrialized `configMap` holding the necessary environment variables for all Gluu services. Hence, you will come to realize that the associated `configMaps` for each service that were defined previosuly such as `oxauth-cm` are no longer used. The upgrade process does not delete these unused `configMaps` as a rollout back to 4.1 might be needed. You may choose to discard these unused `configMaps` after full confirmation that your deployment fully functions.             
 
     === "Hybrid"
       
@@ -926,13 +943,15 @@
         
             ```bash
             helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
-            ```    
-    
+            ``` 
+
+        !!! Note
+            Compated to 4.1 , 4.2 has a centrialized `configMap` holding the necessary environment variables for all Gluu services. Hence, you will come to realize that the associated `configMaps` for each service that were defined previosuly such as `oxauth-cm` are no longer used. The upgrade process does not delete these unused `configMaps` as a rollout back to 4.1 might be needed. You may choose to discard these unused `configMaps` after full confirmation that your deployment fully functions. 
     
     ### Exporting Data
     
     !!! Note
-     * This step is not needed.
+        This step is not needed.
     
     
     1.  Make sure to backup existing LDAP data
