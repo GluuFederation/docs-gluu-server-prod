@@ -17,7 +17,7 @@ There are three methods that inherit a base interface:
 |-----------------|------------------|
 |`def init(self, customScript, configurationAttributes)` |This method is only called once during the script initialization. It can be used for global script initialization, initiate objects etc|
 |`def destroy(self, configurationAttributes)` |This method is called once to destroy events. It can be used to free resource and objects created in the `init()` method|
-|`def getApiVersion(self)` |The `getApiVersion` method allows API changes in order to do transparent migration from an old script to a new API. Currently all scripts should return `1`|
+|`def getApiVersion(self, configurationAttributes, customScript)` |The `getApiVersion` method allows API changes in order to do transparent migration from an old script to a new API. **Only include the customScript variable if the value for getApiVersion is greater than 10**|
 
 The `configurationAttributes` parameter is `java.util.Map<String, SimpleCustomProperty>` with properties specified in `oxConfigurationProperty` attributes.
 
