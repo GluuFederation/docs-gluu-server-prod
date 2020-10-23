@@ -823,14 +823,14 @@ Our tests used 10 million users that were loaded to our `gluu_user` bucket. We h
     kubectl create -f load.yaml -n load
     ```
    
-1. Scale oxAuth to the number of pods according to flow. A mix and match if the total number of authentication per day is the same i.e one billion.
+1. Scale oxAuth to the number of pods according to flow. A mix and match if the total number of authentication per day is the same.
 
     ```bash
     # ROPC Flow
     kubectl scale deploy oxauth -n gluu --replicas=30
     # OR Authorization code Flow
     kubectl scale deploy oxauth -n gluu --replicas=30
-    # OR if both flows and both need to reach one billion sepretly. Note the resource tables in the beginning of this tutorial.
+    # OR if both flows and both need to reach the results separately. Note the resource tables in the beginning of this tutorial.
     kubectl scale deploy oxauth -n gluu --replicas=60
     ```
 
@@ -841,7 +841,7 @@ Our tests used 10 million users that were loaded to our `gluu_user` bucket. We h
     kubectl scale deploy load-testing -n load --replicas=180
     # OR Authorization code Flow
     kubectl scale deploy load-testing -n load --replicas=60
-    # OR if both flows and both need to reach one billion sepretly. Note the resource tables in the beginning of this tutorial.
+    # OR if both flows and both need to reach results separately. Note the resource tables in the beginning of this tutorial.
     kubectl scale deploy load-testing -n load --replicas=240
     ```
 
