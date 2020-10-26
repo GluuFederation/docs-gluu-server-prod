@@ -4,7 +4,7 @@ The Gluu Server should be backed up frequently--**we recommend at least one dail
 
 There are multiple methods for backing up the Gluu Server. A few recommended strategies are provided below.
 
-=== "VM Snapshot Backup"
+=== "Community Edition Snapshot Backup"
     
     In the event of a production outage, a proper snapshot of the last working condition will help rapidly restore service. 
     
@@ -149,7 +149,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     
     You should be done and everything should be working perfectly. You may notice your Gluu Server responding slower than before. That is expected -- your LDAP is adjusting to the new data, and indexing might be in process. Give it some time and it should be back to normal.
 
-=== "Kubernetes instructions"
+=== "Cloud Native instructions"
     
     ## Overview
     
