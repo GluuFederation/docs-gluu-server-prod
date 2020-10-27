@@ -357,6 +357,8 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
                  
         === "Helm"
         
+            1. Save a copy of the ldif backups. The backups should already be on persistence disks but for ease of access please copy these ldifs to a secure location to be used in further steps. 
+            
             1. Save any custom files injected and used across `Gluu` services. These files might likely be save in [Jackrabbit](https://gluu.org/docs/gluu-server/latest/installation-guide/install-kubernetes/#working-with-jackrabbit).
             
             1. Save important gluu `ConfigMap`s:
@@ -383,12 +385,6 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
                 kubectl get secret gluu-jackrabbit-postgres-pass -n gluu -o yaml >> gluu_secrets.yaml
                 ```        
         
-                            
-            1.  Choose the backup of choice and run the command below:
-            
-                ```bash
-                /opt/opendj/bin/import-ldif --hostname localhost --port 4444 --bindDN "cn=Directory manager" --backendID userRoot --trustAll --ldifFile /opt/opendj/ldif/backup-4.ldif --bindPassword "<Password>"
-                ```
             
             1. If this is a restore it likely means the helm deployment of Gluu is currupt. Delete the helm deployment of Gluu in preperation for a new fresh one:
             
@@ -407,4 +403,18 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
                 ```bash
                 helm install <release-name> -f ./values.yaml . -n <gluu-namespace>
                 ```
+                
+            1. Move the backup ldifs to the new opendj pod at `/opt/opendj/ldif`
+            
+            1.  Choose the backup of choice and run the command below:
+            
+                ```bash
+                /opt/opendj/bin/import-ldif --hostname localhost --port 4444 --bindDN "cn=Directory manager" --backendID userRoot --trustAll --ldifFile /opt/opendj/ldif/backup-4.ldif --bindPassword "<Password>"
+                ```
+            
+            1. Preform a rolling update of each service, forexample :             
+            
+               ```bash
+               kubectl rollout restart gluu-deployment -n gluu
+               ```
             
