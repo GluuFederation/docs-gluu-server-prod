@@ -4,104 +4,55 @@
 # Author: Yuriy Movchan
 #
 
-from org.gluu.model.custom.script.type.client import ClientRegistrationType
-from org.gluu.service.cdi.util import CdiUtil
-from org.gluu.oxauth.service import ScopeService
+from org.gluu.model.custom.script.type.scope import DynamicScopeType
 from org.gluu.util import StringHelper, ArrayHelper
-from java.util import Arrays, ArrayList, HashSet
+from java.util import Arrays, ArrayList
 
 import java
 
-class ClientRegistration(ClientRegistrationType):
+class DynamicScope(DynamicScopeType):
     def __init__(self, currentTimeMillis):
         self.currentTimeMillis = currentTimeMillis
 
-    def init(self, customScript, configurationAttributes):
-        print "Client registration. Initialization"
-        
-        self.clientRedirectUrisSet = self.prepareClientRedirectUris(configurationAttributes)
+    def init(self, configurationAttributes):
+        print "Dynamic scope. Initialization"
 
-        print "Client registration. Initialized successfully"
+        print "Dynamic scope. Initialized successfully"
+
         return True   
 
     def destroy(self, configurationAttributes):
-        print "Client registration. Destroy"
-        print "Client registration. Destroyed successfully"
+        print "Dynamic scope. Destroy"
+        print "Dynamic scope. Destroyed successfully"
         return True   
 
-    # Update client entry before persistent it
-    #   registerRequest is org.gluu.oxauth.client.RegisterRequest
-    #   client is org.gluu.oxauth.model.registration.Client
+    # Update Json Web token before signing/encrypting it
+    #   dynamicScopeContext is org.gluu.oxauth.service.external.context.DynamicScopeExternalContext
     #   configurationAttributes is java.util.Map<String, SimpleCustomProperty>
-    def createClient(self, registerRequest, client, configurationAttributes):
-        print "Client registration. CreateClient method"
+    def update(self, dynamicScopeContext, configurationAttributes):
+        print "Dynamic scope. Update method"
 
-        redirectUris = client.getRedirectUris()
-        print "Client registration. Redirect Uris: %s" % redirectUris
+        dynamicScopes = dynamicScopeContext.getDynamicScopes()
+        user = dynamicScopeContext.getUser()
+        jsonToken = dynamicScopeContext.getJsonToken()
+        claims = jsonToken.getClaims()
 
-        addAddressScope = False
-        for redirectUri in redirectUris:
-            if (self.clientRedirectUrisSet.contains(redirectUri)):
-                addAddressScope = True
-                break
-        
-        print "Client registration. Is add address scope: %s" % addAddressScope
+        # Iterate through list of dynamic scopes in order to add custom scopes if needed
+        print "Dynamic scope. Dynamic scopes:", dynamicScopes
+        for dynamicScope in dynamicScopes:
+            # Add organization name if there is scope = org_name
+            if (StringHelper.equalsIgnoreCase(dynamicScope, "org_name")):
+                claims.setClaim("org_name", "Gluu, Inc.")
+                continue
 
-        if addAddressScope:
-            currentScopes = client.getScopes()
-            print "Client registration. Current scopes: %s" % currentScopes
-            
-            scopeService = CdiUtil.bean(ScopeService)
-            addressScope = scopeService.getScopeByDisplayName("address")
-            newScopes = ArrayHelper.addItemToStringArray(currentScopes, addressScope.getDn())
-    
-            print "Client registration. Result scopes: %s" % newScopes
-            client.setScopes(newScopes)
+            # Add work phone if there is scope = work_phone
+            if (StringHelper.equalsIgnoreCase(dynamicScope, "work_phone")):
+                workPhone = user.getAttribute("telephoneNumber");
+                if (StringHelper.isNotEmpty(workPhone)):
+                    claims.setClaim("work_phone", workPhone)
+                continue
 
-        return True
-
-    # Update client entry before persistent it
-    #   registerRequest is org.gluu.oxauth.client.RegisterRequest
-    #   client is org.gluu.oxauth.model.registration.Client
-    #   configurationAttributes is java.util.Map<String, SimpleCustomProperty>
-    def updateClient(self, registerRequest, client, configurationAttributes):
-        print "Client registration. UpdateClient method"
         return True
 
     def getApiVersion(self):
-        return 11
-
-    def prepareClientRedirectUris(self, configurationAttributes):
-        clientRedirectUrisSet = HashSet()
-        if not configurationAttributes.containsKey("client_redirect_uris"):
-            return clientRedirectUrisSet
-
-        clientRedirectUrisList = configurationAttributes.get("client_redirect_uris").getValue2()
-        if StringHelper.isEmpty(clientRedirectUrisList):
-            print "Client registration. The property client_redirect_uris is empty"
-            return clientRedirectUrisSet    
-
-        clientRedirectUrisArray = StringHelper.split(clientRedirectUrisList, ",")
-        if ArrayHelper.isEmpty(clientRedirectUrisArray):
-            print "Client registration. No clients specified in client_redirect_uris property"
-            return clientRedirectUrisSet
-        
-        # Convert to HashSet to quick search
-        i = 0
-        count = len(clientRedirectUrisArray)
-        while i < count:
-            uris = clientRedirectUrisArray[i]
-            clientRedirectUrisSet.add(uris)
-            i = i + 1
-
-        return clientRedirectUrisSet
-
-    # Returns secret key which will be used to validate Software Statement if HMAC algorithm is used (e.g. HS256, HS512). Invoked if oxauth conf property softwareStatementValidationType=SCRIPT which is default/fallback value.
-    # context is reference of org.gluu.oxauth.service.external.context.DynamicClientRegistrationContext (in https://github.com/GluuFederation/oxauth project )
-    def getSoftwareStatementHmacSecret(self, context):
-        return ""
-
-    # Returns JWKS which will be used to validate Software Statement if keys are used (e.g. RS256). Invoked if oxauth conf property softwareStatementValidationType=SCRIPT which is default/fallback value.
-    # context is reference of org.gluu.oxauth.service.external.context.DynamicClientRegistrationContext (in https://github.com/GluuFederation/oxauth project )
-    def getSoftwareStatementJwks(self, context):
-        return ""
+        return 1
