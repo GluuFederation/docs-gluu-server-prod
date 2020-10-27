@@ -266,14 +266,69 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             
         #### Gluu restore step
         
-        1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+        === "Kustomize"
         
-        1.  Run :
-        
-             ```bash
-             ./pygluu-kubernetes.pyz restore
-             ```
+            1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
+            
+            1.  Run :
+            
+                 ```bash
+                 ./pygluu-kubernetes.pyz restore
+                 ```
 
+        === "Helm"
+                    
+            1. Save any custom files injected and used across `Gluu` services. These files might likely be save in [Jackrabbit](https://gluu.org/docs/gluu-server/latest/installation-guide/install-kubernetes/#working-with-jackrabbit).
+            
+            1. Save important gluu `ConfigMap`s:
+            
+                ```bash
+                kubectl get cm gluu -n gluu -o yaml > gluu_main_cm.yaml && \
+                kubectl get cm gluu-config-cm -n gluu -o yaml > gluu_cms.yaml && \
+                echo "---" >> gluu_cms.yaml && \
+                kubectl get cm gluu-config-gen-json-file -n gluu -o yaml >> gluu_cms.yaml && \
+                echo "---" >> gluu_cms.yaml && \
+                kubectl get cm gluu-config-tls-script -n gluu -o yaml >> gluu_cms.yaml && \
+                echo "---" >> gluu_cms.yaml && \
+                kubectl get cm gluu-updatelbip -n gluu -o yaml >> gluu_cms.yaml
+                ```
+            
+            1. Save important gluu `Secret`s:
+            
+                ```bash
+                kubectl get secret gluu -n gluu -o yaml > gluu_main_secret.yaml && \
+                kubectl get secret tls-certificate -n gluu -o yaml > gluu_secrets.yaml && \
+                echo "---" >> gluu_secrets.yaml && \
+                kubectl get secret gluu-jackrabbit-admin-pass -n gluu -o yaml >> gluu_secrets.yaml && \
+                echo "---" >> gluu_secrets.yaml && \
+                kubectl get secret gluu-jackrabbit-postgres-pass -n gluu -o yaml >> gluu_secrets.yaml
+                ```        
+        
+            
+            1. If this is a restore it likely means the helm deployment of Gluu is currupt. Delete the helm deployment of Gluu in preperation for a new fresh one:
+            
+                ```bash
+                helm delete <release-name> -n <gluu-namespace>
+                ```
+            
+            1. Create `gluu` `Secret` and `ConfigMap` from backup saved previosuly:
+            
+               ```bash
+               kubectl create -f gluu_main_secret.yaml && kubectl create -f gluu_main_cm.yaml
+               ```
+            
+            1. Run the install command for helm:
+            
+                ```bash
+                helm install <release-name> -f ./values.yaml . -n <gluu-namespace>
+                ```
+                
+            1. Preform a rolling update of each service, forexample :             
+            
+               ```bash
+               kubectl rollout restart gluu-deployment -n gluu
+               ```
+               
     === "OpenDJ"    
     
         ### Install backup strategy
