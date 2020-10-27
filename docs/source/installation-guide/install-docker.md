@@ -328,10 +328,13 @@ docker exec -ti ldap /opt/opendj/bin/ldapsearch \
     -Z \
     -X \
     -D "cn=directory manager" \
+    -w $LDAP_PASSWORD \
     -b "o=gluu" \
     -s base \
-    -T "objectClass=*"
+    "objectClass=*"
 ```
+
+where `$LDAP_PASSWORD` is the password for LDAP given in installation process.
 
 ### How to unseal Vault
 
