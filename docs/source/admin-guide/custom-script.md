@@ -191,11 +191,23 @@ First oxTrust executes the `initRegistration` method to do an initial user entry
 
 oxAuth implements the [OpenID Connect dynamic client registration](https://openid.net/specs/openid-connect-registration-1_0.html) specification. All new clients have the same default access scopes and attributes except password and client ID. The Client Registration script allows an admin to modify this limitation. In this script it is possible to get a registration request, analyze it, and apply customizations to registered clients. For example, a script can give access to specified scopes if `redirect_uri` belongs to a specified service or domain.
 
-This script type adds only one method to the base script type:
+This script type adds few methods to the base script type:
+
+|Method|`def createClient(self, registerRequest, client, configurationAttributes)`|
+|---|---|
+|**Method Parameter**|`registerRequest` is `org.gluu.oxauth.client.RegisterRequest`<br/>`client` is `org.gluu.oxauth.model.registration.Client`<br/>`configurationAttributes` is `java.util.Map<String, SimpleCustomProperty>`|
 
 |Method|`def updateClient(self, registerRequest, client, configurationAttributes)`|
 |---|---|
 |**Method Parameter**|`registerRequest` is `org.gluu.oxauth.client.RegisterRequest`<br/>`client` is `org.gluu.oxauth.model.registration.Client`<br/>`configurationAttributes` is `java.util.Map<String, SimpleCustomProperty>`|
+
+|Method|`def getSoftwareStatementHmacSecret(self, context)`|
+|---|---|
+|**Method Parameter**|`context` is `org.gluu.oxauth.service.external.context.DynamicClientRegistrationContext` <br> (in https://github.com/GluuFederation/oxauth project )|
+
+|Method|`def getSoftwareStatementJwks(self, context)`|
+|---|---|
+|**Method Parameter**|`context` is `org.gluu.oxauth.service.external.context.DynamicClientRegistrationContext` <br> (in https://github.com/GluuFederation/oxauth project )|
 
 This script can be used in an oxAuth application only.
 
