@@ -257,6 +257,9 @@
                       restartPolicy: Never
             ```
         
+        !!! Warning
+            Key rotation cronJob will try to push `oxauth-keys.jks` and `oxauth-keys.json` to oxAuth pods. If the service account user does not have permissions to list pods the above will fail with a `403` Forbidden message. This action can be disabled forcing oxAuth pods to pull from Kubernetes `Secret`s instead by setting the enviornment variable `GLUU_SYNC_JKS_ENABLED` to `true` inside the main config map i.e `gluu-config-cm` and adding to the `args` of the above yaml `"--opts", "push-to-container:false"` so the `args` section would look like `args: ["patch", "oxauth", "--opts", "interval:48", "--opts", "push-to-container:false"]`.
+                    
         1. Apply cron job
         
             ```bash
