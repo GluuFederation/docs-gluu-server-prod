@@ -8,7 +8,7 @@ With this procedure you can expect to get the following results with a `10` mill
 
 #### Results
 
-| Flow                                           | Transaction per second (TPS)  | 
+| Flow                                           | Authentications per second    | 
 | ---------------------------------------------- | ----------------------------- | 
 | Resource Owner Password Credential Grant Flow  |    7900-8300                  |
 | Authorization code flow                        |    1800-2200                  |
