@@ -128,6 +128,7 @@ webKeysStorage                                     | Web Key Storage Type
 dnName                                             | DN of certificate issuer
 keyStoreFile                                       | The Key Store File (JKS)
 keyStoreSecret                                     | The Key Store password
+keySelectionStrategy                               | Key Selection Strategy : OLDER (default), NEWER, FIRST
 endSessionWithAccessToken                          | Choose whether to accept access tokens to call end_session endpoint
 сookieDomain                                       | Sets cookie domain for all cookies created by OP
 clientWhiteList                                    | This list specifies which client redirection URIs are white-listed
