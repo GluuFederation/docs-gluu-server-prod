@@ -456,11 +456,42 @@ Server: Jetty(9.4.19.v20190610)
 }
 ```
 
+## Firebase integration
+
+CIBA internally generates an authorization url that should be sent to the end-user and it should be shown in the end-user device, it could be in the navigator, mobile app or other kind of supported agents. Gluu AS has already integrated Firebase in order to send these authorization urls to the end-user and also it can be used using interception scripts which is detailed in the next section.
+
+To use Firebase integration, Gluu AS should know which Firebase token of the device should be used to send those push notification containing the authorization url. In order to associate every user with an end-user device, Gluu AS has `backchannelDeviceRegistrationEndpoint` endpoint to register end-user Firebase token.
+
+Device registration parameters:
+- *device_registration_token (required)* This should be gotten from Firebase after device is registered to receive push notifications.
+- *id_token_hint (required)* This should be gotten after user authentication and authorization in Gluu AS, it's used to identify the end-user that will be associated with the Firebase device.
+
+Example:
+```
+POST /restv1/bc-deviceRegistration HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Host: test.gluu.org
+
+device_registration_token=dgpjEZK6nnE:APA91bFqFQUIi9vG3-XxDr-Luqo9bIg1c8XnMuFKCRMrCdoyCz-UY-LFmaubp505tznTjRo_omQ0_mTZMU2aCy2shYahKaKyZEWij-VgnfVaE7JBb-Eg2JsE9puX-raVaE6Xy0vEkQ50&id_token_hint=eyJraWQiOiJkNTVjZTRmYy00ODZkLTQ2YjItYWExNy1jOWRkZjEzY2IzOTlfc2lnX3JzMjU2IiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiTTdKVmNpR2YyY2p0ckE0QVZFc2Q2ZyIsInN1YiI6InFIUHUweEZ5NTJSSkR1cThUdVpQNklGNEVUZnI3N3FZeTdyOEVQSE82RnMiLCJhbXIiOlsiLTEiXSwiaXNzIjoiaHR0cHM6Ly9jZS1kZXY1LmdsdXUub3JnIiwibm9uY2UiOiIzOGFiMzZjZi0wOTQ2LTRkMTEtYWU1Yy05MDkwYjUyNWU0ZDUiLCJzaWQiOiI0NTE0OTQyZC1hOTVmLTRlYzItOWM5OC0xY2Y5OTIzYmI3ODYiLCJveE9wZW5JRENvbm5lY3RWZXJzaW9uIjoib3BlbmlkY29ubmVjdC0xLjAiLCJhdWQiOiIyNzE4YTg2ZC02YzlhLTQ1MjEtYjdjMi1lNWJkZGM2NzZkOWEiLCJhY3IiOiJhdXRoX2xkYXBfc2VydmVyIiwic19oYXNoIjoiUTRBNmFkUkNMTGozX2lZcjNUaTRQUSIsImF1dGhfdGltZSI6MTYwNDY5Mjk2NSwiZXhwIjoxNjA0Njk2NTY1LCJpYXQiOjE2MDQ2OTI5NjV9.iVqfhUnpqPs0TpAo4jKok2Oh11SyPr4iyYU0DLBlHnJL7AZL66ohGKy7rj--ohqiKllIldwYrspau9vqJwBpMsqTcfxKmKgfqhJrFAfdCmpDFgGrQea-9bpC39cE2z5nt4LYzKI-fE1D9jn3Cr7SN4litG16E87BO0Wwr64y4Ns_D3y-TeNE6xZXEvicKjDB9rRMbnlzZec3v7orS85uCCLbN27QNJ4TfyCBGrqVR3_7oYRRVtxQ9I-5j7q9exQg2hjncluNpg_Bev-fvyjwXRlHjZgnE5KYlX8ZdpFBEO-zFL9WQbb8igEkeOHtUxfqbvzJccBOXOtJwIDvmmCJnQ
+```
+
+Gluu AS should be also allowed to send push notification and it will be done using some Firebase configuration that can be found in oxTrust, section to configuration json properties of oxAuth, all properties are found in the section `cibaEndUserNotificationConfig`.
+
+![CIBA Firebase Configuration](../img/admin-guide/ciba/CIBA-FirebaseConfig.png)
+
+In order to associate and test these whole flow, Gluu AS has a page to associate devices and also to test CIBA flow (this shouldn't be used in production). Once whole Firebase configuration is done according to the previous documentation and with Firebase activated, you can use it to test your environment. To test it, you can navigate to `/ciba`, for instance, *https://test.gluu.org/oxauth/ciba*, here there is a screenshot that you should see.
+
+![CIBA Firebase Configuration](../img/admin-guide/ciba/CIBA-Test1.png)
+
+Also this page will ask you for the permission to receive push notifications, you should allow it. After that, press `Authenticate User` button, it will start common authentication flow in order to identify which user you want to associate to this navigator/device.
+
+Once you finish the authz flow, you will be back again to the same page, but you should have your `Id Token` in the screen. After some seconds, below of that section you will see a section called `Instance ID Token`, this is your Firebase identificator that will be used by CIBA to send you push notifications. Here you can press `Delete Token` button just to update that token and create a new one. At this point, this page uses `/bc-deviceRegistration` endpoint to associate user and this navigator.
+
+![CIBA Firebase Configuration](../img/admin-guide/ciba/CIBA-Test2.png)
+
 ## Interception Script
 
-In order to authenticate end-users, current implementation uses Firebase and push notifications to a device, it sends the authorization url, so the device should open the url in a navigator, thus end-user could authenticate and authorize the process using all data based on the request.
-
-However it is also possible to use interception script to send that authorization url to the end-user using any custom channel defined in the deployment.
+It is also possible to use interception script to send that authorization url to the end-user using any custom channel defined in the deployment.
 
 Those interception script could be configured using oxTrust in the section `Other Custom Scripts -> CIBA End User Notification`.
 
