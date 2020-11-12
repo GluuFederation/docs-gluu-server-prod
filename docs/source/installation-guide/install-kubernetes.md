@@ -218,9 +218,10 @@ Please calculate the minimum required resources as per services deployed. The fo
     1. **Optional if not using istio ingress:** Install [nginx-ingress](https://github.com/kubernetes/ingress-nginx) Helm [Chart](https://github.com/helm/charts/tree/master/stable/nginx-ingress).
     
        ```bash
-       helm repo add stable https://kubernetes-charts.storage.googleapis.com
+       helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+       helm repo add stable https://charts.helm.sh/stable
        helm repo update
-       helm install <nginx-release-name> stable/nginx-ingress --namespace=<nginx-namespace>
+       helm install <nginx-release-name> ingress-nginx/ingress-nginx --namespace=<nginx-namespace>
        ```
     
     1.  - If the FQDN for gluu i.e `demoexample.gluu.org` is registered and globally resolvable, forward it to the loadbalancers address created in the previous step by nginx-ingress. A record can be added on most cloud providers to forward the domain to the loadbalancer. Forexample, on AWS assign a CNAME record for the LoadBalancer DNS name, or use Amazon Route 53 to create a hosted zone. More details in this [AWS guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html?icmpid=docs_elb_console). Another example on [GCE](https://medium.com/@kungusamuel90/custom-domain-name-mapping-for-k8s-on-gcp-4dc263b2dabe).
