@@ -132,14 +132,14 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
         You may import the exact export of your ldap `exactdatabackup_date.ldif`.Do not import your exact copy of your LDIF if you are following instructions to to clean your cache entries
         
         ```bash
-        /opt/opendj/bin/import-ldif -n userRoot -l yourdata_withoutoxAuthGrantId.ldif
+        /opt/opendj/bin/import-ldif -n userRoot --offline -l yourdata_withoutoxAuthGrantId.ldif
         ```
         
       If you moved to a new LDAP, copy back your schema files to this directory:
     
-        ```bash
-        /opt/opendj/config/schema/
-        ```
+    ```bash
+    /opt/opendj/config/schema/
+    ```
         
     1. [Start](./services.md#start) the `identity`, `oxauth` and `opendj` services
     
