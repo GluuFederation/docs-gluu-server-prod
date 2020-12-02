@@ -72,6 +72,10 @@ Gluu Server logs usually reveal the source of problems when things are going wro
 
 Generally it's convenient to set the logging level for both oxAuth and SCIM to **DEBUG**. SCIM component uses the same logging level of oxTrust. See the [log management](../operation/logs.md#log-levels) page for more information.
 
+## API documentation at a glance
+
+[SCIM API](../api-guide/scim-api.md) doc page describes the HTTP verbs, resource types, and endpoints available in our implementation of SCIM. The API has also been documented using OpenAPI (swagger) specification for the interested. Find yaml files [here](https://github.com/GluuFederation/scim/tree/version_4.2.2/scim-server/src/main/resources).
+
 ## Working in Test Mode
 
 !!! Warning
