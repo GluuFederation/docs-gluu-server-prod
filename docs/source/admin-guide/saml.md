@@ -16,7 +16,7 @@ In order to support SAML SSO, the Gluu Server must include the Shibboleth SAML I
 
 - During a fresh Gluu Server installation, simply opt in when prompted for Shibboleth. 
 
-- To add Shibboleth to an existing Gluu Server deployment, follow [these instructions](../operation/faq.md/#adding-passportjs-andor-shibboleth-idp-post-installation). 
+- To add Shibboleth to an existing Gluu Server deployment, follow [these instructions](../operation/faq#adding-passportjs-andor-shibboleth-idp-post-installation). 
 
 In addition, the target application must also support SAML. If the app doesn't already support SAML, see the section below about [SAML SP software](#saml-sp). 
 
