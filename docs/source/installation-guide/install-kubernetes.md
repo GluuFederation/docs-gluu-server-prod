@@ -4,11 +4,11 @@
 
 The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edition, requires some special considerations compared to other deployments. This page details the installation and initial configuration of a CN deployment. More advanced configuration details are available on the appropriate pages throughout the Gluu documentation. For convenience, links to those documents follow:
 
-- [Certificate Management](../admin-guide/certificate)  
-- [Key Reference Guide](../reference/container-configs)  
-- [Image Reference Guide](../reference/container-image-refs)  
-- [Backup Strategy](../operation/backup/)  
-- [Upgrade](../upgrade)  
+- [Certificate Management](../admin-guide/certificate.md)  
+- [Key Reference Guide](../reference/container-configs.md)  
+- [Image Reference Guide](../reference/container-image-refs.md)  
+- [Backup Strategy](../operation/backup.md/)  
+- [Upgrade](../upgrade.md)  
 
 ## System Requirements for cloud deployments
 
