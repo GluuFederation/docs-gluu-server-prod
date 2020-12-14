@@ -10,7 +10,7 @@ Set up a server or VM with the following **minimum** requirements:
 
 |CPU Unit  |    RAM     |   Disk Space      | Processor Type |
 |----------|------------|-------------------|----------------|
-|       2  |    4GB     |   40GB            |  64 Bit        |
+|       2  |    8GB     |   40GB            |  64 Bit        |
 
 
 A few additional notes about system requirements:

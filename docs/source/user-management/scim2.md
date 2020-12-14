@@ -60,11 +60,26 @@ You can verify the current authentication scheme by querying the `/ServiceProvid
 
 To exit test mode, just set `scimTestMode` back to `false` and then click the `Save Configuration` button.
 
+## Where to locate SCIM-related logs
+
+Gluu Server logs usually reveal the source of problems when things are going wrong: the first place to look is the SCIM log. Authorization issues (access tokens problems, for instance) are on the side of oxAuth (the authorization server)
+
+    - SCIM log is located at `/opt/gluu/jetty/scim/logs/scim.log`
+
+    - oxAuth log is at `/opt/gluu/jetty/oxauth/logs/oxauth.log`
+
+    - If using the [SCIM](../admin-guide/custom-script#scim) custom script in order to intercept API calls and apply custom logic, the script log is also useful: `/opt/gluu/jetty/scim/logs/scim_script.log`
+
+Generally it's convenient to set the logging level for both oxAuth and SCIM to **DEBUG**. SCIM component uses the same logging level of oxTrust. See the [log management](../operation/logs.md#log-levels) page for more information.
+
+## API documentation at a glance
+
+[SCIM API](../api-guide/scim-api.md) doc page describes the HTTP verbs, resource types, and endpoints available in our implementation of SCIM. The API has also been documented using OpenAPI (swagger) specification for the interested. Find yaml files [here](https://github.com/GluuFederation/scim/tree/version_4.2.2/scim-server/src/main/resources).
 
 ## Working in Test Mode
 
 !!! Warning
-    Test mode provides little security to protect your service. The way this feature operates in Gluu Server can change in future releases.
+    The way this feature operates in Gluu Server may change in future releases.
 
 To interact with the service in test mode, you will have to:
 
@@ -80,17 +95,7 @@ To interact with the service in test mode, you will have to:
 
 - Obtain a new access token for subsequent requests if needed
 
-**Important Notes:**
-
-- When in trouble, check **Gluu Server logs**. These files usually reveal the source of problems when things are going wrong: SCIM service implementation resides in oxTrust, so that's the first place to look. Authorization issues (access tokens problems, for instance) are on the side of oxAuth (the authorization server)
-
-    - oxTrust log is located at `/opt/gluu/jetty/identity/logs/oxtrust.log`
-
-    - oxAuth log is at `/opt/gluu/jetty/oxauth/logs/oxauth.log`
-
-    - It's convenient to set the logging level for both applications to **TRACE** while in Test Mode. See the [log management](../operation/logs.md) page for more information
-
-- If familiar with the Java programming language, skip the steps listed above and simply use the [scim-client](#testing-with-the-scim-client): a Java library developed by Gluu. Those steps are already implemented in the library, so usage of the service is more straightforward  
+If familiar with the Java programming language, skip the steps listed above and simply use the [scim-client](#testing-with-the-scim-client): a Java library developed by Gluu. Those steps are already implemented in the library, so usage of the service is more straightforward  
 
 ### Create an OpenID Client
 

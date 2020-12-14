@@ -352,8 +352,18 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_04
+                    image: gluufederation/upgrade:4.2.1_05
                     name: gluu-upgrade-job
+                    # Enable the command section below if using istio
+                    #command:
+                    #  - tini
+                    #  - -g
+                    #  - --
+                    #  - /bin/sh
+                    #  - -c
+                    #  - |
+                    #      /app/scripts/entrypoint.sh
+                    #      curl -X POST http://localhost:15020/quitquitquit
                   restartPolicy: Never
             ```
             
@@ -466,8 +476,18 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_04
+                    image: gluufederation/upgrade:4.2.1_05
                     name: gluu-upgrade-job
+                    # Enable the command section below if using istio
+                    #command:
+                    #  - tini
+                    #  - -g
+                    #  - --
+                    #  - /bin/sh
+                    #  - -c
+                    #  - |
+                    #      /app/scripts/entrypoint.sh
+                    #      curl -X POST http://localhost:15020/quitquitquit                    
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
                       name: cb-pass
@@ -715,8 +735,18 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_04
+                    image: gluufederation/upgrade:4.2.1_05
                     name: gluu-upgrade-job
+                    # Enable the command section below if using istio
+                    #command:
+                    #  - tini
+                    #  - -g
+                    #  - --
+                    #  - /bin/sh
+                    #  - -c
+                    #  - |
+                    #      /app/scripts/entrypoint.sh
+                    #      curl -X POST http://localhost:15020/quitquitquit                    
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
                       name: cb-pass

@@ -301,7 +301,8 @@ This method relies on an LDIF file to change the authentication mode in LDAP dir
     ```
     ./ldapmodify -h localhost -p 1636 -D "cn=directory manager" -w "{password provided during setup}" -f changeAuth.ldif
     ```
-    
+
+<!---
 ### Graphical method:
 
 Alternatively, this can be accomplished in an LDAP browser.
@@ -317,6 +318,7 @@ You have to update one or both oxAuthenticationMode and OxTrustAuthenticationMod
 - Try to access the login page or Gluu Admin UI.
 
 One more option, InPrivate or Incognito or Private Browser from various Browsers can be used.
+--->
 
 ## No admin access after Cache Refresh?
 
