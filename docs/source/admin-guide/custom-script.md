@@ -366,6 +366,23 @@ It is also possible to run introspection script during `access_token` creation a
 
 If `run_introspection_script_before_access_token_as_jwt_creation_and_include_claims` set to true and `access_token_as_jwt` set to true then introspection script will be run before JWT (`access_token`) is created and all JSON values will be transfered to JWT. Also `context` inside script has additional method which allows to cancel transfering of claims if needed `context.setTranferIntrospectionPropertiesIntoJwtClaims(false)` 
 
+## Revoke Token
+
+Revoke Token scripts allow inject custom logic during token revoking.
+
+```
+    # This method is called during Revoke Token call.
+    # If True is returned, token is revoked. If False is returned, revoking is skipped.
+    # Note :
+    # context is reference of org.gluu.oxauth.service.external.context.RevokeTokenContext(in https://github.com/GluuFederation/oxauth project, )
+    def revoke(self, context):
+        return True
+```
+
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.2/static/extension/revoke_token/revoke_token.py).
+
+Note `RevokeTokenContext` allows to access response builder (`context.getResponseBuilder()`) which allows to customer response if needed.
+
 ## End Session (Logout)
 
 End Session scripts allows to modify HTML response for Frontchannel logout ([spec](http://openid.net/specs/openid-connect-frontchannel-1_0.html)).
