@@ -340,6 +340,8 @@
             spec:
               template:
                 metadata:
+                 annotations:
+                     sidecar.istio.io/inject: disable                
                   labels:
                     app: gluu-upgrade
                 spec:
@@ -354,16 +356,6 @@
                         name: upgrade-cm
                     image: gluufederation/upgrade:4.2.1_05
                     name: gluu-upgrade-job
-                    # Enable the command section below if using istio
-                    #command:
-                    #  - tini
-                    #  - -g
-                    #  - --
-                    #  - /bin/sh
-                    #  - -c
-                    #  - |
-                    #      /app/scripts/entrypoint.sh
-                    #      curl -X POST http://localhost:15020/quitquitquit
                   restartPolicy: Never
             ```
             
@@ -445,7 +437,8 @@
               GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
               GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password #<-- super user password
               GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
-              GLUU_COUCHBASE_USER: admin #<-- Change super user if necessary . 
+              GLUU_COUCHBASE_USER: admin #<-- Change super user if necessary .
+              GLUU_COUCHBASE_BUCKET_PREFIX: gluu #<-- Change if necessary .
               GLUU_PERSISTENCE_TYPE: couchbase
               GLUU_SECRET_ADAPTER: kubernetes
               GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
@@ -464,6 +457,8 @@
             spec:
               template:
                 metadata:
+                 annotations:
+                     sidecar.istio.io/inject: disable                
                   labels:
                     app: gluu-upgrade
                 spec:
@@ -477,17 +472,7 @@
                     - configMapRef:
                         name: upgrade-cm
                     image: gluufederation/upgrade:4.2.1_05
-                    name: gluu-upgrade-job
-                    # Enable the command section below if using istio
-                    #command:
-                    #  - tini
-                    #  - -g
-                    #  - --
-                    #  - /bin/sh
-                    #  - -c
-                    #  - |
-                    #      /app/scripts/entrypoint.sh
-                    #      curl -X POST http://localhost:15020/quitquitquit                    
+                    name: gluu-upgrade-job                 
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
                       name: cb-pass
@@ -703,6 +688,7 @@
               GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password #<-- super user password
               GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
               GLUU_COUCHBASE_USER: admin #<-- Change this if necessary
+              GLUU_COUCHBASE_BUCKET_PREFIX: gluu #<-- Change if necessary .
               GLUU_LDAP_URL: opendj:1636
               GLUU_PERSISTENCE_LDAP_MAPPING: "default" #<-- Change this if needed
               GLUU_PERSISTENCE_TYPE: couchbase
@@ -723,6 +709,8 @@
             spec:
               template:
                 metadata:
+                 annotations:
+                     sidecar.istio.io/inject: disable                      
                   labels:
                     app: gluu-upgrade
                 spec:
@@ -736,17 +724,7 @@
                     - configMapRef:
                         name: upgrade-cm
                     image: gluufederation/upgrade:4.2.1_05
-                    name: gluu-upgrade-job
-                    # Enable the command section below if using istio
-                    #command:
-                    #  - tini
-                    #  - -g
-                    #  - --
-                    #  - /bin/sh
-                    #  - -c
-                    #  - |
-                    #      /app/scripts/entrypoint.sh
-                    #      curl -X POST http://localhost:15020/quitquitquit                    
+                    name: gluu-upgrade-job                    
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
                       name: cb-pass
