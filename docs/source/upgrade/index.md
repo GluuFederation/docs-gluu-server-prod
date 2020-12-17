@@ -340,8 +340,8 @@
             spec:
               template:
                 metadata:
-                 annotations:
-                     sidecar.istio.io/inject: disable                
+                  annotations:
+                     sidecar.istio.io/inject: "false"                
                   labels:
                     app: gluu-upgrade
                 spec:
@@ -457,8 +457,8 @@
             spec:
               template:
                 metadata:
-                 annotations:
-                     sidecar.istio.io/inject: disable                
+                  annotations:
+                     sidecar.istio.io/inject: "false"              
                   labels:
                     app: gluu-upgrade
                 spec:
@@ -709,8 +709,8 @@
             spec:
               template:
                 metadata:
-                 annotations:
-                     sidecar.istio.io/inject: disable                      
+                  annotations:
+                     sidecar.istio.io/inject: "false"                      
                   labels:
                     app: gluu-upgrade
                 spec:
