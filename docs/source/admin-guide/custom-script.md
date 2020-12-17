@@ -431,6 +431,28 @@ Snippet
 
 Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.1/static/extension/resource_owner_password_credentials/resource_owner_password_credentials.py). 
 
+## Persistence Extension
+
+Allows administrators to specify the hashing algorithm employed to encode users' passwords in the local database.  
+
+|Method|`def createHashedPassword(self, credential)`|
+|---|---|
+|**Description**|Given a password, it must return its hashed representation as `String`|
+|Method Parameter|`credential` is `String`|
+
+For implementation, method `createStoragePassword(String, PasswordEncryptionMethod)` of utility class `PasswordEncryptionHelper` can be useful here. The enumeration `PasswordEncryptionMethod` already provides a numerous list of encryption alternatives.
+
+|Method|`def compareHashedPasswords(self, credential, storedCredential)`|
+|---|---|
+|**Description**|Returns true if the given (plain) password matches a hashed password representation.<br/>When the persistence extension script is enabled this method is called upon user+password authentication to determine if the authentication is deemed successful|
+|Method Parameter|`credential` is the password as a `String` (eg. as given in the login form)|
+|Method Parameter|`storedCredential` is the hashed password (`String`) as stored in the local database for the user in question|
+
+Relevant links:
+
+- [Utility classes]( https://github.com/GluuFederation/oxCore/tree/version_4.2.0/persistence-core/src/main/java/org/gluu/persist/operation/auth)
+- [Sample script](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.0/static/extension/persistence_extension/SampleScript.py)
+
 ## Additional Tips
 
 Visit [this page](../developer-guide/tips-cust-script-pages.md) for code references on building custom scripts and pages.
