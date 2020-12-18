@@ -138,6 +138,9 @@
                   name: web-key-rotation
                 spec:
                   template:
+                    metadata:
+                      annotations:
+                        sidecar.istio.io/inject: "false"                  
                     spec:
                       restartPolicy: Never
                       containers:
@@ -177,6 +180,9 @@
                   name: load-web-key-rotation
                 spec:
                   template:
+                    metadata:
+                      annotations:
+                        sidecar.istio.io/inject: "false"                  
                     spec:
                       restartPolicy: Never
                       volumes:
@@ -239,6 +245,9 @@
               jobTemplate:
                 spec:
                   template:
+                    metadata:
+                      annotations:
+                        sidecar.istio.io/inject: "false"
                     spec:
                       containers:
                         - name: oxauth-key-rotation
@@ -253,8 +262,22 @@
                           envFrom:
                             - configMapRef:
                                 name: gluu-config-cm
-                          args: ["patch", "--opts", "interval:48", "--opts", "key-strategy:OLDER", "--opts", "privkey-push-delay:300", "--opts", "privkey-push-strategy:NEWER"]
+                          args: ["patch", "oxauth", "--opts", "interval:48", "--opts", "key-strategy:OLDER", "--opts", "privkey-push-delay:300", "--opts", "privkey-push-strategy:NEWER"]
+                          #volumeMounts:
+                          #- mountPath: /etc/gluu/conf/couchbase_password 
+                          #  name: cb-pass
+                          #  subPath: couchbase_password
+                          #- mountPath: /etc/certs/couchbase.crt
+                          #  name: cb-crt
+                          #  subPath: couchbase.crt
                       restartPolicy: Never
+                      #volumes:
+                      #- name: cb-pass
+                      #  secret:
+                      #    secretName: cb-pass
+                      #- name: cb-crt
+                      #  secret:
+                      #    secretName: cb-crt
             ```
         
         !!! Warning
@@ -291,6 +314,9 @@
               name: oxshibboleth-key-rotation
             spec:
               template:
+                metadata:
+                  annotations:
+                    sidecar.istio.io/inject: "false"              
                 spec:
                   restartPolicy: Never
                   containers:
@@ -333,6 +359,9 @@
               name: oxd-key-rotation
             spec:
               template:
+                metadata:
+                  annotations:
+                    sidecar.istio.io/inject: "false"              
                 spec:
                   restartPolicy: Never
                   containers:
@@ -374,6 +403,9 @@
               name: ldap-key-rotation
             spec:
               template:
+                metadata:
+                  annotations:
+                    sidecar.istio.io/inject: "false"              
                 spec:
                   restartPolicy: Never
                   containers:
@@ -416,6 +448,9 @@
               name: passport-key-rotation
             spec:
               template:
+                metadata:
+                  annotations:
+                    sidecar.istio.io/inject: "false"              
                 spec:
                   restartPolicy: Never
                   containers:
@@ -453,6 +488,9 @@
               name: scim-key-rotation
             spec:
               template:
+                metadata:
+                  annotations:
+                    sidecar.istio.io/inject: "false"              
                 spec:
                   restartPolicy: Never
                   containers:
