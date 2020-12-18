@@ -252,6 +252,9 @@
                       containers:
                         - name: oxauth-key-rotation
                           image: gluufederation/certmanager:4.2.2_01
+                          env:
+                            - name: GLUU_CONTAINER_MAIN_NAME
+                              value: "oxauth" # Place oxauth container name 
                           resources:
                             requests:
                               memory: "300Mi"
