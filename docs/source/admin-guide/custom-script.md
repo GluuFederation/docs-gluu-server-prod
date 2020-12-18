@@ -453,6 +453,9 @@ Relevant links:
 - [Utility classes]( https://github.com/GluuFederation/oxCore/tree/version_4.2.0/persistence-core/src/main/java/org/gluu/persist/operation/auth)
 - [Sample script](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.0/static/extension/persistence_extension/SampleScript.py)
 
+!!! Note
+    It is recommended to store this script in your database. If you use the filesystem option, you may have to replicate the file across nodes when in a container-based environment. This is because the script caller can be oxTrust, oxAuth or even SCIM service. 
+    
 ## Additional Tips
 
 Visit [this page](../developer-guide/tips-cust-script-pages.md) for code references on building custom scripts and pages.
