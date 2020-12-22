@@ -16,7 +16,7 @@ OR USING THE RELEASE.
 
 ## Lifecycle
 
-Status: In Development
+Status: Released
 
 | Released | Community EOL | Enterprise EOL |
 | --- | --- | --- |
@@ -51,6 +51,98 @@ documentation and administrative guide.
 - Redis
 
 ## New features
+
+## 4.2.2 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.2+)
+
+- [#1503](https://github.com/GluuFederation/oxAuth/issues/1503) `sector_identifier` has to be based on host only. Also optimize redirect_uri's validation based on `sector_identifier_uri`
+
+- [#1514](https://github.com/GluuFederation/oxAuth/issues/1514) Persistence extension script still running after disabled
+
+- [#1502](https://github.com/GluuFederation/oxAuth/issues/1502) Introduce revoke interception script
+
+- [#1506](https://github.com/GluuFederation/oxAuth/issues/1506) Modify the `claims-gathering` script so that it first tries to read claims from PCT before directing to the page to enter claims
+
+- [#1508](https://github.com/GluuFederation/oxAuth/issues/1508) Fix PasswordValidator faces validator dependend beans injection after JSF update to 2.3.x
+
+- [#1505](https://github.com/GluuFederation/oxAuth/issues/1505) BUG : NPE during backchannel logout if grant object was not identified
+
+- [#1493](https://github.com/GluuFederation/oxAuth/issues/1493) id_token is missed during 2 concurrent calls for ROPC 
+
+- [#1472](https://github.com/GluuFederation/oxAuth/issues/1472) Error "oxTrust wasn't allowed to access user data" shown
+
+- [#1504](https://github.com/GluuFederation/oxAuth/issues/1504) BUG : PostAuthentication script calls re-authentication instead of re-authorization. 
+
+- [#1478](https://github.com/GluuFederation/oxAuth/issues/1478) Avoid race condition during saving grant object in cache
+
+- [#1496](https://github.com/GluuFederation/oxAuth/issues/1496) Add configuration property to allow switch off forcing prompt consent for offline access
+
+- [#1497](https://github.com/GluuFederation/oxAuth/issues/1497) Add a new claim to the id_token: `"grant": "password"`
+
+- [#1499](https://github.com/GluuFederation/oxAuth/issues/1499) Introspection endpoint not returning scopes as json string
+
+- [#1491](https://github.com/GluuFederation/oxAuth/issues/1491) Return sub value for ROPC based on `openidSubAttribute`.
+
+- [#949](https://github.com/GluuFederation/oxAuth/issues/949) Add support for nested JWE tokens 
+
+- [#1488](https://github.com/GluuFederation/oxAuth/issues/1488) Return custom attributes specified in dynamicRegistrationCustomAttributes in client registration response
+
+- [#1486](https://github.com/GluuFederation/oxAuth/issues/1486) invalidateSessionCookiesAfterAuthorizationFlow is broken in 4.2.1
+
+- [#1494](https://github.com/GluuFederation/oxAuth/issues/1494) If there are more then one key for same `alg` and `use` then take key by `èxp` with configurable strategy
+
+- [#1492](https://github.com/GluuFederation/oxAuth/issues/1492) Bug : ROPC - refresh token is not returned with forceOfflineAccessScopeToEnableRefreshToken=true and offline_access scope
+
+- [#1460](https://github.com/GluuFederation/oxAuth/issues/1460) oxAuth reloads custom scripts (file method)
+
+- [#1487](https://github.com/GluuFederation/oxAuth/issues/1487) `.well-known/openid-configuration` has to be cached (no DB) on configurable amount of time (5min by default)
+
+- [#1485](https://github.com/GluuFederation/oxAuth/issues/1485) session_id should not be included into response if it's not explicitly allowed.
+
+- [#1483](https://github.com/GluuFederation/oxAuth/issues/1483) fix: update jwt date check function in passport scripts
+
+- [#1480](https://github.com/GluuFederation/oxAuth/issues/1480) Refresh token removing doesn't look up in persistence (4.x).
+
+- [#1476](https://github.com/GluuFederation/oxAuth/issues/1476) DuplicateEntryException: Entry already exists when using Consent Gathering script
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.2+)
+
+- [#2046](https://github.com/GluuFederation/oxTrust/issues/2046) "The request is missing a required parameter" error in flow 3
+
+- [#2027](https://github.com/GluuFederation/oxTrust/issues/2027) Passport Config: field mapping dropdown
+
+- [#2028](https://github.com/GluuFederation/oxTrust/issues/2028) Add Local Authentication for oxTrust 
+
+- [#2045](https://github.com/GluuFederation/oxTrust/issues/2045) Use oxAuth configuration to check if application should render login graph on home page
+
+- [#2044](https://github.com/GluuFederation/oxTrust/issues/2044) Remove `sector_identifier_uri` menu with dialogs and provide ability to enter it as text with automatic population of `redirect_uris`
+
+- [#2041](https://github.com/GluuFederation/oxTrust/issues/2041) On oxtrust passport provider, the automatically generated callback url is invalid when using containers
+
+- [#2040](https://github.com/GluuFederation/oxTrust/issues/2040) Prevent registration of the attribute with the same name
+
+- [#2033](https://github.com/GluuFederation/oxTrust/issues/2033) oxTrust should use acr level to check acr instead of acr_name
+
+### [GluuFederation/oxCore](https://github.com/GluuFederation/oxCore/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.2+)
+
+-[#204](https://github.com/GluuFederation/oxCore/issues/204) Fix method to update log level
+
+-[#206](https://github.com/GluuFederation/oxCore/issues/206) Metric Service clean all entries when DB is Couchbase
+
+-[#207](https://github.com/GluuFederation/oxCore/issues/207) Destroy CouchbaseEnvironment object on container restart
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.2+)
+
+-[#723](https://github.com/GluuFederation/community-edition-setup/issues/723) The jar file `bcpkix-jdk15on-1.54.jar` missing at `/opt/oxd-server/lib/` (inside Gluu Chroot) 
+
+-[#720](https://github.com/GluuFederation/community-edition-setup/issues/720) Improve setup.py messages during oxd installation
+
+-[#719](https://github.com/GluuFederation/community-edition-setup/issues/719) Write post setup strings to setup.log
+
+### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxShibboleth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.2+)
+
+-[#78](https://github.com/GluuFederation/oxShibboleth/issues/78) Add new endpoint /idp/health-check to allow cluster check IDP it status
 
 ## 4.2.1 Fixes / Enhancements
 
