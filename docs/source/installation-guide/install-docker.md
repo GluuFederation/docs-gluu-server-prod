@@ -83,6 +83,7 @@ The following services are available during deployment:
 | `registrator`       | -                      | yes       | always  |
 | `vault`             | -                      | yes       | always  |
 | `nginx`             | -                      | yes       | always  |
+| `persistence`       | `JOB_PERSISTENCE`      | yes       | yes     |
 | `oxauth`            | `SVC_OXAUTH`           | no        | yes     |
 | `oxtrust`           | `SVC_OXTRUST`          | no        | yes     |
 | `ldap`              | `SVC_LDAP`             | no        | yes     |
@@ -124,6 +125,25 @@ services:
 ```
 
 If `docker-compose.override.yml` exists, this file will be added as the last Compose file. For reference on multiple Compose file, please take a look at [https://docs.docker.com/compose/extends/#multiple-compose-files](https://docs.docker.com/compose/extends/#multiple-compose-files).
+
+#### Enabling service support
+
+Several services may need extra setting in `settings.py` to enable submenus, custom scripts, etc. upon first installation.
+
+| Service             | Setting Name            | Default Value |
+| ------------------- | ----------------------- | ------------- |
+| `casa`              | `CASA_ENABLED`          | `False`       |
+| `oxpassport`        | `PASSPORT_ENABLED`      | `False`       |
+| `oxshibboleth`      | `SAML_ENABLED`          | `False`       |
+| `radius`            | `RADIUS_ENABLED`        | `False`       |
+| `scim`              | `SCIM_ENABLED`          | `False`       |
+
+To enable the setting, set the value to `True`, example:
+
+```python
+# settings.py
+SAML_ENABLED = True
+```
 
 #### Choose persistence backends
 

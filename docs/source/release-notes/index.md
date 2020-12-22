@@ -52,7 +52,86 @@ documentation and administrative guide.
 
 ## New features
 
-## Fixes / Enhancements
+<!---
+
+## 4.2.1 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.1+)
+
+- [#1447](https://github.com/GluuFederation/oxAuth/issues/1447) If software_statement is present in dynamic registration request, plain claims are lost 
+
+- [#1449](https://github.com/GluuFederation/oxAuth/issues/1449) Do not extend refresh token lifetime on refresh token rotation 
+
+- [#1446](https://github.com/GluuFederation/oxAuth/issues/1446) `acr` and `amr` (auth_level) claims are missed in id_token if does not specify `acr_values` parameter explicitly in authorization request
+
+- [#1444](https://github.com/GluuFederation/oxAuth/issues/1444) Dynamic Registration: fix software_statement validation behavior
+
+- [#1445](https://github.com/GluuFederation/oxAuth/issues/1445) Use CustomObjectAttribute instead of CustomAttribute in user services to use JSON data types
+
+- [#1442](https://github.com/GluuFederation/oxAuth/issues/1442) Update methods to store oxExternalUid as multivalued by default
+
+- [#1430](https://github.com/GluuFederation/oxAuth/issues/1430) Restrict scopes in dynamic registration request for clients with password grant
+
+- [#1438](https://github.com/GluuFederation/oxAuth/issues/1438) Add unique identifier for each metric entry to allow to find which node added that record
+
+- [#1437](https://github.com/GluuFederation/oxAuth/issues/1437) Add option to not return new refresh token on refreshing token at Token Endpoint
+
+- [#1435](https://github.com/GluuFederation/oxAuth/issues/1435) Authentication counter metrics is doubled with default authentication method
+
+- [#1436](https://github.com/GluuFederation/oxAuth/issues/1436) Store issued tokens count metrics
+
+- [#1422](https://github.com/GluuFederation/oxAuth/issues/1422) oxAuth generates backchannel logout tokens for wrong client
+
+- [#1432](https://github.com/GluuFederation/oxAuth/issues/1432) Add configuration option to put session in cache (performance)
+
+- [#1430](https://github.com/GluuFederation/oxAuth/issues/1430) Support hash fragment validation for `request_uri` (required by some new conformance tests)
+
+- [#1428](https://github.com/GluuFederation/oxAuth/issues/1428) Reduce number of session queries to DB (Performance)
+
+- [#1424](https://github.com/GluuFederation/oxAuth/issues/1424) Performance: switch Client Authorization from querying to getting by key
+
+- [#1418](https://github.com/GluuFederation/oxAuth/issues/1418) Keys are not reloaded automatically from keystore file. Full oxauth restart is required.
+
+- [#1420](https://github.com/GluuFederation/oxAuth/issues/1420) Performance: we have a lot of requests to ClientTokens cache key which doesn't make sense for NATIVE cache
+
+- [#1419](https://github.com/GluuFederation/oxAuth/issues/1419) Bug: select account functionality is broken
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.1+)
+
+- [#2016](https://github.com/GluuFederation/oxTrust/issues/2016) oxTrust should not rely on configuration endpoint for scopes
+
+- [#2020](https://github.com/GluuFederation/oxTrust/issues/2020) Bug: GUI allows to persist redirect_uri with fragment
+
+- [#2017](https://github.com/GluuFederation/oxTrust/issues/2017) U2F enrollments not shown in User's Authentication Methods panel
+
+- [#2018](https://github.com/GluuFederation/oxTrust/issues/2018) Visual issues on OIDC client advanced settings page
+
+- [#2015](https://github.com/GluuFederation/oxTrust/issues/2015) Change label / values for Scope visibility
+
+- [#2012](https://github.com/GluuFederation/oxTrust/issues/2012) Injection: Cross-site scripting
+
+- [#2010](https://github.com/GluuFederation/oxTrust/issues/2010) Using Components with Known Vulnerabilities: Outdated jQuery Library Version
+
+- [#2009](https://github.com/GluuFederation/oxTrust/issues/2009) Bump Jython version
+
+- [#2003](https://github.com/GluuFederation/oxTrust/issues/2003) There are two save buttons in json configuration
+
+- [#2002](https://github.com/GluuFederation/oxTrust/issues/2002) Not able to delete `claims redirect uri` for any client
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.1+)
+
+- [#709](https://github.com/GluuFederation/community-edition-setup/issues/709) Update Casa scripts to store and retrieve oxExternalUid as multivalued
+
+- [#708](https://github.com/GluuFederation/community-edition-setup/issues/708) Add index for multivalued oxExternalUid
+
+- [#707](https://github.com/GluuFederation/community-edition-setup/issues/707) CB: Store sessions in new bucket `gluu_session`
+
+- [#703](https://github.com/GluuFederation/community-edition-setup/issues/703) Don't specify MaxMetaspaceSize java option
+
+--->
+
+## 4.2.0 Fixes / Enhancements
+
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2+)
 
 - [#1410](https://github.com/GluuFederation/oxAuth/issues/1410) Failed to start redisProvider

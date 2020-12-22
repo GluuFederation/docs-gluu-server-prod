@@ -37,7 +37,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     1. First check your cache entries by running the following command:
     
         ```bash
-        /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" -w <password> -b 'o=gluu' -T 'oxAuthGrantId=*' dn | grep 'dn:' | wc -l
+        /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" -w <password> -b 'o=gluu' 'oxAuthGrantId=*' dn | grep 'dn:' | wc -l
         ```
         
     1. Dump the data as LDIF
@@ -71,7 +71,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
         - Now export the LDIF and save it somewhere safe. You will not be importing this if you choose to apply any filters as below:
     
         ```bash
-        /opt/opendj/bin/export-ldif -n userRoot -l exactdatabackup_date.ldif
+        /opt/opendj/bin/export-ldif -n userRoot -l exactdatabackup_date.ldif --offline
         ```
     
         - Now exclude `oxAuthGrantId` so the command becomes:
@@ -146,7 +146,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     1. Finally, verify the cache entries have been removed:
     
         ```bash
-        /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" -w <password> -b 'o=gluu' -T 		'oxAuthGrantId=*' dn | grep 'dn:' | wc –l
+        /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" -w <password> -b 'o=gluu'  		'oxAuthGrantId=*' dn | grep 'dn:' | wc –l
         ```
 
     You should be done and everything should be working perfectly. You may notice your Gluu Server responding slower than before. That is expected -- your LDAP is adjusting to the new data, and indexing might be in process. Give it some time and it should be back to normal.
@@ -295,7 +295,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     A file named `ldap-backup.yaml` will have been generated during installation of backup strategy. Use that as follows to remove the backup strategy:
     
     ```bash
-    kubectl delete -f ./couchbase-backup.yaml
+    kubectl delete -f ./ldap-backup.yaml
     ```
     
     #### Restore from backup

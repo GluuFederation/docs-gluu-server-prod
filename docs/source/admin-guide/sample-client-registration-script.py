@@ -53,8 +53,15 @@ class ClientRegistration(ClientRegistrationType):
 
         return True
 
-    def logout(self, configurationAttributes, requestParameters):
-        return True
-
     def getApiVersion(self):
         return 1
+
+    # Returns secret key which will be used to validate Software Statement if HMAC algorithm is used (e.g. HS256, HS512). Invoked if oxauth conf property softwareStatementValidationType=SCRIPT which is default/fallback value.
+    # context is reference of org.gluu.oxauth.service.external.context.DynamicClientRegistrationContext (in https://github.com/GluuFederation/oxauth project )
+    def getSoftwareStatementHmacSecret(self, context):
+        return ""
+
+    # Returns JWKS which will be used to validate Software Statement if keys are used (e.g. RS256). Invoked if oxauth conf property softwareStatementValidationType=SCRIPT which is default/fallback value.
+    # context is reference of org.gluu.oxauth.service.external.context.DynamicClientRegistrationContext (in https://github.com/GluuFederation/oxauth project )
+    def getSoftwareStatementJwks(self, context):
+        return ""

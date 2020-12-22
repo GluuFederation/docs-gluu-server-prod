@@ -966,6 +966,17 @@ Examples:
     ```
 ### Working with Jackrabbit
 
+| Services         | Folder                            |  Jackrabbit Repository                                  | Method                 |
+| ---------------- | --------------------------------- | ------------------------------------------------------- | --------------------   |
+| `oxAuth`         | `/opt/gluu/jetty/oxauth/custom`   | `/repository/default/opt/gluu/jetty/oxauth/custom`      | `PULL` from Jackrabbit |
+| `oxTrust`        | `/opt/gluu/jetty/identity/custom` |  `/repository/default/opt/gluu/jetty/identity/custom`   | `PULL` from Jackrabbit |
+| `Casa`           | `/opt/gluu/jetty/casa`            | `/repository/default/opt/gluu/jetty/casa`               | `PULL` from Jackrabbit |
+| `oxShibboleth`   | `/opt/shibboleth-idp`             | `/repository/default/opt/shibboleth-idp`                | `PULL` from Jackrabbit |
+| `oxTrust`        | `/opt/shibboleth-idp`             |  `/repository/default/opt/shibboleth-idp`               | `PUSH` to Jackrabbit   |
+
+The above means that Jackrabbit will maintain the source folder on all replicas of a service. If one pushed a custom file to `/opt/gluu/jetty/oxauth/custom` at one replica all other replicas would have this file.
+
+
 === "File managers"
 
     !!!note
