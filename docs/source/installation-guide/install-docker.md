@@ -26,7 +26,7 @@ For Docker deployments, provision a VM with:
 Download the `pygluu-compose.pyz` executable:
 
 ```sh
-wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.2.5/pygluu-compose.pyz \
+wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.3.0/pygluu-compose.pyz \
     && chmod +x pygluu-compose.pyz
 ```
 
@@ -42,15 +42,17 @@ Run the following command to generate manifests for deployment:
 The generated files are similar to example below:
 
 ```sh
-tree
+tree .
 .
 ├── couchbase.crt
 ├── couchbase_password
+├── couchbase_superuser_password
 ├── docker-compose.yml
 ├── gcp_kms_creds.json
 ├── gcp_kms_stanza.hcl
 ├── jackrabbit_admin_password
 ├── job.persistence.yml
+├── pygluu-compose.pyz
 ├── svc.casa.yml
 ├── svc.cr_rotate.yml
 ├── svc.fido2.yml
@@ -84,6 +86,7 @@ The following services are available during deployment:
 | `registrator`       | -                      | yes       | always  |
 | `vault`             | -                      | yes       | always  |
 | `nginx`             | -                      | yes       | always  |
+| `persistence`       | `JOB_PERSISTENCE`      | no        | yes     |
 | `oxauth`            | `SVC_OXAUTH`           | no        | yes     |
 | `oxtrust`           | `SVC_OXTRUST`          | no        | yes     |
 | `ldap`              | `SVC_LDAP`             | no        | yes     |
@@ -136,10 +139,23 @@ Supported backends are LDAP, Couchbase, or mix of both (hybrid). The following c
 To choose a persistence backend, create a file called `settings.py` (if it wasn't created in the last step) and set the corresponding option as seen above. For example:
 
 ```python
-PERSISTENCE_TYPE = "couchbase"      # Couchbase will be selected
-PERSISTENCE_LDAP_MAPPING = "user"   # store user mapping in LDAP
-COUCHBASE_USER = "admin"            # Couchbase user
-COUCHBASE_URL = "192.168.100.4"     # Host/IP address of Couchbase server; omit the port
+# Couchbase will be selected
+PERSISTENCE_TYPE = "couchbase"
+
+# store user mapping in LDAP
+PERSISTENCE_LDAP_MAPPING = "user"
+
+# Couchbase user (has access to read and write data, read buckets, etc)
+COUCHBASE_USER = "admin"
+
+# optional, Couchbase superuser (has access to create buckets, etc)
+COUCHBASE_SUPERUSER = ""
+
+# Couchbase bucket prefix
+COUCHBASE_BUCKET_PREFIX = "gluu"
+
+# Host/IP address of Couchbase server; omit the port
+COUCHBASE_URL = "192.168.100.4"
 ```
 
 If `couchbase` or `hybrid` is selected, there are additional steps required to satisfy dependencies:
