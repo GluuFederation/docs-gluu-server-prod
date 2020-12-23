@@ -57,7 +57,7 @@ The following table summarizes the available endpoints in Gluu implementation of
 |[/Schemas](#identityrestv1scimv2schemas)||GET|Retrieve supported schemas info|
 
 !!! Note
-    Actual endpoint URLs are prefixed accordingly with the root URL of SCIM API. As an example, the user's endpoint URL to use in your applications should be `https://your.gluu-host.com/identity/restv1/scim/v2/Users`.
+    Actual endpoint URLs are prefixed accordingly with the root URL of SCIM API. As an example, the user's endpoint URL to use in your applications should be `https://your.gluu-host.com/identity/restv1/scim/v2/Users` or `https://your.gluu-host.com/scim/restv1/scim/v2/Users` if you are in a containers-based environment.
 
 SCIM 2.0 is governed by the [SCIM:Core Schema](https://tools.ietf.org/html/rfc7643) and [SCIM:Protocol](https://tools.ietf.org/html/rfc7644) spec docs. The latter contains full details about the API structure, so use it as a reference in your development tasks. 
 

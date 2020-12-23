@@ -14,6 +14,10 @@ The API is available as a component of Gluu Server. Upon [installation](../insta
 1. `cd /install/community-edition-setup`
 1. Run `python3  post-setup-add-components.py -addscim`  
 
+## About API endpoints
+
+Throughout this document, you will notice endpoints are prefixed with path `/identity/restv1/`. This is valid for CE installations. If you are in a containers-based environment, use `/scim/restv1/` instead. 
+
 ## API Protection
 
 Clearly, this API must not be anonymously accessed. However, the basic SCIM standard does not define a specific mechanism to prevent unauthorized requests to endpoints. There are just a few guidelines in section 2 of [RFC 7644](https://tools.ietf.org/html/rfc7644) concerned with authentication and authorization. 
