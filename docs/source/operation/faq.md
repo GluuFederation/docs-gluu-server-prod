@@ -299,7 +299,7 @@ This method relies on an LDIF file to change the authentication mode in LDAP dir
 - Replace the authentication mode using `ldapmodify` command.
 
     ```
-    ./ldapmodify -h localhost -p 1636 -D "cn=directory manager" -w "{password provided during setup}" -f changeAuth.ldif
+    /opt/opendj/bin/ldapmodify -h localhost -p 1636 -Z -X -D "cn=directory manager" -w "{password provided during setup}" -f changeAuth.ldif 
     ```
 
 <!---
