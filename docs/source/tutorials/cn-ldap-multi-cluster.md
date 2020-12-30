@@ -24,14 +24,15 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
 
 #### On the first cluster run:
 
-1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.2/README.md#build-pygluu-kubernetespyz-manually).
+1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.2/README.md#build-pygluu-kubernetespyz-manually).
 
-1. Run :
+1.  Run :
 
     ```bash
     ./pygluu-kubernetes.pyz helm-install
     ```
-1. Keep an eye out for the following prompts: 
+
+1.  Keep an eye out for the following prompts: 
 
     ```bash
     ALPHA-FEATURE-Are you setting up a multi kubernetes cluster [N] [y/N]: Y
@@ -43,9 +44,10 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     ALPHA-FEATURE-Is this not the first kubernetes cluster [N] [y/N]: N
     ALPHA-FEATURE-Please enter LDAP advertise serf peers as an array [['firstldap.gluu.org:30946', 'secondldap.gluu.org:31946']]: ['firstldap.gluu.org:30946', 'secondldap.gluu.org:31946']
     ```
-   All the above NodePorts must be reachable by the second cluster. Please note also that the Serf advertise address must be resolvable by both clusters. In the event that this is a test environment you may map the addresses via `hostAliases` key inside ldap StatefulSets in both cluster after deployment as in the example below:
+    
+    All the above NodePorts must be reachable by the second cluster. Please note also that the Serf advertise address must be resolvable by both clusters. In the event that this is a test environment you may map the addresses via `hostAliases` key inside ldap StatefulSets in both cluster after deployment as in the example below:
    
-   ```yaml
+    ```yaml
       hostAliases:
       - hostnames:
         - firstldap.gluu.org
@@ -64,45 +66,46 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
       - configMap:
           name: gluu-serf-peers
         name: serfpeers
-   ```
+    ```
 
-1. Prepare `gluu` Secret for second cluster
-
+1.  Prepare `gluu` Secret for second cluster
+    
     ```bash
     kubectl get  secret gluu -n gluu -o yaml > gluu-secret.yaml
     ```
-1. Prepare `gluu` ConfigMap for second cluster
+
+1.  Prepare `gluu` ConfigMap for second cluster
 
     ```bash
     kubectl get cm gluu -n gluu -o yaml > gluu-cm.yaml
     ```
 
-1. Once finished and all the pods are in a running state continue to the second cluster.
+1.  Once finished and all the pods are in a running state continue to the second cluster.
 
 #### On the second cluster:
 
-1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.2/README.md#build-pygluu-kubernetespyz-manually).
+1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.2/README.md#build-pygluu-kubernetespyz-manually).
 
-1. Move the following from the first cluster:
-   - `settings.json`
-   - `gluu-secret.yaml`
-  -  `gluu-cm.yaml`
+1.  Move the following from the first cluster:
+    - `settings.json`
+    - `gluu-secret.yaml`
+    -  `gluu-cm.yaml`
 
-1. Place `settings.json` adjacent to `pygluu-kubernetes.pyz`.
+1.  Place `settings.json` adjacent to `pygluu-kubernetes.pyz`.
 
-1. Create the namespace for gluu. It must match the one created in the first cluster
+1.  Create the namespace for gluu. It must match the one created in the first cluster
 
     ```bash
     kubectl create ns gluu
     ```
    
-1. Create both `gluu-secret.yaml` and `gluu-cm.yaml`
+1.  Create both `gluu-secret.yaml` and `gluu-cm.yaml`
 
     ```bash
     kubectl create -f gluu-secret.yaml
     kubectl create -f gluu-cm.yaml
     ```
-1. Open `settings.json` at the second cluster and edit the following lines to match your setup:
+1.  Open `settings.json` at the second cluster and edit the following lines to match your setup:
 
     ```json
       "GLUU_LDAP_MULTI_CLUSTER": "Y",
@@ -113,9 +116,10 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
       "GLUU_LDAP_ADVERTISE_REPLICATION_PORT": "31989",
       "GLUU_LDAP_SECONDARY_CLUSTER": "Y"
     ```
+    
    Notice we added a `1` to all the NodePorts and changed the advertise address to suite the second opendj.
 
-1. Run :
+1.  Run :
 
     ```bash
     ./pygluu-kubernetes.pyz helm-install
@@ -150,7 +154,212 @@ You may run `dsreplication` command to check the replication status using the a 
     o=site    : secondldap.gluu.org:31444 : 2       : true                : 25521 : 28492 : 31989       : 0        :              : true
     
     ```   
-   
+
+#### Example `settings.json` used in the first cluster.
+
+```json
+{
+  "ACCEPT_GLUU_LICENSE": "Y",
+  "GLUU_VERSION": "4.2",
+  "TEST_ENVIRONMENT": "",
+  "GLUU_UPGRADE_TARGET_VERSION": "",
+  "GLUU_HELM_RELEASE_NAME": "gluu",
+  "NGINX_INGRESS_RELEASE_NAME": "ningress",
+  "NGINX_INGRESS_NAMESPACE": "ingress-nginx",
+  "INSTALL_GLUU_GATEWAY": "N",
+  "POSTGRES_NAMESPACE": "",
+  "KONG_NAMESPACE": "",
+  "GLUU_GATEWAY_UI_NAMESPACE": "",
+  "KONG_PG_USER": "",
+  "KONG_PG_PASSWORD": "",
+  "GLUU_GATEWAY_UI_PG_USER": "",
+  "GLUU_GATEWAY_UI_PG_PASSWORD": "",
+  "KONG_DATABASE": "",
+  "GLUU_GATEWAY_UI_DATABASE": "",
+  "POSTGRES_REPLICAS": "",
+  "POSTGRES_URL": "",
+  "KONG_HELM_RELEASE_NAME": "",
+  "GLUU_GATEWAY_UI_HELM_RELEASE_NAME": "",
+  "USE_ISTIO": "N",
+  "USE_ISTIO_INGRESS": "",
+  "ISTIO_SYSTEM_NAMESPACE": "",
+  "NODES_IPS": [
+    "172.31.22.223"
+  ],
+  "NODES_ZONES": [],
+  "NODES_NAMES": [],
+  "NODE_SSH_KEY": "",
+  "HOST_EXT_IP": "172.31.22.223",
+  "VERIFY_EXT_IP": "",
+  "AWS_LB_TYPE": "",
+  "USE_ARN": "",
+  "VPC_CIDR": "",
+  "ARN_AWS_IAM": "",
+  "LB_ADD": "",
+  "REDIS_URL": "",
+  "REDIS_TYPE": "",
+  "REDIS_PW": "",
+  "REDIS_USE_SSL": "false",
+  "REDIS_SSL_TRUSTSTORE": "",
+  "REDIS_SENTINEL_GROUP": "",
+  "REDIS_MASTER_NODES": "",
+  "REDIS_NODES_PER_MASTER": "",
+  "REDIS_NAMESPACE": "",
+  "INSTALL_REDIS": "",
+  "INSTALL_JACKRABBIT": "Y",
+  "JACKRABBIT_STORAGE_SIZE": "4Gi",
+  "JACKRABBIT_URL": "http://jackrabbit:8080",
+  "JACKRABBIT_ADMIN_ID": "admin",
+  "JACKRABBIT_ADMIN_PASSWORD": ":bC-g@<_|Db{+@*|<Su1p|{o",
+  "JACKRABBIT_CLUSTER": "N",
+  "JACKRABBIT_PG_USER": "",
+  "JACKRABBIT_PG_PASSWORD": "",
+  "JACKRABBIT_DATABASE": "",
+  "DEPLOYMENT_ARCH": "microk8s",
+  "PERSISTENCE_BACKEND": "ldap",
+  "INSTALL_COUCHBASE": "",
+  "COUCHBASE_NAMESPACE": "",
+  "COUCHBASE_VOLUME_TYPE": "",
+  "COUCHBASE_CLUSTER_NAME": "",
+  "COUCHBASE_URL": "",
+  "COUCHBASE_USER": "",
+  "COUCHBASE_BUCKET_PREFIX": "",
+  "COUCHBASE_SUPERUSER": "",
+  "COUCHBASE_PASSWORD": "",
+  "COUCHBASE_SUPERUSER_PASSWORD": "",
+  "COUCHBASE_CRT": "",
+  "COUCHBASE_CN": "",
+  "COUCHBASE_INDEX_NUM_REPLICA": "",
+  "COUCHBASE_SUBJECT_ALT_NAME": "",
+  "COUCHBASE_CLUSTER_FILE_OVERRIDE": "",
+  "COUCHBASE_USE_LOW_RESOURCES": "",
+  "COUCHBASE_DATA_NODES": "",
+  "COUCHBASE_QUERY_NODES": "",
+  "COUCHBASE_INDEX_NODES": "",
+  "COUCHBASE_SEARCH_EVENTING_ANALYTICS_NODES": "",
+  "COUCHBASE_GENERAL_STORAGE": "",
+  "COUCHBASE_DATA_STORAGE": "",
+  "COUCHBASE_INDEX_STORAGE": "",
+  "COUCHBASE_QUERY_STORAGE": "",
+  "COUCHBASE_ANALYTICS_STORAGE": "",
+  "COUCHBASE_INCR_BACKUP_SCHEDULE": "",
+  "COUCHBASE_FULL_BACKUP_SCHEDULE": "",
+  "COUCHBASE_BACKUP_RETENTION_TIME": "",
+  "COUCHBASE_BACKUP_STORAGE_SIZE": "",
+  "LDAP_BACKUP_SCHEDULE": "",
+  "NUMBER_OF_EXPECTED_USERS": "",
+  "EXPECTED_TRANSACTIONS_PER_SEC": "",
+  "USING_CODE_FLOW": "",
+  "USING_SCIM_FLOW": "",
+  "USING_RESOURCE_OWNER_PASSWORD_CRED_GRANT_FLOW": "",
+  "DEPLOY_MULTI_CLUSTER": "",
+  "HYBRID_LDAP_HELD_DATA": "",
+  "LDAP_JACKRABBIT_VOLUME": "",
+  "APP_VOLUME_TYPE": 1,
+  "LDAP_STATIC_VOLUME_ID": "",
+  "LDAP_STATIC_DISK_URI": "",
+  "GLUU_CACHE_TYPE": "NATIVE_PERSISTENCE",
+  "GLUU_NAMESPACE": "gluu",
+  "GLUU_FQDN": "demoexample.gluu.org",
+  "COUNTRY_CODE": "US",
+  "STATE": "TX",
+  "EMAIL": "support@gluu.org",
+  "CITY": "Austin",
+  "ORG_NAME": "Gluu",
+  "GMAIL_ACCOUNT": "",
+  "GOOGLE_NODE_HOME_DIR": "",
+  "IS_GLUU_FQDN_REGISTERED": "N",
+  "LDAP_PW": "Test65Me$",
+  "ADMIN_PW": "Test1234#",
+  "OXD_APPLICATION_KEYSTORE_CN": "",
+  "OXD_ADMIN_KEYSTORE_CN": "",
+  "LDAP_STORAGE_SIZE": "4Gi",
+  "OXAUTH_REPLICAS": 1,
+  "OXTRUST_REPLICAS": 1,
+  "LDAP_REPLICAS": 1,
+  "OXSHIBBOLETH_REPLICAS": "",
+  "OXPASSPORT_REPLICAS": "",
+  "OXD_SERVER_REPLICAS": "",
+  "CASA_REPLICAS": "",
+  "RADIUS_REPLICAS": "",
+  "FIDO2_REPLICAS": "",
+  "SCIM_REPLICAS": "",
+  "ENABLE_OXTRUST_API": "N",
+  "ENABLE_OXTRUST_TEST_MODE": "N",
+  "ENABLE_CACHE_REFRESH": "N",
+  "ENABLE_OXD": "N",
+  "ENABLE_FIDO2": "N",
+  "ENABLE_SCIM": "N",
+  "ENABLE_RADIUS": "N",
+  "ENABLE_OXPASSPORT": "N",
+  "ENABLE_OXSHIBBOLETH": "N",
+  "ENABLE_CASA": "N",
+  "ENABLE_OXAUTH_KEY_ROTATE": "N",
+  "ENABLE_OXTRUST_API_BOOLEAN": "true",
+  "ENABLE_OXTRUST_TEST_MODE_BOOLEAN": "false",
+  "ENABLE_RADIUS_BOOLEAN": "false",
+  "ENABLE_OXPASSPORT_BOOLEAN": "false",
+  "ENABLE_CASA_BOOLEAN": "false",
+  "ENABLE_SAML_BOOLEAN": "false",
+  "ENABLED_SERVICES_LIST": [
+    "ldap",
+    "update-lb-ip",
+    "oxauth",
+    "persistence",
+    "jackrabbit",
+    "oxtrust",
+    "config"
+  ],
+  "OXAUTH_KEYS_LIFE": "",
+  "EDIT_IMAGE_NAMES_TAGS": "N",
+  "CASA_IMAGE_NAME": "gluufederation/casa",
+  "CASA_IMAGE_TAG": "4.2.2_02",
+  "CONFIG_IMAGE_NAME": "gluufederation/config-init",
+  "CONFIG_IMAGE_TAG": "4.2.2_02",
+  "CACHE_REFRESH_ROTATE_IMAGE_NAME": "gluufederation/cr-rotate",
+  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.2.2_02",
+  "CERT_MANAGER_IMAGE_NAME": "gluufederation/certmanager",
+  "CERT_MANAGER_IMAGE_TAG": "4.2.2_02",
+  "LDAP_IMAGE_NAME": "gluufederation/opendj",
+  "LDAP_IMAGE_TAG": "4.2.2_02",
+  "JACKRABBIT_IMAGE_NAME": "gluufederation/jackrabbit",
+  "JACKRABBIT_IMAGE_TAG": "4.2.2_02",
+  "OXAUTH_IMAGE_NAME": "gluufederation/oxauth",
+  "OXAUTH_IMAGE_TAG": "4.2.2_03",
+  "FIDO2_IMAGE_NAME": "gluufederation/fido2",
+  "FIDO2_IMAGE_TAG": "4.2.2_02",
+  "SCIM_IMAGE_NAME": "gluufederation/scim",
+  "SCIM_IMAGE_TAG": "4.2.2_02",
+  "OXD_IMAGE_NAME": "gluufederation/oxd-server",
+  "OXD_IMAGE_TAG": "4.2.2_02",
+  "OXPASSPORT_IMAGE_NAME": "gluufederation/oxpassport",
+  "OXPASSPORT_IMAGE_TAG": "4.2.2_02",
+  "OXSHIBBOLETH_IMAGE_NAME": "gluufederation/oxshibboleth",
+  "OXSHIBBOLETH_IMAGE_TAG": "4.2.2_02",
+  "OXTRUST_IMAGE_NAME": "gluufederation/oxtrust",
+  "OXTRUST_IMAGE_TAG": "4.2.2_03",
+  "PERSISTENCE_IMAGE_NAME": "gluufederation/persistence",
+  "PERSISTENCE_IMAGE_TAG": "4.2.2_02",
+  "RADIUS_IMAGE_NAME": "gluufederation/radius",
+  "RADIUS_IMAGE_TAG": "4.2.2_02",
+  "GLUU_GATEWAY_IMAGE_NAME": "gluufederation/gluu-gateway",
+  "GLUU_GATEWAY_IMAGE_TAG": "4.2.2_01",
+  "GLUU_GATEWAY_UI_IMAGE_NAME": "gluufederation/gluu-gateway-ui",
+  "GLUU_GATEWAY_UI_IMAGE_TAG": "4.2.2_01",
+  "UPGRADE_IMAGE_NAME": "gluufederation/upgrade",
+  "UPGRADE_IMAGE_TAG": "4.2.2_02",
+  "CONFIRM_PARAMS": "Y",
+  "GLUU_LDAP_MULTI_CLUSTER": "Y",
+  "GLUU_LDAP_SERF_PORT": "30946",
+  "GLUU_LDAP_ADVERTISE_ADDRESS": "firstldap.gluu.org:30946",
+  "GLUU_LDAP_ADVERTISE_ADMIN_PORT": "30444",
+  "GLUU_LDAP_ADVERTISE_LDAPS_PORT": "30636",
+  "GLUU_LDAP_ADVERTISE_REPLICATION_PORT": "30989",
+  "GLUU_LDAP_SECONDARY_CLUSTER": "N",
+  "GLUU_LDAP_SERF_PEERS": "['firstldap.gluu.org:30946', 'secondldap.gluu.org:31946']"
+}
+``` 
+  
 #### Example `settings.json` used in the second cluster.
 
 ```json
