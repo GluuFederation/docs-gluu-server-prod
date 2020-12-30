@@ -68,6 +68,8 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
         name: serfpeers
     ```
 
+1.  Wait for all pods to be ina ready state.
+
 1.  Prepare `gluu` Secret for second cluster
     
     ```bash
@@ -79,9 +81,7 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     ```bash
     kubectl get cm gluu -n gluu -o yaml > gluu-cm.yaml
     ```
-
-1.  Once finished and all the pods are in a running state continue to the second cluster.
-
+    
 #### On the second cluster:
 
 1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.2/README.md#build-pygluu-kubernetespyz-manually).
@@ -105,6 +105,7 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     kubectl create -f gluu-secret.yaml
     kubectl create -f gluu-cm.yaml
     ```
+    
 1.  Open `settings.json` at the second cluster and edit the following lines to match your setup:
 
     ```json
@@ -117,7 +118,7 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
       "GLUU_LDAP_SECONDARY_CLUSTER": "Y"
     ```
     
-   Notice we added a `1` to all the NodePorts and changed the advertise address to suite the second opendj.
+    Notice we added a `1` to all the NodePorts and changed the advertise address to suite the second opendj.
 
 1.  Run :
 
@@ -125,7 +126,7 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     ./pygluu-kubernetes.pyz helm-install
     ```
    
-1. Tail the logs and wait for replication to occur. Services should start turning on soon after replication finishes.
+1.  Tail the logs and wait for replication to occur. Services should start turning on soon after replication finishes.
 
 #### Test replication
 
