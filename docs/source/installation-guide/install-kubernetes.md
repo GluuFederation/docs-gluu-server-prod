@@ -1272,6 +1272,6 @@ The above means that Jackrabbit will maintain the source folder on all replicas 
 
 ## Architectural diagram of all Gluu services
 
-![Screenshot](../img/kubernetes/cn-general-arch-diagram.svg)
+![svg](../img/kubernetes/cn-general-arch-diagram.svg)
 
 
