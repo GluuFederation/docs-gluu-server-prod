@@ -333,7 +333,7 @@ Access token usually is random string, but it's possible to return the access to
  - `aud` - Service-specific string identifier or list of string identifiers representing the intended audience for this token, as defined in JWT [RFC7519].     
  - `iss` - String representing the issuer of this token, as defined in JWT [RFC7519].     
 
-Also it is possible to run introspection script before JWT creation and transfer claims from script response into JWT. Read more about introspection script [here](custom-script/#introspection)
+Also it is possible to run introspection script before JWT creation and transfer claims from script response into JWT. Read more about introspection script [here](./custom-script/#introspection)
 
 <!-- Commented out due to lack of browser support.
 ### Token Binding
