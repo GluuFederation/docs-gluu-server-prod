@@ -10,7 +10,10 @@ The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edit
 - [Image Reference Guide](../reference/container-image-refs.md)  
 - [Backup Strategy](../operation/backup.md/)  
 - [Upgrade](../upgrade.md)  
-
+- [Casa interactions diagram](#architectural-diagram-of-all-gluu-services)
+- [SCIM interactions diagram](#architectural-diagram-of-all-gluu-services)
+- [Passport interactions diagram](#architectural-diagram-of-all-gluu-services)
+- [Jackrabbit interactions diagram](#architectural-diagram-of-all-gluu-services)
 
 ## System Requirements for cloud deployments
 
@@ -1179,7 +1182,7 @@ The above means that Jackrabbit will maintain the source folder on all replicas 
 | `Casa`           | `/etc/certs/otp_configuration.json` | `/repository/etc/certs/otp_configuration.json`          | `PULL` from Jackrabbit |
 | `Casa`           | `/etc/certs/super_gluu_creds.json`  | `/repository/default/etc/certs/super_gluu_creds.json`   | `PULL` from Jackrabbit |
 
-
+![svg](../img/kubernetes/cn-jackrabbit.svg)
 
 === "File managers"
 
@@ -1273,5 +1276,17 @@ The above means that Jackrabbit will maintain the source folder on all replicas 
 ## Architectural diagram of all Gluu services
 
 ![svg](../img/kubernetes/cn-general-arch-diagram.svg)
+
+## Architectural diagram of oxPassport
+
+![svg](../img/kubernetes/cn-oxpassport.svg)
+
+## Architectural diagram of Casa
+
+![svg](../img/kubernetes/cn-casa.svg)
+
+## Architectural diagram of SCIM
+
+![svg](../img/kubernetes/cn-scim.svg)
 
 
