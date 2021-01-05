@@ -68,11 +68,11 @@ To exit test mode, just set `scimTestMode` back to `false` and then click the `S
 
 Gluu Server logs usually reveal the source of problems when things are going wrong: the first place to look is the SCIM log. Authorization issues (access tokens problems, for instance) are on the side of oxAuth (the authorization server)
 
-    - SCIM log is located at `/opt/gluu/jetty/scim/logs/scim.log`
+- SCIM log is located at `/opt/gluu/jetty/scim/logs/scim.log`
 
-    - oxAuth log is at `/opt/gluu/jetty/oxauth/logs/oxauth.log`
+- oxAuth log is at `/opt/gluu/jetty/oxauth/logs/oxauth.log`
 
-    - If using the [SCIM](../admin-guide/custom-script#scim) custom script in order to intercept API calls and apply custom logic, the script log is also useful: `/opt/gluu/jetty/scim/logs/scim_script.log`
+- If using the [SCIM](../admin-guide/custom-script#scim) custom script in order to intercept API calls and apply custom logic, the script log is also useful: `/opt/gluu/jetty/scim/logs/scim_script.log`
 
 Generally it's convenient to set the logging level for both oxAuth and SCIM to **DEBUG**. SCIM component uses the same logging level of oxTrust. See the [log management](../operation/logs.md#log-levels) page for more information.
 
