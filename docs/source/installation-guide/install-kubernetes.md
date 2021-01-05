@@ -10,10 +10,10 @@ The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edit
 - [Image Reference Guide](../reference/container-image-refs.md)  
 - [Backup Strategy](../operation/backup.md/)  
 - [Upgrade](../upgrade.md)  
-- [Casa interactions diagram](#architectural-diagram-of-all-gluu-services)
-- [SCIM interactions diagram](#architectural-diagram-of-all-gluu-services)
-- [Passport interactions diagram](#architectural-diagram-of-all-gluu-services)
-- [Jackrabbit interactions diagram](#architectural-diagram-of-all-gluu-services)
+- [Casa interactions diagram](#architectural-diagram-of-casa)
+- [SCIM interactions diagram](#architectural-diagram-of-scim)
+- [Passport interactions diagram](#architectural-diagram-of-oxpassport)
+- [Jackrabbit interactions diagram](#working-with-jackrabbit)
 
 ## System Requirements for cloud deployments
 
@@ -1096,7 +1096,7 @@ This is the main parameter file used with the [`pygluu-kubernetes.pyz`](https://
   
   - An `m5.xlarge` EKS cluster with 3 nodes at the minimum or `n2-standard-4` GKE cluster with 3 nodes. We advice contacting Gluu regarding production setups.
 
-- [Install couchbase kubernetes](https://www.couchbase.com/downloads) and place the tar.gz file inside the same directory as the `pygluu-kubernetes.pyz`.
+- [Install couchbase Operator](https://www.couchbase.com/downloads) version `2.0.3` and place the tar.gz file inside the same directory as the `pygluu-kubernetes.pyz`.
 
 - A modified `couchbase/couchbase-cluster.yaml` will be generated but in production it is likely that this file will be modified.
   * To override the `couchbase-cluster.yaml` place the file inside `/couchbase` folder after running `./pygluu-kubernetes.pyz`. More information on the properties [couchbase-cluster.yaml](https://docs.couchbase.com/operator/1.2/couchbase-cluster-config.html).
