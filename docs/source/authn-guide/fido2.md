@@ -21,7 +21,8 @@ Some well known FIDO2 devices and manufacturers include:
 - [Yubico](https://www.yubico.com/)      
 - [Vasco DIGIPASS SecureClick](https://www.vasco.com/products/two-factor-authenticators/hardware/one-button/digipass-secureclick.html)   
 - [HyperFIDO](http://hyperfido.com/)       
-- [Feitian Technologies](http://www.ftsafe.com/)      
+- [Feitian Technologies](http://www.ftsafe.com/)   
+- [AuthenTrend](https://authentrend.com/)
 
 [Purchase FIDO2 devices on Amazon](https://www.amazon.com/s/ref=nb_sb_noss/146-0120855-4781335?url=search-alias%3Daps&field-keywords=fido2). Or, check [FIDO's certified products](https://fidoalliance.org/certification/fido-certified-products/) for a comprehensive list of FIDO2 devices (sort by `Specification` == `FIDO2`). 
 
