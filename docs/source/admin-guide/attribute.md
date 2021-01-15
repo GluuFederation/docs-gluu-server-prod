@@ -101,6 +101,13 @@ The default NameID for oxTrust generated SAML trust relationships is `transientI
 
 In any SAML SSO transaction, your Gluu Server will need to release attributes about users to the target SP. Configuring your Gluu Server for SAML SSO is covered in the [SAML section of the documentation](./saml.md). 
 
+### eduPerson Attributes
+
+eduPerson attributes are disabled by default. If required those can be activated from oxTrust. Just search for specific attribute and list will appear. From there we can 'Activate' / 'Enable' them accordingly. 
+
+![EduPerson_Attributes](../img/admin-guide/attribute/admin_eduPerson_attribute.PNG)
+
+
 ## OpenID Connect Scopes
 
 In OpenID Connect, scopes are used to group attributes and provide a human 
