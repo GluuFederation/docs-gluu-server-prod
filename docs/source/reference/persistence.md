@@ -207,7 +207,7 @@ In this example, CE applications will use LDAP for `ou=people` and `ou=groups`. 
 
 ## Generic configuration properties
 
-In 4.1, the base configuration details is stored in the `/etc/gluu/conf/gluu.properties` file.
+Base configuration details are stored in the `/etc/gluu/conf/gluu.properties` file.
 
 The following is a self-explanatory sample configuration:
 
