@@ -4,6 +4,8 @@
 
 This will walk you through a multi cluster setup of Gluu using LDAP as the backend persistence.
 
+![svg](../img/kubernetes/cn-multi-cluster-ldap.svg)
+
 ## Installation
 
 ### Set up the cluster
