@@ -7,20 +7,20 @@ This document provides instructions for preparing a VM for a single-node Gluu Se
 ## System Requirements
 
 !!!note
-    Local deployments for testing or demoing Gluu may set the resources to the minimum requirements, which are `8GB RAM`, `4 CPU`, and `50GB disk` in total to run oxAuth, oxTrust, and LDAP.
+    Local deployments for testing or demoing Gluu may set the resources to the minimum requirements, which are `8GB RAM`, `5 CPU`, and `50GB disk` in total to run oxAuth, oxTrust, and LDAP.
 
 First, calculate the minimum required resources as per services deployed. The following table contains default recommended resources to start with. Depending on the use of each service the resources may be increased or decreased. 
 
 |Service           | CPU Unit   |    RAM      |   Disk Space     | Processor Type | Required                           |
 |------------------|------------|-------------|------------------|----------------|------------------------------------|
 |oxAuth            | 2.5        |    2.5GB    |   40GB           |  64 Bit        | Yes                                |
+|oxTrust           | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No, but highly recommended         |
 |LDAP              | 1.5        |    2GB      |   10GB           |  64 Bit        | Only if couchbase is not installed |
 |fido2             | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                 |
 |scim              | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                 |
-|config - job      | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs              |
-|jackrabbit        | 1.5        |    1GB      |   10GB           |  64 Bit        | Yes, if Cloud Native               |
-|persistence - job | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs              |
-|oxTrust           | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No, but highly recommended         |
+|config - job      | 0.5        |    0.5GB    |   N/A            |  64 Bit        | If Cloud Native                    |
+|jackrabbit        | 1.5        |    1GB      |   10GB           |  64 Bit        | If Cloud Native                    |
+|persistence - job | 0.5        |    0.5GB    |   N/A            |  64 Bit        | If Cloud Native                    |
 |oxShibboleth      | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                 |
 |oxPassport        | 0.7        |    0.9GB    |   N/A            |  64 Bit        | No                                 |
 |oxd-server        | 1          |    0.4GB    |   N/A            |  64 Bit        | No                                 |
