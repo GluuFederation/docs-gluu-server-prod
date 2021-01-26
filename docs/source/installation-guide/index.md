@@ -6,16 +6,29 @@ This document provides instructions for preparing a VM for a single-node Gluu Se
 
 ## System Requirements
 
-Set up a server or VM with the following **minimum** requirements: 
+!!!note
+    Local deployments for testing or demoing Gluu may set the resources to the minimum requirements, which are `8GB RAM`, `4 CPU`, and `50GB disk` in total to run all services.
 
-|CPU Unit  |    RAM     |   Disk Space      | Processor Type |
-|----------|------------|-------------------|----------------|
-|       2  |    8GB     |   40GB            |  64 Bit        |
+First, calculate the minimum required resources as per services deployed. The following table contains default recommended resources to start with. Depending on the use of each service the resources may be increased or decreased. 
 
-
-A few additional notes about system requirements:
-
-- When installing more than the default components (i.e. oxAuth, oxTrust, and LDAP), we recommend using a machine with **at least 8GB of RAM**. 
+|Service           | CPU Unit   |    RAM      |   Disk Space     | Processor Type | Required                           |
+|------------------|------------|-------------|------------------|----------------|------------------------------------|
+|oxAuth            | 2.5        |    2.5GB    |   40GB           |  64 Bit        | Yes                                |
+|LDAP              | 1.5        |    2GB      |   10GB           |  64 Bit        | Only if couchbase is not installed |
+|fido2             | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                 |
+|scim              | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                 |
+|config - job      | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs              |
+|jackrabbit        | 1.5        |    1GB      |   10GB           |  64 Bit        | Yes, if Cloud Native               |
+|persistence - job | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs              |
+|oxTrust           | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                 |
+|oxShibboleth      | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                 |
+|oxPassport        | 0.7        |    0.9GB    |   N/A            |  64 Bit        | No                                 |
+|oxd-server        | 1          |    0.4GB    |   N/A            |  64 Bit        | No                                 |
+|nginx             | 1          |    1GB      |   N/A            |  64 Bit        | Yes if not ALB                     |
+|key-rotation      | 0.3        |    0.3GB    |   N/A            |  64 Bit        | No                                 |
+|cr-rotate         | 0.2        |    0.2GB    |   N/A            |  64 Bit        | No                                 |
+|casa              | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                 |
+|radius            | 0.7        |    0.7GB    |   N/A            |  64 Bit        | No                                 |
 
 - Gluu must be deployed on a server or VM with a static IP Address. The static IP address should resolve to a computer hostname which can be achieved by adding an entry to the DNS server or in `/etc/hosts`.     
 
@@ -24,11 +37,11 @@ A few additional notes about system requirements:
 ## Supported Operating Systems
 Deploy Gluu on a server or VM with one of the following supported operating systems:
 
-- [Docker](./install-docker.md)
-- [Ubuntu 16, 18](./install-ubuntu.md)
-- [CentOS 7.x](./install-centos.md)
-- [RHEL 7.x](./install-rhel.md)
-- [Debian 8, 9](./install-debian.md)
+- [Kubernetes](./install-kubernetes.md)
+- [Ubuntu 18, 20](./install-ubuntu.md)
+- [CentOS 7, 8](./install-centos.md)
+- [RHEL 7, 8](./install-rhel.md)
+- [Debian 9, 10](./install-debian.md)
 
 ## Ports
 
