@@ -7,28 +7,28 @@ This document provides instructions for preparing a VM for a single-node Gluu Se
 ## System Requirements
 
 !!!note
-    Local deployments for testing or demoing Gluu may set the resources to the minimum requirements, which are `8GB RAM`, `5 CPU`, and `50GB disk` in total to run oxAuth, oxTrust, and LDAP.
+    Local deployments for testing or demoing Gluu may set the resources to the minimum requirements, which are `8GB RAM`, `5 CPU`, and `50GB disk space` in total to run oxAuth, oxTrust, and LDAP.
 
 First, calculate the recommended required resources as per services deployed. The following table contains default recommended resources to start with. Depending on the use of each service the resources may be increased or decreased. 
 
-|Service           | CPU Unit   |    RAM      |   Disk Space     |  Required                           | Comments |
-|------------------|------------|-------------|------------------|------------------------------------ | ----------|
-|oxAuth            | 2.5        |    2.5GB    |   40GB           |  Yes                                |
-|oxTrust           | 1.0        |    2.0GB    |   N/A            |  Yes                                |
-|LDAP              | 1.5        |    2GB      |   10GB           |  Only if couchbase is not installed | Recommended RAM dependent on size |
-|fido2             | 0.5        |    0.5GB    |   N/A            | No                                  |
-|scim              | 1.0        |    1.0GB    |   N/A            | No                                  |
-|config - job      | 0.5        |    0.5GB    |   N/A            | If Cloud Native                     |
-|jackrabbit        | 1.5        |    1GB      |   10GB           | If Cloud Native                     |
-|persistence - job | 0.5        |    0.5GB    |   N/A            | If Cloud Native                     |
-|SAML IDP          | 1.0        |    1.0GB    |   N/A            | No                                  |
-|oxPassport        | 0.7        |    0.9GB    |   N/A            | No                                  |
-|oxd-server        | 1          |    0.4GB    |   N/A            | No                                  |
-|nginx             | 1          |    1GB      |   N/A            | Yes if not ALB                      |
-|key-rotation      | 0.3        |    0.3GB    |   N/A            | No                                  |
-|cr-rotate         | 0.2        |    0.2GB    |   N/A            | No                                  |
-|casa              | 0.5        |    0.5GB    |   N/A            | No                                  |
-|radius            | 0.7        |    0.7GB    |   N/A            | No                                  |
+|Service           | CPU Unit   |    RAM      |  Required                           | Comments |
+|------------------|------------|-------------|------------------------------------ | ----------|
+|oxAuth            | 2.5        |    2.5GB    |  Yes                                |
+|oxTrust           | 1.0        |    2.0GB    |  Yes                                |
+|LDAP              | 1.5        |    2GB      |  If not using couchbase             | Recommended RAM dependent on size |
+|fido2             | 0.5        |    0.5GB    |  No                                 |
+|scim              | 1.0        |    1.0GB    |  No                                 |
+|config - job      | 0.5        |    0.5GB    |  No                                 | Required if Cloud Native
+|jackrabbit        | 1.5        |    1GB      |  No                                 | Required if Cloud Native
+|persistence - job | 0.5        |    0.5GB    |  No                                 | Required if Cloud Native
+|SAML IDP          | 1.0        |    1.0GB    |  No                                 |
+|oxPassport        | 0.7        |    0.9GB    |  No                                 |
+|oxd-server        | 1          |    0.4GB    |  No                                 |
+|nginx             | 1          |    1GB      |  Yes if not ALB                     |
+|key-rotation      | 0.3        |    0.3GB    |  No                                 |
+|cr-rotate         | 0.2        |    0.2GB    |  No                                 |
+|casa              | 0.5        |    0.5GB    |  No                                 |
+|radius            | 0.7        |    0.7GB    |  No                                 |
 
 - Gluu must be deployed on a server or VM with a static IP Address. The static IP address should resolve to a computer hostname which can be achieved by adding an entry to the DNS server or in `/etc/hosts`.     
 
