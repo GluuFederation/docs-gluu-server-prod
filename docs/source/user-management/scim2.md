@@ -581,7 +581,7 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 
 ```
 <properties>
-	<scim.client.version>4.2.Final</scim.client.version>
+	<scim.client.version>4.2.2.Final</scim.client.version>
 </properties>
 ...
 <repositories>
@@ -748,7 +748,7 @@ Create a project in your favorite IDE, and if using maven add the following snip
 
 ```
 <properties>
-	<scim.client.version>4.2.Final</scim.client.version>
+	<scim.client.version>4.2.2.Final</scim.client.version>
 </properties>
 ...
 <repositories>
