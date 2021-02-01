@@ -64,7 +64,7 @@ By default, the FIDO2 endpoints are disabled in the Gluu Server for compatibilit
 
 1. Set the `disable` field to `False`
 
-1. Set the `mdsAccessToken` field value. This is access token which FIDO Alliance provides to access MDS and TOC data.
+1. Set the `mdsAccessToken` field value. This is access token which FIDO Alliance provides to access MDS and TOC data. 
 
 1. Click the `Save Configuration` button at the bottom of the page.
 
@@ -77,6 +77,10 @@ By default, the FIDO2 endpoints are disabled in the Gluu Server for compatibilit
 1. Put the `https://mds.fidoalliance.org/Root.cer` certificate file into the `/etc/gluu/conf/fido2/mds/cert` folder
 
 1. Restart oxauth services
+
+!!! Note 
+    To retrieve metadata or TOC (Table of Contents for all metadata statements) you will have to first register to get a MDS Access Token. To do this visit: https://mds2.fidoalliance.org/tokens/
+
 
 ## Make FIDO2 the Default
 
