@@ -107,18 +107,16 @@ You can disable forwarding of messages at any time by unchecking the "Is enabled
 
 ### Rate limiting
 
-Currently this configuration is not available in oxTrust. You need to edit config in `/opt/gluu/node/passport/config/production.js` and restart `passport` service.
-
-There are two configuration Properties for rate-limiting:
+Currently this configuration is not available in oxTrust and must be edited manually. Edit the two following configuration properties in `/opt/gluu/node/passport/config/production.js` and then [restart](../operation/services.md#restart) the `passport` service.
 
 | Property | Default Value | Description |
 |----------|---------------|-------------|
-| rateLimitWindowMs | 86400000 Miliseconds <br/>(24 Hr) | The Timeframe for which requests are checked/remembered. |
-| rateLimitMaxRequestAllow | 1000 request | Max number of connections during `rateLimitWindowMs` milliseconds before sending a `429 Too Many Requests` response.|
+| rateLimitWindowMs | 86400000 Milliseconds <br/>(24 Hr) | The Timeframe for which requests are checked/remembered. |
+| rateLimitMaxRequestAllow | 1000 requests | Max number of connections during `rateLimitWindowMs` milliseconds before sending a `429 Too Many Requests` response.|
 
 Example:
 
-If your config is `rateLimitWindowMs: 86400000` and `rateLimitMaxRequestAllow: 1000`, it will allow 1000 request in 24 Hr. If it exceed request more than 1000 in 24 Hr then deny request with `429 Too Many Requests`.
+If rate limiting is configured to `rateLimitWindowMs: 86400000` and `rateLimitMaxRequestAllow: 1000`, it will allow 1000 requests every twenty-four hours. If the requests exceed this number, then the request is denied with a `429 Too Many Requests` error.
 
 ## Attribute mapping and transformation
 
