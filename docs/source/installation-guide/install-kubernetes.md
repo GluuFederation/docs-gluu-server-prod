@@ -22,24 +22,25 @@ The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edit
   
 Please calculate the minimum required resources as per services deployed. The following table contains default recommended resources to start with. Depending on the use of each service the resources may be increased or decreased. 
 
-|Service           | CPU Unit   |    RAM      |   Disk Space     | Processor Type | Required                           |
-|------------------|------------|-------------|------------------|----------------|------------------------------------|
-|oxAuth            | 2.5        |    2.5GB    |   N/A            |  64 Bit        | Yes                                |
-|LDAP              | 1.5        |    2GB      |   10GB           |  64 Bit        | Only if couchbase is not installed |
-|fido2             | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                 |
-|scim              | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                 |
-|config - job      | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs              |
-|jackrabbit        | 1.5        |    1GB      |   10GB           |  64 Bit        | Yes                                |
-|persistence - job | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs              |
-|oxTrust           | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                 |
-|oxShibboleth      | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                 |
-|oxPassport        | 0.7        |    0.9GB    |   N/A            |  64 Bit        | No                                 |
-|oxd-server        | 1          |    0.4GB    |   N/A            |  64 Bit        | No                                 |
-|nginx             | 1          |    1GB      |   N/A            |  64 Bit        | Yes if not ALB                     |
-|key-rotation      | 0.3        |    0.3GB    |   N/A            |  64 Bit        | No                                 |
-|cr-rotate         | 0.2        |    0.2GB    |   N/A            |  64 Bit        | No                                 |
-|casa              | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                 |
-|radius            | 0.7        |    0.7GB    |   N/A            |  64 Bit        | No                                 |
+|Service           | CPU Unit   |    RAM      |   Disk Space     | Processor Type | Required                                    |
+|------------------|------------|-------------|------------------|----------------|---------------------------------------------|
+|oxAuth            | 2.5        |    2.5GB    |   N/A            |  64 Bit        | Yes                                         |
+|LDAP              | 1.5        |    2GB      |   10GB           |  64 Bit        | if using hybrid or ldap for persistence     |
+|[Couchbase](#minimum-couchbase-system-requirements-for-cloud-deployments)         |    -       |      -      |      -           |     -          | If using hybrid or couchbase for persistence|
+|fido2             | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                          |
+|scim              | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                          |
+|config - job      | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs                       |
+|jackrabbit        | 1.5        |    1GB      |   10GB           |  64 Bit        | Yes                                         |
+|persistence - job | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs                       |
+|oxTrust           | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                          |
+|oxShibboleth      | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                          |  
+|oxPassport        | 0.7        |    0.9GB    |   N/A            |  64 Bit        | No                                          |
+|oxd-server        | 1          |    0.4GB    |   N/A            |  64 Bit        | No                                          |
+|nginx             | 1          |    1GB      |   N/A            |  64 Bit        | Yes if not ALB                              |
+|key-rotation      | 0.3        |    0.3GB    |   N/A            |  64 Bit        | No                                          |
+|cr-rotate         | 0.2        |    0.2GB    |   N/A            |  64 Bit        | No                                          |
+|casa              | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                          |
+|radius            | 0.7        |    0.7GB    |   N/A            |  64 Bit        | No                                          |
 
 
 1. Configure cloud or local kubernetes cluster:
@@ -1293,3 +1294,15 @@ The above means that Jackrabbit will maintain the source folder on all replicas 
 ![svg](../img/kubernetes/cn-scim.svg)
 
 
+## Minimum Couchbase System Requirements for cloud deployments
+
+!!!note
+    Couchbase needs optimization in a production environment and must be tested to suit the organizational needs. 
+ 
+| NAME                                     | # of nodes  | RAM(GiB) | Disk Space | CPU | Total RAM(GiB)                           | Total CPU |
+| ---------------------------------------- | ----------- | -------  | ---------- | --- | ---------------------------------------- | --------- |
+| Couchbase Index                          | 1           |  3       | 5Gi        | 1  | 3                                         | 1         |
+| Couchbase Query                          | 1           |  -       | 5Gi        | 1  | -                                         | 1         |
+| Couchbase Data                           | 1           |  3       | 5Gi        | 1  | 3                                         | 1         |
+| Couchbase Search, Eventing and Analytics | 1           |  2       | 5Gi        | 1  | 2                                         | 1         |
+| Grand Total                              |             | 7-8 GB (if query pod is allocated 1 GB)  | 20Gi | 4         |
