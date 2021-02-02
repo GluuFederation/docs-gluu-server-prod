@@ -105,6 +105,21 @@ Ensure the host and port are accessible from the machine running your Passport i
 
 You can disable forwarding of messages at any time by unchecking the "Is enabled" form field.
 
+### Rate limiting
+
+Currently this configuration is not available in oxTrust. You need to edit config in `/opt/gluu/node/passport/config/production.js` and restart `passport` service.
+
+There are two configuration Properties for rate-limiting:
+
+| Property | Default Value | Description |
+|----------|---------------|-------------|
+| rateLimitWindowMs | 86400000 Miliseconds <br/>(24 Hr) | The Timeframe for which requests are checked/remembered. |
+| rateLimitMaxRequestAllow | 1000 request | Max number of connections during `rateLimitWindowMs` milliseconds before sending a `429 Too Many Requests` response.|
+
+Example:
+
+If your config is `rateLimitWindowMs: 86400000` and `rateLimitMaxRequestAllow: 1000`, it will allow 1000 request in 24 Hr. If it exceed request more than 1000 in 24 Hr then deny request with `429 Too Many Requests`.
+
 ## Attribute mapping and transformation
 
 Attribute mapping is the process of taking the user's attributes released by the external identity provider and assign those to internal Gluu attributes (LDAP attributes in this case). 
