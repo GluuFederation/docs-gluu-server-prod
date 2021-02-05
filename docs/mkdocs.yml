@@ -147,8 +147,8 @@ nav:
             - 'Cache Provider Configuration': 'reference/cache-provider-prop.md'
         - 'Persistence Strategies':
             - 'Persistence Mechanisms': 'reference/persistence.md'
+            - 'Database Schema': 'reference/schema.md'
             - 'oxLDAP Properties': 'reference/oxldap.md'
-            - 'LDAP Schema': 'reference/schema.md'
         - 'Kubernetes and Containers Technical Reference':
             - 'Config and Secret Keys': 'reference/container-configs.md'
             - 'Image References': 'reference/container-image-refs.md'
