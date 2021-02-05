@@ -1,4 +1,4 @@
-# Gluu LDAP Schema
+# Gluu Database Schema
    
 Below are the schemes for OpenDJ:   
     
