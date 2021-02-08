@@ -50,7 +50,17 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
-## New features
+<!--
+## 4.2.3 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.3+)
+
+- [#1520](https://github.com/GluuFederation/oxAuth/issues/1520) `sector_identifier` must be consistent with PairwiseIndentifierService and use host of sectorIdentifierUri (not entire uri)
+
+- [#1512](https://github.com/GluuFederation/oxAuth/issues/1512) Stat: provide monthly active users statistic
+
+- [#1513](https://github.com/GluuFederation/oxAuth/issues/1513) Stat: provide token counter - per token type and per grant type
+-->
 
 ## 4.2.2 Fixes / Enhancements
 
