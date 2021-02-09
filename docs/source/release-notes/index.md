@@ -62,7 +62,7 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxCore](https://github.com/GluuFederation/oxCore/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.3+)
 
-- [#210](https://github.com/GluuFederation/oxCore/issues/210)
+- [#210](https://github.com/GluuFederation/oxCore/issues/210) Fix: LogLevel bug sometimes causes memory leak
 
 ## 4.2.2 Fixes / Enhancements
 
