@@ -233,6 +233,8 @@ or
 
 Restart the server.
 
+In the case of Ubuntu 18 or higher, use the file present in /etc/netplan to set the static IP address.
+
 ## Fully Qualified Domain Name (FQDN)
 
 Gluu must be deployed on a fully qualified domain name (FQDN), e.g. `https://my-gluu.server.com`. Localhost is **not** supported. 
