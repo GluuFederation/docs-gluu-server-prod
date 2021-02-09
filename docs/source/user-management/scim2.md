@@ -901,7 +901,7 @@ user.setDisplayName("Dummy human");
 List<Email> emails = new ArrayList<Email>();
 Email email = new Email();
 email.setPrimary(true);
-email.setValue("a@b.com");
+email.setValue("atesting@btesting.com");
 email.setType("work");
 emails.add(email);
 user.setEmails(emails);
