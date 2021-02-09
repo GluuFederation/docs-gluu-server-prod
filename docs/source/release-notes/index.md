@@ -50,7 +50,6 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
-<!--
 ## 4.2.3 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.3+)
@@ -60,7 +59,10 @@ documentation and administrative guide.
 - [#1512](https://github.com/GluuFederation/oxAuth/issues/1512) Stat: provide monthly active users statistic
 
 - [#1513](https://github.com/GluuFederation/oxAuth/issues/1513) Stat: provide token counter - per token type and per grant type
--->
+
+### [GluuFederation/oxCore](https://github.com/GluuFederation/oxCore/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.3+)
+
+- [#210](https://github.com/GluuFederation/oxCore/issues/210)
 
 ## 4.2.2 Fixes / Enhancements
 
