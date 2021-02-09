@@ -21,7 +21,9 @@ Establish a tunnel from your computer to the target Gluu Server's LDAP. Tunnelin
 
 In the below example we are showing how to connect and use Gluu Server's internal LDAP server with any LDAP browser. 
 
- - Sign in with `sudo su -`
+ - If ssh is not installed, run 'sudo apt update' and 'sudo apt install openssh-server', check the ssh status using 'sudo service ssh status'
+ - Allow root login by editing /etc/ssh/sshd_config - change 'PermitRootLogin' to yes, and run 'sudo systemctl reload ssh'
+ - Login as root using 'sudo su -' and set the password for root using 'passwd'
  - Create tunnel:   
    - `ssh -fNL 5901:localhost:1636 root@[ip_of_Gluu_server]`
  - Open LDAP browser        
