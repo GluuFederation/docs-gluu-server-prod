@@ -23,13 +23,13 @@
     * Download the upgrade script
     
     ```
-    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.2.0/upg4xto420.py
+    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.2.3/upg4xto423.py
     ```
     
     * Execute the script:
     
     ```
-    python3 upg4xto420.py
+    python3 upg4xto423.py
     ```
     
     Your upgrade directory will be the current directory. The script will create these directories: `app`, and `ces_current`, and writes Gluu cacerts.
