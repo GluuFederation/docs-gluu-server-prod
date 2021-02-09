@@ -27,7 +27,7 @@ In the below example we are showing how to connect and use Gluu Server's interna
  - Open LDAP browser        
    - Create new connection 
 ![Screenshot](../img/users/user_management_ldap_browser_create_new_connection.png)       
-   - Perform authentication. 'Password' is the the password of 'admin' user.  
+   - Perform authentication. 'Password' is the the password of 'admin' user. (the value of 'Bind DN or user' to be changed from 'cn=directory manager,o=gluu' into 'cn=directory manager')
 ![Screenshot](../img/users/user_management_ldap_browser_authentication_ldap.png)        
    - Browse ldap and go to 'ou=people'.           
 ![Screenshot](../img/users/user_management_ldap_browser_user_info.png)            
