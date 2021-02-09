@@ -23,15 +23,16 @@ For Docker deployments, provision a VM with:
 
 ### Obtain files for deployment
 
-Download the `pygluu-compose.pyz` executable:
-
-```sh
-wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.3.4/pygluu-compose.pyz \
-    && chmod +x pygluu-compose.pyz
-```
+Download the latest `pygluu-compose.pyz` file from [Releases](https://github.com/GluuFederation/community-edition-containers/releases) page.
 
 !!!Note
     `pygluu-compose.pyz` requires Python 3.6+ (and `python3-distutils` package if Ubuntu/Debian is used).
+
+Make sure to set the downloaded `pygluu-compose.pyz` file as executable:
+
+```
+chmod +x pygluu-compose.pyz
+```
 
 Run the following command to generate manifests for deployment:
 
