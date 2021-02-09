@@ -64,6 +64,7 @@ To check the status of these ports in Ubuntu, use the following commands (other 
 ufw status verbose
 ```
 
+If the status is found to be inactive, run the `ufw enable` command.
 
 The default for `ufw` is to `deny incoming` and `allow outgoing`. To reset your setting to default :
 
