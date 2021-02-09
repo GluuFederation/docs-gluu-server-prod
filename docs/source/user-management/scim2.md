@@ -135,6 +135,8 @@ The more pleasant second alternative is using the Gluu server administration web
 
 - At the bottom press the "Add" button to finish creating your OpenId client
 
+If creating an OpenID client using oxTrust results in an error, the /opt/gluu/jetty/identity/webapps/identity.war file must be changed into the one from this link https://ox.gluu.org/maven/org/gluu/oxtrust-server/4.2.2.sp1/oxtrust-server-4.2.2.sp1.war. After changing the identity.war file, run 'service identity restart'.
+
 ### Request an Access Token to the Token Endpoint
 
 !!! Note
