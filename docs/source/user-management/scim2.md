@@ -871,6 +871,8 @@ json_string = {	\
 
 Here, backslashes "\\" allow us to span the contents across several lines.
 
+When using the `json_string` as shown in the code above, either replace the value for `x509Certificates` object with its actual value, or remove this `x509Certificates` object (and the comma after the previous object).
+
 Assuming you named the file above as `scim-client.properties`, the following Java code will create the new user:
 
 ```
