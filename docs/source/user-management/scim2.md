@@ -652,6 +652,8 @@ The first line of method `simpleSearch` is getting an object that conforms to th
 
 Create a main method for class `TestScimClient` and call `simpleSearch` from there. When running, you will see the output of retrieving one user (admin) and see his `displayName` on the screen or wherever you have configured your logs to be written to. Here we are using `log4j2` as framework, but you may use the any other logging framework.
 
+If the code throws an exception at readEntity method, make sure that the scim service is active by using 'service scim status' inside the Gluu container.
+
 Note the usage of `close` in the last statement. While it's not a requirement, it is recommended to call `close` whenever you know there will not be any other request associated to the client you obtained.
 
 The [SCIM protected by UMA section](#scim-protected-by-UMA) contains examples for [adding](#adding-a-user) and [deleting](#delete-a-user) users.  The only actual difference in coding for test mode or UMA-protected service is the way in which you initially get a `ScimClient` object instance. For test mode, just call `ScimClientFactory.getTestClient` as shown in the previous example.
