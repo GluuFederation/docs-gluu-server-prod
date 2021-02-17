@@ -573,6 +573,11 @@ If you code in Java, you can take advantage of the ready-to-use client library [
 
 - Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. There are lots of articles around the Web on how to import a certificate to the keystore. An utility called [Key Store Explorer](http://keystore-explorer.sourceforge.net) makes this task super easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server-<gluu-version>/etc/certs/httpd.crt`
 
+For testing purposes, a self-signed certificate can be added to the local Java keystore with these steps:
+- become the root user and go to `$JAVA_HOME/lib/security` where the `cacerts` file is stored
+- run the command `keytool -import -alias <cert-name> -file </opt/gluu-server/etc/certs/httpd.crt or similar> -keystore cacerts`
+- check the `cacerts` file to make sure the certificate was added
+
 - Online Java-docs for scim-client are available [here](https://ox.gluu.org/scim-javadocs/apidocs/index.html). You can generate java-docs locally too using Maven; just run `mvn javadoc:javadoc -pl scim-client`
 
 ### Start a Simple Project
