@@ -26,7 +26,7 @@ Gluu Server CE allows you to protect your endpoints with [UMA](#scim-protected-b
 
 Alternatively, for testing purposes you can temporarily enable the test mode. In this mode, some complexity is taken out so that it serves as a quick and easy way to start interacting with your service, as well as learning about SCIM.
 
-The test mode and the UMA protection mode are mutually exclusive - one may use either test or UMA protection mode at the time. For the UMA protection mode to work as expected, the test mode must be set to false in JSON Configuration > oxTrust Configuration, and vice versa.
+The test mode and the UMA protection mode are mutually exclusive - one may use either test or UMA protection mode at one time. For the UMA protection mode to work as expected, the test mode must be set to false in JSON Configuration > oxTrust Configuration, and vice versa.
 
 ### Protection Using UMA
 
