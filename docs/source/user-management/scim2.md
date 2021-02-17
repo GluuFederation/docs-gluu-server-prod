@@ -573,7 +573,7 @@ If you code in Java, you can take advantage of the ready-to-use client library [
 
 - Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. There are lots of articles around the Web on how to import a certificate to the keystore. An utility called [Key Store Explorer](http://keystore-explorer.sourceforge.net) makes this task super easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server-<gluu-version>/etc/certs/httpd.crt`
 
-Instructions on how to add a self-signed certificate to local Java keystore:
+For testing purposes, a self-signed certificate can be added to the local Java keystore with these steps:
 - become the root user and go to `$JAVA_HOME/lib/security` where the `cacerts` file is stored
 - run the command `keytool -import -alias <cert-name> -file </opt/gluu-server/etc/certs/httpd.crt or similar> -keystore cacerts`
 - check the `cacerts` file to make sure the certificate was added
