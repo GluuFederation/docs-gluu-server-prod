@@ -254,37 +254,38 @@ This can be done inside ```prepareForStep``` method of the custom script.
 
 1. Return from def getPageForStep(self, step, context) a page /authz/method_name/redirect.html with content similar to the code snippet below - 
 
-```
-    def getPageForStep(self, step, context):
-        return "/authz/method_name/redirect.html"
-```
+    ```
+        def getPageForStep(self, step, context):
+            return "/authz/method_name/redirect.html"
+    ```
 
-```
-...
- <f:metadata>
-     <f:viewAction action="#{consentGatherer.prepareForStep}" if="#{identity.loggedIn}"/>
- </f:metadata>
+    ```
+    ...
+     <f:metadata>
+         <f:viewAction action="#{consentGatherer.prepareForStep}" if="#{identity.loggedIn}"/>
+     </f:metadata>
 	
-```
+    ```
 
 2. In method prepareForStep, prepare data that is needed for the redirect and redirect to the external service. 
 
-```
-def prepareForStep(self, step, context):
-	facesService = CdiUtil.bean(FacesService)
-	facesService.redirectToExternalURL(self.third_party_URL )
+    ```
+    def prepareForStep(self, step, context):
+	    facesService = CdiUtil.bean(FacesService)
+	    facesService.redirectToExternalURL(self.third_party_URL )
 
-	return True
+	    return True
 	
-```
+    ```
 
 3. In order to resume flow after the redirection we can add postauthorize.html
 In this new page we need make a call:
-```
- <f:metadata>
-     <f:viewAction action="#{consentGatherer.authorize}" />
- </f:metadata>
-```
+
+    ```
+     <f:metadata>
+         <f:viewAction action="#{consentGatherer.authorize}" />
+     </f:metadata>
+    ```
 
 4. The action in step 3 takes us to the ``` def authorize(self, step, context) ```. Here you can use parameters from request, call external API to validate data if needed etc. And finally, return false/true from this method.
 
@@ -292,49 +293,50 @@ In this new page we need make a call:
 
 1. Return from def getPageForStep(self, step, context) a page /auth/method_name/redirect.html with content similar to the code snippet below - 
 
-```
-    def getPageForStep(self, step, context):
-        return "/auth/method_name/redirect.html"
-```
+    ```
+        def getPageForStep(self, step, context):
+            return "/auth/method_name/redirect.html"
+    ```
 
-```
-...
- <f:metadata>
-     <f:viewAction action="#{authenticator.prepareForStep}" if="#{identity.loggedIn}"/>
- </f:metadata>
+    ```
+    ...
+     <f:metadata>
+         <f:viewAction action="#{authenticator.prepareForStep}" if="#{identity.loggedIn}"/>
+     </f:metadata>
 	
-```
+    ```
 
 2. In method prepareForStep, prepare data that is needed for the redirection and redirect to the external service. 
 
-```
-def prepareForStep(self, step, context):
-	facesService = CdiUtil.bean(FacesService)
-	facesService.redirectToExternalURL(self.third_party_URL )
+    ```
+    def prepareForStep(self, step, context):
+	    facesService = CdiUtil.bean(FacesService)
+    	    facesService.redirectToExternalURL(self.third_party_URL )
 
-	return True
+	    return True
 	
-```
+    ```
 
 3. In order to resume flow after the redirection we can use postlogin.xhtml (used to resume AuthN flow on call back).
 In this page a call is made to:
-```
- <f:metadata>
-     <f:viewAction action="#{authenticator.authenticate}" />
- </f:metadata>
-```
+
+    ```
+     <f:metadata>
+         <f:viewAction action="#{authenticator.authenticate}" />
+     </f:metadata>
+    ```
 
 4. The action in step 3 takes us to the ``` def authorize(self, step, context) ```. Here you can use parameters from request, call external API to validate data if needed etc. And finally, return false/true from this method.
 
-```
-def authorize(self, step, context): 
-    param1 =  ServerUtil.getFirstValue(context.getRequestParameters(), "param1") 
-	if (param1 == "true"):
-		return True
-	else:
-		return False
+    ```
+    def authorize(self, step, context): 
+        param1 =  ServerUtil.getFirstValue(context.getRequestParameters(), "param1") 
+	    if (param1 == "true"):
+		    return True
+	    else:
+		    return False
 				
 
-```
+    ```
 
 
