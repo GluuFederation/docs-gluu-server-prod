@@ -234,6 +234,19 @@ There are 2 types of supported document storage:
     DOCUMENT_STORE_TYPE = "JCA"
     ```
 
+#### Cache Refresh IP Rotation
+
+Configuring LDAP Synchronization (Cache Refresh) requires static IP address of oxTrust, but in container world, the IP address is assigned dynamically.
+
+By enabling `cr_rotate` service, the required IP address of oxTrust can be discovered and configured in persistence:
+
+```python
+# settings.py
+SVC_CR_ROTATE = True     # enable cache refresh IP rotation
+```
+
+Note that users still need to enable and configure [Cache Refresh](../user-management/ldap-sync.md).
+
 ### Deploy the Gluu Server
 
 Run the following command to install the Gluu Server:
