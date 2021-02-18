@@ -40,7 +40,7 @@
     To get KeyGenerator, run the following command inside the chroot:
     
     ```
-    wget https://ox.gluu.org/maven/org.gluu/oxauth-client/4.2/oxauth-client-4.2-jar-with-dependencies.jar -O oxauth-client.jar
+    wget  https://ox.gluu.org/maven/org/gluu/oxauth-client/4.2.0.Final/oxauth-client-4.2.0.Final-jar-with-dependencies.jar -O oxauth-client.jar
     ```
     
     Then, run KeyGenerator with the following command:
