@@ -250,7 +250,11 @@ The error will appear in the associated template using the following markup:
 In many cases of user authentication, consent gathering there might be a need to redirect to a third party application to perform some operation and redirect back to the Gluu server.
 This can be done inside ```prepareForStep``` method of the custom script. 
 
-### Steps for redirection in a ***Consent Gathering script***. - 
+### Redirection in a ***Consent Gathering script***. - 
+
+Here is a [sample script](https://github.com/GluuFederation/oxAuth/tree/version_4.3.0/Server/integrations/consent-gathering-with-redirection) for consent gathering which has a redirection to a third party app.
+
+Steps:
 
 1. Return from def getPageForStep(self, step, context) a page /authz/method_name/redirect.html with content similar to the code snippet below - 
 
@@ -289,8 +293,11 @@ In this new page we need make a call:
 
 4. The action in step 3 takes us to the ``` def authorize(self, step, context) ```. Here you can use parameters from request, call external API to validate data if needed etc. And finally, return false/true from this method.
 
-### Steps for redirection in a ***Person Authentication script***.
 
+### Redirection in a ***Person Authentication script***.
+
+Here is a [sample script](https://github.com/GluuFederation/oxAuth/blob/version_4.3.0/Server/integrations/cas2/Cas2ExternalAuthenticator.py) for person which has a redirection to a third party app.
+Steps :
 1. Return from def getPageForStep(self, step, context) a page /auth/method_name/redirect.html with content similar to the code snippet below - 
 
     ```
