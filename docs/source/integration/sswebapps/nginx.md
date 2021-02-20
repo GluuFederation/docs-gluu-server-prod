@@ -20,9 +20,9 @@ First, you'll need to install a few dependencies for lua-resty-openidc. The [dep
 ```
 apt update
 apt-get install gcc libssl-dev libpcre3 libpcre3-dev
-wget https://openresty.org/download/openresty-1.11.2.5.tar.gz
-tar -xvf openresty-1.11.2.5.tar.gz 
-cd openresty-1.11.2.5
+wget https://openresty.org/download/openresty-1.19.3.1.tar.gz
+tar -xvf openresty-1.19.3.1.tar.gz 
+cd openresty-1.19.3.1
 ./configure -j2
 make -j2
 sudo make install
