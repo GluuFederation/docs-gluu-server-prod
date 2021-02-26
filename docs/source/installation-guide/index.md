@@ -26,24 +26,21 @@ The minimum requirements for a production environment with the same services (ox
 
 Each deployment will have unique requirements depending on its architecture, services, and number of users. The following table contains some recommended resources to start with. These requirements should be adjusted to suit the specific deployment. 
 
-|Service           | CPU Unit   |    RAM      |  Required                           | Comments |
-|------------------|------------|-------------|------------------------------------ | ----------|
-|oxAuth            | 2.5        |    2.5GB    |  Yes                                |
-|oxTrust           | 1.0        |    2.0GB    |  Yes                                |
-|LDAP              | 1.5        |    2GB      |  If not using couchbase             | Recommended RAM dependent on size |
-|fido2             | 0.5        |    0.5GB    |  No                                 |
-|scim              | 1.0        |    1.0GB    |  No                                 |
-|config - job      | 0.5        |    0.5GB    |  No                                 | Required if Cloud Native
-|jackrabbit        | 1.5        |    1GB      |  No                                 | Required if Cloud Native
-|persistence - job | 0.5        |    0.5GB    |  No                                 | Required if Cloud Native
-|SAML IDP          | 1.0        |    1.0GB    |  No                                 |
-|oxPassport        | 0.7        |    0.9GB    |  No                                 |
-|oxd-server        | 1          |    0.4GB    |  No                                 |
-|nginx             | 1          |    1GB      |  Yes if not ALB                     |
-|key-rotation      | 0.3        |    0.3GB    |  No                                 |
-|cr-rotate         | 0.2        |    0.2GB    |  No                                 |
-|casa              | 0.5        |    0.5GB    |  No                                 |
-|radius            | 0.7        |    0.7GB    |  No                                 |
+|Service           | CPU Unit   |    RAM      |  Comments |
+|------------------|------------|-------------| ----------|
+|fido2             | 0.5        |    0.5GB    | 
+|scim              | 1.0        |    1.0GB    |
+|config - job      | 0.5        |    0.5GB    | Required if Cloud Native
+|jackrabbit        | 1.5        |    1GB      | Required if Cloud Native
+|persistence - job | 0.5        |    0.5GB    | Required if Cloud Native
+|SAML IDP          | 1.0        |    1.0GB    | 
+|oxPassport        | 0.7        |    0.9GB    | 
+|oxd-server        | 1          |    0.4GB    | 
+|nginx             | 1          |    1GB      |
+|key-rotation      | 0.3        |    0.3GB    |
+|cr-rotate         | 0.2        |    0.2GB    |
+|casa              | 0.5        |    0.5GB    |
+|radius            | 0.7        |    0.7GB    | 
 
 - Gluu must be deployed on a server or VM with a static IP Address. The static IP address should resolve to a computer hostname which can be achieved by adding an entry to the DNS server or in `/etc/hosts`.     
 
