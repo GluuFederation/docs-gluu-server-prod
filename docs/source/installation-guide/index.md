@@ -6,21 +6,25 @@ This document provides instructions for preparing a VM for a single-node Gluu Se
 
 ## System Requirements
 
-!!!note
-    Local deployments for testing or demoing Gluu may set the resources to the minimum requirements, which are `8GB RAM`, `5 CPU`, and `50GB disk space` in total to run oxAuth, oxTrust, and LDAP.
-
 ### Testing Environment
 
-A barebones Gluu Server can be set up with **only** oxAuth, oxTrust, LDAP, and the SAML IDP as a test or demo environment. The minimum requirements for this deployment are:
+A barebones Gluu Server can be set up with **only** oxAuth, oxTrust, LDAP, and SAML IDP as a test or demo environment. The minimum requirements for this deployment are:
 
-- 4 GB Ram
+- 4 GB RAM
 - 2 GB swap space
-- 2 CPU Units
+- 2 CPU units
 - 40 GB disk space
 
 ### Production Environment
 
-First, calculate the recommended required resources as per services deployed. The following table contains the default recommended resources to start with. Depending on the use of each service the resources may need to be increased or decreased. 
+The minimum requirements for a production environment with the same services (oxAuth, oxTrust, LDAP, and SAML IDP) are:
+
+- 8 GB RAM
+- 2 GB swap space
+- 4 CPU units
+- 50 GB disk space
+
+Each deployment will have unique requirements depending on its architecture, services, and number of users. The following table contains some recommended resources to start with. These requirements should be adjusted to suit the specific deployment. 
 
 |Service           | CPU Unit   |    RAM      |  Required                           | Comments |
 |------------------|------------|-------------|------------------------------------ | ----------|
@@ -40,8 +44,6 @@ First, calculate the recommended required resources as per services deployed. Th
 |cr-rotate         | 0.2        |    0.2GB    |  No                                 |
 |casa              | 0.5        |    0.5GB    |  No                                 |
 |radius            | 0.7        |    0.7GB    |  No                                 |
-
-- Additionally, a minimum of 50 GB disk space is required.
 
 - Gluu must be deployed on a server or VM with a static IP Address. The static IP address should resolve to a computer hostname which can be achieved by adding an entry to the DNS server or in `/etc/hosts`.     
 
