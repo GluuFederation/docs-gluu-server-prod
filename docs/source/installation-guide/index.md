@@ -9,6 +9,17 @@ This document provides instructions for preparing a VM for a single-node Gluu Se
 !!!note
     Local deployments for testing or demoing Gluu may set the resources to the minimum requirements, which are `8GB RAM`, `5 CPU`, and `50GB disk space` in total to run oxAuth, oxTrust, and LDAP.
 
+### Testing Environment
+
+A barebones Gluu Server can be set up with **only** oxAuth, oxTrust, LDAP, and the SAML IDP as a test or demo environment. The minimum requirements for this deployment are:
+
+- 4 GB Ram
+- 2 GB swap space
+- 2 CPU Units
+- 40 GB disk space
+
+### Production Environment
+
 First, calculate the recommended required resources as per services deployed. The following table contains the default recommended resources to start with. Depending on the use of each service the resources may need to be increased or decreased. 
 
 |Service           | CPU Unit   |    RAM      |  Required                           | Comments |
