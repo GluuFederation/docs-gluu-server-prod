@@ -20,7 +20,7 @@ Status: Released
 
 | Released | Community EOL | Enterprise EOL |
 | --- | --- | --- |
-| July 2020 | December 2021 | December 2022 |
+| July 2020 | December 2022 | December 2023 |
 
 ## Purpose
 
