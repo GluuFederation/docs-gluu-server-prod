@@ -1296,8 +1296,8 @@ The above means that Jackrabbit will maintain the source folder on all replicas 
 
 ## Minimum Couchbase System Requirements for cloud deployments
 
-!!!note
-    Couchbase needs optimization in a production environment and must be tested to suit the organizational needs. 
+The following are the minimum requirements that must be in place for a cloud deployment with [Couchbase](https://couchbase.com). This is not suitable for a production environment with minimal resources. Couchbase requires optimization and must be tested to suit the organizational needs. More information about how Gluu works with Couchbase can be found [here](../reference/persistence.md#couchbase).
+
  
 | NAME                                     | # of nodes  | RAM(GiB) | Disk Space | CPU | Total RAM(GiB)                           | Total CPU |
 | ---------------------------------------- | ----------- | -------  | ---------- | --- | ---------------------------------------- | --------- |
