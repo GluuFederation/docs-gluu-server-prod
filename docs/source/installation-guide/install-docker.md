@@ -106,8 +106,11 @@ The following services are available during deployment:
 To enable/disable non-mandatory services listed above, create a file called `settings.py` and set the value to `True` to enable or set to `False` to disable the service. For example:
 
 ```python
-SVC_LDAP = True                 # will be enabled
-SVC_OXPASSPORT = False          # will be disabled
+# enable ldap service
+SVC_LDAP = True
+
+# disable passport service
+SVC_OXPASSPORT = False
 ```
 
 Any services not specified in `settings.py` will follow the default settings.
@@ -135,7 +138,7 @@ If `docker-compose.override.yml` exists, this file will be added as the last Com
 Supported backends are LDAP, Couchbase, or mix of both (hybrid). The following config control which persistence backend is selected:
 
 - `PERSISTENCE_TYPE`: choose one of `ldap`, `couchbase`, or `hybrid` (the default is `ldap`)
-- `PERSISTENCE_LDAP_MAPPING`: choose one of `default`, `user`, `site`, `cache`, or `token` (default to `default`)
+- `PERSISTENCE_LDAP_MAPPING`: choose one of `default`, `user`, `site`, `cache`, `token`, or `session` (default to `default`)
 
 To choose a persistence backend, create a file called `settings.py` (if it wasn't created in the last step) and set the corresponding option as seen above. For example:
 
@@ -182,7 +185,9 @@ Enable Vault auto-unseal with GCP KMS API by specifying it in `settings.py`:
 
 ```python
 # settings.py
-SVC_VAULT_AUTOUNSEAL = True     # enable Vault auto-unseal with GCP KMS API
+
+# enable Vault auto-unseal with GCP KMS API
+SVC_VAULT_AUTOUNSEAL = True
 ```
 
 The following is an example of how to obtain [GCP KMS credentials](https://shadow-soft.com/vault-auto-unseal/) JSON file, and save it as `gcp_kms_creds.json` in the same directory where `pygluu-compose.pyz` is located, for example:
@@ -234,6 +239,32 @@ There are 2 types of supported document storage:
     DOCUMENT_STORE_TYPE = "JCA"
     ```
 
+    By default `jackrabbit` service will add its own user/password credentials (default to `admin` username and `admin` password).
+    To change the credentials, add the following config in `settings.py`:
+
+    ```python
+    # change the username
+    JACKRABBIT_USER = "my-jackrabbit-user"
+    ```
+
+    Modify `jackrabbit_admin_password` file:
+
+    ```
+    my-jackrabbit-password
+    ```
+
+    If somehow users need to modify the credentials after service is running, there are few steps need to be done:
+
+    -   change credentials via oxTrust UI (Configuration > JSON Configuration > Store Provider Configuration menu).
+
+        - adjust the User Id form field
+        - adjust the Password form field (use plaintext password, i.e. `my-jackrabbit-password`)
+        - submit the form
+
+    -   change `JACKRABBIT_USER` config in `settings.py`
+    -   change the password in `jackrabbit_admin_password` file
+    -   re-deploy `oxtrust` and `jackrabbit` services
+
 #### Cache Refresh IP Rotation
 
 Configuring LDAP Synchronization (Cache Refresh) requires static IP address of oxTrust, but in container world, the IP address is assigned dynamically.
@@ -241,11 +272,98 @@ Configuring LDAP Synchronization (Cache Refresh) requires static IP address of o
 By enabling `cr_rotate` service, the required IP address of oxTrust can be discovered and configured in persistence:
 
 ```python
-# settings.py
-SVC_CR_ROTATE = True     # enable cache refresh IP rotation
+# enable cache refresh IP rotation
+SVC_CR_ROTATE = True
 ```
 
 Note that users still need to enable and configure [Cache Refresh](../user-management/ldap-sync.md).
+
+#### SAML
+
+Add the following config in `settings.py`:
+
+```python
+# enable oxshibboleth service
+SVC_OXSHIBBOLETH = True
+
+# enable SAML support (including the sidebar menu on oxTrust)
+SAML_ENABLED = True
+```
+
+!!!Note
+
+    -   `SAML_ENABLED` config will take effect only on `persistence` service which is run on initial deployment.
+        Alternatively, users can enable/disable the support using oxTrust UI (Configuration > Organization Configuration menu).
+
+    -   The `oxtrust` and `jackrabbit` services must be enabled (see Choose Document Storage section above for configuring `jackrabbit` service).
+
+#### SCIM
+
+Add the following config in `settings.py`:
+
+```python
+# enable scim service
+SVC_SCIM = True
+
+# enable SCIM support (including the sidebar menu on oxTrust) and required custom scripts
+SCIM_ENABLED = True
+```
+
+!!!Note
+
+    `SCIM_ENABLED` config will take effect only on `persistence` service which is run on initial deployment.
+    Alternatively, users can enable/disable the support using oxTrust UI (Configuration > Organization Configuration menu).
+
+#### Passport
+
+Add the following config in `settings.py`:
+
+```python
+# enable passport service
+SVC_OXPASSPORT = True
+
+# enable Passport support (including the sidebar menu on oxTrust) and required custom scripts
+PASSPORT_ENABLED = True
+```
+
+!!!Note
+
+    `PASSPORT_ENABLED` config will take effect only on `persistence` service which is run on initial deployment.
+    Alternatively, users can enable/disable the support using oxTrust UI (Configuration > Organization Configuration menu).
+
+#### Gluu Radius
+
+Add the following config in `settings.py`:
+
+```python
+# enable radius service
+SVC_RADIUS = True
+
+# enable Gluu Radius support (including the sidebar menu on oxTrust) and required custom scripts
+RADIUS_ENABLED = True
+```
+
+!!!Note
+
+    `RADIUS_ENABLED` config will take effect only on `persistence` service which is run on initial deployment.
+    Alternatively, users can enable/disable the support using oxTrust UI (Configuration > Organization Configuration menu).
+
+#### Casa
+
+Add the following config in `settings.py`:
+
+```python
+# enable casa service
+SVC_CASA = True
+
+# enable required custom scripts
+CASA_ENABLED = True
+```
+
+!!!Note
+
+    -   `CASA_ENABLED` config will take effect only on `persistence` service which is run on initial deployment.
+    -   The `oxd_server` and `jackrabbit` services must be enabled (see Choose Document Storage section above for configuring `jackrabbit` service).
 
 ### Deploy the Gluu Server
 
