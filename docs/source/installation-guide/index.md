@@ -20,9 +20,12 @@ A barebones Gluu Server can be set up with **only** oxAuth, oxTrust, LDAP, and S
 The minimum requirements for a production environment with the same services (oxAuth, oxTrust, LDAP, and SAML IDP) are:
 
 - 8 GB RAM
-- 2 GB swap space
+- 4 GB swap space
 - 4 CPU units
 - 50 GB disk space
+
+!!! Note  
+    Swap space should be scaled to the amount of RAM in the deployment. We recommend deployments with over 8GB of RAM also include .5 times the RAM in swap space. For example, if a deployment has 20 GB of RAM, it should also have 10 GB of swap space. 
 
 Each deployment will have unique requirements depending on its architecture, services, and number of users. The following table contains some recommended resources to start with. These requirements should be adjusted to suit the specific deployment. 
 
