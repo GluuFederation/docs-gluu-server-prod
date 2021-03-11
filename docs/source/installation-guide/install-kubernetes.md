@@ -1301,8 +1301,8 @@ The following are the minimum requirements that must be in place for a cloud dep
  
 | NAME                                     | # of nodes  | RAM(GiB) | Disk Space | CPU | Total RAM(GiB)                           | Total CPU |
 | ---------------------------------------- | ----------- | -------  | ---------- | --- | ---------------------------------------- | --------- |
-| Couchbase Index                          | 1           |  3       | 5GB        | 1  | 3                                         | 1         |
-| Couchbase Query                          | 1           |  -       | 5GB        | 1  | -                                         | 1         |
-| Couchbase Data                           | 1           |  3       | 5GB        | 1  | 3                                         | 1         |
-| Couchbase Search, Eventing and Analytics | 1           |  2       | 5GB        | 1  | 2                                         | 1         |
+| Couchbase Index                          | 1           |  3       | 5Gi        | 1  | 3                                         | 1         |
+| Couchbase Query                          | 1           |  -       | 5Gi        | 1  | -                                         | 1         |
+| Couchbase Data                           | 1           |  3       | 5Gi        | 1  | 3                                         | 1         |
+| Couchbase Search, Eventing and Analytics | 1           |  2       | 5Gi        | 1  | 2                                         | 1         |
 | Grand Total                              |             | 7-8 GB (if query pod is allocated 1 GB)  | 20Gi | 4         |
