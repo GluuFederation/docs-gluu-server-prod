@@ -298,9 +298,9 @@ As an example, add text to the top of the form and change the color of the butto
 
     1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
     
-    1. After connecting to  Jackrabbit create  directories `/opt/gluu/jetty/identity/custom/pages` and `/opt/gluu/jetty/identity/custom/static`.
+    1. After connecting to  Jackrabbit create  directories `/opt/gluu/jetty/oxauth/custom/pages` and `/opt/gluu/jetty/oxauth/custom/static`.
 
-    1. Place the following `custom.css` in `/opt/gluu/jetty/identity/custom/static`.
+    1. Place the following `custom.css` in `/opt/gluu/jetty/oxauth/custom/static`.
     
         ```css
         .lockscreen-wrapper .btn-primary {
@@ -308,7 +308,7 @@ As an example, add text to the top of the form and change the color of the butto
         }
         ```
         
-    1. Place a custom `login.xhtml` which you may find in `opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml` inside your oxauth pod  at `/opt/gluu/jetty/identity/custom/pages` in Jackrabbit.
+    1. Place a custom `login.xhtml` which you may find in `opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml` inside your oxauth pod  at `/opt/gluu/jetty/oxauth/custom/pages` in Jackrabbit.
     
     
 
