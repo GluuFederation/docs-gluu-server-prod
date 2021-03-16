@@ -128,7 +128,7 @@ Please calculate the minimum required resources as per services deployed. The fo
     
     ### Requirements
     
-    1. Install [minikube](https://github.com/kubernetes/minikube/releases).
+    1. Install [minikube](https://minikube.sigs.k8s.io/docs/start/).
     
     1. Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
     
@@ -262,6 +262,13 @@ Please calculate the minimum required resources as per services deployed. The fo
     
        ```bash
        helm install <release-name> -f values.yaml -n <namespace> .
+       ```
+       or
+       
+       ```
+       helm repo add gluu https://gluufederation.github.io/cloud-native-edition/pygluu/kubernetes/templates/helm
+       helm repo update
+       helm install <release-name> gluu/gluu -n <namespace> -f overide-values.yaml
        ```
     
     ### EKS helm notes
