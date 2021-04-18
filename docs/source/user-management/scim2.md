@@ -743,7 +743,14 @@ The following instructions show how to interact with the UMA-protected SCIM serv
 
 - Copy the requesting party JKS file to your local machine (inside the Gluu server chroot, it is located at `/install/community-edition-setup/output/scim-rp.jks`)
 
-- Have the requesting party client ID and password at hand. You can find this info in the file `/install/community-edition-setup/setup.properties.last`. Try running `cat setup.properties.last | grep "scim_rp_client"`. The default password is `secret`
+- Have the requesting party client ID and password at hand. You can grab client ID this way:
+    ```
+    cd /install/community-edition-setup
+    openssl enc -d -aes-256-cbc setup.properties.last.enc -out setup.properties
+    cat setup.properties | grep "scim_rp_client"
+    ```
+    
+    The default password is `secret`. Ensure to remove the `file setup.properties`. 
 
 - Ensure you have enabled SCIM and UMA as shown [above](#protection-using-uma)
 
