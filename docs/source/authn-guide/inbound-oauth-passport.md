@@ -97,6 +97,8 @@ Below are some quick and recommended configurations parameters:
 |`scope`|Array| `["openid", "email", "profile"]` |
 |`token_endpoint_auth_method`|string|`client_secret_post`|
 
+If you want to secure your token endpoint method with `private_key_jwt` then check [tutorials here](../tutorials/passport-openid-client.md).
+
 Below are some extra parameters:
 
 | Parameter | Type | example |
