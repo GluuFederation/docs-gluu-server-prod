@@ -102,7 +102,7 @@ Below are some extra parameters:
 | Parameter | Type | example |
 |-----------|------|---------|
 |`params`|object|`{ "acr_values": "dao" }`|
-|`usePCKE`|boolean|`true`|
+|`usePCKE`|boolean|`true` <br/> *Note: You can use `Pure PKCE flow`, you just need to set `usePKCE=true` and `token_endpoint_auth_method=none`* |
 
 ### Protect the OIDC application with `passport_social` authentication
 
