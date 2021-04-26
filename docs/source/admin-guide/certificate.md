@@ -145,7 +145,7 @@
                       restartPolicy: Never
                       containers:
                         - name: web-key-rotation
-                          image: gluufederation/certmanager:4.2.2_01
+                          image: gluufederation/certmanager:4.2.3_07
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm # This may be differnet in Helm
@@ -200,7 +200,7 @@
                               path: gluu_https.key                              
                       containers:
                         - name: load-web-key-rotation
-                          image: gluufederation/certmanager:4.2.2_01
+                          image: gluufederation/certmanager:4.2.3_07
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm  #This may be differnet in Helm
@@ -251,7 +251,7 @@
                     spec:
                       containers:
                         - name: oxauth-key-rotation
-                          image: gluufederation/certmanager:4.2.2_01
+                          image: gluufederation/certmanager:4.2.3_07
                           env:
                             - name: GLUU_CONTAINER_MAIN_NAME
                               value: "oxauth" # Place oxauth container name 
@@ -324,7 +324,7 @@
                   restartPolicy: Never
                   containers:
                     - name: oxshibboleth-key-rotation
-                      image: gluufederation/certmanager:4.2.2_01
+                      image: gluufederation/certmanager:4.2.3_07
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -369,7 +369,7 @@
                   restartPolicy: Never
                   containers:
                     - name: oxd-key-rotation
-                      image: gluufederation/certmanager:4.2.2_01
+                      image: gluufederation/certmanager:4.2.3_07
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -413,7 +413,7 @@
                   restartPolicy: Never
                   containers:
                     - name: ldap-key-rotation
-                      image: gluufederation/certmanager:4.2.2_01
+                      image: gluufederation/certmanager:4.2.3_07
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -458,7 +458,7 @@
                   restartPolicy: Never
                   containers:
                     - name: passport-key-rotation
-                      image: gluufederation/certmanager:4.2.2_01
+                      image: gluufederation/certmanager:4.2.3_07
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -498,7 +498,7 @@
                   restartPolicy: Never
                   containers:
                     - name: scim-key-rotation
-                      image: gluufederation/certmanager:4.2.2_01
+                      image: gluufederation/certmanager:4.2.3_07
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
