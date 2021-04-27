@@ -277,7 +277,7 @@ As an example, add text to the top of the form and change the color of the butto
        spec:
          containers:
          - name: oxauth
-           image: gluufederation/oxauth:4.2.0_01
+           image: gluufederation/oxauth:4.2.3_06
            volumeMounts:
              - name: oxauth-pages-volume
                mountPath: /opt/gluu/jetty/oxauth/custom/pages # login.xthml will be mounted under this directory
@@ -356,7 +356,7 @@ As an example, add text to the top of the form and change the color of the butto
 	  name: oxtrust
 	spec:
 	  containers:
-	  image: gluufederation/oxtrust:4.2.0_01
+	  image: gluufederation/oxtrust:4.2.3_02
 	  volumeMounts:
 	    - name: oxtrust-pages-volume
 	      mountPath: /opt/gluu/jetty/identity/custom/pages # finishlogout.xthml will be mounted under this directory

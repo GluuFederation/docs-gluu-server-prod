@@ -278,7 +278,7 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_05
+                    image: gluufederation/upgrade:4.2.3_03
                     name: gluu-upgrade-job
                   restartPolicy: Never
             ```
@@ -320,7 +320,7 @@
                 configMap:
                   name: oxldif
               containers:
-                image: gluufederation/opendj:4.2.1_02
+                image: gluufederation/opendj:4.2.3_02
                 ...
                 ...
                 volumeMounts:
@@ -395,7 +395,7 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_05
+                    image: gluufederation/upgrade:4.2.3_03
                     name: gluu-upgrade-job                 
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
@@ -647,7 +647,7 @@
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.2.1_05
+                    image: gluufederation/upgrade:4.2.3_03
                     name: gluu-upgrade-job                    
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
@@ -853,7 +853,7 @@
                 configMap:
                   name: oxldif
               containers:
-                image: gluufederation/opendj:4.2.1_02
+                image: gluufederation/opendj:4.2.3_02
                 ...
                 ...
                 volumeMounts:
