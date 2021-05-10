@@ -802,23 +802,20 @@ In the `<hostname>`, both IP (`197.122.32.421`) and hostname (`redis.example.org
 
 ### Modify JSON Entries 
 
-Use JXplorer (or a similar LDAP browser) to modify some of the JSON entries in LDAP for handling accessible caching and multiple authorization servers.      
+Use Apache Directory Studio (or a similar LDAP browser) to modify some of the JSON entries in LDAP for handling accessible caching and multiple authorization servers.      
 
-- In JXplorer, you can connect to your LDAP server using your credentials you configured with setup.py. For example:     
+- In Apache Directory Studio, you can connect to your LDAP server using your credentials you configured with setup.py. As LDAPs 1636 port is not accessible from internet, so you have to configure tunneling from your desktop to Gluu Server.  
+- Open "o=gluu" root DN, under that there is a DN named "ou=configuration"
 
-![alt text](https://raw.githubusercontent.com/GluuFederation/cluster-mgr/master/manual_install/images/JXplorer%20config.png)
+- Modify the "oxCacheConfiguration" attribute to include the redis-server FQDN. 
 
-- Open "Gluu" -> "appliances" -> the first inum here will be where all the attributes needing modification will be
-
-- Modify the "oxCacheConfig" attribute to include the redis-server FQDN. Here, I installed redis-server outside of one of my Gluu chroots
-
-![alt text](https://raw.githubusercontent.com/GluuFederation/cluster-mgr/master/manual_install/images/ManualCache_ox.png)
+![alt text](https://raw.githubusercontent.com/GluuFederation/cluster-mgr/master/manual_install/images/42ManualClusteringCacheConfig.png)
 
 - Change "cacheProviderType" from "IN_MEMORY" to "REDIS". After that, in the "redisConfiguration" portion of "servers", I added "cluster.example.org:16379" which is the server I installed redis-server.
 
 - Make sure that all LDAP servers are utilized for authorization by modifying the "oxIDPAuthentication" attribute.
 
-![alt text](https://raw.githubusercontent.com/GluuFederation/cluster-mgr/master/manual_install/images/ManualCache_auth.png)
+![alt text](https://raw.githubusercontent.com/GluuFederation/cluster-mgr/master/manual_install/images/42oxIDPAuthenticationManualClustering.png)
 
 - Here, change the servers from localhost:1636 to the FQDNs of my servers
 
@@ -826,7 +823,7 @@ Use JXplorer (or a similar LDAP browser) to modify some of the JSON entries in L
 "servers\": [\"cluster.example.org:1636\"],
 ```
 
-- Click `Submit` on the bottom after all changes 
+- Save configuration in Apache Directory Studio. 
 
 ### Transfer Certificates
 
