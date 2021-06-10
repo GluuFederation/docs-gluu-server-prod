@@ -34,10 +34,7 @@ Follow these steps to integrate an external OP for login to an OIDC application:
 1. Protect the OIDC application with `passport_social` authentication
 
 **Notes:**
-
-- OP integration is achieved via the [`passport-openidconnect`](https://github.com/jaredhanson/passport-openidconnect) strategy, which **only** supports the OpenID Connect code flow (not hybrid or implicit). 
-- Communication with the token endpoint is carried out via POST only.
-- There is no support for secretless clients (just confidential OAuth clients). 
+ 
 - Ensure the machine(s) running Passport have access to the OP you are trying to connect to.
 
 ### Add the OP in the admin UI
@@ -50,7 +47,11 @@ Follow these steps to integrate an external OP for login to an OIDC application:
 
 1. Enter a display name for the provider  (e.g "Partner 1", "Customer 1", etc.)
 
-1. In `type`, choose "openidconnect" (if you are using Gluu oxd as a mediator with an OP, check [this](#using-oxd-as-mediator) section)
+1. In `Type`, choose `openid-client` (if you are using Gluu oxd as a mediator with an OP, check [this](#using-oxd-as-mediator) section)
+
+1. In `Mapping`, choose `openid-client`
+
+1. In `Passport.js Strategy`, choose `openid-client`
 
 1. Optionally, supply a `logo path` for this provider (eg. `img/openidconnect.png`). Check this [section](./passport.md#about-logo-images) of the introductory page to learn more
 
@@ -60,11 +61,11 @@ Follow these steps to integrate an external OP for login to an OIDC application:
 
 1. Click on `Add` (meanwhile, accept the default values for the remaining fields)
 
-![oidc_provider](../img/user-authn/passport/oidc_provider.png) 
+![oidc_provider](../img/user-authn/passport/openid-client-provider.png) 
 
 A simple standard [attribute mapping](./passport.md#attribute-mapping-and-transformation) is used for OpenID Connect providers by default. This will populate `uid`, `mail`, `cn`, `displayName`, `givenName`, and `sn` LDAP attributes if the relevant corresponding claims were gathered in the `userInfo` request.
 
-To learn more about how mappings work, check the [tutorial](../tutorials/passport-attributes-mapping.md). Also review the `/opt/gluu/node/passport/server/mappings/openidconnect-default.js` file in the Gluu chroot. If you need to make adjustments, do not edit the default mapping file, create a new one based on its contents.
+To learn more about how mappings work, check the [tutorial](../tutorials/passport-attributes-mapping.md). Also review the `/opt/gluu/node/passport/server/mappings/openid-client.js` file in the Gluu chroot. If you need to make adjustments, do not edit the default mapping file, create a new one based on its contents.
 
 ### Register a client at the OP
 
@@ -80,9 +81,30 @@ where `PROVIDER-ID` is the identifier assigned to the recently added provider.
 
 After the process is finished, you should be given a client ID and a client Secret.
 
-### Supply OIDC parameters
+### Supply openid-client parameters
 
-In the summary table, click on the name of the recently added provider and supply values for `clientID` and `clientSecret`. Fill the rest of the fields according to the endpoints exposed by the OP being configured. Depending on the OP capabilities, you can add more properties as supported, for instance `acr_values`.
+We are using [openid-client](https://github.com/panva/node-openid-client) strategy. You can pass every possible [`client`](https://github.com/panva/node-openid-client/tree/main/docs#new-clientmetadata-jwks-options) config in provider config. 
+
+Default `response_types` is `code`.
+
+Below are some quick and recommended configurations parameters:
+
+| Parameter | Type | example |
+|-----------|------|---------| 
+|`client_id`|string||
+|`client_secret`|string||
+|`issuer`|string| `https://yourop.com` |
+|`scope`|Array| `["openid", "email", "profile"]` |
+|`token_endpoint_auth_method`|string|`client_secret_post`|
+
+If you want to secure your token endpoint method with `private_key_jwt` then check [tutorials here](../tutorials/passport-openid-client.md).
+
+Below are some extra parameters:
+
+| Parameter | Type | example |
+|-----------|------|---------|
+|`params`|object|`{ "acr_values": "dao" }`|
+|`usePCKE`|boolean|`true` <br/> *Note: You can use `Pure PKCE flow`, you just need to set `usePKCE=true` and `token_endpoint_auth_method=none`* |
 
 ### Protect the OIDC application with `passport_social` authentication
 
@@ -140,16 +162,10 @@ In this section, we provide specific steps on how to configure a Gluu Server ins
 
 1. Supply the [OIDC parameters](#supply-oidc-parameters) as follows:
 
-   - `clientID` and `clientSecret`: Grab those from the recently created client. Go to `OpenID Connect` > `Clients` and use for "clientID" the one appearing in the "Inum" column of the table.
+   - `client_id` and `client_secret`: Grab those from the recently created client. Go to `OpenID Connect` > `Clients` and use for "clientID" the one appearing in the "Inum" column of the table.
 
    - `issuer`: `https://<remote-gluu-server>`
    
-   - `authorizationURL`: `https://<remote-gluu-server>/oxauth/restv1/authorize`
-   
-   - `tokenURL`: `https://<remote-gluu-server>/oxauth/restv1/token`
-   
-   - `userInfoURL`: `https://<remote-gluu-server>/oxauth/restv1/userinfo`
-
 ## Integrate OAuth Authorization Servers
 
 !!! Note

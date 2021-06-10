@@ -179,6 +179,7 @@ nav:
         - 'Attributes mapping and transformation in Passport': 'tutorials/passport-attributes-mapping.md'
         - 'Inbound Identity with Apple Sign In': 'tutorials/passport-apple.md'
         - 'Inbound SAML with Passport': 'tutorials/passport-inbound-flow.md'
+        - 'Inbound openid-client with Passport': 'tutorials/passport-openid-client.md'
         - 'Forgot PW': 'tutorials/forgot-pw.md'
         - 'Kafka Logging': 'tutorials/kafka.md'
 - FAQ & Troubleshooting: 'operation/faq.md'

@@ -52,6 +52,13 @@ documentation and administrative guide.
 
 ## New features
 
+## 4.3
+
+### [GluuFederation/gluu-passport](https://github.com/GluuFederation/gluu-passport/issues?q=is%3Aopen+is%3Aissue+milestone%3A4.3)
+
+- [#206](https://github.com/GluuFederation/gluu-passport/issues/206) - Replace `passport-openidconnect` with `openid-client` 
+
+
 ## 4.2.2 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.2+)

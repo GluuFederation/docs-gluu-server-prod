@@ -134,7 +134,7 @@ See our tutorial for [attribute mapping and transformation](../tutorials/passpor
 
 ### Default mappings
 
-Passport already bundles several mappings by default. Most of them are targeted at social login and are proven to work for most use cases. `saml_basic_profile` and `saml_ldap_profile` are generic mappings inspired on the SAML basic and SAML X.500 attribute profiles, respectively. `oxd-default` and `opendidconnect-default` are intended for use when the `passport-oxd` and `passport-openidconnect` strategies are employed to integrate OPs.
+Passport already bundles several mappings by default. Most of them are targeted at social login and are proven to work for most use cases. `saml_basic_profile` and `saml_ldap_profile` are generic mappings inspired on the SAML basic and SAML X.500 attribute profiles, respectively. `oxd-default` and `openid-client` are intended for use when the `passport-oxd` and `openid-client` strategies are employed to integrate OPs.
 
 !!! Warning
     Do not edit out-of-the-box mappings. Instead, create your own versions based on existing files. See the [tutorial](../tutorials/passport-attributes-mapping.md).

@@ -148,34 +148,45 @@ For *b*, the attribute value can be obtained from `user_profile` variable of the
 
 Depending on the strategy in use, eg. `passport-github`, `passport-saml`, etc., it is possible to get information other than actual profile data. This may include an access token, refresh token, and other contextual information specific to every strategy.
 
-To get an idea of what you may have access to, consult the documentation (preferably the code) of the strategy with regards to the **verify** function. Here we describe an example of how to get the access token obtained from an OpenID Connect provider when the `passport-openidconnect` is used. Note that this is not the Gluu access token but that of an external OP integrated for inbound identity using passport.
+To get an idea of what you may have access to, consult the documentation (preferably the code) of the strategy with regards to the **verify** function. Here we describe an example of how to get the access token obtained from an OpenID-Client provider when the `openid-client` is used. Note that this is not the Gluu access token but that of an external OP integrated for inbound identity using passport.
 
-To start, glance at the function `onProfileLoaded` of [passport-openidconnect](https://github.com/jaredhanson/passport-openidconnect/blob/master/lib/strategy.js). You will see different calls to a "verify" function where the number of parameters supplied varies. Note that besides `profile` there are more interesting pieces of data such as `iss` (issuer), `sub`, `accessToken`, and `jwtClaims`. These names are familiar if you have some acquaintance with OIDC. Particularly, if you inspect the code more deeply, you will find that `jwtClaims` contains the claims of the `id_token` received by the OP.
+To start, check all callback parameters of [openid-client here](https://github.com/panva/node-openid-client/tree/main/docs#new-strategyoptions-verify). You will see different calls to a "verify" function where the number of parameters supplied varies. Note that besides `userinfo` there are token data `tokenset`. In token set you will get `access_token`, `refresh_token` and `id_token`.
 
 To access these kind of data do:
 
 1. Pick the most convenient call of `verify` (the one that exhibits the data of your interest) and count the number of parameters in the call (this is called the "arity" of a function). 
-1. In Gluu chroot edit the file `/opt/gluu/node/passport/server/extra-passport-params.js` by adding a new item in function `params` this way (replace `<ARITY>` with a suitable value):
+1. In Gluu chroot, `/opt/gluu/node/passport/server/extra-passport-params.js` file is already setup with `verifyCallbackArity: 3` that mean you will get `tokenset` :
     ```
-    {
-    	  strategy: 'passport-openidconnect',
-        verifyCallbackArity: <ARITY>
-    }
+  	{
+  	  strategy: 'openid-client',
+  	  passportAuthnParams: {
+  	    scope: 'openid email profile'
+  	  },
+  	  options: {},
+  	  verifyCallbackArity: 3
+  	}
     ```
-1. Edit the mapping in use (eg. `/opt/gluu/node/passport/server/mappings/openidconnect-default.js`) so that the function now has 2 arguments, like:
+
+1. Edit the mapping in use (eg. `/opt/gluu/node/passport/server/mappings/openid-client.js`) so that the function now has 2 arguments, like:
     ```
     module.exports = (profile, params) => {
     ```
-1. Manipulate `params` as desired. It contains an array with all the parameters of the `verify` call you picked except for the last one and the profile (which is the first argument of the mapping function). For example, if arity was 6, to get the access token you can do:
+
+1. Manipulate `params` as desired. It contains an array with all the parameters of the `verify` call you picked except for the last one and the profile (which is the first argument of the mapping function). For example,
     ```
-        let token = params[2]
-        //The call to verify was self._verify(iss, sub, profile, accessToken, refreshToken, verified)
-        //enumerate the arguments starting with zero (skipping profile), thus, accessToken corresponds to index 2
-        console.log("access token was " + token)
-        return {
-            ...
-            access_token: token
-        }
+	module.exports = (profile, params) => {
+  		console.log('All Params: ', params)
+  		const token = params[0].access_token
+  		console.log('Access Token: ', token)
+  		return {
+  		  uid: profile.sub,
+  		  mail: profile.email,
+  		  cn: profile.given_name,
+  		  displayName: profile.name,
+  		  givenName: profile.given_name,
+  		  sn: profile.name.family_name
+  		}
+    }
     ```
 1. Save your changes and restart passport
 1. Edit your custom script so that `access_token` is processed as desired.
