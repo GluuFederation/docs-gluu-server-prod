@@ -379,7 +379,7 @@ Revoke Token scripts allow inject custom logic during token revoking.
         return True
 ```
 
-Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.2/static/extension/revoke_token/revoke_token.py).
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.3.0/static/extension/revoke_token/revoke_token.py).
 
 Note `RevokeTokenContext` allows to access response builder (`context.getResponseBuilder()`) which allows to customer response if needed.
 
@@ -403,7 +403,7 @@ Snippet
         return ""
 ```
 
-Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.2.2/static/extension/end_session/end_session.py). 
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.3.0/static/extension/end_session/end_session.py). 
 
 ## Resource Owner Password Credentials
 
