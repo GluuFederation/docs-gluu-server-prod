@@ -92,8 +92,17 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     - `settings.json`
     - `gluu-secret.yaml`
     -  `gluu-cm.yaml`
+    - `helm/gluu/values.yaml`    
 
 1.  Place `settings.json` adjacent to `pygluu-kubernetes.pyz`.
+
+1.  Create the directory `helm/gluu` adjacent to `pygluu-kubernetes.pyz` and place `values.yaml`.
+
+    ```bash
+    mkdir -p helm/gluu/
+    ```
+
+1.  Adjust `jackrabbit.clusterId`  inside `helm/gluu/values.yaml` to something other than `first`. We will call it `second`.
 
 1.  Create the namespace for gluu. It must match the one created in the first cluster
 
@@ -696,6 +705,7 @@ nginx-ingress:
       hosts:
       - demoexample.gluu.org
 jackrabbit:
+  clusterId: "first"
   service:
     jackRabbitServiceName: jackrabbit
   replicas: 1
@@ -1262,6 +1272,7 @@ nginx-ingress:
       hosts:
       - demoexample.gluu.org
 jackrabbit:
+  clusterId: "second"
   service:
     jackRabbitServiceName: jackrabbit
   replicas: 1
