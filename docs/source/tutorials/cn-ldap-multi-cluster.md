@@ -43,7 +43,7 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     ALPHA-FEATURE-Please enter LDAP advertise admin port (NodePort) [30444]: 30444
     ALPHA-FEATURE-Please enter LDAP advertise LDAPS port (NodePort) [30636]: 30636
     ALPHA-FEATURE-Please enter LDAP advertise replication port (NodePort) [30989]: 30989
-    ALPHA-FEATURE-Is this not the first kubernetes cluster [N] [y/N]: N
+    ALPHA-FEATURE-"ALPHA-FEATURE-Is this a subsequent kubernetes cluster [N] [y/N]: N
     ALPHA-FEATURE-Please enter LDAP advertise serf peers as an array [['firstldap.gluu.org:30946', 'secondldap.gluu.org:31946']]: ['firstldap.gluu.org:30946', 'secondldap.gluu.org:31946']
     ```
     
