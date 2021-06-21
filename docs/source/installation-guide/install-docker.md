@@ -23,15 +23,16 @@ For Docker deployments, provision a VM with:
 
 ### Obtain files for deployment
 
-Download the `pygluu-compose.pyz` executable:
-
-```sh
-wget https://github.com/GluuFederation/community-edition-containers/releases/download/v1.3.4/pygluu-compose.pyz \
-    && chmod +x pygluu-compose.pyz
-```
+Download the latest `pygluu-compose.pyz` file from [Releases](https://github.com/GluuFederation/community-edition-containers/releases) page.
 
 !!!Note
     `pygluu-compose.pyz` requires Python 3.6+ (and `python3-distutils` package if Ubuntu/Debian is used).
+
+Make sure to set the downloaded pygluu-compose.pyz file as executable:
+
+```
+chmod +x pygluu-compose.pyz
+```
 
 Run the following command to generate manifests for deployment:
 
@@ -42,7 +43,6 @@ Run the following command to generate manifests for deployment:
 The generated files are similar to example below:
 
 ```sh
-tree .
 .
 ├── couchbase.crt
 ├── couchbase_password
@@ -50,9 +50,13 @@ tree .
 ├── docker-compose.yml
 ├── gcp_kms_creds.json
 ├── gcp_kms_stanza.hcl
+├── generate.json
+├── google-credentials.json
 ├── jackrabbit_admin_password
+├── job.configuration.yml
 ├── job.persistence.yml
-├── pygluu-compose.pyz
+├── settings.py
+├── sql_password
 ├── svc.casa.yml
 ├── svc.cr_rotate.yml
 ├── svc.fido2.yml
@@ -68,13 +72,166 @@ tree .
 ├── svc.scim.yml
 ├── svc.vault_autounseal.yml
 ├── vault_gluu_policy.hcl
+├── vault_key_token.txt
 ├── vault_role_id.txt
-└── vault_secret_id.txt
+├── vault_secret_id.txt
 ```
 
 Proceed to [deployment section](./#deploy-the-gluu-server) for basic setup of Gluu Server deployment or read the [customizing section](./#customizing-installation) for advance setup.
 
 ### Customizing installation
+
+#### Available settings
+
+The following settings are default settings.
+
+```python
+# ========
+# Services
+# ========
+
+# enable LDAP service
+SVC_LDAP = True
+
+# enable oxAuth service
+SVC_OXAUTH = True
+
+# enable oxTrust service
+SVC_OXTRUST = True
+
+# enable Passport service
+SVC_OXPASSPORT = False
+
+# enable Shibboleth service
+SVC_OXSHIBBOLETH = False
+
+# enable CacheRefresh rotation service
+SVC_CR_ROTATE = False
+
+# enable oxd service
+SVC_OXD_SERVER = False
+
+# enable Gluu Radius service
+SVC_RADIUS = False
+
+# enable Vault service with auto-unseal
+SVC_VAULT_AUTOUNSEAL = False
+
+# enable Casa service
+SVC_CASA = False
+
+# enable Jackrabbit service (set to True if DOCUMENT_STORE_TYPE is set to JCA)
+SVC_JACKRABBIT = False
+
+# enable SCIM service
+SVC_SCIM = False
+
+# enable Fido2 service
+SVC_FIDO2 = False
+
+# enable persistence loader service
+JOB_PERSISTENCE = True
+
+# enable config-init service
+JOB_CONFIGURATION = True
+
+# enable Redis service (set to True if CACHE_TYPE is set to REDIS)
+SVC_REDIS = False
+
+# =====
+# Cache
+# =====
+
+# supported cache type (choose NATIVE_PERSISTENCE or REDIS)
+CACHE_TYPE = "NATIVE_PERSISTENCE"
+
+# ===========
+# Persistence
+# ===========
+
+# supported persistence type (choose one of ldap, couchbase, hybrid, sql, or spanner)
+PERSISTENCE_TYPE = "ldap"
+
+# dataset saved into LDAP (choose one of default, user, site, token, cache, or session)
+# this setting only affects hybrid PERSISTENCE_TYPE
+PERSISTENCE_LDAP_MAPPING = "default"
+
+# Couchbase username
+COUCHBASE_USER = "admin"
+
+# Couchbase superuser
+COUCHBASE_SUPERUSER = ""
+
+# hostname/IP address of Couchbase server (scheme and port are omitted)
+COUCHBASE_URL = "localhost"
+
+# Prefix of Couchbase bucket
+COUCHBASE_BUCKET_PREFIX = "gluu"
+
+# SQL dialect (currently only support mysql; postgresql support is experimental)
+SQL_DB_DIALECT= "mysql"
+
+# SQL database name
+SQL_DB_NAME = "gluu"
+
+# hostname/IP address of SQL server
+SQL_DB_HOST = "localhost"
+
+# port of SQL server
+SQL_DB_PORT = 3306
+
+# username to access SQL database
+SQL_DB_USER = "gluu"
+
+# ==============
+# Document store
+# ==============
+
+# supported store type (choose one of LOCAL or JCA)
+DOCUMENT_STORE_TYPE = "LOCAL"
+
+# admin username for Jackrabbit service
+JACKRABBIT_USER = "admin"
+
+# ====
+# Misc
+# ====
+
+# load customization from docker-compose.override.yml (if exists)
+ENABLE_OVERRIDE = False
+
+# enable oxTrust API
+OXTRUST_API_ENABLED = False
+
+# enable test-mode for oxTrust API
+OXTRUST_API_TEST_MODE = False
+
+# enable Passport support
+PASSPORT_ENABLED = False
+
+# enable Casa support
+CASA_ENABLED = False
+
+# enable Gluu Radius support
+RADIUS_ENABLED = False
+
+# enable SAML Shibboleth support
+SAML_ENABLED = False
+
+# enable SCIM API
+SCIM_ENABLED = False
+
+# enable test-mode for SCIM API
+SCIM_TEST_MODE = False
+```
+
+To override any of these settings, create `settings.py` and adjust the value, for example:
+
+```python
+# settings.py
+COUCHBASE_URL = "10.2.1.1"
+COUCHBASE_BUCKET_PREFIX = "my_org"
+```
 
 #### Choose services
 
@@ -87,6 +244,7 @@ The following services are available during deployment:
 | `vault`             | -                      | yes       | always  |
 | `nginx`             | -                      | yes       | always  |
 | `persistence`       | `JOB_PERSISTENCE`      | no        | yes     |
+| `configuration`     | `JOB_CONFIGURATION`    | no        | yes     |
 | `oxauth`            | `SVC_OXAUTH`           | no        | yes     |
 | `oxtrust`           | `SVC_OXTRUST`          | no        | yes     |
 | `ldap`              | `SVC_LDAP`             | no        | yes     |
@@ -133,8 +291,8 @@ If `docker-compose.override.yml` exists, this file will be added as the last Com
 
 Supported backends are LDAP, Couchbase, or mix of both (hybrid). The following config control which persistence backend is selected:
 
-- `PERSISTENCE_TYPE`: choose one of `ldap`, `couchbase`, or `hybrid` (the default is `ldap`)
-- `PERSISTENCE_LDAP_MAPPING`: choose one of `default`, `user`, `site`, `cache`, or `token` (default to `default`)
+- `PERSISTENCE_TYPE`: choose one of `ldap`, `couchbase`, `hybrid` (`ldap` + `couchbase`), `sql`, or `spanner` (default to `ldap`)
+- `PERSISTENCE_LDAP_MAPPING`: choose one of `default`, `user`, `site`, `cache`, `token`, or `session` (default to `default`)
 
 To choose a persistence backend, create a file called `settings.py` (if it wasn't created in the last step) and set the corresponding option as seen above. For example:
 
