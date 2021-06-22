@@ -23,7 +23,7 @@ For Docker deployments, provision a VM with:
 
 ### Obtain files for deployment
 
-Download the latest `pygluu-compose.pyz` file from [Releases](https://github.com/GluuFederation/community-edition-containers/releases) page.
+Download the latest `pygluu-compose-linux-amd64.pyz` (or `pygluu-compose-macos-amd64.pyz` for Mac users) file from [Releases](https://github.com/GluuFederation/community-edition-containers/releases) page and save it as `pygluu-compose.pyz`.
 
 !!!Note
     `pygluu-compose.pyz` requires Python 3.6+ (and `python3-distutils` package if Ubuntu/Debian is used).
