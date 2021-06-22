@@ -79,6 +79,7 @@ nav:
             - 'Introduction': 'authn-guide/intro.md'
             - 'Basic Authentication': 'authn-guide/basic.md'
             - 'FIDO 2.0': 'authn-guide/fido2.md'
+            - 'Passwordless Authn': 'authn-guide/passwordless.md'
             - 'Super Gluu': 'authn-guide/supergluu.md'
             - 'OTP apps': 'authn-guide/otp.md'
             - 'SMS OTP (Twilio)': 'authn-guide/sms-otp.md'
