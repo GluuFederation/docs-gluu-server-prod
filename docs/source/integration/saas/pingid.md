@@ -126,12 +126,7 @@ This section describes configurations to be carried out in Gluu Server.
         1.  Create a ConfigMap that contains all the files extracted i.e `oxauth.properties`, `enroll.xhtml`, `login.xhtml`, `ppm.xhtml`, and `template.xhtml` and the jar file `oxauth-pingid-1.0.jar`
         
             ```sh
-               kubectl create cm oxauth-pingid-integration --from-file=/bundle/opt/gluu/jetty/oxauth/custom/i18n/oxauth.properties \
-               --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/enroll.xhtml \
-               --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/login.xhtml \
-               --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/ppm.xhtml \ 
-               --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/template.xhtml \
-               --from-file=oxauth-pingid-1.0.jar                
+               kubectl create cm oxauth-pingid-integration --from-file=bundle/opt/gluu/jetty/oxauth/custom/i18n/oxauth.properties --from-file=bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/enroll.xhtml --from-file=bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/login.xhtml --from-file=bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/ppm.xhtml --from-file=bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/template.xhtml --from-file=oxauth-pingid-1.0.jar -n <gluu-namespace>                
             ```
         
         1.  Mount the created ConfigMap in your helm values.yaml inside oxauth
