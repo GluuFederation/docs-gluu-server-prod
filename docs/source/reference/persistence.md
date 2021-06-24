@@ -2,9 +2,9 @@
 
 ## Overview
 
-In previous versions the Gluu Server was tightly bundled with LDAP for persistence. In 4.2, the persistence layer has been re-architected, and there is no longer a tight bundling with a specific DB (i.e. LDAP). Now, new persistence plugins can be added and data can be split between multiple persistence modules.
+In previous versions the Gluu Server was tightly bundled with LDAP for persistence. In 4.x, the persistence layer has been re-architected, and there is no longer a tight bundling with a specific DB (i.e. LDAP). Now, new persistence plugins can be added and data can be split between multiple persistence modules.
 
-Gluu 4.2 supports three persistence modules out-of-the-box:
+Gluu 4.3 supports these persistence modules out-of-the-box:
 
 1. [LDAP](https://github.com/GluuFederation/oxCore/tree/master/persistence-ldap), which is still the default persistence method.
 
@@ -32,7 +32,7 @@ This diagram shows the EntryManager dependencies and type resolutions based on t
 
 This module uses an LDAP server to store data. The module code is in the [oxcore-persistence-ldap](https://github.com/GluuFederation/oxCore/tree/master/persistence-ldap) project.
 
-There are few major data structure changes in the 4.2 data model:
+There are few major data structure changes in the data model:
 
 - Dropped `o=<inumOrg>` sub level
 - Dropped `ou=appliances` sub level
@@ -84,7 +84,7 @@ The default settings are suitable for most environments.
 
 ### Couchbase
 
-[Couchbase](https://www.couchbase.com/) is a newly supported persistence layer option introduced in 4.1. Its data model is very similar to LDAP, so an existing DB can be converted from LDIF to Couchbase. 
+[Couchbase](https://www.couchbase.com/) is a persistence layer option very similar to LDAP, so an existing DB can be converted from LDIF to Couchbase. 
 
 Here is sample data entry with key `scopes_10B2`:
 
