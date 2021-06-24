@@ -229,19 +229,7 @@ This section describes configurations to be carried out in Gluu Server.
             ```        
             
         1. After verifying the content has been moved to jackrabbit. Restart oxauth deployment.
-        
-        
-### Building oxauth-pingid library
-
-If you want to generate the jar file on your own (and possibly inspect the source code) follow the steps below:
-
-1.  In a development machine, ensure Java 8+ and Maven build tool are installed. [Download](https://github.com/GluuFederation/oxAuth/archive/refs/heads/version_4.2.3.zip) oxAuth project (branch 4.2.3) and extract it to a temporary location
-
-1.  `cd` to `Server/integrations/pingid`
-
-1.  Execute `mvn package`. Ensure the process finishes successfully
-
-1.  `cd` to `target`. Resulting file is `oxauth-pingid-1.0.jar`
+                
 
 ### Add the custom script
 
@@ -265,3 +253,14 @@ If you want to generate the jar file on your own (and possibly inspect the sourc
 
 1.  Scroll down and click on the `Update` button at the bottom of the page
 
+### Building oxauth-pingid library
+
+If you want to generate the jar file on your own (and possibly inspect the source code) follow the steps below:
+
+1.  In a development machine, ensure Java 8+ and Maven build tool are installed. [Download](https://github.com/GluuFederation/oxAuth/archive/refs/heads/version_4.2.3.zip) oxAuth project (branch 4.2.3) and extract it to a temporary location
+
+1.  `cd` to `Server/integrations/pingid`
+
+1.  Execute `mvn package`. Ensure the process finishes successfully
+
+1.  `cd` to `target`. Resulting file is `oxauth-pingid-1.0.jar`
