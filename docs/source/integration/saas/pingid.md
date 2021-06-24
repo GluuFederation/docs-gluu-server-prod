@@ -111,7 +111,7 @@ This section describes configurations to be carried out in Gluu Server.
 
     ### Transfer script assets and load oxauth-pingid library
     
-    There are two methods of loading files into the deployment which should be used to load the files from the two steps below:
+    There are two methods of loading files into the deployment which can be used to load the files from the two steps below:
     
     -   Extract script assets from [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.2.3/Server/integrations/pingid/bundle.zip).
     
