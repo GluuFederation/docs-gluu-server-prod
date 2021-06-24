@@ -196,7 +196,11 @@ This section describes configurations to be carried out in Gluu Server.
                   subPath: oxauth-pingid-1.0.jar                                                                            
             ```
             
-        1.  Run helm upgrade `helm upgrade <release-name> gluu/gluu -f ./values.yaml -n <namespace> --set global.upgrade.enabled=true --set global.persistence.enabled=false`       
+        1.  Run helm upgrade 
+        
+            ```bash
+            helm upgrade <release-name> gluu/gluu -f ./values.yaml -n <namespace> --set global.upgrade.enabled=true --set global.persistence.enabled=false
+            ```       
         
     
     === "Jackrabbit"
