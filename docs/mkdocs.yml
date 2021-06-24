@@ -43,8 +43,9 @@ markdown_extensions:
 # Navigation
 nav:
 - 'Versions':
+    - '4.3': 'https://gluu.org/docs/gluu-server/4.3/'
+#   - '5.0': 'https://gluu.org/docs/gluu-server/5.0/'
     - '4.2': 'https://gluu.org/docs/gluu-server/4.2/'
-#    - '5.0': 'https://gluu.org/docs/gluu-server/5.0/'
     - '4.1': 'https://gluu.org/docs/gluu-server/4.1/'
     - '4.0': 'https://gluu.org/docs/gluu-server/4.0/'
     - 'EOL Versions': 'https://gluu.org/docs/eol/'
