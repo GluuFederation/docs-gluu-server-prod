@@ -108,9 +108,17 @@ This section describes configurations to be carried out in Gluu Server.
     
     There are two methods of loading files into the deployment which canbe used to load the files from the two steps below:
     
-    - Extract script assets from [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.2.3/Server/integrations/pingid/bundle.zip).
+    -   Extract script assets from [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.2.3/Server/integrations/pingid/bundle.zip).
+    
+        ```bash
+        wget https://github.com/GluuFederation/oxAuth/raw/version_4.2.3/Server/integrations/pingid/bundle.zip && unzip bundle.zip -d bundle
+        ```
     
     - Get oxauth-pingid library from this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.2.3/Server/integrations/pingid/oxauth-pingid-1.0.jar). If you want to generate the jar file on your own (and possibly inspect the source code) follow the steps [below](#building-oxauth-pingid-library)
+    
+        ```bash
+        wget https://github.com/GluuFederation/oxAuth/raw/version_4.2.3/Server/integrations/pingid/oxauth-pingid-1.0.jar
+        ```
     
              
     === "ConfigMaps"
@@ -123,7 +131,7 @@ This section describes configurations to be carried out in Gluu Server.
                --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/login.xhtml \
                --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/ppm.xhtml \ 
                --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/template.xhtml \
-               --from-file=oxauth-pingid-1.0.jar \                                               
+               --from-file=oxauth-pingid-1.0.jar                
             ```
         
         1.  Mount the created ConfigMap in your helm values.yaml inside oxauth
