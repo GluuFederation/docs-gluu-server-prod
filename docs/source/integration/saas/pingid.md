@@ -143,46 +143,52 @@ This section describes configurations to be carried out in Gluu Server.
                 - name: oxauth-pingid-integration-enroll
                   configMap:
                     name: oxauth-pingid-integration
-                    items:               
+                    items:
                     - key: "enroll.xhtml"
                       path: "enroll.xhtml"
                 - name: oxauth-pingid-integration-login
                   configMap:
                     name: oxauth-pingid-integration
-                    items:                              
+                    items:
                     - key: "login.xhtml"
                       path: "login.xhtml"
                 - name: oxauth-pingid-integration-ppm
                   configMap:
                     name: oxauth-pingid-integration
-                    items:                                            
+                    items:
                     - key: "ppm.xhtml"
                       path: "ppm.xhtml"
                 - name: oxauth-pingid-integration-template
                   configMap:
                     name: oxauth-pingid-integration
-                    items:                                                              
+                    items:
                     - key: "template.xhtml"
                       path: "template.xhtml"
                 - name: oxauth-pingid-integration-lib
                   configMap:
                     name: oxauth-pingid-integration
-                    items:                                                              
+                    items:
                     - key: "oxauth-pingid-1.0.jar"
-                      path: "oxauth-pingid-1.0.jar"                                                                                  
+                      path: "oxauth-pingid-1.0.jar"
               volumeMounts:
                 - name: oxauth-pingid-integration-properties
-                  mountPath: /opt/gluu/jetty/oxauth/custom/i18n
+                  mountPath: /opt/gluu/jetty/oxauth/custom/i18n/oxauth.properties
+                  subPath: oxauth.properties
                 - name: oxauth-pingid-integration-enroll
-                  mountPath: /opt/gluu/jetty/oxauth/custom/pages/auth/pingid
+                  mountPath: /opt/gluu/jetty/oxauth/custom/pages/auth/pingid/enroll.xhtml
+                  subPath: enroll.xhtml
                 - name: oxauth-pingid-integration-login
-                  mountPath: /opt/gluu/jetty/oxauth/custom/pages/auth/pingid
+                  mountPath: /opt/gluu/jetty/oxauth/custom/pages/auth/pingid/login.xhtml
+                  subPath: login.xhtml
                 - name: oxauth-pingid-integration-ppm
-                  mountPath: /opt/gluu/jetty/oxauth/custom/pages/auth/pingid
+                  mountPath: /opt/gluu/jetty/oxauth/custom/pages/auth/pingid/ppm.xhtml
+                  subPath: ppm.xhtml
                 - name: oxauth-pingid-integration-template
-                  mountPath: /opt/gluu/jetty/oxauth/custom/pages/auth/pingid 
+                  mountPath: /opt/gluu/jetty/oxauth/custom/pages/auth/pingid/template.xhtml
+                  subPath: template.xhtml
                 - name: oxauth-pingid-integration-lib
-                  mountPath: /opt/gluu/jetty/oxauth/custom/libs                                                                            
+                  mountPath: /opt/gluu/jetty/oxauth/custom/libs/oxauth-pingid-1.0.jar
+                  subPath: oxauth-pingid-1.0.jar                                                                            
             ```
             
         1.  Run helm upgrade `helm upgrade <release-name> gluu/gluu -f ./values.yaml -n <namespace> --set global.upgrade.enabled=true --set global.persistence.enabled=false`       
