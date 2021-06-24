@@ -134,7 +134,7 @@ This section describes configurations to be carried out in Gluu Server.
             ```yaml
             oxauth:
               volumes:
-                - name: oxauth-pingid-integration-oxauth-properties
+                - name: oxauth-pingid-integration-properties
                   configMap:
                     name: oxauth-pingid-integration
                     items:
