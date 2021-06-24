@@ -106,7 +106,7 @@ This section describes configurations to be carried out in Gluu Server.
 
     ### Transfer script assets and load oxauth-pingid library
     
-    There are two methods of loading files into CN which we will use to load the files from the two steps below:
+    There are two methods of loading files into the deployment which canbe used to load the files from the two steps below:
     
     - Extract script assets from [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.2.3/Server/integrations/pingid/bundle.zip).
     
@@ -117,14 +117,14 @@ This section describes configurations to be carried out in Gluu Server.
     
         1.  Create a ConfigMap that contains all the files extracted i.e `oxauth.properties`, `enroll.xhtml`, `login.xhtml`, `ppm.xhtml`, and `template.xhtml` and the jar file `oxauth-pingid-1.0.jar`
         
-           ```sh
+            ```sh
                kubectl create cm oxauth-pingid-integration --from-file=/bundle/opt/gluu/jetty/oxauth/custom/i18n/oxauth.properties \
                --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/enroll.xhtml \
                --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/login.xhtml \
                --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/ppm.xhtml \ 
                --from-file=/bundle/opt/gluu/jetty/oxauth/custom/pages/auth/pingid/template.xhtml \
                --from-file=oxauth-pingid-1.0.jar \                                               
-           ```
+            ```
         
         1.  Mount the created ConfigMap in your helm values.yaml inside oxauth
         
@@ -189,7 +189,7 @@ This section describes configurations to be carried out in Gluu Server.
     
         1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
         
-        1. After connecting to  Jackrabbit move the extracted content which will be mapped correctly as below inside jackrabbit
+        1. After connecting to  Jackrabbit move the extracted content from bundel.zip  and the oxauth-pingid library which should be mapped correctly as below inside jackrabbit
     
             ```bash
             +--- opt
