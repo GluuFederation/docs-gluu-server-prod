@@ -233,7 +233,7 @@ cp /opt/jetty-9.3/temp/jetty-localhost-8081-oxauth.war-_oxauth-any-9071517269463
 
   Don't forget to apply appropriate file system permissions if needed. [Restart](./services.md#restart) the `oxauth` service inside the chroot.`   
 
-## Custom oxAuth Login Page Example in Cloud Native edition ConfigMaps
+## Custom oxAuth Login Page Example in Cloud Native edition
 
 
 This guide will show how to customize HTML pages and CSS in oxAuth for Gluu Server cloud native edition.
