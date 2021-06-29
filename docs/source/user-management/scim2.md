@@ -732,7 +732,7 @@ The following instructions show how to interact with the UMA-protected SCIM serv
 
 - In the following we will use Java as programming language. Entry-level knowledge is enough. Make sure you have Java Standard Edition installed. The use of Maven as a build tool is recommended
 
-- Copy the requesting party JKS file to your local machine (inside the Gluu server chroot, it is located at `/install/community-edition-setup/output/scim-rp.jks`)
+- Copy the requesting party JKS file to your local machine (inside the Gluu server chroot, it is located at `/etc/certs/scim-rp.jks`)
 
 - Have the requesting party client ID and password at hand. You can grab client ID this way:
     ```
