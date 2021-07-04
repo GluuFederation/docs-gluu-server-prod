@@ -68,15 +68,17 @@ By default, the FIDO2 endpoints are disabled in the Gluu Server for compatibilit
 
 1. Click the `Save Configuration` button at the bottom of the page.
 
-1. Log into CE chroot
+1. Log into CE chroot (`/sbin/gluu-serverd login`)
 
 1. `cd /etc/gluu/conf/fido2/mds/toc`
 
 1. `wget https://mds2.fidoalliance.org/?token=<access_token> -O toc.jwt`
 
-1. Put the `https://mds.fidoalliance.org/Root.cer` certificate file into the `/etc/gluu/conf/fido2/mds/cert` folder
+1. `cd /etc/gluu/conf/fido2/mds/cert`
 
-1. Restart oxauth services
+1. `wget -4 https://mds.fidoalliance.org/Root.cer -O fidoalliance-root.cer`
+
+1. `service oxauth restart`
 
 !!! Note 
     To retrieve metadata or TOC (Table of Contents for all metadata statements) you will have to first register to get a MDS Access Token. To do this visit: https://mds2.fidoalliance.org/tokens/
