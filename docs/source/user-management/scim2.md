@@ -1028,6 +1028,8 @@ $ curl -G -H 'Authorization: Bearer ...access token...'  -o output.json
 
 which queries all users whose extended attribute `customAttr3` is greater than 2000 (this accounts the attribute was properly configured as numeric). Note how the attribute is prefixed with the schema URN of the user extension followed by a colon.
 
+Switch to the test mode in order to run the above `curl` command.
+
 ### Handling Custom Attributes in scim-client
 
 To access the name/values of custom attributes please use the `getCustomAttributes` method of your SCIM resource and pass the `URI` of the extension that these custom attributes are associated to. Likewise, to set the values for your custom attributes, call the `addCustomAttributes` and pass a `CustomAttributes` instance. 
