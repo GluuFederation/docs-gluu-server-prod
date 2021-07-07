@@ -102,9 +102,19 @@ documentation and administrative guide.
  
 - [#2043](https://github.com/GluuFederation/oxTrust/issues/2043) Remove 'Generate SP metadata' feature 
 
-### [GluuFederation/gluu-passport](https://github.com/GluuFederation/gluu-passport/issues?q=is%3Aopen+is%3Aissue+milestone%3A4.3)
+### [GluuFederation/gluu-passport](https://github.com/GluuFederation/gluu-passport/issues?q=is%3Aopen+is%3Aissue+milestone%3A4.3.0+)
 
-- [#206](https://github.com/GluuFederation/gluu-passport/issues/206) - Replace `passport-openidconnect` with `openid-client` 
+- [#242](https://github.com/GluuFederation/gluu-passport/issues/206) Sign In with Apple fails after multiple successive logins
+
+- [#239](https://github.com/GluuFederation/gluu-passport/issues/206) ci(husky): update husky
+
+- [#213](https://github.com/GluuFederation/gluu-passport/issues/213) Upgrade node allowed versions to allow latest LTS
+
+- [#210](https://github.com/GluuFederation/gluu-passport/issues/210) build(deps-dev): bump husky from 4.3.8 to 5.0.9
+
+- [#206](https://github.com/GluuFederation/gluu-passport/issues/206) Replace `passport-openidconnect` with `openid-client` 
+
+- [#205](https://github.com/GluuFederation/gluu-passport/issues/205) Update uma.js to use got lib and remove request 
 
 ## 4.2.2 Fixes / Enhancements
 
