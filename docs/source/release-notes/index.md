@@ -16,11 +16,11 @@ OR USING THE RELEASE.
 
 ## Lifecycle
 
-Status: Released
+Status: Beta
 
 | Released | Community EOL | Enterprise EOL |
 | --- | --- | --- |
-| July 2020 | December 2021 | December 2022 |
+| July 2021 | December 2023 | December 2024 |
 
 ## Purpose
 
@@ -52,12 +52,59 @@ documentation and administrative guide.
 
 ## New features
 
-## 4.3
+## 4.3.0 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.0+)
+
+- [#1544](https://github.com/GluuFederation/oxAuth/issues/1544) Openmetric request fail with label as digits only
+
+- [#1538](https://github.com/GluuFederation/oxAuth/issues/1538) MAU: discrepancy of hll cardinality before and after serialization
+ 
+- [#1536](https://github.com/GluuFederation/oxAuth/issues/1536) feat(new-acr-link): create script to replace acr_values in authz url 
+
+- [#1534](https://github.com/GluuFederation/oxAuth/issues/1534) forgot_password script not updated according other oxauth changes
+ 
+- [#1533](https://github.com/GluuFederation/oxAuth/issues/1533) Add JSON Property to release id_token for password grant
+ 
+- [#1528](https://github.com/GluuFederation/oxAuth/issues/1528) There is no automatic expiration of UMA permissions/pct/rpt/etc with Couchbase
+ 
+- [#1526](https://github.com/GluuFederation/oxAuth/issues/1526) Retain claim in access token after refreshing
+
+- [#1525](https://github.com/GluuFederation/oxAuth/issues/1525) Whitelist encryption and signing algorithms in JWKS 
+ 
+- [#1523](https://github.com/GluuFederation/oxAuth/issues/1523) New interceptions script to modify id_token
+ 
+- [#1517](https://github.com/GluuFederation/oxAuth/issues/1517) Avoid NPE in User Info Endpoint (caused by scope removing)
+
+- [#1321](https://github.com/GluuFederation/oxAuth/issues/1321) Add live metric endpoints to oxAuth
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.0+)
+
+- [#2078](https://github.com/GluuFederation/oxTrust/issues/2078) Update morris.js library to latest
+
+- [#2070](https://github.com/GluuFederation/oxTrust/issues/2070) Attribute Form: Enable custom validation checked by default (incorrectly)
+
+- [#2069](https://github.com/GluuFederation/oxTrust/issues/2069) Add Person Form Crashes with New Objectclass 
+
+- [#2066](https://github.com/GluuFederation/oxTrust/issues/2066) Update cleaner job to use more effective RDBS methods
+
+- [#2065](https://github.com/GluuFederation/oxTrust/issues/2065) Don't update GluuConfiguration bean attributes in get method
+
+- [#2061](https://github.com/GluuFederation/oxTrust/issues/2061) oxTrust is crashed when a search with a broad criteria is executed using User search feature against a big enough user database
+
+- [#2055](https://github.com/GluuFederation/oxTrust/issues/2055) Cache Refresh: Don't print ldap password in log
+
+- [#2054](https://github.com/GluuFederation/oxTrust/issues/2054) Email Attribute Validation Not working on View Profile Section
+ 
+- [#2052](https://github.com/GluuFederation/oxTrust/issues/2052) Design configuration for openid-client new passport provider strategy
+
+- [#2051](https://github.com/GluuFederation/oxTrust/issues/2051) Setting custom acr-value for IDP-Initiated Flow
+ 
+- [#2043](https://github.com/GluuFederation/oxTrust/issues/2043) Remove 'Generate SP metadata' feature 
 
 ### [GluuFederation/gluu-passport](https://github.com/GluuFederation/gluu-passport/issues?q=is%3Aopen+is%3Aissue+milestone%3A4.3)
 
 - [#206](https://github.com/GluuFederation/gluu-passport/issues/206) - Replace `passport-openidconnect` with `openid-client` 
-
 
 ## 4.2.2 Fixes / Enhancements
 
