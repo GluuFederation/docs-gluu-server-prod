@@ -1,8 +1,8 @@
 # Upgrade to Gluu Server 4.3
 
-The upgrade process for Gluu Server 4.3.0 will be made available once the initial beta testing has completed.
+!!! Important
+    The upgrade process for Gluu Server 4.3.0 will be made available once the initial beta testing has completed.
 
-<!---
 === "Community Edition"
     
     ## Overview
@@ -943,4 +943,3 @@ The upgrade process for Gluu Server 4.3.0 will be made available once the initia
     
     1.  Unset `LDAP_PASSWD` environment variable
         
---->
