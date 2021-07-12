@@ -6,10 +6,23 @@ This document provides instructions for preparing a VM for a single-node Gluu Se
 
 ## System Requirements
 
-!!!note
-    Local deployments for testing or demoing Gluu may set the resources to the minimum requirements, which are `8GB RAM`, `5 CPU`, and `50GB disk space` in total to run oxAuth, oxTrust, and LDAP.
+### Testing Environment
 
-First, calculate the recommended required resources as per services deployed. The following table contains the default recommended resources to start with. Depending on the use of each service the resources may need to be increased or decreased. 
+A barebones Gluu Server can be set up with **only** oxAuth, oxTrust, LDAP, and SAML IDP as a test or demo environment. The minimum requirements for this deployment are:
+
+- 4 GB RAM
+- 2 GB swap space
+- 2 CPU units
+- 40 GB disk space
+
+### Production Environment
+
+The minimum requirements for a production environment with the same services (oxAuth, oxTrust, LDAP, and SAML IDP) are:
+
+- 8 GB RAM
+- 4 GB swap space
+- 4 CPU units
+- 50 GB disk space
 
 |Service           | CPU Unit   |    RAM      |  Required                           | Comments |
 |------------------|------------|-------------|------------------------------------ | ----------|
@@ -29,8 +42,23 @@ First, calculate the recommended required resources as per services deployed. Th
 |cr-rotate         | 0.2        |    0.2GB    |  No                                 |
 |casa              | 0.5        |    0.5GB    |  No                                 |
 |radius            | 0.7        |    0.7GB    |  No                                 |
+Each deployment will have unique requirements depending on its architecture, services, and number of users. The following table contains some recommended resources to start with. These requirements should be adjusted to suit the specific deployment. 
 
-- Additionally, a minimum of 50 GB disk space is required.
+|Service           | CPU Unit   |    RAM      |  Comments |
+|------------------|------------|-------------| ----------|
+|fido2             | 0.5        |    0.5GB    | 
+|scim              | 1.0        |    1.0GB    |
+|config - job      | 0.5        |    0.5GB    | Required if Cloud Native
+|jackrabbit        | 1.5        |    1GB      | Required if Cloud Native
+|persistence - job | 0.5        |    0.5GB    | Required if Cloud Native
+|SAML IDP          | 1.0        |    1.0GB    | 
+|oxPassport        | 0.7        |    0.9GB    | 
+|oxd-server        | 1          |    0.4GB    | 
+|nginx             | 1          |    1GB      |
+|key-rotation      | 0.3        |    0.3GB    |
+|cr-rotate         | 0.2        |    0.2GB    |
+|casa              | 0.5        |    0.5GB    |
+|radius            | 0.7        |    0.7GB    | 
 
 - Gluu must be deployed on a server or VM with a static IP Address. The static IP address should resolve to a computer hostname which can be achieved by adding an entry to the DNS server or in `/etc/hosts`.     
 
@@ -64,6 +92,7 @@ To check the status of these ports in Ubuntu, use the following commands (other 
 ufw status verbose
 ```
 
+If the status is found to be inactive, run the `ufw enable` command.
 
 The default for `ufw` is to `deny incoming` and `allow outgoing`. To reset your setting to default :
 
@@ -231,6 +260,8 @@ or
 ```
 
 Restart the server.
+
+In the case of Ubuntu 18 or higher, use the file present in /etc/netplan to set the static IP address.
 
 ## Fully Qualified Domain Name (FQDN)
 
