@@ -9,7 +9,7 @@ The Gluu Server administration interface is accessible by navigating to `https:/
 ## Dashboard
 After successful authentication, the administrator is taken to the Dashboard. Some basic information about the VM/server is displayed, as well as the server version, free memory, and disk space. A metrics graph is shown to report some quick statistics about user authentications handled by the service. In the top right, there is a user icon which can be used to log out of oxTrust. The left-hand menu is used to navigate the admin interface.
 
-![Welcome to Gluu Server](../img/admin-guide/oxtrust/42_homePage.PNG)
+![Welcome to Gluu Server](../img/admin-guide/oxtrust/43_homepage.png)
 
 ## Localization of oxTrust UI
 
@@ -63,7 +63,7 @@ There are four tabs in the organization configuration page:
 
 #### System Configuration
 
-![system-config-options](../img/admin-guide/oxtrust/42_org_configuration.PNG)
+![system-config-options](../img/admin-guide/oxtrust/43_org_configuration.PNG)
 
 - Self-service password reset: Allow users to trigger the password reset sequence by following a URL like `https://your.idp.host/identity/person/passwordReminder.htm`. A new password will be sent to the email box provided in "Email" attribute of their user entry (if any). In order for this feature to work, the admin will also need to perform [SMTP Server Configuration](#smtp-server-configuration)      
 
@@ -81,7 +81,7 @@ There are four tabs in the organization configuration page:
 
 #### SMTP Server Configuration     
 
-![SMTP Configuration](../img/admin-guide/oxtrust/42_smtp_configuration.PNG)
+![SMTP Configuration](../img/admin-guide/oxtrust/43_smtp_configuration.PNG)
 
 The Gluu Server needs a mail server in order to send notifications. All fields in this form are mandatory and the configuration can be tested before confirmation.
 
@@ -98,7 +98,7 @@ The Gluu Server needs a mail server in order to send notifications. All fields i
      
 #### Organization Settings  
 
-![Organization Settings](../img/admin-guide/oxtrust/42_org_settings.PNG)
+![Organization Settings](../img/admin-guide/oxtrust/43_org_settings.PNG)
 
 From the Organization Settings page, the administrator can manage the organization name, logo, and favicon. This page also contains the name of the Gluu Server manager group. Users added to this group will have administrator access to the Gluu Server.
 
@@ -116,7 +116,7 @@ The following tabs are included in the `JSON Configuration` menu:
 * [Cache Provider Configuration](#cache-provider-configuration)
 * [oxTrust Import Configuration](#oxtrust-import-configuration)
 
-![JSON Configuration Headers](../img/admin-guide/oxtrust/42_oxtrust_json_configuration.PNG)
+![JSON Configuration Headers](../img/admin-guide/oxtrust/43_oxtrust_json_configuration.PNG)
 
 ### oxTrust Configuration
 From this tab, you can access and edit the oxTrust JSON configuration file. 
@@ -133,7 +133,7 @@ An administrator can allow or deny access to URIs by updating JSON properties in
 
 ### oxAuth Configuration
 
-![oxAuth Configuration](../img/admin-guide/oxtrust/42_oxauth_json_configuration.PNG)
+![oxAuth Configuration](../img/admin-guide/oxtrust/43_oxauth_json_configuration.PNG)
 
 The oxAuth JSON configuration page gives easy access to the different endpoints used by Gluu Server CE. 
 This page also contains the supported response, grants, and algorithms. 
@@ -144,7 +144,7 @@ The Gluu Server administrator can manage oxAuth sessions by adding the desired s
 
 ### Cache Provider Configuration
 
-![Cache Provider Configuration](../img/admin-guide/oxtrust/42_cacheProvider.PNG)
+![Cache Provider Configuration](../img/admin-guide/oxtrust/43_cacheProvider.PNG)
 
 The following cache providers are now supported and can be selected via the `cacheProviderType` combo box field:
 
@@ -157,7 +157,7 @@ Full configuration options can be found at the [Cache Provider Reference doc](..
 
 ### oxTrust Import Configuration
 
-![oxtrustimport](../img/admin-guide/oxtrust/42_oxTrust_import_configuration.PNG)
+![oxtrustimport](../img/admin-guide/oxtrust/43_oxTrust_import_configuration.PNG)
 
 The oxTrust Import Person Configuration page contains attribute values that are available for import via file. If importing users via file, all attributes included in the file should be specified in this table. 
 
@@ -175,7 +175,7 @@ Learn how to import users via file in the [User Management guide](../user-manage
 ### Manage LDAP Authentication
 This section allows the Gluu Server administrator to define how and where the server should connect to authenticate users. If it is a remote LDAP/Active Directory server, the values are required. Put the details of the data source that you are trying to connect with Gluu Server. For example, the data source can be your back-end Active Directory, or your local LDAP server.
 
-![Manage LDAP Authentication](../img/admin-guide/oxtrust/42_Manage_Authentication.PNG)
+![Manage LDAP Authentication](../img/admin-guide/oxtrust/43_Manage_Authentication.PNG)
 
 * _Name:_ This field contains the name of the authentication server
 
