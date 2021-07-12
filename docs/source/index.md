@@ -1,7 +1,7 @@
 # Gluu Server 4.3 Documentation
 
 !!! Important
-    Gluu Server version 4.3 is currently in Open Beta and is therefore not suitable for production environments. This version may still contain known bugs and its stability is not guaranteed.
+    Gluu Server version 4.3.0 is currently in Open Beta and is therefore not suitable for production environments. This version may still contain known bugs and its stability is not guaranteed.
 
 
 ## Introduction
