@@ -266,7 +266,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             
         #### Gluu restore step
         
-        === "Kustomize"
+        === "Kustomize - Depreciated"
         
             1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
             
@@ -335,7 +335,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
         
         A typical installation of Gluu using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases)  will automatiically install a backup strategy that will backup opendj / wren:ds every 10 mins `/opt/opendj/ldif`. However, the couchbase backup can be setup manually:
         
-        === "Kustomize"
+        === "Kustomize - Depreciated"
         
             1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.1/README.md#build-pygluu-kubernetespyz-manually).
             
@@ -350,7 +350,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             1.  Run :
             
                  ```bash
-                 git clone --single-branch --branch 4.2 https://github.com/GluuFederation/cloud-native-edition.git
+                 git clone --single-branch --branch 4.3 https://github.com/GluuFederation/cloud-native-edition.git
                  cd pygluu/kubernetes/templates/helm/ldap-backup
                  ```
                  
@@ -402,7 +402,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             cp backup-1.ldif backup-this-copy.ldif
             ```
             
-        === "Kustomize"
+        === "Kustomize - Depreciated"
                 
             1.  Run :
             

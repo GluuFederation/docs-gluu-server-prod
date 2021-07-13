@@ -22,14 +22,18 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `admin_inum`                                  | `d3afef58-c026-4514-9d4c-e0a3efb4c29d `            |
 | `api_rp_client_jks_fn`                        | `/etc/certs/api-rp.jks`                            |
 | `api_rp_client_jwks_fn`                       | `/etc/certs/api-rp-keys.json`                      |
+| `api_rs_client_cert_alg`                      | `RS512`                            |
+| `api_rs_client_cert_alias`                    | `7193c192-c21d-4fa8-b13b-0667593a1f6f_sig_rs512`                            |
 | `api_rs_client_jks_fn`                        | `/etc/certs/api-rs.jks`                            |
 | `api_rs_client_jwks_fn`                       | `/etc/certs/api-rs-keys.json`                      |
 | `api_test_client_id`                          | `0008-db36db1f-025e-4164-aeed-f82df064eee8`        |
+| `auth_enc_keys`                               | `RSA1_5 RSA-OAEP`        |
+| `auth_sig_keys`                               | `RS256 RS384 RS512 ES256 ES384 ES512 PS256 PS384 PS512`        |
 | `city`                                        | `Austin`                                           |
 | `couchbaseTrustStoreFn`                       | `/etc/certs/couchbase.pkcs12`                      |
 | `country_code`                                | `US`                                               |
 | `default_openid_jks_dn_name`                  | `CN=oxAuth CA Certificates`                        |
-| `fido2ConfigFolder`                           | `/etc/gluu/conf/fido2`                             |
+| `fido2ConfigFolder`                             | `/etc/gluu/conf/fido2`                             |
 | `gluu_radius_client_id`                       | `1701.9c798f32-1b01-42e9-99fe-415060e69e8e`        |
 | `hostname`                                    | `demoexample.gluu.org`                             |
 | `idp3Folder`                                  | `/opt/shibboleth-idp`                              |
@@ -39,7 +43,6 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `ldap_binddn`                                 | `cn=directory manager`                             |
 | `ldap_init_host`                              | `opendj`                                           |
 | `ldap_init_port`                              | `1636`                                             |
-| `ldap_peers`                                  | `["gluu-opendj-0.opendj.gluu.svc.cluster.local"]`  |
 | `ldap_port`                                   | `1389`                                             |
 | `ldap_site_binddn`                            | `cn=directory manager`                             |
 | `ldaps_port`                                  | `1636`                                             |
@@ -66,6 +69,8 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `passport_rp_client_jwks_fn`                  | `/etc/certs/passport-rp-keys.json`                 |
 | `passport_rp_ii_client_id`                    | `1503.3bda64b7-293e-4160-9c97-a5592c1fbd0a`        |
 | `passport_rs_client_id`                       | `1501.c7165c37-8208-4b72-9378-de60deb279b4`        |
+| `passport_rs_client_cert_alg`                 | `RS512`        |
+| `passport_rs_client_cert_alias`               | `a98989b1-11f3-400f-a311-b9db088d331a_sig_rs512`        |
 | `passport_rs_client_jks_fn`                   | `/etc/certs/passport-rs.jks`                       |
 | `passport_rs_client_jwks_fn`                  | `/etc/certs/passport-rs-keys.json`                 |
 | `radius_jwt_keyId`                            | `996e281b-a63a-44a9-badf-197f9fd1aa0f_sig_rs512`   |
@@ -73,10 +78,13 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `scim_rp_client_id`                           | `1202.4099a09e-f300-4fa8-8cfd-cb1347149652`        |
 | `scim_rp_client_jks_fn`                       | `etc/certs/scim-rp.jks`                            |
 | `scim_rp_client_jwks_fn`                      | `/etc/certs/scim-rp-keys.json`                     |
+| `scim_rs_client_cert_alg`                     | `RS512`        |
+| `scim_rs_client_cert_alias`                   | `a515336b-cb7f-4cc0-88cc-7ee89f0af6a7_sig_rs512`        |
 | `scim_rs_client_id`                           | `1201.70bb198a-a10f-461b-81a1-68fa52ca0646`        |
 | `scim_rs_client_jks_fn`                       | `/etc/certs/scim-rs.jks`                           |
 | `scim_rs_client_jwks_fn`                      | `/etc/certs/scim-rs-keys.json`                     |
 | `scim_test_client_id`                         | `0008-1b21974a-5d5c-43f3-b332-e66a6399f2b5`        |
+| `serf_peers`                                  | `["gluu-opendj-0.opendj.gluu.svc.cluster.local"]`  |
 | `shibJksFn`                                   | `/etc/certs/shibIDP.jks`                           |
 | `shibboleth_version`                          | `v3`                                               |
 | `state`                                       | `TX`                                               |
@@ -94,6 +102,7 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `api_rs_client_jks_pass_encoded`          | pyDes + base64          |                                   |
 | `api_rs_jks_base64`                       | pyDes + base64          | /etc/certs/api-rs.jks             |
 | `api_test_client_secret`                  | base64                  |                                   |
+| `couchbase_shib_user_password`            | base64                  |                                   |
 | `encoded_ldapTrustStorePass`              | pyDes + base64          |                                   |
 | `encoded_ox_ldap_pw`                      | pyDes + base64          |                                   |
 | `encoded_oxtrust_admin_password`          | ldap_encode + base64    |                                   |
@@ -101,11 +110,12 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `encoded_shib_jks_pw`                     | pyDes + base64          |                                   |
 | `gluu_ro_client_base64_jwks`              | base64                  | /etc/certs/gluu-radius.keys       |
 | `gluu_ro_encoded_pw`                      | base64                  |                                   |
-| `idp3EncryptionCertificateText`           | base64                  | /etc/certs/idp-encryption.crt     |
+| `idp3EncryptionCertificateText`           | base64                   | /etc/certs/idp-encryption.crt     |
 | `idp3EncryptionKeyText`                   | base64                  | /etc/certs/idp-encryption.key     |
-| `idp3SigningCertificateText`              | base64                  | /etc/certs/idp-signing.crt        |
+| `idp3SigningCertificateText`              | base64                   | /etc/certs/idp-signing.crt        |
 | `idp3SigningKeyText`                      | base64                  | /etc/certs/idp-signing.key        |
 | `idpClient_encoded_pw`                    | pyDes + base64          |                                   |
+| `jcr_last_pw`                            | base64          |       |
 | `ldap_pkcs12_base64`                      | pyDes + base64          | /etc/certs/opendj.pkcs12          |
 | `ldap_ssl_cacert`                         | pyDes + base64          | /etc/certs/opendj.pem             |
 | `ldap_ssl_cert`                           | pyDes + base64          | /etc/certs/opendj.crt             |
@@ -131,6 +141,7 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `passport_sp_key_base64`                  | pyDes + base64          | /etc/certs/passport-sp.key        |
 | `radius_jks_base64`                       | pyDes + base64          | /etc/certs/gluu-radius.jks        |
 | `radius_jwt_pass`                         | pyDes + base64          |                                   |
+| `redis_pw`                                | base64          |                                   |
 | `scim_rp_client_base64_jwks`              | base64                  | /etc/certs/scim-rp-keys.json      |
 | `scim_rp_client_jks_pass`                 | base64                  |                                   |
 | `scim_rp_client_jks_pass_encoded`         | pyDes + base64          |                                   |
@@ -140,6 +151,8 @@ kubectl get configmap  gluu -n <namespace> -o yaml
 | `scim_rs_client_jks_pass_encoded`         | pyDes + base64          |                                   |
 | `scim_rs_jks_base64`                      | pyDes + base64          | /etc/certs/scim-rs.jks            |
 | `scim_test_client_secret`                 | base64                  |                                   |
+| `sealer_jks_base64`                 | base64                  |                                   |
+| `sealer_kver_base64`                 | base64                  |                                   |
 | `shibIDP_cert`                            | pyDes + base64          | /etc/certs/shibIDP.crt            |
 | `shibIDP_jks_base64`                      | pyDes + base64          | /etc/certs/shibIDP.jks            |
 | `shibIDP_key`                             | pyDes + base64           | /etc/certs/shibIDP.key           |

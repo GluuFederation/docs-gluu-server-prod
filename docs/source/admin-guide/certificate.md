@@ -145,7 +145,7 @@
                       restartPolicy: Never
                       containers:
                         - name: web-key-rotation
-                          image: gluufederation/certmanager:4.3.0_01
+                          image: gluufederation/certmanager:4.3.0_b1
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm # This may be differnet in Helm
@@ -200,7 +200,7 @@
                               path: gluu_https.key                              
                       containers:
                         - name: load-web-key-rotation
-                          image: gluufederation/certmanager:4.3.0_01
+                          image: gluufederation/certmanager:4.3.0_b1
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm  #This may be differnet in Helm
@@ -251,7 +251,7 @@
                     spec:
                       containers:
                         - name: oxauth-key-rotation
-                          image: gluufederation/certmanager:4.3.0_01
+                          image: gluufederation/certmanager:4.3.0_b1
                           env:
                             - name: GLUU_CONTAINER_MAIN_NAME
                               value: "oxauth" # Place oxauth container name 
@@ -267,20 +267,30 @@
                                 name: gluu-config-cm
                           args: ["patch", "oxauth", "--opts", "interval:48", "--opts", "key-strategy:OLDER", "--opts", "privkey-push-delay:300", "--opts", "privkey-push-strategy:NEWER"]
                           #volumeMounts:
+                          # If using Couchbase
                           #- mountPath: /etc/gluu/conf/couchbase_password 
                           #  name: cb-pass
                           #  subPath: couchbase_password
                           #- mountPath: /etc/certs/couchbase.crt
                           #  name: cb-crt
                           #  subPath: couchbase.crt
+                          # If using SQL
+                          #- name: sql-pass
+                          #  mountPath: "/etc/jans/conf/sql_password"
+                          #  subPath: sql_password
                       restartPolicy: Never
                       #volumes:
+                      # If using Couchbase
                       #- name: cb-pass
                       #  secret:
                       #    secretName: cb-pass
                       #- name: cb-crt
                       #  secret:
                       #    secretName: cb-crt
+                      # If using SQL
+                      #- name: sql-pass
+                      #  secret:
+                      #    secretName: {{ .Release.Name }}-sql-pass
             ```
         
         !!! Warning
@@ -324,7 +334,7 @@
                   restartPolicy: Never
                   containers:
                     - name: oxshibboleth-key-rotation
-                      image: gluufederation/certmanager:4.3.0_01
+                      image: gluufederation/certmanager:4.3.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -369,7 +379,7 @@
                   restartPolicy: Never
                   containers:
                     - name: oxd-key-rotation
-                      image: gluufederation/certmanager:4.3.0_01
+                      image: gluufederation/certmanager:4.3.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -413,7 +423,7 @@
                   restartPolicy: Never
                   containers:
                     - name: ldap-key-rotation
-                      image: gluufederation/certmanager:4.3.0_01
+                      image: gluufederation/certmanager:4.3.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -458,7 +468,7 @@
                   restartPolicy: Never
                   containers:
                     - name: passport-key-rotation
-                      image: gluufederation/certmanager:4.3.0_01
+                      image: gluufederation/certmanager:4.3.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -498,7 +508,7 @@
                   restartPolicy: Never
                   containers:
                     - name: scim-key-rotation
-                      image: gluufederation/certmanager:4.3.0_01
+                      image: gluufederation/certmanager:4.3.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
