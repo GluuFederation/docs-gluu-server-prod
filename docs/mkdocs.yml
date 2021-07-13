@@ -157,7 +157,7 @@ nav:
         - 'Service Commands': 'operation/services.md'
         - 'Patches': 'upgrade/patches.md'
         - 'Backups': 'operation/backup.md'
-        - 'Migration': 'operation/ce_to_cn_migration.md'
+        - 'CE to CN Migration': 'operation/ce_to_cn_migration.md'
         - 'Security tips': 'operation/security.md'
         - 'Performance tuning': 'operation/fine-tuning.md'
         - 'Ports': 'operation/ports.md'
