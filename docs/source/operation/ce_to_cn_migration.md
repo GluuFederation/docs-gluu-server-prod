@@ -270,7 +270,7 @@ This operational guide walks through migration from the community edition which 
     You will be prompted to migrate from CE.
     
     !!!note
-        The services will not run until the persistence backup date is imported.
+        The services will not run until the persistence backup data is imported.
   
 1.  Import backup data into the persistence manually.
 
