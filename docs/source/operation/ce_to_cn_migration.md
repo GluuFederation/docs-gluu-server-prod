@@ -1,23 +1,23 @@
-# Migratinng from the Community Edition (VM base) to the Cloud Native edition
+# Migrating from the Community Edition (VM base) to the Cloud Native edition
 
 ## Overview
-This operational guide walks through migration from the community edition which uses a VM approach to the cloud native edition which is primarily a Kubernetes cluster.
+This operational guide walks through migration from the community edition, which uses a VM approach, to the cloud native edition, which is primarily a Kubernetes cluster.
 
-## Requirments
+## Requirements
 
 -   Access to the CE VM
 -   Gluu CE version >= 4.3    
--   A Kubernetes cluster, and access to kubectl. You may take a look at the following [section](https://gluu.org/docs/gluu-server/4.2/installation-guide/install-kubernetes/#system-requirements-for-cloud-deployments) to get a better sense on sizing requirements for the Kubernetes cluster.
+-   A Kubernetes cluster, and access to kubectl. You may take a look at the following [section](https://gluu.org/docs/gluu-server/4.3/installation-guide/install-kubernetes/#system-requirements-for-cloud-deployments) to get a better sense on sizing requirements for the Kubernetes cluster.
 
 ## Migration Steps
 
-1.  Login to the server where CE is installed:
+1.  Log in to the server where CE is installed:
 
     ```bash
     ssh $USER@$CE_SERVER
     ```
     
-1.  Backup the data in persistence and save them elsewhere.
+1.  Back up the data in persistence and save them elsewhere.
     
 1.  Set an environment variable to mark where the root directory of CE installation is.
 
@@ -251,7 +251,7 @@ This operational guide walks through migration from the community edition which 
         ]
         ```
 
-1.  Logout from the server where CE is installed.
+1.  Log out from the server where CE is installed.
 
 1.  Download manifests files:
 
