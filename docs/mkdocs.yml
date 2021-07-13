@@ -3,7 +3,7 @@ site_name: Gluu Server 4.3 Docs
 site_description: Documentation for Gluu Server
 
 # Copyright
-copyright: Copyright &copy; 2020, Gluu, Inc.
+copyright: Copyright &copy; 2021, Gluu, Inc.
 
 # Repository
 docs_dir: source
