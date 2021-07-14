@@ -26,7 +26,7 @@ The Gluu Server will create its file system under `/root/` and will be installed
 For **Debian 10 (Buster)**, run the following commands:
 
 ```
-echo "deb https://repo.gluu.org/debian/ buster-stable main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/debian/ buster-testing main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
@@ -50,7 +50,7 @@ apt-mark hold gluu-server
 For **Debian 9 (Stretch)**, run the following commands:
 
 ```
-echo "deb https://repo.gluu.org/debian/ stretch-stable main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/debian/ stretch-testing main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
