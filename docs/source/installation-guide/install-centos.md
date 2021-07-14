@@ -26,7 +26,7 @@ The Gluu Server will create its file system under `/root/` and will be installed
 For **CentOS 8**, run the following commands to install:
 
 ```
-wget https://repo.gluu.org/centos/Gluu-centos8.repo -O /etc/yum.repos.d/Gluu.repo
+wget https://repo.gluu.org/centos/Gluu-centos-8-testing.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
@@ -54,7 +54,7 @@ yum versionlock gluu-server
 For **CentOS 7**, run the following commands to install:
 
 ```
-wget https://repo.gluu.org/centos/Gluu-centos7.repo -O /etc/yum.repos.d/Gluu.repo
+wget https://repo.gluu.org/centos/Gluu-centos-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
