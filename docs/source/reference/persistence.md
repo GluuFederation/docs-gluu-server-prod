@@ -4,7 +4,7 @@
 
 In previous versions the Gluu Server was tightly bundled with LDAP for persistence. In 4.x, the persistence layer has been re-architected, and there is no longer a tight bundling with a specific DB (i.e. LDAP). Now, new persistence plugins can be added and data can be split between multiple persistence modules.
 
-Gluu 4.3 supports these persistence modules out-of-the-box:
+Gluu 4.3 CE supports these persistence modules out-of-the-box:
 
 1. [LDAP](https://github.com/GluuFederation/oxCore/tree/master/persistence-ldap), which is still the default persistence method.
 
@@ -225,3 +225,108 @@ certsDir=/etc/certs
 confDir=
 pythonModulesDir=/opt/gluu/python/libs
 ```
+
+## Data Type Chart
+
+| Name	| LDAP	| SQL	| Spanner	| objectClass/Table |
+| ---- | --- | --- | --- | --- |
+| oxDeviceData	| directoryString	| TINYTEXT	| STRING(MAX)	| oxDeviceRegistration | 
+| oxPublicKeyId	| directoryString	| VARCHAR(96)	| STRING(96)	| oxFido2RegistrationEntry |
+| oxAuthRequestURI	| directoryString	| TINYTEXT	| STRING(MAX)	| oxAuthClient| 
+| oxAuthConfWebKeys	| directoryString	| TEXT	| STRING(MAX)	| oxAuthConfiguration |
+| gluuSAML1URI	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuAttribute |
+| oxData	| directoryString	| TEXT	| STRING(MAX)	| oxMetric |
+| oxCacheConfiguration	| directoryString	| TEXT	| STRING(MAX)	| gluuConfiguration |
+| memberOf	| distinguishedName	| JSON	| ARRAY<STRING(MAX)>	| gluuPerson, gluuOrganization |
+| oxAuthTokenEndpointAuthMethod	| directoryString	| VARCHAR(64)	| STRING(64)	| oxAuthClient |
+| oxInvolvedClients	| directoryString	| TEXT	| STRING(MAX)	| oxAuthSessionId |
+| oxScriptError	| directoryString	| TEXT	| STRING(MAX)	| oxCustomScript |
+| gluuThemeColor	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuOrganization |
+| oxIDPAuthentication	| directoryString	| JSON	| ARRAY<STRING(MAX)>	| gluuConfiguration |
+| oxAuthTosURI	| directoryString	| TINYTEXT	| STRING(MAX)	| oxAuthClient |
+| scimCustomSecond	|	| JSON	| ARRAY<STRING(MAX)> | |	
+| oxSmtpConfiguration	| directoryString	| JSON	| ARRAY<STRING(MAX)>	| gluuConfiguration |
+| oxAuthLogoURI	| directoryString	| TINYTEXT	| STRING(MAX)	| oxAuthClient |
+| oxRegistrationData	| directoryString	| TEXT	| STRING(MAX)	| oxFido2RegistrationEntry |
+| nickname	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuPerson |
+| doc_id		| | VARCHAR(64)	|STRING(64) | |	
+| gluuStatus	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuSAMLconfig, gluuConfiguration, gluuAttribute, gluuPerson, gluuInumMap, oxPassportConfiguration, gluuOrganization, gluuGroup |
+| oxResource	| directoryString |	TINYTEXT	| STRING(MAX) |	oxUmaResource |
+| gluuConfDynamic |	directoryString |	TEXT	| STRING(MAX)	| gluuApplicationConfiguration |
+| oxAuthConfStatic	| directoryString	| TEXT	| STRING(MAX)	| oxAuthConfiguration |
+| tknTyp	| directoryString	| VARCHAR(32)	| STRING(32)	| token |
+| member	| directoryString	| JSON	| ARRAY<STRING(MAX)>	| gluuGroup |
+| middleName	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuPerson |
+| oxAuthenticationMode	| directoryString |	VARCHAR(64) |	STRING(64) |	gluuConfiguration |
+| scp |	directoryString	| TEXT	| STRING(MAX)	| token |
+| oxScopeType |	directoryString	| VARCHAR(64)	| STRING(64)	| oxAuthCustomScope |
+| oxSoftwareStatement	| directoryString	| TEXT	| STRING(MAX)	| oxAuthClient |
+| oxAuthJwks	| directoryString	| TEXT	| STRING(MAX)	| oxAuthClient |
+| oxId	| directoryString	| VARCHAR(128)	| STRING(128)	| oxProxOp, oxAuthCustomScope, oxClientAuthorization, oxExpiredObject, oxUmaResource, oxDeviceRegistration, oxAuthSessionId, oxPushDevice, oxFido2AuthenticationEntry, oxSectorIdentifier, oxRp, oxFido2RegistrationEntry, oxU2fRequest, pairwiseIdentifier, oxPushApplication
+| description	| directoryString	| VARCHAR(768)	| STRING(MAX)	| gluuSAMLconfig, gluuConfiguration, oxAuthCustomScope, oxUmaResource, oxCustomScript, oxDeviceRegistration, gluuAttribute, gluuCustomPerson, oxLink, oxSectorIdentifier, oxAuthClient, gluuOrganization, gluuGroup |
+| oxAuthClientSecret	| directoryString	| VARCHAR(64)	| STRING(64)	| oxAuthClient |
+| picture	| directoryString	| VARCHAR(96)	| STRING(96)	| gluuPerson |
+| gluuAttributeType	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuAttribute |
+| oxAuthUserDN	| distinguishedName	| VARCHAR(128)	| STRING(128)	| oxAuthSessionId |
+| inum	| directoryString	| VARCHAR(64)	| STRING(64)	| oxShibbolethCASProtocolConfiguration, gluuSAMLconfig, gluuConfiguration, oxProxOp, oxAuthCustomScope, samlAcr, oxProxClient, oxUmaResource, oxCustomScript, gluuInvoice, oxScript, gluuAttribute, oxAuthClient, gluuPerson, gluuInumMap, gluuOrganization, gluuGroup, oxEntry, gluuOxtrustStat
+| oxAuthUmaScope	| directoryString	| VARCHAR(128)	| STRING(128)	| oxUmaResource, oxUmaResourcePermission
+| gluuAttributeName	| directoryString |	VARCHAR(64)	| STRING(64)	| gluuAttribute |
+| oxValidation |	directoryString	| TINYTEXT	| STRING(MAX)	| gluuAttribute |
+| oxTrustConfCacheRefresh	| directoryString	| TEXT |	STRING(MAX) |	oxTrustConfiguration |
+| dat	| directoryString	| TEXT |	STRING(MAX)	| cache, oxExpiredObject, oxRp, jansStatEntry |
+| oxAuthResponseType	| directoryString	| JSON	 | ARRAY<STRING(MAX)>	| oxAuthClient |
+| clnId	| directoryString	| VARCHAR(64)	| STRING(64)	| cibaRequest, token, oxAuthUmaPCT, oxAuthUmaRPT|
+| oxClaimRedirectURI	| directoryString	| TINYTEXT	| STRING(MAX)	| oxAuthClient |
+| oxAuthPolicyURI	| directoryString	| TINYTEXT	| STRING(MAX)	| oxAuthClient |
+| programmingLanguage	| directoryString	| VARCHAR(64)	| STRING(64)	| oxCustomScript |
+| oxSessionState	| directoryString	| TEXT	| STRING(MAX)	| oxAuthSessionId |
+| uid	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuPerson, gluuOrganization |
+| gluuAttributeOrigin	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuAttribute |
+| gluuConfStatic	| directoryString	| TEXT	| STRING(MAX)	| gluuApplicationConfiguration |
+| oxAuthSessionAttribute	| directoryString	| TEXT	| STRING(MAX)	| oxAuthSessionId |
+| gluuOrgShortName	| directoryString	| VARCHAR(64)	| STRING(64)	| gluuOrganization |
+| oxAccessTokenSigningAlg	| directoryString	| VARCHAR(64)	| STRING(64)	| oxAuthClient |
+| oxAuthClientURI	| directoryString |	TINYTEXT	| STRING(MAX)	| oxAuthClient |
+| displayName	| directoryString	| VARCHAR(128) |	STRING(128)	| gluuSAMLconfig, gluuConfiguration, oxProxOp, oxAuthCustomScope, oxProxClient, oxUmaResource, oxCustomScript, oxDeviceRegistration, gluuAttribute, oxAuthClient, gluuPerson, gluuOrganization, gluuGroup, oxFido2RegistrationEntry, oxEntry, oxPushApplication |
+| oxLogViewerConfig	| directoryString	| TEXT	| STRING(MAX)	| gluuConfiguration |
+| gluuSAML2URI	| directoryString	| VARCHAR(64)	| STRING(64) |	gluuAttribute |
+| oxApplicationType	| directoryString	| VARCHAR(64)	| STRING(64)	| oxMetric |
+| oxScript	| directoryString	| TEXT	| STRING(MAX)	| oxCustomScript, oxScript |
+| oxAuthConfErrors	| directoryString	| TEXT	| STRING(MAX)	| oxAuthConfiguration |
+| oxAuthSubjectType	| directoryString	| VARCHAR(64)	| STRING(64)	| oxAuthClient |
+| oxAuthGrantType	| directoryString	| JSON	| ARRAY<STRING(MAX)>	| oxAuthClient |
+| oxAuthLogoutURI	| directoryString	| TINYTEXT	| STRING(MAX) |	oxAuthClient |
+| oxAttributes |	directoryString	| TEXT	| STRING(MAX) |	oxAuthCustomScope, oxUmaResourcePermission, oxAuthClient |
+| oxAuthPermissionGrantedMap	| directoryString	| TEXT	| STRING(MAX)	| oxAuthSessionId |
+| classRef	| directoryString	| TEXT	| STRING(MAX)	| samlAcr |
+| oxAuthSectorIdentifierURI	| directoryString	| TINYTEXT	| STRING(MAX)	| oxAuthClient |
+| nnc	| directoryString	| TEXT	| STRING(MAX)	| token |
+| oxAuthClientId	| directoryString	| VARCHAR(64)	| STRING(64)	| oxClientAuthorization, oxSectorIdentifier, pairwiseIdentifier |
+| oxTrustConfImportPerson	| directoryString	| TEXT	| STRING(MAX)	| oxTrustConfiguration |
+| oxAuthInitiateLoginURI	| directoryString	| TINYTEXT	| STRING(MAX)	| oxAuthClient |
+| oxAuthIdTokenSignedResponseAlg	| directoryString	| VARCHAR(64)	| STRING(64)	| oxAuthClient |
+| oxDocumentStoreConfiguration	| directoryString	| TEXT	| STRING(MAX)	| gluuConfiguration |
+| oxAuthJwksURI	| directoryString	| TINYTEXT	| STRING(MAX) |	oxAuthClient |
+| attr	| directoryString	| TEXT	| STRING(MAX)	| token, jansStatEntry |
+| oxScriptType	| directoryString	| VARCHAR(64)	| STRING(64)	| oxCustomScript, oxScript |
+| tknCde	| directoryString	| VARCHAR(80)	| STRING(80)	| token, oxAuthUmaPCT, oxAuthUmaRPT |
+| ou	| directoryString	| VARCHAR(64)	| STRING(64)	| oxShibbolethCASProtocolConfiguration, gluuConfiguration, oxApplicationConfiguration, oxAuthConfiguration, gluuApplicationConfiguration, oxTrustConfiguration, oxPassportConfiguration, vdapcontainer, oxProxConfiguration |
+| urn	| directoryString	| VARCHAR(128)	| STRING(128)	| gluuAttribute |
+| oxTrustMetaLocation	| directoryString	| TINYTEXT	| STRING(MAX)	| oxDeviceRegistration, gluuPerson, gluuGroup |
+| userPassword	| directoryString	| VARCHAR(100)	| STRING(100)	| gluuConfiguration, gluuPerson, gluuOrganization |
+| oxAuthClientIdIssuedAt	| GeneralizedTime	| DATETIME(3)	| TIMESTAMP	| oxAuthClient |
+| oxJwt	| directoryString	| TEXT	| STRING(MAX)	| oxAuthSessionId |
+| oxTrustConfApplication	| directoryString	| TEXT	| STRING(MAX)	| oxTrustConfiguration |
+| oxAuthConfDynamic	| directoryString	| TEXT	| STRING(MAX)	| oxAuthConfiguration | 
+| oxDeviceRegistrationConf	| directoryString	| TEXT	| STRING(MAX)	| oxDeviceRegistration |
+| jwtReq	| directoryString	| TEXT	| STRING(MAX)	| token |
+| oxScopeExpression	| directoryString	| TEXT	| STRING(MAX)	| oxUmaResource |
+| oxDeviceKeyHandle	| directoryString	| VARCHAR(96)	| STRING(96)	| oxDeviceRegistration | 
+| oxConfApplication	| directoryString	| TEXT	| STRING(MAX)	| oxShibbolethCASProtocolConfiguration, oxApplicationConfiguration | 
+| o	| directoryString	| VARCHAR(64)	| STRING(64) | gluuSAMLconfig, gluuConfiguration, vdlabel, vdDirectoryView, gluuPerson, gluuOrganization, gluuGroup
+sn	directoryString	VARCHAR(64)	STRING(64)	gluuPerson |
+| givenName |	directoryString	| VARCHAR(64)	| STRING(64) |	gluuPerson |
+| tknBndCnf	| directoryString	| TINYTEXT	| STRING(MAX) |	token, oxAuthClient |
+| acr	| directoryString	| VARCHAR(48)	| STRING(48)	| token |
+| oxAuthClaimName	| directoryString |	VARCHAR(64)	| STRING(64)	| gluuAttribute |
+| oxUmaPermission	| directoryString |	JSON	| ARRAY<STRING(MAX)>	| oxAuthUmaRPT |
