@@ -1,5 +1,4 @@
-# UNDER CONSTRUCTION
-## PingID MFA authentication script
+# PingID authentication
 
 ## Overview
 
@@ -15,15 +14,15 @@ For a successful deployment the following is required:
 
 - [PingID mobile app](https://www.pingidentity.com/en/resources/downloads/pingid.html) (for testing users)
 
-- Test users at both sides Gluu and PingOne 
+- Test users at Gluu and (optionally) at PingOne
 
 ### Mapping of local and remote identities
 
-Configuring the correspondence between local (Gluu) users and remote (PingOne) users is key. Assuming that Gluu `uid` equals to PingOne `username` is not practical. For this purpose it is required to setup an attribute in Gluu's local database to store the reference to the external identity, ie. PingOne username.
+Configuring the correspondence between local (Gluu) users and remote (PingOne) users is key. Assuming that Gluu `uid` equals to PingOne `username` may not be practical. For this purpose it is required to setup an attribute in Gluu's local database to store the reference to the external identity, ie. PingOne username. If your underlying database is LDAP, this [page](https://www.gluu.org/docs/gluu-server/admin-guide/attribute#custom-attributes) explains how to add an attribute to openDJ schema.
 
-It is assumed that such mapping is already in place, that is, the attribute exists and some local users have the attribute populated. If your underlying database is LDAP, this [page](https://www.gluu.org/docs/gluu-server/admin-guide/attribute#custom-attributes) explains how to add an attribute to openDJ schema.
+The authentication flow the custom interception script implements may create users at ping side: if a user attempts to login (with Gluu) and the username referenced by the mapping attribute is not found as a pingID user, a new (remote) user is added. This applies as long as the [script](#add the-custom-script) is parameterized with the `addNonExistentPingUser` property. 
 
-The authentication flow the custom interception script implements does not make any user provisioning: if a user attempts to login (with Gluu) and there is no correspondence to a remote user, authentication is performed by means of user+password combination only. No linking of external accounts takes place through the flow. The next section provides more information about the actual flow steps.
+When the mapping attribute is not populated, authentication is performed by means of user+password combination only. The next section provides more information about the actual flow steps.
 
 ## Authentication flow overview
 
@@ -250,6 +249,8 @@ This section describes configurations to be carried out in Gluu Server.
 1.  Repeat the process for `token`, `org_alias`, and `authenticator_url`
 
 1.  Add another property called `pingUserAttr` and set its value to the name of the attribute that will contain the reference to the remote pingID user, as explained [here](#mapping-of-local-and-remote-identities)
+
+1. (Optional) Add a property `addNonExistentPingUser` if you require users to be created at ping when nonexisting.
 
 1.  Scroll down and click on the `Update` button at the bottom of the page
 
