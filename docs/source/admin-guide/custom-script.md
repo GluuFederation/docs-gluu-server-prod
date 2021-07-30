@@ -318,21 +318,7 @@ This script can be used in an oxAuth application only. Please check sample below
 
 ## SCIM
 
-SCIM script allows you to execute custom logic when certain SCIM API operations are invoked. Particularly for create, update, and delete users and groups, custom code can be called just before and after data is persisted to the database.
-
-To enable this feature, SCIM script needs to be enabled from the SCIM tab:
-
-1. Click on `Person Authentication Scripts` > `SCIM`
-
-1. Click on `Enabled` check box
-
-1. Click on `update` at the bottom of the page
-
-![SCIM](../img/admin-guide/scimscriptv4.png)
-
-More on SCIM can be found [here](../user-management/scim2.md)
-
-- [SCIM sample script to extend default logic](https://github.com/GluuFederation/oxExternal/blob/master/scim_event_handler/sample/SampleScript.py)
+SCIM script allows you to execute custom logic when certain SCIM API operations are invoked. To learn more visit [this page](../user-management/scim-scripting.md).
 
 ## Introspection
 

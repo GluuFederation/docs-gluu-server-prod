@@ -737,7 +737,7 @@ The following instructions show how to interact with the UMA-protected SCIM serv
 - Have the requesting party client ID and password at hand. You can grab client ID this way:
     ```
     cd /install/community-edition-setup
-    openssl enc -d -aes-256-cbc setup.properties.last.enc -out setup.properties
+    openssl enc -d -aes-256-cbc -in setup.properties.last.enc -out setup.properties
     cat setup.properties | grep "scim_rp_client"
     ```
     
@@ -1101,6 +1101,9 @@ public void handleError(String title, String description, String scimType) {
     //For a list of possible values of scimType, see table 9 of RFC7644
 }
 ```
+
+## Custom scripts
+The service allows you to execute custom logic when certain SCIM API operations are invoked. To learn more visit [this page](./scim-scripting.md).
 
 ## Additional Features of SCIM Service
 
