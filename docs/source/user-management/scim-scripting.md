@@ -116,9 +116,11 @@ As with any other custom script in Gluu, SCIM scripts are run by the Jython engi
 
 To start, ensure SCIM service is running and a protection mode has been [configured](./scim2.md#api-protection). Then in oxTrust enable the sample script:
 
-1. Click on `Person Authentication Scripts` > `SCIM`
+1. Navigate to `Configuration` > `Other custom Scripts` > `SCIM`
 
-1. Click on `Enabled` check box
+1. Expand the only row (labeled `scim_event_handler`)
+
+1. Click on the `Enabled` check box
 
 1. Click on `update` at the bottom of the page
 
@@ -185,6 +187,7 @@ A boolean value should be returned. A `False` value aborts the corresponding SCI
 
 - Possible valuess for `context.getResourceType()` are: User, Group, FidoDevice, Fido2Device
 - `context.getAccessToken()` is a shortcut method that will give you the access token the caller employed to issue the service call 
+- The `passthrough` field in `context` is an empty `java.util.HashMap` that can be used to carry values from this method to `rejectedResourceOperationResponse` 
 - Note that for resource creation operation, `entity` basically contains the same data supplied in the POST payload. In this case, `entity` has not originated from the database and has not been persisted either
 - For the case of modification, retrieval and removal, `entity` contains the data currently stored in the database for the resource in question
 - Since many values come from Java code, you can always do `getClass().getName()` to get an idea of what type of variables you are dealing with
