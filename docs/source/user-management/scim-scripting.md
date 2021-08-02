@@ -88,8 +88,8 @@ These methods are called if `getApiVersion` returns a number >= 4 (available in 
 
 |Methods|2nd param|2nd param Class/Link|
 |-|-|-|
-|`postSearchUsers`|`results`|[PagedResult<ScimCustomPerson>](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)|
-|`postSearchGroups`|`results`|[PagedResult<GluuGroup>](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)|
+|`postSearchUsers`|`results`|[PagedResult](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)<ScimCustomPerson>|
+|`postSearchGroups`|`results`|[PagedResult](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)<GluuGroup>|
 
 Multiple resources retrieval methods return a boolean. A `False` value aborts the whole SCIM operation and a 500 error is returned. The same applies if the method execution crashes at runtime. 
 
@@ -212,7 +212,7 @@ A String value should be returned:
 |Value|Meaning|
 |-|-|
 |None|The operation is denied|
-|Empty string `""`|The operation is allowed|
+|Empty string (zero length)|The operation is allowed|
 |Non-empty string|The operation is allowed and the value will be interpreted as an SCIM filter expression in order to restrict the search. See section 3.4.2.2 of RFC 7644|
 
 When a non-empty string is returned and the search being performed already contains a search filter, a new filter is created by appending both "subfilters" with an `and` operator.  
