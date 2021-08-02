@@ -7,8 +7,12 @@ With SCIM scripts, custom business logic can be executed when several of the SCI
 - Attach additional information to resources when they are created or updated
 - Implement a fine-grained level of access to resources so different callers have permission to handle only a restricted number of resources
 
-**Note**: In this document, the term *resources* refer to those "entities" the service can manage, for instance, users or groups. The term *operation* refers to any SCIM functionality accessible through its HTTP endpoints.
+**Notes**: 
 
+- In this document, the term *resources* refer to those "entities" the service can manage, for instance, users or groups
+- The term *operation* refers to any SCIM functionality accessible through its HTTP endpoints
+- Basic development skills are assumed. Some grasp of Java and Python are required as well as understanding of the SCIM protocol.
+    
 ## API overview
 
 Custom scripts adhere to a simple API (ie. a well-defined collection of methods/routines) that is described in the following. It is advised to check the dummy script provided [here](https://github.com/GluuFederation/community-edition-setup/raw/version_4.3.0/static/extension/scim/SampleScript.py) as you read this section. 
@@ -52,7 +56,7 @@ These methods are called if `getApiVersion` returns a number >= 2.
 
 |Methods|2nd param|2nd param Class/Link|                                                      
 |-|-|-|
-|`postCreateUser`, `postUpdateUser`, `postDeleteUser`||`user`|[ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java)|
+|`postCreateUser`, `postUpdateUser`, `postDeleteUser`|`user`|[ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java)|
 |`postCreateGroup`, `postUpdateGroup`, `postDeleteGroup`|`group`|[GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.3.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
 
 Post-resource modification methods return a boolean. A `False` value aborts the corresponding SCIM operation and a 500 error is returned. The same applies if the method execution crashes at runtime.
@@ -83,7 +87,7 @@ Any change or manipulation upon the object will not be reflected in the underlyi
 These methods are called if `getApiVersion` returns a number >= 4 (available in Gluu 4.2 onwards).
 
 |Methods|2nd param|2nd param Class/Link|
-|-|-|
+|-|-|-|
 |`postSearchUsers`|`results`|[PagedResult<ScimCustomPerson>](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)|
 |`postSearchGroups`|`results`|[PagedResult<GluuGroup>](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)|
 
@@ -106,12 +110,7 @@ These methods are called if `getApiVersion` returns a number >= 5 (available in 
 
 [Later](#defining-rules-for-execution-of-scim-operations) we'll revisit the topic of access and provide concrete examples.
 
-## Developer insights
-
-!!! Warning
-    For this section basic development skills are assumed. Some grasp of Java and Python are required as well as understanding of the SCIM protocol.
-
-### Getting started
+## Developer's first steps
 
 As with any other custom script in Gluu, SCIM scripts are run by the Jython engine. This allows usage of Python-style coding and leverages all the Java classes available in the SCIM web application classpath.
 
@@ -125,9 +124,9 @@ To start, ensure SCIM service is running and a protection mode has been [configu
 
 ![SCIM](../img/admin-guide/scimscriptv4.png)
 
-Inspect (`tail`) `scim_script.log`. After some seconds you'll see some lines related to script initialization, ie. method `init` being called. This means your script is active and properly running. Click [here](./scim2.md#where-to-locate-scim--related-logs) to learn more about SCIM logs.
+Inspect (`tail`) `scim_script.log`. After some seconds you'll see some lines related to script initialization, ie. method `init` being called. This means your script is active and properly running. Click [here](./scim2.md#where-to-locate-scim-related-logs) to learn more about SCIM logs.
 
-Learning by doing is a good approach to scripting in Gluu. To start, edit the script by adding some `print` statements to the following methods (before their respective `return`s): `createUser`, `postCreateUser`, `allowResourceOperation`. Save the script and check the log, wait until `destroy` and `init` are called. 
+Learning by doing is a good approach to scripting in Gluu. To start, edit the script by adding some `print` statements to the following methods: `createUser`, `postCreateUser`, `allowResourceOperation`. Save the script and check the log, wait until `destroy` and `init` are called. 
 
 Send a user creation request to the service. [Here](./scim2.md#creating-resources) is an example. Note the order in which your prints appear in the log.
 
@@ -150,7 +149,7 @@ for user in results.getEntries():
 
 This is very straightforward code except for the usage of `oxTrustAddresses`. Shouldn't it be simply `addresses` as the known SCIM attribute?
 
-Scripts work with entities that are about to be persisted or have already been saved so they kind of resemble the database structure (schema in LDAP terms). It turns out that database attribute names rarely match with SCIM names. An explanation of this fact can be found [here](./scim2.md#how-is-scim-data-stored?).
+Scripts work with entities that are about to be persisted or have already been saved so they kind of resemble the database structure (schema in LDAP terms). It turns out that database attribute names rarely match with SCIM names. An explanation of this fact can be found [here](./scim2.md#how-is-scim-data-stored).
 
 While it is easy to know the SCIM name of a database attribute, the converse requires checking the code, however since you already have the skill this shouldn't be a problem: in [this](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2/user/UserResource.java) Java class you'll find the representation of a user resource in SCIM spec terms. Pay attention to the `addresses` field and its associated `StoreReference` annotation that contains the attribute where addresses are actually stored.  
 
@@ -165,10 +164,7 @@ for user in results.getEntries():
 
 Ensure no addresses are returned anymore in your SCIM user searches. Happy testing!
 
-## Defining rules for execution of SCIM operations 
-
-!!! Warning
-    For this section basic development skills are assumed. Some grasp of Java and Python are required as well as understanding of the SCIM protocol.
+## Defining rules for execution of SCIM operations
 
 With the `allowResourceOperation` and `allowSearchOperation` methods it can be decided whether the caller should be allowed or denied to execute a given operation based on contextual data.
 
@@ -186,6 +182,7 @@ Parameters are described in the table below:
 A boolean value should be returned. A `False` value aborts the corresponding SCIM operation and a 403 error (FORBIDDEN) is sent as the response. Additionally `rejectedResourceOperationResponse` gets called to obtain a custom message error. If the method execution crashes at runtime, 500 is sent.
 
 **Notes**:
+
 - Possible valuess for `context.getResourceType()` are: User, Group, FidoDevice, Fido2Device
 - `context.getAccessToken()` is a shortcut method that will give you the access token the caller employed to issue the service call 
 - Note that for resource creation operation, `entity` basically contains the same data supplied in the POST payload. In this case, `entity` has not originated from the database and has not been persisted either
@@ -215,7 +212,7 @@ A String value should be returned:
 |Value|Meaning|
 |-|-|
 |None|The operation is denied|
-|Empty string: `""`|The operation is allowed|
+|Empty string `""`|The operation is allowed|
 |Non-empty string|The operation is allowed and the value will be interpreted as an SCIM filter expression in order to restrict the search. See section 3.4.2.2 of RFC 7644|
 
 When a non-empty string is returned and the search being performed already contains a search filter, a new filter is created by appending both "subfilters" with an `and` operator.  
@@ -241,11 +238,12 @@ Since SCIM spec does not offer means to handle partitions of this kind, you deci
 The strategy to implement segmentation is rather simple: 
 - Alter the default SCIM script by supplying a custom implementation for the methods that enforce control of access
 - Make the HTTP header name be a configuration property of the script so that it is not hard-coded
-- Add a configuration property that contains the mapping of `userType`s vs. expected header value in JSON format
+- Add a configuration property that contains the mapping of `userType` value vs. expected header value in JSON format
 
 #### Adding and parsing config properties
 
 In oxTrust expand the SCIM script and add properties:
+
 - `custom_header` with value `USER-SEGMENT-SECRET`
 - `access_map` with value `{ "<ramdom_string>":"Contractor", "<ramdom_string>":"Employee", "<ramdom_string>":"Intern" }`
 
@@ -329,7 +327,7 @@ def allowSearchOperation(self, context, configurationAttributes):
         return "userType eq \"%s\"" % expected_user_type
 ```
 
-Recall this [method](#allowSearchOperation) must return a String. Values `None` and empty string have special meanings: deny and fully allow, respectively. 
+Recall this [method](#allowsearchoperation) must return a String. Values `None` and empty string have special meanings: deny and fully allow, respectively. 
 
 Implement `rejectedSearchOperationResponse` as per your needs.
 
