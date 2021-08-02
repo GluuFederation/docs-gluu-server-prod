@@ -11,7 +11,7 @@ With SCIM scripts, custom business logic can be executed when several of the SCI
 
 ## API overview
 
-Custom scripts adhere to a simple API (ie. a well-defined collection of methods/routines) that is described in the following. It is advised to check the dummy script provided [here](??) as you read this section. 
+Custom scripts adhere to a simple API (ie. a well-defined collection of methods/routines) that is described in the following. It is advised to check the dummy script provided [here](https://github.com/GluuFederation/community-edition-setup/raw/version_4.3.0/static/extension/scim/SampleScript.py) as you read this section. 
 
 ### Scripts' config properties
     
