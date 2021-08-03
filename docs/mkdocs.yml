@@ -86,6 +86,7 @@ nav:
             - 'OTP apps': 'authn-guide/otp.md'
             - 'SMS OTP (Twilio)': 'authn-guide/sms-otp.md'
             - 'SMS OTP (SMPP)': 'authn-guide/sms-otp-smpp.md'
+            - 'PingID': 'authn-guide/pingid.md'
             - 'Duo Security': 'authn-guide/duo.md'
             - 'ThumbSignIn': 'authn-guide/thumbsignin.md'
             - 'FIDO U2F': 'authn-guide/U2F.md'
