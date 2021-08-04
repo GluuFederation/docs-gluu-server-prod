@@ -163,7 +163,7 @@ The user should gain immediate access to the protected resource, with no further
 
 
 ## Relying Party Configuration     
-Through the Relying Party configuration you can customize how different IDP profiles will respond to requests received from the SP, including encryption and digital signature options. The underlying IDPs functionality is described in [the Shibboleth wiki](https://wiki.shibboleth.net/confluence/display/IDP30/RelyingPartyConfiguration). 
+Through the Relying Party configuration you can customize how different IDP profiles will respond to requests received from the SP, including encryption and digital signature options. The underlying IDPs functionality is described in [the Shibboleth wiki](https://wiki.shibboleth.net/confluence/display/IDP4/RelyingPartyConfiguration). 
 
 The "Configure Relying Party" checkbox is accessible on the TR creation page and must be enabled with a specific profile(s) selected as active for this TR to generate a valid configuration. In most cases, just adding the SAML2SSO profile with default settings will suffice.
 
@@ -177,10 +177,10 @@ oxTrust allows you to tweak a limited subset of profiles mentioned in the Shibbo
 
 | Profile  | Configuration Wiki Link |
 | -------  | ----------------------- |
-| SAML2SSO | [https://wiki.shibboleth.net/confluence/display/IDP30/SAML2SSOConfiguration](https://wiki.shibboleth.net/confluence/display/IDP30/SAML2SSOConfiguration) |
-| SAML2Logout | [https://wiki.shibboleth.net/confluence/display/IDP30/SAML2LogoutConfiguration](https://wiki.shibboleth.net/confluence/display/IDP30/SAML2LogoutConfiguration) |
-| SAML2AttributeQuery | [https://wiki.shibboleth.net/confluence/display/IDP30/SAML2AttributeQueryConfiguration](https://wiki.shibboleth.net/confluence/display/IDP30/SAML2AttributeQueryConfiguration) |
-| SAML2ArtifactResolution | [https://wiki.shibboleth.net/confluence/display/IDP30/SAML2ArtifactResolutionConfiguration](https://wiki.shibboleth.net/confluence/display/IDP30/SAML2ArtifactResolutionConfiguration) |
+| SAML2SSO | [https://wiki.shibboleth.net/confluence/display/IDP4/SAML2SSOConfiguration](https://wiki.shibboleth.net/confluence/display/IDP4/SAML2SSOConfiguration) |
+| SAML2Logout | [https://wiki.shibboleth.net/confluence/display/IDP4/SAML2LogoutConfiguration](https://wiki.shibboleth.net/confluence/display/IDP4/SAML2LogoutConfiguration) |
+| SAML2AttributeQuery | [https://wiki.shibboleth.net/confluence/display/IDP4/SAML2AttributeQueryConfiguration](https://wiki.shibboleth.net/confluence/display/IDP4/SAML2AttributeQueryConfiguration) |
+| SAML2ArtifactResolution | [https://wiki.shibboleth.net/confluence/display/IDP4/SAML2ArtifactResolutionConfiguration](https://wiki.shibboleth.net/confluence/display/IDP4/SAML2ArtifactResolutionConfiguration) |
 
 ## SAML Single Logout
 
