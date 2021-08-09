@@ -185,8 +185,9 @@ A boolean value should be returned. A `False` value aborts the corresponding SCI
 
 **Notes**:
 
-- Possible valuess for `context.getResourceType()` are: User, Group, FidoDevice, Fido2Device
-- `context.getAccessToken()` is a shortcut method that will give you the access token the caller employed to issue the service call 
+- Possible values for `context.getResourceType()` are: User, Group, FidoDevice, Fido2Device
+- `context.getTokenDetails().getValue()` is a shortcut that will give you the access token the caller employed to issue the service call
+- Both `context.getTokenDetails().getTokenType()` and `context.getTokenDetails().getScope()` return non null values when the access token is an OAuth token, like when you use test mode to [protect](./scim2.md#api-protection) the service
 - The `passthrough` field in `context` is an empty `java.util.HashMap` that can be used to carry values from this method to `rejectedResourceOperationResponse` 
 - Note that for resource creation operation, `entity` basically contains the same data supplied in the POST payload. In this case, `entity` has not originated from the database and has not been persisted either
 - For the case of modification, retrieval and removal, `entity` contains the data currently stored in the database for the resource in question
