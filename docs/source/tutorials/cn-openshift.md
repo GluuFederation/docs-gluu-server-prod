@@ -446,25 +446,33 @@ Red Hat OpenShift Service on AWS (ROSA):
 
 9.  Install gluu. 
 
-    1.  Change permissions to the directory that contains `pygluu-kubernetes.pyz`
+    === "Pygluu-helm"
+            
+        This option is more user friendly as it walks you through an installation pathway and executes a helm install.
 
-        ```bash
-        sudo chgrp -R 0 /path/to/dir/ && chmod -R g=u /path/to/dir/
-        ```
+        1.  Change permissions to the directory that contains [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases/download/v1.6.6/pygluu-kubernetes-linux-amd64.pyz)
 
-    2.  Install the gluu server
+            ```bash
+            sudo chgrp -R 0 /path/to/dir/ && chmod -R g=u /path/to/dir/
+            ```
 
-        ```bash
-        cd /path/to/dir/ && ./pygluu-kubernetes.pyz helm-install
-        ```
+        2.  Install the gluu server
 
-    3.  If the `nginx-ingress` didn't work correctly - modifying the `deployment configuration` for nginx-ingress and adding the serviceaccount to the `anyuid SCC` as the application defined needs to run as user root in the container.
+            ```bash
+            cd /path/to/dir/ && ./pygluu-kubernetes.pyz helm-install
+            ```
 
-        ```bash
-        oc patch deployment.apps/ningress-nginx-ingress-controller --patch '{"spec":{"template":{"spec":{"serviceAccountName": "useroot"}}}}'
-        oc patch deployment.apps/ningress-nginx-ingress-default-backend --patch '{"spec":{"template":{"spec":{"serviceAccountName": "useroot"}}}}'
-        ```
+    === "Helm"
+        
+        Follow this [section](https://gluu.org/docs/gluu-server/4.3/installation-guide/install-kubernetes/#installing-gluu-using-helm-manually) to install using helm manually.
 
+    If the `nginx-ingress` didn't work correctly - modifying the `deployment configuration` for nginx-ingress and adding the serviceaccount to the `anyuid SCC` as the application defined needs to run as user root in the container.
+
+    ```bash
+    oc patch deployment.apps/ningress-nginx-ingress-controller --patch '{"spec":{"template":{"spec":{"serviceAccountName": "useroot"}}}}'
+    oc patch deployment.apps/ningress-nginx-ingress-default-backend --patch '{"spec":{"template":{"spec":{"serviceAccountName": "useroot"}}}}'
+    ```
+    
 ## Uninstallation
 
   Uninstalling the cluster. `cd` to the folder that contains the installation program.
