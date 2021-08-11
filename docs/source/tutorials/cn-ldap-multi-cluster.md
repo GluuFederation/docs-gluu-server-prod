@@ -22,7 +22,8 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     This is an alpha feature only offered with helm installation of Gluu >4.2.
         
 !!!note
-    The current setup hinders the scale of the same StatefulSet of ldap on the same node. 
+    The regional opendjs will purely function to replicate across regions. This layer is non-scalable. The local scalable opendj will receive traffic and handle the connections by Gluu services. 
+
 
 #### On the first cluster run:
 
