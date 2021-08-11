@@ -22,7 +22,7 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     This is an alpha feature only offered with helm installation of Gluu >4.2.
         
 !!!note
-    The current setup hinders the scale of the same StatefulSet of ldap on the same node. 
+    The regional opendjs will purely function to replicate across regions. This layer is non-scalable. The local scalable opendj will receive traffic and handle the connections by Gluu services. 
 
 #### On the first cluster run:
 
@@ -163,7 +163,7 @@ You may run `dsreplication` command to check the replication status using the a 
 ```json
 {
   "ACCEPT_GLUU_LICENSE": "Y",
-  "GLUU_VERSION": "4.2",
+  "GLUU_VERSION": "4.3",
   "TEST_ENVIRONMENT": "",
   "GLUU_UPGRADE_TARGET_VERSION": "",
   "GLUU_HELM_RELEASE_NAME": "gluu",
@@ -316,41 +316,41 @@ You may run `dsreplication` command to check the replication status using the a 
   "OXAUTH_KEYS_LIFE": "",
   "EDIT_IMAGE_NAMES_TAGS": "N",
   "CASA_IMAGE_NAME": "gluufederation/casa",
-  "CASA_IMAGE_TAG": "4.2.2_02",
+  "CASA_IMAGE_TAG": "4.3.0_b1",
   "CONFIG_IMAGE_NAME": "gluufederation/config-init",
-  "CONFIG_IMAGE_TAG": "4.2.2_02",
+  "CONFIG_IMAGE_TAG": "4.3.0_b1",
   "CACHE_REFRESH_ROTATE_IMAGE_NAME": "gluufederation/cr-rotate",
-  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.2.2_02",
+  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.3.0_b1",
   "CERT_MANAGER_IMAGE_NAME": "gluufederation/certmanager",
-  "CERT_MANAGER_IMAGE_TAG": "4.2.2_02",
+  "CERT_MANAGER_IMAGE_TAG": "4.3.0_b1",
   "LDAP_IMAGE_NAME": "gluufederation/opendj",
-  "LDAP_IMAGE_TAG": "4.2.2_02",
+  "LDAP_IMAGE_TAG": "4.3.0_b1",
   "JACKRABBIT_IMAGE_NAME": "gluufederation/jackrabbit",
-  "JACKRABBIT_IMAGE_TAG": "4.2.2_02",
+  "JACKRABBIT_IMAGE_TAG": "4.3.0_b1",
   "OXAUTH_IMAGE_NAME": "gluufederation/oxauth",
-  "OXAUTH_IMAGE_TAG": "4.2.2_03",
+  "OXAUTH_IMAGE_TAG": "4.3.0_b1",
   "FIDO2_IMAGE_NAME": "gluufederation/fido2",
-  "FIDO2_IMAGE_TAG": "4.2.2_02",
+  "FIDO2_IMAGE_TAG": "4.3.0_b1",
   "SCIM_IMAGE_NAME": "gluufederation/scim",
-  "SCIM_IMAGE_TAG": "4.2.2_02",
+  "SCIM_IMAGE_TAG": "4.3.0_b1",
   "OXD_IMAGE_NAME": "gluufederation/oxd-server",
-  "OXD_IMAGE_TAG": "4.2.2_02",
+  "OXD_IMAGE_TAG": "4.3.0_b1",
   "OXPASSPORT_IMAGE_NAME": "gluufederation/oxpassport",
-  "OXPASSPORT_IMAGE_TAG": "4.2.2_02",
+  "OXPASSPORT_IMAGE_TAG": "4.3.0_b1",
   "OXSHIBBOLETH_IMAGE_NAME": "gluufederation/oxshibboleth",
-  "OXSHIBBOLETH_IMAGE_TAG": "4.2.2_02",
+  "OXSHIBBOLETH_IMAGE_TAG": "4.3.0_b1",
   "OXTRUST_IMAGE_NAME": "gluufederation/oxtrust",
-  "OXTRUST_IMAGE_TAG": "4.2.2_03",
+  "OXTRUST_IMAGE_TAG": "4.3.0_b1",
   "PERSISTENCE_IMAGE_NAME": "gluufederation/persistence",
-  "PERSISTENCE_IMAGE_TAG": "4.2.2_02",
+  "PERSISTENCE_IMAGE_TAG": "4.3.0_b1",
   "RADIUS_IMAGE_NAME": "gluufederation/radius",
-  "RADIUS_IMAGE_TAG": "4.2.2_02",
+  "RADIUS_IMAGE_TAG": "4.3.0_b1",
   "GLUU_GATEWAY_IMAGE_NAME": "gluufederation/gluu-gateway",
-  "GLUU_GATEWAY_IMAGE_TAG": "4.2.2_01",
+  "GLUU_GATEWAY_IMAGE_TAG": "4.3.0_b1",
   "GLUU_GATEWAY_UI_IMAGE_NAME": "gluufederation/gluu-gateway-ui",
-  "GLUU_GATEWAY_UI_IMAGE_TAG": "4.2.2_01",
+  "GLUU_GATEWAY_UI_IMAGE_TAG": "4.3.0_b1",
   "UPGRADE_IMAGE_NAME": "gluufederation/upgrade",
-  "UPGRADE_IMAGE_TAG": "4.2.2_02",
+  "UPGRADE_IMAGE_TAG": "4.3.0_b1",
   "CONFIRM_PARAMS": "Y",
   "GLUU_LDAP_MULTI_CLUSTER": "Y",
   "GLUU_LDAP_SERF_PORT": "30946",
@@ -521,41 +521,41 @@ You may run `dsreplication` command to check the replication status using the a 
   "OXAUTH_KEYS_LIFE": "",
   "EDIT_IMAGE_NAMES_TAGS": "N",
   "CASA_IMAGE_NAME": "gluufederation/casa",
-  "CASA_IMAGE_TAG": "4.2.2_02",
+  "CASA_IMAGE_TAG": "4.3.0_b1",
   "CONFIG_IMAGE_NAME": "gluufederation/config-init",
-  "CONFIG_IMAGE_TAG": "4.2.2_02",
+  "CONFIG_IMAGE_TAG": "4.3.0_b1",
   "CACHE_REFRESH_ROTATE_IMAGE_NAME": "gluufederation/cr-rotate",
-  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.2.2_02",
+  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.3.0_b1",
   "CERT_MANAGER_IMAGE_NAME": "gluufederation/certmanager",
-  "CERT_MANAGER_IMAGE_TAG": "4.2.2_02",
+  "CERT_MANAGER_IMAGE_TAG": "4.3.0_b1",
   "LDAP_IMAGE_NAME": "gluufederation/opendj",
-  "LDAP_IMAGE_TAG": "4.2.2_02",
+  "LDAP_IMAGE_TAG": "4.3.0_b1",
   "JACKRABBIT_IMAGE_NAME": "gluufederation/jackrabbit",
-  "JACKRABBIT_IMAGE_TAG": "4.2.2_02",
+  "JACKRABBIT_IMAGE_TAG": "4.3.0_b1",
   "OXAUTH_IMAGE_NAME": "gluufederation/oxauth",
-  "OXAUTH_IMAGE_TAG": "4.2.2_03",
+  "OXAUTH_IMAGE_TAG": "4.3.0_b1",
   "FIDO2_IMAGE_NAME": "gluufederation/fido2",
-  "FIDO2_IMAGE_TAG": "4.2.2_02",
+  "FIDO2_IMAGE_TAG": "4.3.0_b1",
   "SCIM_IMAGE_NAME": "gluufederation/scim",
-  "SCIM_IMAGE_TAG": "4.2.2_02",
+  "SCIM_IMAGE_TAG": "4.3.0_b1",
   "OXD_IMAGE_NAME": "gluufederation/oxd-server",
-  "OXD_IMAGE_TAG": "4.2.2_02",
+  "OXD_IMAGE_TAG": "4.3.0_b1",
   "OXPASSPORT_IMAGE_NAME": "gluufederation/oxpassport",
-  "OXPASSPORT_IMAGE_TAG": "4.2.2_02",
+  "OXPASSPORT_IMAGE_TAG": "4.3.0_b1",
   "OXSHIBBOLETH_IMAGE_NAME": "gluufederation/oxshibboleth",
-  "OXSHIBBOLETH_IMAGE_TAG": "4.2.2_02",
+  "OXSHIBBOLETH_IMAGE_TAG": "4.3.0_b1",
   "OXTRUST_IMAGE_NAME": "gluufederation/oxtrust",
-  "OXTRUST_IMAGE_TAG": "4.2.2_03",
+  "OXTRUST_IMAGE_TAG": "4.3.0_b1",
   "PERSISTENCE_IMAGE_NAME": "gluufederation/persistence",
-  "PERSISTENCE_IMAGE_TAG": "4.2.2_02",
+  "PERSISTENCE_IMAGE_TAG": "4.3.0_b1",
   "RADIUS_IMAGE_NAME": "gluufederation/radius",
-  "RADIUS_IMAGE_TAG": "4.2.2_02",
+  "RADIUS_IMAGE_TAG": "4.3.0_b1",
   "GLUU_GATEWAY_IMAGE_NAME": "gluufederation/gluu-gateway",
-  "GLUU_GATEWAY_IMAGE_TAG": "4.2.2_01",
+  "GLUU_GATEWAY_IMAGE_TAG": "4.3.0_b1",
   "GLUU_GATEWAY_UI_IMAGE_NAME": "gluufederation/gluu-gateway-ui",
-  "GLUU_GATEWAY_UI_IMAGE_TAG": "4.2.2_01",
+  "GLUU_GATEWAY_UI_IMAGE_TAG": "4.3.0_b1",
   "UPGRADE_IMAGE_NAME": "gluufederation/upgrade",
-  "UPGRADE_IMAGE_TAG": "4.2.2_02",
+  "UPGRADE_IMAGE_TAG": "4.3.0_b1",
   "CONFIRM_PARAMS": "Y",
   "GLUU_LDAP_MULTI_CLUSTER": "Y",
   "GLUU_LDAP_SERF_PORT": "31946",
@@ -683,7 +683,7 @@ config:
     gluuPersistenceType: ldap
   image:
     repository: gluufederation/config-init
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
   resources: {}
 nginx-ingress:
   ingress:
@@ -706,7 +706,7 @@ jackrabbit:
     size: 5Gi
   image:
     repository: gluufederation/jackrabbit
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -728,7 +728,7 @@ opendj:
     size: 4Gi
   image:
     repository: gluufederation/opendj
-    tag: 4.2.2_advertise
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -772,7 +772,7 @@ opendj:
 persistence:
   image:
     repository: gluufederation/persistence
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources: {}
 oxauth:
@@ -781,7 +781,7 @@ oxauth:
   replicas: 1
   image:
     repository: gluufederation/oxauth
-    tag: 4.2.2_03
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -796,7 +796,7 @@ oxtrust:
   replicas: 1
   image:
     repository: gluufederation/oxtrust
-    tag: 4.2.2_03
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -811,7 +811,7 @@ fido2:
   replicas: 1
   image:
     repository: gluufederation/fido2
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -826,7 +826,7 @@ scim:
   replicas: 1
   image:
     repository: gluufederation/scim
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -841,7 +841,7 @@ oxd-server:
   replicas: 1
   image:
     repository: gluufederation/oxd-server
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -856,7 +856,7 @@ casa:
   replicas: ''
   image:
     repository: gluufederation/casa
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     requests:
@@ -871,7 +871,7 @@ oxpassport:
   replicas: ''
   image:
     repository: gluufederation/oxpassport
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources: {}
 oxshibboleth:
@@ -880,7 +880,7 @@ oxshibboleth:
   replicas: ''
   image:
     repository: gluufederation/oxshibboleth
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -895,7 +895,7 @@ radius:
   replicas: ''
   image:
     repository: gluufederation/radius
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -909,7 +909,7 @@ cr-rotate:
     crRotateServiceName: cr-rotate
   image:
     repository: gluufederation/cr-rotate
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -922,7 +922,7 @@ oxauth-key-rotation:
   keysLife: 48
   image:
     repository: gluufederation/certmanager
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1091,41 +1091,41 @@ oxauth-key-rotation:
   "OXAUTH_KEYS_LIFE": "",
   "EDIT_IMAGE_NAMES_TAGS": "N",
   "CASA_IMAGE_NAME": "gluufederation/casa",
-  "CASA_IMAGE_TAG": "4.2.2_02",
+  "CASA_IMAGE_TAG": "4.3.0_b1",
   "CONFIG_IMAGE_NAME": "gluufederation/config-init",
-  "CONFIG_IMAGE_TAG": "4.2.2_02",
+  "CONFIG_IMAGE_TAG": "4.3.0_b1",
   "CACHE_REFRESH_ROTATE_IMAGE_NAME": "gluufederation/cr-rotate",
-  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.2.2_02",
+  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.3.0_b1",
   "CERT_MANAGER_IMAGE_NAME": "gluufederation/certmanager",
-  "CERT_MANAGER_IMAGE_TAG": "4.2.2_02",
+  "CERT_MANAGER_IMAGE_TAG": "4.3.0_b1",
   "LDAP_IMAGE_NAME": "gluufederation/opendj",
-  "LDAP_IMAGE_TAG": "4.2.2_02",
+  "LDAP_IMAGE_TAG": "4.3.0_b1",
   "JACKRABBIT_IMAGE_NAME": "gluufederation/jackrabbit",
-  "JACKRABBIT_IMAGE_TAG": "4.2.2_02",
+  "JACKRABBIT_IMAGE_TAG": "4.3.0_b1",
   "OXAUTH_IMAGE_NAME": "gluufederation/oxauth",
-  "OXAUTH_IMAGE_TAG": "4.2.2_03",
+  "OXAUTH_IMAGE_TAG": "4.3.0_b1",
   "FIDO2_IMAGE_NAME": "gluufederation/fido2",
-  "FIDO2_IMAGE_TAG": "4.2.2_02",
+  "FIDO2_IMAGE_TAG": "4.3.0_b1",
   "SCIM_IMAGE_NAME": "gluufederation/scim",
-  "SCIM_IMAGE_TAG": "4.2.2_02",
+  "SCIM_IMAGE_TAG": "4.3.0_b1",
   "OXD_IMAGE_NAME": "gluufederation/oxd-server",
-  "OXD_IMAGE_TAG": "4.2.2_02",
+  "OXD_IMAGE_TAG": "4.3.0_b1",
   "OXPASSPORT_IMAGE_NAME": "gluufederation/oxpassport",
-  "OXPASSPORT_IMAGE_TAG": "4.2.2_02",
+  "OXPASSPORT_IMAGE_TAG": "4.3.0_b1",
   "OXSHIBBOLETH_IMAGE_NAME": "gluufederation/oxshibboleth",
-  "OXSHIBBOLETH_IMAGE_TAG": "4.2.2_02",
+  "OXSHIBBOLETH_IMAGE_TAG": "4.3.0_b1",
   "OXTRUST_IMAGE_NAME": "gluufederation/oxtrust",
-  "OXTRUST_IMAGE_TAG": "4.2.2_03",
+  "OXTRUST_IMAGE_TAG": "4.3.0_b1",
   "PERSISTENCE_IMAGE_NAME": "gluufederation/persistence",
-  "PERSISTENCE_IMAGE_TAG": "4.2.2_02",
+  "PERSISTENCE_IMAGE_TAG": "4.3.0_b1",
   "RADIUS_IMAGE_NAME": "gluufederation/radius",
-  "RADIUS_IMAGE_TAG": "4.2.2_02",
+  "RADIUS_IMAGE_TAG": "4.3.0_b1",
   "GLUU_GATEWAY_IMAGE_NAME": "gluufederation/gluu-gateway",
-  "GLUU_GATEWAY_IMAGE_TAG": "4.2.2_01",
+  "GLUU_GATEWAY_IMAGE_TAG": "4.3.0_b1",
   "GLUU_GATEWAY_UI_IMAGE_NAME": "gluufederation/gluu-gateway-ui",
-  "GLUU_GATEWAY_UI_IMAGE_TAG": "4.2.2_01",
+  "GLUU_GATEWAY_UI_IMAGE_TAG": "4.3.0_b1",
   "UPGRADE_IMAGE_NAME": "gluufederation/upgrade",
-  "UPGRADE_IMAGE_TAG": "4.2.2_02",
+  "UPGRADE_IMAGE_TAG": "4.3.0_b1",
   "CONFIRM_PARAMS": "Y",
   "GLUU_LDAP_MULTI_CLUSTER": "Y",
   "GLUU_LDAP_SERF_PORT": "31946",
@@ -1249,7 +1249,7 @@ config:
     gluuPersistenceType: ldap
   image:
     repository: gluufederation/config-init
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
   resources: {}
 nginx-ingress:
   ingress:
@@ -1272,7 +1272,7 @@ jackrabbit:
     size: 5Gi
   image:
     repository: gluufederation/jackrabbit
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1294,7 +1294,7 @@ opendj:
     size: 4Gi
   image:
     repository: gluufederation/opendj
-    tag: 4.2.2_advertise
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1338,7 +1338,7 @@ opendj:
 persistence:
   image:
     repository: gluufederation/persistence
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources: {}
 oxauth:
@@ -1347,7 +1347,7 @@ oxauth:
   replicas: 1
   image:
     repository: gluufederation/oxauth
-    tag: 4.2.2_03
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1362,7 +1362,7 @@ oxtrust:
   replicas: 1
   image:
     repository: gluufederation/oxtrust
-    tag: 4.2.2_03
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1377,7 +1377,7 @@ fido2:
   replicas: 1
   image:
     repository: gluufederation/fido2
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1392,7 +1392,7 @@ scim:
   replicas: 1
   image:
     repository: gluufederation/scim
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1407,7 +1407,7 @@ oxd-server:
   replicas: 1
   image:
     repository: gluufederation/oxd-server
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1422,7 +1422,7 @@ casa:
   replicas: ''
   image:
     repository: gluufederation/casa
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     requests:
@@ -1437,7 +1437,7 @@ oxpassport:
   replicas: ''
   image:
     repository: gluufederation/oxpassport
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources: {}
 oxshibboleth:
@@ -1446,7 +1446,7 @@ oxshibboleth:
   replicas: ''
   image:
     repository: gluufederation/oxshibboleth
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1461,7 +1461,7 @@ radius:
   replicas: ''
   image:
     repository: gluufederation/radius
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1475,7 +1475,7 @@ cr-rotate:
     crRotateServiceName: cr-rotate
   image:
     repository: gluufederation/cr-rotate
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
@@ -1488,7 +1488,7 @@ oxauth-key-rotation:
   keysLife: 48
   image:
     repository: gluufederation/certmanager
-    tag: 4.2.2_02
+    tag: 4.3.0_b1
     pullPolicy: Always
   resources:
     limits:
