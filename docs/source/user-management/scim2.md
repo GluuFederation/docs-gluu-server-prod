@@ -22,11 +22,12 @@ Throughout this document, you will notice endpoints are prefixed with path `/ide
 
 Clearly, this API must not be anonymously accessed. However, the basic SCIM standard does not define a specific mechanism to prevent unauthorized requests to endpoints. There are just a few guidelines in section 2 of [RFC 7644](https://tools.ietf.org/html/rfc7644) concerned with authentication and authorization. 
 
-Gluu Server CE allows you to protect your endpoints with [UMA](#scim-protected-by-uma) (a profile of [OAuth 2.0](http://tools.ietf.org/html/rfc6749)). This is a safe and standardized approach for controlling access to web resources. For SCIM protection, we **strongly recommend** its usage. 
+Gluu Server CE supports three mechanisms to protect your endpoints:
+- Standard [OAuth](http://tools.ietf.org/html/rfc6749) tokens. Starting with Gluu 4.3, this is the default and recommended mechanism
+- UMA (a profile of OAuth 2.0)
+- Test mode. Being the simplest approach, it serves as a quick and easy way to start interacting with the service, as well as learning about SCIM
 
-Alternatively, for testing purposes you can temporarily enable the test mode. In this mode, some complexity is taken out so that it serves as a quick and easy way to start interacting with your service, as well as learning about SCIM.
-
-### Protection Using UMA
+### Enable the API
 
 By default, the API is not active, so the first step is just to enable it:
 
@@ -36,33 +37,39 @@ By default, the API is not active, so the first step is just to enable it:
 
 ![enable scim](../img/scim/enable-scim.png)
 
-Then, enable UMA protection mode:
+Then proceed to set the protection mode:
 
-- Activate the UMA SCIM custom script in oxTrust admin GUI: Go to `Configuration` > `Other Custom Scripts`, and in the tab for `UMA RPT policies` check "Enabled" for the script labeled "scim_access_policy". Finally press the "Update" button
+![protection mode](../img/scim/protection_mode.png)
+
+### Protection Using OAuth Tokens
+
+- Navigate to `Configuration` > `JSON Configuration` > `OxTrust Configuration`
+- Locate the `Scim properties` section
+- Select **OAUTH** in the `Protection mode` list
+- Click the "Save Configuration" button at the bottom
+
+### Protection Using UMA
+
+- Navigate to `Configuration` > `JSON Configuration` > `OxTrust Configuration`
+- Locate the `Scim properties` section
+- Select **UMA** in the `Protection mode` list
+- Click the "Save Configuration" button at the bottom
+
+Then, activate the UMA SCIM custom script:
+
+- Go to `Configuration` > `Other Custom Scripts`, and in the tab for `UMA RPT policies` check "Enabled" for the script labeled "scim_access_policy". 
+- Finally press the `Update` button
 
 ![enable uma](../img/scim/enable_uma.png)
 
 ### Protection Using Test Mode
 
-By default the API is not active, so the first step is just to enable it:
+- Navigate to `Configuration` > `JSON Configuration` > `OxTrust Configuration`
+- Locate the `Scim properties` section
+- Select **TEST** in the `Protection mode` list
+- Click the "Save Configuration" button at the bottom
 
-- Log in  to the oxTrust GUI
-
-- Go to `Configuration` > `Organization Configuration` and choose "enabled" for the SCIM support property
-
-![enable scim](../img/scim/enable-scim.png)
-
-Then, enable test mode:
-
-- Navigate to `Configuration` > `JSON Configuration` > `OxTrust Configuration`, scroll down and set the `scimTestMode` property to true
-
-- Click the Save Configuration button at the bottom
-
-You can verify the current authentication scheme by querying the `/ServiceProviderConfig` endpoint:
-
-![image](../img/scim/scim-test-mode-config.png)
-
-To exit test mode, just set `scimTestMode` back to `false` and then click the `Save Configuration` button.
+Note this mode is not recommended for a production scenario.
 
 ## Where to locate SCIM-related logs
 
@@ -109,11 +116,11 @@ There are two ways to create a client. One consists of issuing an HTTP POST to t
 
 If you want to follow the first approach (direct interaction with registration endpoint), locate its endpoint URL by visiting `https://<your-gluu-host>/.well-known/openid-configuration` and inspect the property `registration_endpoint`. To know how to structure a payload, refer to section 3 of the OpenID Connect [Dynamic Client Registration 1.0 spec](http://openid.net/specs/openid-connect-registration-1_0.html).
 
-The more pleasant second alternative is using the Gluu server administration web interface. Just follow these steps:
+The second alternative is using the Gluu server administration web interface. Just follow these steps:
 
-- Log in to `https://<your-gluu-host>/identity` using the admin credentials
+- Login to oxTrust using the admin credentials
 
-- Go to `OpenId connect` > `Clients` and click the **Add client** button
+- Go to `OpenId connect` > `Clients` and click the `Add client` button
 
 - Fill out the form using the following values. Most of the default values are OK:
 
@@ -125,12 +132,6 @@ The more pleasant second alternative is using the Gluu server administration web
     
     - Authentication method for the Token Endpoint: client_secret_basic
 
-- Scroll down and click the "Add Scope" button, type openid in the text field, and press search. Select the row whose "display name" is **openid**, and click OK
-
-- Repeat the previous step to add the **permission** scope
-
-- Click the "Add Response Types" button. In the list choose **token** and click OK
-
 - Click the "Add Grant Type" button, then select **client_credentials**
 
 - At the bottom press the "Add" button to finish creating your OpenId client
@@ -140,7 +141,7 @@ The more pleasant second alternative is using the Gluu server administration web
 !!! Note
     This section requires basic knowledge of HTTP at programming or scripting (eg. bash) level.
 
-The **client_credentials** grant chosen allows us to obtain a token very easily: just make a POST to the token endpoint passing the recently-created client credentials. Do the following:
+The **client_credentials** grant chosen allows us to obtain a token by making a POST to the token endpoint passing the recently-created client credentials. Do the following:
 
 - Locate the token endpoint of Gluu server: visit `https://<your-gluu-host>/.well-known/openid-configuration` and search the property labeled **token_endpoint**
 
@@ -152,13 +153,13 @@ The **client_credentials** grant chosen allows us to obtain a token very easily:
 
     - Create a new string concatenating `authUsername`, the colon (:) character, and `authPassword` in that exact order
 
-    - Obtain the underlying array of bytes for the string created. Use `UTF-8` if you need to supply code to transform the string to bytes
+    - Obtain the underlying array of bytes for the string created. Assume the string is `UTF-8` encoded
 
     - Create a base64-encoded string representation of the array of bytes (most programming languages feature this functionality out of the box)
 
     - Create a new string concatenating the word "Basic" (do not include quotes), a space, and the string created in previous step. This is the resulting string of encoded credentials
   
-- Submit an HTTPS POST to the token endpoint using the following data:
+- Submit a POST to the token endpoint using the following:
 
     - **Authorization** header. Use the encoded credentials as the value
 
@@ -176,7 +177,7 @@ Here is an example:
      grant_type=client_credentials
 ```
 
-In `curl` jargon, issue a command like this to achieve the same effect:
+With `curl` a command like this achieves the same effect:
 
 ```
 $ curl -u '<authUsername>:<authPassword>' \
@@ -201,7 +202,7 @@ Pragma: no-cache
 {
 	"access_token":"2YotnFZFEjr1zCsicMWpAA",
 	"token_type":"Bearer",
-	"expires_in":3600
+	"expires_in":300
 }
 ```
 
@@ -211,13 +212,13 @@ Extract the **access token** from the response.
 
 Now, you can start interacting with your service!
 
-To know the protocol, ie. the endpoints available in the service and the information those endpoints accept as input and return as output, see the [protocol spec](https://tools.ietf.org/html/rfc7644). However, to make it easier for you, we have compiled some representative examples of CRUD (create, read, update and delete) with SCIM in the section [Raw HTTP requests](#raw-http-requests) that you may see at a later time.
+To know the endpoints available in the service and the information those endpoints accept as input and return as output, see the [protocol spec](https://tools.ietf.org/html/rfc7644). You may also like checking this [section](#api-documentation-at-a-glance). To make it easier for you, we have compiled some representative examples of CRUD (create, read, update and delete) with SCIM in the section [Raw HTTP requests](#raw-http-requests) that you may see at a later time.
 
 For now, start with a basic query: say we need to find the users whose `userName` contains the sequence of letters "mi". 
 
-We need to know:
+We need to:
 
-- The SCIM endpoint for user retrieval, which is `https://<host-name>/identity/restv1/scim/v2/Users` in Gluu Server 3.1.0+
+- Know the SCIM endpoint for user retrieval, which is `https://<host-name>/identity/restv1/scim/v2/Users`
 
 - **Write a filter for a search:** In this case, it's fairly easy, the filter we need is `filter=userName co "mi"` where `co` stands for _contains_. To learn more about filters see section 3.4.2.2 of [protocol spec](https://tools.ietf.org/html/rfc7644)
 
@@ -243,7 +244,7 @@ After execution, you will get JSON content with the results matching the criteri
 !!! Note 
     Always pay attention to the HTTP response code. If you are getting 401, ie. unauthorized, your token may have expired. If that's the case, proceed to the next section immediately to learn how to cope with this situation.
 
-Remember that in section [Raw HTTP requests](#raw-http-requests) below, there are more `curl` examples on how to interact with SCIM endpoints.
+In section [Raw HTTP requests](#raw-http-requests) below, there are more `curl` examples on how to interact with SCIM endpoints.
 
 ### Obtain New Access Token for Subsequent Requests
 
@@ -567,11 +568,11 @@ If you code in Java, you can take advantage of the ready-to-use client library [
 
 ### Requisites
 
-- Entry-level knowledge of Java is enough. Make sure you have Java Standard Edition installed. The use of Maven as a build tool is recommended
+- Entry-level knowledge of Java is enough. Make sure you have Java 8 or higher installed. The use of Maven as a build tool is recommended
 
 - Ensure you have enabled SCIM and test mode as shown [above](#protection-using-test-mode)
 
-- Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. There are lots of articles around the Web on how to import a certificate to the keystore. An utility called [Key Store Explorer](http://keystore-explorer.sourceforge.net) makes this task super easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server-<gluu-version>/etc/certs/httpd.crt`
+- Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. The [KeyStore Explorer](http://keystore-explorer.org/) utility makes this task super easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server/etc/certs/httpd.crt`
 
 - Online Java-docs for scim-client are available [here](https://ox.gluu.org/scim-javadocs/apidocs/index.html). You can generate java-docs locally too using Maven; just run `mvn javadoc:javadoc -pl scim-client`
 
@@ -599,7 +600,7 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 </dependency>
 ```
 
-Ideally, the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use scim-client v4.2.
+Ideally, the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.3, you should also use scim-client v4.3.
 
 If you don't want to use Maven, you can download the jar file for scim-client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
@@ -650,11 +651,11 @@ The first line of method `simpleSearch` is getting an object that conforms to th
 !!! Note
     The variant of `getTestClient` used in the above example will attempt to register a client for you. For this purpose ensure your Gluu Server has dynamic registration of clients enabled. To avoid creating a new client everytime this method is called, or when dynamic registration is disabled, you can use `getTestClient(String, String, String, String)` where you can pass the ID and secret of an existing client for the third and fourth parameters respectively.
 
-Create a main method for class `TestScimClient` and call `simpleSearch` from there. When running, you will see the output of retrieving one user (admin) and see his `displayName` on the screen or wherever you have configured your logs to be written to. Here we are using `log4j2` as framework, but you may use the any other logging framework.
+Create a main method for class `TestScimClient` and call `simpleSearch` from there. When running, you will see the output of retrieving one user (admin) and see his `displayName` on the screen or wherever you have configured your logs to be written to. Here we are using `log4j2` as framework, but you may use any other logging framework.
 
 Note the usage of `close` in the last statement. While it's not a requirement, it is recommended to call `close` whenever you know there will not be any other request associated to the client you obtained.
 
-The [SCIM protected by UMA section](#scim-protected-by-UMA) contains examples for [adding](#adding-a-user) and [deleting](#delete-a-user) users.  The only actual difference in coding for test mode or UMA-protected service is the way in which you initially get a `ScimClient` object instance. For test mode, just call `ScimClientFactory.getTestClient` as shown in the previous example.
+The [SCIM protected by UMA section](#scim-protected-by-uma) contains examples for [adding](#adding-a-user) and [deleting](#delete-a-user) users.  The only actual difference in coding for test mode, OAuth, or UMA-protected service is the way in which you initially get a `ScimClient` object instance. For test mode, just call `ScimClientFactory.getTestClient` as shown in the previous example.
 
 ### Under the Hood
 
@@ -695,9 +696,69 @@ mvn ... -Dscim.extraHeaders="My-Custom-Header-1, My-Custom-Header-2" -Dscim.head
         -Dscim.header.My-Custom-Header-2="chaos-theory"
 ```
 
+If you want to set headers programatically, you can find the method `setCustomHeaders` useful. This method is callable on any instance obtained via `ScimClientFactory.getTestClient`
+
+## SCIM Protected by OAuth
+
+This protection mode employs the OAuth 2.0 authorization framework to provide access to the service. You may have already noticed that test mode resembles OAuth 2.0 a lot. Actually the difference between this and test mode lies in the usage of scopes. OAuth scopes denote the kind of access a client is looking for.
+
+If you haven't done so, quickly visit the [Working in test mode](#working-in-test-mode) section. In the following we  highlight those additional facts to take into account when working with this mode:
+
+### Client scopes
+
+Previously you had to create a [client](#Create an OpenID Client). Now it's necessary to add scopes to it:
+
+- Login to oxTrust and locate the client created for interaction with SCIM
+
+- Click the "Add Scope" button and sort the list appearing by name
+
+- Tick the scopes prefixed by "https://gluu.org/scim". The kind of access every scope grants is displayed on the right column 
+
+Depending on your needs, you may like to add only some of the scopes to your client. 
+
+For reference, here's is the list of the more relevant scopes. To get the full list, visit the `Scopes` page in oxTrust.
+
+|Scope|Description|
+|-|-|
+|https://gluu.org/scim/users.read|Query/Search user resources|
+|https://gluu.org/scim/users.write|Modify user resources|
+|https://gluu.org/scim/bulk|Send requests to the bulk endpoint|
+|https://gluu.org/scim/all-resources.search|Access the root .search endpoint|
+
+
+### Requesting a token
+
+As seen [earlier](#request-an-access-token-to-the-token-endpoint) before issuing a request to an endpoint, an access token must be obtained. This time the token has to have associated a suitable scope for the operation to be successful.
+
+As an example, assume you are interested in creating a user. One way to request a token could be:
+
+```
+$ curl -u '<clientId>:<clientSecret>' \
+       -d grant_type=client_credentials \
+       -d scope='https://gluu.org/scim/users.write'
+       https://<host-name>/oxauth/restv1/token
+```
+
+If the client employed has the scope of interest the response looks like this: 
+
+```
+{
+	"access_token":"...",
+	"scope":"https://gluu.org/scim/users.write",
+	"token_type":"bearer",
+	"expires_in":300
+}
+```
+
+A token may have multiple scopes associated. In this case separate the requested scopes with white spaces in `scope` parameter. This allows to use the same token for operations of different nature.
+  
+### Java Client
+
+Follow the same guidelines given in [Testing with the scim-client](#testing-with-the-scim-client). Obtain client instances using the `ScimClientFactory.getOAuthClient` methods instead. Tokens obtained here will have all SCIM scopes.
+
 ## SCIM Protected by UMA
 
-User-managed access (UMA) is a profile of [OAuth2.0](http://tools.ietf.org/html/rfc6749) and is focused on defining standardized flows and constructs for coordinating the protection of an API or existing web resource. 
+User-managed access (UMA) is a profile of OAuth 2.0 and is focused on defining standardized flows and constructs for coordinating the protection of an API or existing web resource. 
 
 For more information on UMA please visit the corresponding [page](../admin-guide/uma.md) in the docs - the specification can be found at the [Kantara website](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html).
 
