@@ -187,7 +187,7 @@ A boolean value should be returned. A `False` value aborts the corresponding SCI
 
 - Possible values for `context.getResourceType()` are: User, Group, FidoDevice, Fido2Device
 - `context.getTokenDetails().getValue()` is a shortcut that will give you the access token the caller employed to issue the service call
-- Both `context.getTokenDetails().getTokenType()` and `context.getTokenDetails().getScope()` return non null values when the access token is an OAuth token, like when you use test mode to [protect](./scim2.md#api-protection) the service
+- Both `context.getTokenDetails().getTokenType()` and `context.getTokenDetails().getScope()` return non null values when the protection [mechanism](./scim2.md#api-protection) of the API is OAuth or test mode 
 - The `passthrough` field in `context` is an empty `java.util.HashMap` that can be used to carry values from this method to `rejectedResourceOperationResponse` 
 - Note that for resource creation operation, `entity` basically contains the same data supplied in the POST payload. In this case, `entity` has not originated from the database and has not been persisted either
 - For the case of modification, retrieval and removal, `entity` contains the data currently stored in the database for the resource in question
@@ -239,9 +239,12 @@ Suppose your company has three different applications that make management of us
 
 Since SCIM spec does not offer means to handle partitions of this kind, you decide to use the contextual information coming from every request to determine if the operation should be allowed or not. For this purpose you communicate every application developer to send an additional HTTP header in their call with a value that only you (the administrator) and the developer knows. Let's call it the "secret". For the sake of simplicity let's assume developers are external to the company and only you know their identities. They don't know each other so they cannot exchange secrets.
 
-The strategy to implement segmentation is rather simple: 
+The strategy to implement segmentation is rather simple:
+
 - Alter the default SCIM script by supplying a custom implementation for the methods that enforce control of access
+
 - Make the HTTP header name be a configuration property of the script so that it is not hard-coded
+
 - Add a configuration property that contains the mapping of `userType` value vs. expected header value in JSON format
 
 #### Adding and parsing config properties
@@ -271,7 +274,7 @@ def init(self, configurationAttributes):
 	return True
 ```
 
-Note that no validations took place here: we assumed the script contains the properties, that they are non empty and have sensible values. 
+Note no validations took place here: we assumed the script contains the properties, that they are non empty and have sensible values. 
 
 #### Allow/Deny resource operations
 

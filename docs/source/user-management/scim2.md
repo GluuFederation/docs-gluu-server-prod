@@ -690,7 +690,7 @@ For reference, here's is the list of the more relevant scopes. To get the full l
 |https://gluu.org/scim/bulk|Send requests to the bulk endpoint|
 |https://gluu.org/scim/all-resources.search|Access the root .search endpoint|
 
-Depending on your needs, you may like to add only some of the scopes to your client.
+Depending on your needs, you may like to add only some scopes to your client.
 
 ### Requesting a token
 
