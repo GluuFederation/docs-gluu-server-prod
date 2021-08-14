@@ -23,8 +23,11 @@ Throughout this document, you will notice endpoints are prefixed with path `/ide
 Clearly, this API must not be anonymously accessed. However, the basic SCIM standard does not define a specific mechanism to prevent unauthorized requests to endpoints. There are just a few guidelines in section 2 of [RFC 7644](https://tools.ietf.org/html/rfc7644) concerned with authentication and authorization. 
 
 Gluu Server CE supports three mechanisms to protect your endpoints:
-- Standard [OAuth](http://tools.ietf.org/html/rfc6749) tokens. Starting with Gluu 4.3, this is the default and recommended mechanism
+
+- Standard OAuth tokens. Starting with Gluu 4.3, this is the default and recommended mechanism
+
 - UMA (a profile of OAuth 2.0)
+
 - Test mode. Being the simplest approach, it serves as a quick and easy way to start interacting with the service, as well as learning about SCIM
 
 ### Enable the API
@@ -45,14 +48,14 @@ Then proceed to set the protection mode:
 
 - Navigate to `Configuration` > `JSON Configuration` > `OxTrust Configuration`
 - Locate the `Scim properties` section
-- Select **OAUTH** in the `Protection mode` list
+- Select **OAUTH** in the `Protection Mode` list
 - Click the "Save Configuration" button at the bottom
 
 ### Protection Using UMA
 
 - Navigate to `Configuration` > `JSON Configuration` > `OxTrust Configuration`
 - Locate the `Scim properties` section
-- Select **UMA** in the `Protection mode` list
+- Select **UMA** in the `Protection Mode` list
 - Click the "Save Configuration" button at the bottom
 
 Then, activate the UMA SCIM custom script:
@@ -64,12 +67,13 @@ Then, activate the UMA SCIM custom script:
 
 ### Protection Using Test Mode
 
+!!! Warning
+    This mode is not recommended in a production scenario.
+
 - Navigate to `Configuration` > `JSON Configuration` > `OxTrust Configuration`
 - Locate the `Scim properties` section
-- Select **TEST** in the `Protection mode` list
+- Select **TEST** in the `Protection Mode` list
 - Click the "Save Configuration" button at the bottom
-
-Note this mode is not recommended for a production scenario.
 
 ## Where to locate SCIM-related logs
 
@@ -79,7 +83,7 @@ Gluu Server logs usually reveal the source of problems when things are going wro
 
 - oxAuth log is at `/opt/gluu/jetty/oxauth/logs/oxauth.log`
 
-- If using the [SCIM](../admin-guide/custom-script#scim) custom script in order to intercept API calls and apply custom logic, the script log is also useful: `/opt/gluu/jetty/scim/logs/scim_script.log`
+- If using the SCIM [custom script](#custom-scripts) in order to intercept API calls and apply custom logic, the script log is also useful: `/opt/gluu/jetty/scim/logs/scim_script.log`
 
 Generally it's convenient to set the logging level for both oxAuth and SCIM to **DEBUG**. SCIM component uses the same logging level of oxTrust. See the [log management](../operation/logs.md#log-levels) page for more information.
 
@@ -657,64 +661,25 @@ Note the usage of `close` in the last statement. While it's not a requirement, i
 
 The [SCIM protected by UMA section](#scim-protected-by-uma) contains examples for [adding](#adding-a-user) and [deleting](#delete-a-user) users.  The only actual difference in coding for test mode, OAuth, or UMA-protected service is the way in which you initially get a `ScimClient` object instance. For test mode, just call `ScimClientFactory.getTestClient` as shown in the previous example.
 
-### Under the Hood
-
-#### OpenID clients
+### A word on OpenID clients
 
 When running your code in test mode, some new OpenID clients are created (they are employed to request short-lived tokens to access the service). In oxTrust, you can see those by navigating to `OpenId Connect` > `Clients`; they are named as "SCIM-Client". These clients won't clutter your database, they are also short-lived (one day) so they are cleaned up automatically.
 
-#### HTTP connections and concurrent support
-
-`scim-client` project uses the JAX-RS 2.0 Client API and RestEasy framework. Under the hood network communication between client and server is handled by HttpClient from the Apache HttpComponents project which by default makes use of `org.apache.http.impl.conn.SingleClientConnManager`. This connection manager manipulates a single socket at any given time and supports the use case in which one or more invocations are made serially from a single thread.
-
-The above means that by default, instances obtained via `ScimClientFactory` do not support concurrent calls in a safe manner. Starting with version 4.1, multithread support was added by employing the thread safe connection manager `org.apache.http.impl.conn.PoolingHttpClientConnectionManager`.
-
-!!! Note
-    You need to explicitly enable this feature, otherwise, behavior will be standard (single execution thread per client instance). You will have to supply proper parameters to better suit your production environment needs.
-
-The following lists the steps required to switch the java client to support access in a multithreaded environment:
-
-- Set a Java variable of name `httpclient.multithreaded` with any value. This will make the `scim-client` use the `PoolingHttpClientConnectionManager`.
-
-- To override the default maximum number of total connections the manager uses, supply variable `httpclient.multithreaded.maxtotal` with the value of your choosing.
-
-- To override the default maximum number of connections per route, supply variable `httpclient.multithreaded.maxperroute`.
-
-- **IMPORTANT**: Check RPT connection pooling is enabled in oxTrust. Login to oxTrust and go to `Configuration` > `JSON Configuration`. Scroll down to `rptConnectionPoolUseConnectionPooling` and set the flag to true. To finish press `Save configuration` at the bottom of the page.
-
-#### Supplying custom request headers
-
-You can make the client send extra header parameters upon every request by setting some Java system variables:
-
-- `scim.extraHeaders`: a comma separated list of headers you want to set
-- `scim.header.XYZ`: the value for header `XYZ` (already listed in the previous property)
-
-As an example, suppose you want to send 2 headers, `My-Custom-Header-1, My-Custom-Header-2`, with values `gamble` and `chaos-theory`, respectively.  You can do as follows:
-
-```
-mvn ... -Dscim.extraHeaders="My-Custom-Header-1, My-Custom-Header-2" -Dscim.header.My-Custom-Header-1=gamble 
-        -Dscim.header.My-Custom-Header-2="chaos-theory"
-```
-
-If you want to set headers programatically, you can find the method `setCustomHeaders` useful. This method is callable on any instance obtained via `ScimClientFactory.getTestClient`
-
 ## SCIM Protected by OAuth
 
-This protection mode employs the OAuth 2.0 authorization framework to provide access to the service. You may have already noticed that test mode resembles OAuth 2.0 a lot. Actually the difference between this and test mode lies in the usage of scopes. OAuth scopes denote the kind of access a client is looking for.
+This protection mode employs the [OAuth 2.0](http://tools.ietf.org/html/rfc6749) authorization framework to provide access to the service. You may have already noticed that test mode resembles OAuth 2.0 a lot. Actually the difference between this and the test mode lies in the usage of scopes. OAuth scopes denote the kind of access a client is looking for.
 
-If you haven't done so, quickly visit the [Working in test mode](#working-in-test-mode) section. In the following we  highlight those additional facts to take into account when working with this mode:
+If you haven't done so, check the ["Working in test mode"](#working-in-test-mode) section. In the following we  highlight those additional facts to take into account when working with this mode:
 
 ### Client scopes
 
-Previously you had to create a [client](#Create an OpenID Client). Now it's necessary to add scopes to it:
+Previously you created a [client](#Create an OpenID Client). Now it's necessary to add scopes to it:
 
 - Login to oxTrust and locate the client created for interaction with SCIM
 
-- Click the "Add Scope" button and sort the list appearing by name
+- Click the "Add Scope" button
 
-- Tick the scopes prefixed by "https://gluu.org/scim". The kind of access every scope grants is displayed on the right column 
-
-Depending on your needs, you may like to add only some of the scopes to your client. 
+- Tick the scopes prefixed by "https://gluu.org/scim". The kind of access every scope grants is displayed on the right column. It may be helpful to sort the scopes list by name 
 
 For reference, here's is the list of the more relevant scopes. To get the full list, visit the `Scopes` page in oxTrust.
 
@@ -725,10 +690,11 @@ For reference, here's is the list of the more relevant scopes. To get the full l
 |https://gluu.org/scim/bulk|Send requests to the bulk endpoint|
 |https://gluu.org/scim/all-resources.search|Access the root .search endpoint|
 
+Depending on your needs, you may like to add only some of the scopes to your client.
 
 ### Requesting a token
 
-As seen [earlier](#request-an-access-token-to-the-token-endpoint) before issuing a request to an endpoint, an access token must be obtained. This time the token has to have associated a suitable scope for the operation to be successful.
+As seen [earlier](#request-an-access-token-to-the-token-endpoint), before issuing a request to an endpoint, an access token must be obtained. This time the token has to have associated a suitable scope for the operation to be successful.
 
 As an example, assume you are interested in creating a user. One way to request a token could be:
 
@@ -739,7 +705,7 @@ $ curl -u '<clientId>:<clientSecret>' \
        https://<host-name>/oxauth/restv1/token
 ```
 
-If the client employed has the scope of interest the response looks like this: 
+If the client employed has the scope of interest the response would look like this: 
 
 ```
 {
@@ -750,7 +716,7 @@ If the client employed has the scope of interest the response looks like this:
 }
 ```
 
-A token may have multiple scopes associated. In this case separate the requested scopes with white spaces in `scope` parameter. This allows to use the same token for operations of different nature.
+A token may have multiple scopes associated. In this case you can separate the requested scopes with white spaces in `scope` parameter. This allows to use the same token for operations of different nature.
   
 ### Java Client
 
@@ -1129,31 +1095,29 @@ The following snippet sends a user creation request and shows how to check if th
 
 public void failedCreate() {
 
-        UserResource u = new UserResource();
-        u.setUserName("admin");
-        
-        Response r = client.createUser(u, null, null);
-        Status status = Status.fromStatusCode(r.getStatus());
+   UserResource u = new UserResource();
+   u.setUserName("admin");
+   
+   Response r = client.createUser(u, null, null);
+   Status status = Status.fromStatusCode(r.getStatus());
 
-        switch (r.getStatusInfo().getFamily()) {
-            case SUCCESSFUL:
-                //2xx HTTP sucess, add your processing logic here...
-                break;
-            case CLIENT_ERROR:
-                //4xx HTTP error
-                ErrorResponse error = r.readEntity(ErrorResponse.class);
-                if (status.equals(Status.BAD_REQUEST)) {
-                    handleError("The request is syntactically incorrect", error.getDetail(), error.getScimType());
-                }
-                else
-                if (status.equals(Status.CONFLICT)) {
-                    handleError("An attempt to create an already existing user occurred", error.getDetail(), error.getScimType());
-                }
-                break;
-            case SERVER_ERROR:
-                //5xx HTTP error
-                break;
-        }
+   switch (r.getStatusInfo().getFamily()) {
+      case SUCCESSFUL:
+         //2xx HTTP sucess, add your processing logic here...
+         break;
+      case CLIENT_ERROR:
+         //4xx HTTP error
+         ErrorResponse error = r.readEntity(ErrorResponse.class);
+         if (status.equals(Status.BAD_REQUEST)) {
+            handleError("The request is syntactically incorrect", error.getDetail(), error.getScimType());
+         } else if (status.equals(Status.CONFLICT)) {
+            handleError("An attempt to create an already existing user occurred", error.getDetail(), error.getScimType());
+         }
+         break;
+      case SERVER_ERROR:
+         //5xx HTTP error
+         break;
+   }
         
 }
 
@@ -1162,6 +1126,44 @@ public void handleError(String title, String description, String scimType) {
     //For a list of possible values of scimType, see table 9 of RFC7644
 }
 ```
+
+## Specific behaviors with the Java client 
+
+### HTTP connections and concurrent support
+
+`scim-client` project uses the JAX-RS 2.0 Client API and RestEasy framework. Under the hood network communication between client and server is handled by HttpClient from the Apache HttpComponents project which by default makes use of `org.apache.http.impl.conn.SingleClientConnManager`. This connection manager manipulates a single socket at any given time and supports the use case in which one or more invocations are made serially from a single thread.
+
+The above means that by default, instances obtained via `ScimClientFactory` do not support concurrent calls in a safe manner. Starting with version 4.1, multithread support was added by employing the thread safe connection manager `org.apache.http.impl.conn.PoolingHttpClientConnectionManager`.
+
+!!! Note
+    You need to explicitly enable this feature, otherwise, behavior will be standard (single execution thread per client instance). You will have to supply proper parameters to better suit your production environment needs.
+
+The following lists the steps required to switch the java client to support access in a multithreaded environment:
+
+- Set a Java variable of name `httpclient.multithreaded` with any value. This will make the `scim-client` use the `PoolingHttpClientConnectionManager`.
+
+- To override the default maximum number of total connections the manager uses, supply variable `httpclient.multithreaded.maxtotal` with the value of your choosing.
+
+- To override the default maximum number of connections per route, supply variable `httpclient.multithreaded.maxperroute`.
+
+- (Applicable when using UMA protection mode) Check RPT connection pooling is enabled in oxTrust. Login to oxTrust and go to `Configuration` > `JSON Configuration`. Scroll down to `rptConnectionPoolUseConnectionPooling` and set the flag to true. To finish press `Save configuration` at the bottom of the page.
+
+### Supplying custom request headers
+
+You can make the client send extra header parameters upon every request by setting some Java system variables:
+
+- `scim.extraHeaders`: a comma separated list of headers you want to set
+- `scim.header.XYZ`: the value for header `XYZ` (already listed in the previous property)
+
+As an example, suppose you want to send 2 headers, `My-Custom-Header-1, My-Custom-Header-2`, with values `gamble` and `chaos-theory`, respectively.  You can do as follows:
+
+```
+mvn ... -Dscim.extraHeaders="My-Custom-Header-1, My-Custom-Header-2" \
+        -Dscim.header.My-Custom-Header-1=gamble \ 
+        -Dscim.header.My-Custom-Header-2="chaos-theory"
+```
+
+If you want to set headers programatically, you will find the method `setCustomHeaders` useful. This method is callable on any instance obtained via `ScimClientFactory`.
 
 ## Custom scripts
 The service allows you to execute custom logic when certain SCIM API operations are invoked. To learn more visit [this page](./scim-scripting.md).
