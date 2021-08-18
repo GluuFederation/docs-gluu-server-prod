@@ -106,7 +106,7 @@
     
     1. Log in to the Gluu Server container.
     2. Keep your intermediate certificate in the file `/etc/certs/`.
-    3. Modify `/etc/httpd/conf.d/https_gluu.conf`, and add  
+    3. Modify `/etc/apache2/sites-available/https_gluu.conf`, and add  
       `SSLCertificateChainFile /etc/certs/name_of_your_interm_root_cert.crt`.
     4. [Restart](../operation/services.md#restart) the `httpd` service.
 
