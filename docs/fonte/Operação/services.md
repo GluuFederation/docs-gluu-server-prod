@@ -29,7 +29,7 @@ The following list of services included with the Gluu Server may differ from dep
 
 ``` tab="Ubuntu 18, RHEL 7, Debian 9, or CentOS 7"
 systemctl start [service name]
-```
+```/install/community-edition-setup/setup.py -c
 
 ``` tab="Ubuntu 16"
 service [service name] start
