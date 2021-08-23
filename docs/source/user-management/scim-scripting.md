@@ -106,7 +106,7 @@ These methods are called if `getApiVersion` returns a number >= 5 (available in 
 |`manageResourceOperation`|
 |`manageSearchOperation`|
 
-[Later](#defining-rules-for-execution-of-scim-operations) we'll revisit the topic of access and provide concrete examples.
+[Later](#controlling-execution-of-scim-operations) we'll revisit the topic of access and provide concrete examples.
 
 ## Developer's first steps
 
@@ -126,7 +126,7 @@ To start, ensure SCIM service is running and a protection mode has been [configu
 
 Inspect (`tail`) `scim_script.log`. After some seconds you'll see some lines related to script initialization, ie. method `init` being called. This means your script is active and properly running. Click [here](./scim2.md#where-to-locate-scim-related-logs) to learn more about SCIM logs.
 
-Learning by doing is a good approach to scripting in Gluu. To start, edit the script by adding some `print` statements to the following methods: `createUser`, `postCreateUser`, `allowResourceOperation`. Save the script and check the log, wait until `destroy` and `init` are called. 
+Learning by doing is a good approach to scripting in Gluu. To start, edit the script by adding some `print` statements to the following methods: `createUser`, `postCreateUser`, `manageResourceOperation`. Save the script and check the log, wait until `destroy` and `init` are called. 
 
 Send a user creation request to the service. [Here](./scim2.md#creating-resources) is an example. Note the order in which your prints appear in the log.
 
@@ -192,7 +192,7 @@ Returning `None` transfers the control of the operation for normal processing (d
 - Note that for resource creation operation, `entity` basically contains the same data supplied in the POST `payload`. In this case, `entity` has not originated from the database and has not been persisted either
 - For the case of modification, retrieval and removal, `entity` contains the data currently stored in the database for the resource in question
 - Since many values come from Java code, you can always do `getClass().getName()` to get an idea of what type of variables you are dealing with
-- To build custom error responses your can reuse some of the `getErrorResponse` of class [BaseScimWebService](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-rest/src/main/java/org/gluu/oxtrust/ws/rs/scim2/BaseScimWebService.java) 
+- To build custom error responses your can reuse some of the `getErrorResponse` methods of class [BaseScimWebService](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-rest/src/main/java/org/gluu/oxtrust/ws/rs/scim2/BaseScimWebService.java) 
 
 This method offers a high degree of flexibility. Perform careful testing of your code and account all potential scenarios.
 
@@ -205,11 +205,11 @@ This method is invoked when resource searches are performed. Parameters are desc
 |`context`|Provides contextual information about the SCIM operation being called such as type of resource involved, HTTP verb, request headers, query params, etc.  |[OperationContext](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-rest/src/main/java/org/gluu/oxtrust/service/external/OperationContext.java)|
 |`searchRequest`|An object representing the search parameters provided in the call (applies for both GET and POST)|[SearchRequest](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2/SearchRequest.java)|
 
-Unlike `manageResourceOperation`, no `entity` parameter is passed. This is so because making decisions based on already executed searches would have a performance impact. Instead you can use `context#setFilterPrepend(String)` to help restrict the search against the database: here you use a string value that will be interpreted as an SCIM filter expression (see section 3.4.2.2 of RFC 7644). When the search being performed already contains a search filter (ie. non-empty `searchRequest.getFilter()`), a new filter is created by appending both "subfilters" with an `and` operator.  
+Unlike `manageResourceOperation`, no `entity` parameter is passed. This is so because making decisions based on already executed searches would have a performance impact. Instead you can use `context.setFilterPrepend(...)` to help restrict the search against the database: here you can pass a `String` value that will be interpreted as an SCIM filter expression (see section 3.4.2.2 of RFC 7644). When the search being performed already contains a search filter (ie.  `searchRequest.getFilter()`is non-empty), a new filter is created by appending both "subfilters" with an `and` operator.  
 
 As in the case of `manageResourceOperation` this method is expected to return an instance of `javax.ws.rs.core.Response`.
 
-Returning `None` transfers the control of the operation for normal processing (default Gluu implementation). If the method execution crashes at runtime, a 500 HTTP error is sent.
+Returning `None` transfers the control of the operation for normal processing (the Gluu implementation). If the method execution crashes at runtime, a 500 HTTP error is sent.
 
 The same recommendations given for `manageResourceOperation` apply here. If you build filter expressions in your method, ensure they are syntactically valid to avoid your callers getting unexpected "invalidFilter" 400 errors.
 
@@ -252,9 +252,9 @@ Here is how `init` would look like:
 def init(self, configurationAttributes):
     self.custom_header = configurationAttributes.get("custom_header").getValue2()
     json = configurationAttributes.get("access_map").getValue2()    
-	self.access_map = json.loads(json)
-	print "ScimEventHandler (init): Initialized successfully"
-	return True
+    self.access_map = json.loads(json)
+    print "ScimEventHandler (init): Initialized successfully"
+    return True
 ```
 
 Note no validations took place here: we assumed the script contains the properties, that they are non empty and have sensible values. 
@@ -295,7 +295,7 @@ def manageResourceOperation(self, context, entity, payload, configurationAttribu
         return BaseScimWebService.getErrorResponse(403, None, "Attempt to handle a not allowed user type")
 ```
 
-Note no usage of the payload took place. This is a case you may like to evaluate, where mistakenly using an update the `userType` is set to an unexpected value.
+Note no usage of the payload took place. A case you may like to evaluate is where mistakenly using an update operation, the `userType` is set to an unexpected value.
 
 #### Allow/Deny searches
 
