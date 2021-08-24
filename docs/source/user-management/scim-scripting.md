@@ -219,7 +219,7 @@ Let's assume you make use of the SCIM attribute `userType` so that your user bas
 
 Suppose your company has three different applications that make management of users in every category, that is, only one application is devoted to manage *contractors*, another *employees*, and other *interns*. You are interested in consistently granting access so that no application can create, query or modify users that don't belong to its focus.
 
-Since SCIM spec does not offer means to handle partitions of this kind, you decide to use the contextual information coming from every request to determine if the operation should be allowed or not. For this purpose you communicate every application developer to send an additional HTTP header in their call with a value that only you (the administrator) and the developer knows. Let's call it the "secret". For the sake of simplicity let's assume developers are external to the company and only you know their identities. They don't know each other so they cannot exchange secrets.
+To properly handle this multi-tenancy scenario, you decide to use the contextual information coming from every request to determine if the operation should be allowed or not. For this purpose you communicate every application developer to send an additional HTTP header in their call with a value that only you (the administrator) and the developer knows. Let's call it the "secret". For the sake of simplicity let's assume developers are external to the company and only you know their identities. They don't know each other so they cannot exchange secrets.
 
 The strategy to implement segmentation is rather simple:
 
