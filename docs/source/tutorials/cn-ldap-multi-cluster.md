@@ -34,7 +34,7 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
     This is an alpha feature only offered with helm installation of Gluu >4.2.
         
 !!!note
-     It is recommended to start with one replica in cluster one and then scale through a helm upgrade command after the setup has finished.
+     It is recommended to start with one replica in cluster one and then scale through a helm upgrade command after the setup has finished. Forexample, you can edit the value of `opendj.multiCluster.replicaCount` inside your `values.yaml`  and run `helm upgrade <release-name> /helm -f /helm/gluu/values.yaml -n <namespace>`
 
 !!!note
      All serf addresses will be in the format of `RELEASE-NAME-opendj-CLUSTERID-regional-STATEFULSET#-SERFADDRESSSUFFIX`
