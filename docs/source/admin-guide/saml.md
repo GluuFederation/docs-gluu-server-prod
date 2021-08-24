@@ -229,6 +229,30 @@ The Gluu Server supports the SAML force authentication parameter out-of-the-box.
 
 Upon receiving the SAML request with this flag, the IDP will invalidate its session for the user, then will issue a new OpenID Connect (OIDC) authorization request to oxAuth, including the `prompt=login` parameter. This parameter forces oxAuth to invalidate its session as well. The user will then follow the full authentication procedure.
 
+## Support for additional request parameters in  SSO SP Initiated Flow
+
+Sometimes, some SPs will want to pass additional parameters , either through HTTP GET in SSO Redirect Profiles or HTTP POST in SSO POST Profiles. 
+Our Shibboleth IDP implementation will pass all of those extra parameters to oxAuth in a parameter called `extraParameters`. They are packed in a json object. 
+An example would be 
+```
+{
+    "username": "someuser",
+    "use_2fa" : "true",
+}
+```
+In addition, accessing said data will require logging into oxTrust and going to `Configuration` >  `Json Configuration` > `oxAuth Configuration` > `authorizationRequestCustomAllowedParameters` and add `extraParameters` as one of the Authorization Request Custom Allowed Parameters.
+
+The parameters can then be accessed in a custom script like this 
+```
+identity = CdiUtil.bean(Identity)
+#do other stuff here 
+sessionAttributes = identity.getSessionId().getSessionAttributes()
+# Get the extraParameters data value 
+# This is a string containing the extra parameters as JSON
+# Use a json library to decode and extract the parameters 
+extraParameters = sessionAttributes.get("extraParameters)
+```
+
 ## SAML SP
 If the target application (SP) does not already support SAML, we recommend using the [Shibboleth SP](../integration/sswebapps/saml-sp.md) web server filter to secure and integrate the application with your Gluu SAML IDP. 
 

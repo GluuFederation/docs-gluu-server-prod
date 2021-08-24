@@ -441,6 +441,21 @@ Relevant links:
 
 !!! Note
     It is recommended to store this script in your database. If you use the filesystem option, you may have to replicate the file across nodes when in a container-based environment. This is because the script caller can be oxTrust, oxAuth or even SCIM service. 
+
+## IDP Extension 
+
+This script type is specific to SAML / Shibboleth IDP and allows developers to perform two operations:
+
+- Attribute Translation. The developer can use this to perform any transformation on the returned OpenId attributes after oxAuth authenication 
+  is complete and flow of control is returned to Shibboleth IDP. 
+- Attribute Update. The method in the script is invoked just before the the SAML response is crafted and returned to the SP. Here , the developer 
+  can add, remove or update the attributes to achieve various results. 
+
+|Method|`def translateAttributes(self, context, configurationAttributes)`|
+| ---  | --- |
+| **Description**|Translate attributes from user profile|
+|Method Parameter| `context` is [`org.gluu.idp.externalauth.TranslateAttributesContext.java`](https://github.com/GluuFederation/shib-oxauth-authn3/blob/version_4.3.0/src/main/java/org/gluu/idp/externalauth/TranslateAttributesContext.java) |
+|Method Parameter| `configurationAttributes` is `java.util.Map<String, SimpleCustomProperty>`|
     
 ## Additional Tips
 
