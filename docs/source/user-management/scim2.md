@@ -311,7 +311,7 @@ After execution open the file `output.json`. You should see a response like this
   "meta": {
     "created": "...",
     "lastModified": "...",
-    "location": "https://.../scim/v2/Users/@!..."
+    "location": "https://.../scim/v2/Users/..."
     "resourceType": "User"
   },
   "schemas": [ "urn:ietf:params:scim:schemas:core:2.0:User" ],
@@ -334,10 +334,7 @@ Please note that SCIM will only allow you to create users with HTTP POST verb.
 
 One of the simplest ways to test retrieval is querying all information about a single user. Check in your LDAP the `inum` for Average Joe and do the following request with `curl` passing, as usual, your access token in the headers:
 
-`curl -G -H 'Authorization: Bearer ...access token...' 'https://<host-name>/identity/restv1/scim/v2/Users/<user-inum>'`
-
-!!! Note
-    In the Gluu Server, `inums` are long strings consisting of alphanumeric characters and typically start with @!, include these two characters as well. Note that the URL was surrounded with single quotes: bang characters might be misleading to your command line interpreter.
+`curl -G -H 'Authorization: Bearer ...access token...' https://<host-name>/identity/restv1/scim/v2/Users/<user-inum>`
     
 As a response, you will get a JSON document with all of the attributes in the user schema and their corresponding values. Note that only non-null attributes are present in the output:
 
@@ -432,7 +429,7 @@ And issue the PUT with `curl`:
 $ curl -X PUT -H 'Authorization: Bearer ...access token...' 
        -H 'Content-Type: application/scim+json'
        -d @input.json -o output.json 
-       'https://<host-name>/identity/restv1/scim/v2/Users/<user-inum>'
+       https://<host-name>/identity/restv1/scim/v2/Users/<user-inum>
 ```
 
 Response (`output.json`) will show the same contents of a full retrieval.
@@ -516,7 +513,7 @@ Now let's see it in action:
 $ curl -X PATCH -H 'Authorization: Bearer ...access token...' 
        -H 'Content-Type: application/scim+json' 
        -d @input.json -o output.json 
-       'https://<host-name>/identity/restv1/scim/v2/Users/<user-inum>'
+       https://<host-name>/identity/restv1/scim/v2/Users/<user-inum>
 ```
 
 So far, our resource should look like:
@@ -558,7 +555,7 @@ No input file is used in this case. A delete request could be the following:
 
 ```
 $ curl -X DELETE -H 'Authorization: Bearer ...access token...'
-        'https://<host-name>/identity/restv1/scim/v2/Users/<user-inum>'
+        https://<host-name>/identity/restv1/scim/v2/Users/<user-inum>
 ```
 
 Use the `inum` of our dummy user, Average Joe.
