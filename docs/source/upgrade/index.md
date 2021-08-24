@@ -6,15 +6,15 @@
 === "Community Edition"
     
     ## Overview
-    The Gluu Server **cannot** be upgraded with a simple `apt-get upgrade`. You will need to either use our in-place upgrade script or explicitly install the new version and export/import your data. Find the existing version below for upgrade instructions to Gluu Server 4.2. 
+    The Gluu Server **cannot** be upgraded with a simple `apt-get upgrade`. You will need to either use our in-place upgrade script or explicitly install the new version and export/import your data. Find the existing version below for upgrade instructions to Gluu Server 4.3. 
     
     ### Pre-requisites
     
     - Before upgrading, make sure to [back up](../operation/backup.md) the Gluu container or LDAP LDIF. 
     - Upgrades should always be thoroughly scoped and tested on a development environment *first*.
-    - This upgrade process only upgrades versions 4.0.x and 4.1.x. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
+    - This upgrade process only upgrades versions 4.0.x through 4.1.x. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
     
-    #### Online Upgrade from 4.x to 4.2
+    #### Online Upgrade from 4.x to 4.3
     
     !!! Note
         Upgrade script runs on Python 3. You need to install Python 3 before running the script.
@@ -26,13 +26,13 @@
     * Download the upgrade script
     
     ```
-    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.2.0/upg4xto420.py
+    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.3.0/upg4xto430.py
     ```
     
     * Execute the script:
     
     ```
-    python3 upg4xto420.py
+    python3 upg4xto430.py
     ```
     
     Your upgrade directory will be the current directory. The script will create these directories: `app`, and `ces_current`, and writes Gluu cacerts.
@@ -867,7 +867,7 @@
              ```
              
         !!! Note
-            There is a new health check in 4.3 which may result in kubernetes rejecting the update of statefulsets describing that there are mulitple healthchecks defined. This does not affect the upgrade process itself. This is often only seen in oxtrust and hence  after the confirmation that most  services are up you may have to `kubectl delete -f oxtrust.yaml` and re-apply `kubectl apply -f oxtrust.yaml` to re-initiate the statefulset.
+            There is new health check which may result in kubernetes rejecting the update of statefulsets describing that there are mulitple healthchecks defined. This does not affect the upgrade process itself. This is often only seen in oxtrust and hence  after the confirmation that most  services are up you may have to `kubectl delete -f oxtrust.yaml` and re-apply `kubectl apply -f oxtrust.yaml` to re-initiate the statefulset.
  
              
     ### Exporting Data
