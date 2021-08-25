@@ -1003,6 +1003,13 @@ Once you submit this form, your attribute will be part of the User Extension. Yo
 
 In the JSON response, your new added attribute will appear.
 
+To customize the URI associated to the extension (whose default value is `urn:ietf:params:scim:schemas:extension:gluu:2.0:User`), you can use oxTrust:
+
+- Navigate to `Configuration` > `JSON Configuration` > `OxTrust Configuration`
+- Locate the `Scim properties` section
+- Set a value in the field `User Extension Schema URI`
+- Save the changes
+
 ### Handling Custom Attributes
 
 The following is an example of a user resource with custom attributes set:
