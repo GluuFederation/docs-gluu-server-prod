@@ -122,7 +122,7 @@ If rate limiting is configured to `rateLimitWindowMs: 86400000` and `rateLimitMa
 
 Currently, this configuration is not available in oxTrust. You need to export environment variables:
 
-| Property | Description |
+| Environment variable | Description |
 |----------|-------------|
 | HTTP_PROXY | Sets HTTP proxy to use |
 | HTTPS_PROXY | Sets a distinct proxy to use for HTTPS requests.|
