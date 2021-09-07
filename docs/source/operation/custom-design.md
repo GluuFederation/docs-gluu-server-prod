@@ -263,8 +263,8 @@ As an example, add text to the top of the form and change the color of the butto
     1. Create a config file to store the content of `login.xhtml` and `custom.css`.
     
        ```sh
-           kubectl create cm oxauth-custom-html --from-file=login.xhtml
-           kubectl create cm oxauth-custom-css --from-file=custom.css
+       kubectl create cm oxauth-custom-html --from-file=login.xhtml
+       kubectl create cm oxauth-custom-css --from-file=custom.css
        ```
     
     1. Mount file in your values.yaml under `oxauth.volumes` and `oxauth.volumeMounts`:
@@ -288,7 +288,7 @@ As an example, add text to the top of the form and change the color of the butto
     1. Run helm install or helm upgrade if Gluu has been already installed.  
 
        ```bash
-           helm upgrade gluu gluu/gluu -n <gluu-namespace> --version=1.6.x -f override.yaml
+       helm upgrade gluu gluu/gluu -n <gluu-namespace> --version=1.6.x -f override.yaml
        ```
 
 === "Jackrabbit"
@@ -342,14 +342,14 @@ As an example, add text to the top of the form and change the color of the butto
     1. Create a config file to store the contents of `finishlogout.xhtml` and `custom.css`.
     
        ```sh
-           kubectl create cm oxtrust-custom-html --from-file=finishlogout.xhtml
-           kubectl create cm oxtrust-custom-css --from-file=custom.css
+       kubectl create cm oxtrust-custom-html --from-file=finishlogout.xhtml
+       kubectl create cm oxtrust-custom-css --from-file=custom.css
        ```
     
     1. Mount file in your values.yaml under `oxtrust.volumes` and `oxtrust.volumeMounts`:
     
        ```yaml
-       oxauth:
+       oxtrust:
           volumeMounts:
             - name: oxtrust-pages-volume
               mountPath: /opt/gluu/jetty/identity/custom/pages # finishlogout.xthml will be mounted under this directory
@@ -367,7 +367,7 @@ As an example, add text to the top of the form and change the color of the butto
     1. Run helm install or helm upgrade if Gluu has been already installed.  
 
        ```bash
-           helm upgrade gluu gluu/gluu -n <gluu-namespace> --version=1.6.x -f override.yaml
+       helm upgrade gluu gluu/gluu -n <gluu-namespace> --version=1.6.x -f override.yaml
        ```
 
 === "Jackrabbit"
