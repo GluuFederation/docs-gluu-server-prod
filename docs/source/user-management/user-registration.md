@@ -47,11 +47,11 @@ Administrators can choose whether all email addresses should be unique. By defau
 ### OpenDJ
 1. Log in to the Gluu container
 1. Run this command to list all plugins:  
-    `/opt/opendj/bin/dsconfig -h hostname -p 4444 -D "cn=directory manager" -w yourPassword -n list-plugins`
+    `/opt/opendj/bin/dsconfig -h hostname -p 4444 -D "cn=directory manager" -j ~/.pw -n list-plugins`
 1. To disable the email uniqueness plugin, run this command:  
-    `/opt/opendj/bin/dsconfig -h hostname -p 4444 -D "cn=directory manager" -w yourPassword -n set-plugin-prop --plugin-name "Unique mail address" --set enabled:false`
+    `/opt/opendj/bin# /opt/opendj/bin/dsconfig -h localhost -p 4444 -D "cn=directory manager" -X -j ~/.pw -n set-plugin-prop --plugin-name "Unique mail address" --set enabled:false`
 1. If you want to re-enable the email uniqueness plugin, run this command:  
-    `/opt/opendj/bin/dsconfig -h hostname -p 4444 -D "cn=directory manager" -w yourPassword -n set-plugin-prop --plugin-name "Unique mail address" --set enabled:true`
+    `/opt/opendj/bin# /opt/opendj/bin/dsconfig -h localhost -p 4444 -D "cn=directory manager" -X -j ~/.pw -n set-plugin-prop --plugin-name "Unique mail address" --set enabled:true`
 1. [Restart](../operation/services.md#restart) the `opendj` service.
 
 ## Design customizations  
