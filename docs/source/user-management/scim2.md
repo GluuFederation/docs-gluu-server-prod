@@ -30,6 +30,9 @@ Gluu Server CE supports three mechanisms to protect your endpoints:
 
 - Test mode. Being the simplest approach, it serves as a quick and easy way to start interacting with the service, as well as learning about SCIM
 
+!!! Warning
+    A bypass mode may be available where no security checks take place so straight access is allowed. Use this mode only if you can guarantee endpoints can be secured via external protection measures implemented by your organization.
+
 ### Enable the API
 
 By default, the API is not active, so the first step is just to enable it:
