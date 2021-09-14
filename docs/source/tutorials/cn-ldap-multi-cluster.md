@@ -16,15 +16,14 @@ Setup two kubernetes cluster. We will be using two microk8s clusters sized at t2
  
 #### Requirements
 
-- You must make sure that the nodeports are open for ldap  communications. The node ports depend on the number of clusters and take a format of `3094(n-1)`, `3063(n-1)`, `3044(n-1)`, and `3098(n-1)`, where `n` is the replica number.
-- All serf addresses will be in the format of `RELEASE-NAME-opendj-CLUSTERID-regional-STATEFULSET#-SERFADDRESSSUFFIX` and hence these addresses must be resolvable. The below table depicts the relationship , assuming the release name to be `gluu` , cluster id to be `east`, and serf address suffix to be `regional.gluu.org`.
+- You must make sure that the nodeports are open for ldap  communications. The node ports depend on the number of clusters and take a format of `309(namespaceintID)(n-1)`, `307(namespaceintID)(n-1)`, `304(namespaceintID)(n-1)`, and `306(namespaceintID)(n-1)`, where `n` is the replica number.
+- All serf addresses will be in the format of `RELEASE-NAME-opendj-CLUSTERID-regional-STATEFULSET#-SERFADDRESSSUFFIX` and hence these addresses must be resolvable. The below table depicts the relationship , assuming the release name to be `gluu` , cluster id to be `east`, namespace int id to be `0`, and serf address suffix to be `regional.gluu.org`.
 
     |NodePort   |Serf advertise port  | Serf admin port | Serf LDAPS port	|Serf LDAP replication port| Serf Advertise address                          |
     |-----------|---------------------|-----------------|-------------------|--------------------------|-------------------------------------------------|
-    |Replica 1  |`30940`              |`30440`	        |`30630`        	| `30980`                  | `gluu-opendj-east-regional-0-regional.gluu.org` |
-    |Replica 2  |`30941`              |`30441`	        |`30631`	        | `30981`                  | `gluu-opendj-east-regional-1-regional.gluu.org` | 
-    |Replica n  |`3094(n-1)`          |`3044(n-1)`	    |`3063(n-1)`	    | `3098(n-1)`              | `gluu-opendj-east-regional-(n-1)-regional.gluu.org` |
-
+    |Replica 1  |`30700`              |`30400`	        |`30600`        	| `30900`                  | `gluu-opendj-east-regional-0-regional.gluu.org` |
+    |Replica 2  |`30701`              |`30401`	        |`30601`	        | `30901`                  | `gluu-opendj-east-regional-1-regional.gluu.org` | 
+    |Replica n  |`3070(n-1)`          |`3040(n-1)`	    |`3060(n-1)`	    | `3090(n-1)`              | `gluu-opendj-east-regional-(n-1)-regional.gluu.org` |
 
 - All clusters must use the same helm release name
 
@@ -155,15 +154,15 @@ Global Administrator User ID [admin]:
 Password for user 'admin': 
 Suffix DN : Server                                              : Entries : Replication enabled : DS ID : RS ID : RS Port (1) : M.C. (2) : A.O.M.C. (3) : Security (4)
 ----------:-----------------------------------------------------:---------:---------------------:-------:-------:-------------:----------:--------------:-------------
-o=gluu    : gluu-opendj-east-regional-0-regional.gluu.org:30440 : 210     : true                : 3405  : 24442 : 30980       : 0        :              : true
-o=gluu    : gluu-opendj-east-regional-1-regional.gluu.org:30441 : 210     : true                : 10457 : 11635 : 30981       : 0        :              : true
-o=gluu    : gluu-opendj-west-regional-1-regional.gluu.org:30441 : 210     : true                : 20953 : 28477 : 30981       : 0        :              : true
-o=metric  : gluu-opendj-east-regional-0-regional.gluu.org:30440 : 25      : true                : 6048  : 24442 : 30980       : 24       :              : true
-o=metric  : gluu-opendj-east-regional-1-regional.gluu.org:30441 : 28      : true                : 12646 : 11635 : 30981       : 14       :              : true
-o=metric  : gluu-opendj-west-regional-1-regional.gluu.org:30441 : 7       : true                : 13210 : 28477 : 30981       : 52       :              : true
-o=site    : gluu-opendj-east-regional-0-regional.gluu.org:30440 : 2       : true                : 2115  : 24442 : 30980       : 0        :              : true
-o=site    : gluu-opendj-east-regional-1-regional.gluu.org:30441 : 2       : true                : 2672  : 11635 : 30981       : 0        :              : true
-o=site    : gluu-opendj-west-regional-1-regional.gluu.org:30441 : 2       : true                : 3031  : 28477 : 30981       : 0        :              : true
+o=gluu    : gluu-opendj-east-regional-0-regional.gluu.org:30400 : 210     : true                : 3405  : 24442 : 30980       : 0        :              : true
+o=gluu    : gluu-opendj-east-regional-1-regional.gluu.org:30401 : 210     : true                : 10457 : 11635 : 30981       : 0        :              : true
+o=gluu    : gluu-opendj-west-regional-1-regional.gluu.org:30401 : 210     : true                : 20953 : 28477 : 30981       : 0        :              : true
+o=metric  : gluu-opendj-east-regional-0-regional.gluu.org:30400 : 25      : true                : 6048  : 24442 : 30980       : 24       :              : true
+o=metric  : gluu-opendj-east-regional-1-regional.gluu.org:30401 : 28      : true                : 12646 : 11635 : 30981       : 14       :              : true
+o=metric  : gluu-opendj-west-regional-1-regional.gluu.org:30401 : 7       : true                : 13210 : 28477 : 30981       : 52       :              : true
+o=site    : gluu-opendj-east-regional-0-regional.gluu.org:30400 : 2       : true                : 2115  : 24442 : 30980       : 0        :              : true
+o=site    : gluu-opendj-east-regional-1-regional.gluu.org:30401 : 2       : true                : 2672  : 11635 : 30981       : 0        :              : true
+o=site    : gluu-opendj-west-regional-1-regional.gluu.org:30401 : 2       : true                : 3031  : 28477 : 30981       : 0        :              : true
 
 [1] The port used to communicate between the servers whose contents are being
 replicated.
