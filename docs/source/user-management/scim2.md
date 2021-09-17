@@ -1281,25 +1281,25 @@ The image above shows the example of `middleName` whose corresponding SCIM core 
 
 ## Potential performance issues with Group endpoints
 
-In SCIM a group resource basically consists of an identifier, a display name, and a collection of members associated to it. Also, every member is made up of a user identifier, his display name, and others. As a consequence, retrieving group information requires making a correlation with existing user data. Since Gluu database model does not follow a relational database pattern this may entail a considerable amount of user queries when groups contain thousands of members. 
+In SCIM a group resource basically consists of an identifier, a display name, and a collection of members associated to it. Also, every member is made up of a user identifier, his display name, and other attributes. As a consequence, retrieving group information requires making a correlation with existing user data. Since Gluu database model does not follow a relational database pattern this may entail a considerable amount of user queries when groups contain thousands of members. 
 
 While this could have been workarounded by storing members' display names inside group entries, this brings additional problems to deal with.
 
-Another source of overhead stems from creation and modification of groups where many new users are associated to a group: by default, checks are made to guarantee only existing users are added to groups, thus requiring continuous database queries.
+Another source of potential overhead stems from creation and modification of groups where many new users are associated to a given group: by default checks are made to guarantee only existing users are attached to groups, thus requiring continuous database queries.
 
-Currently there are two ways to lower the amount of workload required for SCIM group operations:
+Currently there are two ways to lower the amount of database lookups required for SCIM group operations:
 
 - Explicitly excluding display names from responses
-- Pass the overhead bypass flag to skip member's validations
+- Pass the _overhead bypass_ flag to skip members validations
 
 The first approach consists of using the query param `excludedAttributes` (see RFC 7644) so that display names are neither retrieved from database nor sent in responses. A value like `members.display` does the job. Note the query param `attributes` can also be used for this purpose, for example with a value like `members.value` that will output only members' identifiers and ignore other non-required attributes.
 
-This approach is particularly useful in search and retrievals when users' display names are not necessary.
+This approach is particularly useful in search and retrievals when users' display names are not needed.
 
 The second is a stronger approach that turns off validation of incoming members data: if the usage of a POST/PUT/PATCH operation implies adding members, their existence is not verified, they will simply get added. Here, the client application is responsible for sending accurate data. To use this approach add a query or header param named `Group-Overhead-Bypass` with any value. Note under this mode of operation:
 
-- Display names are never returned regardless of the value of `attributes` or `excludedAttributes` params
-- Patch operations involving display names in path filters are ignored, eg: `"path": "members[value eq \"2819c223\" or display eq \"Joan\"]"`
+- Display names are never returned regardless of `attributes` or `excludedAttributes` params values
+- Remove/replace patch operations that involve display names in path filters are ignored, eg: `"path": "members[value eq \"2819c223\" or display eq \"Joe\"]"`
 
 ## Supporting a User Registration Process with SCIM
 
