@@ -62,7 +62,6 @@ nav:
             - 'Kubernetes': 'installation-guide/install-kubernetes.md'
             - 'Docker': 'installation-guide/install-docker.md'
             - 'Ubuntu': 'installation-guide/install-ubuntu.md'
-            - 'Debian': 'installation-guide/install-debian.md'
             - 'RHEL': 'installation-guide/install-rhel.md'
             - 'CentOS': 'installation-guide/install-centos.md'
         - 'Setup Script Options': 'installation-guide/setup_py.md'
