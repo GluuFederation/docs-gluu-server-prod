@@ -20,7 +20,7 @@ Status: Beta
 
 | Released | Community EOL | Enterprise EOL |
 | --- | --- | --- |
-| July 2021 | December 2023 | December 2024 |
+| October 2021 | April 2023 | April 2024 |
 
 ## Purpose
 
@@ -40,7 +40,7 @@ documentation and administrative guide.
 ## Available components in Gluu Server 4.3
 - oxAuth, oxTrust, oxCore v4.3
 - Gluu OpenDJ v4.4.11 (with Bouncy Castle FIPS 140-2 crypto package 1.0.2.1 and Bouncy Castle Java APIs for the TLS 1.0.9)
-- Shibboleth v3.4.4
+- Shibboleth v4.1.4
 - Passport v4.1
 - Java v1.8.0_112
 - Node.js v9.9.0
@@ -55,6 +55,8 @@ documentation and administrative guide.
 ## 4.3.0 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.0+)
+
+- [#1545](https://github.com/GluuFederation/oxAuth/issues/1545) Oxauth-rp service unable to start after fresh installation of 4.3.0
 
 - [#1544](https://github.com/GluuFederation/oxAuth/issues/1544) Openmetric request fail with label as digits only
 
@@ -80,7 +82,21 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.0+)
 
+- [#2085](https://github.com/GluuFederation/oxTrust/issues/2085) Enhance usability of scopes picker in client edition form
+
+- [#2084](https://github.com/GluuFederation/oxTrust/issues/2084) Updating client id in passport IDP-initiated flow config throws Oops error.
+
+- [#2081](https://github.com/GluuFederation/oxTrust/issues/2081) Oops error on clicking Other custom Scripts
+
 - [#2078](https://github.com/GluuFederation/oxTrust/issues/2078) Update morris.js library to latest
+
+- [#2075](https://github.com/GluuFederation/oxTrust/issues/2075) "Organization Configuration" throwing error 
+
+- [#2074](https://github.com/GluuFederation/oxTrust/issues/2074) Fill correct provider options as per type in Passport Provider Configuration
+
+- [#2073](https://github.com/GluuFederation/oxTrust/issues/2073) SAML NameID configuration is not working in Cloud Edition
+
+- [#2072](https://github.com/GluuFederation/oxTrust/issues/2072) Cache Refresh not working on 4.3.0 version. 
 
 - [#2070](https://github.com/GluuFederation/oxTrust/issues/2070) Attribute Form: Enable custom validation checked by default (incorrectly)
 
@@ -102,11 +118,19 @@ documentation and administrative guide.
  
 - [#2043](https://github.com/GluuFederation/oxTrust/issues/2043) Remove 'Generate SP metadata' feature 
 
+- [#1985](https://github.com/GluuFederation/oxTrust/issues/1985) Missing popup when clicking SP Metadata File link
+
 ### [GluuFederation/gluu-passport](https://github.com/GluuFederation/gluu-passport/issues?q=is%3Aopen+is%3Aissue+milestone%3A4.3.0+)
 
-- [#242](https://github.com/GluuFederation/gluu-passport/issues/206) Sign In with Apple fails after multiple successive logins
+- [#313](https://github.com/GluuFederation/gluu-passport/issues/313) Bug: getRPT. Failed to get RPT token in Gluu 4.3.0
 
-- [#239](https://github.com/GluuFederation/gluu-passport/issues/206) ci(husky): update husky
+- [#291](https://github.com/GluuFederation/gluu-passport/issues/291) Passport social not recognizing any external identity provider (google, facebook etc ).
+
+- [#242](https://github.com/GluuFederation/gluu-passport/issues/242) Sign In with Apple fails after multiple successive logins
+
+- [#241](https://github.com/GluuFederation/gluu-passport/issues/241) R&D on openid-client provider configuration without requesting to discovery endpoint
+
+- [#239](https://github.com/GluuFederation/gluu-passport/issues/239) ci(husky): update husky
 
 - [#213](https://github.com/GluuFederation/gluu-passport/issues/213) Upgrade node allowed versions to allow latest LTS
 
@@ -115,6 +139,12 @@ documentation and administrative guide.
 - [#206](https://github.com/GluuFederation/gluu-passport/issues/206) Replace `passport-openidconnect` with `openid-client` 
 
 - [#205](https://github.com/GluuFederation/gluu-passport/issues/205) Update uma.js to use got lib and remove request 
+
+- [#187](https://github.com/GluuFederation/gluu-passport/issues/187) Passing non-user attributes from idp provider to OP (custom_data)
+
+### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxShibboleth/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.0+)
+
+- [#93](https://github.com/GluuFederation/oxShibboleth/issues/93) Code migration to Shibboleth IDP 4.1.4
 
 ## 4.2.2 Fixes / Enhancements
 
