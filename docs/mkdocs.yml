@@ -39,6 +39,8 @@ google_analytics:
 nav:
 - 'Versions':
     - '3.1.5': 'https://gluu.org/docs/gluu-server/3.1.5/'
+    - '4.3': 'https://gluu.org/docs/gluu-server/4.3/' 
+    - '4.2': 'https://gluu.org/docs/gluu-server/4.2/' 
     - '4.1': 'https://gluu.org/docs/gluu-server/4.1/'    
     - '4.0': 'https://gluu.org/docs/gluu-server/4.0/'   
     - '3.1.8': 'https://gluu.org/docs/gluu-server/3.1.8/'
