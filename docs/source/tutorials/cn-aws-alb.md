@@ -16,9 +16,9 @@ The Gluu Server has been optimized with several container strategies that allow 
  
    Create the Kubernetes cluster. We will be using EKS but GKE is also fine to use. Example `eksctl` command.
 
-    ```bash
-    eksctl create cluster --name gluualbcluster --version 1.19 --nodegroup-name standard-workers --node-type t2.medium --zones eu-central-1a,eu-central-1b,eu-central-1c --nodes 4 --nodes-min 1 --nodes-max 5 --region eu-central-1 --ssh-public-key "~/.ssh/id_rsa.pub"
-    ```
+   ```bash
+   eksctl create cluster --name gluualbcluster --version 1.19 --nodegroup-name standard-workers --node-type t2.medium --zones eu-central-1a,eu-central-1b,eu-central-1c --nodes 4 --nodes-min 1 --nodes-max 5 --region eu-central-1 --ssh-public-key "~/.ssh/id_rsa.pub"
+   ```
    
 #### Requirements
 
@@ -38,14 +38,15 @@ The Gluu Server has been optimized with several container strategies that allow 
 
 6. Run :
 
-    ```bash
-    ./pygluu-kubernetes.pyz helm-install
-    ```
+   ```bash
+   ./pygluu-kubernetes.pyz helm-install
+   ```
+
 7. Once the installation has finished and you can access the GUI. Head to `Configuration > JSON Configuration > OxTrust Configuration`, then set `rptConnectionPoolUseConnectionPooling` to `false`.
 
 8. Restart oxTrust.
 
-   ```
+   ```bash
    kubectl rollout restart statefulset <helm-name>-oxtrust -n <namespace>
    # kubectl rollout restart statefulset gluu-oxtrust -n gluu
    ```
