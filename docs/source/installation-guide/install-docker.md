@@ -67,7 +67,6 @@ The generated files are similar to example below:
 ├── svc.oxpassport.yml
 ├── svc.oxshibboleth.yml
 ├── svc.oxtrust.yml
-├── svc.radius.yml
 ├── svc.redis.yml
 ├── svc.scim.yml
 ├── svc.vault_autounseal.yml
@@ -110,9 +109,6 @@ SVC_CR_ROTATE = False
 
 # enable oxd service
 SVC_OXD_SERVER = False
-
-# enable Gluu Radius service
-SVC_RADIUS = False
 
 # enable Vault service with auto-unseal
 SVC_VAULT_AUTOUNSEAL = False
@@ -212,17 +208,14 @@ PASSPORT_ENABLED = False
 # enable Casa support
 CASA_ENABLED = False
 
-# enable Gluu Radius support
-RADIUS_ENABLED = False
-
 # enable SAML Shibboleth support
 SAML_ENABLED = False
 
 # enable SCIM API
 SCIM_ENABLED = False
 
-# enable test-mode for SCIM API
-SCIM_TEST_MODE = False
+# enable test-mode for SCIM API (default to `OAUTH`)
+GLUU_SCIM_PROTECTION_MODE = "TEST"
 ```
 
 To override any of these settings, create `settings.py` and adjust the value, for example:
@@ -251,7 +244,6 @@ The following services are available during deployment:
 | `oxpassport`        | `SVC_OXPASSPORT`       | no        | no      |
 | `oxshibboleth`      | `SVC_OXSHIBBOLETH`     | no        | no      |
 | `redis`             | `SVC_REDIS`            | no        | no      |
-| `radius`            | `SVC_RADIUS`           | no        | no      |
 | `vault` auto-unseal | `SVC_VAULT_AUTOUNSEAL` | no        | no      |
 | `oxd_server`        | `SVC_OXD_SERVER`       | no        | no      |
 | `cr_rotate`         | `SVC_CR_ROTATE`        | no        | no      |
