@@ -89,7 +89,7 @@ The following settings are default settings.
 # Services
 # ========
 
-# enable LDAP service
+# enable LDAP service (set to `True` if `PERSISTENCE_TYPE` is set to `ldap`)
 SVC_LDAP = True
 
 # enable oxAuth service
@@ -116,7 +116,7 @@ SVC_VAULT_AUTOUNSEAL = False
 # enable Casa service
 SVC_CASA = False
 
-# enable Jackrabbit service (set to True if DOCUMENT_STORE_TYPE is set to JCA)
+# enable Jackrabbit service (set to `True` if `DOCUMENT_STORE_TYPE` is set to `JCA`)
 SVC_JACKRABBIT = False
 
 # enable SCIM service
@@ -131,25 +131,25 @@ JOB_PERSISTENCE = True
 # enable config-init service
 JOB_CONFIGURATION = True
 
-# enable Redis service (set to True if CACHE_TYPE is set to REDIS)
+# enable Redis service (set to `True` if `CACHE_TYPE` is set to `REDIS`)
 SVC_REDIS = False
 
 # =====
 # Cache
 # =====
 
-# supported cache type (choose NATIVE_PERSISTENCE or REDIS)
+# supported cache type (choose `NATIVE_PERSISTENCE` or `REDIS`)
 CACHE_TYPE = "NATIVE_PERSISTENCE"
 
 # ===========
 # Persistence
 # ===========
 
-# supported persistence type (choose one of ldap, couchbase, hybrid, sql, or spanner)
+# supported persistence type (choose one of `ldap`, `couchbase`, `hybrid`, `sql`, or `spanner`)
 PERSISTENCE_TYPE = "ldap"
 
-# dataset saved into LDAP (choose one of default, user, site, token, cache, or session)
-# this setting only affects hybrid PERSISTENCE_TYPE
+# dataset saved into LDAP (choose one of `default`, `user`, `site`, `token`, `cache`, or `session`)
+# this setting only affects hybrid `PERSISTENCE_TYPE`
 PERSISTENCE_LDAP_MAPPING = "default"
 
 # Couchbase username
@@ -179,11 +179,17 @@ SQL_DB_PORT = 3306
 # username to access SQL database
 SQL_DB_USER = "gluu"
 
+# Instance ID of Google Spanner
+GOOGLE_SPANNER_INSTANCE_ID = ""
+
+# Database ID of Google Spanner
+GOOGLE_SPANNER_DATABASE_ID = ""
+
 # ==============
 # Document store
 # ==============
 
-# supported store type (choose one of LOCAL or JCA)
+# supported store type (choose one of `LOCAL` or `JCA`)
 DOCUMENT_STORE_TYPE = "LOCAL"
 
 # admin username for Jackrabbit service
@@ -281,49 +287,95 @@ If `docker-compose.override.yml` exists, this file will be added as the last Com
 
 #### Choose persistence backends
 
-Supported backends are LDAP, Couchbase, or mix of both (hybrid). The following config control which persistence backend is selected:
+Supported backends are LDAP, Couchbase, hybrid (LDAP + Couchbase), SQL, and Google Spanner. The following config control which persistence backend is selected:
 
 - `PERSISTENCE_TYPE`: choose one of `ldap`, `couchbase`, `hybrid` (`ldap` + `couchbase`), `sql`, or `spanner` (default to `ldap`)
 - `PERSISTENCE_LDAP_MAPPING`: choose one of `default`, `user`, `site`, `cache`, `token`, or `session` (default to `default`)
 
-To choose a persistence backend, create a file called `settings.py` (if it wasn't created in the last step) and set the corresponding option as seen above. For example:
+Modify `settings.py` (create the file if doesn't exist) and configure based on selected persistence. For example:
 
-```python
-# Couchbase will be selected
-PERSISTENCE_TYPE = "couchbase"
+1.  LDAP
 
-# store user mapping in LDAP
-PERSISTENCE_LDAP_MAPPING = "user"
+    No additional configuration needed.
 
-# Couchbase user (has access to read and write data, read buckets, etc)
-COUCHBASE_USER = "admin"
+1.  Couchbase
 
-# optional, Couchbase superuser (has access to create buckets, etc)
-COUCHBASE_SUPERUSER = ""
 
-# Couchbase bucket prefix
-COUCHBASE_BUCKET_PREFIX = "gluu"
-
-# Host/IP address of Couchbase server; omit the port
-COUCHBASE_URL = "192.168.100.4"
-```
-
-If `couchbase` or `hybrid` is selected, there are additional steps required to satisfy dependencies:
-
--   put Couchbase cluster certificate into the `couchbase.crt` file
-
--   put Couchbase password into the `couchbase_password` file
-
--   the Couchbase cluster must have `data`, `index`, and `query` services at minimum
-
--   if `COUCHBASE_URL` is set to hostname, make sure it can be reached by DNS query; alternatively add the extra host into `docker-compose.override.yml` file, for example:
-
-    ```yaml
-    services:
-      oxauth:
-        extra_hosts:
-        - "${COUCHBASE_HOSTNAME}:${COUCHBASE_IP}"
+    ```python
+    PERSISTENCE_TYPE = "couchbase"
+    COUCHBASE_USER = "admin"
+    COUCHBASE_SUPERUSER = ""
+    COUCHBASE_BUCKET_PREFIX = "gluu"
+    COUCHBASE_URL = "192.168.100.4"
+    # disable LDAP service
+    SVC_LDAP = False
     ```
+
+    Additional steps required to satisfy dependencies:
+
+    -   put Couchbase cluster certificate into the `couchbase.crt` file
+
+    -   put Couchbase password into the `couchbase_password` file
+
+    -   the Couchbase cluster must have `data`, `index`, and `query` services at minimum
+
+    -   if `COUCHBASE_URL` is set to hostname, make sure it can be reached by DNS query; alternatively add the extra host into `docker-compose.override.yml` file, for example:
+
+        ```yaml
+        services:
+        oxauth:
+            extra_hosts:
+            - "${COUCHBASE_HOSTNAME}:${COUCHBASE_IP}"
+        ```
+
+1.  Hybrid
+
+    ```python
+    PERSISTENCE_TYPE = "hybrid"
+    # store user mapping in LDAP
+    PERSISTENCE_LDAP_MAPPING = "user"
+    # ensure LDAP service is enabled
+    SVC_LDAP = True
+    ```
+
+    Additional steps required to satisfy dependencies:
+
+    -   put Couchbase cluster certificate into the `couchbase.crt` file
+
+    -   put Couchbase password into the `couchbase_password` file
+
+    -   the Couchbase cluster must have `data`, `index`, and `query` services at minimum
+
+1.  SQL
+
+    ```python
+    PERSISTENCE_TYPE = "sql"
+    SQL_DB_DIALECT= "mysql"
+    SQL_DB_NAME = "gluu"
+    SQL_DB_HOST = "localhost"
+    SQL_DB_PORT = 3306
+    SQL_DB_USER = "gluu"
+    # ensure LDAP service is disabled
+    SVC_LDAP = False
+    ```
+
+    Additional steps required to satisfy dependencies:
+
+    -   put MySQL password into the `sql_password` file.
+    -   minimum MySQL version is `v5.7`.
+
+1.  Spanner
+
+    ```python
+    PERSISTENCE_TYPE = "spanner"
+    GOOGLE_SPANNER_INSTANCE_ID = "my-instance-id"
+    GOOGLE_SPANNER_DATABASE_ID = "my-db-id"
+    # disable LDAP service
+    SVC_LDAP = False
+    ```
+    Additional steps required to satisfy dependencies:
+
+    -   put Google credentials into `google-credentials.json` file.
 
 #### Set up Vault auto-unseal
 
