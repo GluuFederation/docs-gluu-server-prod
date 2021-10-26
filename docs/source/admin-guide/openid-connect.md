@@ -229,6 +229,24 @@ Key and salt are read from oxAuth configuration entries `pairwiseCalculationKey`
 
 A user's associated Pairwise IDs can be viewed and managed directly in the database, or more conveniently in their oxTrust user record. Check the [Manage People doc](../user-management/local-user-management.md#managing-associated-pairwise-ids) for more information. 
 
+### Add Sector Identifier
+
+oxAuth provides an easy way to manage and publish a `sector_identifier_uri`. The Gluu admin can use this feature to select certain clients or even add ad-hoc `redirect_uri` values. oxAuth will publish a valid sector identifier JSON object as defined in OpenID Connect dynamic client registration spec. A client could then register this sector identifier URI in addition to redirect URIs.
+
+Follow these steps to add a sector identifier:
+
+1. In oxTrust, navigate to `OpenID Connect` > `Sector Identifier`.
+![Sector](../img/admin-guide/openid/sectoridentifier.png)
+
+1. Click `Add Sector Identifier`.
+![add sector id](../img/admin-guide/openid/addsectoridentifier.png)
+
+1. Add redirect URIs to the `Sector Identifier`.
+![add redirect uris](../img/admin-guide/openid/sectoridentifieraddurl.png)
+
+1. Add clients that uses the `Sector Identifier`.
+![add client](../img/admin-guide/openid/sectoridentifieraddclient.png)
+
 
 ## Authentication
 
