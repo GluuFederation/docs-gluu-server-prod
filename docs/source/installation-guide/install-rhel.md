@@ -136,10 +136,6 @@ Sometimes things go wrong! It can be difficult to troubleshoot issues if the ste
 Run the following commands:
 
 ```
-/sbin/gluu-serverd disable
-```
-
-```
 /sbin/gluu-serverd stop
 ```
 
