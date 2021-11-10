@@ -36,7 +36,7 @@ apt update
 ```
 
 ```
-apt install gluu-server-4.2.3
+apt install gluu-server=4.2.3~Ubuntu20.04
 ```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
@@ -61,7 +61,7 @@ apt update
 ```
 
 ```
-apt install gluu-server-4.2.3
+apt install gluu-server=4.2.3~Ubuntu20.04
 ```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
