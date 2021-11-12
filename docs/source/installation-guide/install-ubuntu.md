@@ -24,7 +24,7 @@ The Gluu Server will create its file system under `/root/` and will be installed
 For **Ubuntu 20.x** run the following commands: 
 
 ```
-echo "deb https://repo.gluu.org/ubuntu/ focal-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
@@ -49,7 +49,7 @@ apt-mark hold gluu-server
 For **Ubuntu 18.04.x** run the following commands: 
 
 ```
-echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/ubuntu/ bionic main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
