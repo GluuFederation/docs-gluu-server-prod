@@ -64,6 +64,7 @@ nav:
             - 'Ubuntu': 'installation-guide/install-ubuntu.md'
             - 'RHEL': 'installation-guide/install-rhel.md'
             - 'CentOS': 'installation-guide/install-centos.md'
+            - 'SUSE': 'installation-guide/install-suse.md'
         - 'Setup Script Options': 'installation-guide/setup_py.md'
 #        - 'Upgrade to 4.3': 'upgrade/index.md'
         - 'Clustering': 'installation-guide/cluster.md'
