@@ -158,7 +158,7 @@ nav:
             - 'Image References': 'reference/container-image-refs.md'
 - Operation Guide:
         - 'Service Commands': 'operation/services.md'
-        - 'Patches': 'upgrade/patches.md'
+#        - 'Patches': 'upgrade/patches.md'
         - 'Backups': 'operation/backup.md'
         - 'CE to CN Migration': 'operation/ce_to_cn_migration.md'
         - 'Security tips': 'operation/security.md'
