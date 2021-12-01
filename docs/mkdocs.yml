@@ -76,6 +76,7 @@ nav:
             - 'AD/LDAP Synchronization': 'user-management/ldap-sync.md'
             - 'IDM Synchronization': 'user-management/idm-sync.md'
             - 'User Registration': 'user-management/user-registration.md'
+            - 'Collecting Metrics': 'user-management/metrics.md'
             - 'SCIM 2.0 User Management': 'user-management/scim2.md'
             - 'SCIM custom scripts': 'user-management/scim-scripting.md'
         - User Authentication:
