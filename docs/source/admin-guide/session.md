@@ -54,7 +54,6 @@ The following properties related to OP session:
 - `sessionIdUnusedLifetime` - unused OP session lifetime (set by default to 1 day). If an OP session is not used for a given amount of time, the OP session is removed. 
 - `sessionIdUnauthenticatedUnusedLifetime` - lifetime of `unauthenticated` OP session. This determines how long the user can be on the login page while unauthenticated.
 - `sessionIdRequestParameterEnabled` - Boolean value specifying whether to enable session_id HTTP request parameter. Default value is `false` (since 4.2). 
-- `sessionIdEnabled` - specifies whether it is allowed to authenticate user by session automatically (without end-user interaction).  
 - `sessionIdPersistOnPromptNone` - specifies whether to persist or update the session object with data if `prompt=none`. Default value is `true`, so session is persisted by default.
 - `invalidateSessionCookiesAfterAuthorizationFlow` - this is special property which specifies whether to invalidate `session_id` and `consent_session_id` cookies right after successful or unsuccessful authorization. 
 

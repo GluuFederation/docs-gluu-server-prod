@@ -880,11 +880,6 @@
             "exclusiveMaximum": false,
             "exclusiveMinimum": false
         },
-        "sessionIdEnabled": {
-            "id": "sessionIdEnabled",
-            "description": "Boolean value specifying whether to enable session ID parameter.",
-            "type": "boolean"
-        },
         "sessionIdRequestParameterEnabled": {
             "id": "sessionIdRequestParameterEnabled",
             "description": "Boolean value specifying whether to enable session_id HTTP request parameter.",
@@ -1186,7 +1181,6 @@
         "applianceInum",
         "sessionIdUnusedLifetime",
         "sessionIdUnauthenticatedUnusedLifetime",
-        "sessionIdEnabled",
         "sessionIdPersistOnPromptNone",
         "sessionStateHttpOnly",
         "configurationUpdateInterval",
