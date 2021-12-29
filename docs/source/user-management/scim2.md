@@ -268,7 +268,7 @@ To lower the barrier to start with SCIM, some raw HTTP sample requests are prese
 
 If you are a Java developer, you already have at your disposal a [library](#testing-with-the-scim-client) to interact with your SCIM endpoints so there is no need to craft requests by hand.
 
-Examples shown here cover very little of what's possible to achieve with the SCIM REST API. For more involved or advanced use cases, you may like to glance at the spec. The [SCIM API](../api-guide/scim-api/#user-endpoint) page offers a condensed and more readable reference to compose your requests.
+Examples shown here cover very little of what's possible to achieve with the SCIM REST API. For more involved or advanced use cases, you may like to glance at the spec. The [SCIM API](../../api-guide/scim-api/#user-endpoint) page offers a condensed and more readable reference to compose your requests.
 
 
 ### Requisites
