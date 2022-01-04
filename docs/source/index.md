@@ -66,7 +66,7 @@ Learn more about using the Gluu Server for access management in the [UMA docs](.
 ## Support
 Gluu offers free and VIP support! Anyone can browse or register and post questions on the [Gluu support portal](https://support.gluu.org). Tickets opened by the community are public, and we do our best to answer them in a timely manner. 
 
-Private support, guaranteed response times and consultative support are available with a paid support contract. For more information, see [our website](https://gluu.org/pricing).
+Private support, guaranteed response times and consultative support are available with a paid support contract. For more information, see [our website](https://gluu.org/).
 
 ## Contribute 
 We want to keep improving our docs. Please help us improve by submitting any improvements to our [Documentation Github](https://github.com/GluuFederation/docs-ce-prod). If you're a Github pro, submit a pull request. If not, just open an issue on any typos, bugs, or improvements you'd like to see addressed. We need your help... even if you're not a coder, you can contribute! 
