@@ -39,9 +39,7 @@ There are few major data structure changes in the data model:
 - Moved configuration to `ou=configuration,o=gluu`
 - Moved `ou=tokens` and `ou=authoriztions` from client sub-entries to `o=gluu`
 
-In Gluu 4.2, there is a migrator to convert an existing data set to the new model.
-
-<!-- More detail on the migrator to come -->
+In Gluu 4.x, there is a migrator to convert an existing data set to the new model.
 
 The following is an example of a typical LDAP tree after installation:
 
