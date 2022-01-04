@@ -7,14 +7,6 @@ relates to the Gluu Server Release versioned 4.1. The work is licensed under “
 
 UNLESS IT HAS BEEN EXPRESSLY AGREED UPON BY ANY WRITTEN AGREEMENT BEFOREHAND, THE WORK/RELEASE IS PROVIDED “AS IS”, WITHOUT ANY WARRANTY OR GUARANTEE OF ANY KIND EXPRESS OR IMPLIED. UNDER NO CIRCUMSTANCE, THE AUTHOR, OR GLUU SHALL BE LIABLE FOR ANY CLAIMS OR DAMAGES CAUSED DIRECTLY OR INDIRECTLY TO ANY PROPERTY OR LIFE WHILE INSTALLING OR USING THE RELEASE.
 
-## Lifecycle
-
-Status: In Development
-
-| Released | Community EOL | Enterprise EOL |
-| --- | --- | --- |
-| March 2020 | September 2021 | September 2022 |
-
 ## Purpose
 
 The document is released with the Version 4.1 of the Gluu Software. The purpose of this document is to provide the changes made/new features included in this release of the Gluu Software. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered. 
