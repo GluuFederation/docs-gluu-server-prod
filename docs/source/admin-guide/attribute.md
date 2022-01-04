@@ -53,6 +53,50 @@ In order to create SSO to certain applications you may need to add custom attrib
  
 This creates the attribute in the local LDAP server. 
 
+### Adding Custom Attributes when MySQL backend is used
+1. Add a column to table `gluuPerson` in MySQL. Command will be
+  `ALTER TABLE gluuPerson ADD COLUMN <claimName> <dataType>;`
+
+  Choose dataType according to the following table
+
+  | Gluu oxTrust UI Type | SQL dataType                                                                      |
+  | -------------------- | --------------------------------------------------------------------------------- |
+  | Text                 | VARCHAR(<SIZE>) *string value to be kept, SIZE is an integer for max string size* |
+  | Numeric              | INT                                                                               |
+  | Boolean              | SMALLINT                                                                          |
+  | Binary               | BINARY                                                                            |
+  | Certificate          | TEXT                                                                              |
+  | Date                 | DATETIME(3)                                                                       |
+  | Numeric              | INT                                                                               |
+  | Multivalued          | JSON                                                                              |
+
+  !!! Note
+      if the attribute is Multivalued **dataType** should be JSON regardless of what you will chose for Type in Gluu oxTrust UI.
+
+2. [Register](#add-the-attribute-to-oxtrust) an attribute on Gluu oxTrust UI. When registering attribute **Name** `claimName`.
+
+
+#### Example
+
+We are going to add simple text attribute **customAttribute** with max size 200 characters.
+
+  1. Use the following SQL command to add column
+
+  ```sql
+  mysql> ALTER TABLE gluuPerson ADD COLUMN customAttribute VARCHAR(100);
+  Query OK, 0 rows affected (0.04 sec)
+  Records: 0  Duplicates: 0  Warnings: 0
+  ```
+
+  2. On Gluu oxTrust UI go Configuration/Attributes and click **Register Attribute** button. Fill the fields according to your needs, 
+  see following screenshot
+  
+  ![register attribute](../img/admin-guide/attribute/add_custom_attribute.png)
+
+  Once you registered attribute, you will see under Available User Claims / gluuPerson
+
+  ![available claims](../img/admin-guide/attribute/available_claims.png)
+
 ### Add the attribute to oxTrust
 Now you need to register the new attribute in the Gluu Server GUI by navigating to `Configuration` > `Attributes`  and then click the `Register Attribute` button. 
 
