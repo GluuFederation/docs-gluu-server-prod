@@ -35,6 +35,28 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
+## 4.3.1 Fixes / Enhancements
+
+- Updated log4j to version 2.16.0 in all services
+- 
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.1+)
+
+- [#1584](https://github.com/GluuFederation/oxAuth/issues/1584) Update to RestEasy 4
+
+- [#1570](https://github.com/GluuFederation/oxAuth/issues/1570) Enhance casa login page and its derivations when the browser saves credentials 
+
+- [#1448](https://github.com/GluuFederation/oxAuth/issues/1448) passport_saml and passport_social produces script error after reloading script
+
+- [#900](https://github.com/GluuFederation/oxAuth/issues/900) Remove sessionIdEnabled Property
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.1+)
+
+- [#2082](https://github.com/GluuFederation/oxTrust/issues/2082) Password reset success completion redirection
+
+### [GluuFederation/gluu-passport](https://github.com/GluuFederation/gluu-passport/issues?q=is%3Aopen+is%3Aissue+milestone%3A4.3.1+)
+
+- [#288](https://github.com/GluuFederation/gluu-passport/issues/288) saml-passport upgraded to version 3.1.2
+
 ## 4.3.0 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.0+)
