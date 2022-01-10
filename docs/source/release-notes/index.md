@@ -37,8 +37,8 @@ documentation and administrative guide.
 
 ## 4.3.1 Fixes / Enhancements
 
-- Updated log4j to version 2.16.1 in all services
-- 
+    - Updated log4j to version 2.16.1 in all services
+
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.3.1+)
 
 - [#1584](https://github.com/GluuFederation/oxAuth/issues/1584) Update to RestEasy 4
