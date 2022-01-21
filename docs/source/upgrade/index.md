@@ -35,6 +35,7 @@
     Your upgrade directory will be the `/opt/upd/4.3.1/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.3.1`.
 
     #### Offline Upgrade from 4.x to 4.3.1
+    
     If your machine is not open to public internet, you can download self extracting upgrade script form https://repo.gluu.org/upd/4-3-1.upg.run and you can run inside Gluu CE container as
 
     ```
