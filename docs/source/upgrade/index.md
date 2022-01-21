@@ -1,8 +1,5 @@
 # Upgrade to Gluu Server 4.3
 
-!!! Important
-    The upgrade process for Gluu Server 4.3.0 will be made available once the initial beta testing has completed.
-
 === "Community Edition"
     
     ## Overview
@@ -12,9 +9,9 @@
     
     - Before upgrading, make sure to [back up](../operation/backup.md) the Gluu container or LDAP LDIF. 
     - Upgrades should always be thoroughly scoped and tested on a development environment *first*.
-    - This upgrade process only upgrades versions 4.0.x through 4.1.x. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
+    - This upgrade process only upgrades versions 4.0.x through 4.3.0. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
     
-    #### Online Upgrade from 4.x to 4.3
+    #### Online Upgrade from 4.x to 4.3.1
     
     !!! Note
         Upgrade script runs on Python 3. You need to install Python 3 before running the script.
@@ -26,7 +23,7 @@
     * Download the upgrade script
     
     ```
-    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.3.0/upg4xto430.py
+    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.3.1/upg4xto431.py
     ```
     
     * Execute the script:
