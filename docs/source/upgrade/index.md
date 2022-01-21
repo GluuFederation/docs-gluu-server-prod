@@ -29,7 +29,7 @@
     * Execute the script:
     
     ```
-    python3 upg4xto430.py
+    python3 upg4xto431.py
     ```
     
     Your upgrade directory will be the current directory. The script will create these directories: `app`, and `ces_current`, and writes Gluu cacerts.
