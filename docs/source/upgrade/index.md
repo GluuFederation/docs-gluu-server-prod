@@ -9,7 +9,7 @@
     
     - Before upgrading, make sure to [back up](../operation/backup.md) the Gluu container or LDAP LDIF. 
     - Upgrades should always be thoroughly scoped and tested on a development environment *first*.
-    - This upgrade process only upgrades versions 4.0.x through 4.3.0. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
+    - This upgrade process only upgrades versions 4.0.x through 4.3.1. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
         
     - Upgrade script runs on Python 3. You need to install Python 3 before running the script.
         * On CentoOS/RHEL: `yum install -y python3`
