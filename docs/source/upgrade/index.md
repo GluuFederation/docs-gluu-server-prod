@@ -32,7 +32,7 @@
     python3 upg4xto431.py
     ```
     
-    Your upgrade directory will be the `/opt/upd/4.3.1/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also download latest setup files to `/install/community_edition_setup_4.3.1`.
+    Your upgrade directory will be the `/opt/upd/4.3.1/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.3.1`.
     
 
 === "Cloud Native Edition"
