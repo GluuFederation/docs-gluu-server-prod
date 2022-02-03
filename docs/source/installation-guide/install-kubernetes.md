@@ -1324,11 +1324,11 @@ This is the main parameter file used with the [`pygluu-kubernetes.pyz`](https://
 
 ## Use remote Couchbase as the persistence layer
 
-- [Install couchbase](https://docs.couchbase.com/server/current/install/install-intro.html)
+- [Install couchbase](https://docs.couchbase.com/server/current/install/install-intro.html) version 6.x.
 
 - Obtain the Public DNS or FQDN of the couchbase node.
 
-- Head to the FQDN of the couchbase node to [setup](https://docs.couchbase.com/server/current/manage/manage-nodes/create-cluster.html) your couchbase cluster. When setting up please use the FQDN as the hostname of the new cluster.
+- Head to the FQDN of the couchbase node to [setup](https://docs.couchbase.com/server/current/manage/manage-nodes/create-cluster.html) your Couchbase cluster. When setting up please use the FQDN as the hostname of the new cluster.
 
 - Couchbase URL base , user, and password will be needed for installation when running `pygluu-kubernetes.pyz`
 
