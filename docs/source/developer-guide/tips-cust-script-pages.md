@@ -293,7 +293,7 @@ So create an xhtml page `postlogin.xhtml` which will look like this :
 
 <f:view transient="true" contentType="text/html">
 	<f:metadata>
-		<f:viewAction action="#{authenticator.authenticate}" />
+		<f:viewAction action="#{authenticator.authenticateWithOutcome}" />
 	</f:metadata>
 </f:view>
 
