@@ -51,11 +51,11 @@ See below [oxTrust API docs](#available-api-modes) for reference.
 1. `gluufederation/oxauth:4.0.1_05` image.
 1. `gluufederation/oxtrust:4.0.1_05` image.
 
-## Available API Modes
+## Available API Modes for CN
 
-The oxTrust API has two modes that administrators can configure according to need.
+The oxTrust API has two modes that administrators can configure according to need for cloud native deployments.
 
-### Test Mode
+### Test Mode for CN
 
 !!! Note
     Test mode is not recommended for production. Choose UMA mode instead.
@@ -144,7 +144,7 @@ Search for the field named `oxTrustApiTestMode`, set it to `True` and save the c
     ]
     ```
 
-### UMA Mode
+### UMA Mode for CN
 
 1.  Set environment variable `GLUU_OXTRUST_API_ENABLED=true` when running `gluufederation/persistence` container to enable oxTrust API:
 
@@ -374,11 +374,11 @@ Search for the field named `oxTrustApiTestMode`, set it to `True` and save the c
 
     Reuse the token (as long as it still valid) to make any request to oxTrust API endpoints.
 
-## Available API modes
+## Available API modes for VM
 
-The oxTrust API has two modes that administrators can configure according to need.
+The oxTrust API has two modes that administrators can configure according to need for VM-based deployments.
 
-### Test Mode
+### Test Mode for VM
    
 Follow these steps to configure the test mode:
 
@@ -408,7 +408,7 @@ Follow these steps to configure the test mode:
     
 1. Use that accesss token as Bearer token when making api calls.
    
-### UMA Mode
+### UMA Mode for VM
   
 The UMA mode is the mode in which the API is protected by UMA. This is the recommended mode for production server.
 
