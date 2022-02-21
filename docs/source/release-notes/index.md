@@ -207,7 +207,7 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.2.2+)
 
-- [#2046](https://github.com/GluuFederation/oxTrust/issues/2046) "The request is missing a required parameter" error in flow 3
+- [#2046](https://github.com/GluuFederation/oxTrust/issues/2046) "The request is missing a required parameter" error obtained in flow 3
 
 - [#2027](https://github.com/GluuFederation/oxTrust/issues/2027) Passport Config: field mapping dropdown
 
@@ -255,7 +255,7 @@ documentation and administrative guide.
 
 - [#1459](https://github.com/GluuFederation/oxAuth/issues/1459) Remove log noise from passport-saml
 
-- [#1461](https://github.com/GluuFederation/oxAuth/issues/1461) JWKS published invalid key for "crv" : "P-421"
+- [#1461](https://github.com/GluuFederation/oxAuth/issues/1461) JWKS published invalid key for "crv" : "P-521"
 
 - [#1456](https://github.com/GluuFederation/oxAuth/issues/1456) redirect_uri must be re-validated at authorize auction and on error redirect
 
@@ -277,7 +277,7 @@ documentation and administrative guide.
 
 - [#1442](https://github.com/GluuFederation/oxAuth/issues/1442) Update methods to store oxExternalUid as multivalued by default
 
-- [#1430](https://github.com/GluuFederation/oxAuth/issues/1430) Restrict scopes in dynamic registration request for clients with password grant
+- [#1130](https://github.com/GluuFederation/oxAuth/issues/1130) Restrict scopes in dynamic registration request for clients with password grant
 
 - [#1438](https://github.com/GluuFederation/oxAuth/issues/1438) Add unique identifier for each metric entry to allow to find which node added that record
 
@@ -459,45 +459,45 @@ documentation and administrative guide.
 
 - [#1261](https://github.com/GluuFederation/oxAuth/issues/1261) OpenID Connect Client: Add client claim to specify introspection scripts to execute
 
-- [#1260](https://github.com/GluuFederation/oxAuth/issues/1260) FAPI test (private key jwt) is failing because we don't consider client_assertion and client_assertion_type params
+- [#1260](https://github.com/GluuFederation/oxAuth/issues/1260) FAPI test (private key jwt) is failing because of not considering client_assertion and client_assertion_type parameters
 
 - [#1256](https://github.com/GluuFederation/oxAuth/issues/1256) FAPI test fail because conformance suite is sending a list of auds
 
-- [#1255](https://github.com/GluuFederation/oxAuth/issues/1255) FAPI test fail because we don't check aud field correctly
+- [#1255](https://github.com/GluuFederation/oxAuth/issues/1255) FAPI test fail because of not checking aud field correctly
 
 - [#1253](https://github.com/GluuFederation/oxAuth/issues/1253) Change behavior of `default` scope
 
 - [#1252](https://github.com/GluuFederation/oxAuth/issues/1252) Dynamic registration: do not add fallback response_type or grant_type.
 
-- [#1250](https://github.com/GluuFederation/oxAuth/issues/1250) FAPI test fail because we are using state query param but we shouldn't
+- [#1250](https://github.com/GluuFederation/oxAuth/issues/1250) FAPI test fail because of using state query parameter
 
 - [#1249](https://github.com/GluuFederation/oxAuth/issues/1249) FAPI test is not passing because refresh token issued to a client can be used with another client
 
-- [#1248](https://github.com/GluuFederation/oxAuth/issues/1248) FAPI : swap clients - test fail because we are sending an unexpected kind of error
+- [#1248](https://github.com/GluuFederation/oxAuth/issues/1248) FAPI : swap clients - test fail because of sending an unexpected kind of error
 
 - [#1247](https://github.com/GluuFederation/oxAuth/issues/1247) Gather geolocation data from client instead of server side
 
-- [#1244](https://github.com/GluuFederation/oxAuth/issues/1244) FAPI tests fail because we are not validating that exp and scope must be present in the request.
+- [#1244](https://github.com/GluuFederation/oxAuth/issues/1244) FAPI tests fail because of not validating that exp and scope must be present in the request.
 
 - [#1242](https://github.com/GluuFederation/oxAuth/issues/1242) Change session_id after user authentication
 
-- [#1241](https://github.com/GluuFederation/oxAuth/issues/1241) FAPI  complains that oxauth does not return error in fragment only and that that state in error response does not match
+- [#1241](https://github.com/GluuFederation/oxAuth/issues/1241) FAPI  complains that oxauth does not return error in fragment only and that state in error response does not match
 
 - [#1240](https://github.com/GluuFederation/oxAuth/issues/1240) samesite cookie handling in upcoming Chrome 80
 
 - [#1239](https://github.com/GluuFederation/oxAuth/issues/1239) FAPI : during test we noticed that `c_hash` and `s_hash` is not always present in id_token
 
-- [#1238](https://github.com/GluuFederation/oxAuth/issues/1238) FAPI test fail because we are including headers that shouldn't be sent
+- [#1238](https://github.com/GluuFederation/oxAuth/issues/1238) FAPI test fail because of including headers that shouldn't be sent
 
 - [#1230](https://github.com/GluuFederation/oxAuth/issues/1230) FAPI : acr requested claim is not returned in id_token
 
 - [#1228](https://github.com/GluuFederation/oxAuth/issues/1228) FAPI test fail because oxAuth should reject when response_type is only code
 
-- [#1227](https://github.com/GluuFederation/oxAuth/issues/1227) FAPI : one of FAPI tests fail because oxauth does not handle request as JWT correctly.
+- [#1227](https://github.com/GluuFederation/oxAuth/issues/1227) FAPI : one of FAPI tests fail because oxauth does not handle request as JWT correctly
 
 - [#1226](https://github.com/GluuFederation/oxAuth/issues/1226) Test automation
 
-- [#1224](https://github.com/GluuFederation/oxAuth/issues/1224) fido2 authentication not working in  chrome
+- [#1224](https://github.com/GluuFederation/oxAuth/issues/1224) FIDO2 authentication not working in  chrome
 
 - [#1220](https://github.com/GluuFederation/oxAuth/issues/1220) Write script to facilitate multiple test email address against one valid address
 
@@ -509,7 +509,7 @@ documentation and administrative guide.
 
 - [#1211](https://github.com/GluuFederation/oxAuth/issues/1211) Key expiration messages should be logged only if auto re-new is not enabled or re-generation interval is too big for key lifetime
 
-- [#1202](https://github.com/GluuFederation/oxAuth/issues/1202) oxAuth should autconfigure tokens clean size based on server load
+- [#1202](https://github.com/GluuFederation/oxAuth/issues/1202) oxAuth should auto configure tokens clean size based on server load
 
 - [#1198](https://github.com/GluuFederation/oxAuth/issues/1198) Add JSON configuration property to control removal of offline access refresh tokens
 
@@ -521,7 +521,7 @@ documentation and administrative guide.
 
 - [#1191](https://github.com/GluuFederation/oxAuth/issues/1191) Super Gluu should support communtiction with web application on desktop
 
-- [#1187](https://github.com/GluuFederation/oxAuth/issues/1187) Don't allow to issue openid scope in password grant unless admin approve this
+- [#1187](https://github.com/GluuFederation/oxAuth/issues/1187) Don't allow to issue openid scope in password grant without the admin permission
 
 - [#1186](https://github.com/GluuFederation/oxAuth/issues/1186) Make password grant type configurable for dynamic clients
 
@@ -545,7 +545,7 @@ documentation and administrative guide.
 
 - [#1150](https://github.com/GluuFederation/oxAuth/issues/1150) oxauth code should use new `cacheService.getWithPut()` method
 
-- [#1149](https://github.com/GluuFederation/oxAuth/issues/1149) Review Fido2 implementation to confrom latest spec and conformance tools
+- [#1149](https://github.com/GluuFederation/oxAuth/issues/1149) Review FIDO2 implementation to confrom latest specification and conformance tools
 
 - [#1136](https://github.com/GluuFederation/oxAuth/issues/1136) Make front-channel logout page customizable
 
@@ -575,7 +575,7 @@ documentation and administrative guide.
 
 - [#1053](https://github.com/GluuFederation/oxAuth/issues/1053) Do not return client_secret on client read
 
-- [#1038](https://github.com/GluuFederation/oxAuth/issues/1038) Userinfo response is not as expected as describe in spec
+- [#1038](https://github.com/GluuFederation/oxAuth/issues/1038) Userinfo response is not as expected as describe in specification
 
 - [#1036](https://github.com/GluuFederation/oxAuth/issues/1036) Introduce `oxauth-persistence-model` maven module to be re-used by oxTrust API
 
@@ -615,7 +615,7 @@ documentation and administrative guide.
 
 - [#958](https://github.com/GluuFederation/oxAuth/issues/958) More flexibilty to set audience on a per client basis
 
-- [#936](https://github.com/GluuFederation/oxAuth/issues/936) FIDO 2: Add support for multi facet app IDs for impl
+- [#936](https://github.com/GluuFederation/oxAuth/issues/936) FIDO 2: Add support for multi facet application IDs for impl
 
 - [#935](https://github.com/GluuFederation/oxAuth/issues/935) Improve error page for Super Gluu denied authentication
 
@@ -709,11 +709,11 @@ documentation and administrative guide.
 
 - [#1987](https://github.com/GluuFederation/oxTrust/issues/1987) Gluu 4.1.1 and 4.2: getting same Pairwise ID ( first generated one ) for rest of the users
 
-- [#1973](https://github.com/GluuFederation/oxTrust/issues/1973) Can u2f and fido2 dates be shown using the same format?
+- [#1973](https://github.com/GluuFederation/oxTrust/issues/1973) U2F and FIDO2 dates are using the same format
 
 - [#1967](https://github.com/GluuFederation/oxTrust/issues/1967) Use JSON Property to allow extra attributes for person status
 
-- [#1959](https://github.com/GluuFederation/oxTrust/issues/1959) Issue when securely store CIBA configuration keys
+- [#1959](https://github.com/GluuFederation/oxTrust/issues/1959) Fix an issue when securely store CIBA configuration keys
 
 - [#1958](https://github.com/GluuFederation/oxTrust/issues/1958) CIBA configuration UI
 
@@ -747,7 +747,7 @@ documentation and administrative guide.
 
 - [#1865](https://github.com/GluuFederation/oxTrust/issues/1865) Configuration / Add Script: Pre-populate class and method according to interface
 
-- [#1862](https://github.com/GluuFederation/oxTrust/issues/1862) Do we still need web UI representation of nameids?
+- [#1862](https://github.com/GluuFederation/oxTrust/issues/1862) Enhance web UI representation of nameids
 
 - [#1861](https://github.com/GluuFederation/oxTrust/issues/1861) Optimize Cache Refresh to better handle really huge userbases
 
@@ -759,9 +759,9 @@ documentation and administrative guide.
 
 - [#1682](https://github.com/GluuFederation/oxTrust/issues/1682) Improve Error Reporting In oxTrust API
 
-- [#1663](https://github.com/GluuFederation/oxTrust/issues/1663) Allow special char "underscore" in attribute name
+- [#1663](https://github.com/GluuFederation/oxTrust/issues/1663) Allow special character "underscore" in attribute name
 
-- [#1641](https://github.com/GluuFederation/oxTrust/issues/1641) Contact Email field validation in Config > Org Config
+- [#1641](https://github.com/GluuFederation/oxTrust/issues/1641) Contact Email field validation in Configuration > Organization configuration
 
 - [#1636](https://github.com/GluuFederation/oxTrust/issues/1636) Performance degrade for /person/view, person/viewProfile.htm (potentially other pages)
 
@@ -769,6 +769,6 @@ documentation and administrative guide.
 
 - [#1602](https://github.com/GluuFederation/oxTrust/issues/1602) Remove the finishlogout page
 
-- [#1583](https://github.com/GluuFederation/oxTrust/issues/1583) Invalid Birthdate Format
+- [#1583](https://github.com/GluuFederation/oxTrust/issues/1583) Fix an invalid Birthdate Format
 
-- [#1551](https://github.com/GluuFederation/oxTrust/issues/1551) Disallow the use of a user's username in their password
+- [#1551](https://github.com/GluuFederation/oxTrust/issues/1551) Disallow the match between the username and the password
