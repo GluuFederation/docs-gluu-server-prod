@@ -8,7 +8,7 @@ The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edit
 - [Certificate Management](../admin-guide/certificate.md)  
 - [Key Reference Guide](../reference/container-configs.md)  
 - [Image Reference Guide](../reference/container-image-refs.md)  
-- [Backup Strategy](../operation/backup.md/)  
+- [Backup Strategy](../operation/backup.md)  
 - [Upgrade](../upgrade/index.md)
 - [Migrating from CE](../operation/ce_to_cn_migration.md)  
 - [Casa interactions diagram](#architectural-diagram-of-casa)
@@ -23,24 +23,24 @@ The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edit
   
 Please calculate the minimum required resources as per services deployed. The following table contains default recommended resources to start with. Depending on the use of each service the resources may be increased or decreased. 
 
-|Service           | CPU Unit   |    RAM      |   Disk Space     | Processor Type | Required                                    |
-|------------------|------------|-------------|------------------|----------------|---------------------------------------------|
-|oxAuth            | 2.5        |    2.5GB    |   N/A            |  64 Bit        | Yes                                         |
-|LDAP              | 1.5        |    2GB      |   10GB           |  64 Bit        | if using hybrid or ldap for persistence     |
-|[Couchbase](#minimum-couchbase-system-requirements-for-cloud-deployments)         |    -       |      -      |      -           |     -          | If using hybrid or couchbase for persistence|
-|fido2             | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                          |
-|scim              | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                          |
-|config - job      | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs                       |
-|jackrabbit        | 1.5        |    1GB      |   10GB           |  64 Bit        | Yes                                         |
-|persistence - job | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs                       |
-|oxTrust           | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                          |
-|oxShibboleth      | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                          |  
-|oxPassport        | 0.7        |    0.9GB    |   N/A            |  64 Bit        | No                                          |
-|oxd-server        | 1          |    0.4GB    |   N/A            |  64 Bit        | No                                          |
-|nginx             | 1          |    1GB      |   N/A            |  64 Bit        | Yes if not ALB                              |
-|key-rotation      | 0.3        |    0.3GB    |   N/A            |  64 Bit        | No                                          |
-|cr-rotate         | 0.2        |    0.2GB    |   N/A            |  64 Bit        | No                                          |
-|casa              | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                          |
+| Service                                                                   | CPU Unit   |    RAM      |   Disk Space     | Processor Type | Required                                     |
+|---------------------------------------------------------------------------|------------|-------------|------------------|----------------|----------------------------------------------|
+| oxAuth                                                                    | 2.5        |    2.5GB    |   N/A            |  64 Bit        | Yes                                          |
+| LDAP                                                                      | 1.5        |    2GB      |   10GB           |  64 Bit        | if using hybrid or LDAP for persistence      |
+| [Couchbase](#minimum-couchbase-system-requirements-for-cloud-deployments) |    -       |      -      |      -           |     -          | If using hybrid or couchbase for persistence |
+| FIDO2                                                                     | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                           |
+| SCIM                                                                      | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                           |
+| config - job                                                              | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs                        |
+| Jackrabbit                                                                | 1.5        |    1GB      |   10GB           |  64 Bit        | Yes                                          |
+| persistence - job                                                         | 0.5        |    0.5GB    |   N/A            |  64 Bit        | Yes on fresh installs                        |
+| oxTrust                                                                   | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                           |
+| oxShibboleth                                                              | 1.0        |    1.0GB    |   N/A            |  64 Bit        | No                                           |  
+| oxPassport                                                                | 0.7        |    0.9GB    |   N/A            |  64 Bit        | No                                           |
+| oxd-server                                                                | 1          |    0.4GB    |   N/A            |  64 Bit        | No                                           |
+| NGINX                                                                     | 1          |    1GB      |   N/A            |  64 Bit        | Yes if not ALB                               |
+| key-rotation                                                              | 0.3        |    0.3GB    |   N/A            |  64 Bit        | No                                           |
+| cr-rotate                                                                 | 0.2        |    0.2GB    |   N/A            |  64 Bit        | No                                           |
+| CASA                                                                      | 0.5        |    0.5GB    |   N/A            |  64 Bit        | No                                           |
 
 
 1. Configure cloud or local kubernetes cluster:
@@ -61,7 +61,7 @@ Please calculate the minimum required resources as per services deployed. The fo
             aws-cli
             kubectl version
     
-    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the address of loadblancer for use later during installation.
+    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the address of loadblancer for use later during installation.
 
     !!!note
         Default  AWS deployment will install a classic load balancer with an `IP` that is not static. Don't worry about the `IP` changing. All pods will be updated automatically with our script when a change in the `IP` of the load balancer occurs. However, when deploying in production, **DO NOT** use our script. Instead, assign a CNAME record for the LoadBalancer DNS name, or use Amazon Route 53 to create a hosted zone. More details in this [AWS guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html?icmpid=docs_elb_console).
@@ -92,7 +92,7 @@ Please calculate the minimum required resources as per services deployed. The fo
         
     1.  If a connection is not made to google consul using google account the call to the api will fail. Either connect to google consul using an associated google account and run any `kubectl` command like `kubectl get pod` or create a service account using a json key [file](https://cloud.google.com/docs/authentication/getting-started).
     
-    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
+    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
 
     
 === "DOKS"
@@ -102,7 +102,7 @@ Please calculate the minimum required resources as per services deployed. The fo
     
     -  Follow this [guide](https://www.digitalocean.com/docs/kubernetes/how-to/create-clusters/) to create digital ocean kubernetes service cluster and connect to it.
 
-    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
+    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
 
 === "AKS"
     ## Azure - AKS
@@ -120,7 +120,7 @@ Please calculate the minimum required resources as per services deployed. The fo
     
     -  Follow this [section](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#connect-to-the-cluster) to connect to the AKS cluster
     
-    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
+    - **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/) it prior to installing Gluu. You may choose to use any installation method Istio supports. If you have insalled istio ingress , a loadbalancer will have been created. Please save the ip of loadblancer for use later during installation.
 
       
 === "Minikube"
@@ -148,7 +148,7 @@ Please calculate the minimum required resources as per services deployed. The fo
         minikube addons enable ingress
         ```
         
-    1. **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/standalone-operator/) it prior to installing Gluu. You may choose to use any installation method Istio supports.Please note that at the moment Istio ingress is not supported with Minikube. 
+    1. **Optional[alpha]:** If using Istio please [install](https://istio.io/latest/docs/setup/install/) it prior to installing Gluu. You may choose to use any installation method Istio supports.Please note that at the moment Istio ingress is not supported with Minikube. 
     
 === "MicroK8s"
     ## MicroK8s
@@ -180,13 +180,13 @@ Please calculate the minimum required resources as per services deployed. The fo
     
     - Kubernetes >=1.19x
     - Persistent volume provisioner support in the underlying infrastructure
-    - Install [Helm3](https://helm.sh/docs/using_helm/)
+    - Install [Helm3](https://helm.sh/docs/intro/install/)
     
     ### Quickstart
     
     1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](#build-pygluu-kubernetespyz-manually).
     
-    1. **Optional:** If using couchbase as the persistence backend. Download the couchbase [kubernetes](https://www.couchbase.com/downloads) operator package for linux and place it in the same directory as `pygluu-kubernetes.pyz`
+    1. **Optional:** If using couchbase as the persistence backend. Download the [couchbase](https://www.couchbase.com/downloads) kubernetes operator package for linux and place it in the same directory as `pygluu-kubernetes.pyz`
     
     1. Run :
     
@@ -196,7 +196,7 @@ Please calculate the minimum required resources as per services deployed. The fo
       
     #### Installing Gluu using Helm manually
     
-    1. **Optional if not using istio ingress:** Install [nginx-ingress](https://github.com/kubernetes/ingress-nginx) Helm [Chart](https://github.com/helm/charts/tree/master/stable/nginx-ingress).
+    1. **Optional if not using Istio ingress:** Install [NGINX-Ingress](https://github.com/kubernetes/ingress-nginx) Helm [Chart](https://github.com/helm/charts/tree/master/stable/nginx-ingress).
     
        ```bash
        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -205,11 +205,11 @@ Please calculate the minimum required resources as per services deployed. The fo
        helm install <nginx-release-name> ingress-nginx/ingress-nginx --namespace=<nginx-namespace>
        ```
     
-    1.  - If the FQDN for gluu i.e `demoexample.gluu.org` is registered and globally resolvable, forward it to the loadbalancers address created in the previous step by nginx-ingress. A record can be added on most cloud providers to forward the domain to the loadbalancer. Forexample, on AWS assign a CNAME record for the LoadBalancer DNS name, or use Amazon Route 53 to create a hosted zone. More details in this [AWS guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html?icmpid=docs_elb_console). Another example on [GCE](https://medium.com/@kungusamuel90/custom-domain-name-mapping-for-k8s-on-gcp-4dc263b2dabe).
+    1.  - If the FQDN for gluu i.e `demoexample.gluu.org` is registered and globally resolvable, forward it to the loadbalancers address created in the previous step by NGINX-Ingress. A record can be added on most cloud providers to forward the domain to the loadbalancer. For example, on AWS assign a CNAME record for the LoadBalancer DNS name, or use Amazon Route 53 to create a hosted zone. More details in this [AWS guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html?icmpid=docs_elb_console). Another example on [GCE](https://medium.com/@kungusamuel90/custom-domain-name-mapping-for-k8s-on-gcp-4dc263b2dabe).
     
         - If the FQDN is not registered acquire the loadbalancers ip if on **GCE**, or **Azure** using `kubectl get svc <release-name>-nginx-ingress-controller --output jsonpath='{.status.loadBalancer.ingress[0].ip}'` and if on **AWS** get the loadbalancers addresss using `kubectl -n ingress-nginx get svc ingress-nginx \--output jsonpath='{.status.loadBalancer.ingress[0].hostname}'`.
     
-    1.  - If deploying on the cloud make sure to take a look at the helm cloud specific notes before continuing.
+    1.  - If deploying on the cloud make sure to take a look at the Helm cloud specific notes before continuing.
     
           * [EKS](#eks-helm-notes)
           * [GKE](#gke-helm-notes)
@@ -223,7 +223,7 @@ Please calculate the minimum required resources as per services deployed. The fo
         
         1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](#build-pygluu-kubernetespyz-manually).
         
-        1. Download the couchbase [kubernetes](https://www.couchbase.com/downloads) operator package for linux and place it in the same directory as `pygluu-kubernetes.pyz`
+        1. Download the [couchbase](https://www.couchbase.com/downloads) kubernetes operator package for linux and place it in the same directory as `pygluu-kubernetes.pyz`
     
         1.  Run:
         
@@ -239,7 +239,7 @@ Please calculate the minimum required resources as per services deployed. The fo
        helm install <release-name> -f values.yaml -n <namespace> .
        ```
     
-    ### EKS helm notes
+    ### EKS Helm notes
     
     #### Required changes to the `values.yaml`
     
@@ -267,7 +267,7 @@ Please calculate the minimum required resources as per services deployed. The fo
     
       Tweak the optional [parameters](#configuration) in `values.yaml` to fit the setup needed.
     
-    ### GKE helm notes
+    ### GKE Helm notes
     
     #### Required changes to the `values.yaml`
     
@@ -296,7 +296,7 @@ Please calculate the minimum required resources as per services deployed. The fo
     
       Tweak the optional [parameters](#configuration) in `values.yaml` to fit the setup needed.
     
-    ### Minikube helm notes
+    ### Minikube Helm notes
     
     #### Required changes to the `values.yaml`
     
@@ -351,7 +351,7 @@ Please calculate the minimum required resources as per services deployed. The fo
         provisioner: microk8s.io/hostpath #CHANGE-THIS
         lbAddr: ""
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
-        lbIp: "" #CHANGE-THIS  to the IP of the microk8s vm
+        lbIp: "" #CHANGE-THIS  to the IP of the microk8s VM
     
       nginx:
         ingress:
@@ -367,7 +367,7 @@ Please calculate the minimum required resources as per services deployed. The fo
     
       Tweak the optional [parameteres](#configuration) in `values.yaml` to fit the setup needed.
     
-    - Map gluus FQDN at `/etc/hosts` file  to the microk8s vm IP as shown below.
+    - Map gluus FQDN at `/etc/hosts` file  to the microk8s VM IP as shown below.
     
       ```bash
       ##
@@ -949,9 +949,9 @@ Please calculate the minimum required resources as per services deployed. The fo
         gluuSamlEnabled: false
     ```
     
-    ### Casa
+    ### CASA
     
-    - Casa is dependant on `oxd-server`. To install it `oxd-server` must be enabled.
+    - CASA is dependant on `oxd-server`. To install it `oxd-server` must be enabled.
     
     ### Other optional services
     
@@ -1091,194 +1091,194 @@ This is the main parameter file used with the [`pygluu-kubernetes.pyz`](https://
 !!!note
     Please generate this file using [`pygluu-kubernetes.pyz generate-settings`](https://github.com/GluuFederation/cloud-native-edition/releases).
 
-| Parameter                                       | Description                                                                      | Options                                                                                     |
-| ----------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `ACCEPT_GLUU_LICENSE`                           | Accept the [License](https://www.gluu.org/license/cloud-native-edition/)         | `"Y"` or `"N"`                                                                              |
-| `TEST_ENVIRONMENT`                              | Allows installation with no resources limits and requests defined.               | `"Y"` or `"N"`                                                                              |
-| `ADMIN_PW`                                      | Password of oxTrust 6 chars min: 1 capital, 1 small, 1 digit and 1 special char  | `"P@ssw0rd"`                                                                                |
-| `GLUU_VERSION`                                  | Gluu version to be installed                                                     | `"4.2"`                                                                                     |
-| `GLUU_UPGRADE_TARGET_VERSION`                   | Gluu upgrade version                                                             | `"4.2"`                                                                                     |
-| `GLUU_HELM_RELEASE_NAME`                        | Gluu Helm release name                                                           | `"<name>"`                                                                                  |
-| `KONG_HELM_RELEASE_NAME`                        | Gluu Gateway (Kong) Helm release name                                            | `"<name>"`                                                                                  |
-| `NGINX_INGRESS_NAMESPACE`                       | Nginx namespace                                                                  | `"<name>"`                                                                                  |
-| `NGINX_INGRESS_RELEASE_NAME`                    | Nginx Helm release name                                                          | `"<name>"`                                                                                  |
-| `GLUU_GATEWAY_UI_HELM_RELEASE_NAME`             |  Gluu Gateway UI release name                                                    | `"<name>"`                                                                                  |
-| `INSTALL_GLUU_GATEWAY`                          | Install Gluu Gateway Database mode                                               | `"Y"` or `"N"`                                                                              |
-| `USE_ISTIO`                                     | Enable use of Istio. This will inject sidecars in Gluu pods.[Alpha]              | `"Y"` or `"N"`                                                                              |
-| `USE_ISTIO_INGRESS`                             | Enable Istio ingress.[Alpha]                                                     | `"Y"` or `"N"`                                                                              |
-| `ISTIO_SYSTEM_NAMESPACE`                        | Postgres namespace - Gluu Gateway [Alpha]                                        | `"<name>"`                                                                                  |
-| `POSTGRES_NAMESPACE`                            | Postgres namespace - Gluu Gateway                                                | `"<name>"`                                                                                  |
-| `KONG_NAMESPACE`                                | Kong namespace - Gluu Gateway                                                    | `"<name>"`                                                                                  |
-| `GLUU_GATEWAY_UI_NAMESPACE`                     | Gluu Gateway UI namespace - Gluu Gateway                                         | `"<name>"`                                                                                  |
-| `KONG_PG_USER`                                  | Kong Postgres user - Gluu Gateway                                                | `"<name>"`                                                                                  |
-| `KONG_PG_PASSWORD`                              | Kong Postgres password - Gluu Gateway                                            | `"<name>"`                                                                                  |
-| `GLUU_GATEWAY_UI_PG_USER`                       | Gluu Gateway UI Postgres user - Gluu Gateway                                     | `"<name>"`                                                                                  |
-| `GLUU_GATEWAY_UI_PG_PASSWORD`                   | Gluu Gateway UI Postgres password - Gluu Gateway                                 | `"<name>"`                                                                                  |
-| `KONG_DATABASE`                                 | Kong Postgres Database name - Gluu Gateway                                       | `"<name>"`                                                                                  |
-| `GLUU_GATEWAY_UI_DATABASE`                      | Gluu Gateway UI Postgres Database name - Gluu Gateway                            | `"<name>"`                                                                                  |
-| `POSTGRES_REPLICAS`                             | Postgres number of replicas - Gluu Gateway                                       | `"<name>"`                                                                                  |
-| `POSTGRES_URL`                                  | Postgres URL ( Can be local or remote) - Gluu Gateway                            |  i.e `"<servicename>.<namespace>.svc.cluster.local"`                                        |
-| `NODES_IPS`                                     | List of kubernetes cluster node ips                                              | `["<ip>", "<ip2>", "<ip3>"]`                                                                |
-| `NODES_ZONES`                                   | List of kubernetes cluster node zones                                            | `["<node1_zone>", "<node2_zone>", "<node3_zone>"]`                                          |
-| `NODES_NAMES`                                   | List of kubernetes cluster node names                                            | `["<node1_name>", "<node2_name>", "<node3_name>"]`                                          |
-| `NODE_SSH_KEY`                                  | nodes ssh key path location                                                      | `"<pathtosshkey>"`                                                                          |
-| `HOST_EXT_IP`                                   | Minikube or Microk8s vm ip                                                       | `"<ip>"`                                                                                    |
-| `VERIFY_EXT_IP`                                 | Verify the Minikube or Microk8s vm ip placed                                     | `"Y"` or `"N"`                                                                              |
-| `AWS_LB_TYPE`                                   | AWS loadbalancer type                                                            | `""` , `"clb"` or `"nlb"`                                                                   |
-| `USE_ARN`                                       | Use ssl provided from ACM AWS                                                    | `""`, `"Y"` or `"N"`                                                                        |
-| `VPC_CIDR`                                      | VPC CIDR in use for the Kubernetes cluster                                       | `""`, i.e `192.168.1.116`                                                                   |
-| `ARN_AWS_IAM`                                   | The arn string                                                                   | `""` or `"<arn:aws:acm:us-west-2:XXXXXXXX:certificate/XXXXXX-XXXXXXX-XXXXXXX-XXXXXXXX>"`    |
-| `LB_ADD`                                        | AWS loadbalancer address                                                         | `"<loadbalancer_address>"`                                                                  |
-| `DEPLOYMENT_ARCH`                               | Deployment architecture                                                          | `"microk8s"`, `"minikube"`, `"eks"`, `"gke"`, `"aks"`, `"do"` or `"local"`                  |
-| `PERSISTENCE_BACKEND`                           | Backend persistence type                                                         | `"ldap"`, `"couchbase"` or `"hybrid"`                                                       |
-| `REDIS_URL`                                     | Redis url with port. Used when Redis is deployed for Cache.                      | i.e `"redis:6379"`, `"clustercfg.testing-redis.icrbdv.euc1.cache.amazonaws.com:6379"`       |
-| `REDIS_TYPE`                                    | Type of Redis deployed                                                           | `"SHARDED"`, `"STANDALONE"`, `"CLUSTER"`, or `"SENTINEL"`                                   |
-| `REDIS_PW`                                      | Redis Password if used. This may be empty. If not choose a long password.        | i.e `""`, `"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUakNDQWphZ0F3SUJBZ0lVV2Y0TExEb"`     |
-| `REDIS_USE_SSL`                                 | Redis SSL use                                                                    |  `"false"` or `"true"`                                                                      |
-| `REDIS_SSL_TRUSTSTORE`                          | Redis SSL truststore. If using cloud provider services this is left empty.       | i.e `""`, `"/etc/myredis.pem"`                                                              |
-| `REDIS_SENTINEL_GROUP`                          | Redis Sentinel group                                                             | i.e `""`                                                                                    |
-| `REDIS_MASTER_NODES`                            | Number of Redis master node if Redis is to be installed                          | i.e `3`                                                                                     |
-| `REDIS_NODES_PER_MASTER`                        | Number of nodes per Redis master node if Redis is to be installed                | i.e `2`                                                                                     |
-| `REDIS_NAMESPACE`                               | Redis Namespace if Redis is to be installed                                      | i.e `"gluu-redis-cluster"`                                                                  |
-| `INSTALL_REDIS`                                 | Install Redis                                                                    | `"Y"` or `"N"`                                                                              |
-| `INSTALL_COUCHBASE`                             | Install couchbase                                                                | `"Y"` or `"N"`                                                                              |
-| `COUCHBASE_NAMESPACE`                           | Couchbase namespace                                                              | `"<name>"`                                                                                  |
-| `COUCHBASE_VOLUME_TYPE`                         | Persistence Volume type                                                          | `"io1"`,`"ps-ssd"`, `"Premium_LRS"`                                                         |
-| `COUCHBASE_CLUSTER_NAME`                        | Couchbase cluster name                                                           | `"<name>"`                                                                                  |
-| `COUCHBASE_URL`                                 | Couchbase internal address to the cluster                                        | `""` or i.e `"<clustername>.<namespace>.svc.cluster.local"`                                 |
-| `COUCHBASE_USER`                                | Couchbase username                                                               | `""` or i.e `"gluu"`                                                                        |
-| `COUCHBASE_BUCKET_PREFIX`                       | Prefix for Couchbase buckets                                                     | `gluu`                                                                                      |
-| `COUCHBASE_PASSWORD`                            | Password of CB 6 chars min: 1 capital, 1 small, 1 digit and 1 special char       | `"P@ssw0rd"`                                                                                |
-| `COUCHBASE_SUPERUSER`                           | Couchbase superuser username                                                     | `""` or i.e `"admin"`                                                                       |
-| `COUCHBASE_SUPERUSER_PASSWORD`                  | Password of CB 6 chars min: 1 capital, 1 small, 1 digit and 1 special char       | `"P@ssw0rd"`                                                                                |
-| `COUCHBASE_CRT`                                 | Couchbase CA certification                                                       | `""` or i.e `<crt content not encoded>`                                                     |
-| `COUCHBASE_CN`                                  | Couchbase certificate common name                                                | `""`                                                                                        |
-| `COUCHBASE_INDEX_NUM_REPLICA`                   | Couchbase number of replicas per index                                           | `0`                                                                                         |
-| `COUCHBASE_SUBJECT_ALT_NAME`                    | Couchbase SAN                                                                    | `""` or i.e `"cb.gluu.org"`                                                                 |
-| `COUCHBASE_CLUSTER_FILE_OVERRIDE`               | Override `couchbase-cluster.yaml` with a custom `couchbase-cluster.yaml`         | `"Y"` or `"N"`                                                                              |
-| `COUCHBASE_USE_LOW_RESOURCES`                   | Use very low resources for Couchbase deployment. For demo purposes               | `"Y"` or `"N"`                                                                              |
-| `COUCHBASE_DATA_NODES`                          | Number of Couchbase data nodes                                                   | `""` or i.e `"4"`                                                                           |
-| `COUCHBASE_QUERY_NODES`                         | Number of Couchbase query nodes                                                  | `""` or i.e `"3"`                                                                           |
-| `COUCHBASE_INDEX_NODES`                         | Number of Couchbase index nodes                                                  | `""` or i.e `"3"`                                                                           | 
-| `COUCHBASE_SEARCH_EVENTING_ANALYTICS_NODES`     | Number of Couchbase search, eventing and analytics nodes                         | `""` or i.e `"2"`                                                                           |
-| `COUCHBASE_GENERAL_STORAGE`                     | Couchbase general storage size                                                   | `""` or i.e `"2"`                                                                           |
-| `COUCHBASE_DATA_STORAGE`                        | Couchbase data storage size                                                      | `""` or i.e `"5Gi"`                                                                         |
-| `COUCHBASE_INDEX_STORAGE`                       | Couchbase index storage size                                                     | `""` or i.e `"5Gi"`                                                                         |
-| `COUCHBASE_QUERY_STORAGE`                       | Couchbase query storage size                                                     | `""` or i.e `"5Gi"`                                                                         |
-| `COUCHBASE_ANALYTICS_STORAGE`                   | Couchbase search, eventing and analytics storage size                            | `""` or i.e `"5Gi"`                                                                         |
-| `COUCHBASE_INCR_BACKUP_SCHEDULE`                | Couchbase incremental backup schedule                                            |  i.e `"*/30 * * * *"`                                                                       |
-| `COUCHBASE_FULL_BACKUP_SCHEDULE`                | Couchbase  full backup  schedule                                                 |  i.e `"0 2 * * 6"`                                                                          |
-| `COUCHBASE_BACKUP_RETENTION_TIME`               | Couchbase time to retain backups in s,m or h                                     |  i.e `"168h`                                                                                |
-| `COUCHBASE_BACKUP_STORAGE_SIZE`                 | Couchbase backup storage size                                                    | i.e `"20Gi"`                                                                                |
-| `NUMBER_OF_EXPECTED_USERS`                      | Number of expected users [couchbase-resource-calc-alpha]                         | `""` or i.e `"1000000"`                                                                     |
-| `EXPECTED_TRANSACTIONS_PER_SEC`                 | Expected transactions per second [couchbase-resource-calc-alpha]                 | `""` or i.e `"2000"`                                                                        |
-| `USING_CODE_FLOW`                               | If using code flow [couchbase-resource-calc-alpha]                               | `""`, `"Y"` or `"N"`                                                                        |
-| `USING_SCIM_FLOW`                               | If using SCIM flow [couchbase-resource-calc-alpha]                               | `""`, `"Y"` or `"N"`                                                                        |
-| `USING_RESOURCE_OWNER_PASSWORD_CRED_GRANT_FLOW` | If using password flow [couchbase-resource-calc-alpha]                           | `""`, `"Y"` or `"N"`                                                                        |
-| `DEPLOY_MULTI_CLUSTER`                          | Deploying a Multi-cluster [alpha]                                                | `"Y"` or `"N"`                                                                              |
-| `HYBRID_LDAP_HELD_DATA`                         | Type of data to be held in LDAP with a hybrid installation of couchbase and LDAP | `""`, `"default"`, `"user"`, `"site"`, `"cache"` or `"token"`                               |
-| `LDAP_JACKRABBIT_VOLUME`                        | LDAP/Jackrabbit Volume type                                                      | `""`, `"io1"`,`"ps-ssd"`, `"Premium_LRS"`                                                   |
-| `APP_VOLUME_TYPE`                               | Volume type for LDAP persistence                                                 | [options](#app_volume_type-options)                                                         |
-| `INSTALL_JACKRABBIT`                            | Install Jackrabbit                                                               | `"Y"` or `"N"`                                                                              |
-| `JACKRABBIT_STORAGE_SIZE`                       | Jackrabbit volume storage size                                                   | `""` i.e `"4Gi"`                                                                            |
-| `JACKRABBIT_URL`                                | http:// url for Jackrabbit                                                       | i.e `"http://jackrabbit:8080"`                                                              |
-| `JACKRABBIT_ADMIN_ID`                           | Jackrabbit admin ID                                                              | i.e `"admin"`                                                                               |
-| `JACKRABBIT_ADMIN_PASSWORD`                     | Jackrabbit admin password                                                        | i.e `"admin"`                                                                           |
-| `JACKRABBIT_CLUSTER`                            | Jackrabbit Cluster mode                                                          | `"N"` or `"Y"`                                                                              |
-| `JACKRABBIT_PG_USER`                            | Jackrabbit postgres username                                                     | i.e `"jackrabbit"`                                                                          |
-| `JACKRABBIT_PG_PASSWORD`                        | Jackrabbit postgres password                                                     | i.e `"jackrabbbit"`                                                                         |
-| `JACKRABBIT_DATABASE`                           | Jackrabbit postgres database name                                                | i.e `"jackrabbit"`                                                                          |
-| `LDAP_STATIC_VOLUME_ID`                         | LDAP static volume id (AWS EKS)                                                  | `""` or `"<static-volume-id>"`                                                              |
-| `LDAP_STATIC_DISK_URI`                          | LDAP static disk uri (GCE GKE or Azure)                                          | `""` or `"<disk-uri>"`                                                                      |
-| `LDAP_BACKUP_SCHEDULE`                          | LDAP back up cron job frequency                                                  |  i.e `"*/30 * * * *"`                                                                       |
-| `GLUU_CACHE_TYPE`                               | Cache type to be used                                                            | `"IN_MEMORY"`, `"REDIS"` or `"NATIVE_PERSISTENCE"`                                          |
-| `GLUU_NAMESPACE`                                | Namespace to deploy Gluu in                                                      | `"<name>"`                                                                                  |
-| `GLUU_FQDN`                                     | Gluu FQDN                                                                        | `"<FQDN>"` i.e `"demoexample.gluu.org"`                                                     |
-| `COUNTRY_CODE`                                  | Gluu country code                                                                | `"<country code>"` i.e `"US"`                                                               |
-| `STATE`                                         | Gluu state                                                                       | `"<state>"` i.e `"TX"`                                                                      |
-| `EMAIL`                                         | Gluu email                                                                       | `"<email>"` i.e `"support@gluu.org"`                                                        |
-| `CITY`                                          | Gluu city                                                                        | `"<city>"` i.e `"Austin"`                                                                   |
-| `ORG_NAME`                                      | Gluu organization name                                                           | `"<org-name>"` i.e `"Gluu"`                                                                 |
-| `LDAP_PW`                                       | Password of LDAP 6 chars min: 1 capital, 1 small, 1 digit and 1 special char     | `"P@ssw0rd"`                                                                                |
-| `GMAIL_ACCOUNT`                                 | Gmail account for GKE installation                                               | `""` or`"<gmail>"` i.e                                                                      |
-| `GOOGLE_NODE_HOME_DIR`                          | User node home directory, used if the hosts volume is used                       | `"Y"` or `"N"`                                                                              |
-| `IS_GLUU_FQDN_REGISTERED`                       | Is Gluu FQDN globally resolvable                                                 | `"Y"` or `"N"`                                                                              |
-| `OXD_APPLICATION_KEYSTORE_CN`                   | OXD application keystore common name                                             | `"<name>"` i.e `"oxd_server"`                                                               |
-| `OXD_ADMIN_KEYSTORE_CN`                         | OXD admin keystore common name                                                   | `"<name>"` i.e `"oxd_server"`                                                               |
-| `LDAP_STORAGE_SIZE`                             | LDAP volume storage size                                                         | `""` i.e `"4Gi"`                                                                            |
-| `OXAUTH_KEYS_LIFE`                              | oxAuth Key life span in hours                                                    | `48`                                                               |
-| `FIDO2_REPLICAS`                                | Number of FIDO2 replicas                                                         | min `"1"`                                                                                   |
-| `SCIM_REPLICAS`                                 | Number of SCIM replicas                                                          | min `"1"`                                                                                   |
-| `OXAUTH_REPLICAS`                               | Number of oxAuth replicas                                                        | min `"1"`                                                                                   |
-| `OXTRUST_REPLICAS`                              | Number of oxTrust replicas                                                       | min `"1"`                                                                                   |
-| `LDAP_REPLICAS`                                 | Number of LDAP replicas                                                          | min `"1"`                                                                                   |
-| `OXSHIBBOLETH_REPLICAS`                         | Number of oxShibboleth replicas                                                  | min `"1"`                                                                                   |
-| `OXPASSPORT_REPLICAS`                           | Number of oxPassport replicas                                                    | min `"1"`                                                                                   |
-| `OXD_SERVER_REPLICAS`                           | Number of oxdServer replicas                                                     | min `"1"`                                                                                   |
-| `CASA_REPLICAS`                                 | Number of Casa replicas                                                          | min `"1"`                                                                                   |
-| `RADIUS_REPLICAS`                               | Number of Radius replica                                                         | min `"1"`                                                                                   |
-| `ENABLE_OXTRUST_API`                            | Enable oxTrust-api                                                               | `"Y"` or `"N"`                                                                              |
-| `ENABLE_OXTRUST_TEST_MODE`                      | Enable oxTrust Test Mode                                                         | `"Y"` or `"N"`                                                                              |
-| `ENABLE_CACHE_REFRESH`                          | Enable cache refresh rotate installation                                         | `"Y"` or `"N"`                                                                              |
-| `ENABLE_OXD`                                    | Enable oxd server installation                                                   | `"Y"` or `"N"`                                                                              |
-| `ENABLE_RADIUS`                                 | Enable Radius installation                                                       | `"Y"` or `"N"`                                                                              |
-| `ENABLE_OXPASSPORT`                             | Enable oxPassport installation                                                   | `"Y"` or `"N"`                                                                              |
-| `ENABLE_OXSHIBBOLETH`                           | Enable oxShibboleth installation                                                 | `"Y"` or `"N"`                                                                              |
-| `ENABLE_CASA`                                   | Enable Casa installation                                                         | `"Y"` or `"N"`                                                                              |
-| `ENABLE_FIDO2`                                  | Enable Fido2 installation                                                        | `"Y"` or `"N"`                                                                              |
-| `ENABLE_SCIM`                                   | Enable SCIM installation                                                         | `"Y"` or `"N"`                                                                              |
-| `ENABLE_OXAUTH_KEY_ROTATE`                      | Enable key rotate installation                                                   | `"Y"` or `"N"`                                                                              |
-| `ENABLE_OXTRUST_API_BOOLEAN`                    | Used by `pygluu-kubernetes`                                                      | `"false"`                                                                                   |
-| `ENABLE_OXTRUST_TEST_MODE_BOOLEAN`              | Used by `pygluu-kubernetes`                                                      | `"false"`                                                                                   |
-| `ENABLE_RADIUS_BOOLEAN`                         | Used by `pygluu-kubernetes`                                                      | `"false"`                                                                                   |
-| `ENABLE_OXPASSPORT_BOOLEAN`                     | Used by `pygluu-kubernetes`                                                      | `"false"`                                                                                   |
-| `ENABLE_CASA_BOOLEAN`                           | Used by `pygluu-kubernetes`                                                      | `"false"`                                                                                   |
-| `ENABLE_SAML_BOOLEAN`                           | Used by `pygluu-kubernetes`                                                      | `"false"`                                                                                   |
-| `ENABLED_SERVICES_LIST`                         | Used by `pygluu-kubernetes`. List of all enabled services                        | `"[]"`                                                                                   |
-| `EDIT_IMAGE_NAMES_TAGS`                         | Manually place the image source and tag                                          | `"Y"` or `"N"`                                                                              |
-| `JACKRABBIT_IMAGE_NAME`                         | Jackrabbit image repository name                                                 | i.e `"gluufederation/jackrabbit"`                                                           |
-| `JACKRABBIT_IMAGE_TAG`                          | Jackrabbit image tag                                                             | i.e `"4.3.0_02"`                                                                            |
-| `CASA_IMAGE_NAME`                               | Casa image repository name                                                       | i.e `"gluufederation/casa"`                                                                 |
-| `CASA_IMAGE_TAG`                                | Casa image tag                                                                   | i.e `"4.3.0_02"`                                                                            |
-| `CONFIG_IMAGE_NAME`                             | Config image repository name                                                     | i.e `"gluufederation/config-init"`                                                          |
-| `CONFIG_IMAGE_TAG`                              | Config image tag                                                                 | i.e `"4.3.0_02"`                                                                            |
-| `CACHE_REFRESH_ROTATE_IMAGE_NAME`               | Cache refresh image repository name                                              | i.e `"gluufederation/cr-rotate"`                                                            |
-| `CACHE_REFRESH_ROTATE_IMAGE_TAG`                | Cache refresh  image tag                                                         | i.e `"4.3.0_02"`                                                                            |
-| `CERT_MANAGER_IMAGE_NAME`                       | Gluus Certificate management image repository name                               | i.e `"gluufederation/certmanager"`                                                          |
-| `CERT_MANAGER_IMAGE_TAG`                        | Gluus Certificate management image tag                                           | i.e `"4.3.0_02"`                                                                            |
-| `LDAP_IMAGE_NAME`                               | LDAP image repository name                                                       | i.e `"gluufederation/opendj"`                                                               |
-| `LDAP_IMAGE_TAG`                                | LDAP image tag                                                                   | i.e `"4.3.0_02"`                                                                            |
-| `OXAUTH_IMAGE_NAME`                             | oxAuth image repository name                                                     | i.e `"gluufederation/oxauth"`                                                               |
-| `OXAUTH_IMAGE_TAG`                              | oxAuth image tag                                                                 | i.e `"4.3.0_03"`                                                                            |
-| `OXD_IMAGE_NAME`                                | oxd image repository name                                                        | i.e `"gluufederation/oxd-server"`                                                           |
-| `OXD_IMAGE_TAG`                                 | oxd image tag                                                                    | i.e `"4.3.0_02"`                                                                            |
-| `OXPASSPORT_IMAGE_NAME`                         | oxPassport image repository name                                                 | i.e `"gluufederation/oxpassport"`                                                           |
-| `OXPASSPORT_IMAGE_TAG`                          | oxPassport image tag                                                             | i.e `"4.3.0_02"`                                                                            |
-| `FIDO2_IMAGE_NAME`                              | FIDO2 image repository name                                                      | i.e `"gluufederation/oxpassport"`                                                           |
-| `FIDO2_IMAGE_TAG`                               | FIDO2 image tag                                                                  | i.e `"4.3.0_02"`                                                                            |
-| `SCIM_IMAGE_NAME`                               | SCIM image repository name                                                       | i.e `"gluufederation/oxpassport"`                                                           |
-| `SCIM_IMAGE_TAG`                                | SCIM image tag                                                                   | i.e `"4.3.0_02"`                                                                            |
-| `OXSHIBBOLETH_IMAGE_NAME`                       | oxShibboleth image repository name                                               | i.e `"gluufederation/oxshibboleth"`                                                         |
-| `OXSHIBBOLETH_IMAGE_TAG`                        | oxShibboleth image tag                                                           | i.e `"4.3.0_02"`                                                                            |
-| `OXTRUST_IMAGE_NAME`                            | oxTrust image repository name                                                    | i.e `"gluufederation/oxtrust"`                                                              |
-| `OXTRUST_IMAGE_TAG`                             | oxTrust image tag                                                                | i.e `"4.3.0_02"`                                                                            |
-| `PERSISTENCE_IMAGE_NAME`                        | Persistence image repository name                                                | i.e `"gluufederation/persistence"`                                                          |
-| `PERSISTENCE_IMAGE_TAG`                         | Persistence image tag                                                            | i.e `"4.3.0_02"`                                                                            |
-| `GLUU_GATEWAY_IMAGE_NAME`                       | Gluu Gateway image repository name                                               | i.e `"gluufederation/gluu-gateway"`                                                         |
-| `GLUU_GATEWAY_IMAGE_TAG`                        | Gluu Gateway image tag                                                           | i.e `"4.3.0_01"`                                                                            |
-| `GLUU_GATEWAY_UI_IMAGE_NAME`                    | Gluu Gateway UI image repository name                                            | i.e `"gluufederation/gluu-gateway-ui"`                                                      |
-| `GLUU_GATEWAY_UI_IMAGE_TAG`                     | Gluu Gateway UI image tag                                                        | i.e `"4.3.0_01"`                                                                            |
-| `UPGRADE_IMAGE_NAME`                            | Gluu upgrade image repository name                                               | i.e `"gluufederation/upgrade"`                                                              |
-| `UPGRADE_IMAGE_TAG`                             | Gluu upgrade image tag                                                           | i.e `"4.3.0_02"`                                                                            |
-| `CONFIRM_PARAMS`                                | Confirm using above options                                                      | `"Y"` or `"N"`                                                                              |
-| `GLUU_LDAP_MULTI_CLUSTER`                       | HELM-ALPHA-FEATURE: Enable LDAP multi cluster environment                        |`"Y"` or `"N"`                                                                               |
-| `GLUU_LDAP_SERF_PORT`                           | HELM-ALPHA-FEATURE: Serf UDP and TCP port                                        | i.e `30946`                                                                                 |
-| `GLUU_LDAP_ADVERTISE_ADDRESS`                   | HELM-ALPHA-FEATURE: LDAP pod advertise address                                   | i.e `demoexample.gluu.org:30946"`                                                           |
-| `GLUU_LDAP_ADVERTISE_ADMIN_PORT`                | HELM-ALPHA-FEATURE: LDAP serf advertise admin port                               | i.e `30444`                                                                                 |
-| `GLUU_LDAP_ADVERTISE_LDAPS_PORT`                | HELM-ALPHA-FEATURE: LDAP serf advertise LDAPS port                               | i.e `30636`                                                                                 |
-| `GLUU_LDAP_ADVERTISE_REPLICATION_PORT`          | HELM-ALPHA-FEATURE: LDAP serf advertise replication port                         | i.e `30989`                                                                                 |
-| `GLUU_LDAP_SECONDARY_CLUSTER`                   | HELM-ALPHA-FEATURE: Is this the first kubernetes cluster or not                  | `"Y"` or `"N"`                                                                              |
-| `GLUU_LDAP_SERF_PEERS`                          | HELM-ALPHA-FEATURE: All opendj serf advertised addresses. This must be resolvable | `["firstldap.gluu.org:30946", "secondldap.gluu.org:31946"]` |
+| Parameter                                       | Description                                                                                 | Options                                                                                     |
+| ----------------------------------------------- |---------------------------------------------------------------------------------------------| ------------------------------------------------------------------------------------------- |
+| `ACCEPT_GLUU_LICENSE`                           | Accept the [License](https://gluu.org/docs/gluu-server/4.3/#license/)                       | `"Y"` or `"N"`                                                                              |
+| `TEST_ENVIRONMENT`                              | Allows installation with no resources limits and requests defined.                          | `"Y"` or `"N"`                                                                              |
+| `ADMIN_PW`                                      | Password of oxTrust 6 chars min: 1 capital, 1 small, 1 digit and 1 special char             | `"P@ssw0rd"`                                                                                |
+| `GLUU_VERSION`                                  | Gluu version to be installed                                                                | `"4.2"`                                                                                     |
+| `GLUU_UPGRADE_TARGET_VERSION`                   | Gluu upgrade version                                                                        | `"4.2"`                                                                                     |
+| `GLUU_HELM_RELEASE_NAME`                        | Gluu Helm release name                                                                      | `"<name>"`                                                                                  |
+| `KONG_HELM_RELEASE_NAME`                        | Gluu Gateway (Kong) Helm release name                                                       | `"<name>"`                                                                                  |
+| `NGINX_INGRESS_NAMESPACE`                       | Nginx namespace                                                                             | `"<name>"`                                                                                  |
+| `NGINX_INGRESS_RELEASE_NAME`                    | Nginx Helm release name                                                                     | `"<name>"`                                                                                  |
+| `GLUU_GATEWAY_UI_HELM_RELEASE_NAME`             | Gluu Gateway UI release name                                                                | `"<name>"`                                                                                  |
+| `INSTALL_GLUU_GATEWAY`                          | Install Gluu Gateway Database mode                                                          | `"Y"` or `"N"`                                                                              |
+| `USE_ISTIO`                                     | Enable use of Istio. This will inject sidecars in Gluu pods.[Alpha]                         | `"Y"` or `"N"`                                                                              |
+| `USE_ISTIO_INGRESS`                             | Enable Istio ingress.[Alpha]                                                                | `"Y"` or `"N"`                                                                              |
+| `ISTIO_SYSTEM_NAMESPACE`                        | Postgres namespace - Gluu Gateway [Alpha]                                                   | `"<name>"`                                                                                  |
+| `POSTGRES_NAMESPACE`                            | Postgres namespace - Gluu Gateway                                                           | `"<name>"`                                                                                  |
+| `KONG_NAMESPACE`                                | Kong namespace - Gluu Gateway                                                               | `"<name>"`                                                                                  |
+| `GLUU_GATEWAY_UI_NAMESPACE`                     | Gluu Gateway UI namespace - Gluu Gateway                                                    | `"<name>"`                                                                                  |
+| `KONG_PG_USER`                                  | Kong Postgres user - Gluu Gateway                                                           | `"<name>"`                                                                                  |
+| `KONG_PG_PASSWORD`                              | Kong Postgres password - Gluu Gateway                                                       | `"<name>"`                                                                                  |
+| `GLUU_GATEWAY_UI_PG_USER`                       | Gluu Gateway UI Postgres user - Gluu Gateway                                                | `"<name>"`                                                                                  |
+| `GLUU_GATEWAY_UI_PG_PASSWORD`                   | Gluu Gateway UI Postgres password - Gluu Gateway                                            | `"<name>"`                                                                                  |
+| `KONG_DATABASE`                                 | Kong Postgres Database name - Gluu Gateway                                                  | `"<name>"`                                                                                  |
+| `GLUU_GATEWAY_UI_DATABASE`                      | Gluu Gateway UI Postgres Database name - Gluu Gateway                                       | `"<name>"`                                                                                  |
+| `POSTGRES_REPLICAS`                             | Postgres number of replicas - Gluu Gateway                                                  | `"<name>"`                                                                                  |
+| `POSTGRES_URL`                                  | Postgres URL ( Can be local or remote) - Gluu Gateway                                       |  i.e `"<servicename>.<namespace>.svc.cluster.local"`                                        |
+| `NODES_IPS`                                     | List of kubernetes cluster node ips                                                         | `["<ip>", "<ip2>", "<ip3>"]`                                                                |
+| `NODES_ZONES`                                   | List of kubernetes cluster node zones                                                       | `["<node1_zone>", "<node2_zone>", "<node3_zone>"]`                                          |
+| `NODES_NAMES`                                   | List of kubernetes cluster node names                                                       | `["<node1_name>", "<node2_name>", "<node3_name>"]`                                          |
+| `NODE_SSH_KEY`                                  | nodes ssh key path location                                                                 | `"<pathtosshkey>"`                                                                          |
+| `HOST_EXT_IP`                                   | Minikube or Microk8s vm ip                                                                  | `"<ip>"`                                                                                    |
+| `VERIFY_EXT_IP`                                 | Verify the Minikube or Microk8s vm ip placed                                                | `"Y"` or `"N"`                                                                              |
+| `AWS_LB_TYPE`                                   | AWS loadbalancer type                                                                       | `""` , `"clb"` or `"nlb"`                                                                   |
+| `USE_ARN`                                       | Use ssl provided from ACM AWS                                                               | `""`, `"Y"` or `"N"`                                                                        |
+| `VPC_CIDR`                                      | VPC CIDR in use for the Kubernetes cluster                                                  | `""`, i.e `192.168.1.116`                                                                   |
+| `ARN_AWS_IAM`                                   | The arn string                                                                              | `""` or `"<arn:aws:acm:us-west-2:XXXXXXXX:certificate/XXXXXX-XXXXXXX-XXXXXXX-XXXXXXXX>"`    |
+| `LB_ADD`                                        | AWS loadbalancer address                                                                    | `"<loadbalancer_address>"`                                                                  |
+| `DEPLOYMENT_ARCH`                               | Deployment architecture                                                                     | `"microk8s"`, `"minikube"`, `"eks"`, `"gke"`, `"aks"`, `"do"` or `"local"`                  |
+| `PERSISTENCE_BACKEND`                           | Backend persistence type                                                                    | `"ldap"`, `"couchbase"` or `"hybrid"`                                                       |
+| `REDIS_URL`                                     | Redis url with port. Used when Redis is deployed for Cache.                                 | i.e `"redis:6379"`, `"clustercfg.testing-redis.icrbdv.euc1.cache.amazonaws.com:6379"`       |
+| `REDIS_TYPE`                                    | Type of Redis deployed                                                                      | `"SHARDED"`, `"STANDALONE"`, `"CLUSTER"`, or `"SENTINEL"`                                   |
+| `REDIS_PW`                                      | Redis Password if used. This may be empty. If not choose a long password.                   | i.e `""`, `"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURUakNDQWphZ0F3SUJBZ0lVV2Y0TExEb"`     |
+| `REDIS_USE_SSL`                                 | Redis SSL use                                                                               |  `"false"` or `"true"`                                                                      |
+| `REDIS_SSL_TRUSTSTORE`                          | Redis SSL truststore. If using cloud provider services this is left empty.                  | i.e `""`, `"/etc/myredis.pem"`                                                              |
+| `REDIS_SENTINEL_GROUP`                          | Redis Sentinel group                                                                        | i.e `""`                                                                                    |
+| `REDIS_MASTER_NODES`                            | Number of Redis master node if Redis is to be installed                                     | i.e `3`                                                                                     |
+| `REDIS_NODES_PER_MASTER`                        | Number of nodes per Redis master node if Redis is to be installed                           | i.e `2`                                                                                     |
+| `REDIS_NAMESPACE`                               | Redis Namespace if Redis is to be installed                                                 | i.e `"gluu-redis-cluster"`                                                                  |
+| `INSTALL_REDIS`                                 | Install Redis                                                                               | `"Y"` or `"N"`                                                                              |
+| `INSTALL_COUCHBASE`                             | Install couchbase                                                                           | `"Y"` or `"N"`                                                                              |
+| `COUCHBASE_NAMESPACE`                           | Couchbase namespace                                                                         | `"<name>"`                                                                                  |
+| `COUCHBASE_VOLUME_TYPE`                         | Persistence Volume type                                                                     | `"io1"`,`"ps-ssd"`, `"Premium_LRS"`                                                         |
+| `COUCHBASE_CLUSTER_NAME`                        | Couchbase cluster name                                                                      | `"<name>"`                                                                                  |
+| `COUCHBASE_URL`                                 | Couchbase internal address to the cluster                                                   | `""` or i.e `"<clustername>.<namespace>.svc.cluster.local"`                                 |
+| `COUCHBASE_USER`                                | Couchbase username                                                                          | `""` or i.e `"gluu"`                                                                        |
+| `COUCHBASE_BUCKET_PREFIX`                       | Prefix for Couchbase buckets                                                                | `gluu`                                                                                      |
+| `COUCHBASE_PASSWORD`                            | Password of Couchbase 6 characters min: 1 capital, 1 small, 1 digit and 1 special character | `"P@ssw0rd"`                                                                                |
+| `COUCHBASE_SUPERUSER`                           | Couchbase superuser username                                                                | `""` or i.e `"admin"`                                                                       |
+| `COUCHBASE_SUPERUSER_PASSWORD`                  | Password of Couchbase 6 characters min: 1 capital, 1 small, 1 digit and 1 special character | `"P@ssw0rd"`                                                                                |
+| `COUCHBASE_CRT`                                 | Couchbase CA certification                                                                  | `""` or i.e `<crt content not encoded>`                                                     |
+| `COUCHBASE_CN`                                  | Couchbase certificate common name                                                           | `""`                                                                                        |
+| `COUCHBASE_INDEX_NUM_REPLICA`                   | Couchbase number of replicas per index                                                      | `0`                                                                                         |
+| `COUCHBASE_SUBJECT_ALT_NAME`                    | Couchbase SAN                                                                               | `""` or i.e `"cb.gluu.org"`                                                                 |
+| `COUCHBASE_CLUSTER_FILE_OVERRIDE`               | Override `couchbase-cluster.yaml` with a custom `couchbase-cluster.yaml`                    | `"Y"` or `"N"`                                                                              |
+| `COUCHBASE_USE_LOW_RESOURCES`                   | Use very low resources for Couchbase deployment. For demo purposes                          | `"Y"` or `"N"`                                                                              |
+| `COUCHBASE_DATA_NODES`                          | Number of Couchbase data nodes                                                              | `""` or i.e `"4"`                                                                           |
+| `COUCHBASE_QUERY_NODES`                         | Number of Couchbase query nodes                                                             | `""` or i.e `"3"`                                                                           |
+| `COUCHBASE_INDEX_NODES`                         | Number of Couchbase index nodes                                                             | `""` or i.e `"3"`                                                                           | 
+| `COUCHBASE_SEARCH_EVENTING_ANALYTICS_NODES`     | Number of Couchbase search, eventing and analytics nodes                                    | `""` or i.e `"2"`                                                                           |
+| `COUCHBASE_GENERAL_STORAGE`                     | Couchbase general storage size                                                              | `""` or i.e `"2"`                                                                           |
+| `COUCHBASE_DATA_STORAGE`                        | Couchbase data storage size                                                                 | `""` or i.e `"5Gi"`                                                                         |
+| `COUCHBASE_INDEX_STORAGE`                       | Couchbase index storage size                                                                | `""` or i.e `"5Gi"`                                                                         |
+| `COUCHBASE_QUERY_STORAGE`                       | Couchbase query storage size                                                                | `""` or i.e `"5Gi"`                                                                         |
+| `COUCHBASE_ANALYTICS_STORAGE`                   | Couchbase search, eventing and analytics storage size                                       | `""` or i.e `"5Gi"`                                                                         |
+| `COUCHBASE_INCR_BACKUP_SCHEDULE`                | Couchbase incremental backup schedule                                                       |  i.e `"*/30 * * * *"`                                                                       |
+| `COUCHBASE_FULL_BACKUP_SCHEDULE`                | Couchbase  full backup  schedule                                                            |  i.e `"0 2 * * 6"`                                                                          |
+| `COUCHBASE_BACKUP_RETENTION_TIME`               | Couchbase time to retain backups in s,m or h                                                |  i.e `"168h`                                                                                |
+| `COUCHBASE_BACKUP_STORAGE_SIZE`                 | Couchbase backup storage size                                                               | i.e `"20Gi"`                                                                                |
+| `NUMBER_OF_EXPECTED_USERS`                      | Number of expected users [couchbase-resource-calc-alpha]                                    | `""` or i.e `"1000000"`                                                                     |
+| `EXPECTED_TRANSACTIONS_PER_SEC`                 | Expected transactions per second [couchbase-resource-calc-alpha]                            | `""` or i.e `"2000"`                                                                        |
+| `USING_CODE_FLOW`                               | If using code flow [couchbase-resource-calc-alpha]                                          | `""`, `"Y"` or `"N"`                                                                        |
+| `USING_SCIM_FLOW`                               | If using SCIM flow [couchbase-resource-calc-alpha]                                          | `""`, `"Y"` or `"N"`                                                                        |
+| `USING_RESOURCE_OWNER_PASSWORD_CRED_GRANT_FLOW` | If using password flow [couchbase-resource-calc-alpha]                                      | `""`, `"Y"` or `"N"`                                                                        |
+| `DEPLOY_MULTI_CLUSTER`                          | Deploying a Multi-cluster [alpha]                                                           | `"Y"` or `"N"`                                                                              |
+| `HYBRID_LDAP_HELD_DATA`                         | Type of data to be held in LDAP with a hybrid installation of couchbase and LDAP            | `""`, `"default"`, `"user"`, `"site"`, `"cache"` or `"token"`                               |
+| `LDAP_JACKRABBIT_VOLUME`                        | LDAP/Jackrabbit Volume type                                                                 | `""`, `"io1"`,`"ps-ssd"`, `"Premium_LRS"`                                                   |
+| `APP_VOLUME_TYPE`                               | Volume type for LDAP persistence                                                            | [options](#app_volume_type-options)                                                         |
+| `INSTALL_JACKRABBIT`                            | Install Jackrabbit                                                                          | `"Y"` or `"N"`                                                                              |
+| `JACKRABBIT_STORAGE_SIZE`                       | Jackrabbit volume storage size                                                              | `""` i.e `"4Gi"`                                                                            |
+| `JACKRABBIT_URL`                                | http:// url for Jackrabbit                                                                  | i.e `"http://jackrabbit:8080"`                                                              |
+| `JACKRABBIT_ADMIN_ID`                           | Jackrabbit admin ID                                                                         | i.e `"admin"`                                                                               |
+| `JACKRABBIT_ADMIN_PASSWORD`                     | Jackrabbit admin password                                                                   | i.e `"admin"`                                                                           |
+| `JACKRABBIT_CLUSTER`                            | Jackrabbit Cluster mode                                                                     | `"N"` or `"Y"`                                                                              |
+| `JACKRABBIT_PG_USER`                            | Jackrabbit postgres username                                                                | i.e `"jackrabbit"`                                                                          |
+| `JACKRABBIT_PG_PASSWORD`                        | Jackrabbit postgres password                                                                | i.e `"jackrabbbit"`                                                                         |
+| `JACKRABBIT_DATABASE`                           | Jackrabbit postgres database name                                                           | i.e `"jackrabbit"`                                                                          |
+| `LDAP_STATIC_VOLUME_ID`                         | LDAP static volume id (AWS EKS)                                                             | `""` or `"<static-volume-id>"`                                                              |
+| `LDAP_STATIC_DISK_URI`                          | LDAP static disk uri (GCE GKE or Azure)                                                     | `""` or `"<disk-uri>"`                                                                      |
+| `LDAP_BACKUP_SCHEDULE`                          | LDAP back up cron job frequency                                                             |  i.e `"*/30 * * * *"`                                                                       |
+| `GLUU_CACHE_TYPE`                               | Cache type to be used                                                                       | `"IN_MEMORY"`, `"REDIS"` or `"NATIVE_PERSISTENCE"`                                          |
+| `GLUU_NAMESPACE`                                | Namespace to deploy Gluu in                                                                 | `"<name>"`                                                                                  |
+| `GLUU_FQDN`                                     | Gluu FQDN                                                                                   | `"<FQDN>"` i.e `"demoexample.gluu.org"`                                                     |
+| `COUNTRY_CODE`                                  | Gluu country code                                                                           | `"<country code>"` i.e `"US"`                                                               |
+| `STATE`                                         | Gluu state                                                                                  | `"<state>"` i.e `"TX"`                                                                      |
+| `EMAIL`                                         | Gluu email                                                                                  | `"<email>"` i.e `"support@gluu.org"`                                                        |
+| `CITY`                                          | Gluu city                                                                                   | `"<city>"` i.e `"Austin"`                                                                   |
+| `ORG_NAME`                                      | Gluu organization name                                                                      | `"<org-name>"` i.e `"Gluu"`                                                                 |
+| `LDAP_PW`                                       | Password of LDAP 6 characters min: 1 capital, 1 small, 1 digit and 1 special character      | `"P@ssw0rd"`                                                                                |
+| `GMAIL_ACCOUNT`                                 | Gmail account for GKE installation                                                          | `""` or`"<gmail>"` i.e                                                                      |
+| `GOOGLE_NODE_HOME_DIR`                          | User node home directory, used if the hosts volume is used                                  | `"Y"` or `"N"`                                                                              |
+| `IS_GLUU_FQDN_REGISTERED`                       | Is Gluu FQDN globally resolvable                                                            | `"Y"` or `"N"`                                                                              |
+| `OXD_APPLICATION_KEYSTORE_CN`                   | OXD application keystore common name                                                        | `"<name>"` i.e `"oxd_server"`                                                               |
+| `OXD_ADMIN_KEYSTORE_CN`                         | OXD admin keystore common name                                                              | `"<name>"` i.e `"oxd_server"`                                                               |
+| `LDAP_STORAGE_SIZE`                             | LDAP volume storage size                                                                    | `""` i.e `"4Gi"`                                                                            |
+| `OXAUTH_KEYS_LIFE`                              | oxAuth Key life span in hours                                                               | `48`                                                               |
+| `FIDO2_REPLICAS`                                | Number of FIDO2 replicas                                                                    | min `"1"`                                                                                   |
+| `SCIM_REPLICAS`                                 | Number of SCIM replicas                                                                     | min `"1"`                                                                                   |
+| `OXAUTH_REPLICAS`                               | Number of oxAuth replicas                                                                   | min `"1"`                                                                                   |
+| `OXTRUST_REPLICAS`                              | Number of oxTrust replicas                                                                  | min `"1"`                                                                                   |
+| `LDAP_REPLICAS`                                 | Number of LDAP replicas                                                                     | min `"1"`                                                                                   |
+| `OXSHIBBOLETH_REPLICAS`                         | Number of oxShibboleth replicas                                                             | min `"1"`                                                                                   |
+| `OXPASSPORT_REPLICAS`                           | Number of oxPassport replicas                                                               | min `"1"`                                                                                   |
+| `OXD_SERVER_REPLICAS`                           | Number of oxdServer replicas                                                                | min `"1"`                                                                                   |
+| `CASA_REPLICAS`                                 | Number of Casa replicas                                                                     | min `"1"`                                                                                   |
+| `RADIUS_REPLICAS`                               | Number of Radius replica                                                                    | min `"1"`                                                                                   |
+| `ENABLE_OXTRUST_API`                            | Enable oxTrust-api                                                                          | `"Y"` or `"N"`                                                                              |
+| `ENABLE_OXTRUST_TEST_MODE`                      | Enable oxTrust Test Mode                                                                    | `"Y"` or `"N"`                                                                              |
+| `ENABLE_CACHE_REFRESH`                          | Enable cache refresh rotate installation                                                    | `"Y"` or `"N"`                                                                              |
+| `ENABLE_OXD`                                    | Enable oxd server installation                                                              | `"Y"` or `"N"`                                                                              |
+| `ENABLE_RADIUS`                                 | Enable Radius installation                                                                  | `"Y"` or `"N"`                                                                              |
+| `ENABLE_OXPASSPORT`                             | Enable oxPassport installation                                                              | `"Y"` or `"N"`                                                                              |
+| `ENABLE_OXSHIBBOLETH`                           | Enable oxShibboleth installation                                                            | `"Y"` or `"N"`                                                                              |
+| `ENABLE_CASA`                                   | Enable Casa installation                                                                    | `"Y"` or `"N"`                                                                              |
+| `ENABLE_FIDO2`                                  | Enable Fido2 installation                                                                   | `"Y"` or `"N"`                                                                              |
+| `ENABLE_SCIM`                                   | Enable SCIM installation                                                                    | `"Y"` or `"N"`                                                                              |
+| `ENABLE_OXAUTH_KEY_ROTATE`                      | Enable key rotate installation                                                              | `"Y"` or `"N"`                                                                              |
+| `ENABLE_OXTRUST_API_BOOLEAN`                    | Used by `pygluu-kubernetes`                                                                 | `"false"`                                                                                   |
+| `ENABLE_OXTRUST_TEST_MODE_BOOLEAN`              | Used by `pygluu-kubernetes`                                                                 | `"false"`                                                                                   |
+| `ENABLE_RADIUS_BOOLEAN`                         | Used by `pygluu-kubernetes`                                                                 | `"false"`                                                                                   |
+| `ENABLE_OXPASSPORT_BOOLEAN`                     | Used by `pygluu-kubernetes`                                                                 | `"false"`                                                                                   |
+| `ENABLE_CASA_BOOLEAN`                           | Used by `pygluu-kubernetes`                                                                 | `"false"`                                                                                   |
+| `ENABLE_SAML_BOOLEAN`                           | Used by `pygluu-kubernetes`                                                                 | `"false"`                                                                                   |
+| `ENABLED_SERVICES_LIST`                         | Used by `pygluu-kubernetes`. List of all enabled services                                   | `"[]"`                                                                                   |
+| `EDIT_IMAGE_NAMES_TAGS`                         | Manually place the image source and tag                                                     | `"Y"` or `"N"`                                                                              |
+| `JACKRABBIT_IMAGE_NAME`                         | Jackrabbit image repository name                                                            | i.e `"gluufederation/jackrabbit"`                                                           |
+| `JACKRABBIT_IMAGE_TAG`                          | Jackrabbit image tag                                                                        | i.e `"4.3.0_02"`                                                                            |
+| `CASA_IMAGE_NAME`                               | Casa image repository name                                                                  | i.e `"gluufederation/casa"`                                                                 |
+| `CASA_IMAGE_TAG`                                | Casa image tag                                                                              | i.e `"4.3.0_02"`                                                                            |
+| `CONFIG_IMAGE_NAME`                             | Config image repository name                                                                | i.e `"gluufederation/config-init"`                                                          |
+| `CONFIG_IMAGE_TAG`                              | Config image tag                                                                            | i.e `"4.3.0_02"`                                                                            |
+| `CACHE_REFRESH_ROTATE_IMAGE_NAME`               | Cache refresh image repository name                                                         | i.e `"gluufederation/cr-rotate"`                                                            |
+| `CACHE_REFRESH_ROTATE_IMAGE_TAG`                | Cache refresh  image tag                                                                    | i.e `"4.3.0_02"`                                                                            |
+| `CERT_MANAGER_IMAGE_NAME`                       | Gluus Certificate management image repository name                                          | i.e `"gluufederation/certmanager"`                                                          |
+| `CERT_MANAGER_IMAGE_TAG`                        | Gluus Certificate management image tag                                                      | i.e `"4.3.0_02"`                                                                            |
+| `LDAP_IMAGE_NAME`                               | LDAP image repository name                                                                  | i.e `"gluufederation/opendj"`                                                               |
+| `LDAP_IMAGE_TAG`                                | LDAP image tag                                                                              | i.e `"4.3.0_02"`                                                                            |
+| `OXAUTH_IMAGE_NAME`                             | oxAuth image repository name                                                                | i.e `"gluufederation/oxauth"`                                                               |
+| `OXAUTH_IMAGE_TAG`                              | oxAuth image tag                                                                            | i.e `"4.3.0_03"`                                                                            |
+| `OXD_IMAGE_NAME`                                | oxd image repository name                                                                   | i.e `"gluufederation/oxd-server"`                                                           |
+| `OXD_IMAGE_TAG`                                 | oxd image tag                                                                               | i.e `"4.3.0_02"`                                                                            |
+| `OXPASSPORT_IMAGE_NAME`                         | oxPassport image repository name                                                            | i.e `"gluufederation/oxpassport"`                                                           |
+| `OXPASSPORT_IMAGE_TAG`                          | oxPassport image tag                                                                        | i.e `"4.3.0_02"`                                                                            |
+| `FIDO2_IMAGE_NAME`                              | FIDO2 image repository name                                                                 | i.e `"gluufederation/oxpassport"`                                                           |
+| `FIDO2_IMAGE_TAG`                               | FIDO2 image tag                                                                             | i.e `"4.3.0_02"`                                                                            |
+| `SCIM_IMAGE_NAME`                               | SCIM image repository name                                                                  | i.e `"gluufederation/oxpassport"`                                                           |
+| `SCIM_IMAGE_TAG`                                | SCIM image tag                                                                              | i.e `"4.3.0_02"`                                                                            |
+| `OXSHIBBOLETH_IMAGE_NAME`                       | oxShibboleth image repository name                                                          | i.e `"gluufederation/oxshibboleth"`                                                         |
+| `OXSHIBBOLETH_IMAGE_TAG`                        | oxShibboleth image tag                                                                      | i.e `"4.3.0_02"`                                                                            |
+| `OXTRUST_IMAGE_NAME`                            | oxTrust image repository name                                                               | i.e `"gluufederation/oxtrust"`                                                              |
+| `OXTRUST_IMAGE_TAG`                             | oxTrust image tag                                                                           | i.e `"4.3.0_02"`                                                                            |
+| `PERSISTENCE_IMAGE_NAME`                        | Persistence image repository name                                                           | i.e `"gluufederation/persistence"`                                                          |
+| `PERSISTENCE_IMAGE_TAG`                         | Persistence image tag                                                                       | i.e `"4.3.0_02"`                                                                            |
+| `GLUU_GATEWAY_IMAGE_NAME`                       | Gluu Gateway image repository name                                                          | i.e `"gluufederation/gluu-gateway"`                                                         |
+| `GLUU_GATEWAY_IMAGE_TAG`                        | Gluu Gateway image tag                                                                      | i.e `"4.3.0_01"`                                                                            |
+| `GLUU_GATEWAY_UI_IMAGE_NAME`                    | Gluu Gateway UI image repository name                                                       | i.e `"gluufederation/gluu-gateway-ui"`                                                      |
+| `GLUU_GATEWAY_UI_IMAGE_TAG`                     | Gluu Gateway UI image tag                                                                   | i.e `"4.3.0_01"`                                                                            |
+| `UPGRADE_IMAGE_NAME`                            | Gluu upgrade image repository name                                                          | i.e `"gluufederation/upgrade"`                                                              |
+| `UPGRADE_IMAGE_TAG`                             | Gluu upgrade image tag                                                                      | i.e `"4.3.0_02"`                                                                            |
+| `CONFIRM_PARAMS`                                | Confirm using above options                                                                 | `"Y"` or `"N"`                                                                              |
+| `GLUU_LDAP_MULTI_CLUSTER`                       | HELM-ALPHA-FEATURE: Enable LDAP multi cluster environment                                   |`"Y"` or `"N"`                                                                               |
+| `GLUU_LDAP_SERF_PORT`                           | HELM-ALPHA-FEATURE: Serf UDP and TCP port                                                   | i.e `30946`                                                                                 |
+| `GLUU_LDAP_ADVERTISE_ADDRESS`                   | HELM-ALPHA-FEATURE: LDAP pod advertise address                                              | i.e `demoexample.gluu.org:30946"`                                                           |
+| `GLUU_LDAP_ADVERTISE_ADMIN_PORT`                | HELM-ALPHA-FEATURE: LDAP serf advertise admin port                                          | i.e `30444`                                                                                 |
+| `GLUU_LDAP_ADVERTISE_LDAPS_PORT`                | HELM-ALPHA-FEATURE: LDAP serf advertise LDAPS port                                          | i.e `30636`                                                                                 |
+| `GLUU_LDAP_ADVERTISE_REPLICATION_PORT`          | HELM-ALPHA-FEATURE: LDAP serf advertise replication port                                    | i.e `30989`                                                                                 |
+| `GLUU_LDAP_SECONDARY_CLUSTER`                   | HELM-ALPHA-FEATURE: Is this the first kubernetes cluster or not                             | `"Y"` or `"N"`                                                                              |
+| `GLUU_LDAP_SERF_PEERS`                          | HELM-ALPHA-FEATURE: All opendj serf advertised addresses. This must be resolvable           | `["firstldap.gluu.org:30946", "secondldap.gluu.org:31946"]` |
 
 ### `APP_VOLUME_TYPE`-options
 
@@ -1305,7 +1305,7 @@ This is the main parameter file used with the [`pygluu-kubernetes.pyz`](https://
 ## Use Couchbase solely as the persistence layer
 
 ### Requirements
-  - If you are installing on microk8s or minikube please ignore the below notes as a low resource `couchbase-cluster.yaml` will be applied automatically, however the VM being used must at least have 8GB RAM and 2 cpu available .
+  - If you are installing on microk8s or minikube please ignore the below notes as a low resource `couchbase-cluster.yaml` will be applied automatically, however the VM being used must at least have 8GB RAM and 2 CPU available .
   
   - An `m5.xlarge` EKS cluster with 3 nodes at the minimum or `n2-standard-4` GKE cluster with 3 nodes. We advice contacting Gluu regarding production setups.
 
