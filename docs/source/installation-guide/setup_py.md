@@ -29,24 +29,24 @@ The setup script will bring up a prompt to provide information for certificate a
 
 Refer to the following table for details about available setup options:    
 
-| Setup Option                |  Explanation                               |
-|-------------------------|--------------------------------------------|
-| Enter IP Address | Used primarily by Apache httpd for the [Listen](https://httpd.apache.org/docs/2.4/bind.html) directive. **Use an IP address assigned to one of this server's network interfaces (usage of addresses assigned to loopback interfaces is not supported)**|
-| Enter hostname | Internet-facing FQDN that is used to generate certificates and metadata. **Do not use an IP address or localhost.** |
-| Enter your city or locality | Used to generate X.509 certificates. |
-| Enter your state or province two letter code | Used to generate X.509 certificates. |
-| Enter two letter Country Code | Used to generate X.509 certificates. |
-| Enter Organization Name | Used to generate X.509 certificates. |
-| Enter email address for support at your organization | Used to generate X.509 certificates. | 
-| Optional: enter password for oxTrust and LDAP superuser | Used as the LDAP directory manager password, and for the default admin user for oxTrust. |
-| Install oxAuth OAuth2 Authorization Server | Required. Includes Gluu's OpenID Connect provider (OP) and UMA authorization server (AS) implementations.|
-| Install oxTrust Admin UI | Required. This is the Gluu server admin dashboard. |
-| Install Backend DB Server | Required. Installs OpenDJ, used to store user info and configuration data. |
-| Install Apache 2 web server | Required |
-| Install Shibboleth SAML IDP | Optional. Only install if a SAML identity provider (IDP) is needed. |
-| Install oxAuth RP | Optional. OpenID Connect test client: useful for test environments, for more details see [here](../admin-guide/openid-connect/#oxauth-rp) |
-| Install Passport |  Optional. Install if you want to support external IDP, for instance to offer users social login. |
-| Install Gluu Radius | Optional. Installs Radius server. More information is available [here](../admin-guide/radius-server/gluu-radius.md)
+| Setup Option                | Explanation                                                                                                                                                                                                                                   |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Enter IP Address | Used primarily by Apache httpd for the [Listen](https://httpd.apache.org/docs/2.4/bind.html) directive. **Use an IP address assigned to one of this server's network interfaces (usage of addresses assigned to loopback interfaces is not supported)** |
+| Enter hostname | Internet-facing FQDN that is used to generate certificates and metadata. **Do not use an IP address or localhost.**                                                                                                                           |
+| Enter your city or locality | Used to generate X.509 certificates.                                                                                                                                                                                                          |
+| Enter your state or province two letter code | Used to generate X.509 certificates.                                                                                                                                                                                                          |
+| Enter two letter Country Code | Used to generate X.509 certificates.                                                                                                                                                                                                          |
+| Enter Organization Name | Used to generate X.509 certificates.                                                                                                                                                                                                          |
+| Enter email address for support at your organization | Used to generate X.509 certificates.                                                                                                                                                                                                          | 
+| Optional: enter password for oxTrust and LDAP superuser | Used as the LDAP directory manager password, and for the default admin user for oxTrust.                                                                                                                                                      |
+| Install oxAuth OAuth2 Authorization Server | Required. Includes Gluu's OpenID Connect provider (OP) and UMA authorization server (AS) implementations.                                                                                                                                     |
+| Install oxTrust Admin UI | Required. This is the Gluu server admin dashboard.                                                                                                                                                                                            |
+| Install Backend DB Server | Required. Installs OpenDJ, used to store user info and configuration data.                                                                                                                                                                    |
+| Install Apache 2 web server | Required                                                                                                                                                                                                                                      |
+| Install Shibboleth SAML IDP | Optional. Only install if a SAML identity provider (IDP) is needed.                                                                                                                                                                           |
+| Install oxAuth RP | Optional. OpenID Connect test client: useful for test environments, for more details see [here](../admin-guide/openid-connect.md/#oxauth-rp)                                                                                                     |
+| Install Passport | Optional. Install if you want to support external IDP, for instance to offer users social login.                                                                                                                                              |
+| Install Gluu Radius | Optional. Installs Radius server. More information is available [here](../admin-guide/radius-server/gluu-radius.md)                                                                                                                           
 
 When complete, the setup script will show the selections and prompt for confirmation. If everything looks OK, select Y to finish installation. 
 
@@ -121,10 +121,10 @@ The administrator can use the following command line options to include addition
 * __-ldap-admin-password__ Used as the LDAP directory manager password
 * __-application-max-ram__ Sets the maximum RAM value to be used
 * __-properties-password__ Encoded setup.properties file password
-* __--install-casa__ Install Casa
+* __--install-casa__ Install CASA
 * __--install-oxd__ Install oxd Server
 * __--install-scim__ Install Scim Server
-* __--install-fido2__ Install Fido2
+* __--install-fido2__ Install FIDO2
 * __--oxd-use-gluu-storage__ Use Gluu Storage for Oxd Server
 * __-couchbase-bucket-prefix__ Set prefix for couchbase buckets
 * __--generate-oxd-certificate__ Generate certificate for oxd based on hostname
