@@ -795,7 +795,7 @@ In the `<hostname>`, both IP (`197.122.32.421`) and hostname (`redis.example.org
 **This is the end of the commands that had to be done on both nodes**
  
 !!! Info
-    For more information or if you're having trouble, please see [this redis how-to guide.](https://redislabs.com/blog/using-stunnel-to-secure-redis/)
+    For more information or if you're having trouble, please see this [redis how-to guide.](https://redislabs.com/blog/using-stunnel-to-secure-redis/)
 
 !!! Note
     Redis can also be configured for HA and failover with multiple methods, utilizing [Sentinel](https://redis.io/topics/sentinel) or [Redis-cluster](https://redis.io/topics/cluster-tutorial)
