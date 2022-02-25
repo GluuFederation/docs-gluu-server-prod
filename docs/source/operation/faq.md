@@ -24,7 +24,7 @@ rm -rf /opt/gluu-server/opt/jetty-9.3/temp/*
 
 ## Adding Passport.js and/or Shibboleth IDP post installation
 
-The `post-setup-add-components.py` script enables you to install the Shibboleth SAML IDP and Passport.js authentication middleware to your Gluu Server *post* installation. To add/install these components follow these steps:
+The `./setup.py` script enables you to install the Shibboleth SAML IDP and Passport.js authentication middleware to your Gluu Server *post* installation. To add/install these components follow these steps:
 
 1. Log in to your Gluu chroot container    
 1. Change working directory to `/install/community-edition-setup/`: 

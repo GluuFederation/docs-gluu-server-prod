@@ -12,7 +12,8 @@ The API is available as a component of Gluu Server. Upon [installation](../insta
 
 1. Login to chroot
 1. `cd /install/community-edition-setup`
-1. Run `python3  post-setup-add-components.py -addscim`  
+1. Run `./setup.py --install-scim`
+
 
 ## About API endpoints
 
