@@ -8,7 +8,7 @@ For your reference, the current version of the standard is governed by the follo
 
 ## Installation
 
-The API is available as a component of Gluu Server. Upon [installation](../installation-guide/install.md) you can select if you want SCIM included in your environment. To add SCIM post-install do the following:
+The API is available as a component of Gluu Server. Upon [installation](../installation-guide/index.md) you can select if you want SCIM included in your environment. To add SCIM post-install do the following:
 
 1. Login to chroot
 1. `cd /install/community-edition-setup`
@@ -670,7 +670,7 @@ When running your code in test mode, some new OpenID clients are created (they a
 
 This protection mode employs the [OAuth 2.0](http://tools.ietf.org/html/rfc6749) authorization framework to provide access to the service. You may have already noticed that test mode resembles OAuth 2.0 a lot. Actually the difference between this and the test mode lies in the usage of scopes. OAuth scopes denote the kind of access a client is looking for.
 
-If you haven't done so, check the ["Working in test mode"](#working-in-test-mode) section. In the following we  highlight those additional facts to take into account when working with this mode:
+If you haven't done so, check the [Working in test mode](#working-in-test-mode) section. In the following we  highlight those additional facts to take into account when working with this mode:
 
 ### Client scopes
 
