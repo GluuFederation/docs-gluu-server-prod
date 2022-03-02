@@ -5,7 +5,7 @@ The 'Basic' or 'Internal' method is used to implement username / password authen
 
 Basic authentication relies on a successful LDAP BIND operation against an LDAP directory--either the
 local LDAP included in the Gluu Server, or a backend LDAP server like Active Directory that has been configured for
-use with the Gluu Server via [Cache Refresh](../user-management/ldap-sync.md).
+use with the Gluu Server via [Cache Refresh](../admin-guide/custom-script.md#Cache-Refresh).
 
 ## Prerequisites
 
@@ -19,16 +19,16 @@ use with the Gluu Server via [Cache Refresh](../user-management/ldap-sync.md).
 ## Properties
 The script has the following properties: 
 
-|	Property	|	Description		|	Example	|
-|-----------------------|-------------------------------|---------------|
-|Name		|Name of the authentication module		|basic|
-|SAML ACRs | Name of the associated [`AuthnContextClassRef`](../admin-guide/saml/#enable-authncontextclassref-in-oxtrust) value |urn:oasis:names:tc:SAML:2.0:ac:classes:Password|
-|Description		|Description of the purpose of this script|Basic AuthN Script|
-|Programming Language|Script Developed with Python|Python|
-|Location type|Where this script is located inside Gluu Server|Ldap|
-|Usage type|Purpose of usage|Native|
-|Custom property|Customization properties|Not required by default|
-|Script|The main python script|No change required by default|
+| 	Property	           | 	Description		                                                                                             | 	Example	                                       |
+|----------------------|------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| Name		               | Name of the authentication module		                                                                        | basic                                           |
+| SAML ACRs            | Name of the associated [`AuthnContextClassRef`](../admin-guide/saml.md#authncontextclassref-support) value | urn:oasis:names:tc:SAML:2.0:ac:classes:Password |
+| Description		        | Description of the purpose of this script                                                                  | Basic AuthN Script                              |
+| Programming Language | Script Developed with Python                                                                               | Python                                          |
+| Location type        | Where this script is located inside Gluu Server                                                            |                                                 |Ldap|
+| Usage type           | Purpose of usage                                                                                           |                                                 | Native                                          |
+| Custom property      | Customization properties                                                                                   |                                                 | Not required by default                         |
+| Script               | The main python script                                                                                     |                                                 | No change required by default                   |
 
 
 ## Enable 'Basic' Authentication
@@ -65,9 +65,9 @@ Open up a new browser or incognito window, try to login into your Gluu Server or
 
 To switch the basic authentication method between username and email address, follow these steps:
 1. Navigate to `Configuration` > `Manage Authentication`
-1. Change the `Local Primary Key` to `uid` for username or `mail` for email address.
+2. Change the `Local Primary Key` to `uid` for username or `mail` for email address.
 
-Other LDAP configuration settings can be found in the [oxTrust documentation](../admin-guide/oxtrust-ui/#manage-authentication)
+Other LDAP configuration settings can be found in the [oxTrust documentation](../admin-guide/oxtrust-ui.md#manage-authentication)
 
 ### Password reset in local Gluu LDAP
 

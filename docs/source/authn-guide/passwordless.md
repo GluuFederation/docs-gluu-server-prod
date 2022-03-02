@@ -26,7 +26,7 @@ Additionally, there are some features worth noting:
 
 1. Log in to oxTrust with admin credentials
 2. Visit `Configuration` > `Person Authentication Scripts`, click on `fido2` and ensure the script is flagged as enabled 
-3. If you want to support [Super Gluu](https://super.gluu.org/home/) as second factor too, enable the `super_gluu` script. Support for biometric authentication is available as well, for this purpose follow [these instructions](https://www.gluu.org/docs/gluu-server/authn-guide/BioID/) 
+3. If you want to support [Super Gluu](supergluu.md) as second factor too, enable the `super_gluu` script. Support for biometric authentication is available as well, for this purpose follow [these instructions](https://www.gluu.org/docs/gluu-server/authn-guide/BioID/) 
 
 ### Add the passwordless script
 
@@ -82,7 +82,7 @@ Account choice also works in conjunction with [Login hint](#login-hint). If the 
 
 ## Authentication mechanisms for second factor
 
-In a passwordless scenario you may want to offer a trusted/restricted set of authentication methods for use in the second step. A popular choice for this is FIDO. The passwordless flow offered by Gluu also supports [Super Gluu](https://super.gluu.org/home/) as well as Biometric authentication by [BioID](https://www.bioid.com/).
+In a passwordless scenario you may want to offer a trusted/restricted set of authentication methods for use in the second step. A popular choice for this is FIDO. The passwordless flow offered by Gluu also supports [Super Gluu](supergluu.md) as well as Biometric authentication by [BioID](https://www.bioid.com/).
 
 Please note the `snd_step_methods` custom property of the passwordless interception script in oxTrust. It contains a comma-separated list of identifiers of authentication methods that will be part of the second step of the flow. Note order is relevant: a method appearing first is preferred (prompted) over one appearing further in the list. 
 

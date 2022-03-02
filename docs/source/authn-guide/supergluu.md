@@ -1,6 +1,6 @@
 # Super Gluu
 ## Overview
-[Super Gluu](https://super.gluu.org) is a push-notification two-factor authentication (2FA) mobile app built to work with the Gluu Server. 
+[Super Gluu](supergluu.md) is a push-notification two-factor authentication (2FA) mobile app built to work with the Gluu Server. 
 
 ### FIDO Security
 Super Gluu uses public-key encryption as specified in the [FIDO U2F authentication standard](https://fidoalliance.org/specifications/overview/). Upon device enrollment, Super Gluu registers its public key against the Gluu Server's FIDO U2F endpoint. When authentication happens, there is a challenge response to ensure that the device has the corresponding private key. 
@@ -132,7 +132,7 @@ The Gluu Server admin will do the following:
 
 1. Delete the oxID DN 
 
-Now the old device is gone and the user can enroll a new device following the above instructions for [registering a new device](#device-enrollment). 
+Now the old device is gone and the user can enroll a new device following the above instructions for [registering a new device](#first-time-device-enrollment). 
  
 ### Using SCIM
 See the [SCIM documentation](../user-management/scim2.md#fido-devices) for a discussion on how to manage FIDO devices, including Super Gluu, using the SCIM protocol. 

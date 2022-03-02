@@ -12,8 +12,8 @@ to implement a two-step, two-factor authentication (2FA) with username / passwor
 ## Prerequisites
 - A Gluu Server ([installation instructions](../installation-guide/index.md));      
 - [FIDO2 interception script](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/fido2/Fido2ExternalAuthenticator.py) (included in the default Gluu Server distribution);     
-- At least one FIDO2 device for testing, like one of the devices [listed below](#FIDO2-devices). 
-- For Linux-based operating systems, a little modification required in udev rule, that is stated [below](#fido2-linux).
+- At least one FIDO2 device for testing, like one of the devices [listed below](#fido2-devices). 
+- For Linux-based operating systems, a little modification required in udev rule, that is stated [below](#fido2-in-linux).
 
 ### FIDO2 devices
 Some well known FIDO2 devices and manufacturers include:           
@@ -29,9 +29,9 @@ Some well known FIDO2 devices and manufacturers include:
 ## Properties
 The script has the following properties
 
-|	Property	|	Description		|	Example	|
-|-----------------------|-------------------------------|---------------|
-|fido2_server_uri		|URL of the oxAuth FIDO2 server|`https://idp.mycompany.com`|
+| 	Property	         | 	Description		                 | 	Example	                   |
+|--------------------|--------------------------------|-----------------------------|
+| fido2_server_uri		 | URL of the oxAuth FIDO2 server | `https://idp.mycompany.com` |
 
 ## Enable FIDO2 script
 
