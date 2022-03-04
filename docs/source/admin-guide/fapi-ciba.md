@@ -5,7 +5,7 @@
 Gluu Server supports and it's also certified as a FAPI implementation by OpenID, more info about the certification [here](https://openid.net/certification/#FAPI_OPs) and it supports a higher level of security about endpoints responsible to process authentication and authorization.
 
 All specs about FAPI profile you can find here:
-[https://openid.net/specs/openid-financial-api-part-2-ID2.html](https://openid.net/specs/openid-financial-api-part-2-ID2.html)
+[OpenID Financial API Part 2 ID2](https://openid.net/specs/openid-financial-api-part-2-ID2.html)
 
 **Client Initiated Backchannel Authentication** is an authentication flow in which RPs, that can obtain a valid identifier for the user they want to authenticate, will be able to initiate an interaction flow to authenticate their users without having end-user interaction from the consumption device. The flow involves direct communication from the Client to Gluu Server without redirect through the user's browser (consumption device).
 
@@ -14,10 +14,10 @@ Gluu Server is also certified as a CIBA implementation, more info about the cert
 About CIBA implementation is highly recommended to see this another page, since it contains some fundamentals features that are very important to understand this document: [CIBA](ciba.md)
 
 All specs about CIBA profile you could find here:
-[https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html)
+[OpenID Connect Client-Initiated Backchannel Authentication Flow](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html)
 
 More information about **FAPI-CIBA** profile here:
-[https://openid.net/specs/openid-financial-api-ciba-ID1.html](https://openid.net/specs/openid-financial-api-ciba-ID1.html)
+[Financial-grade API: Client Initiated Backchannel Authentication Profile](https://openid.net/specs/openid-financial-api-ciba-ID1.html)
 
 ## CIBA Token Delivery Modes
 The push mode is not permitted by this specification as it delivers tokens to the client by calling an endpoint owned by the client. This substantially differs from the established pattern of retrieving tokens by presenting client authentication to the token endpoint, and it may have security concerns that are currently unknown.
@@ -48,7 +48,7 @@ FAPI-CIBA implementation supports two types of client authentication, Mutual TLS
 #### Mutual TLS
 In this kind of authentication, client should send a certificate to the server that is only issued for that specific client and it also includes `client_id` in the CIBA request. Gluu Server with MTLS is configured using `Apache` which is deeply explained in the next link:
 
-[https://www.gluu.org/docs/gluu-server/4.0/fe/mtls/](https://www.gluu.org/docs/gluu-server/4.0/fe/mtls/)
+[Mutual TLS Client Authentication and Certificate Bound Access Tokens](https://www.gluu.org/docs/gluu-server/4.0/fe/mtls/)
 
 Using client certificate server should authenticate that client and after that Gluu Server check the JWT sent by the client to get all information about the CIBA request.
 

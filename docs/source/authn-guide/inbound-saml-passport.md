@@ -126,7 +126,7 @@ Provide the name (excluding the extension) of the mapping file to use in the pro
 
 ### Make use of `passport_saml` authentication
 
-To offer inbound SAML from an OpenID Connect application, use the same steps described for [Social Login](../authn-guide/intro.md/#social-login), except the acr value has to be `passport_saml`.
+To offer inbound SAML from an OpenID Connect application, use the same steps described for [Social Login](../authn-guide/intro.md#social-login), except the acr value has to be `passport_saml`.
 
 <!--
 If your application is a SP (SAML provider), ....
