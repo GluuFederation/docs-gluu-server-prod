@@ -50,7 +50,7 @@ CORS can be configured in oxTrust. Follow these steps:
 
 1. Click `save` at the bottom of the page.
 
-1. [Restart](../operation/services.md) the `oxauth` service.
+1. [Restart](../operation/services.md#commands) the `oxauth` service.
 
 ### Parameters supported by CORS Filters
 
