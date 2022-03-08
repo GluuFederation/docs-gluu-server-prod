@@ -52,7 +52,7 @@ SigningCertificate                     : The SAML cert ( shibIDP.crt ) from Gluu
 ### Custom Attributes  
 
 The configuration begins by creating a few custom attributes named `IDPEmail`, `ImmutableID` and `objectguid`. 
-Refer to [this doc](../../admin-guide/attribute/#custom-attributes) to create custom attributes.
+Refer to [this doc](../../admin-guide/attribute.md/#custom-attributes) to create custom attributes.
 
 #### 'objectguid' configuration
 
@@ -63,7 +63,7 @@ this attribute in such a way that it can 'pull' the exact binary value from back
  
 ##### Create custom attribute named 'objectguid' according to Gluu doc. 
 
- - Follow [doc](https://gluu.org/docs/ce/3.1.2/admin-guide/attribute/#custom-attributes) to create this custom attribute. Deployer need to follow below rules when creating this attribute in oxTrust ( 2nd phase of creating custom attribute ). 
+ - Follow [doc](../../admin-guide/attribute.md/#custom-attributes) to create this custom attribute. Deployer need to follow below rules when creating this attribute in oxTrust ( 2nd phase of creating custom attribute ). 
 
    - Name: objectguid
    - SAML1 URI: urn:gluu:dir:attribute-def:objectguid
@@ -101,7 +101,7 @@ Also we need to apply a little snippet for 'IDPEmail' in 'attribute-resolver.xml
  
 #### 'ImmutableID' nameID configuration
 
-This is a 'persistent' type nameID; base attribute 'objectguid'. Follow the doc on how to create [custom NameID doc](https://gluu.org/docs/ce/3.1.2/admin-guide/attribute/#defining-nameid)
+This is a 'persistent' type nameID; base attribute 'objectguid'. Follow the doc on how to create [custom NameID doc](../../integration/saas/dropbox.md/#custom-nameids)
 
 ##### Configuration in 'attribute-resolver.xml.vm', the velocity template file: 
 

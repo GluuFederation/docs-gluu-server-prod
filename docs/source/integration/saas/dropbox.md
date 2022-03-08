@@ -14,7 +14,7 @@ The new attribute screen should look like the screenshot below
 * [Restart](../../operation/services.md#restart) the `identity` and `idp` services
 
 ### Trust Relationship
-Please refer [here](../../admin-guide/saml.md#outbound-saml-shibboleth) to create trust relationship and fill up the form with the following info
+Please refer [here](../../admin-guide/saml.md#trust-relationship-requirements) to create trust relationship and fill up the form with the following info
 
 The metadata for Dropbox is necessary to create trust relationship. Please use the following snippet so create the `dropbox_metadata.xml`.
 

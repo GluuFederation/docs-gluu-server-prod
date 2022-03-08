@@ -42,7 +42,7 @@ Add the REST API extension to an existing Gluu 4.3.x deployment by following the
 ## Overview
 
 The following sections are guides on how to access oxTrust API using within Gluu Server container deployment.
-See below [oxTrust API docs](#available-api-modes) for reference.
+See below [oxTrust API docs](#available-api-modes-for-vm) for reference.
 
 ## Prerequisites
 
@@ -383,8 +383,8 @@ The oxTrust API has two modes that administrators can configure according to nee
 Follow these steps to configure the test mode:
 
 1. Move the oxTrust API jar to `/opt/gluu/jetty/identity/custom/libs/`.
-1. Edit `identity.xml` as mentioned [above](#installation)
-1. [Restart](https://gluu.org/docs/gluu-server/4.3/operation/services/) the `identity` service
+1. Edit `identity.xml` as mentioned [above](#vm-installation-instructions)
+1. [Restart](../operation/services.md#commands) the `identity` service
 1. Log into Gluu Admin UI
 1. Navigate to `Configuration` > `Manage Custom Scripts`
 1. Under `UMA RPT Policies`, select and enable the custom script named `oxtrust_api_access_policy`
