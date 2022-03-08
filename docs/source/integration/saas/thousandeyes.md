@@ -12,7 +12,6 @@ As administrative user, log into ThousandEyes control panel.
    - Identity Provider Issuer: `https://test431all.gluu.org/idp/shibboleth`
    - Service Provider Issuer: `https://app.thousandeyes.com`
    - Vetification certificates: automatically collected from IDP metadata...
-   - 
 
 ![image](../../img/integration/ThousandEyes_1.png)
 
@@ -37,7 +36,7 @@ As administrative user, log into ThousandEyes control panel.
          - Default Auth Methods: none
          - includeAttributestatement: default
          - Support Unspecified NameidFormat: default 
-         - 
+  
  - ![image](../../img/integration/ThousandEyes_3.png)
 
 - Create an user who has same email address as ThousandEyes portal has. As for example, test user 'mohib@gluu.org' is available in both ThousandEyes and Gluu Server in this case. 
