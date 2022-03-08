@@ -14,7 +14,7 @@ As administrative user, log into ThousandEyes control panel.
    - Vetification certificates: automatically collected from IDP metadata...
    - 
 
-![image](../img/integration/ThousandEyes_1.png)
+![image](../../img/integration/ThousandEyes_1.png)
 
 ## Gluu Server configuration
 
@@ -23,7 +23,7 @@ As administrative user, log into ThousandEyes control panel.
    - Save it
  - Configure NameID based on EmailAddress. 
   
- ![image](../img/integration/ThousandEyes_2.png)
+ ![image](../../img/integration/ThousandEyes_2.png)
  
  - Configure Trust Relationship by using modified SP metadata. 
    - Relying Party configuration: 
@@ -38,7 +38,7 @@ As administrative user, log into ThousandEyes control panel.
          - includeAttributestatement: default
          - Support Unspecified NameidFormat: default 
          - 
- - ![image](../img/integration/ThousandEyes_3.png)
+ - ![image](../../img/integration/ThousandEyes_3.png)
 
 - Create an user who has same email address as ThousandEyes portal has. As for example, test user 'mohib@gluu.org' is available in both ThousandEyes and Gluu Server in this case. 
 
