@@ -140,6 +140,7 @@ nav:
             - 'Amazon Web Services (AWS)': 'integration/saas/aws.md'
             - 'Rocketchat': 'integration/saas/rocketchat.md'
             - 'SAMLtest.id': 'integration/saas/saml_test_id.md'
+            - 'ThousandEyes': 'integration/saas/thousandeyes.md'
 - Reference:
         - Gluu API Guide:
             - 'Gluu Server API': 'api-guide/api.md'
