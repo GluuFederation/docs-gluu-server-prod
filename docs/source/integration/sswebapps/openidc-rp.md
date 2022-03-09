@@ -224,7 +224,7 @@ Run the following command to __Add EPEL Repo__.
 To set up __Apache2 SSL__, run the following commands:
 
 !!! Note
-    If the hiredis package is not found by the `yum` command, please download it manually from [this page](https://centos.pkgs.org/6/puias-unsupported-x86_64/hiredis-0.12.1-1.sdl6.x86_64.rpm.html) and install it.
+    If the hiredis package is not found by the `yum` command, please download it manually from [this page](https://centos.pkgs.org/7/okey-x86_64/hiredis-0.12.1-1.el7.centos.x86_64.rpm.html) and install it.
 
 ```
 yum install httpd mod_ssl
