@@ -18,7 +18,7 @@ The Gluu Server administrator can make changes to attributes, such as changing t
 ## Custom Attributes
 In order to create SSO to certain applications you may need to add custom attributes to your Gluu Server. Custom attributes can be added by following the instructions below: 
 
-### Addition of custom attributes to LDAP
+### Add custom attributes to LDAP
 
 #### OpenDJ
 
@@ -26,7 +26,7 @@ In order to create SSO to certain applications you may need to add custom attrib
 
     1.  In OpenDJ, add custom attributes to `/opt/opendj/config/schema/77-customAttributes.ldif`:
     
-        - In the below example, `customTest` is our custom attribute. Kindly note this is just an example, np guarantee it will work in your setup.
+        - In the below example, `customTest` is our custom attribute. Kindly note this is just an example.
  
         ```
         dn: cn=schema
@@ -73,7 +73,7 @@ In order to create SSO to certain applications you may need to add custom attrib
     
         !!! Warning
 
-          Spacing is extremely in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error.
+          Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error.
 
           You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
 
@@ -86,7 +86,7 @@ That will create the attribute in the local LDAP server. You can navigate to `Co
 
     1. Create a file named 77-customAttributes.ldif and load it with the custom attributes that you want.
 
-        - In the below example, `customTest` is our custom attribute. Kindly note this is just an example, np guarantee it will work in your setup.
+        - In the below example, `customTest` is our custom attribute. Kindly note this is just an example.
  
         ```
         dn: cn=schema
@@ -133,7 +133,7 @@ That will create the attribute in the local LDAP server. You can navigate to `Co
 
         !!! Warning
 
-          Spacing is extremely in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error.
+          Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error.
 
           You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
     
