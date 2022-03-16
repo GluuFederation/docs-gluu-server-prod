@@ -22,7 +22,7 @@ In order to create SSO to certain applications you may need to add custom attrib
 
 #### OpenDJ
 
-=== "Community Edition Setup"
+=== "Community Edition Setup - VM"
 
     1.  In OpenDJ, add custom attributes to `/opt/opendj/config/schema/77-customAttributes.ldif`:
     
@@ -71,15 +71,12 @@ In order to create SSO to certain applications you may need to add custom attrib
           MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
         ```
     
-        !!! Warning
+        !!!warning
+            Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
 
-          Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error.
+    1.  - [Restart](../operation/services.md#restart) the `opendj` service.
 
-          You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
-
-          1.  - [Restart](../operation/services.md#restart) the `opendj` service.
-
-That will create the attribute in the local LDAP server. You can navigate to `Configuration` > `Attributes` in the UI to see the added attribute. 
+    That will create the attribute in the local LDAP server. You can navigate to `Configuration` > `Attributes` in the UI to see the added attribute. 
 
 
 === "Cloud Native Setup"
@@ -131,12 +128,9 @@ That will create the attribute in the local LDAP server. You can navigate to `Co
           MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
         ```
 
-        !!! Warning
+        !!!warning
+            Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
 
-          Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error.
-
-          You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
-    
     1. Create a kubernetes configmap called `ldap-custom-attributes` targeting the content of the file you created above.
 
         ```sh
@@ -182,7 +176,7 @@ That will create the attribute in the local LDAP server. You can navigate to `Co
         kubectl scale sts <release-name>-opendj -n <namespace> --replicas=1
         ```
 
-That will create the attribute in the local LDAP server. You can navigate to `Configuration` > `Attributes` in the UI to see the added attribute.   
+    That will create the attribute in the local LDAP server. You can navigate to `Configuration` > `Attributes` in the UI to see the added attribute.   
     
 ### Addition of custom attributes to a setup using MySQL backend
 

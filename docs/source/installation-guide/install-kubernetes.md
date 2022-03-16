@@ -65,7 +65,10 @@ Please calculate the minimum required resources as per services deployed. The fo
 
     !!!note
         Default  AWS deployment will install a classic load balancer with an `IP` that is not static. Don't worry about the `IP` changing. All pods will be updated automatically with our script when a change in the `IP` of the load balancer occurs. However, when deploying in production, **DO NOT** use our script. Instead, assign a CNAME record for the LoadBalancer DNS name, or use Amazon Route 53 to create a hosted zone. More details in this [AWS guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html?icmpid=docs_elb_console).
-      
+
+    !!!warning
+        In recent releases we have noticed that the ALB does not properly work with the oxtrust admin UI. Functions such as access and cache refresh do not work. There is an [issue](https://github.com/GluuFederation/oxTrust/issues/2130) open but the main issue is in the fact that ALB does not support rewrites.
+
 
 === "GKE"
     ## GCE (Google Cloud Engine) - GKE
