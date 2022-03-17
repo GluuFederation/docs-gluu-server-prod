@@ -24,7 +24,7 @@ In order to create SSO to certain applications you may need to add custom attrib
 
 === "Community Edition Setup - VM"
 
-    1.  In OpenDJ, add custom attributes to `/opt/opendj/config/schema/77-customAttributes.ldif`:
+    -  In OpenDJ, add custom attributes to `/opt/opendj/config/schema/77-customAttributes.ldif`:
     
         - In the below example, `customTest` is our custom attribute. Kindly note this is just an example.
  
@@ -74,14 +74,14 @@ In order to create SSO to certain applications you may need to add custom attrib
         !!!warning
             Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
 
-    1.  - [Restart](../operation/services.md#restart) the `opendj` service.
+    - [Restart](../operation/services.md#restart) the `opendj` service.
 
     That will create the attribute in the local LDAP server. You can navigate to `Configuration` > `Attributes` in the UI to see the added attribute. 
 
 
 === "Cloud Native Setup"
 
-    1. Create a file named 77-customAttributes.ldif and load it with the custom attributes that you want.
+    - Create a file named 77-customAttributes.ldif and load it with the custom attributes that you want.
 
         - In the below example, `customTest` is our custom attribute. Kindly note this is just an example.
  
@@ -131,7 +131,7 @@ In order to create SSO to certain applications you may need to add custom attrib
         !!!warning
             Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
 
-    1. Create a kubernetes configmap called `ldap-custom-attributes` targeting the content of the file you created above.
+    - Create a kubernetes configmap called `ldap-custom-attributes` targeting the content of the file you created above.
 
         ```sh
         kubectl create cm ldap-custom-attributes -n <namespace> --from-file=/path/to/77-customAttributes.ldif
@@ -144,7 +144,7 @@ In order to create SSO to certain applications you may need to add custom attrib
         ```
 
   
-    1. Open your `values.yaml` file and mount the file as a volume under `opendj`.
+    - Open your `values.yaml` file and mount the file as a volume under `opendj`.
     
         ```yaml
         opendj: 
@@ -158,13 +158,13 @@ In order to create SSO to certain applications you may need to add custom attrib
                 subPath: 77-customAttributes.ldif    
         ```
         
-    1. Navigate to the folder where the values.yaml is `helm/gluu` and do the helm upgrade with the following command
+    - Navigate to the folder where the values.yaml is `helm/gluu` and do the helm upgrade with the following command
 
         ```sh
         helm upgrade <release-name> . -f values.yaml -n <namespace>
         ```
 
-    1. Restart the `opendj` service to ensure custom attributes are loaded. Note that we restart the service by scaling down to 0, waiting for a bit and scaling back up to 1. We do that with the following commands
+    - Restart the `opendj` service to ensure custom attributes are loaded. Note that we restart the service by scaling down to 0, waiting for a bit and scaling back up to 1. We do that with the following commands
 
         ```sh
         kubectl scale sts <release-name>-opendj -n <namespace> --replicas=0
@@ -180,7 +180,7 @@ In order to create SSO to certain applications you may need to add custom attrib
     
 ### Addition of custom attributes to a setup using MySQL backend
 
-1. Add a column to table `gluuPerson` in MySQL. Command will be
+- Add a column to table `gluuPerson` in MySQL. Command will be
   `ALTER TABLE gluuPerson ADD COLUMN <claimName> <dataType>;`
 
   Choose dataType according to the following table
@@ -199,14 +199,14 @@ In order to create SSO to certain applications you may need to add custom attrib
   !!! Note
       if the attribute is Multivalued, **dataType** should be JSON regardless of what you will choose for Type in Gluu oxTrust UI.
 
-2. [Register](#add-the-attribute-to-oxtrust) an attribute in the Gluu oxTrust UI. When registering attribute **Name** `claimName`.
+- [Register](#add-the-attribute-to-oxtrust) an attribute in the Gluu oxTrust UI. When registering attribute **Name** `claimName`.
 
 
 #### Example
 
 We are going to add simple text attribute **customAttribute** with max size 200 characters.
 
-  1. Use the following SQL command to add column
+  - Use the following SQL command to add column
 
   ```sql
   mysql> ALTER TABLE gluuPerson ADD COLUMN customAttribute VARCHAR(100);
@@ -214,7 +214,7 @@ We are going to add simple text attribute **customAttribute** with max size 200 
   Records: 0  Duplicates: 0  Warnings: 0
   ```
 
-  2. In the Gluu oxTrust UI, navigate to `Configuration` > `Attributes` and click **Register Attribute** button. Fill in the fields with your attribute values. 
+  - In the Gluu oxTrust UI, navigate to `Configuration` > `Attributes` and click **Register Attribute** button. Fill in the fields with your attribute values. 
   See the following screenshot shwoing the attribute form fields.
   
   ![register attribute](../img/admin-guide/attribute/add_custom_attribute.png)
