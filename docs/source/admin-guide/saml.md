@@ -194,18 +194,6 @@ Once enabled, the user can be directed to `https://[hostname]/idp/Authn/oxAuth/l
 
 If the user clicks `Yes` or just waits a few seconds, the session will be killed and the user will be logged out.
 
-## IDP-initiated outbound SAML flow
-
-A regular outbound SAML flow starts at an SP. The user is redirected to an IDP with a SAML request, and is then sent by the IDP to the ACS endpoint of the SP with a SAML response. A shortened version of this flow is called "IDP-initiated" (or "unsolicited" in Shibboleth's documentation). It starts with the IDP sending a SAML response to the SP, when no prior SAML request was made.
-
-The Gluu Server is configured to support this SAML flow out-of-the-box. To employ it, follow these steps:
-
-1. Add a TR for the SP using the standard procedure described [above](#create-a-trust-relationship). Wait until the updated configuration is re-loaded by the IDP.   
-1. Craft a URL like this: `https://idp.gluu.host.loc/idp/profile/SAML2/Unsolicited/SSO?providerId=https%3A%2F%2Fsphost-shib.site%3a8443%2Fshibboleth`, where: 
-    1. `idp.gluu.host.loc` is the DNS name of the target Gluu Server   
-    1. `providerId` URL query parameter contains `entityid` of the target SP   
-1. Send the user to the composed URL (e.g. via redirection by on-page JS, an action triggered by a button, etc.)
-
 ## Federation Configuration     
 If your target SP is part of a federation like [InCommon](https://www.incommon.org/federation/), a TR can be created for the SP using the federation's metadata. To achieve this, add a TR for the federation in the Gluu Server first, then create TRs for each target SP in the federation. If working with large metadata files, make sure the backend has enough resources to handle such a large operation.
 
