@@ -96,6 +96,7 @@ nav:
             - 'Account Lockout': 'authn-guide/lockout.md'
             - 'Forgot Password': 'authn-guide/pw-reset.md'
             - 'Custom Script Tutorial': 'authn-guide/customauthn.md'
+            - 'OpenDJ Replication': 'authn-guide/custom-ldap-replication.md'
         - Inbound Identity:
             - 'Introduction': 'authn-guide/passport.md'
             - 'Inbound OAuth & OpenID Connect': 'authn-guide/inbound-oauth-passport.md'
