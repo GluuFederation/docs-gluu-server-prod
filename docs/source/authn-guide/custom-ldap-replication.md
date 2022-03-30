@@ -25,13 +25,13 @@ enables having synchronized database instances for high availability.
 
 For certain reasons E.g limited computing resources, OpenDJ replication might get so slow leading to unsynchronized databases at any given time intervals.
 
-For instance a 'find_user_by_uid.getUserId()' function in our script above can fail because Gluu ldap connections goes to a different opendj pod for every request made. The previously created user is not replicated quickly enough to all opendj pods thus causing authentication to fail.
+For instance a `find_user_by_uid.getUserId()` function in our script above can fail because Gluu ldap connections goes to a different opendj pod for every request made. The previously created user is not replicated quickly enough to all opendj pods thus causing authentication to fail.
 
 ### Solution
 
 - To solve the issue above, a tested solution is to configure the services in a way that binds oxAuth for authentication to the same opendj it contacted when it created the user. This enables the clieent session to be reserved as long as the OpenDJ hasn't been restarted.
 
-- In the OpenDJ service, set 'service.spec.sessionAffinity' to 'ClientIP'. By default the session held by the service is 3 hours and can be modified by setting 'service.spec.sessionAffinityConfig.clientIP.timeoutSeconds'. For example to configure the sessionAffinity to the opendj service, refer to the snippet below.
+- In the OpenDJ service, set `service.spec.sessionAffinity` to `ClientIP`. By default the session held by the service is 3 hours and can be modified by setting `service.spec.sessionAffinityConfig.clientIP.timeoutSeconds`. For example to configure the sessionAffinity to the opendj service, refer to the snippet below.
 
     ```
     "sessionAffinity": "ClientIP",
@@ -45,7 +45,7 @@ For instance a 'find_user_by_uid.getUserId()' function in our script above can f
 
 - Enhance the interception script with custom functionality that ease creation of a user E.g add detailed print statements and operation retries. For example the following custom addUser() method is added to the authentication script.
 
-    '''
+    ```
     def addUser(self, user, saml_user_uid):
         userService = CdiUtil.bean(UserService)
         count = 0
@@ -63,20 +63,20 @@ For instance a 'find_user_by_uid.getUserId()' function in our script above can f
                 time.sleep(count)
         print "ERROR: Failed to add user '%s' after 5 tries. " % user
         raise Exception("Failed to add user after 5 tries")
-    '''
+    ```
 
 ### Troubleshooting
 
 - Ensure that OpenDJ replication is correctly set up and the pods are running.
 
-    '''
+    ```
         kubectl get pods -n gluu
-    '''
+    ```
 
 - Use the 'netstat' command to test if the opendj pods are connected
 
-    '''
+    ```
         kubectl exec -it -n gluu oxauth-xxxxxxxxxx-xxxx  -- sh 
 
         / # netstat -na |grep 1636
-    '''
+    ```
