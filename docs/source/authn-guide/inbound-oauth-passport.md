@@ -57,7 +57,7 @@ Follow these steps to integrate an external OP for login to an OIDC application:
 
 1. Check `Is enabled` (unless there is a reason to leave this provider integration temporarily disabled)
 
-1. It's not required to check `Request For Email` or `Email linking` unless implementing a [custom flow](./passport.md#altering-flow-behaviour)
+1. It's not required to check `Request For Email` or `Email linking` unless implementing a [custom flow](./passport.md#altering-flow-behavior)
 
 1. Click on `Add` (meanwhile, accept the default values for the remaining fields)
 
@@ -189,7 +189,7 @@ Follow these steps to configure your Gluu Server for login with external OAuth s
 
 1. Enter an identifier for this provider (letters, digits, and underscore characters allowed). Check [here](./passport.md#identifiers) to learn more about identifiers usage
 
-1. Enter a display name for the provider (e.g "Goooogle", "Windows Live", "Foursquare", etc.)
+1. Enter a display name for the provider (e.g "Google", "Windows Live", "Foursquare", etc.)
 
 1. In `type` choose "oauth"
 
@@ -252,7 +252,7 @@ Follow these steps to configure your Gluu Server for login with external OAuth s
     
 1. Check `Is enabled` (unless there is a reason to leave this provider integration temporarily disabled)
 
-1. It's not required to check `Request For Email` or `Email linking` unless implementing a [custom flow](./passport.md#altering-flow-behaviour)
+1. It's not required to check `Request For Email` or `Email linking` unless implementing a [custom flow](./passport.md#altering-flow-behavior)
 
 1. Leave the fields under the `Providers Options` empty and click `Add`.
 
@@ -261,7 +261,7 @@ Follow these steps to configure your Gluu Server for login with external OAuth s
 Every provider has its own procedure for issuing client credentials (AKA client ID and client secret). Check the developer docs of the specific social site (or OAuth provider) for more information. The aim is to get to a page that allows creation of applications. Here are links for a few popular providers: 
 
 - [GitHub](https://github.com/settings/applications/new)   
-- [Twitter](https://apps.twitter.com)   
+- [Twitter](https://developer.twitter.com/en)   
 - [Facebook](https://developers.facebook.com)
 
 To create an application, you will need to provide information like an application name or ID, domain name of your application, and authorization callback URLs. The callback URL is shown in the field labeled "Callback URL" of provider's form. The URL looks like
@@ -272,7 +272,9 @@ https://your-gluu-host/passport/auth/<PROVIDER-ID>/callback
 
 where `PROVIDER-ID` is the identifier assigned to the recently added provider.
 
-Once the application is created, you will be given two pieces of data: client ID and client secret. Terminology varies depending on provider; sometimes it is called consumer key and consumer secret, or app ID and app secret, etc. For instance, [this is how it looks on Facebook](../img/user-authn/passport/fb-addurl.png).    
+Once the application is created, you will be given two pieces of data: client ID and client secret. Terminology varies depending on provider; sometimes it is called consumer key and consumer secret, or app ID and app secret, etc. For instance, this is how it looks on Facebook:
+
+![this is how it looks on Facebook](../img/user-authn/passport/fb-addurl.png).    
 
 ### Supply strategy parameters
 

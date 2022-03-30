@@ -143,14 +143,10 @@ Passport is available as an optional component during [Gluu Server installation]
 1. Move into Gluu Server's container
 
 1. `# cd /install/community-edition-setup/`
+ 
+1. Run `# ./setup.py --install-passport`
 
-1. `wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/master/post-setup-add-components.py`
-
-1. `# chmod +x post-setup-add-components.py` 
-
-1. Run `# ./post-setup-add-components.py -addpassport`
-
-1. Run `# runuser -l node -c "cd /opt/gluu/node/passport/&&PATH=$PATH:/opt/node/bin npm install -P"`
+You may need to restart gluu server after successfully installed **passport**.
 
 ### Enable Passport
 

@@ -51,7 +51,7 @@ After installation, the `gluu-server-nochroot` package needs to be excluded from
 zypper addlock gluu-server-nochroot
 ```
 
-### Start the server
+### Start the server and log in
 
 The Gluu Server must be started to proceed. 
 

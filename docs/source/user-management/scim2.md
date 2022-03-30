@@ -8,11 +8,12 @@ For your reference, the current version of the standard is governed by the follo
 
 ## Installation
 
-The API is available as a component of Gluu Server. Upon [installation](../installation-guide/install.md) you can select if you want SCIM included in your environment. To add SCIM post-install do the following:
+The API is available as a component of Gluu Server. Upon [installation](../installation-guide/index.md) you can select if you want SCIM included in your environment. To add SCIM post-install do the following:
 
 1. Login to chroot
 1. `cd /install/community-edition-setup`
-1. Run `python3  post-setup-add-components.py -addscim`  
+1. Run `./setup.py --install-scim`
+
 
 ## About API endpoints
 
@@ -669,7 +670,7 @@ When running your code in test mode, some new OpenID clients are created (they a
 
 This protection mode employs the [OAuth 2.0](http://tools.ietf.org/html/rfc6749) authorization framework to provide access to the service. You may have already noticed that test mode resembles OAuth 2.0 a lot. Actually the difference between this and the test mode lies in the usage of scopes. OAuth scopes denote the kind of access a client is looking for.
 
-If you haven't done so, check the ["Working in test mode"](#working-in-test-mode) section. In the following we  highlight those additional facts to take into account when working with this mode:
+If you haven't done so, check the [Working in test mode](#working-in-test-mode) section. In the following we  highlight those additional facts to take into account when working with this mode:
 
 ### Client scopes
 
@@ -1177,13 +1178,13 @@ The service allows you to execute custom logic when certain SCIM API operations 
 
 ## Additional Features of SCIM Service
 
-The SCIM standard is concerned with two types of resources, Users and Groups. However, according to spec, the service can be extended to add new resource types. Particularly, Gluu Server implementation of SCIM contains the additional resource types "FIDO 2.0 device" and "FIDO u2f device" (formerly known as "FIDO device"). 
+The SCIM standard is concerned with two types of resources, Users and Groups. However, according to spec, the service can be extended to add new resource types. Particularly, Gluu Server implementation of SCIM contains the additional resource types "FIDO 2.0 device" and "FIDO U2F device" (formerly known as "FIDO device"). 
 
 Fido 2.0 devices are enrolled in Gluu Server through the `fido2` custom interception script, while FIDO U2F devices correspond to the `u2f` script. Since FIDO 2.0 has U2F support, U2F devices are treated generally as 2.0 devices if they were enrolled by using the `fido2` script. 
 
 ### FIDO U2F Devices
 
-A FIDO U2F device represents a user credential stored in the Gluu Server LDAP that is compliant with the [FIDO u2f](https://fidoalliance.org) standard. These devices are used as a second factor in a setting of strong authentication. Examples of FIDO devices are [u2f security keys](../authn-guide/U2F/) and [Super Gluu devices](../authn-guide/supergluu/).
+A FIDO U2F device represents a user credential stored in the Gluu Server LDAP that is compliant with the [FIDO U2F](https://fidoalliance.org) standard. These devices are used as a second factor in a setting of strong authentication. Examples of FIDO devices are [U2F security keys](../authn-guide/U2F.md/) and [Super Gluu devices](../authn-guide/supergluu.md/).
 
 Having FIDO devices as one of resource types allow application developers querying, updating and deleting already existing (added) devices. Addition of devices do not take place through the service since this process requires direct end-user interaction, ie. device enrolling.
 
@@ -1247,7 +1248,7 @@ Your result list might look like this:
 
 ### FIDO 2 Devices
 
-Fido 2 device resources adhere to the more current Fido 2.0 initiative (WebAuthn + CTAP). From a SCIM viewpoint they are very similar to u2f devices. The following is a summary of features of a Fido Device SCIM resource:
+Fido 2 device resources adhere to the more current Fido 2.0 initiative (WebAuthn + CTAP). From a SCIM viewpoint they are very similar to U2F devices. The following is a summary of features of a Fido Device SCIM resource:
 
 - Schema URN: `urn:ietf:params:scim:schemas:core:2.0:Fido2Device`
 
@@ -1292,13 +1293,13 @@ Currently there are two ways to lower the amount of database lookups required fo
 - Explicitly excluding display names from responses
 - Pass the _overhead bypass_ flag to skip members validations
 
-The first approach consists of using the query param `excludedAttributes` (see RFC 7644) so that display names are neither retrieved from database nor sent in responses. A value like `members.display` does the job. Note the query param `attributes` can also be used for this purpose, for example with a value like `members.value` that will output only members' identifiers and ignore other non-required attributes.
+The first approach consists of using the query parameter `excludedAttributes` (see RFC 7644) so that display names are neither retrieved from database nor sent in responses. A value like `members.display` does the job. Note the query parameter `attributes` can also be used for this purpose, for example with a value like `members.value` that will output only members' identifiers and ignore other non-required attributes.
 
 This approach is particularly useful in search and retrievals when users' display names are not needed.
 
-The second is a stronger approach that turns off validation of incoming members data: if the usage of a POST/PUT/PATCH operation implies adding members, their existence is not verified, they will simply get added. Here, the client application is responsible for sending accurate data. To use this approach add a query or header param named `Group-Overhead-Bypass` with any value. Note under this mode of operation:
+The second is a stronger approach that turns off validation of incoming members data: if the usage of a POST/PUT/PATCH operation implies adding members, their existence is not verified, they will simply get added. Here, the client application is responsible for sending accurate data. To use this approach add a query or header parameter named `Group-Overhead-Bypass` with any value. Note under this mode of operation:
 
-- Display names are never returned regardless of `attributes` or `excludedAttributes` params values
+- Display names are never returned regardless of `attributes` or `excludedAttributes` parameters values
 - Remove/replace patch operations that involve display names in path filters are ignored, eg: `"path": "members[value eq \"2819c223\" or display eq \"Joe\"]"`
 
 ## Supporting a User Registration Process with SCIM
@@ -1316,7 +1317,7 @@ Here, you have some useful tips before you start:
 
     - You can send headers in your requests as well as reading them from the service response
   
-1. If not supported natively, choose a library to facilitate JSON content manipulation. As you have already noticed we have been dealing with Json for requests as well as for responses. Experience shows that being able to map from objects (or data structures) of your language to Json and viceversa helps saving hours of coding
+1. If not supported natively, choose a library to facilitate JSON content manipulation. As you have already noticed we have been dealing with JSON for requests as well as for responses. Experience shows that being able to map from objects (or data structures) of your language to Json and viceversa helps saving hours of coding
 
 1. Shape your data model early. List the attributes your application will operate upon and correlate with those found in the SCIM user schema. You can learn about the schema in [RFC 7644](https://tools.ietf.org/html/rfc7644). At least, take a look at the JSON-formatted schema that your Gluu Server shows: visit `https://<host-name>/identity/restv1/scim/v2/Schemas/urn:ietf:params:scim:schemas:core:2.0:User`.
 

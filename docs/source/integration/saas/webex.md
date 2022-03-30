@@ -3,7 +3,7 @@
 ## Custom Attribute Creation
 
 We need to create couple of custom attributes and one custom nameID. 
-List of custom attributes and nameID is stated below. [Here](../../admin-guide/saml.md#custom-nameid) is 
+List of custom attributes and nameID is stated below. [Here](../../admin-guide/attribute.md#custom-attributes) is 
 how we can create custom attributes. 
 
  - uidwebex
@@ -68,10 +68,10 @@ We need to modify attributeDefinition for these attributes. Configuration is app
     - Declaration of 'uidwebex': 
 
 ``` 
-<resolver:AttributeDefinition xsi:type="ad:Simple" id="uidwebex" sourceAttributeID="uidwebex">
-        <resolver:Dependency ref="siteLDAP" />
-        <resolver:AttributeEncoder xsi:type="enc:SAML2String" nameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" name="uid" />
-</resolver:AttributeDefinition>
+        <resolver:AttributeDefinition xsi:type="ad:Simple" id="uidwebex" sourceAttributeID="uidwebex">
+                <resolver:Dependency ref="siteLDAP" />
+                <resolver:AttributeEncoder xsi:type="enc:SAML2String" nameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" name="uid" />
+        </resolver:AttributeDefinition>
 ```
   - Attribute 'emailwebex': 
     - Append 'emailwebex' in 'if statement': 

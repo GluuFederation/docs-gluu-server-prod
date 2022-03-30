@@ -180,7 +180,7 @@ configured in [this section](./gluu-radiator.md#gluu-ro-openid-configuration).
 
 - `sslVerifyCnScheme`. This is an optional string containing the scheme used to perform certificate verification. See the perl package `IO::Socket::SSL` for details.
 
-- `sslVerifyCnName`. This is an optional string containing the name which is used in hostname verification. See the per l package `IO::Socket::SSL` for details.
+- `sslVerifyCnName`. This is an optional string containing the name which is used in hostname verification. See the perl package `IO::Socket::SSL` for details.
 
 - `unreachableServerAction`. This is an optional string containing the action to take as long as the Gluu Server is unreachable. The valid values are `accept`, `ignore` and `reject` , representing the various Radius return values for each request , notably `Access-Accept` , `Access-Ignore` and `Access-Reject`. Default value is `reject`.
 
@@ -199,11 +199,11 @@ http. Default is 1 second
 
 - `authScheme`. This is an optional string containing the authentication scheme to use. The valid values are `onestep` and `twostep`. `onestep` will simply authenticate the user against the Gluu Server and return the result in the form of a radius
 authentication status. `twostep` , which is the default , authenticates the user's credentials against gluu server , and 
-performs an additional authentication verification (the default script uses SuperGluu). 
+performs an additional authentication verification (the default script uses [Super Gluu](https://gluu.org/docs/gluu-server/4.3/authn-guide/supergluu/)). 
 
 ## Testing 
 
-1. Create a user or use an existing user on Gluu Server. Make sure the user has at least one enrolled [Super Gluu](https://super.gluu.org) device associated with their account.    
+1. Create a user or use an existing user on Gluu Server. Make sure the user has at least one enrolled [Super Gluu](https://gluu.org/docs/gluu-server/4.3/authn-guide/supergluu/) device associated with their account.    
 
 1. Run Radiator (see Radiator documentation)    
 

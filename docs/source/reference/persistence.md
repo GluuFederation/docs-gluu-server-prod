@@ -8,7 +8,7 @@ Gluu 4.3 CE supports these persistence modules out-of-the-box:
 
 1. [LDAP](https://github.com/GluuFederation/oxCore/tree/master/persistence-ldap), which is still the default persistence method.
 
-1. [Couchbase Enterprise Edition](https://github.com/GluuFederation/oxCore/tree/master/persistence-couchbase), supporting both local (on the same server as Gluu) and remote Couchbase clusters. 
+1. [Couchbase Enterprise Edition](https://github.com/GluuFederation/oxCore/tree/master/persistence-couchbase) version 6.x, supporting both local (on the same server as Gluu) and remote Couchbase clusters. 
  
 1. [Hybrid](https://github.com/GluuFederation/oxCore/tree/master/persistence-hybrid), a meta module allowing data to be mapped to different persistence modules. For example, user and group entries can be stored in LDAP, while all other entries are stored in Couchbase.  
 

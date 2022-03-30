@@ -4,7 +4,8 @@
 
 The Gluu Server has been optimized with several container strategies that allow scaling micro-services and orchestrating them using Kubernetes. This tutorial will walk through installation of Gluu on AWS EKS (Elastic Kuberentes service ) with ALB controller.
 
-
+!!!warning
+    In recent releases we have noticed that the ALB does not properly work with the oxtrust admin UI. Functions such as access and cache refresh do not work. There is an [issue](https://github.com/GluuFederation/oxTrust/issues/2130) open but the main issue is in the fact that ALB does not support rewrites.
 
 ## Installation
 

@@ -140,7 +140,7 @@ SCIM spec defines the concept of attribute returnability where some attributes s
 
 Assume you are maintaining a user base of secret agents that work for your company and need to avoid exposing information such as their physical addresses for safety reasons. To keep it simple let's restrict the scope to user searches only. In practice you should take steps to hide this data on user retrieval and update.
 
-Let's alter `postSearchUsers`'s second param (`results`) to ensure addresses are not leaked:
+Let's alter `postSearchUsers`'s second parameter (`results`) to ensure addresses are not leaked:
 
 ```
 for user in results.getEntries():
@@ -188,7 +188,7 @@ Returning `None` transfers the control of the operation for normal processing (d
 
 - Possible values for `context.getResourceType()` are: User, Group, FidoDevice, Fido2Device
 - `context.getTokenDetails().getValue()` is a shortcut that will give you the access token the caller employed to issue the service call
-- Both `context.getTokenDetails().getTokenType()` and `context.getTokenDetails().getScope()` return non null values when the protection [mechanism](./scim2.md#api-protection) of the API is OAuth or test mode 
+- Both `context.getTokenDetails().getTokenType()` and `context.getTokenDetails().getScope()` return non null values when the [protection mechanism](./scim2.md#api-protection) of the API is OAuth or test mode 
 - Note that for resource creation operation, `entity` basically contains the same data supplied in the POST `payload`. In this case, `entity` has not originated from the database and has not been persisted either
 - For the case of modification, retrieval and removal, `entity` contains the data currently stored in the database for the resource in question
 - Since many values come from Java code, you can always do `getClass().getName()` to get an idea of what type of variables you are dealing with
@@ -234,7 +234,7 @@ The strategy to implement segmentation is rather simple:
 In oxTrust expand the SCIM script and add properties:
 
 - `custom_header` with value `USER-SEGMENT-SECRET`
-- `access_map` with value `{ "<ramdom_string>":"Contractor", "<ramdom_string>":"Employee", "<ramdom_string>":"Intern" }`
+- `access_map` with value `{ "<random_string>":"Contractor", "<random_string>":"Employee", "<random_string>":"Intern" }`
 
 Save the changes.
 
