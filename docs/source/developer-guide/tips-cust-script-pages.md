@@ -344,7 +344,7 @@ To solve the issue above, a tested solution is to configure the services in a wa
     },
     ```
 
-2. Enhance the interception script with custom functionality that ease creation of a user E.g add detailed print statements and operation retries. For example the following custom addUser() method is added to the authentication script.
+2. The solution above should be sufficient but if it doesn't work for you, enhance the interception script with custom functionality that ease creation of a user E.g add detailed print statements and operation retries. For example the following custom addUser() method is added to the authentication script.
 
     ```
     def addUser(self, user, saml_user_uid):
