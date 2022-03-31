@@ -96,7 +96,6 @@ nav:
             - 'Account Lockout': 'authn-guide/lockout.md'
             - 'Forgot Password': 'authn-guide/pw-reset.md'
             - 'Custom Script Tutorial': 'authn-guide/customauthn.md'
-            - 'OpenDJ Replication': 'authn-guide/custom-ldap-replication.md'
         - Inbound Identity:
             - 'Introduction': 'authn-guide/passport.md'
             - 'Inbound OAuth & OpenID Connect': 'authn-guide/inbound-oauth-passport.md'
@@ -179,6 +178,7 @@ nav:
         - 'Coding custom scripts and pages': 'developer-guide/tips-cust-script-pages.md'
         - 'Localization': 'developer-guide/localization.md'
         - 'Script Debugging': 'developer-guide/script-debugging.md'
+        - 'Adding a user and Session Affinity': 'developer-guide/session-affinity.md'
 - Tutorials:
         # - 'The billion load test': 'tutorials/load-test.md' # hide test until officially tested
         - 'A 2k Benchmark': 'tutorials/2k-benchmark.md'

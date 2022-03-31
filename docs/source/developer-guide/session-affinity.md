@@ -1,10 +1,8 @@
-# Authenticating via an External IDP a New User Created Using a Custom Authentication Script in an Opendj Replication Setup
+# Authenticating via an External IDP a New User Created Using a Custom Authentication Script in a Cloud Native Setup with Kubernetes
 
 ## General Overview
 
-Using [Interception scripts](https://gluu.org/docs/gluu-server/4.3/authn-guide/customauthn/), you can customize many aspects of your Gluu Server identity and access management services for example using a custom script to create and authenticate a user.
-
-This section explains how to authenticate via an external IDP a new user that has been created with a custom interception script in a multi cluster setup of Gluu using LDAP as the backend persistence. For reference, you can read how a GLUU LDAP cloud native multi cluster setup is implemented [here](https://gluu.org/docs/gluu-server/4.3/tutorials/cn-ldap-multi-cluster/#test-replication). 
+This section explains how to authenticate via an external IDP a new user that has been created with a custom interception script in a cloud native setup of Gluu using LDAP as the backend persistence. For reference, you can read how a GLUU LDAP cloud native setup with Kubernetes is implemented [here](https://gluu.org/docs/gluu-server/4.3/installation-guide/install-kubernetes/). 
 
 ### Custom Authentication Script Overview
 
@@ -18,10 +16,9 @@ In the sample script being referred, we assume that the user is to be authentica
     user_authenticated = authenticationService.authenticate(found_user_name)
     ```
 
-### OpenDJ Replication Overview
+### Cloud Native Setup Overview
 
-LDAP as the backend persistence for GLUU can be setup in a multi cluster. Refer to the link shared in the general overview on how to achieve this. A complete replication setup 
-enables having synchronized database instances for high availability.
+LDAP as the backend persistence for GLUU can be setup in a cloud native approach. Refer to the link shared in the general overview on how to achieve this with Kubernetes. A complete setup enables having synchronized database instances for high availability.
 
 For certain reasons E.g limited computing resources, OpenDJ replication might get so slow leading to unsynchronized databases at any given time intervals.
 
@@ -67,7 +64,7 @@ For instance a `find_user_by_uid.getUserId()` function in our script above can f
 
 ### Troubleshooting
 
-- Ensure that OpenDJ replication is correctly set up and the pods are running.
+- Ensure the setup is correct and the pods are running.
 
     ```
         kubectl get pods -n gluu
