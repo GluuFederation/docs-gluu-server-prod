@@ -11,7 +11,7 @@ The Gluu Server is a [fully certified OpenID Provider (OP)](http://openid.net/ce
 ## Protocol Overview
 OpenID Connect is an identity layer that profiles OAuth 2.0 to define a sign-in flow for applications (clients) to
 authenticate a person and obtain authorization to gather information (or "claims") about that person. For more information,
-see [http://openid.net/connect](http://openid.net/connect)
+see [OpenID Connect](http://openid.net/connect)
 
 It's handy to know some OpenID Connect terminology:
 
@@ -24,7 +24,7 @@ or website, which needs to authenticate the subject. The RP is an OAuth
 client.
 
 !!! Note
-    To learn more about the differences between OAuth, SAML and OpenID Connect, read [this blog](http://gluu.co/oauth-saml-openid).
+    To learn more about the differences between OAuth, SAML and OpenID Connect, read [this blog](https://gluu.org/oauth-vs-saml-vs-openid-connect).
 
 ## OpenID Connect APIs
 
@@ -270,7 +270,7 @@ The default distribution of the Gluu Server includes custom authentication scrip
 |  yubicloud	| Yubico cloud OTP verification service |
 |  uaf	| experimental support for the FIDO UAF protocol |
 |  basic_lock	| [Enables lockout after a certain number of failures](../authn-guide/intro.md#configuring-account-lockout) |
-|  basic	| [Sample script using local database authentication](../authn-guide/basic.md/) |
+|  basic	| [Sample script using local database authentication](../authn-guide/basic.md) |
 
 Clients can request any enabled authentication mechanism. To enable an authentication script in oxTrust, navigate to `Configuration` > `Manage Custom Scripts`, find the desired script, check the `Enabled` box, scroll to the bottom of the page and click `Update`.
 

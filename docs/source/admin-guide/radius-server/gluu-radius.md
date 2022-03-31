@@ -32,7 +32,7 @@ In addition, the Gluu Radius config file can be found in the Linux container und
    - `Authentication Timeout`: This is the maximum amount of time in milliseconds between when an authentication request is initiated and the user approving authentication. This applies only for long lived two-factor authentication based requests (e.g. Super-Gluu).
   
 !!! Note   
-    Any change to any of these configuration parameters will require a [restart](../../operation/services.md) of the `gluu-radius` service. Make sure the ports selected for authentication and accounting are open.
+    Any change to any of these configuration parameters will require a [restart](../../operation/services.md#commands) of the `gluu-radius` service. Make sure the ports selected for authentication and accounting are open.
 
 ![gluu-radius-basic-config](../../img/admin-guide/radius-server/gluu-radius-basic-config.png).
 
@@ -46,7 +46,7 @@ In oxTrust, navigate to `Radius` > `Server Configuration` and select the `OpenID
    - `OpenID Scopes`: These are the scopes used during the password grant token request. For proper operation, the scope list *must* contain the `openid` scope.
 
 !!! Note 
-    A change to any of these configuration parameters will require a [restart](../../operation/services.md) of the `gluu-radius` service.
+    A change to any of these configuration parameters will require a [restart](../../operation/services.md#commands) of the `gluu-radius` service.
     
 ![gluu-radius-openid-config](../../img/admin-guide/radius-server/gluu-radius-openid-config.png)
 
@@ -80,7 +80,7 @@ This section covers optional advanced configuration topics.
 ### Gluu Radius config file 
  The Gluu Radius configuration file can be found under `/etc/gluu/conf/radius/gluu-radius.properties` 
 in the linux container. There are a couple things you can change from the configuration file.
-Any change to this file will take effect only after [restarting](../../operation/services.md) the `gluu-radius` service.
+Any change to this file will take effect only after [restarting](../../operation/services.md#commands) the `gluu-radius` service.
 
 #### Turning on/off listening. 
 It is possible to turn listening on/off for the radius server. This feature is useful when using gluu-radius
@@ -131,7 +131,7 @@ To change the algorithm, follow these steps:
     radius.jwt.auth.keyId = <kid>
     ```
 
-- Once complete, [restart](../../operation/services.md) the `gluu-radius` service.
+- Once complete, [restart](../../operation/services.md#commands) the `gluu-radius` service.
 
 #### External jwks 
 Using an external jwks requires you pasting the contents of the jwks into the `JWKS` section in the `Encryption/Signing` tab

@@ -18,43 +18,169 @@ The Gluu Server administrator can make changes to attributes, such as changing t
 ## Custom Attributes
 In order to create SSO to certain applications you may need to add custom attributes to your Gluu Server. Custom attributes can be added by following the instructions below: 
 
-### Add the attribute to LDAP
+### Add custom attributes to LDAP
 
 #### OpenDJ
 
- - In OpenDJ, add custom attributes to `/opt/opendj/config/schema/77-customAttributes.ldif`
- - In the below example, `customTest` is our custom attribute :
- 
-    ```
-    attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1400 NAME 'customTest'
-      DESC 'Custom Attribute' 
-      EQUALITY caseIgnoreMatch 
-      SUBSTR caseIgnoreSubstringsMatch 
-      SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
-      X-ORIGIN 'Gluu custom attribute' )
-    ```
+=== "Community Edition Setup - VM"
 
-!!! Warning
-    Spacing is extremely important here. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly.
-
-  - Add custom attribute to the `gluuCustomPerson` objectClasses:
-  
-    ```
-    objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
-     SUP ( top )
-     AUXILIARY
-     MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
-    ```
-
-!!! Warning
-    You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
+    -  In OpenDJ, add custom attributes to `/opt/opendj/config/schema/77-customAttributes.ldif`:
     
- - [Restart](../operation/services.md#restart) the `opendj` service.
+        - In the below example, `customTest` is our custom attribute. Kindly note this is just an example.
  
-This creates the attribute in the local LDAP server. 
+        ```
+        dn: cn=schema
+        objectClass: top
+        objectClass: ldapSubentry
+        objectClass: subschema
+        cn: schema
+        attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1400 NAME 'customTest'
+          DESC 'Custom Attribute' 
+          EQUALITY caseIgnoreMatch 
+          SUBSTR caseIgnoreSubstringsMatch 
+          SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+          X-ORIGIN 'Gluu custom attribute' )
+        ```
 
-### Adding Custom Attributes when MySQL backend is used
-1. Add a column to table `gluuPerson` in MySQL. Command will be
+        - Add custom attribute to the `gluuCustomPerson` objectClasses:
+  
+        ```
+        objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
+          SUP ( top )
+          AUXILIARY
+          MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
+        ```
+
+        - The complete `77-customAttributes.ldif` will look like this:
+      
+        ```
+        dn: cn=schema
+        objectClass: top
+        objectClass: ldapSubentry
+        objectClass: subschema
+        cn: schema
+        attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1400 NAME 'customTest'
+          DESC 'Custom Attribute' 
+          EQUALITY caseIgnoreMatch 
+          SUBSTR caseIgnoreSubstringsMatch 
+          SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+          X-ORIGIN 'Gluu custom attribute' )
+        objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
+          SUP ( top )
+          AUXILIARY
+          MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
+        ```
+    
+        !!!warning
+            Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
+
+    - [Restart](../operation/services.md#restart) the `opendj` service.
+
+    That will create the attribute in the local LDAP server. You can navigate to `Configuration` > `Attributes` in the UI to see the added attribute. 
+
+
+=== "Cloud Native Setup"
+
+    - Create a file named 77-customAttributes.ldif and load it with the custom attributes that you want.
+
+        - In the below example, `customTest` is our custom attribute. Kindly note this is just an example.
+ 
+        ```
+        dn: cn=schema
+        objectClass: top
+        objectClass: ldapSubentry
+        objectClass: subschema
+        cn: schema
+        attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1400 NAME 'customTest'
+          DESC 'Custom Attribute' 
+          EQUALITY caseIgnoreMatch 
+          SUBSTR caseIgnoreSubstringsMatch 
+          SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+          X-ORIGIN 'Gluu custom attribute' )
+        ```
+
+        - Add custom attribute to the `gluuCustomPerson` objectClasses:
+      
+        ```
+        objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
+          SUP ( top )
+          AUXILIARY
+          MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
+        ```
+
+        - The complete `77-customAttributes.ldif` will look like this:
+      
+        ```
+        dn: cn=schema
+        objectClass: top
+        objectClass: ldapSubentry
+        objectClass: subschema
+        cn: schema
+        attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1400 NAME 'customTest'
+          DESC 'Custom Attribute' 
+          EQUALITY caseIgnoreMatch 
+          SUBSTR caseIgnoreSubstringsMatch 
+          SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+          X-ORIGIN 'Gluu custom attribute' )
+        objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
+          SUP ( top )
+          AUXILIARY
+          MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
+        ```
+
+        !!!warning
+            Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
+
+    - Create a kubernetes configmap called `ldap-custom-attributes` targeting the content of the file you created above.
+
+        ```sh
+        kubectl create cm ldap-custom-attributes -n <namespace> --from-file=/path/to/77-customAttributes.ldif
+        ```
+
+        - Check if the configmap has been created by running the following command:
+
+        ```sh
+        kubectl get cm -n <namespace>
+        ```
+
+  
+    - Open your `values.yaml` file and mount the file as a volume under `opendj`.
+    
+        ```yaml
+        opendj: 
+            volumes:
+              - name: ldap-custom-attributes
+                configMap:
+                  name: ldap-custom-attributes
+            volumeMounts:
+              - name: ldap-custom-attributes
+                mountPath: "/opt/opendj/config/schema/77-customAttributes.ldif"
+                subPath: 77-customAttributes.ldif    
+        ```
+        
+    - Navigate to the folder where the values.yaml is `helm/gluu` and do the helm upgrade with the following command
+
+        ```sh
+        helm upgrade <release-name> . -f values.yaml -n <namespace>
+        ```
+
+    - Restart the `opendj` service to ensure custom attributes are loaded. Note that we restart the service by scaling down to 0, waiting for a bit and scaling back up to 1. We do that with the following commands
+
+        ```sh
+        kubectl scale sts <release-name>-opendj -n <namespace> --replicas=0
+        ```
+
+        Wait for a bit for the scaling down to happen, then scale back up.
+
+        ```sh
+        kubectl scale sts <release-name>-opendj -n <namespace> --replicas=1
+        ```
+
+    That will create the attribute in the local LDAP server. You can navigate to `Configuration` > `Attributes` in the UI to see the added attribute.   
+    
+### Addition of custom attributes to a setup using MySQL backend
+
+- Add a column to table `gluuPerson` in MySQL. Command will be
   `ALTER TABLE gluuPerson ADD COLUMN <claimName> <dataType>;`
 
   Choose dataType according to the following table
@@ -71,16 +197,16 @@ This creates the attribute in the local LDAP server.
   | Multivalued          | JSON                                                                              |
 
   !!! Note
-      if the attribute is Multivalued **dataType** should be JSON regardless of what you will chose for Type in Gluu oxTrust UI.
+      if the attribute is Multivalued, **dataType** should be JSON regardless of what you will choose for Type in Gluu oxTrust UI.
 
-2. [Register](#add-the-attribute-to-oxtrust) an attribute on Gluu oxTrust UI. When registering attribute **Name** `claimName`.
+- [Register](#add-the-attribute-to-oxtrust) an attribute in the Gluu oxTrust UI. When registering attribute **Name** `claimName`.
 
 
 #### Example
 
 We are going to add simple text attribute **customAttribute** with max size 200 characters.
 
-  1. Use the following SQL command to add column
+  - Use the following SQL command to add column
 
   ```sql
   mysql> ALTER TABLE gluuPerson ADD COLUMN customAttribute VARCHAR(100);
@@ -88,56 +214,59 @@ We are going to add simple text attribute **customAttribute** with max size 200 
   Records: 0  Duplicates: 0  Warnings: 0
   ```
 
-  2. On Gluu oxTrust UI go Configuration/Attributes and click **Register Attribute** button. Fill the fields according to your needs, 
-  see following screenshot
+  - In the Gluu oxTrust UI, navigate to `Configuration` > `Attributes` and click **Register Attribute** button. Fill in the fields with your attribute values. 
+  See the following screenshot shwoing the attribute form fields.
   
   ![register attribute](../img/admin-guide/attribute/add_custom_attribute.png)
 
-  Once you registered attribute, you will see under Available User Claims / gluuPerson
+  Once you registered attribute, Go to `Users` > `Add person` > `Available User Claims` and check under `gluuPerson`
 
   ![available claims](../img/admin-guide/attribute/available_claims.png)
 
-### Add the attribute to oxTrust
-Now you need to register the new attribute in the Gluu Server GUI by navigating to `Configuration` > `Attributes`  and then click the `Register Attribute` button. 
+### Addition of custom attributes to oxTrust
 
-The following screen will appear:
+To register the new attribute in the Gluu Server GUI, navigate to `Configuration` > `Attributes`  and click the `Register Attribute` button. 
+
+You'll be redirected to the following page:
 
 ![Add Attribute Screen](../img/admin-guide/attribute/admin_attribute_add.png)
 
-* _Name:_ This field defines the name of the custom attribute. The name must be unique in the Gluu Server LDAP tree.
+The following fields are supported;
 
-* _SAML1 URI:_ This field can contain a SAML v1 supported nameformat for the new attribute. If this field is left blank the Gluu Server will automatically populate a value. 
+* `Name` This field defines the name of the custom attribute. The name must be unique in the Gluu Server LDAP tree.
 
-* _SAML2 URI:_ This field can contain a SAML v2 supported nameformat for the new attribute. If this field is left blank the Gluu Server will automatically populate a value. 
+* `SAML1 URI` This field can contain a SAML v1 supported nameformat for the new attribute. If this field is left blank the Gluu Server will automatically populate a value. 
 
-* _Display Name:_ The display name can be anything that is human readable.
+* `SAML2 URI` This field can contain a SAML v2 supported nameformat for the new attribute. If this field is left blank the Gluu Server will automatically populate a value. 
 
-* _Type:_ Select what type of attribute is being added in this field. The Gluu Server supports four types of attributes: text, numeric, photo, and date. Choose the option that best applies. 
+* `Display Name` The display name can be anything that is human readable.
 
-* _Edit Type:_ This field controls who can edit this attribute. If `user` is selected, this will enable each user to edit this attribute in their Gluu server user profile (assuming oxTrust is user facing, and the "User can edit own profile" feature has been enabled).
+* `Type` Select what type of attribute is being added in this field. The Gluu Server supports four types of attributes: text, numeric, photo, and date. Choose the option that best applies. 
 
-* _View Type:_ This field controls which type of user is allowed to view
+* `Edit Type` This field controls who can edit this attribute. If `user` is selected, this will enable each user to edit this attribute in their Gluu server user profile (assuming oxTrust is user facing, and the "User can edit own profile" feature has been enabled).
+
+* `View Type` This field controls which type of user is allowed to view
   corresponding attribute at his/her "Profile" page of the web UI.
 
-* _Multivalued:_ If the attribute contains more than one value, set this field to True. 
+* `Multivalued` If the attribute contains more than one value, set this field to True. 
 
-* _oxAuth claim name:_ If this attribute will be used as a 'claim' in your OpenID Connect service, add the name of the claim here. Generally, the name of the attribute == name of the claim.
+* `oxAuth claim name` If this attribute will be used as a 'claim' in your OpenID Connect service, add the name of the claim here. Generally, the name of the attribute == name of the claim.
 
-* _SCIM Attributes:_ If the attribute is a part of your SCIM architecture, set this field to True.
+* `SCIM Attributes` If the attribute is a part of your SCIM architecture, set this field to True.
 
-* _Enable custom validation for this attribute:_ If you plan to set minimum and maximum lengths or a regex pattern, as described below, you will need to enable custom validation for this attribute. Otherwise you can leave this disabled. 
+* `Enable custom validation for this attribute` If you plan to set minimum and maximum lengths or a regex pattern, as described below, you will need to enable custom validation for this attribute. Otherwise you can leave this disabled. 
 
-* _Enable tooltip for this attribute:_ This allows you to set a tool tip for the attribute. 
+* `Enable tooltip for this attribute` This allows you to set a tool tip for the attribute. 
 
-* _Minimum Length:_ This is the minimum length of a value associated with this attribute. 
+* `Minimum Length` This is the minimum length of a value associated with this attribute. 
 
-* _Maximum Length:_ This is the maximum length of a value associated with this attribute. 
+* `Maximum Length` This is the maximum length of a value associated with this attribute. 
 
-* _Regex Pattern:_ You can set a regex pattern to enforce proper formatting of an attribute. For example, you could set a regex expression for an email attribute like this: `^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$`. This would make sure that a value is added for the attribute only if it follows standard email formatting.
+* `Regex Pattern` You can set a regex pattern to enforce proper formatting of an attribute. For example, you could set a regex expression for an email attribute like this: `^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$`. This would make sure that a value is added for the attribute only if it follows standard email formatting.
 
-* _Status:_ Mark the attribute as Active so that it can be used in your federation service. Or leave choose Inactive to create the attribute and then you can activate it at a later date. 
+* `Status` Used to mark the attribute as Active so that it can be used in your federation service or choose Inactive to create the attribute that can be activated at a later date. 
 
-Click register and now this new attribute should be available for release in your federation service. 
+Click Register and now this new attribute should be available for release in your federation service. 
 
 The default NameID for oxTrust generated SAML trust relationships is `transientID`. It's always a good idea to release the `transientID` as an attribute, as some SP's may not work otherwise. If there are other `NameID` requirements, a custom attribute must be created in oxTrust first before defining it as the `NameID`. Please review the [custom attributes](./attribute.md#custom-attributes) section of the docs to learn how to create custom attributes in oxTrust.
 

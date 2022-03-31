@@ -2,7 +2,7 @@
 ## Overview
 Central Authentication Service (CAS) is a legacy single sign-on (SSO) protocol for web applications. The name CAS also refers to a software package that implements the CAS protocol, which is now included in the Shibboleth IDP v3 package. 
 
-The Gluu Server can be deployed with the Shibboleth IDP, which supports most of the [CAS protocol v2 specification](https://apereo.github.io/cas/5.0.x/protocol/CAS-Protocol-V2-Specification.html), including attribute release and CAS proxy support.
+The Gluu Server can be deployed with the Shibboleth IDP, which supports most of the [CAS protocol v2 specification](https://apereo.github.io/cas/6.2.x/protocol/CAS-Protocol-V2-Specification.html), including attribute release and CAS proxy support.
 
 !!! Note
     CAS should *only* be used if there are legacy applications which only support CAS. Otherwise, all new SSO development should use [OpenID Connect](../admin-guide/openid-connect.md). 
@@ -22,8 +22,8 @@ Gluu provides two main scenarios involving CAS flows. By analogy with SAML scena
 
 Outbound CAS is a traditional way to employ the protocol. Website or application (or, more likely, CAS client acting on behalf of them) redirects a user to a designated CAS server (in this case your Gluu CE instance) for authentication and authorization. CAS server authenticates the user, checks whether such application is allowed to request his/her personal data, then redirects user's browser back to the application/CAS client with a `service ticket`. The ticket is then validated by them by calling respective validation endpoint at CAS server via back-channel connection. Depending on protocol version and server's policies, some attributes may also be sent in response to validation call.
 
-In contrast, inbound CAS is a way for Gluu server itself to delegate authentication to some remote CAS server in your organization's network. By doing so it allows you to leverage your existing infrastracture and broadens your authentication options. From a technical standpoint it's just another [custom authentication script](../authn-guide/customauthn/) which is already pre-packaged in your instance. You can find out more about how to configure 
-it on [corresponding Github page](https://github.com/GluuFederation/oxAuth/tree/version_4.3/Server/integrations/cas2).
+In contrast, inbound CAS is a way for Gluu server itself to delegate authentication to some remote CAS server in your organization's network. By doing so it allows you to leverage your existing infrastracture and broadens your authentication options. From a technical standpoint it's just another [custom authentication script](../authn-guide/customauthn.md) which is already pre-packaged in your instance. You can find out more about how to configure 
+it on [corresponding Github page](https://github.com/GluuFederation/oxAuth/tree/version_4.3.2/Server/integrations/cas2).
 
 ### Outbound CAS
 Outbound CAS configuration is split into two different parts. First, CAS support must be enabled in web UI. Then applications which should be allowed to use this CAS server must be added to service registry - this part is done from Linux console (inside the container). After those mandatory steps are completed, you also may want to define a list of attributes which should be released in addition to user id which is sent by default (also done via Linux console).
@@ -174,7 +174,7 @@ In example below it's configured to use `eduPersonPrincipalName` attribute inste
 
 #### Ticket validation using SAML protocol
 
-CAS supports [SAML requests](https://apereo.github.io/cas/5.0.x/protocol/SAML-Protocol.html) during ticket validation step. Corresponding endpoint is located at `https://your.gluu.host/idp/profile/cas/samlValidate` URL and may be used instead of "native" CAS `/serviceValidate` if your CAS client supports it. Other steps of the general CAS flow stay the same.
+CAS supports [SAML requests](https://apereo.github.io/cas/6.5.x/protocol/SAML-Protocol.html) during ticket validation step. Corresponding endpoint is located at `https://your.gluu.host/idp/profile/cas/samlValidate` URL and may be used instead of "native" CAS `/serviceValidate` if your CAS client supports it. Other steps of the general CAS flow stay the same.
 
 ## Logging
 

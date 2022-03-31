@@ -415,9 +415,11 @@ initial admin password). The output will contain something like this:
 2. Select (i) IIS (ii) Web Management Tools (iii) II6 Management Compatibility (iv) IIS Management Console (v) IIS Management Scripts and Tools (vi) IIS Management Service
 
 3. Select (i) World Wide Web Services (ii) CGI (iii) ISAPI Filters (iv) ISAPI Extensions --> Press OK.
+
 ![IIS 7 Setup](../../img/integration/admin_sp_iis7setup.png)
 
 4. Test IIS to see if it is installed in your system with "127.0.0.1" in the web browser. For our test case, we used IIS7.
+
 ![Test IIS](../../img/integration/admin_sp_iis7test.png)
 
 ## ISAPI Filter Configuration
@@ -457,12 +459,15 @@ initial admin password). The output will contain something like this:
   1. Click on "Handler Mapping" from main page
 
 ![SP Handler](../../img/integration/admin_sp_handlermapping.png)
+
     2. Click "Add Script Map" from Action
+
 ![Script Map](../../img/integration/admin_sp_addscriptmap.png)
    
    3. Request Path :".sso"
       
    4. Executable should be pointed to "isapi_shib.dll"
+
 ![Executable](../../img/integration/admin_sp_executable.png)
 
   g. Restart IIS
@@ -796,19 +801,21 @@ initial admin password). The output will contain something like this:
 5. Now, there are two options. According to your target you will have to
 choose one.
 
-	1. Option 1: If you install Shibboleth for the Apache Web Server
+    1. Option 1: If you install Shibboleth for the Apache Web Server
 
-	2. Option 2: If you install Shibboleth for Microsoft IIS Web Server
+    2. Option 2: If you install Shibboleth for Microsoft IIS Web Server
 
-		a. For the Microsoft IIS Web Server, CHECK “Install ISAPI filter
-		and configure IIS”. Remember to put the file Extension ”.sso” --
-		this is necessary.
+        a. For the Microsoft IIS Web Server, CHECK “Install ISAPI filter
+        and configure IIS”. Remember to put the file Extension ”.sso” --
+        this is necessary.
 
     ![IMAGE](../../img/integration/admin_sp_microsoft.png)
+
         b. For the Apache Web Server, UNCHECK "Install ISAPI filter and
-		configure IIS".
+        configure IIS".
 
     ![IMAGE](../../img/integration/admin_sp_apachesetup.png)
+
    3. UAC of Windows 7 may block this program, so allow it.
 
     ![IMAGE](../../img/integration/admin_sp_uac.png)

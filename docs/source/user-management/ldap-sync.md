@@ -109,9 +109,20 @@ This section of the application allows the server administrator to connect to th
 
 When the Copy method is selected, a section for Attribute mapping will be exposed. In this section, the Gluu Server Administrator can map any attribute from the backend Active Directory/LDAP to the LDAP cache of the Gluu Server.
 
+In the source attribute to destination attribute mapping field, you can enter the source attribute value on the left, and the destination attribute on the right. In other words, you can specify what the attribute is on the backend in the left field, and what it should be rendered as when it comes through the Gluu Server in the right field.
+
+Example :
+
+On the Gluu server side, we have the attr `uid` which is used to denote the primary key.
+`sAMAaccountName` which is the primary key used in AD is not available in the Gluu server by default. 
+While configuring cache refresh under `Configuration` --> `Cache refresh` you can map source attrib to destination attributes under `Add source attribute to destination attribute mapping` as shown in the screenshot. See how `sAMAaccountName` and `uid` are mapped.
+
 ![Attribute Mapping](../img/admin-guide/user/admin_cache_mapattribute.png)
 
-In the source attribute to destination attribute mapping field, you can enter the source attribute value on the left, and the destination attribute on the right. In other words, you can specify what the attribute is on the backend in the left field, and what it should be rendered as when it comes through the Gluu Server in the right field.
+In adition; you sould also do this:
+Under menu item `Configuration ` --> `Manage Authentication` --> `Manage LDAP Autentication`, you can configure 
+`Primary key` is the primary attribute of backend AD / LDAP (samAccountName in your case).
+`Local Primary key ` is Gluu’s OpenDJ primary key ( which is UID )
 
 The Administrator can select any Cache Refresh Method according to the backend Active Directory/LDAP server, but there are some essential values for both types of cache refresh method. The values are given below.
 

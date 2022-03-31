@@ -8,6 +8,10 @@ To enable SCIM open the oxTrust administration interface and navigate to `Organi
 
 Then enable the protection mode you want for your API, see details [here](../user-management/scim2.md#api-protection).
 
+## Swagger Documentation
+
+Current Swagger documentation for Gluu SCIM APIs can be found in the [SCIM API Swagger document](https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/GluuFederation/scim/master/scim-server/src/main/resources/gluu-scim-swagger.yaml)
+
 ## HTTP verbs
 
 As a summary, these are the verbs a compliant SCIM server implementation (like Gluu) speaks:

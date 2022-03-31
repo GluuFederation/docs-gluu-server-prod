@@ -158,7 +158,7 @@
                     kubectl apply -f web-key-rotation.yaml -n <gluu-namespace>
                 ```            
         
-        === "Load from exisitng source"
+        === "Load from existing source"
         
             !!! Note
                 This will load `gluu_https.crt` and `gluu_https.key` from `/etc/certs`.

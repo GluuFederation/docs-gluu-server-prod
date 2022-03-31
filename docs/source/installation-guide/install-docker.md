@@ -283,7 +283,7 @@ services:
     container_name: my-oxauth
 ```
 
-If `docker-compose.override.yml` exists, this file will be added as the last Compose file. For reference on multiple Compose file, please take a look at [https://docs.docker.com/compose/extends/#multiple-compose-files](https://docs.docker.com/compose/extends/#multiple-compose-files).
+If `docker-compose.override.yml` exists, this file will be added as the last Compose file. For reference on multiple Compose file, please take a look at [Multiple Compose Files](https://docs.docker.com/compose/extends/#multiple-compose-files).
 
 #### Choose persistence backends
 

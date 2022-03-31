@@ -211,7 +211,7 @@ resource description.
 
 Request to the resource is registration is incorrect, the authorization
 server responds with an with error message by including the below  error 
-codes in the response. Discussed detail in [unsupported methods](#unsupportedHeadMethod)
+codes in the response. Discussed detail in [unsupported methods](#unsupportedheadmethod)
 
 - unsupported_method_type: The resource server request used an unsupported HTTP method. 
   The authorization server MUST respond with the HTTP 405 (Method Not Allowed) status code.

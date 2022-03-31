@@ -1,4 +1,4 @@
-# A reference for coding custom scripts and pages
+# Custom Scripts and Pages Guide
 
 ## Overview
 
@@ -13,7 +13,7 @@ In addition to that, there are the usual implicit JSP/JSF [objects](http://incep
 In the case of custom scripts, any class in oxAuth's classpath can be used as well as the standard Java 8 classes. 
 
 !!! Note
-    Find the javadocs here: [oxAuth](https://ox.gluu.org/javadocs/oxauth/) <!--and [oxCore](?)--> (choose the version matching your Gluu Server version).
+    Find the javadocs here: [oxAuth](https://ox.gluu.org/javadocs/oxauth/) and [oxCore](https://ox.gluu.org/javadocs/oxauth/).
 
 While there are hundreds of classes available for reuse, the following summarizes the most commonly used:
 
@@ -222,7 +222,9 @@ Relevant methods:
 |Properties decryptAllProperties(Properties connectionProperties)|Returns a `java.util.Properties` object with all decrypted values found in `connectionProperties`|
 |`String encrypt(String unencryptedString)`|Encrypts the string supplied|
 
-## Example: Displaying error conditions to end-users
+## Examples 
+    
+### Displaying error conditions to end-users
 
 When coding certain flows, it is important to be able to display errors in the xhtml templates based on conditions that occur as the  associated custom script runs. For this purposes, the `FacesMessage` bean can be used. Here is an example that adds an error message in the UI:
 
@@ -244,3 +246,58 @@ The error will appear in the associated template using the following markup:
 <h:messages />
 ...
 ```
+
+### Redirecting to a third-party application and back
+
+For user authentication or consent gathering, there might be a need to redirect to a third party application to perform some operation and return the control back to authentication steps of the custom script. Please apply these steps to a person authentication script in such a scenario: 
+
+1. Return from `def getPageForStep(self, step, context)`, a page `/auth/method_name/redirect.html` ; with content similar to the code snippet below - 
+
+```
+    def getPageForStep(self, step, context):
+        return "/auth/method_name/redirect.html"
+```
+    
+Contents of redirect.xhtml should take the flow to prepareForStep method
+    
+```
+...
+	<f:metadata>
+		<f:viewAction action="#{authenticator.prepareForStep}" if="#{not identity.loggedIn}" />
+	</f:metadata>
+	
+```
+
+2. In method `prepareForStep` prepare data needed for redirect and perform the redirection to the external service. 
+
+```
+def prepareForStep(self, step, context):
+        .....
+	facesService = CdiUtil.bean(FacesService)
+	facesService.redirectToExternalURL(third_party_URL )
+
+	return True
+	
+```
+
+3. In order to resume flow after the redirection, invoke a similar URL to ` https://my.gluu.server/postlogin.htm?param=123` from the third party app which takes the flow back to the authenticate method of the custom script.
+    
+So create an xhtml page `postlogin.xhtml` which will look like this :
+    
+```
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:view transient="true" contentType="text/html">
+	<f:metadata>
+		<f:viewAction action="#{authenticator.authenticateWithOutcome}" />
+	</f:metadata>
+</f:view>
+
+</html>
+```
+
+4. The `<f:viewAction action="#{authenticator.authenticate}" />` in step 3 takes us to the `  def authenticate(self, configurationAttributes, requestParameters, step):`. Here you can use parameters from request (` param = ServerUtil.getFirstValue(requestParameters, "param-name") `) , perform the state check and finally, return true or false from this method.

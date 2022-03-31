@@ -46,7 +46,7 @@ Follow these steps to integrate an external IDP for inbound SAML:
 
 1. Check `Is enabled` (unless there is a reason to leave this provider integration temporarily disabled)
 
-1. It's not required to check `Request For Email` or `Email linking` unless implementing [custom flow behavior](./passport.md#altering-flow-behaviour)
+1. It's not required to check `Request For Email` or `Email linking` unless implementing [custom flow behavior](./passport.md#altering-flow-behavior)
 
 As mentioned earlier in the [introduction to inbound identity](./passport.md#supported-providers), Passport reuses [Passport.js](http://www.passportjs.org/) strategies to integrate a variety of identity provider "flavors". For IDPs, the [passport-saml](https://github.com/bergie/passport-saml/) strategy is used. This strategy is highly customizable via [configuration parameters](https://github.com/bergie/passport-saml/#config-parameter-details), which are specified in the "Provider options" panel.
 
@@ -126,7 +126,7 @@ Provide the name (excluding the extension) of the mapping file to use in the pro
 
 ### Make use of `passport_saml` authentication
 
-To offer inbound SAML from an OpenID Connect application, use the same steps described for [Social Login](./passport.md#protect-the-application-with-passport_social-authentication), except the acr value has to be `passport_saml`.
+To offer inbound SAML from an OpenID Connect application, use the same steps described for [Social Login](../authn-guide/intro.md#social-login), except the acr value has to be `passport_saml`.
 
 <!--
 If your application is a SP (SAML provider), ....

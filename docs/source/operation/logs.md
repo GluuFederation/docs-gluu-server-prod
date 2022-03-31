@@ -106,7 +106,7 @@ The following files define the log levels in Gluu Server. Please edit the file w
 
 ```
 
-[Restart](./services.md) any changed services to allow the changes to take effect.
+[Restart](./services.md#commands) any changed services to allow the changes to take effect.
     
 ## Setup Logs
 The setup logs are stored inside the `/install/community-edition-setup/` folder. There are two logs available, one detailing the setup process and the other documenting the errors:

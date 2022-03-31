@@ -230,7 +230,7 @@ In order to configure a dynamic scope the following steps are required:
   - Corresponding dynamic script must be linked to that scope (Add dynamic script button)
 - The scope must be added to the client which will be using it at the "OpenID Connect -> Clients" page (using the "Add Scope" button), and the scope must be included by the client in "scope=" URL query parameter
 
-More detailed explanation about adding scopes can be found under Openid [scopes](../admin-guide/openid-connect/#scopes)
+More detailed explanation about adding scopes can be found under Openid [scopes](openid-connect.md#scopes)
 
 - [Sample Dynamic Scope Script](./sample-dynamic-script.py)
 
@@ -288,7 +288,7 @@ Associate RPT Claims script with client (Update button must be clicked to persis
 
 ![rptclaims](../img/admin-guide/rptclaims.png)
 
-View a [RPT Claims Script Sample](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/uma_rpt_claims/uma_rpt_claims.py)
+View a [RPT Claims Script Sample](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/java/org/gluu/oxauth/uma/service/UmaRptService.java)
 
 
 
@@ -415,7 +415,7 @@ Snippet
         return False
 ```
 
-Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.1/static/extension/resource_owner_password_credentials/resource_owner_password_credentials.py). 
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.3.0/static/extension/resource_owner_password_credentials/resource_owner_password_credentials.py). 
 
 ## Persistence Extension
 
@@ -459,4 +459,4 @@ This script type is specific to SAML / Shibboleth IDP and allows developers to p
     
 ## Additional Tips
 
-Visit [this page](../developer-guide/tips-cust-script-pages.md) for code references on building custom scripts and pages.
+Visit [Custom Scripts and Pages Guide](../developer-guide/tips-cust-script-pages.md) for code references on building custom scripts and pages.

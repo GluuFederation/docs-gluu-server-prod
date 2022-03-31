@@ -30,7 +30,7 @@ As the user does not provide authentication credentials directly to the consumpt
 supporting this flow requires the to OP have some mechanism of initiating user authentication
 out-of-band from the interaction with the consumption device.
 
-For more information, see [https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0-ID1.html](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0-ID1.html)
+For more information, see [OpenID Connect Client Initiated Backchannel Authentication Flow](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0-ID1.html)
 
 ## Protocol Overview
 
@@ -398,7 +398,7 @@ Server: Jetty(9.4.19.v20190610)
 Token request should be done using CIBA grant and is only used in `poll` and `ping` flows, so this endpoint should be used in this way:
 
 - *poll mode* In this case, client should call every N seconds to this endpoint.
-- *ping mode* client should call once he receives the callback from the OP, however it's also possible to call to the endpoint before, in that case, the behaviour would be very similar than `poll` mode.
+- *ping mode* client should call once he receives the callback from the OP, however it's also possible to call to the endpoint before, in that case, the behavior would be very similar than `poll` mode.
 
 Custom parameters for CIBA grant type are:
 - *grant_type (required)* Value MUST be `urn:openid:params:grant-type:ciba`
@@ -485,7 +485,7 @@ In order to associate and test these whole flow, Gluu AS has a page to associate
 
 Also this page will ask you for the permission to receive push notifications, you should allow it. After that, press `Authenticate User` button, it will start common authentication flow in order to identify which user you want to associate to this navigator/device.
 
-Once you finish the authz flow, you will be back again to the same page, but you should have your `Id Token` in the screen. After some seconds, below of that section you will see a section called `Instance ID Token`, this is your Firebase identificator that will be used by CIBA to send you push notifications. Here you can press `Delete Token` button just to update that token and create a new one. At this point, this page uses `/bc-deviceRegistration` endpoint to associate user and this navigator.
+Once you finish the authentication flow, you will be back again to the same page, but you should have your `Id Token` in the screen. After some seconds, below of that section you will see a section called `Instance ID Token`, this is your Firebase identificator that will be used by CIBA to send you push notifications. Here you can press `Delete Token` button just to update that token and create a new one. At this point, this page uses `/bc-deviceRegistration` endpoint to associate user and this navigator.
 
 ![CIBA Firebase Configuration](../img/admin-guide/ciba/CIBA-Test2.png)
 

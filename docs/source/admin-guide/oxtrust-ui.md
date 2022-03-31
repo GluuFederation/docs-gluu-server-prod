@@ -16,14 +16,14 @@ After successful authentication, the administrator is taken to the Dashboard. So
 The oxTrust UI supports localization. The default language is English. To set a new preferred language, edit a few properties file, found within `identity.war`. The path for `identity.war` is `/opt/gluu/jetty/identity`, which can be found in the `chroot` container.
 
 oxAuth contains the following resource bundles:   
-- [messages_en.properties](https://github.com/GluuFederation/oxAuth/tree/version_4.2/Server/src/main/resources/oxauth_en.properties)       
-- [messages_bg.properties](https://github.com/GluuFederation/oxAuth/tree/version_4.2/Server/src/main/resources/oxauth_bg.properties)      
-- [messages_de.properties](https://github.com/GluuFederation/oxAuth/tree/version_4.2/Server/src/main/resources/oxauth_de.properties)        
-- [messages_es.properties](https://github.com/GluuFederation/oxAuth/tree/version_4.2/Server/src/main/resources/oxauth_es.properties)       
-- [messages_fr.properties](https://github.com/GluuFederation/oxAuth/tree/version_4.2/Server/src/main/resources/oxauth_fr.properties)     
-- [messages_it.properties](https://github.com/GluuFederation/oxAuth/tree/version_4.2/Server/src/main/resources/oxauth_it.properties)    
-- [messages_ru.properties](https://github.com/GluuFederation/oxAuth/tree/version_4.2/Server/src/main/resources/oxauth_ru.properties)      
-- [messages_tr.properties](https://github.com/GluuFederation/oxAuth/tree/version_4.2/Server/src/main/resources/oxauth_tr.properties)      
+- [messages_en.properties](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/resources/oxauth_en.properties)       
+- [messages_bg.properties](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/resources/oxauth_bg.properties)      
+- [messages_de.properties](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/resources/oxauth_de.properties)        
+- [messages_es.properties](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/resources/oxauth_es.properties)       
+- [messages_fr.properties](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/resources/oxauth_fr.properties)     
+- [messages_it.properties](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/resources/oxauth_it.properties)    
+- [messages_ru.properties](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/resources/oxauth_ru.properties)      
+- [messages_tr.properties](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/resources/oxauth_tr.properties)      
 
 These properties files store the translatable text of the messages to be displayed. The default properties file, `messages_en.properties`, contains the following lines:
 
@@ -106,7 +106,7 @@ From the Organization Settings page, the administrator can manage the organizati
 
 ![Organization Settings](../img/admin-guide/oxtrust/add_libs.png)
 
-In the Extra Libs tab, the administrator can add any needed additional libraries for use in both oxAuth and oxTrust.
+In the Extra Libraries tab, the administrator can add any needed additional libraries for use in both oxAuth and oxTrust.
 
 ## JSON Configuration      
 The following tabs are included in the `JSON Configuration` menu:
@@ -153,7 +153,7 @@ The following cache providers are now supported and can be selected via the `cac
 * [Redis](../reference/cache-provider-prop.md#redis-configuration) - recommended for cluster deployments
 * [NativePersistence](../reference/cache-provider-prop.md#native-persistence-configuration) - recommended to avoid additional components installation. All cache entries are saved in persistence layers.
 
-Full configuration options can be found at the [Cache Provider Reference doc](../reference/cache-provider-prop.md)
+Full configuration options can be found at the [Cache Provider Reference] document (../reference/cache-provider-prop.md)
 
 ### oxTrust Import Configuration
 
@@ -248,7 +248,7 @@ The Gluu Server exposes interception scripts for organizations to implement cust
 ![Manage Custom Scripts](../img/admin-guide/oxtrust/managecustomscriptsv4.png)
 
 ## Manage Registration
-The Gluu Server is shipped with a very basic user registration feature. The registration page can be found at `https://<hostname>/identity/register`. For custom enrollment requirements we recommend that you write a registration page and use SCIM to add the user record to the Gluu Server. In some cases, oxTrust is not Internet-facing, which makes it a bad option for user registration. Only use the net-net feature for basic requirements. See [user registration](../user-management/local-user-management#user-registration) for more. 
+The Gluu Server is shipped with a very basic user registration feature. The registration page can be found at `https://<hostname>/identity/register.htm`. For custom enrollment requirements we recommend that you write a registration page and use SCIM to add the user record to the Gluu Server. In some cases, oxTrust is not Internet-facing, which makes it a bad option for user registration. Only use the net-net feature for basic requirements. See [user registration](../user-management/user-registration.md) for more. 
 
 The tab has two options:
 
@@ -280,7 +280,7 @@ This allows you to export attributes from one Gluu Server instance and import th
     Before importing attributes to another instance, make sure that the `dn` value matches the structure of the instance the attributes are being imported to. Check with the LDAP search command or using a LDAP browser like `jxplorer` to make sure they match.
 
 ## Cache Refresh
-Cache Refresh, a.k.a. LDAP Synchronization, is the process of connecting one or more existing backend LDAP servers, like Microsoft Active Directory, with the Gluu Server's local LDAP server. `Cache Refresh` periodically searches these data sources, compares the results to previous searches, and if a changed user account is found, it is updated.The frequency of cache refresh is also set from this page via the `Polling interval (minutes)`. The `key attribute(s)` is used to correlate a user if the user is found in more then one LDAP server. In this case, the two entries are joined. The source attributes specify which attributes will be pulled from the backend LDAP server. The backend server address, bind DN and other connection information is speciifed in the `Source Backend LDAP Servers` tab. More information on [LDAP Syncronization](../user-management/ldap-sync.md) can be found in the user management section of the docs. 
+Cache Refresh, a.k.a. LDAP Synchronization, is the process of connecting one or more existing backend LDAP servers, like Microsoft Active Directory, with the Gluu Server's local LDAP server. `Cache Refresh` periodically searches these data sources, compares the results to previous searches, and if a changed user account is found, it is updated.The frequency of cache refresh is also set from this page via the `Polling interval (minutes)`. The `key attribute(s)` is used to correlate a user if the user is found in more then one LDAP server. In this case, the two entries are joined. The source attributes specify which attributes will be pulled from the backend LDAP server. The backend server address, bind DN and other connection information is speciifed in the `Source Backend LDAP Servers` tab. More information on [LDAP Syncronization](../user-management/ldap-sync.md) can be found in the user management section of the documents. 
 
 ## Configure Log Viewer / View Log File
 This tool can be used to view file system logs. If you don't like to SSH, 
@@ -302,13 +302,13 @@ The Passport authentication middleware enables inbound identity for SAML, OAuth,
 This tab is hidden until Passport is enabled for [SAML](../authn-guide/inbound-saml-passport.md#enable-passport) and/or [OAuth/OpenID Connect](../authn-guide/inbound-oauth-passport.md#enable-passport)
 
 ## OpenID Connect
-The OpenID Connect protocol is supported by default in all Gluu Server deployments. Learn more about configuring and managing OpenID Connect in the [OpenID Connect](./openid-connect.md) portion of the docs. 
+The OpenID Connect protocol is supported by default in all Gluu Server deployments. Learn more about configuring and managing OpenID Connect in the [OpenID Connect](./openid-connect.md) portion of the documents. 
 
 ## UMA
-UMA (User-Managed Access) is an access management protocol that is also supported by default in all Gluu Server deployments. Learn more about configuring and managing UMA in the [UMA](./uma.md) portion of the docs.
+UMA (User-Managed Access) is an access management protocol that is also supported by default in all Gluu Server deployments. Learn more about configuring and managing UMA in the [UMA](./uma.md) portion of the documents.
 
 ## Users
-The users tab allows the Gluu admin to perform various user management tasks like adding users, searching users, and importing users from a file. Learn more about managing users in the [user management](../user-management/local-user-management.md) portion of the docs. 
+The users tab allows the Gluu admin to perform various user management tasks like adding users, searching users, and importing users from a file. Learn more about managing users in the [user management](../user-management/local-user-management.md) portion of the documents. 
 
 ## Personal
-The personal tab allows an individual to view and manage (if enabled) their basic profile information. However, since oxTrust is designed to be an administrative tool it is often not Internet facing, making it a bad choice for user self-service profile management. In general, if user profile management is an important requirement for your organization, we recommend writing a separate app or forking our open source [credential management app](https://github.com/GluuFederation/cred-mgr). 
+The personal tab allows an individual to view and manage (if enabled) their basic profile information. However, since oxTrust is designed to be an administrative tool it is often not Internet facing, making it a bad choice for user self-service profile management. In general, if user profile management is an important requirement for your organization, we recommend writing a separate app or forking our open source [credential management app](https://github.com/GluuFederation/docs-upgrade-prod/blob/1e3eab7ce47c48a53147a571264432468fbedbcc/docs/source/developer/authn-methods/credentials-management.md). 

@@ -67,9 +67,9 @@ Some prerequisites are necessary for setting up Gluu with delta-syncrepl MMR:
 
 ### Install Gluu
 
-- First, [install Gluu](https://gluu.org/docs/ce/installation-guide/install/) on one of the servers, node 1. It will be referred to as the "primary" for the sake of simplification. Once everything is configured, there will be no primary in the multi-master configuration.
+- First, [install Gluu](https://gluu.org/docs/gluu-server/4.3/installation-guide/) on one of the servers, node 1. It will be referred to as the "primary" for the sake of simplification. Once everything is configured, there will be no primary in the multi-master configuration.
 
-- On all of the non-primary Gluu Cluster members (not the NGINX server, or the redis server), [download the Gluu packages](https://gluu.org/docs/ce/installation-guide/install/) but **don't run `setup.py` yet**!   
+- On all of the non-primary Gluu Cluster members (not the NGINX server, or the redis server), [download the Gluu packages](https://gluu.org/docs/gluu-server/4.3/installation-guide/) but **don't run `setup.py` yet**!   
 
 - On the primary Gluu Server, log in to the chroot and cd to `/install/community-edition-setup/`
 
@@ -795,7 +795,7 @@ In the `<hostname>`, both IP (`197.122.32.421`) and hostname (`redis.example.org
 **This is the end of the commands that had to be done on both nodes**
  
 !!! Info
-    For more information or if you're having trouble, please see [this redis how-to guide.](https://redislabs.com/blog/using-stunnel-to-secure-redis/)
+    For more information or if you're having trouble, please see this [redis how-to guide.](https://redislabs.com/blog/using-stunnel-to-secure-redis/)
 
 !!! Note
     Redis can also be configured for HA and failover with multiple methods, utilizing [Sentinel](https://redis.io/topics/sentinel) or [Redis-cluster](https://redis.io/topics/cluster-tutorial)
