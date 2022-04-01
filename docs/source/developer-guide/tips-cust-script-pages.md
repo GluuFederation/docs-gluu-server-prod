@@ -301,3 +301,83 @@ So create an xhtml page `postlogin.xhtml` which will look like this :
 ```
 
 4. The `<f:viewAction action="#{authenticator.authenticate}" />` in step 3 takes us to the `  def authenticate(self, configurationAttributes, requestParameters, step):`. Here you can use parameters from request (` param = ServerUtil.getFirstValue(requestParameters, "param-name") `) , perform the state check and finally, return true or false from this method.
+
+### Authenticating via an External IDP a New User Created Using a Custom Authentication Script in a Cloud Native Setup with Kubernetes
+
+#### General Overview
+
+This section explains how to authenticate a new user that has been created with a custom authentication script in a cloud native setup of Gluu that uses LDAP as the backend persistence. For reference, click [here](https://gluu.org/docs/gluu-server/4.3/installation-guide/install-kubernetes/) for guidance on installing Gluu with Kubernetes
+
+#### Custom Authentication Script Overview
+
+In the sample script, we assume that the user is to be authenticated via an external IDP. If the user doesn't exist in OpenDJ, the script automatically creates the user in the database before trying to authenticate them.
+
+- For example consider the snippet below extracted from the script:
+ 
+    ```
+    find_user_by_uid = userService.addUser(user, True)
+    found_user_name = find_user_by_uid.getUserId()
+    user_authenticated = authenticationService.authenticate(found_user_name)
+    ```
+
+#### Cloud Native Setup Overview
+
+LDAP is supported for backend persistence. Refer to the link shared in the general overview on how to achieve this with Kubernetes. A complete cloud native setup with replication enables having synchronized database instances for high availability. However for certain reasons for example limited computing resources, OpenDJ replication might get so slow leading to unsynchronized databases at any given time intervals.
+
+For instance a `find_user_by_uid.getUserId()` function in our script can fail because an opendj database connection could be routed to a different pod for every request made. Therefore the newly created user is not replicated quickly enough to all opendj pods hence causing authentication to fail.
+
+#### Solution
+
+To solve the issue above, a tested solution is to configure the services in a way that binds oxAuth service to the same opendj pod it got connected to when it created the user. This enables the client session to be reserved as long as the OpenDJ hasn't been restarted.
+
+- In the OpenDJ service, set `service.spec.sessionAffinity` to `ClientIP`. By default the session held by the service is 3 hours and can be modified by setting `service.spec.sessionAffinityConfig.clientIP.timeoutSeconds`. For example to configure the sessionAffinity to the opendj service, refer to the snippet below.
+
+    ```
+    "sessionAffinity": "ClientIP",
+
+    "sessionAffinityConfig": {
+        "clientIP": {
+            "timeoutSeconds": 28800
+        }
+    },
+    ```
+
+!!! Note
+    The solution above should be sufficient but if it doesn't work, enhance the interception script with custom functionality that ease creation of a user E.g add detailed print statements and operation retries. For example the following custom addUser() method is added to the authentication script.
+
+        ```
+        def addUser(self, user, saml_user_uid):
+            userService = CdiUtil.bean(UserService)
+            count = 0
+            while count < 5:
+                count = count + 1
+                try:
+                    find_user_by_uid = userService.getUserByAttribute("oxExternalUid", "custom_id_if_any:" + saml_user_uid)
+                    if not (find_user_by_uid is None):
+                        return find_user_by_uid
+                    newUser = userService.addUser(user, True)
+                    return newUser
+                except java.lang.Exception as err:
+                    print "Failed to add user."
+                    print str(err)
+                    time.sleep(count)
+            print "ERROR: Failed to add user '%s' after 5 tries. " % user
+            raise Exception("Failed to add user after 5 tries")
+        ```
+
+#### Troubleshooting
+
+- Ensure the setup is correct and the pods are running.
+
+    ```
+        kubectl get pods -n gluu
+    ```
+
+- Use the 'netstat' command to test if the opendj pods are connected
+
+    ```
+        kubectl exec -it -n gluu oxauth-xxxxxxxxxx-xxxx  -- sh 
+
+        / # netstat -na |grep 1636
+    ```
+
