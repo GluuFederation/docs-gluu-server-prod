@@ -345,25 +345,23 @@ To solve the issue above, a tested solution is to configure the services in a wa
 !!! Note
     The solution above should be sufficient but if it doesn't work, enhance the interception script with custom functionality that ease creation of a user E.g add detailed print statements and operation retries. For example the following custom addUser() method is added to the authentication script.
 
-        ```
-        def addUser(self, user, saml_user_uid):
-            userService = CdiUtil.bean(UserService)
-            count = 0
-            while count < 5:
-                count = count + 1
-                try:
-                    find_user_by_uid = userService.getUserByAttribute("oxExternalUid", "custom_id_if_any:" + saml_user_uid)
-                    if not (find_user_by_uid is None):
-                        return find_user_by_uid
-                    newUser = userService.addUser(user, True)
-                    return newUser
-                except java.lang.Exception as err:
-                    print "Failed to add user."
-                    print str(err)
-                    time.sleep(count)
-            print "ERROR: Failed to add user '%s' after 5 tries. " % user
-            raise Exception("Failed to add user after 5 tries")
-        ```
+	def addUser(self, user, saml_user_uid):
+	    userService = CdiUtil.bean(UserService)
+	    count = 0
+	    while count < 5:
+		count = count + 1
+		try:
+		    find_user_by_uid = userService.getUserByAttribute("oxExternalUid", "custom_id_if_any:" + saml_user_uid)
+		    if not (find_user_by_uid is None):
+			return find_user_by_uid
+		    newUser = userService.addUser(user, True)
+		    return newUser
+		except java.lang.Exception as err:
+		    print "Failed to add user."
+		    print str(err)
+		    time.sleep(count)
+	    print "ERROR: Failed to add user '%s' after 5 tries. " % user
+	    raise Exception("Failed to add user after 5 tries")
 
 #### Troubleshooting
 
