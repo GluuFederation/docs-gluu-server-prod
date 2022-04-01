@@ -344,7 +344,8 @@ To solve the issue above, a tested solution is to configure the services in a wa
 
 !!! Note
     The solution above should be sufficient but if it doesn't work, enhance the interception script with custom functionality that ease creation of a user E.g add detailed print statements and operation retries. For example the following custom addUser() method is added to the authentication script.
-
+		
+    ```		
     def addUser(self, user, saml_user_uid):
         userService = CdiUtil.bean(UserService)
         count = 0
@@ -362,6 +363,7 @@ To solve the issue above, a tested solution is to configure the services in a wa
 	        time.sleep(count)
         print "ERROR: Failed to add user '%s' after 5 tries. " % user
         raise Exception("Failed to add user after 5 tries")
+    ```			
 
 #### Troubleshooting
 
