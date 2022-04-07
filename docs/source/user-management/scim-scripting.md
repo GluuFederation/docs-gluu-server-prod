@@ -15,13 +15,13 @@ With SCIM scripts, custom business logic can be executed when several of the SCI
     
 ## API overview
 
-Custom scripts adhere to a simple API (ie. a well-defined collection of methods/routines) that is described in the following. It is advised to check the dummy script provided [here](https://github.com/GluuFederation/community-edition-setup/raw/version_4.3.0/static/extension/scim/SampleScript.py) as you read this section. 
+Custom scripts adhere to a simple API (ie. a well-defined collection of methods/routines) that is described in the following. It is advised to check the dummy script provided [here](https://github.com/GluuFederation/community-edition-setup/raw/version_4.4.0/static/extension/scim/SampleScript.py) as you read this section. 
 
 ### Scripts' config properties
     
 All methods contain a `configurationAttributes` parameter, this gives access to the configuration properties of the script itself. This is a relevant aspect of Gluu scripts: they are all parameterizable!. 
 
-`configurationAttributes` is a `java.util.Map<String, SimpleCustomProperty>` and [here](https://github.com/GluuFederation/oxCore/blob/version_4.3.0/oxUtil/src/main/java/org/gluu/model/SimpleCustomProperty.java) is how `SimpleCustomProperty` looks.
+`configurationAttributes` is a `java.util.Map<String, SimpleCustomProperty>` and [here](https://github.com/GluuFederation/oxCore/blob/version_4.4.0/oxUtil/src/main/java/org/gluu/model/SimpleCustomProperty.java) is how `SimpleCustomProperty` looks.
 
 ### Basic methods
 
@@ -41,8 +41,8 @@ These methods are called regardless of the API version used. Names are self expl
 
 |Methods|2nd param|2nd param Class/Link|
 |-|-|-|
-|`createUser`, `updateUser`, `deleteUser`|`user`|[ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java)|
-|`createGroup`, `updateGroup`, `deleteGroup`|`group`|[GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.3.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
+|`createUser`, `updateUser`, `deleteUser`|`user`|[ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java)|
+|`createGroup`, `updateGroup`, `deleteGroup`|`group`|[GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.4.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
 
 Pre-resource modification methods return a boolean. A `False` value aborts the corresponding SCIM operation and a 500 error is returned. The same applies if the method execution crashes at runtime.
 
@@ -56,8 +56,8 @@ These methods are called if `getApiVersion` returns a number >= 2.
 
 |Methods|2nd param|2nd param Class/Link|                                                      
 |-|-|-|
-|`postCreateUser`, `postUpdateUser`, `postDeleteUser`|`user`|[ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java)|
-|`postCreateGroup`, `postUpdateGroup`, `postDeleteGroup`|`group`|[GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.3.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
+|`postCreateUser`, `postUpdateUser`, `postDeleteUser`|`user`|[ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java)|
+|`postCreateGroup`, `postUpdateGroup`, `postDeleteGroup`|`group`|[GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.4.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
 
 Post-resource modification methods return a boolean. A `False` value aborts the corresponding SCIM operation and a 500 error is returned. The same applies if the method execution crashes at runtime.
 
@@ -73,8 +73,8 @@ These methods are called if `getApiVersion` returns a number >= 3 (available in 
 
 |Methods|2nd param|2nd param Class/Link|
 |-|-|-|
-|`getUser`|`user`|[ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java)|
-|`getGroup`|`group`|[GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.3.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
+|`getUser`|`user`|[ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java)|
+|`getGroup`|`group`|[GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.4.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
 
 Single resource retrieval methods return a boolean. A `False` value aborts the whole SCIM operation and a 500 error is returned. The same applies if the method execution crashes at runtime. 
 
@@ -88,8 +88,8 @@ These methods are called if `getApiVersion` returns a number >= 4 (available in 
 
 |Methods|2nd param|2nd param Class/Link|
 |-|-|-|
-|`postSearchUsers`|`results`|[PagedResult](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)<ScimCustomPerson>|
-|`postSearchGroups`|`results`|[PagedResult](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)<GluuGroup>|
+|`postSearchUsers`|`results`|[PagedResult](https://github.com/GluuFederation/oxOrm/blob/version_4.4.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)<ScimCustomPerson>|
+|`postSearchGroups`|`results`|[PagedResult](https://github.com/GluuFederation/oxOrm/blob/version_4.4.0/core/src/main/java/org/gluu/persist/model/PagedResult.java)<GluuGroup>|
 
 Multiple resources retrieval methods return a boolean. A `False` value aborts the whole SCIM operation and a 500 error is returned. The same applies if the method execution crashes at runtime. 
 
@@ -151,7 +151,7 @@ This is very straightforward code except for the usage of `oxTrustAddresses`. Sh
 
 Scripts work with entities that are about to be persisted or have already been saved so they kind of resemble the database structure (schema in LDAP terms). It turns out that database attribute names rarely match with SCIM names. An explanation of this fact can be found [here](./scim2.md#how-is-scim-data-stored).
 
-While it is easy to know the SCIM name of a database attribute, the converse requires checking the code, however since you already have the skill this shouldn't be a problem: in [this](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2/user/UserResource.java) Java class you'll find the representation of a user resource in SCIM spec terms. Pay attention to the `addresses` field and its associated `StoreReference` annotation that contains the attribute where addresses are actually stored.  
+While it is easy to know the SCIM name of a database attribute, the converse requires checking the code, however since you already have the skill this shouldn't be a problem: in [this](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2/user/UserResource.java) Java class you'll find the representation of a user resource in SCIM spec terms. Pay attention to the `addresses` field and its associated `StoreReference` annotation that contains the attribute where addresses are actually stored.  
 
 With that said, save your modifications. You may like the idea of adding some prints for enlightment like:
 
@@ -176,9 +176,9 @@ Parameters are described in the table below:
 
 |Name|Description|Class/Link|
 |-|-|-|
-|`context`|Provides contextual information about the SCIM operation being called such as type of resource involved, HTTP verb, request headers, query params, etc.  |[OperationContext](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-rest/src/main/java/org/gluu/oxtrust/service/external/OperationContext.java)|
-|`entity`|An non-null object representing the resource involved|A descendant of [Entry](https://github.com/GluuFederation/oxOrm/blob/version_4.3.0/model/src/main/java/org/gluu/persist/model/base/Entry.java). If the resource is a user, it will be an instance of [ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java). In case of a group, it will be a [GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.3.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
-|`payload`|The payload sent in the invocation; `null` when the operation is removal or retrieval by ID|The datatype depends on the operation called. Check the [interface](https://github.com/GluuFederation/scim/tree/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/ws/rs/scim2) that suits best and inspect the first parameter's datatype. The class will belong to some subpackage inside [org.gluu.oxtrust.model.scim2](https://github.com/GluuFederation/scim/tree/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2)|
+|`context`|Provides contextual information about the SCIM operation being called such as type of resource involved, HTTP verb, request headers, query params, etc.  |[OperationContext](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-rest/src/main/java/org/gluu/oxtrust/service/external/OperationContext.java)|
+|`entity`|An non-null object representing the resource involved|A descendant of [Entry](https://github.com/GluuFederation/oxOrm/blob/version_4.4.0/model/src/main/java/org/gluu/persist/model/base/Entry.java). If the resource is a user, it will be an instance of [ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java). In case of a group, it will be a [GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.4.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
+|`payload`|The payload sent in the invocation; `null` when the operation is removal or retrieval by ID|The datatype depends on the operation called. Check the [interface](https://github.com/GluuFederation/scim/tree/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/ws/rs/scim2) that suits best and inspect the first parameter's datatype. The class will belong to some subpackage inside [org.gluu.oxtrust.model.scim2](https://github.com/GluuFederation/scim/tree/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2)|
 
 This method is expected to return an instance of `javax.ws.rs.core.Response` that supersedes the output of the operation itself. In other words, the actual processing of the operation is skipped in favor of the code supplied here. However note that minor validations may take place in the payload before your code is actually called. 
 
@@ -192,7 +192,7 @@ Returning `None` transfers the control of the operation for normal processing (d
 - Note that for resource creation operation, `entity` basically contains the same data supplied in the POST `payload`. In this case, `entity` has not originated from the database and has not been persisted either
 - For the case of modification, retrieval and removal, `entity` contains the data currently stored in the database for the resource in question
 - Since many values come from Java code, you can always do `getClass().getName()` to get an idea of what type of variables you are dealing with
-- To build custom error responses your can reuse some of the `getErrorResponse` methods of class [BaseScimWebService](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-rest/src/main/java/org/gluu/oxtrust/ws/rs/scim2/BaseScimWebService.java) 
+- To build custom error responses your can reuse some of the `getErrorResponse` methods of class [BaseScimWebService](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-rest/src/main/java/org/gluu/oxtrust/ws/rs/scim2/BaseScimWebService.java) 
 
 This method offers a high degree of flexibility. Perform careful testing of your code and account all potential scenarios.
 
@@ -202,8 +202,8 @@ This method is invoked when resource searches are performed. Parameters are desc
 
 |Name|Description|Class/Link|
 |-|-|-|
-|`context`|Provides contextual information about the SCIM operation being called such as type of resource involved, HTTP verb, request headers, query params, etc.  |[OperationContext](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-rest/src/main/java/org/gluu/oxtrust/service/external/OperationContext.java)|
-|`searchRequest`|An object representing the search parameters provided in the call (applies for both GET and POST)|[SearchRequest](https://github.com/GluuFederation/scim/blob/version_4.3.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2/SearchRequest.java)|
+|`context`|Provides contextual information about the SCIM operation being called such as type of resource involved, HTTP verb, request headers, query params, etc.  |[OperationContext](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-rest/src/main/java/org/gluu/oxtrust/service/external/OperationContext.java)|
+|`searchRequest`|An object representing the search parameters provided in the call (applies for both GET and POST)|[SearchRequest](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2/SearchRequest.java)|
 
 Unlike `manageResourceOperation`, no `entity` parameter is passed. This is so because making decisions based on already executed searches would have a performance impact. Instead you can use `context.setFilterPrepend(...)` to help restrict the search against the database: here you can pass a `String` value that will be interpreted as an SCIM filter expression (see section 3.4.2.2 of RFC 7644). When the search being performed already contains a search filter (ie.  `searchRequest.getFilter()`is non-empty), a new filter is created by appending both "subfilters" with an `and` operator.  
 

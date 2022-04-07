@@ -464,7 +464,7 @@ Red Hat OpenShift Service on AWS (ROSA):
 
     === "Helm"
         
-        Follow this [section](https://gluu.org/docs/gluu-server/4.3/installation-guide/install-kubernetes/#installing-gluu-using-helm-manually) to install using helm manually.
+        Follow this [section](https://gluu.org/docs/gluu-server/4.4/installation-guide/install-kubernetes/#installing-gluu-using-helm-manually) to install using helm manually.
 
     If the `nginx-ingress` didn't work correctly - modifying the `deployment configuration` for nginx-ingress and adding the serviceaccount to the `anyuid SCC` as the application defined needs to run as user root in the container.
 

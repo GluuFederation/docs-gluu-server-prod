@@ -306,7 +306,7 @@ So create an xhtml page `postlogin.xhtml` which will look like this :
 
 #### General Overview
 
-This section explains how to authenticate a new user that has been created with a custom authentication script in a cloud native setup of Gluu that uses LDAP as the backend persistence. For reference, click [here](https://gluu.org/docs/gluu-server/4.3/installation-guide/install-kubernetes/) for guidance on installing Gluu with Kubernetes
+This section explains how to authenticate a new user that has been created with a custom authentication script in a cloud native setup of Gluu that uses LDAP as the backend persistence. For reference, click [here](https://gluu.org/docs/gluu-server/4.4/installation-guide/install-kubernetes/) for guidance on installing Gluu with Kubernetes
 
 #### Custom Authentication Script Overview
 

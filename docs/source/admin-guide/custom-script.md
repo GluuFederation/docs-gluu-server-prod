@@ -288,7 +288,7 @@ Associate RPT Claims script with client (Update button must be clicked to persis
 
 ![rptclaims](../img/admin-guide/rptclaims.png)
 
-View a [RPT Claims Script Sample](https://github.com/GluuFederation/oxAuth/blob/version_4.3.2/Server/src/main/java/org/gluu/oxauth/uma/service/UmaRptService.java)
+View a [RPT Claims Script Sample](https://github.com/GluuFederation/oxAuth/blob/version_4.4.0/Server/src/main/java/org/gluu/oxauth/uma/service/UmaRptService.java)
 
 
 
@@ -365,7 +365,7 @@ Revoke Token scripts allow inject custom logic during token revoking.
         return True
 ```
 
-Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.3.0/static/extension/revoke_token/revoke_token.py).
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.4.0/static/extension/revoke_token/revoke_token.py).
 
 Note `RevokeTokenContext` allows to access response builder (`context.getResponseBuilder()`) which allows to customer response if needed.
 
@@ -389,7 +389,7 @@ Snippet
         return ""
 ```
 
-Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.3.0/static/extension/end_session/end_session.py). 
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.4.0/static/extension/end_session/end_session.py). 
 
 ## Resource Owner Password Credentials
 
@@ -415,7 +415,7 @@ Snippet
         return False
 ```
 
-Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.3.0/static/extension/resource_owner_password_credentials/resource_owner_password_credentials.py). 
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.4.0/static/extension/resource_owner_password_credentials/resource_owner_password_credentials.py). 
 
 ## Persistence Extension
 
@@ -454,7 +454,7 @@ This script type is specific to SAML / Shibboleth IDP and allows developers to p
 |Method|`def translateAttributes(self, context, configurationAttributes)`|
 | ---  | --- |
 | **Description**|Translate attributes from user profile|
-|Method Parameter| `context` is [`org.gluu.idp.externalauth.TranslateAttributesContext.java`](https://github.com/GluuFederation/shib-oxauth-authn3/blob/version_4.3.0/src/main/java/org/gluu/idp/externalauth/TranslateAttributesContext.java) |
+|Method Parameter| `context` is [`org.gluu.idp.externalauth.TranslateAttributesContext.java`](https://github.com/GluuFederation/shib-oxauth-authn3/blob/version_4.4.0/src/main/java/org/gluu/idp/externalauth/TranslateAttributesContext.java) |
 |Method Parameter| `configurationAttributes` is `java.util.Map<String, SimpleCustomProperty>`|
     
 ## Additional Tips

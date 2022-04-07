@@ -67,9 +67,9 @@ Some prerequisites are necessary for setting up Gluu with delta-syncrepl MMR:
 
 ### Install Gluu
 
-- First, [install Gluu](https://gluu.org/docs/gluu-server/4.3/installation-guide/) on one of the servers, node 1. It will be referred to as the "primary" for the sake of simplification. Once everything is configured, there will be no primary in the multi-master configuration.
+- First, [install Gluu](https://gluu.org/docs/gluu-server/4.4/installation-guide/) on one of the servers, node 1. It will be referred to as the "primary" for the sake of simplification. Once everything is configured, there will be no primary in the multi-master configuration.
 
-- On all of the non-primary Gluu Cluster members (not the NGINX server, or the redis server), [download the Gluu packages](https://gluu.org/docs/gluu-server/4.3/installation-guide/) but **don't run `setup.py` yet**!   
+- On all of the non-primary Gluu Cluster members (not the NGINX server, or the redis server), [download the Gluu packages](https://gluu.org/docs/gluu-server/4.4/installation-guide/) but **don't run `setup.py` yet**!   
 
 - On the primary Gluu Server, log in to the chroot and cd to `/install/community-edition-setup/`
 

@@ -93,7 +93,7 @@ Generally it's convenient to set the logging level for both oxAuth and SCIM to *
 
 ## API documentation at a glance
 
-[SCIM API](../api-guide/scim-api.md) doc page describes the HTTP verbs, resource types, and endpoints available in our implementation of SCIM. The API has also been documented using OpenAPI (swagger) specification for the interested. Find yaml files [here](https://github.com/GluuFederation/scim/tree/version_4.3.0/scim-server/src/main/resources).
+[SCIM API](../api-guide/scim-api.md) doc page describes the HTTP verbs, resource types, and endpoints available in our implementation of SCIM. The API has also been documented using OpenAPI (swagger) specification for the interested. Find yaml files [here](https://github.com/GluuFederation/scim/tree/version_4.4.0/scim-server/src/main/resources).
 
 ## Working in Test Mode
 
@@ -587,7 +587,7 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 
 ```
 <properties>
-	<scim.client.version>4.3.0.Final</scim.client.version>
+	<scim.client.version>4.4.0.Final</scim.client.version>
 </properties>
 ...
 <repositories>
@@ -605,7 +605,7 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 </dependency>
 ```
 
-Ideally, the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.3, you should also use scim-client v4.3.
+Ideally, the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.4, you should also use scim-client v4.4.
 
 If you don't want to use Maven, you can download the jar file for scim-client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
@@ -783,7 +783,7 @@ Create a project in your favorite IDE, and if using maven add the following snip
 
 ```
 <properties>
-	<scim.client.version>4.3.0.Final</scim.client.version>
+	<scim.client.version>4.4.0.Final</scim.client.version>
 </properties>
 ...
 <repositories>

@@ -180,7 +180,7 @@ encrypted or not.
 ```json
 {
   "ACCEPT_GLUU_LICENSE": "Y",
-  "GLUU_VERSION": "4.3.0_dev",
+  "GLUU_VERSION": "4.4.0_dev",
   "TEST_ENVIRONMENT": "",
   "GLUU_UPGRADE_TARGET_VERSION": "",
   "GLUU_HELM_RELEASE_NAME": "gluu",
@@ -313,35 +313,35 @@ encrypted or not.
   "OXAUTH_KEYS_LIFE": "",
   "EDIT_IMAGE_NAMES_TAGS": "N",
   "CASA_IMAGE_NAME": "gluufederation/casa",
-  "CASA_IMAGE_TAG": "4.3.0_dev",
+  "CASA_IMAGE_TAG": "4.4.0_dev",
   "CONFIG_IMAGE_NAME": "gluufederation/config-init",
-  "CONFIG_IMAGE_TAG": "4.3.0_dev",
+  "CONFIG_IMAGE_TAG": "4.4.0_dev",
   "CACHE_REFRESH_ROTATE_IMAGE_NAME": "gluufederation/cr-rotate",
-  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.3.0_dev",
+  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.4.0_dev",
   "CERT_MANAGER_IMAGE_NAME": "gluufederation/certmanager",
-  "CERT_MANAGER_IMAGE_TAG": "4.3.0_dev",
+  "CERT_MANAGER_IMAGE_TAG": "4.4.0_dev",
   "LDAP_IMAGE_NAME": "gluufederation/opendj",
-  "LDAP_IMAGE_TAG": "4.3.0_dev",
+  "LDAP_IMAGE_TAG": "4.4.0_dev",
   "JACKRABBIT_IMAGE_NAME": "gluufederation/jackrabbit",
-  "JACKRABBIT_IMAGE_TAG": "4.3.0_dev",
+  "JACKRABBIT_IMAGE_TAG": "4.4.0_dev",
   "OXAUTH_IMAGE_NAME": "gluufederation/oxauth",
-  "OXAUTH_IMAGE_TAG": "4.3.0_dev",
+  "OXAUTH_IMAGE_TAG": "4.4.0_dev",
   "FIDO2_IMAGE_NAME": "gluufederation/fido2",
-  "FIDO2_IMAGE_TAG": "4.3.0_dev",
+  "FIDO2_IMAGE_TAG": "4.4.0_dev",
   "SCIM_IMAGE_NAME": "gluufederation/scim",
-  "SCIM_IMAGE_TAG": "4.3.0_dev",
+  "SCIM_IMAGE_TAG": "4.4.0_dev",
   "OXD_IMAGE_NAME": "gluufederation/oxd-server",
-  "OXD_IMAGE_TAG": "4.3.0_dev",
+  "OXD_IMAGE_TAG": "4.4.0_dev",
   "OXPASSPORT_IMAGE_NAME": "gluufederation/oxpassport",
-  "OXPASSPORT_IMAGE_TAG": "4.3.0_dev",
+  "OXPASSPORT_IMAGE_TAG": "4.4.0_dev",
   "OXSHIBBOLETH_IMAGE_NAME": "gluufederation/oxshibboleth",
-  "OXSHIBBOLETH_IMAGE_TAG": "4.3.0_dev",
+  "OXSHIBBOLETH_IMAGE_TAG": "4.4.0_dev",
   "OXTRUST_IMAGE_NAME": "gluufederation/oxtrust",
-  "OXTRUST_IMAGE_TAG": "4.3.0_dev",
+  "OXTRUST_IMAGE_TAG": "4.4.0_dev",
   "PERSISTENCE_IMAGE_NAME": "gluufederation/persistence",
-  "PERSISTENCE_IMAGE_TAG": "4.3.0_dev",
+  "PERSISTENCE_IMAGE_TAG": "4.4.0_dev",
   "UPGRADE_IMAGE_NAME": "gluufederation/upgrade",
-  "UPGRADE_IMAGE_TAG": "4.3.0_dev",
+  "UPGRADE_IMAGE_TAG": "4.4.0_dev",
   "CONFIRM_PARAMS": "Y",
   "GLUU_LDAP_MULTI_CLUSTER": "Y",
   "GLUU_LDAP_ADVERTISE_ADDRESS": "regional.gluu.org",
@@ -383,7 +383,7 @@ encrypted or not.
 ```json
 {
   "ACCEPT_GLUU_LICENSE": "Y",
-  "GLUU_VERSION": "4.3.0_dev",
+  "GLUU_VERSION": "4.4.0_dev",
   "TEST_ENVIRONMENT": "",
   "GLUU_UPGRADE_TARGET_VERSION": "",
   "GLUU_HELM_RELEASE_NAME": "gluu",
@@ -516,35 +516,35 @@ encrypted or not.
   "OXAUTH_KEYS_LIFE": "",
   "EDIT_IMAGE_NAMES_TAGS": "N",
   "CASA_IMAGE_NAME": "gluufederation/casa",
-  "CASA_IMAGE_TAG": "4.3.0_dev",
+  "CASA_IMAGE_TAG": "4.4.0_dev",
   "CONFIG_IMAGE_NAME": "gluufederation/config-init",
-  "CONFIG_IMAGE_TAG": "4.3.0_dev",
+  "CONFIG_IMAGE_TAG": "4.4.0_dev",
   "CACHE_REFRESH_ROTATE_IMAGE_NAME": "gluufederation/cr-rotate",
-  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.3.0_dev",
+  "CACHE_REFRESH_ROTATE_IMAGE_TAG": "4.4.0_dev",
   "CERT_MANAGER_IMAGE_NAME": "gluufederation/certmanager",
-  "CERT_MANAGER_IMAGE_TAG": "4.3.0_dev",
+  "CERT_MANAGER_IMAGE_TAG": "4.4.0_dev",
   "LDAP_IMAGE_NAME": "gluufederation/opendj",
-  "LDAP_IMAGE_TAG": "4.3.0_dev",
+  "LDAP_IMAGE_TAG": "4.4.0_dev",
   "JACKRABBIT_IMAGE_NAME": "gluufederation/jackrabbit",
-  "JACKRABBIT_IMAGE_TAG": "4.3.0_dev",
+  "JACKRABBIT_IMAGE_TAG": "4.4.0_dev",
   "OXAUTH_IMAGE_NAME": "gluufederation/oxauth",
-  "OXAUTH_IMAGE_TAG": "4.3.0_dev",
+  "OXAUTH_IMAGE_TAG": "4.4.0_dev",
   "FIDO2_IMAGE_NAME": "gluufederation/fido2",
-  "FIDO2_IMAGE_TAG": "4.3.0_dev",
+  "FIDO2_IMAGE_TAG": "4.4.0_dev",
   "SCIM_IMAGE_NAME": "gluufederation/scim",
-  "SCIM_IMAGE_TAG": "4.3.0_dev",
+  "SCIM_IMAGE_TAG": "4.4.0_dev",
   "OXD_IMAGE_NAME": "gluufederation/oxd-server",
-  "OXD_IMAGE_TAG": "4.3.0_dev",
+  "OXD_IMAGE_TAG": "4.4.0_dev",
   "OXPASSPORT_IMAGE_NAME": "gluufederation/oxpassport",
-  "OXPASSPORT_IMAGE_TAG": "4.3.0_dev",
+  "OXPASSPORT_IMAGE_TAG": "4.4.0_dev",
   "OXSHIBBOLETH_IMAGE_NAME": "gluufederation/oxshibboleth",
-  "OXSHIBBOLETH_IMAGE_TAG": "4.3.0_dev",
+  "OXSHIBBOLETH_IMAGE_TAG": "4.4.0_dev",
   "OXTRUST_IMAGE_NAME": "gluufederation/oxtrust",
-  "OXTRUST_IMAGE_TAG": "4.3.0_dev",
+  "OXTRUST_IMAGE_TAG": "4.4.0_dev",
   "PERSISTENCE_IMAGE_NAME": "gluufederation/persistence",
-  "PERSISTENCE_IMAGE_TAG": "4.3.0_dev",
+  "PERSISTENCE_IMAGE_TAG": "4.4.0_dev",
   "UPGRADE_IMAGE_NAME": "gluufederation/upgrade",
-  "UPGRADE_IMAGE_TAG": "4.3.0_dev",
+  "UPGRADE_IMAGE_TAG": "4.4.0_dev",
   "CONFIRM_PARAMS": "Y",
   "GLUU_LDAP_MULTI_CLUSTER": "Y",
   "GLUU_LDAP_ADVERTISE_ADDRESS": "regional.gluu.org",
@@ -733,7 +733,7 @@ config:
     gluuPersistenceType: ldap
   image:
     repository: gluufederation/config-init
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   volumes: []
   volumeMounts: []
@@ -801,7 +801,7 @@ jackrabbit:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/jackrabbit
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: 1
   resources:
@@ -851,7 +851,7 @@ opendj:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/opendj
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   multiCluster:
     enabled: true
@@ -933,7 +933,7 @@ persistence:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/persistence
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   resources:
     limits:
@@ -960,7 +960,7 @@ oxauth:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxauth
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: 1
   resources:
@@ -1008,7 +1008,7 @@ oxtrust:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxtrust
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: 1
   resources:
@@ -1057,7 +1057,7 @@ fido2:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/fido2
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -1103,7 +1103,7 @@ scim:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/scim
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -1149,7 +1149,7 @@ oxd-server:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxd-server
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: 1
   resources:
@@ -1197,7 +1197,7 @@ casa:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/casa
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -1243,7 +1243,7 @@ oxpassport:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxpassport
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -1291,7 +1291,7 @@ oxshibboleth:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxshibboleth
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -1330,7 +1330,7 @@ cr-rotate:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/cr-rotate
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   resources:
     limits:
@@ -1354,7 +1354,7 @@ oxauth-key-rotation:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/certmanager
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   keysLife: 48
   resources:
@@ -1520,7 +1520,7 @@ config:
     gluuPersistenceType: ldap
   image:
     repository: gluufederation/config-init
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   volumes: []
   volumeMounts: []
@@ -1588,7 +1588,7 @@ jackrabbit:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/jackrabbit
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: 1
   resources:
@@ -1638,7 +1638,7 @@ opendj:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/opendj
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   multiCluster:
     enabled: true
@@ -1720,7 +1720,7 @@ persistence:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/persistence
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   resources:
     limits:
@@ -1747,7 +1747,7 @@ oxauth:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxauth
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: 1
   resources:
@@ -1795,7 +1795,7 @@ oxtrust:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxtrust
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: 1
   resources:
@@ -1844,7 +1844,7 @@ fido2:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/fido2
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -1890,7 +1890,7 @@ scim:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/scim
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -1936,7 +1936,7 @@ oxd-server:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxd-server
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: 1
   resources:
@@ -1984,7 +1984,7 @@ casa:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/casa
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -2030,7 +2030,7 @@ oxpassport:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxpassport
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -2078,7 +2078,7 @@ oxshibboleth:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/oxshibboleth
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   replicas: ''
   resources:
@@ -2117,7 +2117,7 @@ cr-rotate:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/cr-rotate
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   resources:
     limits:
@@ -2141,7 +2141,7 @@ oxauth-key-rotation:
   image:
     pullPolicy: IfNotPresent
     repository: gluufederation/certmanager
-    tag: 4.3.0_dev
+    tag: 4.4.0_dev
     pullSecrets: []
   keysLife: 48
   resources:

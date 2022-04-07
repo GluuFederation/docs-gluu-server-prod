@@ -145,7 +145,7 @@
                       restartPolicy: Never
                       containers:
                         - name: web-key-rotation
-                          image: gluufederation/certmanager:4.3.0_b1
+                          image: gluufederation/certmanager:4.4.0_b1
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm # This may be differnet in Helm
@@ -200,7 +200,7 @@
                               path: gluu_https.key                              
                       containers:
                         - name: load-web-key-rotation
-                          image: gluufederation/certmanager:4.3.0_b1
+                          image: gluufederation/certmanager:4.4.0_b1
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm  #This may be differnet in Helm
@@ -251,7 +251,7 @@
                     spec:
                       containers:
                         - name: oxauth-key-rotation
-                          image: gluufederation/certmanager:4.3.0_b1
+                          image: gluufederation/certmanager:4.4.0_b1
                           env:
                             - name: GLUU_CONTAINER_MAIN_NAME
                               value: "oxauth" # Place oxauth container name 
@@ -294,7 +294,7 @@
             ```
         
         !!! Warning
-            Key rotation cronJob will try to push `oxauth-keys.jks` and `oxauth-keys.json` to oxAuth pods. If the service account user does not have permissions to list pods the above will fail with a `403` Forbidden message. This action can be disabled forcing oxAuth pods to pull from Kubernetes `Secret`s instead by setting the enviornment variable `GLUU_SYNC_JKS_ENABLED` to `true` inside the main config map i.e `gluu-config-cm` and adding to the `args` of the above yaml `"--opts", "push-to-container:false"` so the `args` section would look like `args: ["patch", "oxauth", "--opts", "interval:48", "--opts", "push-to-container:false"]`.
+            Key rotation cronJob will try to push `oxauth-keys.jks` and `oxauth-keys.json` to oxAuth pods. If the service account user does not have permissions to list pods the above will fail with a `4.4` Forbidden message. This action can be disabled forcing oxAuth pods to pull from Kubernetes `Secret`s instead by setting the enviornment variable `GLUU_SYNC_JKS_ENABLED` to `true` inside the main config map i.e `gluu-config-cm` and adding to the `args` of the above yaml `"--opts", "push-to-container:false"` so the `args` section would look like `args: ["patch", "oxauth", "--opts", "interval:48", "--opts", "push-to-container:false"]`.
                     
         1. Apply cron job
         
@@ -334,7 +334,7 @@
                   restartPolicy: Never
                   containers:
                     - name: oxshibboleth-key-rotation
-                      image: gluufederation/certmanager:4.3.0_b1
+                      image: gluufederation/certmanager:4.4.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -379,7 +379,7 @@
                   restartPolicy: Never
                   containers:
                     - name: oxd-key-rotation
-                      image: gluufederation/certmanager:4.3.0_b1
+                      image: gluufederation/certmanager:4.4.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -423,7 +423,7 @@
                   restartPolicy: Never
                   containers:
                     - name: ldap-key-rotation
-                      image: gluufederation/certmanager:4.3.0_b1
+                      image: gluufederation/certmanager:4.4.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -468,7 +468,7 @@
                   restartPolicy: Never
                   containers:
                     - name: passport-key-rotation
-                      image: gluufederation/certmanager:4.3.0_b1
+                      image: gluufederation/certmanager:4.4.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -508,7 +508,7 @@
                   restartPolicy: Never
                   containers:
                     - name: scim-key-rotation
-                      image: gluufederation/certmanager:4.3.0_b1
+                      image: gluufederation/certmanager:4.4.0_b1
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm

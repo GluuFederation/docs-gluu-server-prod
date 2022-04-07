@@ -199,11 +199,11 @@ http. Default is 1 second
 
 - `authScheme`. This is an optional string containing the authentication scheme to use. The valid values are `onestep` and `twostep`. `onestep` will simply authenticate the user against the Gluu Server and return the result in the form of a radius
 authentication status. `twostep` , which is the default , authenticates the user's credentials against gluu server , and 
-performs an additional authentication verification (the default script uses [Super Gluu](https://gluu.org/docs/gluu-server/4.3/authn-guide/supergluu/)). 
+performs an additional authentication verification (the default script uses [Super Gluu](https://gluu.org/docs/gluu-server/4.4/authn-guide/supergluu/)). 
 
 ## Testing 
 
-1. Create a user or use an existing user on Gluu Server. Make sure the user has at least one enrolled [Super Gluu](https://gluu.org/docs/gluu-server/4.3/authn-guide/supergluu/) device associated with their account.    
+1. Create a user or use an existing user on Gluu Server. Make sure the user has at least one enrolled [Super Gluu](https://gluu.org/docs/gluu-server/4.4/authn-guide/supergluu/) device associated with their account.    
 
 1. Run Radiator (see Radiator documentation)    
 

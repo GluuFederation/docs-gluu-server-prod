@@ -58,7 +58,7 @@ yum install httpd mod_ssl
 
     ```
       <IfDefine DontIgnoreDefaultVHost>
-      <VirtualHost _default_:443>
+      <VirtualHost _default_:4.4>
   
         ...
 
@@ -69,9 +69,9 @@ yum install httpd mod_ssl
 1. Create `/etc/httpd/conf.d/test_site.conf` file with contents provided below:
 
     ```
-      <VirtualHost 0.0.0.0:443>
+      <VirtualHost 0.0.0.0:4.4>
           DocumentRoot /var/www/html/test_shib_protected_site/
-          ServerName [sp_dns_name]:443
+          ServerName [sp_dns_name]:4.4
       
           SSLEngine on
           SSLProtocol -ALL +TLSv1

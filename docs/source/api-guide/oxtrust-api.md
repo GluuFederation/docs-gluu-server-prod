@@ -2,17 +2,17 @@
 
 ## Overview
 
-Gluu Server offers REST APIs for the [oxTrust Admin GUI](https://gluu.org/docs/gluu-server/4.3/admin-guide/oxtrust-ui/). With the REST API, server configurations can be automated, new GUIs can be built to expose specific admin functionality, and other integrations can be created for the Gluu admin portal.
+Gluu Server offers REST APIs for the [oxTrust Admin GUI](https://gluu.org/docs/gluu-server/4.4/admin-guide/oxtrust-ui/). With the REST API, server configurations can be automated, new GUIs can be built to expose specific admin functionality, and other integrations can be created for the Gluu admin portal.
 
 ## VM Installation instructions
 
-Add the REST API extension to an existing Gluu 4.3.x deployment by following these steps:
+Add the REST API extension to an existing Gluu 4.4.x deployment by following these steps:
 
 1. Inside the Gluu chroot, navigate to `/custom/libs/`.
 
-1. In this folder, download the .jar file corresponding to the Gluu Server 4.3 version currently installed:
+1. In this folder, download the .jar file corresponding to the Gluu Server 4.4 version currently installed:
 2. 
-    - [4.3.0.Final](https://ox.gluu.org/maven/org/gluu/oxtrust-api-server/4.3.0.Final/oxtrust-api-server-4.3.0.Final.jar)
+    - [4.4.0.Final](https://ox.gluu.org/maven/org/gluu/oxtrust-api-server/4.4.0.Final/oxtrust-api-server-4.4.0.Final.jar)
 
 1. Navigate to `/opt/gluu/jetty/identity/webapps/`.
 
@@ -35,7 +35,7 @@ Add the REST API extension to an existing Gluu 4.3.x deployment by following the
 
 1. On the second to last line, replace `[jarName]` with the name of the `.jar` file downloaded in step 2.
 
-1. [Restart](https://gluu.org/docs/gluu-server/4.3/operation/services/#restart) the `identity` service.
+1. [Restart](https://gluu.org/docs/gluu-server/4.4/operation/services/#restart) the `identity` service.
 
 ## Kubernetes and Docker instructions
 
@@ -75,7 +75,7 @@ The oxTrust API has two modes that administrators can configure according to nee
         -e GLUU_OXTRUST_API_TEST_MODE=true \
         -v $PWD/vault_role_id.txt:/etc/certs/vault_role_id \
         -v $PWD/vault_secret_id.txt:/etc/certs/vault_secret_id \
-        gluufederation/persistence:4.3.0_01
+        gluufederation/persistence:4.4.0_01
     ```
     
     If using kubernetes `pygluu-kubernetes.pyz` answer yes to both the following prompts: 
@@ -94,7 +94,7 @@ Search for the field named `oxTrustApiTestMode`, set it to `True` and save the c
 
 1.  Obtain Test mode client credentials from config and secret backends.
 
-    1.  Grab `api_test_client_id` from config backend; in this example, we're getting `0008-b52a8524-35b2-4835-968e-481a366be8cd` as its value. This is the client ID.
+    1.  Grab `api_test_client_id` from config backend; in this example, we're getting `0008-b52a8524.45b2-4.45-968e-481a366be8cd` as its value. This is the client ID.
 
     1.  Grab `api_test_client_secret` from secret backend; in this example, we're getting `TVtZwLZxp25XFDelMJNDQsa8` as its value. This is the client secret.
 
@@ -161,7 +161,7 @@ Search for the field named `oxTrustApiTestMode`, set it to `True` and save the c
         -e GLUU_OXTRUST_API_TEST_MODE=false \
         -v $PWD/vault_role_id.txt:/etc/certs/vault_role_id \
         -v $PWD/vault_secret_id.txt:/etc/certs/vault_secret_id \
-        gluufederation/persistence:4.3.0_01
+        gluufederation/persistence:4.4.0_01
     ```
     
     If using kubernetes `pygluu-kubernetes.pyz` answer `Y` to enabling `oxTrust API` and `N` to enabling `Test Mode`.
@@ -533,7 +533,7 @@ The UMA mode is the mode in which the API is protected by UMA. This is the recom
 
 ## API Reference
 
-Current Swagger documentation for oxTrust APIs can be found in the [oxTrust API doc](https://gluu.org/swagger-ui/?operationsSorter=alpha&url=https://raw.githubusercontent.com/GluuFederation/oxTrust/version_4.3.1/api-server/src/main/resources/META-INF/openapi.yaml).
+Current Swagger documentation for oxTrust APIs can be found in the [oxTrust API doc](https://gluu.org/swagger-ui/?operationsSorter=alpha&url=https://raw.githubusercontent.com/GluuFederation/oxTrust/version_4.4.0/api-server/src/main/resources/META-INF/openapi.yaml).
 
 ## License
 

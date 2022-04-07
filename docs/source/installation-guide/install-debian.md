@@ -1,7 +1,7 @@
 # Debian Installation 
 
 !!! note
-    The Gluu Server Debian distribution has been deprecated in version 4.3.
+    The Gluu Server Debian distribution has been deprecated in version 4.4.
     
 ## Overview
 Single-node Gluu Server Linux packages are available for Debian 9 and 10. Follow the instructions below:

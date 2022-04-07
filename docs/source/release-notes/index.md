@@ -3,13 +3,13 @@
 ## Notice
 
 This document, also known as the Gluu Release Note, 
-relates to the Gluu Server Release versioned 4.3. The work is licensed under “[The Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) License” allowing the use, copy, modify, merge, publish, distribute, sub-license and sale without limitation and liability. This document extends only to the aforementioned release version in the heading.
+relates to the Gluu Server Release versioned 4.4. The work is licensed under “[The Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) License” allowing the use, copy, modify, merge, publish, distribute, sub-license and sale without limitation and liability. This document extends only to the aforementioned release version in the heading.
 
 UNLESS IT HAS BEEN EXPRESSLY AGREED UPON BY ANY WRITTEN AGREEMENT BEFOREHAND, THE WORK/RELEASE IS PROVIDED “AS IS”, WITHOUT ANY WARRANTY OR GUARANTEE OF ANY KIND EXPRESS OR IMPLIED. UNDER NO CIRCUMSTANCE, THE AUTHOR, OR GLUU SHALL BE LIABLE FOR ANY CLAIMS OR DAMAGES CAUSED DIRECTLY OR INDIRECTLY TO ANY PROPERTY OR LIFE WHILE INSTALLING OR USING THE RELEASE.
 
 ## Purpose
 
-The document is released with the Version 4.3 of the Gluu Software. The purpose of this document is to provide the changes made/new features included in this release of the Gluu Software. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered. 
+The document is released with the Version 4.4 of the Gluu Software. The purpose of this document is to provide the changes made/new features included in this release of the Gluu Software. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered. 
 
 ## Background
 
@@ -22,8 +22,8 @@ The most common use cases for the Gluu Server include single sign-on (SSO), mobi
 Please visit the [Gluu Documentation Page](http://www.gluu.org/docs/ce) for the complete 
 documentation and administrative guide. 
 
-## Available components in Gluu Server 4.3
-- oxAuth, oxTrust, oxCore v4.3
+## Available components in Gluu Server 4.4
+- oxAuth, oxTrust, oxCore v4.4
 - Gluu OpenDJ v4.4.11 (with Bouncy Castle FIPS 140-2 crypto package 1.0.2.1 and Bouncy Castle Java APIs for the TLS 1.0.9)
 - Shibboleth v4.1.4
 - Passport v4.1

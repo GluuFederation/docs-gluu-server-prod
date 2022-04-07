@@ -268,7 +268,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
         
         === "Kustomize - Depreciated"
         
-            1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.3/README.md#build-pygluu-kubernetespyz-manually).
+            1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.4/README.md#build-pygluu-kubernetespyz-manually).
             
             1.  Run :
             
@@ -350,7 +350,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             1.  Run :
             
                  ```bash
-                 git clone --single-branch --branch 4.3 https://github.com/GluuFederation/cloud-native-edition.git
+                 git clone --single-branch --branch 4.4 https://github.com/GluuFederation/cloud-native-edition.git
                  cd pygluu/kubernetes/templates/helm/ldap-backup
                  ```
                  

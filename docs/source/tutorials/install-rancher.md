@@ -60,17 +60,17 @@ Exposing the UI is not necessary but you may do so by following these steps:
 
 1. Create a single point of entry ( Load balancer) for your cluster. Please note that if you have given the instances permissions to act on the cloud the load balancer should have already been created and hence the following steps are not needed, otherwise a `NodePort` would have been created and you would need to follow with the next steps..
 
-1. Get the port number nginx is using for forwarding `443` connections, here that would be `31822`
+1. Get the port number nginx is using for forwarding `4.4` connections, here that would be `31822`
 
    ```bash
    kubectl get svc -n ingress-nginx
     NAME                                          TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
     default-http-backend                          ClusterIP      10.43.60.162   <none>        80/TCP                       131m
-    ningress-ingress-nginx-controller             LoadBalancer   10.43.55.137   <pending>     80:30925/TCP,443:31822/TCP   18m
-    ningress-ingress-nginx-controller-admission   ClusterIP      10.43.8.231    <none>        443/TCP                      18m
+    ningress-ingress-nginx-controller             LoadBalancer   10.43.55.137   <pending>     80:30925/TCP,4.4:31822/TCP   18m
+    ningress-ingress-nginx-controller-admission   ClusterIP      10.43.8.231    <none>        4.4/TCP                      18m
    ```
 
-   Forexample, Using AWS UI create an LB with `TCP` port `443` pointing to your nodeport i.e `TCP` `31822`. If this is a FQDN create an `https` listener rule instead and attach your arn certificate. If you used `TCP`, add to your local computer ip of your loadbalancer and map it to your FQDN, then head to your browser at `https://<gluu-FQDN>` i.e `https://demoexample.gluu.org`
+   Forexample, Using AWS UI create an LB with `TCP` port `4.4` pointing to your nodeport i.e `TCP` `31822`. If this is a FQDN create an `https` listener rule instead and attach your arn certificate. If you used `TCP`, add to your local computer ip of your loadbalancer and map it to your FQDN, then head to your browser at `https://<gluu-FQDN>` i.e `https://demoexample.gluu.org`
 
 1. You must add a record to point your FQDN to the loadbalancer / ip used as a the single point of entry.
 

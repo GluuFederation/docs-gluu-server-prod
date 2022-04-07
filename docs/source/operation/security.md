@@ -109,7 +109,7 @@ Next controls allow you to fine-tune Gluu's UMA implementation's behaviour, resu
 Needless to say, keeping your instance up to date is paramount for maintaining its security. List of the latest vulnerabilities in the Gluu Server suite itself and corresponding patches can be found [here](https://gluu.org/docs/ce/upgrade/patches/). In addition,  updates should be conducted for all system components both inside and outside of container on regular basis.
 
 !!! Warning
-    Gluu's repository must be disabled before any attempt to update packages outside of container as described [here](https://gluu.org/docs/gluu-server/4.3/installation-guide/install-suse/#disable-gluu-repositories)):
+    Gluu's repository must be disabled before any attempt to update packages outside of container as described [here](https://gluu.org/docs/gluu-server/4.4/installation-guide/install-suse/#disable-gluu-repositories)):
 
   - For RHEL/CentOS distros, use `# yum update` inside and outside of container
   

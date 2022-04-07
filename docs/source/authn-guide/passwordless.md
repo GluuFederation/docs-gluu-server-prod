@@ -19,7 +19,7 @@ Additionally, there are some features worth noting:
 
 ### Requirements
 
-- Ensure you have a running instance of Gluu Server 4.3
+- Ensure you have a running instance of Gluu Server 4.4
 - While not a requisite, usage of [Gluu Casa](https://casa.gluu.org) is highly recommended as part of your 2FA solution. Among others this app helps users to enroll their authentication credentials which is a key aspect for passwordless authentication to take place. 
 
 ### Enable 2FA-related scripts
@@ -33,7 +33,7 @@ Additionally, there are some features worth noting:
 1. Log in to oxTrust with admin credentials
 2. Visit `Configuration` > `Person Authentication Scripts`. At the bottom click on `Add custom script configuration` and fill values as follows:
    - For `name` use a meaningful identifier, like `passwordless`
-   - In the `script` field use the contents of this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.3.0/Server/integrations/passwordless/PasswordlessAuthentication.py)
+   - In the `script` field use the contents of this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/passwordless/PasswordlessAuthentication.py)
    - Tick the `enabled` checkbox
    - For the rest of fields, you can accept the defaults
 3. Click on `Add new property`. On the left type `snd_step_methods`, on the right use `fido2,super_gluu` or whatever suits your needs best. See [Authentication mechanisms for second factor](#authentication-mechanisms-for-second-factor) for more
@@ -46,7 +46,7 @@ If you want to support Account Choice see the [corresponding section](#account-c
 
 ### Transfer script assets to your server
 
-Extract [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.3.0/Server/integrations/passwordless/bundle.zip) to the root (ie. `/`) of your Gluu server. In a standard CE installation this means extraction should take place under `/opt/gluu-server`.
+Extract [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/passwordless/bundle.zip) to the root (ie. `/`) of your Gluu server. In a standard CE installation this means extraction should take place under `/opt/gluu-server`.
 
 The zip file contains UI pages (forms), associated javascript and CSS files, as well as miscellaneous python code required for the flow to run properly. When extracting use the `root` user. 
 

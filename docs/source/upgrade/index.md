@@ -1,29 +1,29 @@
-# Upgrade to Gluu Server 4.3
+# Upgrade to Gluu Server 4.4
 
 === "Community Edition"
     
     ## Overview
-    The Gluu Server **cannot** be upgraded with a simple `apt-get upgrade`. You will need to either use our in-place upgrade script or explicitly install the new version and export/import your data. Find the existing version below for upgrade instructions to Gluu Server 4.3. 
+    The Gluu Server **cannot** be upgraded with a simple `apt-get upgrade`. You will need to either use our in-place upgrade script or explicitly install the new version and export/import your data. Find the existing version below for upgrade instructions to Gluu Server 4.4. 
     
     ### Pre-requisites
     
     - Before upgrading, make sure to [back up](../operation/backup.md) the Gluu container or LDAP LDIF. 
     - Upgrades should always be thoroughly scoped and tested on a development environment *first*.
-    - This upgrade process only upgrades versions 4.0.x through 4.3.1. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
+    - This upgrade process only upgrades versions 4.0.x through 4.4.1. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
         
     - Upgrade script runs on Python 3. You need to install Python 3 before running the script.
         * On CentoOS/RHEL: `yum install -y python3`
         * On Ubuntu/Debian: `apt-get update && apt-get install -y python3`
     
     
-    #### Online Upgrade from 4.x to 4.3.1
+    #### Online Upgrade from 4.x to 4.4.1
   
     The upgrade script downloads all needed software and applications from the internet. You can perform an online upgrade by following these steps:
     
     * Download the upgrade script
     
     ```
-    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.3.1/upg4xto431.py
+    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.4.1/upg4xto431.py
     ```
     
     * Execute the script:
@@ -32,17 +32,17 @@
     python3 upg4xto431.py
     ```
     
-    Your upgrade directory will be the `/opt/upd/4.3.1/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.3.1`.
+    Your upgrade directory will be the `/opt/upd/4.4.1/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.4.1`.
 
-    #### Offline Upgrade from 4.x to 4.3.1
+    #### Offline Upgrade from 4.x to 4.4.1
     
-    If your machine is not open to public internet, you can download self extracting upgrade script form https://repo.gluu.org/upd/4-3-1.upg.run and you can run inside Gluu CE container as
+    If your machine is not open to public internet, you can download self extracting upgrade script form https://repo.gluu.org/upd/4.4-1.upg.run and you can run inside Gluu CE container as
 
     ```
-    sh 4-3-1.upg.run
+    sh 4.4-1.upg.run
     ```
     
-    The script extracts contents to `/opt/upd/4.3.1/dist`, and writes latest setup files to `/install/community_edition_setup_4.3.1`
+    The script extracts contents to `/opt/upd/4.4.1/dist`, and writes latest setup files to `/install/community_edition_setup_4.4.1`
     
 === "Cloud Native Edition"
 
@@ -97,11 +97,11 @@
                     - --source
                     - "4.2"
                     - --target
-                    - "4.3"
+                    - "4.4"
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.3.0_b1
+                    image: gluufederation/upgrade:4.4.0_b1
                     name: gluu-upgrade-job
                   restartPolicy: Never
             ```
@@ -109,7 +109,7 @@
         1.  Clone latest stable manifests.
         
             ```bash
-            git clone --recursive --depth 1 --branch 4.3 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
+            git clone --recursive --depth 1 --branch 4.4 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
             ```
             
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.2/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. Also make sure your current `values.yaml` other options are moved correctly to the new values.yaml.
@@ -126,7 +126,7 @@
         1.  Create configmap for `101-ox.ldif` file.
         
             ```bash
-            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.3/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
+            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
             ```
             
         1.  Delete `oxAuthExpiration` index
@@ -143,7 +143,7 @@
                 configMap:
                   name: oxldif
               containers:
-                image: gluufederation/opendj:4.3.0_b1
+                image: gluufederation/opendj:4.4.0_b1
                 ...
                 ...
                 volumeMounts:
@@ -212,11 +212,11 @@
                     - --source
                     - "4.2"
                     - --target
-                    - "4.3"
+                    - "4.4"
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.3.0_b1
+                    image: gluufederation/upgrade:4.4.0_b1
                     name: gluu-upgrade-job                 
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
@@ -387,10 +387,10 @@
         1.  Clone latest stable manifests.
         
             ```bash
-            git clone --recursive --depth 1 --branch 4.3 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
+            git clone --recursive --depth 1 --branch 4.4 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
             ```
                         
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.3/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.3/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
+        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
             Move old `settings.json` that was used in 4.2 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
             
             ```bash
@@ -461,11 +461,11 @@
                     - --source
                     - "4.2"
                     - --target
-                    - "4.3"
+                    - "4.4"
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.3.0_b1
+                    image: gluufederation/upgrade:4.4.0_b1
                     name: gluu-upgrade-job                    
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
@@ -635,10 +635,10 @@
         1.  Clone latest stable manifests.
         
             ```bash
-            git clone --recursive --depth 1 --branch 4.3 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
+            git clone --recursive --depth 1 --branch 4.4 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
             ```
                         
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.3/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.3/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
+        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
             Move old `settings.json` that was used in 4.2 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
             
             ```bash
@@ -671,7 +671,7 @@
                 configMap:
                   name: oxldif
               containers:
-                image: gluufederation/opendj:4.3.0_b1
+                image: gluufederation/opendj:4.4.0_b1
                 ...
                 ...
                 volumeMounts:
@@ -698,7 +698,7 @@
 
     #### Kustomize - Depreciated
     
-    - Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.3/README.md#build-pygluu-kubernetespyz-manually).
+    - Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.4/README.md#build-pygluu-kubernetespyz-manually).
     
     - Move your  `settings.json` that was used in installing 4.2 next to `./pygluu-kubernetes.pyz`. 
     

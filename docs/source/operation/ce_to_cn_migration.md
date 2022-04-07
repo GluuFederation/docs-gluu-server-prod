@@ -6,8 +6,8 @@ This operational guide walks through migration from the community edition, which
 ## Requirements
 
 -   Access to the CE VM
--   Gluu CE version >= 4.3    
--   A Kubernetes cluster, and access to kubectl. You may take a look at the following [section](https://gluu.org/docs/gluu-server/4.3/installation-guide/install-kubernetes/#system-requirements-for-cloud-deployments) to get a better sense on sizing requirements for the Kubernetes cluster.
+-   Gluu CE version >= 4.4    
+-   A Kubernetes cluster, and access to kubectl. You may take a look at the following [section](https://gluu.org/docs/gluu-server/4.4/installation-guide/install-kubernetes/#system-requirements-for-cloud-deployments) to get a better sense on sizing requirements for the Kubernetes cluster.
 
 ## Migration Steps
 
