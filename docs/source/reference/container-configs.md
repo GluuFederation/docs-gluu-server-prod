@@ -236,4 +236,7 @@ kubectl get configmap  gluu -n <namespace> -o yaml
     ```bash
     keytool -list -v -keystore /etc/certs/opendj.pkcs12 --storepass ldap_truststore_pass_decoded
     ```
-    
+
+## Services start order
+
+![svg](../img/kubernetes/cn-hierarchial-service-start-order.svg)    
