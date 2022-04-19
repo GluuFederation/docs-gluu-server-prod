@@ -35,6 +35,24 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
+## 4.4.0 Fixes / Enhancements
+
+- Numerous bug fixes to fully support MySQL in VM-based deployments
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.0+)
+
+- [#1518](https://github.com/GluuFederation/oxAuth/issues/1518) Switching to DUO Universal Prompt (newer UI version) from the older authentication prompt
+
+- [#1587](https://github.com/GluuFederation/oxAuth/issues/1587) feat: add ability to specify key length for KeyGenerator 
+
+- [#1631](https://github.com/GluuFederation/oxAuth/issues/1631) Enable Casa Script to Support External LDAP Authentication Source
+
+### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxShibboleth/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.0+)
+
+- [#129](https://github.com/GluuFederation/oxShibboleth/issues/129) Update resteasy libraries to latest 4.5.x version
+
+- [#130](https://github.com/GluuFederation/oxShibboleth/issues/130) Update log4j-over-slf4j to 1.7.36
+
 ## 4.3.1 Fixes / Enhancements
 
     - Updated log4j to version 2.17 in all services
