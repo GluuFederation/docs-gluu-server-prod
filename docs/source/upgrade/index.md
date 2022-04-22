@@ -9,21 +9,21 @@
     
     - Before upgrading, make sure to [back up](../operation/backup.md) the Gluu container or LDAP LDIF. 
     - Upgrades should always be thoroughly scoped and tested on a development environment *first*.
-    - This upgrade process only upgrades versions 4.0.x through 4.4.1. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
+    - This upgrade process only upgrades versions 4.0.x through 4.3.1. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
         
     - Upgrade script runs on Python 3. You need to install Python 3 before running the script.
         * On CentoOS/RHEL: `yum install -y python3`
         * On Ubuntu/Debian: `apt-get update && apt-get install -y python3`
     
     
-    #### Online Upgrade from 4.x to 4.4.1
+    #### Online Upgrade from 4.x to 4.4.0
   
     The upgrade script downloads all needed software and applications from the internet. You can perform an online upgrade by following these steps:
     
     * Download the upgrade script
     
     ```
-    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.4.1/upg4xto431.py
+    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.4.0/upg4xto440.py
     ```
     
     * Execute the script:
@@ -32,17 +32,17 @@
     python3 upg4xto431.py
     ```
     
-    Your upgrade directory will be the `/opt/upd/4.4.1/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.4.1`.
+    Your upgrade directory will be the `/opt/upd/4.4.0/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.4.0`.
 
-    #### Offline Upgrade from 4.x to 4.4.1
+    #### Offline Upgrade from 4.x to 4.4.0
     
-    If your machine is not open to public internet, you can download self extracting upgrade script form https://repo.gluu.org/upd/4.4-1.upg.run and you can run inside Gluu CE container as
+    If your machine is not open to public internet, you can download self extracting upgrade script form https://repo.gluu.org/upd/4.4-0.upg.run and you can run inside Gluu CE container as
 
     ```
-    sh 4.4-1.upg.run
+    sh 4.4-0.upg.run
     ```
     
-    The script extracts contents to `/opt/upd/4.4.1/dist`, and writes latest setup files to `/install/community_edition_setup_4.4.1`
+    The script extracts contents to `/opt/upd/4.4.0/dist`, and writes latest setup files to `/install/community_edition_setup_4.4.0`
     
 === "Cloud Native Edition"
 
