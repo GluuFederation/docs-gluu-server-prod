@@ -42,7 +42,7 @@ zypper refresh
 ```
 
 ```
-zypper install gluu-server-nochroot
+zypper install gluu-server-nochroot-4.3.1-15.x86_64.rpm	
 ```
 
 After installation, the `gluu-server-nochroot` package needs to be excluded from automatic updates with the following command.
