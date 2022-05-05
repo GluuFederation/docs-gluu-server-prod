@@ -70,6 +70,8 @@ The generated files are similar to example below:
 ├── svc.redis.yml
 ├── svc.scim.yml
 ├── svc.vault_autounseal.yml
+├── svc.mysql.yml
+├── svc.nginx_ports.yml
 ├── vault_gluu_policy.hcl
 ├── vault_key_token.txt
 ├── vault_role_id.txt
@@ -179,11 +181,17 @@ SQL_DB_PORT = 3306
 # username to access SQL database
 SQL_DB_USER = "gluu"
 
+# Google project ID
+GOOGLE_PROJECT_ID = ""
+
 # Instance ID of Google Spanner
 GOOGLE_SPANNER_INSTANCE_ID = ""
 
 # Database ID of Google Spanner
 GOOGLE_SPANNER_DATABASE_ID = ""
+
+# Host of Spanner emulator, i.e. 10.10.1.2:9010
+SPANNER_EMULATOR_HOST = ""
 
 # ==============
 # Document store
@@ -237,26 +245,28 @@ COUCHBASE_BUCKET_PREFIX = "my_org"
 The following services are available during deployment:
 
 | Service             | Setting Name           | Mandatory | Enabled by default|
-| ------------------- | ---------------------- | --------- | ------- |
-| `consul`            | -                      | yes       | always  |
-| `registrator`       | -                      | yes       | always  |
-| `vault`             | -                      | yes       | always  |
-| `nginx`             | -                      | yes       | always  |
-| `persistence`       | `JOB_PERSISTENCE`      | no        | yes     |
-| `configuration`     | `JOB_CONFIGURATION`    | no        | yes     |
-| `oxauth`            | `SVC_OXAUTH`           | no        | yes     |
-| `oxtrust`           | `SVC_OXTRUST`          | no        | yes     |
-| `ldap`              | `SVC_LDAP`             | no        | yes     |
-| `oxpassport`        | `SVC_OXPASSPORT`       | no        | no      |
-| `oxshibboleth`      | `SVC_OXSHIBBOLETH`     | no        | no      |
-| `redis`             | `SVC_REDIS`            | no        | no      |
-| `vault` auto-unseal | `SVC_VAULT_AUTOUNSEAL` | no        | no      |
-| `oxd_server`        | `SVC_OXD_SERVER`       | no        | no      |
-| `cr_rotate`         | `SVC_CR_ROTATE`        | no        | no      |
-| `casa`              | `SVC_CASA`             | no        | no      |
-| `scim`              | `SVC_SCIM`             | no        | no      |
-| `fido2`             | `SVC_FIDO2`            | no        | no      |
-| `jackrabbit`        | `SVC_JACKRABBIT`       | no        | no      |
+| ------------------- | ---------------------- | --------- | ----------------- |
+| `consul`            | -                      | yes       | always            |
+| `registrator`       | -                      | yes       | always            |
+| `vault`             | -                      | yes       | always            |
+| `nginx`             | -                      | yes       | always            |
+| `persistence`       | `JOB_PERSISTENCE`      | no        | yes               |
+| `configuration`     | `JOB_CONFIGURATION`    | no        | yes               |
+| `oxauth`            | `SVC_OXAUTH`           | no        | yes               |
+| `oxtrust`           | `SVC_OXTRUST`          | no        | yes               |
+| `ldap`              | `SVC_LDAP`             | no        | yes               |
+| `oxpassport`        | `SVC_OXPASSPORT`       | no        | no                |
+| `oxshibboleth`      | `SVC_OXSHIBBOLETH`     | no        | no                |
+| `redis`             | `SVC_REDIS`            | no        | no                |
+| `vault` auto-unseal | `SVC_VAULT_AUTOUNSEAL` | no        | no                |
+| `oxd_server`        | `SVC_OXD_SERVER`       | no        | no                |
+| `cr_rotate`         | `SVC_CR_ROTATE`        | no        | no                |
+| `casa`              | `SVC_CASA`             | no        | no                |
+| `scim`              | `SVC_SCIM`             | no        | no                |
+| `fido2`             | `SVC_FIDO2`            | no        | no                |
+| `jackrabbit`        | `SVC_JACKRABBIT`       | no        | no                |
+| `mysql`             | `SVC_MYSQL`            | no        | no                |
+| `nginx_ports`       | `SVC_NGINX_PORTS`      | no        | yes               |
 
 To enable/disable non-mandatory services listed above, create a file called `settings.py` and set the value to `True` to enable or set to `False` to disable the service. For example:
 
@@ -355,6 +365,8 @@ Modify `settings.py` (create the file if doesn't exist) and configure based on s
     SQL_DB_HOST = "localhost"
     SQL_DB_PORT = 3306
     SQL_DB_USER = "gluu"
+    # ensure MySQL service is enabled
+    SVC_MYSQL = True
     # ensure LDAP service is disabled
     SVC_LDAP = False
     ```
@@ -362,20 +374,27 @@ Modify `settings.py` (create the file if doesn't exist) and configure based on s
     Additional steps required to satisfy dependencies:
 
     -   put MySQL password into the `sql_password` file.
+    -   put MySQL root password into the `sql_root_password` file (required to bootstrap the database).
     -   minimum MySQL version is `v5.7`.
 
 1.  Spanner
 
     ```python
     PERSISTENCE_TYPE = "spanner"
+    GOOGLE_PROJEC_ID = "my-project-id"
     GOOGLE_SPANNER_INSTANCE_ID = "my-instance-id"
     GOOGLE_SPANNER_DATABASE_ID = "my-db-id"
+
+    # optionally use Spanner emulator instead of Spanner cloud
+    # SPANNER_EMULATOR_HOST = "10.10.1.2:9010"
     # disable LDAP service
     SVC_LDAP = False
     ```
+
     Additional steps required to satisfy dependencies:
 
     -   put Google credentials into `google-credentials.json` file.
+    -   alternative is to use Spanner emulator
 
 #### Set up Vault auto-unseal
 
