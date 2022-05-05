@@ -36,7 +36,7 @@ apt update
 ```
 
 ```
-apt install gluu-server
+apt install gluu-server_4.3.1~ubuntu20.04_amd64.deb
 ```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
@@ -61,7 +61,7 @@ apt update
 ```
 
 ```
-apt install gluu-server
+apt install gluu-server_4.3.1~ubuntu18.04_amd64.deb
 ```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
