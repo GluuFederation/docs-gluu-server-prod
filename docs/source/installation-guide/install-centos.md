@@ -42,7 +42,7 @@ yum clean all
 ```
 
 ```
-yum install gluu-server
+yum install gluu-server-4.3.1-centos8.x86_64.rpm
 ```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
@@ -70,7 +70,7 @@ yum clean all
 ```
 
 ```
-yum install gluu-server
+yum install gluu-server-4.3.1-centos7.x86_64.rpm
 ```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
