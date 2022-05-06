@@ -75,7 +75,7 @@ The oxTrust API has two modes that administrators can configure according to nee
         -e GLUU_OXTRUST_API_TEST_MODE=true \
         -v $PWD/vault_role_id.txt:/etc/certs/vault_role_id \
         -v $PWD/vault_secret_id.txt:/etc/certs/vault_secret_id \
-        gluufederation/persistence:4.4.0_01
+        gluufederation/persistence:4.4.0-1
     ```
     
     If using kubernetes `pygluu-kubernetes.pyz` answer yes to both the following prompts: 
@@ -161,7 +161,7 @@ Search for the field named `oxTrustApiTestMode`, set it to `True` and save the c
         -e GLUU_OXTRUST_API_TEST_MODE=false \
         -v $PWD/vault_role_id.txt:/etc/certs/vault_role_id \
         -v $PWD/vault_secret_id.txt:/etc/certs/vault_secret_id \
-        gluufederation/persistence:4.4.0_01
+        gluufederation/persistence:4.4.0-1
     ```
     
     If using kubernetes `pygluu-kubernetes.pyz` answer `Y` to enabling `oxTrust API` and `N` to enabling `Test Mode`.

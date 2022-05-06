@@ -183,7 +183,6 @@ nav:
         # - 'The billion load test': 'tutorials/load-test.md' # hide test until officially tested
         - 'A 2k Benchmark': 'tutorials/2k-benchmark.md'
         - 'Impossible Travel with Deduce': 'tutorials/impossible-travel.md'
-        - 'LDAP cloud native multi cluster setup': 'tutorials/cn-ldap-multi-cluster.md'
         - 'Install Gluu CN with ALB controller': 'tutorials/cn-aws-alb.md'
         - 'Install Gluu CN with Rancher or RKE': 'tutorials/install-rancher.md'
         - 'Attributes mapping and transformation in Passport': 'tutorials/passport-attributes-mapping.md'
