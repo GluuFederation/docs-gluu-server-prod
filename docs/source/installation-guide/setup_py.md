@@ -121,6 +121,9 @@ The administrator can use the following command line options to include addition
 * __-ldap-admin-password__ Used as the LDAP directory manager password
 * __-application-max-ram__ Sets the maximum RAM value to be used
 * __-properties-password__ Encoded setup.properties file password
+* __-rdbm-user=<username>__ Credential for RDBM setup
+* __-rdbm-password=<password>__ Credential for RDBM setup
+* __-local-rdbm=mysql__ Sets RDBMS type to MySQL
 * __--install-casa__ Install CASA
 * __--install-oxd__ Install oxd Server
 * __--install-scim__ Install Scim Server
