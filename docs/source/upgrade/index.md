@@ -140,7 +140,7 @@
                 configMap:
                   name: oxldif
               containers:
-                image: gluufederation/opendj:4.4.0-1
+                image: gluufederation/opendj:4.4.0-1sdd
                 ...
                 ...
                 volumeMounts:
