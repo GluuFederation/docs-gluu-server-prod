@@ -123,7 +123,7 @@
         1.  Create configmap for `101-ox.ldif` file.
         
             ```bash
-            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/ldap/101-ox.yaml
+            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
             ```
             
         1.  Delete `oxAuthExpiration` index
