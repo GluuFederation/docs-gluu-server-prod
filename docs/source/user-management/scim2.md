@@ -573,13 +573,13 @@ If you code in Java, you can take advantage of the ready-to-use client library [
 
 ### Requisites
 
-- Entry-level knowledge of Java is enough. Make sure you have Java 8 or higher installed. The use of Maven as a build tool is recommended
+- Entry-level knowledge of Java is enough. Make sure you have Java 11 or higher installed. The use of Maven as a build tool is recommended
 
 - Ensure you have enabled SCIM and test mode as shown [above](#protection-using-test-mode)
 
 - Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. The [KeyStore Explorer](http://keystore-explorer.org/) utility makes this task super easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server/etc/certs/httpd.crt`
 
-- Online Java-docs for scim-client are available [here](https://ox.gluu.org/scim-javadocs/apidocs/index.html). You can generate java-docs locally too using Maven; just run `mvn javadoc:javadoc -pl scim-client`
+- Online Java-docs for scim-client are available [here](https://maven.gluu.org/javadocs/scim/version_4.4.0/client/). You can generate java-docs locally too using Maven; just run `mvn javadoc:javadoc -pl scim-client`
 
 ### Start a Simple Project
 
@@ -594,7 +594,7 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
   <repository>
     <id>gluu</id>
     <name>Gluu repository</name>
-    <url>http://ox.gluu.org/maven</url>
+    <url>http://maven.gluu.org/maven</url>
   </repository>
 </repositories>
 ...
@@ -607,7 +607,7 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 
 Ideally, the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.4, you should also use scim-client v4.4.
 
-If you don't want to use Maven, you can download the jar file for scim-client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
+If you don't want to use Maven, you can download the jar file for scim-client here: [https://maven.gluu.org/maven/org/gluu/scim-client/](https://maven.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
 ### Simple Retrieval
 
@@ -758,7 +758,7 @@ The following instructions show how to interact with the UMA-protected SCIM serv
 
 #### Requisites
 
-- In the following we will use Java as programming language. Entry-level knowledge is enough. Make sure you have Java Standard Edition installed. The use of Maven as a build tool is recommended
+- In the following we will use Java as programming language. Entry-level knowledge is enough. Make sure you have Java 11 or higher installed. The use of Maven as a build tool is recommended
 
 - Copy the requesting party JKS file to your local machine (inside the Gluu server chroot, it is located at `/etc/certs/scim-rp.jks`)
 
@@ -775,7 +775,7 @@ The following instructions show how to interact with the UMA-protected SCIM serv
 
 - Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. There are lots of articles around the Web on how to import a certificate to the keystore. An utility called [Key Store Explorer](http://keystore-explorer.sourceforge.net) makes this task super-easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server-<gluu-version>/etc/certs/httpd.crt`
 
-- Online Java-docs for scim-client are available [here](https://ox.gluu.org/scim-javadocs/apidocs/index.html). You can generate java-docs locally using Maven; just run `mvn javadoc:javadoc -pl scim-client`
+- Online Java-docs for scim-client are available [here](https://maven.gluu.org/javadocs/scim/version_4.4.0/client/). You can generate java-docs locally using Maven; just run `mvn javadoc:javadoc -pl scim-client`
 
 #### Start a Simple Project
 
@@ -790,7 +790,7 @@ Create a project in your favorite IDE, and if using maven add the following snip
   <repository>
     <id>gluu</id>
     <name>Gluu repository</name>
-    <url>http://ox.gluu.org/maven</url>
+    <url>http://maven.gluu.org/maven</url>
   </repository>
 </repositories>
 ...
@@ -803,7 +803,7 @@ Create a project in your favorite IDE, and if using maven add the following snip
 
 Ideally the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use scim-client v4.2.
 
-If you don't want to use Maven, you can download the jar file for scim-client here: [https://ox.gluu.org/maven/org/gluu/scim-client/](https://ox.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
+If you don't want to use Maven, you can download the jar file for scim-client here: [https://maven.gluu.org/maven/org/gluu/scim-client/](https://maven.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
 #### Simple Retrieval
 
