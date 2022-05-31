@@ -114,8 +114,23 @@
 
     ## Rotating Certificates and Keys in Kubernetes setup
     
+    #### Cert and Key Rotation in a Cloud Native Multi Cluster/Region Environment
+    
     !!! Note
-        `gluu-config-cm` in all examples refer to gluus installation configuration parameters. This name is correct in Kustomization installation, however in Helm the name is in the format of `<helms release name>-config-cm` and must be changed.
+        In a multi-cluster environment, rotation of certs and keys should only be done in one cluster region. After, the secret and configmap should then be moved to other regions by first saving them into a file and applying them on the second or subsequent clusters.
+
+        First get both the secret and configmap and save them into files on the cluster where the rotation was done
+
+        `kubectl get  secret gluu -n gluu -o yaml > gluu-secret.yaml`
+        `kubectl get cm gluu -n gluu -o yaml > gluu-cm.yaml`
+
+        Apply them on the other cluster(s) in other regions
+
+        `kubectl apply gluu-secret.yaml -n gluu`
+        `kubectl get gluu-cm.yaml -n gluu`
+
+    !!! Note
+        `gluu-config-cm` in all examples below refer to gluus installation configuration parameters. This name is correct in Kustomization installation, however in Helm the name is in the format of `<helms release name>-config-cm` and must be changed.
     
     
     === "web (ingress)"
