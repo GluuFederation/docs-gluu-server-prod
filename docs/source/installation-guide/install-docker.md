@@ -323,7 +323,7 @@ Modify `settings.py` (create the file if doesn't exist) and configure based on s
 
     Additional steps required to satisfy dependencies:
 
-    -   put Couchbase cluster certificate into the `couchbase.crt` file
+    -   put Couchbase cluster certificate into the `couchbase.crt` file (the root certificate is visible on the Root Certificate panel of the Security screen of Couchbase Web Console)
 
     -   put Couchbase password into the `couchbase_password` file
 
@@ -350,7 +350,7 @@ Modify `settings.py` (create the file if doesn't exist) and configure based on s
 
     Additional steps required to satisfy dependencies:
 
-    -   put Couchbase cluster certificate into the `couchbase.crt` file
+    -   put Couchbase cluster certificate into the `couchbase.crt` file (the root certificate is visible on the Root Certificate panel of the Security screen of Couchbase Web Console)
 
     -   put Couchbase password into the `couchbase_password` file
 
