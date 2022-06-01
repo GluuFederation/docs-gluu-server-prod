@@ -127,7 +127,7 @@
         Apply them on the other cluster(s) in other regions
 
         `kubectl apply gluu-secret.yaml -n gluu`
-        `kubectl get gluu-cm.yaml -n gluu`
+        `kubectl apply gluu-cm.yaml -n gluu`
 
     !!! Note
         `gluu-config-cm` in all examples below refer to gluus installation configuration parameters. This name is correct in Kustomization installation, however in Helm the name is in the format of `<helms release name>-config-cm` and must be changed.
