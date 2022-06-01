@@ -149,7 +149,7 @@
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm # This may be differnet in Helm
-                          args: ["patch", "web"]
+                          args: ["patch", "web", "--opts", "valid-to:365"]
                 ```
             
             1. Apply job
@@ -384,7 +384,7 @@
                       - configMapRef:
                           name: gluu-config-cm
                       # Change application-cn:oxd-server and admin-cn:oxd-server to match oxd service name
-                      args: ["patch", "oxd", "--opts", "application-cn:oxd-server", "--opts", "admin-cn:oxd-server"]
+                      args: ["patch", "oxd", "--opts", "application-cn:oxd-server", "--opts", "admin-cn:oxd-server", "--opts", "valid-to:365"]
             ``` 
         
         1. Apply job
@@ -427,7 +427,7 @@
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
-                      args: ["patch", "ldap", "--opts", "subj-alt-name:opendj"] 
+                      args: ["patch", "ldap", "--opts", "subj-alt-name:opendj", "--opts", "valid-to:365"] 
             ```
         
         1. Apply job
@@ -472,7 +472,7 @@
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
-                      args: ["patch", "passport"]
+                      args: ["patch", "passport", "--opts", "valid-to:365"]
             ```
         
         1. Apply job
@@ -512,7 +512,7 @@
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
-                      args: ["patch", "scim"]
+                      args: ["patch", "scim", "--opts", "valid-to:365"]
             ```
             
         1. Apply job
