@@ -117,7 +117,7 @@
     #### Cert and Key Rotation in a Cloud Native Multi Cluster/Region Environment
     
     !!! Note
-        In a multi-cluster environment, rotation of certs and keys should only be done in one cluster region. If the secret and config layer isn't central, the secret and configmap should then be moved to other regions by first saving them into a file and applying them on the second or subsequent clusters.
+        In a multi-cluster environment, rotation of certs and keys should only be done in one cluster region. If the secret and config layer aren't central, the secret and configmap should then be moved to other regions by first saving them into a file and applying them on the second or subsequent clusters.
 
         First get both the secret and configmap and save them into files on the cluster where the rotation was done
 
