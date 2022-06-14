@@ -121,13 +121,13 @@
 
         First get both the secret and configmap and save them into files on the cluster where the rotation was done
 
-        `kubectl get  secret gluu -n gluu -o yaml > gluu-secret.yaml`
+        `kubectl get secret gluu -n gluu -o yaml > gluu-secret.yaml`
         `kubectl get cm gluu -n gluu -o yaml > gluu-cm.yaml`
 
         Apply them on the other cluster(s) in other regions
 
-        `kubectl apply gluu-secret.yaml -n gluu`
-        `kubectl get gluu-cm.yaml -n gluu`
+        `kubectl apply -f gluu-secret.yaml -n gluu`
+        `kubectl apply -f gluu-cm.yaml -n gluu`
 
     !!! Note
         `gluu-config-cm` in all examples below refer to gluus installation configuration parameters. This name is correct in Kustomization installation, however in Helm the name is in the format of `<helms release name>-config-cm` and must be changed.
