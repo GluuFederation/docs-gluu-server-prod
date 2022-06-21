@@ -43,7 +43,7 @@
                   </AssertionConsumerService>
           </SPSSODescriptor>
       </EntityDescriptor>
-     ```
+    ```
      
    - Create a trust relationship with above metadata and release "Email" attribute. 
  
