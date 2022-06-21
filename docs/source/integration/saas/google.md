@@ -51,8 +51,8 @@
 
 ![image](../../img/integration/GWorkspace_gluu44_RP_config.png)
 
-  - Create test user who is aligned with your Google Workspace user ( for testing purpose ). Our test user is 'zico@gluu.org' which is available in both Google and Gluu Server. 
+  - Create test user who is aligned with your Google Workspace user (for testing purposes). Our test user is 'zico@gluu.org' which is available in both Google and Gluu Server. 
 
 ## Test
 
-Initiate SSO with `docs.google.com/a/gluu.org` and it would look like this: https://youtu.be/Iub6e246YGw
+Initiate SSO with `docs.google.com/a/gluu.org` and it would look as demonstrated (in this video.)[https://youtu.be/Iub6e246YGw]
