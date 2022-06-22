@@ -4,15 +4,15 @@
 
 ## Google workspace configuration
 
-1. Log into `admin.google.com` with administrative privilege user.
+- Log into `admin.google.com` with administrative privilege user.
  
 ![image](../../img/integration/GWorkspace_gluu44_admin_panel.png)
 
-2. `Security` > `SSO with third party IdP` 
+- `Security` > `SSO with third party IdP` 
  
 ![image](../../img/integration/GWorkspace_gluu44_security.png)
 
-3. `Add SSO Profile`
+- `Add SSO Profile`
 
      - Check `Set up SSO with third-party identity provider`
      
@@ -24,11 +24,11 @@
     
  ![image](../../img/integration/GWorkspace_gluu44_IDP_config.png)
  
-4. Save configuration. 
+- Save configuration. 
   
 ## Gluu Server configuration
 
-1. Configure NameID:  
+- Configure NameID:  
 
    - Configure a NameID based on `Email` attribute. 
 
@@ -36,7 +36,7 @@
     
 ![image](../../img/integration/GWorkspace_gluu44_nameid.png)
 
- 2. Create Trust Relationship: 
+ - Create Trust Relationship: 
 
 
     - We need to write a quick metadata for Google workplace which we are going to use in trust relationship. 
@@ -60,8 +60,8 @@
 
 ![image](../../img/integration/GWorkspace_gluu44_RP_config.png)
 
-3. Create test user who is aligned with your Google Workspace user (for testing purposes). Our test user is 'zico@gluu.org' which is available in both Google and Gluu Server. 
+- Create test user who is aligned with your Google Workspace user (for testing purposes). Our test user is 'zico@gluu.org' which is available in both Google and Gluu Server. 
 
 ## Test
 
-Initiate SSO with `docs.google.com/a/gluu.org` and it would look as demonstrated (in this video.)[https://youtu.be/Iub6e246YGw]
+Initiate SSO with `docs.google.com/a/gluu.org` and it would look as demonstrated [in this video](https://youtu.be/Iub6e246YGw).
