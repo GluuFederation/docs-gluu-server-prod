@@ -30,9 +30,9 @@
 
 - Configure NameID:  
 
-   - Configure a NameID based on `Email` attribute. 
+     - Configure a NameID based on `Email` attribute. 
 
-   - NameId type would be: `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`
+     - NameId type would be: `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`
     
 ![image](../../img/integration/GWorkspace_gluu44_nameid.png)
 
