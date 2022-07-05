@@ -8,7 +8,7 @@ oxAuth is a Weld+JSF application. That means custom scripts and custom pages (JS
 
 Specifically, custom pages can use EL expressions to get/bind values or call methods of classes annotated with `javax.inject.Named` as long as they are part of the application's WAR file or [external libraries](../operation/custom-design.md#subdirectories) added to the classpath. Thus, practically all `@Named` beans belonging to [oxAuth](https://github.com/GluuFederation/oxAuth) or [oxCore](https://github.com/GluuFederation/oxCore) subprojects are potential candidates.
 
-In addition to that, there are the usual implicit JSP/JSF [objects](http://incepttechnologies.blogspot.com/p/jsf-implicit-objects.html) plus the `i18n` labels map (`msgs`) used for [localization](../operation/custom-design/#subdirectories) purposes.
+In addition to that, there are the usual implicit JSP/JSF [objects](http://incepttechnologies.blogspot.com/p/jsf-implicit-objects.html) plus the `i18n` labels map (`msgs`) used for [localization](../operation/custom-design.md/#subdirectories) purposes.
 
 In the case of custom scripts, any class in oxAuth's classpath can be used as well as the standard Java 8 classes. 
 

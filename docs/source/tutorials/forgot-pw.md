@@ -50,4 +50,4 @@ The Gluu Server exposes SCIM APIs for managing user data. This is an abstract gu
 
 ## Best Practices
 
-There is no industry standard for implementing a Forgot Password feature. However, for an overview of best practices, review [OWASP's Forgot PW cheatsheet](https://www.owasp.org/index.php/Forgot_Password_Cheat_Sheet). 
+There is no industry standard for implementing a Forgot Password feature. However, for an overview of best practices, review [OWASP's Forgot PW cheatsheet](https://owasp.org/www-pdf-archive/OWASP_Cheatsheets_Book.pdf). 
