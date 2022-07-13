@@ -9,6 +9,8 @@ For Docker deployments, provision a VM with:
 
 ### Linux users
 
+- If using Ubuntu use `20.04` and higher.
+
 - The minimum system requirements, as described in the [VM Preparation Guide](../installation-guide/index.md#system-requirements).
 
 - [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script) is installed
