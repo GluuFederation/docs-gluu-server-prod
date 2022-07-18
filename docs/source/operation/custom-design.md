@@ -419,3 +419,58 @@ As an example, add text to the top of the form and change the color of the butto
 Here's the screenshot of customized oxTrust logout page.
 
 ![Screenshot](../img/kubernetes/oxtrust-custom-logout.png)
+
+## Custom SAML IDP Pages Example in Cloud Native edition
+
+This guide will show examples of how to customize pages in oxShibboleth (SAML IDP) for Gluu Server cloud native edition.
+
+=== "ConfigMaps"
+
+    !!! Note
+
+        The pod namespace and name is set to `gluu` and `oxshibboleth` respectively.
+
+    1.  Locate the directory contains web pages
+
+        ```bash
+        kubectl -n gluu exec oxshibboleth -- ls /opt/shibboleth-idp/views
+        ```
+
+        Output example:
+
+        ```
+        error.vm    logout.vm
+        ```
+
+    1.  Get the `error.vm` from oxShibboleth pod:
+
+        ```bash
+        kubectl -n gluu cp oxshibboleth:/opt/shibboleth-idp/views/error.vm ./error.vm
+        ```
+
+    1.  Modify the copied `error.vm` local file
+
+    1.  Create a config file to store the contents of modified `error.vm`.
+
+        ```bash
+        kubectl -n gluu create cm oxshibboleth-custom-vm --from-file=error.vm
+        ```
+
+    1.  Mount file by adding to the `values.yaml` or your `override.yaml` under `oxshibboleth.volumes` and `oxshibboleth.volumeMounts`:
+
+        ```yaml
+        oxshibboleth:
+          volumeMounts:
+            - name: oxshibboleth-pages-volume
+              mountPath: /opt/gluu/jetty/idp/custom/pages # error.vm will be mounted under this directory
+          volumes:
+            - name: oxshibboleth-pages-volume
+              configMap:
+                name: oxshibboleth-custom-vm
+        ```
+
+    1.  Run helm install or helm upgrade if Gluu has been already installed.
+
+        ```bash
+        helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f override.yaml
+        ```
