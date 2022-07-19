@@ -346,21 +346,18 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
                  ```
                  
         === "Helm"
-    
-            1.  Run :
-            
-                 ```bash
-                 git clone --single-branch --branch 4.4 https://github.com/GluuFederation/cloud-native-edition.git
-                 cd pygluu/kubernetes/templates/helm/ldap-backup
-                 ```
                  
-            1. Edit the main values file to integrate with Gluu:
-            
-                ```bash
-                vi values.yaml      
+            1. Run
+
+                ```
+                cd pygluu/kubernetes/templates/helm/gluu/values.yaml
                 ```
             
-            1. Once done install the ldap-backup chart
+            1. Edit the values.yaml file and set `opendj.backup.enabled` to `true`.
+            
+            1. Set `opendj.backup.enabled.cronJobSchedule` to the schedule that you want. 
+            
+            1. Once done, run helm to set the ldap-backup cronjob. For example,
             
                 ```bash
                 helm install <release-name> -f ./values.yaml . --namespace=<gluu-namespace>
