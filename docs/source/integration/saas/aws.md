@@ -77,35 +77,35 @@ Follow these steps to create an AWS role:
 ### Create AWS Custom Attributes in LDAP
 
 Now you need to add two new attributes into your Gluu LDAP. 
-Follow [these instructions](https://gluu.org/docs/ce/admin-guide/attribute/#add-the-attribute-to-ldap) to add new attributes in your LDAP server. 
+Follow [these instructions](https://gluu.org/docs/gluu-server/4.3/admin-guide/attribute/#add-custom-attributes-to-ldap) to add new attributes in your LDAP server. 
 
-Here are a few sample attribute values we added to the `custom.schema` doc:
+Here are a few sample attribute values we added to the `custom schema` doc:
 
 ```
-attributetype: ( 1.3.6.1.4.1.48710.1.3.1003 NAME 'RoleEntitlement'
-        EQUALITY caseIgnoreMatch
-        SUBSTR caseIgnoreSubstringsMatch
-        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
-        X-ORIGIN 'Gluu - AWS Assume Role' )
+attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1003 NAME 'RoleEntitlement'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  X-ORIGIN 'Gluu - AWS Assume Role' )
 ```   
       
 ```
-attributetype: ( 1.3.6.1.4.1.48710.1.3.1004 NAME 'RoleSessionName'
-        EQUALITY caseIgnoreMatch
-        SUBSTR caseIgnoreSubstringsMatch
-        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
-        X-ORIGIN 'Gluu - AWS Assume Role Session Name' )
+attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1004 NAME 'RoleSessionName'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  X-ORIGIN 'Gluu - AWS Assume Role Session Name' )
 ```   
  
 ```
-objectclass: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
-        SUP ( top )
-        AUXILIARY
-        MAY ( telephoneNumber $ mobile $ RoleEntitlement $ RoleSessionName )
-        X-ORIGIN 'Gluu - Custom persom objectclass' )
+objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
+  SUP ( top )
+  AUXILIARY
+  MAY ( telephoneNumber $ mobile $ RoleEntitlement $ RoleSessionName )
+  X-ORIGIN 'Gluu - Custom persom objectclass' )
 ```  
       
-Make sure the `attributetype` LDAP ID number is unique. 
+Do not replace the existing `objectClasses` with the above; add the two new attributes to the existing `objectClasses`. Make sure the `attributeTypes` LDAP ID number is unique. 
 
 Save and test the custom configuration.
 
