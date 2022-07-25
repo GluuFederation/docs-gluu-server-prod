@@ -77,7 +77,7 @@ Follow these steps to create an AWS role:
 ### Create AWS Custom Attributes in LDAP
 
 Now you need to add two new attributes into your Gluu LDAP. 
-Follow [these instructions](https://gluu.org/docs/gluu-server/4.3/admin-guide/attribute/#add-custom-attributes-to-ldap) to add new attributes in your LDAP server. 
+Follow [these instructions](https://gluu.org/docs/gluu-server/4.4/admin-guide/attribute/#add-custom-attributes-to-ldap) to add new attributes in your LDAP server. 
 
 Here are a few sample attribute values we added to the `custom schema` doc:
 
