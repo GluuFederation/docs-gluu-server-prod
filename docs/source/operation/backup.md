@@ -265,16 +265,6 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             ```
             
         #### Gluu restore step
-        
-        === "Kustomize - Depreciated"
-        
-            1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.4/README.md#build-pygluu-kubernetespyz-manually).
-            
-            1.  Run :
-            
-                 ```bash
-                 ./pygluu-kubernetes.pyz restore
-                 ```
 
         === "Helm"
                     
@@ -341,10 +331,10 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             
             1. Set `opendj.backup.enabled.cronJobSchedule` to the schedule that you want. 
             
-            1. Once done, run helm to set the ldap-backup cronjob. For example,
+            1. Once done, run `helm install` if installing for the first time and `helm upgrade` if Gluu is already installed to set the ldap-backup cronjob. For example,
             
                 ```bash
-                helm install <release-name> -f ./values.yaml . --namespace=<gluu-namespace>
+                helm upgrade <release-name> -f ./values.yaml . --namespace=<gluu-namespace>
                 ```
                 
         !!! Note
@@ -382,15 +372,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             cd /opt/opendj/ldif
             cp backup-1.ldif backup-this-copy.ldif
             ```
-            
-        === "Kustomize - Depreciated"
-                
-            1.  Run :
-            
-                 ```bash
-                 ./pygluu-kubernetes.pyz restore
-                 ```
-                 
+                             
         === "Helm"
         
             1. Save a copy of the ldif backups. The backups should already be on persistence disks but for ease of access please copy these ldifs to a secure location to be used in further steps. 
