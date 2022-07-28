@@ -35,6 +35,63 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
+## 4.4.1 Fixes / Enhancements
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.1+)
+
+- fix: setup removal notice
+- fix: remove cache refresh files on uninstall
+- feat: generating of keystore for signing emails has been refactored
+- feat: support of sending signed emails has been added
+- feat: definition of signing algorithm has been added
+- fix: unnecessary .encode('utf-8') has been removed
+- fix: fix repository URL
+- fix: oxd for cluster
+- fix: gcs path
+- feat: added localhost to requestUriBlackList
+- feat: set auth mode and enable scripts by setup.properties
+- feat: options -ox-trust-authentication-mode -ox-authentication-mode -enable-script
+- [#874](https://github.com/GluuFederation/community-edition-setup/issues/874) fix: cacert path in oxtrust config
+- [#872](https://github.com/GluuFederation/community-edition-setup/issues/872) Skip not required SQL tables creation
+- fix: fido external files
+- [#870](https://github.com/GluuFederation/community-edition-setup/issues/870) fix: multivalued attributes of eduPerson
+  
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.1+)
+
+- feat: support of sending signed emails has been added;
+- chore(oxauth): renamed requestUriBlackList -> requestUriBlockList
+- feat(oxauth): added restriction for request_uri parameter (blacklist/allowed list)
+- [#1682](https://github.com/GluuFederation/oxAuth/issues/1682) chore: Upgrade crypto-js to 4.1.1 version
+- feat: add sample script for multi auth conf which uses Gluu LDAP auth confs
+- feat: add methods to simplify getting auth manager configurations
+- chore: force to use latest OWASP html-sanitizer
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.1+)
+
+- feat: oxcore issue 223 display DB option on ui
+- feat: sending of emails has been added (for bcprov and bc-fips);
+- fix: remove blue strip for the message.
+- fix: disabled multivalued check box for mysql db
+- fix: added onelogin saml lib and removed those classes
+- fix: removed unused attributes
+- feat: added organization details in saml metadata format
+- feat: added functionality to create metadata by filling form
+- fix: add dynamic script in openid scopes.
+- fix: import attribute in mysql db
+- feat: usage smtpconnectprotectiontype has been updated;
+- feat: entering of keystore parameters has been added in interface;
+- feat: added saml apis
+- fix : removed sesssionDEnabled attributes
+
+### [GluuFederation/oxCore](https://github.com/GluuFederation/oxCore/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.1+)
+
+- fix: fix for display name
+- feat: sending of emails has been updated (for bcprov and bc-fips);
+- feat: add DB documentstore provider
+- feat: sending signed emails has been added;
+- feat: updating smtp configuring has been added;
+- feat: add method for saml api
+
 ## 4.4.0 Fixes / Enhancements
 
 - Numerous bug fixes to fully support MySQL in VM-based deployments
