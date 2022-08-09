@@ -236,12 +236,15 @@ Please calculate the minimum required resources as per services deployed. The fo
            
         1. Open `settings.json` file generated from the previous step and copy over the values of `COUCHBASE_URL` and `COUCHBASE_USER`   to `global.gluuCouchbaseUrl` and `global.gluuCouchbaseUser` in `values.yaml` respectively. 
     
-    1.  Make sure you are in the same directory as the `values.yaml` file and run:
+    1.  Create your [override-values.yaml](https://github.com/GluuFederation/cloud-native-edition/blob/4.4/pygluu/kubernetes/templates/helm/gluu/values.yaml) and execute:
     
        ```bash
-       helm install <release-name> -f values.yaml -n <namespace> .
+
+        helm repo add gluu https://gluufederation.github.io/cloud-native-edition/pygluu/kubernetes/templates/helm
+        helm repo update
+        helm install gluu gluu/gluu -n <namespace> --version=1.7.x -f override-values.yaml
        ```
-    
+
     ### EKS Helm notes
     
     #### Required changes to the `values.yaml`
