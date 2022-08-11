@@ -533,7 +533,7 @@ The UMA mode is the mode in which the API is protected by UMA. This is the recom
 
 ## API Reference
 
-Current Swagger documentation for oxTrust APIs can be found in the [oxTrust API doc](https://gluu.org/swagger-ui/?operationsSorter=alpha&url=https://raw.githubusercontent.com/GluuFederation/oxTrust/version_4.4.0/api-server/src/main/resources/META-INF/openapi.yaml).
+Current Swagger documentation for oxTrust APIs can be found in the [oxTrust API doc](https://gluu.org/swagger-ui/?operationsSorter=alpha&url=https://raw.githubusercontent.com/GluuFederation/oxTrust/version_4.4.1/api-server/src/main/resources/META-INF/openapi.yaml).
 
 ## License
 
