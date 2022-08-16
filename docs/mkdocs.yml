@@ -1,15 +1,15 @@
 # Project information
-site_name: Gluu Server 4.4 Docs
+site_name: Gluu Server 4.5 Docs
 site_description: Documentation for Gluu Server
 
 # Copyright
-copyright: Copyright &copy; 2021, Gluu, Inc.
+copyright: Copyright &copy; 2022, Gluu, Inc.
 
 # Repository
 docs_dir: source
 repo_name: GluuFederation/docs-gluu-server-prod
 repo_url: https://github.com/GluuFederation/docs-gluu-server-prod/
-edit_uri: edit/4.4/docs/source
+edit_uri: edit/4.5/docs/source
 
 # Configuration
 theme:
@@ -21,7 +21,7 @@ theme:
     logo: 'gluu.jpg'
     favicon: 'favicon.ico'
 extra:
-    version: '4.4'
+    version: '4.5'
 extra_css:
   - css/tabs.css
 
@@ -43,6 +43,7 @@ markdown_extensions:
 # Navigation
 nav:
 - 'Versions':
+    - '4.5': 'https://gluu.org/docs/gluu-server/4.5/'
     - '4.4': 'https://gluu.org/docs/gluu-server/4.4/'
     - '4.3': 'https://gluu.org/docs/gluu-server/4.3/'
 #   - '5.0': 'https://gluu.org/docs/gluu-server/5.0/'
@@ -67,7 +68,7 @@ nav:
             - 'CentOS': 'installation-guide/install-centos.md'
             - 'SUSE': 'installation-guide/install-suse.md'
         - 'Setup Script Options': 'installation-guide/setup_py.md'
-        - 'Upgrade to 4.4': 'upgrade/index.md'
+        - 'Upgrade to 4.5': 'upgrade/index.md'
         - 'Clustering': 'installation-guide/cluster.md'
 - Administration Guide:
         - 'oxTrust admin UI': 'admin-guide/oxtrust-ui.md'
