@@ -12,7 +12,7 @@ Add the REST API extension to an existing Gluu 4.4.x deployment by following the
 
 1. In this folder, download the .jar file corresponding to the Gluu Server 4.4 version currently installed:
 2. 
-    - [4.4.0.Final](https://ox.gluu.org/maven/org/gluu/oxtrust-api-server/4.4.0.Final/oxtrust-api-server-4.4.0.Final.jar)
+    - [4.4.1.Final](https://maven.gluu.org/maven/org/gluu/oxtrust-api-server/4.4.1.Final/oxtrust-api-server-4.4.1.Final.jar)
 
 1. Navigate to `/opt/gluu/jetty/identity/webapps/`.
 
