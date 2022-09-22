@@ -54,32 +54,11 @@ Now FIDO2 is an available authentication mechanism for your Gluu Server. This me
     configuration by navigating to the following URL: `https://<hostname>/.well-known/openid-configuration`. 
     Find `"acr_values_supported":` and you should see `"fido2"`. 
 
-## Enable FIDO2 endpoints
+## Upgrade to MDS3 for Gluu server versions less than 4.4.0
 
-By default, the FIDO2 endpoints are disabled in the Gluu Server for compatibility with older versions. To activate the endpoints, follow these steps:
+Prior to Gluu 4.4.0, all FIDO2 device attestations were verified against the MDS2 repository that had to be downloaded to Gluu's FIDO2 server using an Access Token by an administrator. MDS2 will be discontinued from October 22. MDS3 has now been implemented in the FIDO2 server, as a result, the MDS3 blob does not require authorization by means of an Access Token and is downloaded and refreshed periodically by the FIDO2 server and does not require any intervention by the administrator.
 
-1. Navigate to `Configuration` > `JSON Configuration`
-
-1. Click on the `FIDO2 Configuration` tab
-
-1. Set the `disable` field to `False`
-
-1. Set the `mdsAccessToken` field value. This is access token which FIDO Alliance provides to access MDS and TOC data. 
-
-1. Click the `Save Configuration` button at the bottom of the page.
-
-1. Log into CE chroot
-
-1. `cd /etc/gluu/conf/fido2/mds/toc`
-
-1. `wget https://mds2.fidoalliance.org/?token=<access_token> -O toc.jwt`
-
-1. Put the `https://mds.fidoalliance.org/Root.cer` certificate file into the `/etc/gluu/conf/fido2/mds/cert` folder
-
-1. Restart oxauth services
-
-!!! Note 
-    To retrieve metadata or TOC (Table of Contents for all metadata statements) you will have to first register to get a MDS Access Token. To do this visit: https://mds2.fidoalliance.org/tokens/
+If you have been running Gluu server versions lesser than 4.4.0, you are required to upgrade the server to reflect the switch to [MDS3](https://fidoalliance.org/metadata/) using [this script](https://github.com/GluuFederation/community-edition-package/blob/master/update/4.4.0/upg4xto440.py) . 
 
 
 ## Make FIDO2 the Default
