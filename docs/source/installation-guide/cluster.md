@@ -218,18 +218,12 @@ Proceed with these values [Y|n]
 sed -i 's/dsreplication.java-args=-Xms8m -client/dsreplication.java-args=-Xms8m -client -Dcom.sun.jndi.ldap.object.disableEndpointIdentification=true/g' /opt/opendj/config/java.properties
 ```
   
-To set the new properties, run the command in the Gluu container.
+For the changes to take effect, restart opendj service in the Gluu container.
 
 ```bash
-/opt/opendj/bin/dsjavaproperties
+systemctl restart opendj
 ```
    
-You should recieve an operation successful message:
-   
-```bash
-The operation was successful.  The server commands will use the java arguments and java home specified in the properties file located in /opt/opendj/config/java.properties
-```
-
 We need to make all nodes accessible to each other by setting the listening address to `0.0.0.0`. In your command you may have to change `cn=directory manager` to your CN ( by default `cn=directory manager` unless changed ), and  `<password>` to the password set in the first installation of Gluu on node 1. If the below commands are not connecting, try changing `localhost` to the nodes' explicit IP addresss, here that would be `159.203.126.10` and `138.197.65.243`.
    
 **Restart all nodes**
