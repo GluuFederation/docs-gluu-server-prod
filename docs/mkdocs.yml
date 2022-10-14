@@ -1,0 +1,195 @@
+# Project information
+site_name: Gluu Server 4.4 Docs
+site_description: Documentation for Gluu Server
+
+# Copyright
+copyright: Copyright &copy; 2021, Gluu, Inc.
+
+# Repository
+docs_dir: source
+repo_name: GluuFederation/docs-gluu-server-prod
+repo_url: https://github.com/GluuFederation/docs-gluu-server-prod/
+edit_uri: edit/4.4/docs/source
+
+# Configuration
+theme:
+    name: material
+    custom_dir: 'theme'
+    palette:
+        primary: 'green'
+        accent: 'green'
+    logo: 'gluu.jpg'
+    favicon: 'favicon.ico'
+extra:
+    version: '4.4'
+extra_css:
+  - css/tabs.css
+
+# Tracking
+google_analytics:
+  - 'UA-31008645-7'
+  - 'auto'
+
+# Extensions
+markdown_extensions:
+- admonition
+- attr_list
+- toc:
+     permalink: '#'
+- codehilite
+- pymdownx.superfences
+- pymdownx.tabbed
+
+# Navigation
+nav:
+- 'Versions':
+    - '4.4': 'https://gluu.org/docs/gluu-server/4.4/'
+    - '4.3': 'https://gluu.org/docs/gluu-server/4.3/'
+#   - '5.0': 'https://gluu.org/docs/gluu-server/5.0/'
+    - '4.2': 'https://gluu.org/docs/gluu-server/4.2/'
+    - '4.1': 'https://gluu.org/docs/gluu-server/4.1/'
+    - '4.0': 'https://gluu.org/docs/gluu-server/4.0/'
+    - 'EOL Versions': 'https://gluu.org/docs/eol/'
+- ' ': 'https://gluu.org/docs'
+- ' ': 'https://gluu.org/docs'
+- Home: 'index.md'
+- Release Notes: 'release-notes/index.md'
+- Whats new in v4: '4.x-intro.md'
+- Installation Guide:
+        - 'VM Preparation': 'installation-guide/index.md'
+        - 'Installation':
+#            - 'Start here': 'installation-guide/install.md'
+#            - 'Test Drive': 'installation-guide/test-drive.md'
+            - 'Kubernetes': 'installation-guide/install-kubernetes.md'
+            - 'Docker': 'installation-guide/install-docker.md'
+            - 'Ubuntu': 'installation-guide/install-ubuntu.md'
+            - 'RHEL': 'installation-guide/install-rhel.md'
+            - 'CentOS': 'installation-guide/install-centos.md'
+            - 'SUSE': 'installation-guide/install-suse.md'
+        - 'Setup Script Options': 'installation-guide/setup_py.md'
+        - 'Upgrade to 4.4': 'upgrade/index.md'
+        - 'Clustering': 'installation-guide/cluster.md'
+- Administration Guide:
+        - 'oxTrust admin UI': 'admin-guide/oxtrust-ui.md'
+        - 'Interception Scripts': 'admin-guide/custom-script.md'
+        - User Management:
+            - 'Local User Management': 'user-management/local-user-management.md'
+            - 'AD/LDAP Synchronization': 'user-management/ldap-sync.md'
+            - 'IDM Synchronization': 'user-management/idm-sync.md'
+            - 'User Registration': 'user-management/user-registration.md'
+            - 'Collecting Metrics': 'user-management/metrics.md'
+            - 'SCIM 2.0 User Management': 'user-management/scim2.md'
+            - 'SCIM custom scripts': 'user-management/scim-scripting.md'
+        - User Authentication:
+            - 'Introduction': 'authn-guide/intro.md'
+            - 'Basic Authentication': 'authn-guide/basic.md'
+            - 'FIDO 2.0': 'authn-guide/fido2.md'
+            - 'Passwordless Authn': 'authn-guide/passwordless.md'
+            - 'Super Gluu': 'authn-guide/supergluu.md'
+            - 'OTP apps': 'authn-guide/otp.md'
+            - 'SMS OTP (Twilio)': 'authn-guide/sms-otp.md'
+            - 'SMS OTP (SMPP)': 'authn-guide/sms-otp-smpp.md'
+            - 'PingID': 'authn-guide/pingid.md'
+            - 'Duo Security': 'authn-guide/duo.md'
+            - 'ThumbSignIn': 'authn-guide/thumbsignin.md'
+            - 'FIDO U2F': 'authn-guide/U2F.md'
+            - 'Certificate Authentication': 'authn-guide/cert-auth.md'
+            - 'Account Lockout': 'authn-guide/lockout.md'
+            - 'Forgot Password': 'authn-guide/pw-reset.md'
+            - 'Custom Script Tutorial': 'authn-guide/customauthn.md'
+        - Inbound Identity:
+            - 'Introduction': 'authn-guide/passport.md'
+            - 'Inbound OAuth & OpenID Connect': 'authn-guide/inbound-oauth-passport.md'
+            - 'Inbound SAML': 'authn-guide/inbound-saml-passport.md'
+        - 'RADIUS':
+            - 'Gluu Radius': 'admin-guide/radius-server/gluu-radius.md'
+            - 'Radiator Plugin': 'admin-guide/radius-server/gluu-radiator.md'
+        - 'CIBA':
+            - 'OpenID Connect CIBA': 'admin-guide/ciba.md'
+            - 'FAPI-CIBA': 'admin-guide/fapi-ciba.md'
+        - 'Attributes': 'admin-guide/attribute.md'
+        - 'SAML IDP': 'admin-guide/saml.md'
+        - 'OpenID Connect Provider (OP)': 'admin-guide/openid-connect.md'
+        - 'UMA Authorization Server (AS)': 'admin-guide/uma.md'
+        - 'Central Authentication Service (CAS)': 'admin-guide/cas.md'
+        - 'OAuth2.0 Device Authorization Grant': admin-guide/device-authz-grant/
+        - 'Session Management': 'admin-guide/session.md'
+        - 'Certificate Management': 'admin-guide/certificate.md'
+        - 'CORS Configuration': 'admin-guide/cors.md'
+- Integration Guide:
+        - 'Introduction': 'integration/index.md'
+        - 'Server Side Web Apps':
+            - 'OAuth2 Grants': 'admin-guide/oauth2.md'
+            - 'oxd OAuth 2.0': 'integration/oxd-oauth2/index.md'
+            - 'Nginx lua-resty-openidc': 'integration/sswebapps/nginx.md'
+            - 'Apache mod_auth_openidc': 'integration/sswebapps/openidc-rp.md'
+            - 'Shibboleth SAML SP': 'integration/sswebapps/saml-sp.md'
+        - 'Single Page Apps':
+            - 'AppAuth JS': 'integration/spa/appauth-js.md'
+            - 'Gluu OIDC JS Client': 'integration/spa/oauth-js-implicit.md'
+        - 'Native Apps':
+            - 'AppAuth iOS and macOS': 'integration/native-apps/appauth-ios.md'
+            - 'AppAuth Android': 'integration/native-apps/appauth-android.md'
+        - 'SaaS / Off-the-shelf Apps':
+            - 'Google Apps': 'integration/saas/google.md'
+            - 'Office 365': 'integration/saas/office.md'
+            - 'Moodle': 'integration/saas/moodle.md'
+            - 'Salesforce': 'integration/saas/salesforce.md'
+            - 'Dropbox': 'integration/saas/dropbox.md'
+            - 'GitHub Enterprise': 'integration/saas/github-enterprise.md'
+            - 'Cisco WebEx': 'integration/saas/webex.md'
+            - 'Amazon Web Services (AWS)': 'integration/saas/aws.md'
+            - 'Rocketchat': 'integration/saas/rocketchat.md'
+            - 'SAMLtest.id': 'integration/saas/saml_test_id.md'
+            - 'ThousandEyes': 'integration/saas/thousandeyes.md'
+- Reference:
+        - Gluu API Guide:
+            - 'Gluu Server API': 'api-guide/api.md'
+            - 'oxTrust API': 'api-guide/oxtrust-api.md'
+            - 'OpenID Connect API': 'api-guide/openid-connect-api.md'
+            - 'SCIM API': 'api-guide/scim-api.md'
+            - 'UMA API': 'api-guide/uma-api.md'
+        - 'JSON Properties':
+            - 'oxTrust JSON Properties': 'reference/JSON-oxtrust-prop.md'
+            - 'oxAuth JSON Properties': 'reference/JSON-oxauth-prop.md'
+            - 'Cache Provider Configuration': 'reference/cache-provider-prop.md'
+        - 'Persistence Strategies':
+            - 'Persistence Mechanisms': 'reference/persistence.md'
+            - 'oxLDAP Properties': 'reference/oxldap.md'
+            - 'LDAP Schema': 'reference/schema.md'
+        - 'Kubernetes and Containers Technical Reference':
+            - 'Config and Secret Keys': 'reference/container-configs.md'
+            - 'Image References': 'reference/container-image-refs.md'
+- Operation Guide:
+        - 'Service Commands': 'operation/services.md'
+#        - 'Patches': 'upgrade/patches.md'
+        - 'Backups': 'operation/backup.md'
+        - 'CE to CN Migration': 'operation/ce_to_cn_migration.md'
+        - 'Security tips': 'operation/security.md'
+        - 'Performance tuning': 'operation/fine-tuning.md'
+        - 'Ports': 'operation/ports.md'
+        - 'Logout': 'operation/logout.md'
+        - 'Log Management' : 'operation/logs.md'
+        - 'Customize Public Pages': 'operation/custom-design.md'
+        - 'Change IP Address': 'operation/changeip.md'
+        - 'Server Clean-up': 'operation/cleanup.md'
+        - 'Replacing Expired JKS Files': 'operation/replace-expired-jks-scim.md'
+        - 'Auto-enrolled users clean-up': 'operation/auto-enrolled-users-clean.md'
+- Developer Guide:
+#        - 'Build oxTrust with Eclipse': 'developer-guide/oxtrust-eclipse.md'
+        - 'Coding custom scripts and pages': 'developer-guide/tips-cust-script-pages.md'
+        - 'Localization': 'developer-guide/localization.md'
+        - 'Script Debugging': 'developer-guide/script-debugging.md'
+- Tutorials:
+        # - 'The billion load test': 'tutorials/load-test.md' # hide test until officially tested
+        - 'A 2k Benchmark': 'tutorials/2k-benchmark.md'
+        - 'Impossible Travel with Deduce': 'tutorials/impossible-travel.md'
+        - 'Install Gluu CN with ALB controller': 'tutorials/cn-aws-alb.md'
+        - 'Install Gluu CN with Rancher or RKE': 'tutorials/install-rancher.md'
+        - 'Attributes mapping and transformation in Passport': 'tutorials/passport-attributes-mapping.md'
+        - 'Inbound Identity with Apple Sign In': 'tutorials/passport-apple.md'
+        - 'Inbound SAML with Passport': 'tutorials/passport-inbound-flow.md'
+        - 'Inbound openid-client with Passport': 'tutorials/passport-openid-client.md'
+        - 'Forgot PW': 'tutorials/forgot-pw.md'
+        - 'Kafka Logging': 'tutorials/kafka.md'
+- FAQ & Troubleshooting: 'operation/faq.md'

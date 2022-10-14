@@ -1,8 +1,6 @@
-# docs-ce-prod
+# docs-ce-prod 
 
-**Each branch represents a version of CE**   
-
-This repo holds all versions of CE docs and includes scripts to publish. All docs are processed using mkdocs. This repo is organized with branches for each version of the documentation.
+This repo is holds all versions of CE docs and includes scripts to publish.  All docs are processed using mkdocs. This Repo is organized with branches for each version of the documentation.
 
 ## Documentation styleguide 
 
@@ -13,7 +11,8 @@ Fork, clone, and make a pull request.
 
 **Note: "Master" is the branch for editing this `README.md`.  You will not see documentation files until you check out the specific branch.**
 
-## Check out the docs
+
+## Check out specific branch
 
 `$ git checkout <branchname>`
 
