@@ -48,7 +48,7 @@ First make sure the Gluu Server is properly configured to support Radiator.
 
 Although not used in this case in its capacity as a RADIUS server, Gluu Radius, during installation, comes with all the components required to make the GluuRadiator plugin work seamlessly with Gluu Server.
 
-Install Gluu Radius by following the instructions [here](./gluu-radius.md). 
+Install Gluu Radius by following the instructions [here](./gluu-radius.md). The script itself is available [here](https://github.com/GluuFederation/radius/blob/master/setup/scripts/super_gluu_ro.py).
 
 If Radiator and the Gluu Server will run on the same system, one additional step needs to be taken: configure Gluu Radius to use different listening ports than the ones Radiator will use. Instructions can be found [here](./gluu-radius.md#basic-configuration).
 
