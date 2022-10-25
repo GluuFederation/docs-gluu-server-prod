@@ -84,57 +84,132 @@ In order to create SSO to certain applications you may need to add custom attrib
     - Create a file with a distinct name detailing the custome attribute, here we will call it `customTest.ldif` and load it with the custom attributes that you want.
 
         - In the below example, `customTest` is our custom attribute. Kindly note this is just an example.
- 
-        ```
-        dn: cn=schema
-        objectClass: top
-        objectClass: ldapSubentry
-        objectClass: subschema
-        cn: schema
-        attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1400 NAME 'customTest'
-          DESC 'Custom Attribute' 
-          EQUALITY caseIgnoreMatch 
-          SUBSTR caseIgnoreSubstringsMatch 
-          SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
-          X-ORIGIN 'Gluu custom attribute' )
-        ```
 
-        - Add custom attribute to the `gluuCustomPerson` objectClasses:
+        - Download the custom schema json file that we will be overriding. The file name **cannot** be changed and should stay `custom_schema.json`.
+          
+          ```
+          wget https://raw.githubusercontent.com/GluuFederation/docker-opendj/4.4/schemas/custom_schema.json
+          ```
+
+        - Open the file and add the custom attribute to the `gluuCustomPerson` objectClasses attributeTypes. Since the object class is already define we will just be adding the attribute type under `attributeTypes`:
       
         ```
-        objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
-          SUP ( top )
-          AUXILIARY
-          MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
+        {
+        "desc": "Custom Attribute",
+
+            "equality": "caseIgnoreMatch",
+            "names": [
+                "customTest"
+            ],
+            "multivalued": true,
+            "oid": "oxAttribute",
+            "substr": "caseIgnoreSubstringsMatch",
+            "syntax": "1.3.6.1.4.1.1466.115.121.1.15",
+            "x_origin": "Gluu custom attribute"
+        }
         ```
 
-        - The complete `customTest.ldif` will look like this:
+        - The complete `custom_schema.json` will look like this:
       
         ```
-        dn: cn=schema
-        objectClass: top
-        objectClass: ldapSubentry
-        objectClass: subschema
-        cn: schema
-        attributeTypes: ( 1.3.6.1.4.1.48710.1.3.1400 NAME 'customTest'
-          DESC 'Custom Attribute' 
-          EQUALITY caseIgnoreMatch 
-          SUBSTR caseIgnoreSubstringsMatch 
-          SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
-          X-ORIGIN 'Gluu custom attribute' )
-        objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson'
-          SUP ( top )
-          AUXILIARY
-          MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
+        {
+            "schemaFile": "77-customAttributes.ldif",
+            "attributeTypes": [
+                {
+                "desc": "Stores the unique identifier (bcid) for a user on BioID`s biometric service",
+
+                    "equality": "caseIgnoreMatch",
+                    "names": [
+                        "oxBiometricDevices"
+                    ],
+                    "multivalued": true,
+                    "oid": "oxAttribute",
+                    "substr": "caseIgnoreSubstringsMatch",
+                    "syntax": "1.3.6.1.4.1.1466.115.121.1.15",
+                    "x_origin": "Gluu created attribute"
+                },
+                {
+                "desc": "Stores the unique identifier for a user (userid) on DUO`s 2fa service",
+
+                    "equality": "caseIgnoreMatch",
+                    "names": [
+                        "oxDuoDevices"
+                    ],
+                    "multivalued": true,
+                    "oid": "oxAttribute",
+                    "substr": "caseIgnoreSubstringsMatch",
+                    "syntax": "1.3.6.1.4.1.1466.115.121.1.15",
+                    "x_origin": "Gluu created attribute"
+                },
+                {
+                "desc": "Custom Attribute",
+
+                    "equality": "caseIgnoreMatch",
+                    "names": [
+                        "customTest"
+                    ],
+                    "multivalued": true,
+                    "oid": "oxAttribute",
+                    "substr": "caseIgnoreSubstringsMatch",
+                    "syntax": "1.3.6.1.4.1.1466.115.121.1.15",
+                    "x_origin": "Gluu custom attribute"
+                }
+            ],
+            "objectClasses": [
+                {
+                    "kind": "AUXILIARY",
+                    "may": [
+                        "telephoneNumber",
+                        "mobile",
+                        "carLicense",
+                        "facsimileTelephoneNumber",
+                        "departmentNumber",
+                        "employeeType",
+                        "cn",
+                        "st",
+                        "manager",
+                        "street",
+                        "postOfficeBox",
+                        "employeeNumber",
+                        "preferredDeliveryMethod",
+                        "roomNumber",
+                        "secretary",
+                        "homePostalAddress",
+                        "l",
+                        "postalCode",
+                        "description",
+                        "title",
+                        "oxBiometricDevices",
+                        "oxDuoDevices"
+                    ],
+                    "names": [
+                        "gluuCustomPerson"
+                    ],
+                    "oid": "oxObjectClass",
+                    "sup": [
+                        "top"
+                    ],
+                    "x_origin": "Gluu - Custom person objectclass",
+                    "sql": {"ignore": true}
+                }
+            ],
+            "oidMacros": {
+                "oxAttribute": "oxPublished:3",
+                "oxMatchRules": "oxPublished:2",
+                "oxObjectClass": "oxPublished:4",
+                "oxOrgOID": "1.3.6.1.4.1.48720",
+                "oxPublished": "oxOrgOID:1",
+                "oxReserved": "oxOrgOID:0",
+                "oxSyntax": "oxPublished:1"
+            }
+        }
         ```
 
-        !!!warning
-            Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
 
     - Create a kubernetes configmap called `ldap-custom-test-attributes` targeting the content of the file you created above.
 
         ```sh
-        kubectl create cm ldap-custom-test-attributes -n <namespace> --from-file=/path/to/customTest.ldif
+        kubectl create cm ldap-custom-test-attributes -n <namespace> --from-file=/path/to/custom_schema.json
         ```
 
         - Check if the configmap has been created by running the following command:
@@ -154,8 +229,8 @@ In order to create SSO to certain applications you may need to add custom attrib
                 name: ldap-custom-test-attributes
           volumeMounts:
             - name: ldap-custom-test-attributes
-              mountPath: "/app/schemas/customTest.ldif"
-              subPath: customTest.ldif    
+              mountPath: "/app/schemas/custom_schema.json"
+              subPath: custom_schema.json    
         ```
         
     - Navigate to the folder where the values.yaml is `helm/gluu` and do the helm upgrade with the following command
