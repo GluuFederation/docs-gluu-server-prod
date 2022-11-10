@@ -69,7 +69,7 @@ When integrating a new external provider for inbound identity in oxTrust, an exi
 
 While configuring an external provider, it is handy to see a mapping in action. Adding print statements in the mapping function is an easy way to inspect data going in and out. Here is an example:
 
-```
+```js
 module.exports = profile => {
 	console.log(JSON.stringify(profile))
 	return {
@@ -82,7 +82,26 @@ module.exports = profile => {
 
 The above simply prints the profile object in JSON notation. Note that any number of (valid Javascript) statements can be added before the `return` keyword.
 
-Save the file in `/opt/gluu/node/passport/server/mappings`, restart Passport (by using `/opt/dist/scripts/passport restart`) and trigger the authentication flow in the browser for the attribute mapping to take place. To see the printed output, tail the `/opt/gluu/node/passport/server/logs/start.log` file.
+Save the file in `/opt/gluu/node/passport/server/mappings`, restart Passport (by using `/opt/dist/scripts/passport restart`) and trigger the authentication flow in the browser for the attribute mapping to take place. To see the printed output, tail the `/opt/gluu/node/passport/logs/start.log` file.
+
+You can also use `utils/logging` utility with `logger.log2()` function. It will print logs in `/opt/gluu/node/passport/logs/passport.log` file.
+
+```js
+const logger = require('../utils/logging')
+
+module.exports = profile => {
+  logger.log2('debug', `profile json : ${JSON.stringify(profile)}`)
+
+  return {
+    uid: profile.username || profile.id,
+    mail: profile.email,
+    cn: profile.displayName,
+    displayName: profile.displayName,
+    givenName: profile.name.givenName,
+    sn: profile.name.familyName
+  }
+}
+```
 
 Once debugging is finished, all log statements should be removed or commented out.
 
