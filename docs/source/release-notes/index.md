@@ -19,7 +19,7 @@ The most common use cases for the Gluu Server include single sign-on (SSO), mobi
 
 ## Documentation
 
-Please visit the [Gluu Documentation Page](http://www.gluu.org/docs/ce) for the complete 
+Please visit the [Gluu Documentation Page](http://www.gluu.org/docs/) for the complete 
 documentation and administrative guide. 
 
 ## Available components in Gluu Server 4.4
@@ -34,6 +34,121 @@ documentation and administrative guide.
 - Weld 3.0.0
 - FluentD 3.5
 - Redis
+
+## 4.4.2 Fixes / Enhancements
+
+### [GluuFederation/oxcore](https://github.com/GluuFederation/oxcore/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.2+)
+
+- refactor: class smtp_connect_protection_type has been updated (according to sonar requirements);
+- feat: encrypting keystore password has been added;
+- feat: improvement of sending emails has been added;
+- fix: fix for display name
+- fix: checking of trust server has been added;
+- fix: allow to use in casa
+- feat: sending of emails has been updated (for bcprov and bc-fips);
+- feat: definition of signing algorithm has been added;
+- fix: unnecessary downloading of the oxauth-server has been removed;
+- Dbdocumentstore 4.4.1
+- Fix : added instance initiation for standalone execution
+
+### [GluuFederation/oxtrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.2+)
+
+- feat(oxtrust): update jquery and bootstrap to latest stable versions #2248
+- feat: swagger yml file for 4.4.1
+- feat: removed unused locale related files
+- feat: remove russia and french from locale dropdown
+- feat: encrypting keystore password has been added;
+- feat: hiding keystore password has been added;
+- fix: facilitate multiple same type NameID creation
+- fix: facilitate multiple same type NameID creation
+- feat: More details can be found in oxTrust issue #2167
+- feat: oxcore issue 223 display DB option on ui
+- feat: sending of emails has been updated (for bcprov and bc-fips);
+- fix: remove blue strip for the message.
+- fix: disabled multivalued check box for mysql db
+- feat: singing of sending emails has been added;
+- Saml metadata
+- fix: added onelogin saml lib and removed those classes
+- fix: added lib and removed those classes
+- fix: removed unused attributes
+- feat: added functionality to create metadata by filling form
+- fix: add dynamic script in openid scopes.
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.2+)
+
+- fix: post-setup install service
+- fix: small changes of config files;
+- fix: usage of SSL cache has been restored;
+- fix: remove metadata-root-ca.cer
+- fix: cb 7.1.1 installation
+- fix: oxd keystorepath from config in export/import cert
+- fix: remove python3-prompt-toolkit dependency for ubuntu22
+- fix: small fix of configuration;
+- fix: small fix of timeout for /identity/restv1/scim/;
+- fix: wrong proxy mappings have been removed;
+- fix: setup of permissions of deployed files have been added;
+- fix: some improvements of installing data and config files;
+- Revert "feat: attribute "userStatus" has been added to directories: "inum=xxxxx,ou=people,o=gluu";"
+- feat: attribute "userStatus" has been added to directories: "inum=xxxxx,ou=people,o=gluu";
+- feat: casa-external_twilio_sms.py has been updated, by oxAuth/twilio_sms script;
+- feat: attributes: "employeeNumber", "mobile", "telephoneNumber" have been activated;
+- feat: usage of caches has been updated;
+- fix: Oxtrust issue 2226
+- feat: remove russia and french from locale supported list
+- fix: replace popen by subprocess
+- fix: suse support
+- fix: OS description
+- fix: set_configuration() for snap
+- refactor: remove oxtrustapi_setup.py
+- fix: remove  java-11-openjdk-devel disa-stig dependency
+- feat: encrypting smtp-keys keystore has been added;
+- fix: resolving problem of configuring of fapolicyd;
+- fix: fapolicyd rules file
+- fix: seperate python dependencies
+- fix: ldap2mysql migration tool
+- fix: remove apache config when uninstall (ref: #892)
+- fix: setup removal notice
+- fix: remove cache refresh files on uninstall
+- feat: generating of keystore for signing emails has been refactored;
+- feat: definition of signing algorithm has been added;
+- fix: unnecessary downloading of the oxauth-server has been removed;
+- fix: unnecessary .encode('utf-8') has been removed;
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.2)
+
+- fix: suppresswarnings has been added;
+- refactor: formatting and refactoring the code;
+- fix: processing of certs tree has been updated;
+- fix: fix of ocsp certificates processing;
+- feat: support of ecdsa has been added to fingerprint generation code;
+- chore: temporary disable tests
+- fix: small fixes in scripts;
+- feat: processing of multivalued "mobile" has been added;
+- feat: removed unused locale related files (#1706)
+- feat: encrypting keystore password has been added;
+
+### [GluuFederation/gluu-core-bom:](https://github.com/GluuFederation/gluu-core-bom/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.2)
+
+- chore: update DB/LDAP libs
+- chore: update commons libs
+
+### [GluuFederation/oxOrm](https://github.com/GluuFederation/oxOrm/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.2)
+
+- chore: don't force spanner libs dependencies
+- chore: remove unused logging
+- feat: add method to determine DB filed type
+    
+### [GluuFederation/scim](https://github.com/GluuFederation/scim/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.2)
+
+- chore: use warning instead of error for user lookup by inum 
+- chore: use warn if token lookup failed and skip check if on bypass mode 
+- chore: log keyId
+- feat: use ou=attributes to determine if attribute multivalued
+- fix: avoid initialization problems
+- fix: prevent empty user name see 
+- feat: allow to set custom attribute mutivalued property
+- chore: Use RestEasyClientBuilderImpl explicitly
+- feat: make bulk properties parameterizable #54
 
 ## 4.4.1 Fixes / Enhancements
 
