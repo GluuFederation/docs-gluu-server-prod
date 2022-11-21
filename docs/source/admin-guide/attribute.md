@@ -355,6 +355,43 @@ eduPerson attributes are disabled by default. If required those can be activated
 
 ![EduPerson_Attributes](../img/admin-guide/attribute/admin_eduPerson_attribute.PNG)
 
+## Remapping IDP Attributes
+
+This script allows organization to virtually map any SAML attributes value without populating user's information. 
+There might be applications or service providers who might want different name attribute with default values. As for example, some SP might use "OrgEmailAddress" to get EmailAddress value of users in their own server. Previously we had to create "OrgEmailAddress" manually, run either SCIM or Cache Refresh to populate email address in user's information and then send that new manual attribute with email address value to SP. Which is certainly tedious and more attribute in data source means more resource consumption and 
+more maintenance. 
+
+### How to use this script
+ 
+ - Get the script [here](./idp_remap.py)
+ - Log into oxTrust
+ - Go to `Other Custom Scripts`
+ - Go to `IdP Extension` tab
+ - Use this script
+ - Custom property should be: 
+   - `remap_configuration` == `{"baseAttribute":"newCustomAttribute"}`  [ i.e. for our example: `remap_configuration` == {"mail":"AliasBaba"} ] 
+ - Update
+
+### Troubleshooting
+
+You can check this script related information in `idp-script.log` which is located in `/opt/shibboleth-idp/logs`
+
+A successful log would be like below: 
+
+```
+2022-10-22 04:43:19,474 -  - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Initialization
+2022-10-22 04:43:20,179 -  - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. {u'mail': u'AliasBaba'} 
+2022-10-22 04:43:27,637 -  - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Initialization
+2022-10-22 04:43:27,639 -  - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. {u'mail': u'AliasBaba'} 
+2022-10-22 04:45:11,457 - 118.179.84.52 - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Method: postAuthentication
+2022-10-22 04:45:11,459 - 118.179.84.52 - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Method: postAuthentication. requestedAcr = None, usedAcr = simple_password_auth
+2022-10-22 04:45:11,459 - 118.179.84.52 - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Method: postAuthentication. requestedAcr is not specified
+2022-10-22 04:45:11,460 - 118.179.84.52 - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Method: translateAttributes
+2022-10-22 04:45:11,874 - 118.179.84.52 - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Method: updateAttributes
+2022-10-22 04:45:11,874 - 118.179.84.52 - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Method: updateAttributes
+2022-10-22 04:45:11,875 - 118.179.84.52 - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Method: remapAttribute (mail, AliasBaba)
+2022-10-22 04:45:11,876 - 118.179.84.52 - INFO [org.gluu.service.PythonService:243] - Idp Remap Script. Source attribute found and remapped to target attribute
+```
 
 ## OpenID Connect Scopes
 
