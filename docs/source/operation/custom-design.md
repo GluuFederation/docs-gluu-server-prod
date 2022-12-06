@@ -240,7 +240,7 @@ This guide will show how to customize HTML pages and CSS in oxAuth for Gluu Serv
 
 As an example, we're going to:
 
-1. add text to the top of the form (and apply styling)
+1. add text to the top of the login form (and apply styling)
 1. add text in the footer
 
 ### Preparing custom files

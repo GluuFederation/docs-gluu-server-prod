@@ -1612,9 +1612,11 @@ The above means that Jackrabbit will maintain the source folder on all replicas 
     !!!warning
         Used for quick testing with Jackrabbit and should be avoided. 
 
-    1. Copy files to Jackrabbit container at `/opt/webdav`
-    
-    1. Run `python3 /app/scripts/jca_sync.py` .
+    1. Login to Jackrabbit container, for example: `kubectl -n gluu exec -ti jackrabbit-0 -- sh`.
+
+    1. Go to `/opt/webdav` directory; create any files or directory under this directory.
+
+    1. Run `python3 /app/scripts/jca_sync.py`.
 
 
 ## Build pygluu-kubernetes installer
