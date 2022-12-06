@@ -1601,11 +1601,11 @@ The above means that Jackrabbit will maintain the source folder on all replicas 
         
         === "Windows"
         
-            Open  `My PC` and inside the address that might read your `C` drive place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
+            Install a WebDav client such as WinSCP. Connect using the jackrabbit address which should be `http://localhost:8080/repository/default`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
             
         === "Mac"
         
-            Open `Finder` , `Go` then `Connect to Server` and place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`. 
+            Open `Finder` , `Go` then `Connect to Server` and place the address which should be `http://localhost:8080/repository/default`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`. 
         
 === "Script"
 
