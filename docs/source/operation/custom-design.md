@@ -243,7 +243,7 @@ As an example, we're going to:
 1. add text to the top of the login form (and apply styling)
 1. add text in the footer
 
-### Preparing custom files
+### Preparing custom files for oxAuth
 
 !!! Note
 
@@ -381,67 +381,70 @@ Here's the screenshot of customized oxAuth login page.
 
 This guide will show examples of how to customize HTML pages and CSS in oxTrust for Gluu Server cloud native edition.
 
-Here's the screenshot of default oxTrust logout page.
+As an example, we're going to add text to the logout form.
 
-![Screenshot](../img/kubernetes/oxtrust-default-logout.png)
+### Preparing custom files for oxTrust
 
-As an example, add text to the top of the form and change the color of the button by following these steps:
+!!! Note
+
+    The pod namespace and name is set to `gluu` and `oxtrust` respectively.
+
+1.  Locate the directory contains exploded oxTrust WAR
+
+    ```sh
+    kubectl -n gluu exec oxtrust -- ls /opt/jetty/temp
+    ```
+
+    Output example:
+
+    ```
+    jetty-0_0_0_0-8080-identity_war-_identity-any-6467019887303284828
+    ```
+
+1.  Get the `finishlogout.xhtml` from oxTrust pod:
+
+    ```sh
+    kubectl -n gluu cp oxtrust:/opt/jetty/temp/jetty-0_0_0_0-8080-identity_war-_identity-any-6467019887303284828/webapp/finishlogout.xhtml ./finishlogout.xhtml
+    ```
+
+    Modify the file locally:
+
+    ```html
+    <ui:define name="body">
+        <div class="lockscreen-wrapper" style="text-align: center;">
+            <div class="lockscreen-name"
+                style="text-align: center; font-size: 1.2em !important; margin-top: 10px; margin-bottom: 10px;">
+                Thank you for using <b>GLUU</b>.
+            </div>
+            <a class="btn btn-block btn-primary" href="login.htm" style="width: 50%;">#{msgs['finishLogout.signIn']}</a>
+            <!-- customization -->
+            <div style="font-style: italic; font-weight: bolder; margin-top: 20px;">See your later!!</div>
+            <!-- end of customization -->
+        </div>
+    </ui:define>
+    ```
+
+1. Use `configmaps` or `jackrabbit` to upload customization.
 
 === "ConfigMaps"
 
-    !!! Note
-
-        The pod namespace and name is set to `gluu` and `oxtrust` respectively.
-
-    1.  Locate the directory contains exploded oxTrust WAR
-
-        ```sh
-        kubectl -n gluu exec oxtrust -- ls /opt/jetty/temp
-        ```
-
-        Output example:
-
-        ```
-        jetty-0_0_0_0-8080-identity_war-_identity-any-6467019887303284828
-        ```
-
-    1.  Get the `finishlogout.xhtml` from oxTrust pod:
-
-        ```sh
-        kubectl -n gluu cp oxtrust:/opt/jetty/temp/jetty-0_0_0_0-8080-identity_war-_identity-any-6467019887303284828/webapp/finishlogout.xhtml ./finishlogout.xhtml
-        ```
-
-    1.  Copy the following text and save it as `./custom.css`:
-
-        ```css
-        .lockscreen-wrapper .btn-primary {
-            background-color: #b79933 !important;
-        }
-        ```
-
-    1.  Create a config file to store the contents of `finishlogout.xhtml` and `custom.css`.
+    1.  Create a config file to store the contents of `finishlogout.xhtml`.
 
         ```sh
         kubectl -n gluu create cm oxtrust-custom-html --from-file=finishlogout.xhtml
-        kubectl -n gluu create cm oxtrust-custom-css --from-file=custom.css
         ```
 
-    1.  Mount file in your values.yaml under `oxtrust.volumes` and `oxtrust.volumeMounts`:
+    1.  Mount file in your `values.yaml` under `oxtrust.volumes` and `oxtrust.volumeMounts`:
 
         ```yaml
         oxtrust:
           volumeMounts:
             - name: oxtrust-pages-volume
               mountPath: /opt/gluu/jetty/identity/custom/pages # finishlogout.xthml will be mounted under this directory
-            - name: oxtrust-static-volume
-              mountPath: /opt/gluu/jetty/identity/custom/static # custom.css will be mounted under this directory
           volumes:
             - name: oxtrust-pages-volume
               configMap:
                 name: oxtrust-custom-html
-            - name: oxtrust-static-volume
-              configMap:
-                name: oxtrust-custom-css
         ```
 
     1.  Run helm install or helm upgrade if Gluu has been already installed.
@@ -454,17 +457,11 @@ As an example, add text to the top of the form and change the color of the butto
 
     1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
 
-    1. After connecting to  Jackrabbit create  directories `/opt/gluu/jetty/identity/custom/pages` and `/opt/gluu/jetty/identity/custom/static`.
+    1. After connecting to  Jackrabbit create the following directories: `opt/gluu/jetty/identity/custom/pages`.
 
-    1. Place the following `custom.css` in `/opt/gluu/jetty/identity/custom/static`.
+    1. Put `finishlogout.xhtml` under `opt/gluu/jetty/identity/custom/pages` directory.
 
-        ```css
-        .lockscreen-wrapper .btn-primary {
-            background-color: #b79933 !important;
-        }
-        ```
-
-    1. Place a custom `login.xhtml` which you may find in `opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml` inside your oxauth pod  at `/opt/gluu/jetty/identity/custom/pages` in Jackrabbit.
+    1. Custom files will be pulled by oxTrust pod after few minutes.
 
 Here's the screenshot of customized oxTrust logout page.
 
