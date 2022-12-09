@@ -1597,24 +1597,26 @@ The above means that Jackrabbit will maintain the source folder on all replicas 
     
         === "Linux"
         
-            Open file manager which maybe `Nautilus` and find `Connect to Server` place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
+            Open file manager which maybe `Nautilus` and find `Connect to Server` place the address which should be `dav://localhost:8080/repository/default`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
         
         === "Windows"
         
-            Open  `My PC` and inside the address that might read your `C` drive place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
+            Install a WebDav client such as WinSCP. Connect using the jackrabbit address which should be `http://localhost:8080/repository/default`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`.
             
         === "Mac"
         
-            Open `Finder` , `Go` then `Connect to Server` and place the address which should be `http://localhost:8080`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`. 
+            Open `Finder` , `Go` then `Connect to Server` and place the address which should be `http://localhost:8080/repository/default`. By default the username and password are `admin` if not changed in `etc/gluu/conf/jca_password`. 
         
 === "Script"
 
     !!!warning
         Used for quick testing with Jackrabbit and should be avoided. 
 
-    1. Copy files to Jackrabbit container at `/opt/webdav`
-    
-    1. Run `python3 /app/scripts/jca_sync.py` .
+    1. Login to Jackrabbit container, for example: `kubectl -n gluu exec -ti jackrabbit-0 -- sh`.
+
+    1. Go to `/opt/webdav` directory; create any files or directory under this directory.
+
+    1. Run `python3 /app/scripts/jca_sync.py`.
 
 
 ## Build pygluu-kubernetes installer
