@@ -356,7 +356,7 @@ As an example, we're going to:
     1.  Run helm install or helm upgrade if Gluu has been already installed.
 
         ```bash
-        helm upgrade gluu gluu/gluu -n gluu --version=1.6.x -f override.yaml
+        helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f values.yaml
         ```
 
 === "Jackrabbit"
@@ -450,7 +450,7 @@ As an example, we're going to add text to the logout form.
     1.  Run helm install or helm upgrade if Gluu has been already installed.
 
         ```bash
-        helm upgrade gluu gluu/gluu -n gluu --version=1.6.x -f override.yaml
+        helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f values.yaml
         ```
 
 === "Jackrabbit"
@@ -503,7 +503,7 @@ This guide will show examples of how to customize pages in oxShibboleth (SAML ID
         kubectl -n gluu create cm oxshibboleth-custom-vm --from-file=error.vm
         ```
 
-    1.  Mount file by adding to the `values.yaml` or your `override.yaml` under `oxshibboleth.volumes` and `oxshibboleth.volumeMounts`:
+    1.  Mount file by adding to the `values.yaml` under `oxshibboleth.volumes` and `oxshibboleth.volumeMounts`:
 
         ```yaml
         oxshibboleth:
@@ -519,5 +519,5 @@ This guide will show examples of how to customize pages in oxShibboleth (SAML ID
     1.  Run helm install or helm upgrade if Gluu has been already installed.
 
         ```bash
-        helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f override.yaml
+        helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f values.yaml
         ```
