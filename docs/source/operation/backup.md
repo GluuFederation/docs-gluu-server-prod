@@ -327,7 +327,7 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
                  
         === "Helm"
                  
-            1. Edit the [values.yaml](https://github.com/GluuFederation/cloud-native-edition/blob/4.4/pygluu/kubernetes/templates/helm/gluu/values.yaml) file and set `opendj.backup.enabled` to `true`.
+            1. Edit the [values.yaml](https://github.com/GluuFederation/cloud-native-edition/blob/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) file and set `opendj.backup.enabled` to `true`.
             
             1. Set `opendj.backup.enabled.cronJobSchedule` to the schedule that you want. 
             

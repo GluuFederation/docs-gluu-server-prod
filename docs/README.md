@@ -1,3 +1,3 @@
-# docs-4.4 docs site
-Gluu Server 4.4 Docs
+# docs-4.5 docs site
+Gluu Server 4.5 Docs
 
