@@ -9,7 +9,7 @@
     
     - Before upgrading, make sure to [back up](../operation/backup.md) the Gluu container or LDAP LDIF. 
     - Upgrades should always be thoroughly scoped and tested on a development environment *first*.
-    - This upgrade process only upgrades versions 4.0.x through 4.3.1. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
+    - This upgrade process only upgrades versions 4.0.x through 4.5.0. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
         
     - Upgrade script runs on Python 3. You need to install Python 3 before running the script.
         * On CentoOS/RHEL: `yum install -y python3`
@@ -92,13 +92,13 @@
                   containers:
                   - args:
                     - --source
-                    - "4.3"
+                    - "4.4"
                     - --target
                     - "4.5"
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.5.0-01
+                    image: gluufederation/upgrade:4.5.0-2
                     name: gluu-upgrade-job
                   restartPolicy: Never
             ```
@@ -110,7 +110,7 @@
             ```
             
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. Also make sure your current `values.yaml` other options are moved correctly to the new values.yaml.
-            Move old `settings.json` that was used in 4.3 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
+            Move old `settings.json` that was used in 4.4 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
             
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
@@ -140,7 +140,7 @@
                 configMap:
                   name: oxldif
               containers:
-                image: gluufederation/opendj:4.5.0-1
+                image: gluufederation/opendj:4.5.0-2
                 ...
                 ...
                 volumeMounts:
@@ -207,13 +207,13 @@
                   containers:
                   - args:
                     - --source
-                    - "4.3"
+                    - "4.4"
                     - --target
                     - "4.5"
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.5.0-1
+                    image: gluufederation/upgrade:4.5.0-2
                     name: gluu-upgrade-job                 
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
@@ -240,7 +240,7 @@
             ```
                         
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
-            Move old `settings.json` that was used in 4.3 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
+            Move old `settings.json` that was used in 4.4 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
             
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
@@ -308,13 +308,13 @@
                   containers:
                   - args:
                     - --source
-                    - "4.3"
+                    - "4.4"
                     - --target
                     - "4.5"
                     envFrom:
                     - configMapRef:
                         name: upgrade-cm
-                    image: gluufederation/upgrade:4.5.0-1
+                    image: gluufederation/upgrade:4.5.0-2
                     name: gluu-upgrade-job                    
                     volumeMounts:
                     - mountPath: /etc/gluu/conf/couchbase_password
@@ -340,7 +340,7 @@
             ```
                         
         1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
-            Move old `settings.json` that was used in 4.3 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
+            Move old `settings.json` that was used in 4.4 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
             
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
