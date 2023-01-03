@@ -164,7 +164,8 @@
             ```bash
             helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
             ```
-             
+
+        1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.             
         
     === "Couchbase"
       
@@ -266,6 +267,8 @@
             ```bash
             helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
             ```
+
+        1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.
 
     === "Hybrid"
       
@@ -401,6 +404,8 @@
             helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
             ```
 
+        1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.
+
     === "MySQL"
 
         1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
@@ -495,7 +500,9 @@
         
             ```bash
             helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
-            ``` 
+            ```
+
+        1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.
 
 
     ### Exporting Data
