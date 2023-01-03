@@ -115,6 +115,7 @@
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
+            You do not have to execute the above command as you can simply go over your main override yaml used in 4.4 and adjust according to the 4.5 values.yaml.
             
             Go over your `values.yaml` and make sure it reflects all current information.
             
@@ -245,6 +246,8 @@
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
+
+            You do not have to execute the above command as you can simply go over your main override yaml used in 4.4 and adjust according to the 4.5 values.yaml.
             
             Go over your `values.yaml` and make sure it reflects all current information. Forexample, make sure your couchbase url and crt are filled and correct. Also make sure that your couchbase user and password are the new ones which you created in a previous step,  and that the couchbase superuser and superuser password are filled correctly.
             
@@ -345,6 +348,8 @@
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
+
+            You do not have to execute the above command as you can simply go over your main override yaml used in 4.4 and adjust according to the 4.5 values.yaml.
             
             Go over your `values.yaml` and make sure it reflects all current information. Forexample, make sure your couchbase url and crt are filled and correct. Also make sure that your couchbase user and password are the new ones which you created in a previous step,  and that the couchbase superuser and superuser password are filled correctly.
             
@@ -382,6 +387,102 @@
         
             ```
                     
+        1. Apply `upgrade.yaml`
+        
+            ```bash
+            kubectl create -f upgrade.yaml -n <gluu-namespace>
+            ```
+           
+            Wait until upgrade job is finished and tail the logs of the upgrade pod.
+           
+        1.  Run upgrade `Helm`
+        
+            ```bash
+            helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
+            ```
+
+    === "MySQL"
+
+        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
+         
+            ```yaml
+            apiVersion: v1
+            data:
+              DOMAIN: FQDN #<-- Change this to your FQDN
+              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
+              GLUU_CONFIG_ADAPTER: kubernetes
+              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
+              GLUU_SQL_DB_DIALECT: "mysql
+              GLUU_SQL_DB_HOST: my-release-mysql.default.svc.cluster.local #<-- Change this to mysql host
+              GLUU_SQL_DB_PORT: 3306
+              GLUU_SQL_DB_NAME: gluu #<-- Change this to mysql db name
+              GLUU_SQL_DB_USER: gluu #<-- Change this to mysql username 
+              GLUU_SQL_DB_TIMEZONE: UTC
+              GLUU_PERSISTENCE_TYPE: sql
+              GLUU_SECRET_ADAPTER: kubernetes
+              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
+            kind: ConfigMap
+            metadata:
+              labels:
+                app: gluu-upgrade
+              name: upgrade-cm
+            ---
+            apiVersion: batch/v1
+            kind: Job
+            metadata:
+              labels:
+                app: gluu-upgrade
+              name: gluu-upgrade-job
+            spec:
+              template:
+                metadata:
+                  annotations:
+                     sidecar.istio.io/inject: "false"                
+                  labels:
+                    app: gluu-upgrade
+                spec:
+                  containers:
+                  - args:
+                    - --source
+                    - "4.4"
+                    - --target
+                    - "4.5"
+                    envFrom:
+                    - configMapRef:
+                        name: upgrade-cm
+                    image: gluufederation/upgrade:4.5.0-2
+                    name: gluu-upgrade-job
+                    volumeMounts:
+                    - name: sql-pass
+                      mountPath: "/etc/gluu/conf/sql_password"
+                      subPath: sql_password
+                  restartPolicy: Never
+                  volumes:
+                  - name: sql-pass
+                    secret:
+                      secretName: gluu-sql-pass <-- Change this to the secret name holding couchbase pass
+            ```
+
+        1.  Clone latest stable manifests.
+        
+            ```bash
+            git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
+            ```
+                        
+        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
+            Move old `settings.json` that was used in 4.4 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
+            
+            ```bash
+            ./pygluu-kubernetes.pyz upgrade-values-yaml
+            ```
+            
+            You do not have to execute the above command as you can simply go over your main override yaml used in 4.4 and adjust according to the 4.5 values.yaml.
+            Go over your `values.yaml` and make sure it reflects all current information. Forexample, make sure your couchbase url and crt are filled and correct. Also make sure that your couchbase user and password are the new ones which you created in a previous step,  and that the couchbase superuser and superuser password are filled correctly.
+            
+            Go over your `values.yaml` and make sure it reflects all current information. Forexample, make sure your couchbase url and crt are filled and correct. Also make sure that your couchbase user and password are the new ones which you created in a previous step,  and that the couchbase superuser and superuser password are filled correctly.
+
+        1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
+
         1. Apply `upgrade.yaml`
         
             ```bash
