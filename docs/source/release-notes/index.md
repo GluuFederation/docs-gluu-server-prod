@@ -22,8 +22,8 @@ The most common use cases for the Gluu Server include single sign-on (SSO), mobi
 Please visit the [Gluu Documentation Page](http://www.gluu.org/docs/ce) for the complete 
 documentation and administrative guide. 
 
-## Available components in Gluu Server 4.4
-- oxAuth, oxTrust, oxCore v4.4
+## Available components in Gluu Server 4.5
+- oxAuth, oxTrust, oxCore v4.5
 - Gluu OpenDJ v4.4.11 (with Bouncy Castle FIPS 140-2 crypto package 1.0.2.1 and Bouncy Castle Java APIs for the TLS 1.0.9)
 - Shibboleth v4.1.4
 - Passport v4.1
@@ -36,6 +36,11 @@ documentation and administrative guide.
 - Redis
 
 ## 4.5 Fixes / Enhancements
+
+### [GluuFederation/oxOrm](https://github.com/GluuFederation/oxOrm/issues?utf8=?&q=is%3Aissue+milestone%3A4.5+)
+
+- [#25](https://github.com/GluuFederation/oxOrm/issues/25) Add PostgreSQL support
+- [#24](https://github.com/GluuFederation/oxOrm/issues/24) update to conform Couchbase SDK 3.x
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.5+)
 
@@ -75,6 +80,10 @@ documentation and administrative guide.
 ### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxShibboleth/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
 
 - [#155](https://github.com/GluuFederation/oxShibboleth/issues/155) No attributes released in saml sso.
+
+### [GluuFederation/scim](https://github.com/GluuFederation/scim/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#47](https://github.com/GluuFederation/scim/issues/47) include the name of problematic attribute part of extension in the error response
 
 ## 4.4.1 Fixes / Enhancements
 
