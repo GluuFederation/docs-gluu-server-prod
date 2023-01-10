@@ -35,6 +35,47 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
+## 4.5 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.5+)
+
+- [#1748](https://github.com/GluuFederation/oxAuth/issues/1748) Duplicate iss and aud on introspection as jwt
+- [#1760](https://github.com/GluuFederation/oxAuth/issues/1760) add ability to return error out of introspection and update_token custom script 
+- [#1763](https://github.com/GluuFederation/oxAuth/issues/1763) end session - if id_token is expired but signature is correct, look up session by sid claim
+- [#1758](https://github.com/GluuFederation/oxAuth/issues/1758) log WebApplicationException in debug log level
+- [#1735](https://github.com/GluuFederation/oxAuth/issues/1735) add convenient idTokenLifetime client property
+- [#1733](https://github.com/GluuFederation/oxAuth/issues/1733) PKCE parameters from first SSO request retains in futher calls
+- [#1730](https://github.com/GluuFederation/oxAuth/issues/1730) do not unauthenticate session on prompt=login if there was no at least 1 successful redirect to rp
+- [#1727](https://github.com/GluuFederation/oxAuth/issues/1727) fixed request file method failure
+- [#1725](https://github.com/GluuFederation/oxAuth/issues/1725) SpontaneousScopeHttpTest fails during build 
+- [#1723](https://github.com/GluuFederation/oxAuth/issues/1723) fix NPE in JwtAuthorizationRequest
+- [#1721](https://github.com/GluuFederation/oxAuth/issues/1721) allow end session with expired id_token_hint (by checking signature and aud/sid)
+- [#1714](https://github.com/GluuFederation/oxAuth/issues/1714) allow authentication for max_age=0
+- [#1705](https://github.com/GluuFederation/oxAuth/issues/1705) Auth Server JSON config for allowSpontaneousScopes 
+- [#1701](https://github.com/GluuFederation/oxAuth/issues/1701) CIBA has hardcoded false for includeIdTokenClaims
+- [#1537](https://github.com/GluuFederation/oxAuth/issues/1537) add custom script method to get device registration token. 
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#2282](https://github.com/GluuFederation/oxtrust/issues/2282) Not possible to add a deep link as redirect_uri
+- [#2262](https://github.com/GluuFederation/oxtrust/issues/2262) oxTrust with 100+ SAML trust relationships
+- [#2209](https://github.com/GluuFederation/oxtrust/issues/2209) Cache refresh should remove persons sub entries on removal
+- [#2225](https://github.com/GluuFederation/oxtrust/issues/2225) Remove files in /var/gluu/identity/removed 
+- [#1704](https://github.com/GluuFederation/oxtrust/issues/1704) Support SAML MDQ as alternative to downloading federation metadata
+- [#2226](https://github.com/GluuFederation/oxtrust/issues/2226) make languages configurable in properties
+- [#2176](https://github.com/GluuFederation/oxtrust/issues/2176) remove deprecated caCertsLocation, caCertsPassphrase properties
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#961](https://github.com/GluuFederation/community-edition-setup/issues/961) Gluu radius post installation failed when the backend is spanner.
+- [#950](https://github.com/GluuFederation/community-edition-setup/issues/950) Apply persistence update to all CE projects to conform jetty 10
+- [#946](https://github.com/GluuFederation/community-edition-setup/issues/946) Incorrect JDBC driver class in SAML IDP [postgresql]
+- [#937](https://github.com/GluuFederation/community-edition-setup/issues/937) Install CB/Spanner DB libraries from separated archive
+
+### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxShibboleth/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#155](https://github.com/GluuFederation/oxShibboleth/issues/155) No attributes released in saml sso.
+
 ## 4.4.1 Fixes / Enhancements
 
 ### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.4.1+)
