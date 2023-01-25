@@ -55,54 +55,7 @@
     #### Helm
 
     === "LDAP"
-    
-        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-         
-            ```yaml
-            apiVersion: v1
-            data:
-              DOMAIN: FQDN #<-- Change this to your FQDN
-              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-              GLUU_CONFIG_ADAPTER: kubernetes
-              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-              GLUU_LDAP_URL: opendj:1636
-              GLUU_PERSISTENCE_TYPE: ldap
-              GLUU_SECRET_ADAPTER: kubernetes
-              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-            kind: ConfigMap
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: upgrade-cm
-            ---
-            apiVersion: batch/v1
-            kind: Job
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: gluu-upgrade-job
-            spec:
-              template:
-                metadata:
-                  annotations:
-                     sidecar.istio.io/inject: "false"                
-                  labels:
-                    app: gluu-upgrade
-                spec:
-                  containers:
-                  - args:
-                    - --source
-                    - "4.4"
-                    - --target
-                    - "4.5"
-                    envFrom:
-                    - configMapRef:
-                        name: upgrade-cm
-                    image: gluufederation/upgrade:4.5.0-2
-                    name: gluu-upgrade-job
-                  restartPolicy: Never
-            ```
-            
+     
         1.  Clone latest stable manifests.
         
             ```bash
@@ -120,45 +73,13 @@
             Go over your `values.yaml` and make sure it reflects all current information.
             
         1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
-        
-        1.  Create configmap for `101-ox.ldif` file.
-        
-            ```bash
-            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/ldap/101-ox.yaml
-            ```
-            
+         
         1.  Delete `oxAuthExpiration` index
         
             ```bash
             kubectl exec -ti gluu-opendj-0 -n <gluu-namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4.54 --bindDN 'cn=Directory Manager' --trustAll -f
             ```
-            
-        1.  Mount 101-ox.ldif in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset gluu-opendj -n gluu`
-        
-            ```yaml
-              volumes:
-              - name: ox-ldif-cm
-                configMap:
-                  name: oxldif
-              containers:
-                image: gluufederation/opendj:4.5.0-2
-                ...
-                ...
-                volumeMounts:
-                - name: ox-ldif-cm
-                  mountPath: /opt/opendj/config/schema/101-ox.ldif
-                  subPath: 101-ox.ldif
-        
-            ```
-            
-        1. Apply `upgrade.yaml`
-        
-            ```bash
-            kubectl create -f upgrade.yaml -n <gluu-namespace>
-            ```
-           
-            Wait until upgrade job is finished and tail the logs of the upgrade pod.
-                   
+  
         1.  Run upgrade `Helm`
         
             ```bash
@@ -168,73 +89,7 @@
         1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.             
         
     === "Couchbase"
-      
-        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-         
-            ```yaml
-            apiVersion: v1
-            data:
-              DOMAIN: FQDN #<-- Change this to your FQDN
-              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-              GLUU_CONFIG_ADAPTER: kubernetes
-              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-              GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
-              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password #<-- super user password
-              GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
-              GLUU_COUCHBASE_USER: admin #<-- Change super user if necessary .
-              GLUU_COUCHBASE_BUCKET_PREFIX: gluu #<-- Change if necessary .
-              GLUU_PERSISTENCE_TYPE: couchbase
-              GLUU_SECRET_ADAPTER: kubernetes
-              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-            kind: ConfigMap
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: upgrade-cm
-            ---
-            apiVersion: batch/v1
-            kind: Job
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: gluu-upgrade-job
-            spec:
-              template:
-                metadata:
-                  annotations:
-                     sidecar.istio.io/inject: "false"              
-                  labels:
-                    app: gluu-upgrade
-                spec:
-                  containers:
-                  - args:
-                    - --source
-                    - "4.4"
-                    - --target
-                    - "4.5"
-                    envFrom:
-                    - configMapRef:
-                        name: upgrade-cm
-                    image: gluufederation/upgrade:4.5.0-2
-                    name: gluu-upgrade-job                 
-                    volumeMounts:
-                    - mountPath: /etc/gluu/conf/couchbase_password
-                      name: cb-pass
-                      subPath: couchbase_password
-                    - mountPath: /etc/certs/couchbase.crt
-                      name: cb-crt
-                      subPath: couchbase.crt
-                  restartPolicy: Never
-                  volumes:
-                  - name: cb-pass
-                    secret:
-                      secretName: cb-pass #<-- Change this to the secret name holding couchbase superuser pass
-                  - name: cb-crt
-                    secret:
-                      secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
-            ```
-
-                                
+       
         1.  Clone latest stable manifests.
         
             ```bash
@@ -271,74 +126,7 @@
         1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.
 
     === "Hybrid"
-      
-        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-         
-            ```yaml
-            apiVersion: v1
-            data:
-              DOMAIN: FQDN #<-- Change this to your FQDN
-              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-              GLUU_CONFIG_ADAPTER: kubernetes
-              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-              GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
-              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password #<-- super user password
-              GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
-              GLUU_COUCHBASE_USER: admin #<-- Change this if necessary
-              GLUU_COUCHBASE_BUCKET_PREFIX: gluu #<-- Change if necessary .
-              GLUU_LDAP_URL: opendj:1636
-              GLUU_PERSISTENCE_LDAP_MAPPING: "default" #<-- Change this if needed
-              GLUU_PERSISTENCE_TYPE: couchbase
-              GLUU_SECRET_ADAPTER: kubernetes
-              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-            kind: ConfigMap
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: upgrade-cm
-            ---
-            apiVersion: batch/v1
-            kind: Job
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: gluu-upgrade-job
-            spec:
-              template:
-                metadata:
-                  annotations:
-                     sidecar.istio.io/inject: "false"                      
-                  labels:
-                    app: gluu-upgrade
-                spec:
-                  containers:
-                  - args:
-                    - --source
-                    - "4.4"
-                    - --target
-                    - "4.5"
-                    envFrom:
-                    - configMapRef:
-                        name: upgrade-cm
-                    image: gluufederation/upgrade:4.5.0-2
-                    name: gluu-upgrade-job                    
-                    volumeMounts:
-                    - mountPath: /etc/gluu/conf/couchbase_password
-                      name: cb-pass
-                      subPath: couchbase_password
-                    - mountPath: /etc/certs/couchbase.crt
-                      name: cb-crt
-                      subPath: couchbase.crt
-                  restartPolicy: Never
-                  volumes:
-                  - name: cb-pass
-                    secret:
-                      secretName: cb-pass #<-- Change this to the secret name holding couchbase pass
-                  - name: cb-crt
-                    secret:
-                      secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
-            ```
-                                    
+       
         1.  Clone latest stable manifests.
         
             ```bash
@@ -360,44 +148,13 @@
 
         1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
             
-        1.  Create configmap for `101-ox.ldif` file.
-        
-            ```bash
-            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/v1.2.6/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
-            ```
             
         1.  Delete `oxAuthExpiration` index
         
             ```bash
             kubectl exec -ti gluu-opendj-0 -n <gluu-namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4.54 --bindDN 'cn=Directory Manager' --trustAll -f
             ```
-            
-        1.  Mount 101-ox.ldif in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset opendj -n gluu`
-        
-            ```yaml
-              volumes:
-              - name: ox-ldif-cm
-                configMap:
-                  name: oxldif
-              containers:
-                image: gluufederation/opendj:4.5.0-01
-                ...
-                ...
-                volumeMounts:
-                - name: ox-ldif-cm
-                  mountPath: /opt/opendj/config/schema/101-ox.ldif
-                  subPath: 101-ox.ldif
-        
-            ```
-                    
-        1. Apply `upgrade.yaml`
-        
-            ```bash
-            kubectl create -f upgrade.yaml -n <gluu-namespace>
-            ```
-           
-            Wait until upgrade job is finished and tail the logs of the upgrade pod.
-           
+
         1.  Run upgrade `Helm`
         
             ```bash
@@ -406,67 +163,7 @@
 
         1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.
 
-    === "MySQL"
-
-        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-         
-            ```yaml
-            apiVersion: v1
-            data:
-              DOMAIN: FQDN #<-- Change this to your FQDN
-              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-              GLUU_CONFIG_ADAPTER: kubernetes
-              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-              GLUU_SQL_DB_DIALECT: "mysql
-              GLUU_SQL_DB_HOST: my-release-mysql.default.svc.cluster.local #<-- Change this to mysql host
-              GLUU_SQL_DB_PORT: 3306
-              GLUU_SQL_DB_NAME: gluu #<-- Change this to mysql db name
-              GLUU_SQL_DB_USER: gluu #<-- Change this to mysql username 
-              GLUU_SQL_DB_TIMEZONE: UTC
-              GLUU_PERSISTENCE_TYPE: sql
-              GLUU_SECRET_ADAPTER: kubernetes
-              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-            kind: ConfigMap
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: upgrade-cm
-            ---
-            apiVersion: batch/v1
-            kind: Job
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: gluu-upgrade-job
-            spec:
-              template:
-                metadata:
-                  annotations:
-                     sidecar.istio.io/inject: "false"                
-                  labels:
-                    app: gluu-upgrade
-                spec:
-                  containers:
-                  - args:
-                    - --source
-                    - "4.4"
-                    - --target
-                    - "4.5"
-                    envFrom:
-                    - configMapRef:
-                        name: upgrade-cm
-                    image: gluufederation/upgrade:4.5.0-2
-                    name: gluu-upgrade-job
-                    volumeMounts:
-                    - name: sql-pass
-                      mountPath: "/etc/gluu/conf/sql_password"
-                      subPath: sql_password
-                  restartPolicy: Never
-                  volumes:
-                  - name: sql-pass
-                    secret:
-                      secretName: gluu-sql-pass <-- Change this to the secret name holding couchbase pass
-            ```
+    === "SQL"
 
         1.  Clone latest stable manifests.
         
@@ -488,14 +185,7 @@
 
         1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
 
-        1. Apply `upgrade.yaml`
-        
-            ```bash
-            kubectl create -f upgrade.yaml -n <gluu-namespace>
-            ```
-           
-            Wait until upgrade job is finished and tail the logs of the upgrade pod.
-           
+          
         1.  Run upgrade `Helm`
         
             ```bash
