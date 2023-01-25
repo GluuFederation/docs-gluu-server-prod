@@ -41,7 +41,7 @@ Refer to the following table for details about available setup options:
 | Optional: enter password for oxTrust and LDAP superuser | Used as the LDAP directory manager password, and for the default admin user for oxTrust.                                                                                                                                                      |
 | Install oxAuth OAuth2 Authorization Server | Required. Includes Gluu's OpenID Connect provider (OP) and UMA authorization server (AS) implementations.                                                                                                                                     |
 | Install oxTrust Admin UI | Required. This is the Gluu server admin dashboard.                                                                                                                                                                                            |
-| Install Backend DB Server | Required. Installs OpenDJ, used to store user info and configuration data.                                                                                                                                                                    |
+| Backend Type | Required. You can choose one of Local OpenDj, Remote OpenDj, Local Couchbase (availabel if you have package at /opt/dist/couchbase), Remote Couchbase, Local MySQL, Remote MySQL, Local PgSQL, Remote PgSQL, Cloud Spanner, Spanner Emulator. *Note: Some options are not available depending on your profile.* |
 | Install Apache 2 web server | Required                                                                                                                                                                                                                                      |
 | Install Shibboleth SAML IDP | Optional. Only install if a SAML identity provider (IDP) is needed.                                                                                                                                                                           |
 | Install oxAuth RP | Optional. OpenID Connect test client: useful for test environments, for more details see [here](../admin-guide/openid-connect.md/#oxauth-rp)                                                                                                     |
@@ -86,7 +86,6 @@ The setup script can be used to configure your Gluu Server and to add initial da
 The administrator can use the following command line options to include additional components:
 
 * __-c__ Switches to command line
-* __-r__ Install oxAuth RP
 * __-p__ Install Passport
 * __-d__ specify the directory where community-edition-setup is located. Defaults to '.'
 * __-f__ specify `setup.properties` file
@@ -99,13 +98,16 @@ The administrator can use the following command line options to include addition
 * __-t__ Load test data
 * __-x__ Load test data and exit
 * __-stm__ Enable Scim Test Mode
+* __-sum__ Enable-scim-uma-mode
 * __-properties-password__ Provide password to decode `setup.properties.last.enc`
 * __--import-ldif=custom-ldif-dir__ Render ldif templates from custom-ldif-dir and import them in LDAP
 * __--listen_all_interfaces__ Allow the LDAP server to listen on all server interfaces. This is required for clustered installations to replicate between LDAP servers. If not enabled, the LDAP server listens only to localhost
 * __---allow-pre-released-features__ Enable options to install experimental features, not yet officially supported.
 * __--remote-ldap__ Allows use of a remote LDAP server.
-* __--install-local-opendj__ Installs a local OpenDJ LDAP server
-* __--remote-couchbase__ Allows use of a remote Couchbase server.
+* __--install-local-ldap__ Installs a local OpenDJ LDAP server
+* __--disable-local-ldap__  Disables installing local OpenDJ LDAP server
+* __--remote-couchbase__ Allows use of a remote Couchbase server
+* __--local-couchbase__ Enables installing couchbase server
 * __--no-data__ Do not import any data to database backend, used for clustering
 * __--no-oxauth__ Do not install oxAuth OAuth2 Authorization Server
 * __--no-oxtrust__ "Do not install oxTrust Admin UI
@@ -120,20 +122,42 @@ The administrator can use the following command line options to include addition
 * __-oxtrust-admin-password__ Used as the default admin user for oxTrust
 * __-ldap-admin-password__ Used as the LDAP directory manager password
 * __-application-max-ram__ Sets the maximum RAM value to be used
-* __-properties-password__ Encoded setup.properties file password
-* __-rdbm-user=<username>__ Credential for RDBM setup
-* __-rdbm-password=<password>__ Credential for RDBM setup
 * __-local-rdbm=mysql__ Sets RDBMS type to MySQL
+* __-rdbm-user=<username>__ Credential for RDBM setup
+* __-rdbm-port RDBM_PORT__  RDBM port
+* __-rdbm-db RDBM_DB__      RDBM database
+* __-rdbm-host RDBM_HOST__  RDBM host
+* __--reset-rdbm-db__       Deletes all table on target database. Warning! You will lose all data on target database.
+* __-rdbm-password=<password>__ Credential for RDBM setup
+* __-spanner-project__ Spanner project name
+* __-spanner-instance__ Spanner instance name
+* __-spanner-database__ Spanner database name
+* __-spanner-emulator-host__ Use Spanner emulator host
+* __-google-application-credentials__ Path to Google application credentials json file
 * __--install-casa__ Install CASA
 * __--install-oxd__ Install oxd Server
 * __--install-scim__ Install Scim Server
 * __--install-fido2__ Install FIDO2
 * __--oxd-use-gluu-storage__ Use Gluu Storage for Oxd Server
 * __-couchbase-bucket-prefix__ Set prefix for couchbase buckets
+* __-couchbase-hostname__ Remote couchbase server hostname
+* __-couchbase-admin-user__ Couchbase admin user
+* __-couchbase-admin-password__ Couchbase admin user password
 * __--generate-oxd-certificate__ Generate certificate for oxd based on hostname
-* __--load-passwords', help__ Load password from setup.properties
+* __--dummy__ Dummy installation. Used for re-storing backups
+* __-csx__ Collect setup properties, save and exit
+* __-j__ Use Java existing on system
+* __-testadmin-password__ Used as password for testadmin for oxTrust
+* __-profile__ Setup profile, can take one of CE, DISA-STIG
+* __-opendj-keystore-type__ OpenDj keystore type, ony for DISA-STIG profile and can take one of pkcs11, bcfks
+* __--no-progress__ Use simple progress
+* __-enable-script__ inum of scripts to enable, use comma as seperation character
+* __-ox-authentication-mode__ Sets oxAuthenticationMode 
+* __-ox-trust-authentication-mode__ Sets oxTrustAuthenticationMode
+* __--gluu-passwurd-cert__  Creates Gluu Passwurd API keystore
+* __-properties__ Other properties. Example: encode_salt:Y83EBo94vj9b4iyKDX2drmZk,default_store_type:JKS
 
-Example Command: `# ./setup.py -ps` This command will install Gluu Server with Passport and Shibboleth IDP.
+Example Command: `# ./setup.py -p -s` This command will install Gluu Server with Passport and Shibboleth IDP.
 
 
 !!! Note
