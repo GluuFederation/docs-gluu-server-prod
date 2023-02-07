@@ -1,6 +1,6 @@
 # Ubuntu Installation 
 ## Overview
-Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 18.04.x. Follow the instructions below: 
+Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 22.x. Follow the instructions below: 
 
 1. [Install the Linux package](#install-the-package)
 2. [Start the Server and log in to the container](#start-the-server-and-log-in)
@@ -13,13 +13,37 @@ Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 18.04.x. F
 
 ## Prerequisites
 - Make sure the target server or VM meets **all minimum requirements** specified in the [VM Preparation Guide](../installation-guide/index.md). 
-- **Ubuntu 18 or 20**: The Universe repository must be enabled.
+- **Ubuntu 20 or 22**: The Universe repository must be enabled.
 
 ## Instructions
 
 ### Install the package
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
 
+
+For **Ubuntu 22.x** run the following commands: 
+
+```
+echo "deb https://repo.gluu.org/ubuntu/ jammy main" > /etc/apt/sources.list.d/gluu-repo.list
+```
+
+```
+curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+
+```
+apt update
+```
+
+```
+apt install gluu-server_4.4.2~ubuntu22.04_amd64.deb
+```
+
+After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
+
+```
+apt-mark hold gluu-server
+```
 
 For **Ubuntu 20.x** run the following commands: 
 
@@ -36,7 +60,7 @@ apt update
 ```
 
 ```
-apt install gluu-server
+apt install gluu-server_4.4.2~ubuntu20.04_amd64.deb
 ```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
@@ -45,24 +69,6 @@ After installation, the `gluu-server` package needs to be excluded from automati
 apt-mark hold gluu-server
 ```
 
-
-For **Ubuntu 18.04.x** run the following commands: 
-
-```
-echo "deb https://repo.gluu.org/ubuntu/ bionic main" > /etc/apt/sources.list.d/gluu-repo.list
-```
-
-```
-curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
-```
-
-```
-apt update
-```
-
-```
-apt install gluu-server
-```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
 
@@ -74,7 +80,7 @@ apt-mark hold gluu-server
 
 The Gluu Server is a chroot container, which must be started to proceed. 
 
-For **Ubuntu 20.x and 18.04.x** run the following commands: 
+For **Ubuntu 20.x and 22.x** run the following commands: 
 
 ```
 /sbin/gluu-serverd enable
@@ -123,7 +129,7 @@ Sometimes things go wrong! It can be difficult to troubleshoot issues if the ste
 
 ## Uninstallation
 
-For **Ubuntu Server 20.x and Ubuntu Server 18.04.x**, run the following commands:
+For **Ubuntu Server 20.x and Ubuntu Server 22.x**, run the following commands:
 
 ```
 /sbin/gluu-serverd disable
