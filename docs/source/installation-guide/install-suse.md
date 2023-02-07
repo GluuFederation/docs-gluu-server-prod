@@ -1,4 +1,5 @@
-# Suse Installation 
+# SUSE Installation 
+
 ## Overview
 Single-node Gluu Server Linux package are available for SUSE Linux Enterprise Server 15. Follow the instructions below: 
 
