@@ -60,7 +60,7 @@ apt update
 ```
 
 ```
-apt install gluu-server_4.4.2~ubuntu20.04_amd64.deb
+apt install gluu-server=4.4.2~ubuntu20.04
 ```
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
