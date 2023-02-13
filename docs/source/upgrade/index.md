@@ -60,7 +60,7 @@
             git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd cloud-native-edition/pygluu/kubernetes/templates/helm/gluu
             ```
             
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`.
+        1.  Modify all images inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`.
         1.  Move the old `settings.json` that was used in the 4.4 installation into the same directory `pygluu-kubernetes.pyz` exists in.  The `json` file can be generated  using `./pygluu-kubernetes.pyz generate-settings`.
 
         1.  Execute the following command:
@@ -72,7 +72,15 @@
         Another way to upgrade your deployment is by simply going over your `override.yaml` used in 4.4 and adjust it according to the 4.5 [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml).
                     
         1.  Inside your new `override.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
-        
+            ``` yaml
+            global:
+                upgrade:
+                    enabled: true
+                    sourceVersion: "4.4"
+                    targetVersion: "4.5"  
+                persistence:
+                    enabled: false
+            ```
         1.  Delete `oxAuthExpiration` index
         
             ```bash
@@ -100,7 +108,8 @@
             git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd cloud-native-edition/pygluu/kubernetes/templates/helm/gluu
             ```
             
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`.
+        1.  Modify all images inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`. For example, make sure your couchbase url, crt and other configurations are filled and correctly.
+
         1.  Move the old `settings.json` that was used in the 4.4 installation into the same directory `pygluu-kubernetes.pyz` exists in.  The `json` file can be generated  using `./pygluu-kubernetes.pyz generate-settings`.
 
         1.  Execute the following command:
@@ -112,7 +121,15 @@
         Another way to upgrade your deployment is by simply going over your `override.yaml` used in 4.4 and adjust it according to the 4.5 [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml).
                     
         1.  Inside your new `override.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
-        
+            ``` yaml
+            global:
+                upgrade:
+                    enabled: true
+                    sourceVersion: "4.4"
+                    targetVersion: "4.5"  
+                persistence:
+                    enabled: false
+            ```
 
         1.  Run `helm upgrade`
         
@@ -133,7 +150,8 @@
             git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd cloud-native-edition/pygluu/kubernetes/templates/helm/gluu
             ```
             
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`.
+        1.  Modify all images inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`. For example, make sure your couchbase url, crt and other configurations are filled and correctly.
+
         1.  Move the old `settings.json` that was used in the 4.4 installation into the same directory `pygluu-kubernetes.pyz` exists in.  The `json` file can be generated  using `./pygluu-kubernetes.pyz generate-settings`.
 
         1.  Execute the following command:
@@ -145,7 +163,15 @@
         Another way to upgrade your deployment is by simply going over your `override.yaml` used in 4.4 and adjust it according to the 4.5 [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml).
                     
         1.  Inside your new `override.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
-        
+            ``` yaml
+            global:
+                upgrade:
+                    enabled: true
+                    sourceVersion: "4.4"
+                    targetVersion: "4.5"  
+                persistence:
+                    enabled: false
+            ```
 
         1.  Run `helm upgrade`
         
@@ -166,7 +192,7 @@
             git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd cloud-native-edition/pygluu/kubernetes/templates/helm/gluu
             ```
             
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`.
+        1.  Modify all images inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`.
         1.  Move the old `settings.json` that was used in the 4.4 installation into the same directory `pygluu-kubernetes.pyz` exists in.  The `json` file can be generated  using `./pygluu-kubernetes.pyz generate-settings`.
 
         1.  Execute the following command:
@@ -178,7 +204,15 @@
         Another way to upgrade your deployment is by simply going over your `override.yaml` used in 4.4 and adjust it according to the 4.5 [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml).
                     
         1.  Inside your new `override.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
-        
+            ``` yaml
+            global:
+                upgrade:
+                    enabled: true
+                    sourceVersion: "4.4"
+                    targetVersion: "4.5"  
+                persistence:
+                    enabled: false
+            ```
 
         1.  Run `helm upgrade`
         
