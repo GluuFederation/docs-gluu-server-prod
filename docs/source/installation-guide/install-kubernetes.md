@@ -254,7 +254,8 @@ Please calculate the minimum required resources as per services deployed. The fo
       ```yaml
       #global values to be used across charts
       global:
-        provisioner: kubernetes.io/aws-ebs #CHANGE-THIS
+        storageClass:
+          provisioner: kubernetes.io/aws-ebs
         lbAddr: "" #CHANGE-THIS to the address received in the previous step axx-109xx52.us-west-2.elb.amazonaws.com
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
         isDomainRegistered: "false" # CHANGE-THIS  "true" or "false" to specify if the domain above is registered or not.
@@ -282,7 +283,8 @@ Please calculate the minimum required resources as per services deployed. The fo
       ```yaml
       #global values to be used across charts
       global:
-        provisioner: kubernetes.io/gce-pd #CHANGE-THIS
+        storageClass:
+          provisioner: kubernetes.io/gce-pd
         lbAddr: ""
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
         # Networking configs
@@ -311,7 +313,8 @@ Please calculate the minimum required resources as per services deployed. The fo
       ```yaml
       #global values to be used across charts
       global:
-        provisioner: k8s.io/minikube-hostpath #CHANGE-THIS
+        storageClass:
+          provisioner: k8s.io/minikube-hostpath
         lbAddr: ""
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
         lbIp: "" #CHANGE-THIS  to the IP of minikube <minikube ip>
@@ -354,7 +357,8 @@ Please calculate the minimum required resources as per services deployed. The fo
       ```yaml
       #global values to be used across charts
       global:
-        provisioner: microk8s.io/hostpath #CHANGE-THIS
+        storageClass:
+          provisioner: microk8s.io/hostpath
         lbAddr: ""
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
         lbIp: "" #CHANGE-THIS  to the IP of the microk8s VM
