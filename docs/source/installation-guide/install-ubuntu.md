@@ -38,6 +38,8 @@ apt update
 apt install gluu-server
 ```
 
+<!-- When the next version is released, this version should be changed to the most current 4.5.x package in repo.gluu.org, replacing the `_` between `gluu-server` and the version number with an `=` -->
+
 For **Ubuntu 20.x** run the following commands: 
 
 ```
@@ -55,6 +57,7 @@ apt update
 ```
 apt install gluu-server
 ```
+<!-- When the next version is released, this version should be changed to the most current 4.5.x package in repo.gluu.org, replacing the `_` between `gluu-server` and the version number with an `=` -->
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
 
