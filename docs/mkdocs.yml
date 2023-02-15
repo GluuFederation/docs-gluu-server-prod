@@ -92,7 +92,7 @@ nav:
             - 'FIDO U2F': 'authn-guide/U2F.md'
             - 'Certificate Authentication': 'authn-guide/cert-auth.md'
             - 'Account Lockout': 'authn-guide/lockout.md'
-            - 'Forgot Password': 'authn-guide/pw-reset.md'
+            - 'Password Reset': 'authn-guide/pw-reset.md'
             - 'Custom Script Tutorial': 'authn-guide/customauthn.md'
         - Inbound Identity:
             - 'Introduction': 'authn-guide/passport.md'
