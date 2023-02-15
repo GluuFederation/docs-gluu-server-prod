@@ -168,7 +168,7 @@ nav:
         - 'Performance tuning': 'operation/fine-tuning.md'
         - 'Ports': 'operation/ports.md'
         - 'Logout': 'operation/logout.md'
-        - 'Log Management' : 'operation/logs.md'
+        - 'Log Management': 'operation/logs.md'
         - 'Customize Public Pages': 'operation/custom-design.md'
         - 'Change IP Address': 'operation/changeip.md'
         - 'Server Clean-up': 'operation/cleanup.md'
