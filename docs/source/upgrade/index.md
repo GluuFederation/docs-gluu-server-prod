@@ -23,13 +23,13 @@
     * Download the upgrade script
     
     ```
-    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.5.0/upg4xto440.py
+    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.5.0/upg4xto450.py
     ```
     
     * Execute the script:
     
     ```
-    python3 upg4xto431.py
+    python3 upg4xto450.py
     ```
     
     Your upgrade directory will be the `/opt/upd/4.5.0/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.5.0`.
