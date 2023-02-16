@@ -87,7 +87,7 @@
         The private key cannot be password protected, and the public key must be base64 X.509. 
     
     !!! Note
-        Please backup your full `/etc/certs` directory and `cacerts` file under `/opt/jdkx.y.z/jre/lib/security/` folder before updating certificates.
+        Please backup your full `/etc/certs` directory and `cacerts` file under `/opt/amazon-corretto-x.x.x.x/jre/lib/security/` folder before updating certificates.
     
     Please follow these steps shown below to update the Apache SSL cert:
     
@@ -96,9 +96,9 @@
     - Import 'httpd.der' into the Java Keystore
     / Convertion to DER, command:<br/> `openssl x509 -outform der -in httpd.crt -out httpd.der`
         - Delete the existing certificate to avoid ambiguity due to presence of 2 different certificates for the same entity after importing the new one: 
-        `/opt/jdkx.x.x.x/jre/bin/keytool -delete -alias <hostname_of_your_Gluu_Server>_httpd -keystore /opt/jdkx.x.x.x/jre/lib/security/cacerts -storepass changeit`
+        `/opt/jre/bin/keytool -delete -alias <hostname_of_your_Gluu_Server>_httpd -keystore /opt/jre/lib/security/cacerts -storepass changeit`
         - Import certificate into the Java Keystore(cacerts):
-        `/opt/jdkx.x.x.x/jre/bin/keytool -importcert -file httpd.der -keystore /opt/jdkx.x.x.x/jre/lib/security/cacerts -alias <hostname_of_your_Gluu_Server>_httpd -storepass changeit`
+        `/opt/jre/bin/keytool -importcert -file httpd.der -keystore /opt/jre/lib/security/cacerts -alias <hostname_of_your_Gluu_Server>_httpd -storepass changeit`
     - [Restart](../operation/services.md#restart) `opendj`, `apache2/httpd`, `oxauth` and `identity` services.
     
     ## Install Intermediate Certificates
@@ -142,7 +142,7 @@
                       restartPolicy: Never
                       containers:
                         - name: web-key-rotation
-                          image: gluufederation/certmanager:4.2.0_dev
+                          image: gluufederation/certmanager:4.2.0_01
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm # This may be differnet in Helm
@@ -194,7 +194,7 @@
                               path: gluu_https.key                              
                       containers:
                         - name: load-web-key-rotation
-                          image: gluufederation/certmanager:4.2.0_dev
+                          image: gluufederation/certmanager:4.2.0_01
                           envFrom:
                           - configMapRef:
                               name: gluu-config-cm  #This may be differnet in Helm
@@ -242,7 +242,7 @@
                     spec:
                       containers:
                         - name: oxauth-key-rotation
-                          image: gluufederation/certmanager:4.2.0_dev
+                          image: gluufederation/certmanager:4.2.0_01
                           resources:
                             requests:
                               memory: "300Mi"
@@ -292,7 +292,7 @@
                   restartPolicy: Never
                   containers:
                     - name: oxshibboleth-key-rotation
-                      image: gluufederation/certmanager:4.2.0_dev
+                      image: gluufederation/certmanager:4.2.0_01
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -334,7 +334,7 @@
                   restartPolicy: Never
                   containers:
                     - name: oxd-key-rotation
-                      image: gluufederation/certmanager:4.2.0_dev
+                      image: gluufederation/certmanager:4.2.0_01
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -375,7 +375,7 @@
                   restartPolicy: Never
                   containers:
                     - name: ldap-key-rotation
-                      image: gluufederation/certmanager:4.2.0_dev
+                      image: gluufederation/certmanager:4.2.0_01
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -417,7 +417,7 @@
                   restartPolicy: Never
                   containers:
                     - name: passport-key-rotation
-                      image: gluufederation/certmanager:4.2.0_dev
+                      image: gluufederation/certmanager:4.2.0_01
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm
@@ -454,7 +454,7 @@
                   restartPolicy: Never
                   containers:
                     - name: scim-key-rotation
-                      image: gluufederation/certmanager:4.2.0_dev
+                      image: gluufederation/certmanager:4.2.0_01
                       envFrom:
                       - configMapRef:
                           name: gluu-config-cm

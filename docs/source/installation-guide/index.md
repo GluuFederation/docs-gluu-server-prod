@@ -28,10 +28,10 @@ A few additional notes about system requirements:
 Deploy Gluu on a server or VM with one of the following supported operating systems:
 
 - [Docker](./install-docker.md)
-- [Ubuntu 16, 18](./install-ubuntu.md)
-- [CentOS 7.x](./install-centos.md)
-- [RHEL 7.x](./install-rhel.md)
-- [Debian 8, 9](./install-debian.md)
+- [Ubuntu 18, 20](./install-ubuntu.md)
+- [CentOS 7, 8](./install-centos.md)
+- [RHEL 7, 8](./install-rhel.md)
+- [Debian 9, 10](./install-debian.md)
 
 ## Ports
 
@@ -104,7 +104,7 @@ session required pam_limits.so
 It is recommended to check the FD limit before increasing it. If this limit is customized and more than default, we recommend using the higher one. The FD limit can be found using the following command. 
 
 ```
-# cat /proc/sys/fs/file-max
+cat /proc/sys/fs/file-max
 ```
 
 Please note, the command may vary depending on the OS in use.
@@ -290,17 +290,17 @@ guide you through kernel update in the Linode VM.
 
 * Check for the current version of the kernel. If the output contains `-Linode`, then proceed
 ```
-# uname -a
+uname -a
 ```
 
 * Run the following command to update the kernel:
 ```
-# apt-get install linux-image-virtual grub2
+apt-get install linux-image-virtual grub2
 ```
 
 * Modify `grub` file in the `/etc/default/` folder:
 ```
-# vim /etc/default/grub
+vim /etc/default/grub
 ```
 
   * Ensure that the following lines are present in the grub file
@@ -313,6 +313,9 @@ GRUB_SERIAL_COMMAND="serial --speed=19200 --unit=0 --word=8 --parity=no --stop=1
 
 * Finally run the following commands to update `grub` and reboot:
 ```
-# update-grub
-# reboot
+update-grub
+```
+
+```
+reboot
 ```
