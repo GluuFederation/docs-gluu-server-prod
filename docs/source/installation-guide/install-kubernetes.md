@@ -222,6 +222,30 @@ Please calculate the minimum required resources as per services deployed. The fo
           * [Minikube](#minikube-helm-notes)
           * [MicroK8s](#microk8s-helm-notes)
     
+    1.  **Optional:** If using PostgreSQL as the persistence backend.
+        In a production environment, a production grade PostgreSQL server should be used such as `Cloud SQL` in GCP or `Amazon RDS` in AWS.
+
+        For testing purposes, you can deploy it on your Kubernetes cluster using the following commands:
+        ```bash
+        helm repo add bitnami https://charts.bitnami.com/bitnami
+        helm install postgresql --set auth.rootPassword=Test1234#,auth.database=gluu bitnami/postgresql -n postgres
+        ```
+
+        Add the following yaml snippet to your `override.yaml` file:
+        ```yaml
+        global:
+          gluuPersistenceType: sql
+        config:
+          configmap:
+            cnSqlDbName: gluu
+            cnSqlDbPort: 3306
+            cnSqlDbDialect: pgsql
+            cnSqlDbHost: postgresql.postgres.svc
+            cnSqlDbUser: root
+            cnSqlDbTimezone: UTC
+            cnSqldbUserPassword: Test1234#
+        ```
+
     1.  **Optional:** If using couchbase as the persistence backend.
         
         1. Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](#build-pygluu-kubernetespyz-manually).
