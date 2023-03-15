@@ -159,94 +159,8 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     ## Persistence Backup and Restore
 
     === "Couchbase"   
-        ### Automatic backup
-        A typical installation of Gluu using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases)  will automatically install a backup file named `couchbase-backup.yaml` that will backup `Couchbase` every 5 minutes to a `Persistent Volume`. 
-        
-        ### Manual backup
-        Couchbase backup can also be configured manually:
-        
-        1.  Download [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases). This package can be built [manually](https://github.com/GluuFederation/cloud-native-edition/blob/4.2/README.md#build-pygluu-kubernetespyz-manually).
-        
-        1.  Run:
-        
-            ```bash
-            ./pygluu-kubernetes.pyz install-couchbase-backup
-            ```
-             
-        !!! Note
-            `./pygluu-kubernetes.pyz install-couchbase-backup` will not install couchbase.
-        
-        
-        ### Couchbase restore
-        
-        1.  Install a new Couchbase if needed.
-        
-            ```bash
-            ./pygluu-kubernetes.pyz install-couchbase
-            ```
-        
-        1.  Create a pod definition yaml file named `restore-cb-pod.yaml` with the following configuration. You can change `volumes`, `volumeMounts` and `namespace` as needed. 
-        
-            !!! Note
-                `./pygluu-kubernetes.pyz install-couchbase-backup` uses the `volumes` and `volumeMounts` as seen in the yaml configuration below
-                
-            ```yaml
-            apiVersion: v1
-            kind: Pod
-            metadata:
-              name: restore-node
-              namespace: cbns
-            spec:  # specification of the pod's contents
-              containers:
-                - name: restore-pod
-                  image: couchbase/server:enterprise-6.5.0
-                  # Just spin & wait forever
-                  command: [ "/bin/bash", "-c", "--" ]
-                  args: [ "while true; do sleep 30; done;" ]
-                  volumeMounts:
-                    - name: "couchbase-cluster-backup-volume"
-                      mountPath: "/backups"
-              volumes:
-                - name: couchbase-cluster-backup-volume
-                  persistentVolumeClaim:
-                    claimName: backup-pvc
-              restartPolicy: Never
-            ```
-        
-        1.  Apply `restore-cb-pod.yaml`.
-        
-            ```bash
-            kubectl apply -f  restore-cb-pod.yaml
-            ```
-            
-        1.  Access the `restore-node` pod.
-        
-            ```bash
-            kubectl exec -it restore-node -n cbns -- /bin/bash
-            ```
-         
-        1.  Choose the backup of choice
-        
-            ```bash
-            cbbackupmgr list --archive /backups --repo couchbase
-            ```
-            
-            We will choose the oldest we received from the command above `2020-02-20T10_05_13.781131773Z`
-            
-        1.  Perform the restore using the [cbbackupmgr](https://docs.couchbase.com/server/current/backup-restore/cbbackupmgr-restore.html) command.
-        
-            ```bash
-            cbbackupmgr restore --archive /backups --repo couchbase --cluster cbgluu.cbns.svc.cluster.local --username admin --password passsword --start 2020-02-20T10_05_13.781131773Z --end 2020-02-20T10_05_13.781131773Z
-            ```
-            
-            
-        1. Once done, delete the `restore-node` pod.
-        
-            ```bash
-            kubectl delete -f restore-cb-pod.yaml -n cbns
-            ```
-            
-                       
+         You can follow the Couchbase [docs](https://docs.couchbase.com/operator/current/howto-backup.html) to [backup](https://docs.couchbase.com/operator/current/howto-backup.html#overview) and [restore](https://docs.couchbase.com/operator/current/howto-backup.html#restoring-from-a-backup) your persistence.
+
     === "OpenDJ"    
         !!! Note
             Up to 6 backups will be stored at `/opt/opendj/ldif` on the running `opendj` pod. The backups will carry the name `backup-0.ldif` to `backup-5.ldif` and will be overwritten to save te data.
@@ -286,7 +200,18 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
             
     === "SQL"
 
-        SQL database backup is a common feature whether in a User-managed or Cloud-Managed deployment.
+        SQL databases backup and restore are a common feature whether in a User-managed or Cloud-Managed deployment.
+
+
+        One way to *backup* your postgresql database for example:
+        ```bash
+        pg_dump dbname > dumpfile
+        ```
+        
+        Restore the database using the generated `dumpfile`:
+        ```bash
+        psql dbname < dumpfile
+        ```
 
     ## Configmaps and Secrets - Backup and Restore    
 
@@ -319,6 +244,8 @@ There are multiple methods for backing up the Gluu Server. A few recommended str
     Keep note of the chart version. For example: `backup-chart-version`
 
     ### Restore of Configmaps and Secrets 
+    !!! Note
+        You have to restore your [Persistence](#persistence-backup-and-restore) before doing this step.
 
     1.  Create namespace
     ```bash
