@@ -4,7 +4,7 @@
 
 In previous versions the Gluu Server was tightly bundled with LDAP for persistence. In 4.x, the persistence layer has been re-architected, and there is no longer a tight bundling with a specific DB (i.e. LDAP). Now, new persistence plugins can be added and data can be split between multiple persistence modules.
 
-Gluu 4.4 CE supports these persistence modules out-of-the-box:
+Gluu 4.5 CE supports these persistence modules out-of-the-box:
 
 1. [LDAP](https://github.com/GluuFederation/oxCore/tree/master/persistence-ldap), which is still the default persistence method.
 
