@@ -106,6 +106,7 @@ sessionIdLifetime                                  | The lifetime of session id 
 serverSessionIdLifetime                            | Dedicated property to control lifetime of the server side OP session object in seconds. Overrides `sessionIdLifetime`. By default value is 0, so object lifetime equals `sessionIdLifetime` (which sets both cookie and object expiration). It can be useful if goal is to keep different values for client cookie and server object.
 sessionIdRequestParameterEnabled                   | Boolean value specifying whether to enable session_id HTTP request parameter
 sessionIdPersistOnPromptNone                       | Boolean value specifying whether to persist session ID on prompt none
+sessionIdPersistInCache                            | Boolean value specifying whether sessions are stored in the cache. If false, sessions are stored in database.
 fapiCompatibility                                  | Boolean value specifying whether to turn on FAPI compatibility mode. If true AS behaves in more strict mode.
 consentGatheringScriptBackwardCompatibility        | Boolean value specifying whether to turn on Consent Gathering Script backward compatibility mode. If true AS will pick up script with higher level globally. If false (default) AS will pick up script based on client configuration.
 introspectionScriptBackwardCompatibility           | Boolean value specifying whether switch off client's introspection scripts (true value) and run all scripts that exists on server. Default value is false.
