@@ -153,7 +153,7 @@ nav:
         - 'Persistence Strategies':
             - 'Persistence Mechanisms': 'reference/persistence.md'
             - 'MySQL Schema': 'reference/mysql-schema.md'
-            - 'PostgreSQL Schema': 'reference/posgres-schema.md'
+            - 'PostgreSQL Schema': 'reference/postgres-schema.md'
             - 'oxLDAP Properties': 'reference/oxldap.md'
             - 'LDAP Schema': 'reference/ldap-schema.md'
         - 'Kubernetes and Containers Technical Reference':
