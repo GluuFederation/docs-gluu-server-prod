@@ -369,6 +369,127 @@ Full version of the script example can be found [here](https://github.com/GluuFe
 
 Note `RevokeTokenContext` allows to access response builder (`context.getResponseBuilder()`) which allows to customer response if needed.
 
+## Update Token Script
+
+### 1. Mandatory methods:
+```
+class UpdateToken(UpdateTokenType):
+
+    def __init__(self, currentTimeMillis):
+        self.currentTimeMillis = currentTimeMillis
+
+    def init(self, customScript, configurationAttributes):
+        return True
+
+    def destroy(self, configurationAttributes):
+        return True
+
+    def getApiVersion(self):
+        return 11
+````
+### 2. modifyIdToken () : Used to modify claims in an ID token
+
+Pseudocode and example :
+```
+    # Returns boolean, true - indicates that script applied changes
+    # jsonWebResponse - is JwtHeader, you can use any method to manipulate JWT
+    # context is reference of org.gluu.oxauth.service.external.context.ExternalUpdateTokenContext
+    def modifyIdToken(self, jsonWebResponse, context):
+
+    # header claims
+	jsonWebResponse.getHeader().setClaim("header_name", "header_value")
+
+	#custom claims
+	jsonWebResponse.getClaims().setClaim("openbanking_intent_id", openbanking_intent_id_value)
+
+	#regular claims        
+	jsonWebResponse.getClaims().setClaim("sub", claimValue)
+
+	return True
+
+```
+
+### 3.  modifyAccessToken():  
+#### a. Granularity of access control:
+An UpdateTokenType script is great for adding scopes or removing scopes to/from the Access token. By doing so you can tailor build the granularity of access control according to business need.
+
+[`context.overwriteAccessTokenScopes`](https://github.com/GluuFederation/oxAuth/blob/ef5762e41b13bffc09702f821a1ad6d81900428d/Server/src/main/java/org/gluu/oxauth/service/external/context/ExternalUpdateTokenContext.java) is ready to use method of the `context` variable
+
+```
+    def modifyAccessToken(self, accessToken, context):
+              context.overwriteAccessTokenScopes(accessToken, Sets.newHashSet("openid", "mynewscope"))
+```
+#### b.  Perform business check before returning AT
+
+Pseudo code and example - Issue Access token only if account balance is greater than 0
+```
+    # Returns boolean, true - indicates that script applied changes
+    # accessToken - is JwtHeader, you can use any method to manipulate JWT
+    # context is reference of org.gluu.oxauth.service.external.context.ExternalUpdateTokenContext
+    def modifyAccessToken(self, accessToken, context):
+
+         #read from session
+	     sessionIdService = CdiUtil.bean(SessionIdService)
+	     sessionId = sessionIdService.getSessionByDn(context.getGrant().getSessionDn()) # fetch from persistence
+
+        org_id = sessionId.getSessionAttributes().get("org_id")
+	    balance = thirdPartyApi.checkBalance(org_id)
+
+        if balance > 0 :
+           return True
+        else:
+           return False # forbid the creation of AT
+```
+#### c. Modify claims in an access token:
+```
+    # Returns boolean, true - indicates that script applied changes. If false is returned token will not be created.
+    # accessToken is reference of org.gluu.oxauth.model.common.AccessToken (note authorization grant can be taken as context.getGrant())
+    # context is reference of org.gluu.oxauth.service.external.context.ExternalUpdateTokenContext
+    def modifyAccessToken(self, accessToken, context):
+
+	    # header claims
+	    accessToken.getHeader().setClaim("header_name", "header_value")
+
+	    #custom claims
+	    accessToken.getClaims().setClaim("claim_name", "claimValue")
+
+	    #regular claims        
+	    accessToken.getClaims().setClaim("sub", claimValue)
+
+	    return True
+
+```
+
+### 5. Modify a specific token lifetime based on the context:
+1. Refresh token lifetime:
+```
+    def getRefreshTokenLifetimeInSeconds(self, context):
+        return 24 * 60 * 60 # one day
+```
+2. ID token lifetime:
+```
+    def getIdTokenLifetimeInSeconds(self, context):
+        return 10 * 60 * 60 # 10 hours
+```
+3. Access token lifetime:
+```
+    def getAccessTokenLifetimeInSeconds(self, context):
+        return 10 * 60 * 60 # 10 hours
+```
+
+### 6. modifyRefreshToken() :  
+Used to modify claims in a Refresh Token
+```
+    # Returns boolean, true - indicates that script applied changes. If false is returned token will not be created.
+    # refreshToken is reference of org.gluu.oxauth.model.common.RefreshToken (note authorization grant can be taken as context.getGrant())
+    # context is reference of org.gluu.oxauth.service.external.context.ExternalUpdateTokenContext
+    def modifyRefreshToken(self, refreshToken, context):
+        return True
+
+```
+
+- [Sample Update Token Script](./sample-update-token-script.py)
+
 ## End Session (Logout)
 
 End Session scripts allows to modify HTML response for Frontchannel logout ([spec](http://openid.net/specs/openid-connect-frontchannel-1_0.html)).
