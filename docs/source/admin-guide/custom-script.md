@@ -387,9 +387,11 @@ class UpdateToken(UpdateTokenType):
     def getApiVersion(self):
         return 11
 ````
+
 ### 2. modifyIdToken () : Used to modify claims in an ID token
 
 Pseudocode and example :
+
 ```
     # Returns boolean, true - indicates that script applied changes
     # jsonWebResponse - is JwtHeader, you can use any method to manipulate JWT
@@ -409,7 +411,8 @@ Pseudocode and example :
 
 ```
 
-### 3.  modifyAccessToken():  
+### 3.  modifyAccessToken(): 
+
 #### a. Granularity of access control:
 An UpdateTokenType script is great for adding scopes or removing scopes to/from the Access token. By doing so you can tailor build the granularity of access control according to business need.
 
@@ -419,9 +422,11 @@ An UpdateTokenType script is great for adding scopes or removing scopes to/from 
     def modifyAccessToken(self, accessToken, context):
               context.overwriteAccessTokenScopes(accessToken, Sets.newHashSet("openid", "mynewscope"))
 ```
+
 #### b.  Perform business check before returning AT
 
 Pseudo code and example - Issue Access token only if account balance is greater than 0
+
 ```
     # Returns boolean, true - indicates that script applied changes
     # accessToken - is JwtHeader, you can use any method to manipulate JWT
@@ -440,7 +445,9 @@ Pseudo code and example - Issue Access token only if account balance is greater 
         else:
            return False # forbid the creation of AT
 ```
+
 #### c. Modify claims in an access token:
+
 ```
     # Returns boolean, true - indicates that script applied changes. If false is returned token will not be created.
     # accessToken is reference of org.gluu.oxauth.model.common.AccessToken (note authorization grant can be taken as context.getGrant())
@@ -461,16 +468,21 @@ Pseudo code and example - Issue Access token only if account balance is greater 
 ```
 
 ### 5. Modify a specific token lifetime based on the context:
+
 1. Refresh token lifetime:
+
 ```
     def getRefreshTokenLifetimeInSeconds(self, context):
         return 24 * 60 * 60 # one day
 ```
+
 2. ID token lifetime:
+
 ```
     def getIdTokenLifetimeInSeconds(self, context):
         return 10 * 60 * 60 # 10 hours
 ```
+
 3. Access token lifetime:
 ```
     def getAccessTokenLifetimeInSeconds(self, context):
@@ -479,6 +491,7 @@ Pseudo code and example - Issue Access token only if account balance is greater 
 
 ### 6. modifyRefreshToken() :  
 Used to modify claims in a Refresh Token
+
 ```
     # Returns boolean, true - indicates that script applied changes. If false is returned token will not be created.
     # refreshToken is reference of org.gluu.oxauth.model.common.RefreshToken (note authorization grant can be taken as context.getGrant())
@@ -489,6 +502,7 @@ Used to modify claims in a Refresh Token
 ```
 
 - [Sample Update Token Script](./sample-update-token-script.py)
+
 
 ## End Session (Logout)
 
