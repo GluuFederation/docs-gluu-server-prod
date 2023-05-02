@@ -372,6 +372,7 @@ Note `RevokeTokenContext` allows to access response builder (`context.getRespons
 ## Update Token Script
 
 ### 1. Mandatory methods:
+
 ```
 class UpdateToken(UpdateTokenType):
 
@@ -386,7 +387,7 @@ class UpdateToken(UpdateTokenType):
 
     def getApiVersion(self):
         return 11
-````
+```
 
 ### 2. modifyIdToken () : Used to modify claims in an ID token
 
