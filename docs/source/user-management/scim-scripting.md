@@ -168,6 +168,9 @@ Ensure no addresses are returned anymore in your SCIM user searches. Happy testi
 
 With the `manageResourceOperation` and `manageSearchOperation` methods you can make complex decisions on how processing should take place based on contextual data and the incoming payload.
 
+!!! Important
+    Consider the incoming payload as a read-only variable. Modifying is value may produce unexpected results
+
 ### manageResourceOperation
 
 This method is invoked when any following operations are executed: resource creation, modification, removal and retrieval by ID. In case of bulks, the method is called for every operation that fits into these categories.
@@ -178,7 +181,7 @@ Parameters are described in the table below:
 |-|-|-|
 |`context`|Provides contextual information about the SCIM operation being called such as type of resource involved, HTTP verb, request headers, query params, etc.  |[OperationContext](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-rest/src/main/java/org/gluu/oxtrust/service/external/OperationContext.java)|
 |`entity`|An non-null object representing the resource involved|A descendant of [Entry](https://github.com/GluuFederation/oxOrm/blob/version_4.4.0/model/src/main/java/org/gluu/persist/model/base/Entry.java). If the resource is a user, it will be an instance of [ScimCustomPerson](https://github.com/GluuFederation/scim/blob/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim/ScimCustomPerson.java). In case of a group, it will be a [GluuGroup](https://github.com/GluuFederation/oxTrust/blob/version_4.4.0/model/src/main/java/org/gluu/oxtrust/model/GluuGroup.java)|
-|`payload`|The payload sent in the invocation; `null` when the operation is removal or retrieval by ID|The datatype depends on the operation called. Check the [interface](https://github.com/GluuFederation/scim/tree/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/ws/rs/scim2) that suits best and inspect the first parameter's datatype. The class will belong to some subpackage inside [org.gluu.oxtrust.model.scim2](https://github.com/GluuFederation/scim/tree/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2)|
+|`payload`|The payload sent in the invocation; `null` when the operation is removal or retrieval by ID. Altering the payload is discouraged|The datatype depends on the operation called. Check the [interface](https://github.com/GluuFederation/scim/tree/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/ws/rs/scim2) that suits best and inspect the first parameter's datatype. The class will belong to some subpackage inside [org.gluu.oxtrust.model.scim2](https://github.com/GluuFederation/scim/tree/version_4.4.0/scim-model/src/main/java/org/gluu/oxtrust/model/scim2)|
 
 This method is expected to return an instance of `javax.ws.rs.core.Response` that supersedes the output of the operation itself. In other words, the actual processing of the operation is skipped in favor of the code supplied here. However note that minor validations may take place in the payload before your code is actually called. 
 
