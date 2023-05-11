@@ -895,6 +895,16 @@
             "description": "Boolean value specifying whether to set Session State HttpOnly.",
             "type": "boolean"
         },
+        "allowBlankValuesInDiscoveryResponse": {
+            "id": "allowBlankValuesInDiscoveryResponse",
+            "description": "Boolean value specifying whether to allow blank values in discovery response.",
+            "type": "boolean"
+        },
+        "logNotFoundEntityAsError": {
+            "id": "logNotFoundEntityAsError",
+            "description": "Boolean value specifying whether to log not found entity exception as error or as trace. Default value is false (trace).",
+            "type": "boolean"
+        },
         "configurationUpdateInterval": {
             "id": "configurationUpdateInterval",
             "description": "The interval for configuration update in seconds.",

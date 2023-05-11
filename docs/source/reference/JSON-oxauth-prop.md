@@ -112,6 +112,7 @@ consentGatheringScriptBackwardCompatibility        | Boolean value specifying wh
 introspectionScriptBackwardCompatibility           | Boolean value specifying whether switch off client's introspection scripts (true value) and run all scripts that exists on server. Default value is false.
 clientAuthorizationBackwardCompatibility           | Boolean value specifying whether switch to old way of fetching client authorizations (querying by `userInum=<v>&clientId=<c>` filter instead of getting by key `v_c` introduced in 4.2.1 which impacts performance). 
 rejectJwtWithNoneAlg                               | Boolean value specifying whether reject JWT requested or validated with algorithm None. Default value is true.
+allowBlankValuesInDiscoveryResponse                | Boolean value specifying whether to allow blank values in Discovery Response. Default value is false.
 spontaneousScopeLifetime                           | The lifetime of spontaneous scope in seconds.
 configurationUpdateInterval                        | The interval for configuration update in seconds
 cssLocation                                        | The location for CSS files
@@ -141,6 +142,7 @@ invalidateSessionCookiesAfterAuthorizationFlow     | Boolean value to specify wh
 updateUserLastLogonTime                            | Choose if application should update oxLastLogonTime attribute upon user authentication
 updateClientAccessTime                             | Choose if application should update oxLastAccessTime/oxLastLogonTime attributes upon client authentication
 enableClientGrantTypeUpdate                        | Choose if client can update Grant Type values
+logNotFoundEntityAsError                           | Specify whether to log not found entity exception as error or as trace. Default value is false (trace).
 loggingLevel                                       | Specify the logging level for oxAuth loggers
 corsConfigurationFilters                           | This list specifies the CORS configuration filters
 logClientIdOnClientAuthentication                  | Choose if application should log the Client ID on client authentication
