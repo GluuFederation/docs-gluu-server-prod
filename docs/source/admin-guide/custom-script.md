@@ -420,6 +420,8 @@ An UpdateTokenType script is great for adding scopes or removing scopes to/from 
 [`context.overwriteAccessTokenScopes`](https://github.com/GluuFederation/oxAuth/blob/ef5762e41b13bffc09702f821a1ad6d81900428d/Server/src/main/java/org/gluu/oxauth/service/external/context/ExternalUpdateTokenContext.java) is ready to use method of the `context` variable
 
 ```
+    from com.google.common.collect import Sets
+    ....
     def modifyAccessToken(self, accessToken, context):
               context.overwriteAccessTokenScopes(accessToken, Sets.newHashSet("openid", "mynewscope"))
 ```
@@ -450,21 +452,18 @@ Pseudo code and example - Issue Access token only if account balance is greater 
 #### c. Modify claims in an access token:
 
 ```
+    
+
     # Returns boolean, true - indicates that script applied changes. If false is returned token will not be created.
     # accessToken is reference of org.gluu.oxauth.model.common.AccessToken (note authorization grant can be taken as context.getGrant())
     # context is reference of org.gluu.oxauth.service.external.context.ExternalUpdateTokenContext
     def modifyAccessToken(self, accessToken, context):
-
-	    # header claims
-	    accessToken.getHeader().setClaim("header_name", "header_value")
-
-	    #custom claims
-	    accessToken.getClaims().setClaim("claim_name", "claimValue")
-
-	    #regular claims        
-	    accessToken.getClaims().setClaim("sub", claimValue)
-
-	    return True
+       
+        
+        context.getClaims().setClaim("claim_name", "claimValue")
+       
+        print "Update token script. Modify access token: %s" % accessToken
+        return True
 
 ```
 
