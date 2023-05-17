@@ -459,7 +459,7 @@ Pseudo code and example - Issue Access token only if account balance is greater 
     # context is reference of org.gluu.oxauth.service.external.context.ExternalUpdateTokenContext
     def modifyAccessToken(self, accessToken, context):
        
-        
+        context.getHeader().setClaim("custom_header_name", "custom_header_value")
         context.getClaims().setClaim("claim_name", "claimValue")
        
         print "Update token script. Modify access token: %s" % accessToken
