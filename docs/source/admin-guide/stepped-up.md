@@ -1,8 +1,12 @@
-# Stepped Up Authentication Example
+### What is Stepped Up Authentication ? 
+While navigating through an application, a user is challenged to produce an additional authentication when a certain API (of higher criticality) accessed by the client, does not have the needed scope.
 
-## Use case:
-When a user is challenged to produce an additional authentication when a certain API accessed by the client, does not have the needed scope.
-
+Consider the following sequence of events :
+1. A user is logged in to an app using very basic authentication mechanism. Say login- password.
+2. The user navigates through the app.
+3. When the user attempts to access a critical resource, he is presented with another authentication step say otp.
+4. The user, after successful authentication, has the needed access token to access the critical resource.
+ 
 ```mermaid
 
 sequenceDiagram
@@ -23,18 +27,20 @@ API->>Website: 3. 401 Unauthorized<br>WWW-Authenticate: Bearer error="insufficie
 Website->>Browser: Enforce additional challenge on the user<br> (Enter OTP) 
 Person->>Browser:Enter OTP
 Browser->>Auth Server: /authorize endpoint
+Note right of Auth Server: Stepped-up Authentication
 Auth Server->>Auth Server:Validate OTP (Person authentication script)
+Note right of Auth Server: Modify scope of AT
 Auth Server->>Auth Server: Modify scope of AT to include OTP (Update token script)
 Auth Server->> Website: Return Access Token with scope containing OTP
 
 ```
 
-## Implementation details 
-
+## Implementation details : 
+This implementation has been broken down to 5 parts highlighted in different colours. The details contain sample code that can be used to be build the flow using `Person Authentication Scripts` and `Update Token Scripts`
 ```mermaid
 
 sequenceDiagram
-title Mapping OAuth Scopes to ACR
+title Implementation Stepped-up authn in Gluu's Authentication server
 
 actor Person
 participant Browser
@@ -42,7 +48,7 @@ participant Website
 participant Auth Server
 participant API
 autonumber
-rect rgb(191, 223, 255)
+rect rgb(255, 223, 211)
 Website->>Browser: html login form
 Person->>Browser: Update PII
 Browser->>Website: POST 
@@ -50,15 +56,20 @@ Website->>Auth Server: login request /authorize?response_type=code id_token
 Auth Server->> Auth Server: UpdateTokenScript - place user info in id_token <br>e.g. encrypted inum
 Auth Server ->>Website: return id_token and code
 end
-rect rgb(181, 200, 255)
+rect rgb(211,211,211)
+Website->> Website: Extract the user info from id_token and save in website's session (not to be confused with Auth Server session)
+end
+
+rect rgb(212, 238, 227)
 Website->>API: request some endpoint
 API->>API:  Enforce<br> presence of <br> 'otp' scope<br> in  access_token
 API->>Website: 401 Unauthorized<br>WWW-Authenticate: <br>Bearer error="insufficient_user_authentication" 
-Website->>Website: Extract the encrypted inum from id_token
-Website->>Browser:  redirect to AS, <br>pass the encrypted inum <br>as login_hint
-Browser->>Auth Server: authorize?acr_values=otp<br>&client_id=1234<br>&scope=otp + other scopes<br>&response_type=code<br>&client_id=____<br>&redirect_uri=____<br>&state=_____<br>&nonce=____<br>&prompt=login&<br>login_hint=encrypted_inum
+Website->>Browser:  redirect to AS
 end
-rect rgb(190, 200, 255)
+
+
+rect rgb(186,225,255)
+Browser->>Auth Server: authorize?acr_values=otp<br>&client_id=1234<br>&scope=otp + other scopes<br>&response_type=code<br>&client_id=____<br>&redirect_uri=____<br>&state=_____<br>&nonce=____<br>&prompt=login&<br>login_hint=encrypted_inum
 Auth Server->>Auth Server:  Get encrypted user inum,<br>from login_hint, and decrypt<br>return None, if inum not found<br> 
 Auth Server->>Browser:  Display OTP Page
 Person->>Browser:  enter OTP
@@ -72,19 +83,21 @@ Auth Server->>Auth Server:  Update token script is invoked. <br> read session va
 Auth Server->>Website: access_token, id_token,<br>refresh_token
 end 
 
-rect rgb(195, 212, 255)
+rect rgb(255,255,186)
 Website->>API:  request some endpoint<br>(with new access_token)
 API->>API:  verify the acess_token. It should contain the necessary scope i.e otp
 end
 
 ```
 
-### Steps 1-6:
+### Step A: Ensure id_token has some info to identify the user:
 
-1. The client should be configured to return id_token (hybrid flow)
-3. Update token script should be updated to return encrypted inum in id_token.
+1. When the user logs in for the very first time and performs basic authentication, the Update Token script can be used to place a custom claim containing some user identification.  
+In this example, we store the encrypted inum of the user as a "custom claim" in the id_token. 
+1. A good practice is to not put the primary key / user identifier in plain text
+
+UpdateToken script:
 ```
-
    def modifyIdToken(self, jsonWebResponse, context):
         print "Update token script. Modify idToken: %s" % jsonWebResponse
         sessionIdService = CdiUtil.bean(SessionIdService)
@@ -93,22 +106,29 @@ end
         user_name = session.getSessionAttributes().get("auth_user")                
         foundUser = userService.getUserByAttribute("uid", user_name)        
         userInum = foundUser.getAttribute("inum") 
-        print userInum
+        
         encryptedInum = CdiUtil.bean(EncryptionService).encrypt(userInum)
         print encryptedInum 
+        
         #custom claim in id_token
         jsonWebResponse.getClaims().setClaim("someFancyName", encryptedInum)
-        #print "Update token script. After modify idToken: %s" % jsonWebResponse
-        #jsonWebResponse.getClaims().setClaim("someFancyName", "madhu")
+        
         return True
 ```
+### Step B: Website (RP) extracts the user info from id_token:
+1. The Website (RP / client) should extract the user info from id_token and save it in the website's session.
+2. The website's session should not be confused with the Auth Server's session. 
+3. The Auth Server sessions are state-less and any session related information that the website wishes to consume can only be that which can be extracted from an id_token.
 
-### Step 7-12:
-1. call /authorize endpoint with login_hint=encrypted_inum
-2. Instead of login_hint, the implementation can use `id_token_hint` in the request parameter or jwe `request` object in the request parameter containing all the parameters that will identify the user and his session. 
+### Step C: Critical Resource accessed by user.
+1. Website detects critical resource, examines the Access token presented by the client.
+2. Redirects to RP for stepped-up authentication
 
-### Step 13-20:
-1. Extract user info from `login_hint`, `id_token_hint` or `request`-jwe.
+### Step D: Stepped-up authentication
+1. Website calls /authorize endpoint with login_hint=encrypted_inum, which was previously extracted from id_token in Step B
+1. Use `login_hint`, `id_token_hint` or `request`-jwe to identify the user in Person Authentication script used to perform the additional authentication step.
+
+Stepped-up Authn Person Authentication script:
 ```
  def prepareForStep(self, configurationAttributes, requestParameters, step):
         print "OTP test. Prepare for steps %s" %step
@@ -135,8 +155,8 @@ end
         else:
             return False
 ```
-2. Validate user otp
-3. "enforce_scope=otp", add to session
+3. Validate user otp
+4. "enforce_scope=otp", add to session
 
 ```
 def authenticate(self, configurationAttributes, requestParameters, step):
@@ -166,8 +186,10 @@ def authenticate(self, configurationAttributes, requestParameters, step):
 
 ```
 
-## Step 22: 
-
+5: Update AT with relevant scope
+* Check the session variable "enforce_scope" and add the "scope" to the Access token. 
+* You can also modify Access token header claims and regular claims using the `modifyAccessToken` in the Update Token Script.
+Update Token script:
 ```
     def modifyAccessToken(self, accessToken, context):
 
@@ -178,7 +200,13 @@ def authenticate(self, configurationAttributes, requestParameters, step):
         enforce_scope = sessionId.getSessionAttributes().get("enforce_scope ")
 	if enforce_scope not None:
                context.overwriteAccessTokenScopes(accessToken, Sets.newHashSet("existingScope1", "existingScope2", "mynewscope"))
+
+        context.getHeader().setClaim("custom_header_name", "custom_header_value")
+        context.getClaims().setClaim("claim_name", "claimValue")
 ```
+### Step E: Access the critical resource with new Access token:
+The access token contains needed scope because the scopes were updated in Step D,  point 5
+
 
 ## Update token script
 
