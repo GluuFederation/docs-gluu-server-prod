@@ -1,3 +1,9 @@
+!!! Attention
+    All Linux assets, packages, and binaries require a support contract for access.
+    Contact sales@gluu.org for more information. For free up-to-date binaries,
+    check out the latest releases at [The Linux Foundation Janssen Project](https://docs.jans.io),
+    the new upstream open source project.
+
 # Ubuntu Installation 
 ## Overview
 Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 22.x. Follow the instructions below: 
