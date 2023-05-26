@@ -1,9 +1,16 @@
+
+!!! Attention
+    All Linux assets, packages, and binaries require a support contract for access.
+    Contact sales@gluu.org for more information. For free up-to-date binaries,
+    check out the latest releases at [The Linux Foundation Janssen Project](https://docs.jans.io),
+    the new upstream open source project.
+
 # The Kubernetes recipes
 
 ## Getting Started with Kubernetes
 
 The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edition, requires some special considerations compared to other deployments. This page details the installation and initial configuration of a CN deployment. More advanced configuration details are available on the appropriate pages throughout the Gluu documentation. For convenience, links to those documents follow:
-
+- [Pre-requirments for accessing imsges and assets](#requirmentes-for-accessing-docker-images-and-assets)
 - [Architectural general diagram](#architectural-diagram-of-all-gluu-services)
 - [Certificate Management](../admin-guide/certificate.md)  
 - [Key Reference Guide](../reference/container-configs.md)  
@@ -15,6 +22,28 @@ The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edit
 - [SCIM interactions diagram](#architectural-diagram-of-scim)
 - [Passport interactions diagram](#architectural-diagram-of-oxpassport)
 - [Jackrabbit interactions diagram](#working-with-jackrabbit)
+
+## Requirmentes for accessing docker images and asset
+
+1. Contact sales@gluu.org for credentials to access and pull our docker images. Existing customers should have recieved the credentials already. If you are using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases) the tool that parses values.yaml you can skip the next steps. We recommend using helm manually.
+2. Follow the [guide](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line) to create a secret in your kubernetes environment holding the docker credentials.
+3. Inject the secret name in your [`values.yaml`](https://github.com/GluuFederation/cloud-native-edition/blob/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) at `image.pullSecrets` for each service.
+   Forexample:
+   ```yaml
+   ...
+   ...
+   oxauth:
+     image:
+       # -- Image pullPolicy to use for deploying.
+       pullPolicy: IfNotPresent
+       # -- Image  to use for deploying.
+       repository: gluufederation/oxauth
+       # -- Image  tag to use for deploying.
+       tag: 4.5.1-1
+       # -- Image Pull Secrets
+       pullSecrets:
+         - regcred
+   ```
 
 ## System Requirements for cloud deployments
 
