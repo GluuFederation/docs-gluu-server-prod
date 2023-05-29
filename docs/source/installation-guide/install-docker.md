@@ -1,3 +1,10 @@
+!!! Attention
+    All Linux assets, packages, and binaries require a support contract for access.
+    Contact sales@gluu.org for more information. For free up-to-date binaries,
+    check out the latest releases at [The Linux Foundation Janssen Project](https://docs.jans.io),
+    the new upstream open source project.
+
+
 # Docker Installation
 
 ## Overview
@@ -22,6 +29,18 @@ For Docker deployments, provision a VM with:
 - [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
 
 ## Instructions
+
+### Setup credentials for accessing docker images and assets
+
+1.  Contact sales@gluu.org for credentials to access and pull our docker images. Existing customers should have received the credentials already. 
+
+1.  Run the following command to use the credentials mentioned in previous step:
+
+    ```
+    docker login 
+    ```
+
+    You will be prompted for username and password/token.
 
 ### Obtain files for deployment
 
