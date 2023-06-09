@@ -34,7 +34,7 @@ The Gluu Server will be installed under `/opt`. File size and [minimum requireme
 For **SUSE Linux Enterprise Server 15**, run the following commands to install:
 
 ```
-wget https://repo.gluu.org/suse/RPM-GPG-KEY-GLUU -O RPM-GPG-KEY-GLUU
+wget --user="your-username" --password="your-password" https://repo.gluu.org/suse/RPM-GPG-KEY-GLUU -O RPM-GPG-KEY-GLUU
 ```
 
 ```

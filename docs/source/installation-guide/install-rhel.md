@@ -33,15 +33,23 @@ The Gluu Server will create its file system under `/root/` and will be installed
 For **RHEL 8**, run the following commands:
 
 ```
-wget https://repo.gluu.org/rhel/Gluu-rhel8.repo -O /etc/yum.repos.d/Gluu.repo
+wget --user="your-username" --password="your-password" https://repo.gluu.org/rhel/Gluu-rhel8.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
-wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+wget --user="your-username" --password="your-password" https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
 
 ```
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+Update file /etc/dnf/dnf.conf, append these two lines:
+
+
+username=**your-username**
+password=**your-password**
 ```
 
 ```
@@ -61,15 +69,23 @@ yum versionlock gluu-server
 For **RHEL 7**, run the following commands:
 
 ```
-wget https://repo.gluu.org/rhel/Gluu-rhel7.repo -O /etc/yum.repos.d/Gluu.repo
+wget --user="your-username" --password="your-password" https://repo.gluu.org/rhel/Gluu-rhel7.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
-wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+wget --user="your-username" --password="your-password" https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
 
 ```
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+Update file /etc/dnf/dnf.conf, append these two lines:
+
+
+username=**your-username**
+password=**your-password**
 ```
 
 ```
