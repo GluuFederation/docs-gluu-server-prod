@@ -35,7 +35,7 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
-#4.5.1 Fixes / Enhancements
+## 4.5.1 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
 • [#1849 ](https://github.com/GluuFederation/oxAuth/issues/1849)explicit user consent is required when up-scope within client authorized scopes 
