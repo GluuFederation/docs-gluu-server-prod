@@ -311,11 +311,9 @@ Please calculate the minimum required resources as per services deployed. The fo
       global:
         storageClass:
           provisioner: kubernetes.io/aws-ebs
-        lbAddr: "" #CHANGE-THIS to the address received in the previous step axx-109xx52.us-west-2.elb.amazonaws.com
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
-        isDomainRegistered: "false" # CHANGE-THIS  "true" or "false" to specify if the domain above is registered or not.
-    
-      nginx:
+        isDomainRegistered: "false" # CHANGE-THIS  "true" or "false" to specify if the domain above is registered or not.    
+      nginx-ingress:
         ingress:
           enabled: true
           path: /
@@ -325,6 +323,9 @@ Please calculate the minimum required resources as per services deployed. The fo
             - secretName: tls-certificate
               hosts:
                 - demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
+      config:
+        configmap:
+          lbAddr: "" #CHANGE-THIS to the address received in the previous step axx-109xx52.us-west-2.elb.amazonaws.com 
       ```    
     
       Tweak the optional [parameters](#configuration) in `values.yaml` to fit the setup needed.
@@ -340,12 +341,11 @@ Please calculate the minimum required resources as per services deployed. The fo
       global:
         storageClass:
           provisioner: kubernetes.io/gce-pd
-        lbAddr: ""
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
         # Networking configs
         lbIp: "" #CHANGE-THIS  to the IP received from the previous step
         isDomainRegistered: "false" # CHANGE-THIS  "true" or "false" to specify if the domain above is registered or not.
-      nginx:
+      nginx-ingress:
         ingress:
           enabled: true
           path: /
@@ -370,11 +370,10 @@ Please calculate the minimum required resources as per services deployed. The fo
       global:
         storageClass:
           provisioner: k8s.io/minikube-hostpath
-        lbAddr: ""
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
         lbIp: "" #CHANGE-THIS  to the IP of minikube <minikube ip>
     
-      nginx:
+      nginx-ingress:
         ingress:
           enabled: true
           path: /
@@ -414,11 +413,10 @@ Please calculate the minimum required resources as per services deployed. The fo
       global:
         storageClass:
           provisioner: microk8s.io/hostpath
-        lbAddr: ""
         domain: demoexample.gluu.org #CHANGE-THIS to the FQDN used for Gluu
         lbIp: "" #CHANGE-THIS  to the IP of the microk8s VM
     
-      nginx:
+      nginx-ingress:
         ingress:
           enabled: true
           path: /
