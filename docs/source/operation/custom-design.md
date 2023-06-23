@@ -345,7 +345,6 @@ As an example, we're going to:
                 postStart:
                     exec:
                         command: [ "sh", "-c", "mkdir /opt/gluu/jetty/oxauth/custom/static/stylesheet/ && cp /tmp/static/custom.css /opt/gluu/jetty/oxauth/custom/static/stylesheet"] # custom.css will be copied from the temporary to the desired location   
-               /opt/gluu/jetty/oxauth/custom/static/stylesheet # custom.css will be mounted under this directory
            volumes:
              - name: oxauth-pages-volume
                configMap:
