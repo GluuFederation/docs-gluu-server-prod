@@ -38,32 +38,34 @@ documentation and administrative guide.
 ## 4.5.1 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
-• [#1849 ](https://github.com/GluuFederation/oxAuth/issues/1849)explicit user consent is required when up-scope within client authorized scopes 
-• [#1365](https://github.com/GluuFederation/oxAuth/issues/1365)login Page blank value error message is not user friendly
-• [#1838](https://github.com/GluuFederation/oxAuth/issues/1838)failed to initialize resteasy proxy from script at server startup
-• [#1774](https://github.com/GluuFederation/oxAuth/issues/1774)make not found exception logging level configurable
-• [#1830](https://github.com/GluuFederation/oxAuth/issues/1830)upgrade nimbus
-• [#1828](https://github.com/GluuFederation/oxAuth/issues/1828)unnecessary "session not found" error messages during refresh token flow 
-• [#1826](https://github.com/GluuFederation/oxAuth/issues/1826)upgrade dependencies
-• [#1827](https://github.com/GluuFederation/oxAuth/issues/1827)jettison 1.5.2 -> 1.5.4 
-• [#1728](https://github.com/GluuFederation/oxAuth/issues/1728)introduce new UpdateToken methods in oxauth which exist in jans
-• [#1825](https://github.com/GluuFederation/oxAuth/issues/1825)introduce new UpdateToken methods
-• [#1818](https://github.com/GluuFederation/oxAuth/issues/1818)we should strive to let RP handle error instead of showing Ooops page
-• [#1820](https://github.com/GluuFederation/oxAuth/issues/1820)apply  client WhiteList  when session is valid (allowPostLogoutRedirectWithoutValidation=true )
-• [#1821](https://github.com/GluuFederation/oxAuth/issues/1821)corrected post_logout_redirect_uri validation 
-• [#1812](https://github.com/GluuFederation/oxAuth/issues/1812)oxAuth still searches custom script using it's acr_value while it should be its inum
-• [#1805](https://github.com/GluuFederation/oxAuth/issues/1805)oxAuth seems to drop parts of url query string when comparing redirect_uri during request authorization
-• [#1660](https://github.com/GluuFederation/oxAuth/issues/1660)Login page doesn't display the correct localized characters
-• [#1747] (https://github.com/GluuFederation/oxAuth/issues/1747)do not log WebApplicationException as error since it's expected behavior
+
+- [#1849 ](https://github.com/GluuFederation/oxAuth/issues/1849)explicit user consent is required when up-scope within client authorized scopes 
+- [#1365](https://github.com/GluuFederation/oxAuth/issues/1365)login Page blank value error message is not user friendly
+- [#1838](https://github.com/GluuFederation/oxAuth/issues/1838)failed to initialize resteasy proxy from script at server startup
+- [#1774](https://github.com/GluuFederation/oxAuth/issues/1774)make not found exception logging level configurable
+- [#1830](https://github.com/GluuFederation/oxAuth/issues/1830)upgrade nimbus
+- [#1828](https://github.com/GluuFederation/oxAuth/issues/1828)unnecessary "session not found" error messages during refresh token flow 
+- [#1826](https://github.com/GluuFederation/oxAuth/issues/1826)upgrade dependencies
+- [#1827](https://github.com/GluuFederation/oxAuth/issues/1827)jettison 1.5.2 -> 1.5.4 
+- [#1728](https://github.com/GluuFederation/oxAuth/issues/1728)introduce new UpdateToken methods in oxauth which exist in jans
+- [#1825](https://github.com/GluuFederation/oxAuth/issues/1825)introduce new UpdateToken methods
+- [#1818](https://github.com/GluuFederation/oxAuth/issues/1818)we should strive to let RP handle error instead of showing Ooops page
+- [#1820](https://github.com/GluuFederation/oxAuth/issues/1820)apply  client WhiteList  when session is valid (allowPostLogoutRedirectWithoutValidation=true )
+- [#1821](https://github.com/GluuFederation/oxAuth/issues/1821)corrected post_logout_redirect_uri validation 
+- [#1812](https://github.com/GluuFederation/oxAuth/issues/1812)oxAuth still searches custom script using it's acr_value while it should be its inum
+- [#1805](https://github.com/GluuFederation/oxAuth/issues/1805)oxAuth seems to drop parts of url query string when comparing redirect_uri during request authorization
+- [#1660](https://github.com/GluuFederation/oxAuth/issues/1660)Login page doesn't display the correct localized characters
+- [#1747](https://github.com/GluuFederation/oxAuth/issues/1747)do not log WebApplicationException as error since it's expected behavior
 
 ### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
-• [#2343](https://github.com/GluuFederation/oxTrust/issues/2343) Password reset page showing success even when passwords mismatching
-• [#2311](https://github.com/GluuFederation/oxTrust/issues/2311) User self-registration page doesn't seem to enforce custom validation rules for attributes
-• [#2307](https://github.com/GluuFederation/oxTrust/issues/2307) Reset password page error handling / Strong password policy
-• [#2310](https://github.com/GluuFederation/oxTrust/issues/2310) Regex pattern validation on Password attributes causes error when creating user
-• [#2321](https://github.com/GluuFederation/oxTrust/issues/2321) oxTrust won't allow to set several postlogout redirect uris for OIDC client
-• [#2295](https://github.com/GluuFederation/oxTrust/issues/2295) It's hard to browse list of OIDC scopes when configuring client's properties, it's cluttered too much and not organized enough
-• [#2320](https://github.com/GluuFederation/oxTrust/issues/2320) oxTrust won't allow for multiple acrs set as "Default ACR value" for OIDC client
+
+- [#2343](https://github.com/GluuFederation/oxTrust/issues/2343) Password reset page showing success even when passwords mismatching
+- [#2311](https://github.com/GluuFederation/oxTrust/issues/2311) User self-registration page doesn't seem to enforce custom validation rules for attributes
+- [#2307](https://github.com/GluuFederation/oxTrust/issues/2307) Reset password page error handling / Strong password policy
+- [#2310](https://github.com/GluuFederation/oxTrust/issues/2310) Regex pattern validation on Password attributes causes error when creating user
+- [#2321](https://github.com/GluuFederation/oxTrust/issues/2321) oxTrust won't allow to set several postlogout redirect uris for OIDC client
+- [#2295](https://github.com/GluuFederation/oxTrust/issues/2295) It's hard to browse list of OIDC scopes when configuring client's properties, it's cluttered too much and not organized enough
+- [#2320](https://github.com/GluuFederation/oxTrust/issues/2320) oxTrust won't allow for multiple acrs set as "Default ACR value" for OIDC client
 
 ## 4.5 Fixes / Enhancements
 
