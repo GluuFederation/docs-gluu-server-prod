@@ -81,7 +81,7 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
 
 ```
-Update file /etc/dnf/dnf.conf, append these two lines:
+Update file /etc/yum.conf, append these two lines:
 
 
 username=**your-username**
