@@ -26,9 +26,28 @@ The Kubernetes deployment of the Gluu Server, also called Cloud Native (CN) Edit
 
 ## Requirements for accessing docker images and assets
 
-1. Contact sales@gluu.org for credentials to access and pull our docker images. Existing customers should have received the credentials already. 
-2. Follow the [guide](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line) to create a secret in your kubernetes environment holding the docker credentials. Make sure you're creating the secret in the same namespace (create the namespace if doesn't exist yet) that will be used in Gluu installation.
+1. Contact sales@gluu.org for credentials (username and password/token) to access and pull our docker images. Existing customers should have received the credentials already. 
+
+2.  Create [secrets to access and pull images](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line) from Docker hub repo. The secrets must lives in the same namespace (create the namespace if doesn't exist yet).
+
+    ```
+    kubectl create namespace <namespace>
+    ```
+
+    If you're planning to use `istio`, set the label as well:
+
+    ```
+    kubectl label namespace <namespace> istio-injection=enabled
+    ```
+
+    Afterwards, create the required secrets (in this example, `regcred` is the name of the secret):
+
+    ```
+    kubectl -n <namespace> create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=<username> --docker-password=<password/token>
+    ```
+
 3. If you are using [`pygluu-kubernetes.pyz`](https://github.com/GluuFederation/cloud-native-edition/releases) the tool that parses `values.yaml` you can skip the next steps. We recommend using helm manually.
+
 4. Inject the secret name in your [`values.yaml`](https://github.com/GluuFederation/cloud-native-edition/blob/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) at `image.pullSecrets` for each service.
    For example:
    ```yaml
