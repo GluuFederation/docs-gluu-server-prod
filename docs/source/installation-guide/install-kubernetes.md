@@ -1735,9 +1735,6 @@ Steps to migrate from Jackrabbit (`JCA`) to Persistence (`DB`) document store in
 
     Afterwards, upgrade the Helm chart to newest version, for example: `helm -n <namespace> <release-name> gluu/gluu -f values.yaml --version <version>`.
 
-1.  Check selected document store in oxTrust UI by navigating to `Configuration > JSON Configuration > Store Provider Configuration` page.
-    Change the value of `Document store Type` form field from `JCA` to `DB` if needed and save configuration.
-
 1.  Check `GLUU_DOCUMENT_STORE_TYPE` env var in configmaps:
 
     ```
@@ -1749,6 +1746,9 @@ Steps to migrate from Jackrabbit (`JCA`) to Persistence (`DB`) document store in
     ```
     kubectl -n <namespace> patch cm <release-name>-config-cm --type json --patch '[{"op": "replace", "path": "/data/GLUU_DOCUMENT_STORE_TYPE", "value": "DB"}]'
     ```
+
+1.  Check selected document store in oxTrust UI by navigating to `Configuration > JSON Configuration > Store Provider Configuration` page.
+    Change the value of `Document store Type` form field from `JCA` to `DB` if needed and save configuration.
 
 1.  Rollout restart all deployments/statefulsets to force updates.
 
