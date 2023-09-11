@@ -24,8 +24,8 @@ A list of references to all the images used in Gluu enterprise can be found belo
 
 [Gluu Cert Manager](https://hub.docker.com/r/gluufederation/certmanager)
 
-[CacheRefresh Rotation](https://hub.docker.com/r/gluufederation/cr-rotate)
+[CacheRefresh Rotation](https://gluu.org/docs/de/reference/cr-rotate/)
 
-[Radius](https://hub.docker.com/r/gluufederation/radius)
+[Radius](https://gluu.org/docs/de/reference/radius/)
 
-[Upgrade](https://hub.docker.com/r/gluufederation/upgrade)
+[Upgrade](https://gluu.org/docs/de/reference/upgrade/)
