@@ -160,6 +160,7 @@ nav:
             - 'Config and Secret Keys': 'reference/container-configs.md'
             - 'Image References': 'reference/container-image-refs.md'
 - Operation Guide:
+        - 'Health Checks': 'operation/health-check.md'
         - 'Service Commands': 'operation/services.md'
 #        - 'Patches': 'upgrade/patches.md'
         - 'Backups': 'operation/backup.md'
