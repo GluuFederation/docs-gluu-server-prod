@@ -2,21 +2,21 @@
 
 A list of references to all the images used in Gluu enterprise can be found below:
 
-[Config Init](https://hub.docker.com/r/gluufederation/config-init)
+[Config Init](https://gluu.org/docs/de/reference/config-init/)
 
 [Jackrabbit](https://hub.docker.com/r/gluufederation/jackrabbit)
 
-[OpenDJ / Wren:DS](https://hub.docker.com/r/gluufederation/opendj)
+[OpenDJ / Wren:DS](https://gluu.org/docs/de/reference/opendj/)
 
-[Persistence](https://hub.docker.com/r/gluufederation/persistence)
+[Persistence](https://gluu.org/docs/de/reference/persistence/)
 
-[oxAuth](https://hub.docker.com/r/gluufederation/oxauth)
+[oxAuth](https://gluu.org/docs/de/reference/oxauth/)
 
-[oxTrust](https://hub.docker.com/r/gluufederation/oxtrust)
+[oxTrust](https://gluu.org/docs/de/reference/oxtrust/)
 
-[oxShibboleth](https://hub.docker.com/r/gluufederation/oxshibboleth)
+[oxShibboleth](https://gluu.org/docs/de/reference/oxshibboleth/)
 
-[oxPassport](https://hub.docker.com/r/gluufederation/oxpassport)
+[oxPassport](https://gluu.org/docs/de/reference/oxpassport/)
 
 [FIDO2](https://hub.docker.com/r/gluufederation/fido2)
 
