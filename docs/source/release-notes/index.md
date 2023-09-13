@@ -34,6 +34,26 @@ documentation and administrative guide.
 - Weld 3.0.0
 - FluentD 3.5
 - Redis
+- 
+
+## 4.5.2 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
+
+- [#1849 ](https://github.com/GluuFederation/oxAuth/issues/1849) Explicit user consent is required when up-scope within client authorized scopes 
+- [#1850](https://github.com/GluuFederation/oxAuth/issues/1850) create MAU exporter
+- [#1853](https://github.com/GluuFederation/oxAuth/issues/1853) scopes are missed in grant_type=refresh_token AS must take scopes from previous grant
+- [#1857](https://github.com/GluuFederation/oxAuth/issues/1857) state is not always returned on redirect from /end_session endpoint
+- [#1862](https://github.com/GluuFederation/oxAuth/issues/1862) added client_id parameter support to /end_session
+  
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#2346](https://github.com/GluuFederation/oxTrust/issues/2346) Added MAU Report to oxTrust
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#996](https://github.com/GluuFederation/community-edition-setup/issues/996) Make jans_stat a default oauth scope
 
 ## 4.5.1 Fixes / Enhancements
 
