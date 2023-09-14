@@ -1,7 +1,7 @@
 # Health Checks For Service Endpoints
 
 Health checks are used to determine if a container is working as it should be or not.
-By default some primary endpoints are enabled by default to check status of various components. 
+By default some primary endpoints are enabled ouf of the box to check status of various components. 
 
 ## oxAuth
 
