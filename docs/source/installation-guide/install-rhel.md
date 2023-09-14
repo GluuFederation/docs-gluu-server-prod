@@ -7,7 +7,7 @@
 
 # RHEL Installation 
 ## Overview
-Single-node Gluu Server Linux packages are available for RHEL 7 and 8. Follow the instructions below:
+Single-node Gluu Server Linux packages are available for RHEL 7, 8 and 9. Follow the instructions below:
 
 1. [Install the Linux package](#install-the-package)
 2. [Start the Server and log in to the container](#start-the-server-and-log-in)
@@ -29,6 +29,63 @@ Single-node Gluu Server Linux packages are available for RHEL 7 and 8. Follow th
 ### Install the package
 
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
+
+For **RHEL 9 nochroot-package**, run the following commands:
+
+```
+Open /etc/yum.repos.d/redhat-rhui.repo update enabled=0 to enabled=1 in repo: [codeready-builder-for-rhel-9-rhui-rpms]
+```
+
+```
+dnf update -y
+```
+
+```
+dnf  install  https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+
+```
+
+```
+dnf  install  https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
+
+```
+
+```
+wget --user="user" --password="password" https://repo.gluu.org/rhel/Gluu-rhel-9-testing.repo -O /etc/yum.repos.d/Gluu.repo
+
+```
+
+```
+wget --user="user" --password="password" https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+update-crypto-policies --set DEFAULT:SHA1
+```
+
+```
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+Update file /etc/dnf/dnf.conf, append these two lines:
+
+username=user
+password=password
+```
+
+```
+dnf clean all
+```
+
+```
+dnf install gluu-server-nochroot
+```
+
+```
+update-crypto-policies --set DEFAULT
+```
+
 
 For **RHEL 8**, run the following commands:
 
