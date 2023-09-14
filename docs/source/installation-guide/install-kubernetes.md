@@ -1733,7 +1733,7 @@ Steps to migrate from Jackrabbit (`JCA`) to Persistence (`DB`) document store in
         gluuDocumentStoreType: DB
     ```
 
-    Afterwards, upgrade the Helm chart to newest version, for example: `helm -n <namespace> <release-name> gluu/gluu -f values.yaml --version <version>`.
+    Afterwards, upgrade the Helm chart to newest version, for example: `helm -n <namespace> upgrade <release-name> gluu/gluu -f values.yaml --version <version>`.
 
 1.  Check `GLUU_DOCUMENT_STORE_TYPE` env var in configmaps:
 
