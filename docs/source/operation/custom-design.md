@@ -318,7 +318,7 @@ As an example, we're going to:
     }
     ```
 
-1.  Use `configmaps` or `jackrabbit` to upload customization.
+1.  Use `configmaps` or `jackrabbit` (deprecated since Gluu v4.5.2) to upload customization.
 
 === "ConfigMaps"
 
@@ -364,6 +364,9 @@ As an example, we're going to:
         ```
 
 === "Jackrabbit"
+
+    !!! warning
+        Jackrabbit is deprecated since Gluu v4.5.2 and users are recommended to use ConfigMaps instead.
 
     1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
 
@@ -458,6 +461,9 @@ As an example, we're going to add text to the logout form.
         ```
 
 === "Jackrabbit"
+
+    !!! warning
+        Jackrabbit is deprecated since Gluu v4.5.2 and users are recommended to use ConfigMaps instead.
 
     1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
 
