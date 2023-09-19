@@ -48,7 +48,10 @@
  
     ## Overview
     
-    This guide introduces how to upgrade cloud native edition from one version to another.
+    This guide introduces how to upgrade cloud native edition from one version to another. 
+    We support both upgrading from different versions, for example 4.4 to 4.5, or doing a patch upgrade of the same version. 
+    You can upgrade using either `pygluu` or `helm`.
+
 
     === "LDAP"
         ### pygluu upgrade
@@ -80,6 +83,17 @@
                     targetVersion: "4.5"  
                 persistence:
                     enabled: false
+            ```
+            To perform a patch upgrade, where the source and target version are the same, your `override.yaml` will be:
+
+            ``` yaml
+                global:
+                    upgrade:
+                        enabled: true
+                        sourceVersion: "4.5"
+                        targetVersion: "4.5"  
+                    persistence:
+                        enabled: true
             ```
         1.  Delete `oxAuthExpiration` index
         
@@ -130,6 +144,17 @@
                 persistence:
                     enabled: false
             ```
+            To perform a patch upgrade, where the source and target version are the same, your `override.yaml` will be:
+
+            ``` yaml
+                global:
+                    upgrade:
+                        enabled: true
+                        sourceVersion: "4.5"
+                        targetVersion: "4.5"  
+                    persistence:
+                        enabled: true
+            ```
 
         1.  Run `helm upgrade`
         
@@ -172,6 +197,17 @@
                 persistence:
                     enabled: false
             ```
+            To perform a patch upgrade, where the source and target version are the same, your `override.yaml` will be:
+
+            ``` yaml
+                global:
+                    upgrade:
+                        enabled: true
+                        sourceVersion: "4.5"
+                        targetVersion: "4.5"  
+                    persistence:
+                        enabled: true
+            ```
 
         1.  Run `helm upgrade`
         
@@ -212,6 +248,17 @@
                     targetVersion: "4.5"  
                 persistence:
                     enabled: false
+            ```
+            To perform a patch upgrade, where the source and target version are the same, your `override.yaml` will be:
+
+            ``` yaml
+                global:
+                    upgrade:
+                        enabled: true
+                        sourceVersion: "4.5"
+                        targetVersion: "4.5"  
+                    persistence:
+                        enabled: true
             ```
 
         1.  Run `helm upgrade`
