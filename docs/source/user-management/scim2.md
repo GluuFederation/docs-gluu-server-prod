@@ -93,7 +93,7 @@ Generally it's convenient to set the logging level for both oxAuth and SCIM to *
 
 ## API documentation at a glance
 
-[SCIM API](../api-guide/scim-api.md) doc page describes the HTTP verbs, resource types, and endpoints available in our implementation of SCIM. The API has also been documented using OpenAPI (swagger) specification for the interested. Find yaml files [here](https://github.com/GluuFederation/scim/tree/version_4.4.0/scim-server/src/main/resources).
+[SCIM API](../api-guide/scim-api.md) doc page describes the HTTP verbs, resource types, and endpoints available in our implementation of SCIM. The API has also been documented using OpenAPI (swagger) specification for the interested. Find yaml files [here](https://github.com/GluuFederation/scim/tree/version_4.5.2/scim-server/src/main/resources).
 
 ## Working in Test Mode
 
@@ -579,7 +579,7 @@ If you code in Java, you can take advantage of the ready-to-use client library [
 
 - Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. The [KeyStore Explorer](http://keystore-explorer.org/) utility makes this task super easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server/etc/certs/httpd.crt`
 
-- Online Java-docs for scim-client are available [here](https://maven.gluu.org/javadocs/scim/version_4.4.0/client/). You can generate java-docs locally too using Maven; just run `mvn javadoc:javadoc -pl scim-client`
+- Online Java-docs for scim-client are available [here](https://maven.gluu.org/javadocs/scim/version_4.5.2/client/). You can generate java-docs locally too using Maven; just run `mvn javadoc:javadoc -pl scim-client`
 
 ### Start a Simple Project
 
@@ -587,14 +587,14 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 
 ```
 <properties>
-	<scim.client.version>4.4.0.Final</scim.client.version>
+	<scim.client.version>4.5.2.Final</scim.client.version>
 </properties>
 ...
 <repositories>
   <repository>
     <id>gluu</id>
     <name>Gluu repository</name>
-    <url>http://maven.gluu.org/maven</url>
+    <url>https://maven.gluu.org/maven</url>
   </repository>
 </repositories>
 ...
@@ -605,7 +605,7 @@ Create a project in your favorite IDE, and if using Maven, add the following sni
 </dependency>
 ```
 
-Ideally, the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.4, you should also use scim-client v4.4.
+Ideally, the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.5, you should also use scim-client v4.5. Access to Gluu's repository is restricted - contact sales if you don't have credentials yet. 
 
 If you don't want to use Maven, you can download the jar file for scim-client here: [https://maven.gluu.org/maven/org/gluu/scim-client/](https://maven.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
@@ -775,7 +775,7 @@ The following instructions show how to interact with the UMA-protected SCIM serv
 
 - Add the SSL certificate of your Gluu server to the `cacerts` keystore of your local Java installation. There are lots of articles around the Web on how to import a certificate to the keystore. An utility called [Key Store Explorer](http://keystore-explorer.sourceforge.net) makes this task super-easy. If you are using a self-signed certificate, you can find it at `/opt/gluu-server-<gluu-version>/etc/certs/httpd.crt`
 
-- Online Java-docs for scim-client are available [here](https://maven.gluu.org/javadocs/scim/version_4.4.0/client/). You can generate java-docs locally using Maven; just run `mvn javadoc:javadoc -pl scim-client`
+- Online Java-docs for scim-client are available [here](https://maven.gluu.org/javadocs/scim/version_4.5.2/client/). You can generate java-docs locally using Maven; just run `mvn javadoc:javadoc -pl scim-client`
 
 #### Start a Simple Project
 
@@ -783,14 +783,14 @@ Create a project in your favorite IDE, and if using maven add the following snip
 
 ```
 <properties>
-	<scim.client.version>4.4.0.Final</scim.client.version>
+	<scim.client.version>4.5.2.Final</scim.client.version>
 </properties>
 ...
 <repositories>
   <repository>
     <id>gluu</id>
     <name>Gluu repository</name>
-    <url>http://maven.gluu.org/maven</url>
+    <url>https://maven.gluu.org/maven</url>
   </repository>
 </repositories>
 ...
@@ -801,7 +801,7 @@ Create a project in your favorite IDE, and if using maven add the following snip
 </dependency>
 ```
 
-Ideally the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.2, you should also use scim-client v4.2.
+Ideally the scim-client you use should match your Gluu version. For example, if you are running Gluu Server CE v4.5, you should also use scim-client v4.5. Access to Gluu's repository is restricted - contact sales if you don't have credentials yet.
 
 If you don't want to use Maven, you can download the jar file for scim-client here: [https://maven.gluu.org/maven/org/gluu/scim-client/](https://maven.gluu.org/maven/org/gluu/scim-client/). This may require you to add other libraries (jar files dependencies) manually.
 
@@ -1172,6 +1172,18 @@ mvn ... -Dscim.extraHeaders="My-Custom-Header-1, My-Custom-Header-2" \
 ```
 
 If you want to set headers programatically, you will find the method `setCustomHeaders` useful. This method is callable on any instance obtained via `ScimClientFactory`.
+
+### jakarta namespace support
+
+The Java client depends on libraries that use the `javax` package prefix. If the classpath of your application requires usage of the `jakarta` namespace, starting with version 4.5.2 we provide a specific artifact for this purpose:
+
+```
+<dependency>
+  <groupId>org.gluu</groupId>
+  <artifactId>scim-client-jakarta</artifactId>
+  ...
+</dependency>
+```
 
 ## Custom scripts
 The service allows you to execute custom logic when certain SCIM API operations are invoked. To learn more visit [this page](./scim-scripting.md).

@@ -115,7 +115,7 @@
     ## Rotating Certificates and Keys in Kubernetes setup
     
     !!! Note
-        `gluu-config-cm` in all examples refer to gluus installation configuration parameters. This name is correct in Kustomization installation, however in Helm the name is in the format of `<helms release name>-config-cm` and must be changed.
+        `gluu-config-cm` in all examples refer to gluu's installation configuration parameters. This name is correct in Kustomization installation, however in Helm the name is in the format of `<helms release name>-config-cm` and must be changed.
     
     
     === "web (ingress)"
