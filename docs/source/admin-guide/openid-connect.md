@@ -235,6 +235,7 @@ oxAuth provides an easy way to manage and publish a `sector_identifier_uri`. The
 
 Follow these steps to add a sector identifier:
 
+<!--
 1. In oxTrust, navigate to `OpenID Connect` > `Sector Identifier`.
 ![Sector](../img/admin-guide/openid/sectoridentifier.png)
 
@@ -247,6 +248,7 @@ Follow these steps to add a sector identifier:
 1. Add clients that uses the `Sector Identifier`.
 ![add client](../img/admin-guide/openid/sectoridentifieraddclient.png)
 
+-->
 
 ## Authentication
 
