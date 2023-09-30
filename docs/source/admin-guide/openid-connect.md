@@ -240,11 +240,11 @@ Follow these steps to add a sector identifier:
 
 1. First, let's gather all client URIs which will be used by the RP of this client.
    
-1. Create a file named "abc.json" and put it inside `/var/www/html/sectoridentifer/` location of your Gluu Server's chroot container. 
+1. Create a file named "abc.json" and put it inside `/var/www/html/sectoridentifier/` location of your Gluu Server's chroot container. 
    For our case as the name of our client is "testClient" so we created "testClient.json" and saved it inside above location of our demo server. 
    Content of that json looks like below: 
    ```
-        root@localhost:/var/www/html/sectoridentifer# cat testClient.json 
+        root@localhost:/var/www/html/sectoridentifier# cat testClient.json 
         [
           "https://testapp.mohib.gluu.info/secure/callback",
           "https://localhost:8091/secure/callback",
@@ -252,7 +252,7 @@ Follow these steps to add a sector identifier:
         ]
         root@localhost:/var/www/html/sectoridentifer#
    ```
-1. Now our "Sector URI" is ready and we are going to use `https://[hostname_of_Gluu_Server]/sectoridentifer/testClient.json` as our "Sector URI"
+1. Now our "Sector URI" is ready and we are going to use `https://[hostname_of_Gluu_Server]/sectoridentifier/testClient.json` as our "Sector URI"
 
 <!--
 1. In oxTrust, navigate to `OpenID Connect` > `Sector Identifier`.
