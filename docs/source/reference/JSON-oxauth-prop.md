@@ -27,6 +27,7 @@ openIdDiscoveryEndpoint                            | Discovery endpoint URL
 idGenerationEndpoint                               | ID Generation endpoint URL
 introspectionEndpoint                              | Introspection endpoint URL
 introspectionAccessTokenMustHaveUmaProtectionScope | If True, rejects introspection requests if access_token does not have the uma_protection scope in its authorization header
+introspectionRestrictBasicAuthnToOwnTokens         | If True, allow client request only own tokens. Otherwise allow to introspect all tokens. Default value is false.
 umaConfigurationEndpoint                           | UMA Configuration endpoint URL
 sectorIdentifierEndpoint                           | Sector Identifier endpoint URL
 oxElevenGenerateKeyEndpoint                        | oxEleven Generate Key endpoint URL
