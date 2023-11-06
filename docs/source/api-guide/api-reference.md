@@ -8,7 +8,7 @@ The Gluu Server comes with a variety of APIs to help handle administration and c
 
 Swagger documentation for Gluu Services can be accessed through the following links:
 
-- [oxTrust](https://gluu.org/swagger-ui/?operationsSorter=alpha&url=https://raw.githubusercontent.com/GluuFederation/oxTrust/version_4.4.0/api-server/src/main/resources/META-INF/openapi.yaml)
+- [oxTrust](https://gluu.org/swagger-ui/?operationsSorter=alpha&url=https://raw.githubusercontent.com/GluuFederation/oxTrust/master/api-server/src/main/resources/META-INF/openapi.yaml)
 - [oxAuth](https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/GluuFederation/oxAuth/master/docs/oxAuthSwagger.yaml#/)
 - [SCIM](https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/GluuFederation/scim/master/scim-server/src/main/resources/gluu-scim-swagger.yaml)
 
