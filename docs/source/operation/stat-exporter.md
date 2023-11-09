@@ -1,5 +1,7 @@
 # MAU Exporter
 
+Works against AS "4.3.1" and later.
+
 ## Prepare Authorization Server
 
 1. Make sure `jans_stat` scope is present on server and is set as defalut (`defaultScope=true`)
