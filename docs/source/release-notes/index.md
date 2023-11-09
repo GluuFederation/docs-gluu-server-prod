@@ -25,7 +25,7 @@ documentation and administrative guide.
 ## Available components in Gluu Server 4.5
 - oxAuth, oxTrust, oxCore v4.5
 - Gluu OpenDJ v4.4.11 (with Bouncy Castle FIPS 140-2 crypto package 1.0.2.1 and Bouncy Castle Java APIs for the TLS 1.0.9)
-- Shibboleth v4.2.1
+- Shibboleth v4.3.1
 - Passport v4.1
 - Java v1.8.0_112
 - Node.js v9.9.0
