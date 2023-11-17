@@ -4,7 +4,7 @@ Works against AS "4.3.1" and later.
 
 ## Prepare Authorization Server
 
-1. Make sure `jans_stat` scope is present on server and is set as defalut (`defaultScope=true`)
+1. Make sure `jans_stat` scope is present on server and is set as default (`defaultScope=true`)
 2. AS restricts by time how often `/stat` endpoint can be called. Default limit is `60` seconds. Server replies with `403 Forbidden` error if exceeds it.
    Limit can be changed via `statWebServiceIntervalLimitInSeconds` global configuration property. 
 3. If dynamic registration is disabled on AS, enable it (`dynamicRegistrationEnabled=true`)
