@@ -34,7 +34,31 @@ documentation and administrative guide.
 - Weld 3.0.0
 - FluentD 3.5
 - Redis
-- 
+
+## 4.5.3 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
+
+- [#1859](https://github.com/GluuFederation/oxAuth/issues/1859) fix(stat-exporter): if run stat exporter against jans-auth-server it is trying to connect to wrong endpoint and fail
+- [#1878](https://github.com/GluuFederation/oxAuth/issues/1878) fix(stat-exporter): stat exporter can't run against jans-auth-server
+- [#1879 ](https://github.com/GluuFederation/oxAuth/issues/1879) fix(oxauth): re-authentication doesn't happen for OIDC authz request with the higher "level" acr requested anymore 
+- [#1880](https://github.com/GluuFederation/oxAuth/pull/1880) fix(oxauth): client secret printed on logs
+- [#1883](https://github.com/GluuFederation/oxAuth/issues/1883) feat: implement Saml router script
+- [#1861](https://github.com/GluuFederation/oxAuth/issues/1861) fix(oxauth) : add exclusion to authentication filter for "/token" and "public client" when PKCE is used
+- [#1867](https://github.com/GluuFederation/oxAuth/issues/1867) Unable to add multiple case sensitive redirect URI
+- [#1869](https://github.com/GluuFederation/oxAuth/issues/1868) fix(oxauth): cnf introspection response is null even when valid cert is send during MTLS #6343 #1868
+  
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+ - [#2371](https://github.com/GluuFederation/oxTrust/issues/2371) feat: Add Search Field for Scopes Selection in OpenID Client
+
+
+### [GluuFederation/casa](https://github.com/GluuFederation/casa/issues?q=is%3Aissue+is%3Aclosed)
+
+  - [#265](https://github.com/GluuFederation/casa/issues/265) fix: error while enrolling OTP
+
+  
 
 ## 4.5.2 Fixes / Enhancements
 
