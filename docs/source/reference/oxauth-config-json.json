@@ -10,6 +10,11 @@
             "description": "Session as JWT.",
             "type": "boolean"
         },
+        "forceRopcInAuthorizationEndpoint": {
+            "id": "forceRopcInAuthorizationEndpoint",
+            "description": "Specify whether to enabled ROPC custom script on Authorization Endpoint. Default value is false.",
+            "type": "boolean"
+        },
         "issuer": {
             "id": "issuer",
             "description": "URL using the https scheme with no query or fragment component that the OP asserts as its Issuer Identifier.",
@@ -182,6 +187,11 @@
         "introspectionAccessTokenMustHaveUmaProtectionScope": {
             "id": "introspectionAccessTokenMustHaveUmaProtectionScope",
             "description":"Reject introspection requests if access_token in Authorization header does not have uma_protection scope.",
+            "type": "boolean"
+        },
+        "introspectionRestrictBasicAuthnToOwnTokens": {
+            "id": "introspectionRestrictBasicAuthnToOwnTokens",
+            "description":"If True, allow client request only own tokens. Otherwise allow to introspect all tokens. Default value is false.",
             "type": "boolean"
         },
         "openidSubAttribute": {

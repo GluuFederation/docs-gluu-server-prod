@@ -20,6 +20,8 @@ theme:
         accent: 'green'
     logo: 'gluu.jpg'
     favicon: 'favicon.ico'
+    features:
+      - content.code.copy
 extra:
     version: '4.5'
 extra_css:

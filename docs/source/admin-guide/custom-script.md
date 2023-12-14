@@ -550,7 +550,12 @@ Snippet
         return False
 ```
 
-Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.4.0/static/extension/resource_owner_password_credentials/resource_owner_password_credentials.py). 
+Full version of the script example can be found [here](https://github.com/GluuFederation/community-edition-setup/blob/version_4.4.0/static/extension/resource_owner_password_credentials/resource_owner_password_credentials.py).
+
+Sometimes it can be useful to ROPC custom script at Authorization Endpoint to avoid redirects and pages. 
+By default it is not enabled but it can be enabled if set `forceRopcInAuthorizationEndpoint` AS configuration property to `true`.
+
+Also it is required to set `user` in context in custom script (`context.setUser(<user>)`). Without it authorization will go on in normal way (with pages and redirects).
 
 ## Persistence Extension
 

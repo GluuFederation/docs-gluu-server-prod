@@ -27,6 +27,7 @@ openIdDiscoveryEndpoint                            | Discovery endpoint URL
 idGenerationEndpoint                               | ID Generation endpoint URL
 introspectionEndpoint                              | Introspection endpoint URL
 introspectionAccessTokenMustHaveUmaProtectionScope | If True, rejects introspection requests if access_token does not have the uma_protection scope in its authorization header
+introspectionRestrictBasicAuthnToOwnTokens         | If True, allow client request only own tokens. Otherwise allow to introspect all tokens. Default value is false.
 umaConfigurationEndpoint                           | UMA Configuration endpoint URL
 sectorIdentifierEndpoint                           | Sector Identifier endpoint URL
 oxElevenGenerateKeyEndpoint                        | oxEleven Generate Key endpoint URL
@@ -165,6 +166,7 @@ changeSessionIdOnAuthentication                    | Boolean value specifying wh
 forceOfflineAccessScopeToEnableRefreshToken        | Boolean value specifying whether force offline_access scope to enable refresh_token grant type. Default value is true.
 errorReasonEnabled                                 | Boolean value specifying whether to return detailed reason of the error from AS. Default value is false.
 removeRefreshTokensForClientOnLogout               | Boolean value specifying whether to remove Refresh Tokens on logout. Default value is false.
+forceRopcInAuthorizationEndpoint                   | Boolean value specifying whether to enabled ROPC custom script on Authorization Endpoint. Default value is false.
 
 ### Brute Force Protection
 
