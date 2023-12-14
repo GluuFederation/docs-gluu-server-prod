@@ -280,8 +280,7 @@ Please calculate the minimum required resources as per the services deployed. Th
 
         For testing purposes, you can deploy it on your Kubernetes cluster using the following commands:
         ```bash
-        helm repo add bitnami https://charts.bitnami.com/bitnami
-        helm install postgresql --set auth.rootPassword=Test1234#,auth.database=gluu bitnami/postgresql -n postgres
+        helm install my-release --set auth.postgresPassword=Test1234#,auth.database=gluu -n gluu oci://registry-1.docker.io/bitnamicharts/postgresql
         ```
 
         Add the following yaml snippet to your `override.yaml` file:
@@ -291,10 +290,10 @@ Please calculate the minimum required resources as per the services deployed. Th
         config:
           configmap:
             cnSqlDbName: gluu
-            cnSqlDbPort: 3306
+            cnSqlDbPort: 5432
             cnSqlDbDialect: pgsql
-            cnSqlDbHost: postgresql.postgres.svc
-            cnSqlDbUser: root
+            cnSqlDbHost: my-release-postgresql.gluu.svc
+            cnSqlDbUser: postgres
             cnSqlDbTimezone: UTC
             cnSqldbUserPassword: Test1234#
         ```
@@ -1805,6 +1804,17 @@ Steps to migrate from Jackrabbit (`JCA`) to Persistence (`DB`) document store in
 ## Architectural diagram of all Gluu services
 
 ![svg](../img/kubernetes/cn-general-arch-diagram.svg)
+
+## Network traffic between Gluu services
+
+1. **Database Access:** all Gluu services require access to the database.
+
+2. **Pod-2-Pod Communication:** Gluu services communicate with each other as depicted. 
+
+    Most of this communication is external. Meaning it goes through the FQDN, instead of using the internal Kubernetes service address.
+
+    For example, a service would call the well-known for oxauth `https://FQDN/.well-known/openid-configuration`.
+    We recommend to only keep the `.well-known` endpoint public and protect the rest.
 
 ## Architectural diagram of oxPassport
 
