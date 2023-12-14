@@ -1811,10 +1811,11 @@ Steps to migrate from Jackrabbit (`JCA`) to Persistence (`DB`) document store in
 
 2. **Pod-2-Pod Communication:** Gluu services communicate with each other as depicted. 
 
-    Most of this communication is external. Meaning it goes through the FQDN, instead of using the internal Kubernetes service address.
 
-    For example, a service would call the well-known for oxauth `https://FQDN/.well-known/openid-configuration`.
-    We recommend to only keep the `.well-known` endpoint public and protect the rest.
+3. **External/Internet Communication**:
+    - Oxauth: should be publically accessible.
+
+    - Rest of the pods:  We recommend to only keep the `.well-known` endpoints public and protect the rest.
 
 ## Architectural diagram of oxPassport
 
