@@ -138,6 +138,7 @@ nav:
             - 'GitHub Enterprise': 'integration/saas/github-enterprise.md'
             - 'Cisco WebEx': 'integration/saas/webex.md'
             - 'Amazon Web Services (AWS)': 'integration/saas/aws.md'
+            - 'Azure': 'integration/saas/azure.md'
             - 'Rocketchat': 'integration/saas/rocketchat.md'
             - 'SAMLtest.id': 'integration/saas/saml_test_id.md'
             - 'ThousandEyes': 'integration/saas/thousandeyes.md'
