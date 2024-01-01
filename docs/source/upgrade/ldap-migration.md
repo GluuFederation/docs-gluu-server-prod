@@ -41,7 +41,7 @@ This documentation demonstrates how to upgrade from CN 4.2 LDAP to 4.5 PostgreSQ
         gluuJackrabbitAdminPass: admin # make sure the value is equal to the one in old values.yaml
     ```
  
-1.  Run `helm upgrade`.
+1.  Run `helm upgrade <gluu-release-name> gluu/gluu -n <namespace> -f values.yaml`.
 
 1.  Make sure the cluster is functioning after the upgrade.
 
@@ -221,7 +221,7 @@ This documentation demonstrates how to upgrade from CN 4.2 LDAP to 4.5 PostgreSQ
         cnSqldbUserPassword: <postgres-user-password>
     ```
     
-1.  Run `helm upgrade`.
+1.  Run `helm upgrade <gluu-release-name> gluu/gluu -n <namespace> -f values.yaml`.
 
 1.  Make sure the cluster is functioning after migration.
 
