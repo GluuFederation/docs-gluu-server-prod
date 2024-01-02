@@ -1,10 +1,10 @@
 # Overview
 
-This documentation demonstrates how to upgrade from CN 4.2 LDAP to 4.5 PostgreSQL.
+This documentation demonstrates how to upgrade from CN >=4.2 LDAP to 4.5 PostgreSQL.
 
 ## Prerequisites
 
-   CN 4.2 is already installed.
+   CN >=4.2 is already installed.
 
 ## Upgrading Installation
 
@@ -26,7 +26,9 @@ This documentation demonstrates how to upgrade from CN 4.2 LDAP to 4.5 PostgreSQ
         enabled: true
       upgrade:
         enabled: true
-        sourceVersion: "4.2"
+        image:
+          tag: 4.5.3-2
+        sourceVersion: "4.2" #current chart version
         targetVersion: "4.5"
         pullSecrets:
           - name: regcred
@@ -40,7 +42,9 @@ This documentation demonstrates how to upgrade from CN 4.2 LDAP to 4.5 PostgreSQ
       secrets:
         gluuJackrabbitAdminPass: admin # make sure the value is equal to the one in old values.yaml
     ```
- 
+
+1.  Make sure that the completed `gluu-config` and `gluu-persistence` jobs are deleted. 
+
 1.  Run `helm upgrade <gluu-release-name> gluu/gluu -n <namespace> -f values.yaml`.
 
 1.  Make sure the cluster is functioning after the upgrade.
@@ -227,7 +231,7 @@ This documentation demonstrates how to upgrade from CN 4.2 LDAP to 4.5 PostgreSQ
 
 ## Known Issues
 
-1.  During upgrade from 4.2 to 4.5, the helm command throws the following message:
+1.  During upgrade from >=4.2 to 4.5, if you didn't delete the jobs as instructed, the helm command throws the following message:
 
     ```
     Error: UPGRADE FAILED: cannot patch "gluu-config" with kind Job: Job.batch "gluu-config" is invalid: spec.template: 
@@ -235,6 +239,8 @@ This documentation demonstrates how to upgrade from CN 4.2 LDAP to 4.5 PostgreSQ
     ```
 
     The upgrade itself is running though.
+
+    If you faced this, you should switch `global.upgrade.enabled: false` and rerun the `helm upgrade` command again, so that it’s registered with the helm lifecycle that the upgrade was successful.
     
 1.  Interception scripts are not upgraded automatically. They need to be upgraded manually.
 

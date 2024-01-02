@@ -67,7 +67,7 @@ nav:
             - 'SUSE': 'installation-guide/install-suse.md'
         - 'Setup Script Options': 'installation-guide/setup_py.md'
         - 'Upgrade to 4.5': 'upgrade/index.md'
-        - 'Migration 4.2 LDAP to 4.5 SQL': 'upgrade/ldap-migration.md'
+        - 'Migration >=4.2 LDAP to 4.5 SQL': 'upgrade/ldap-migration.md'
         - 'Clustering': 'installation-guide/cluster.md'
 - Administration Guide:
         - 'oxTrust admin UI': 'admin-guide/oxtrust-ui.md'
