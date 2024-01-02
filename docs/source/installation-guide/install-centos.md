@@ -53,7 +53,7 @@ yum versionlock gluu-server
 Inside chroot, there is a bug in Centos 7 package. That causes `/sbin/gluu-serverd login` command to fail. For that we need to run below additional command to change the permissions of private key files.
 
 ```
-chmod 600 /opt/gluu_server/etc/ssh/ssh_host_*_key
+chmod 600  /opt/gluu_server/etc/ssh/ssh_host_*_key
 ```
 
 For **CentOS 7**, run the following commands to install:
