@@ -118,7 +118,7 @@ This documentation demonstrates how to upgrade from CN >=4.2 LDAP to 4.5 Postgre
                     secretName: offline-sql-pass # adjust the value according to your setup
               containers:
                 - name: offline-persistence-load
-                  image: gluufederation/persistence:4.5.3_dev
+                  image: gluufederation/persistence:4.5.3-2
                   volumeMounts:
                     - name: custom-gluu-ldif
                       mountPath: /app/custom_ldif/01_gluu.ldif
@@ -185,7 +185,7 @@ This documentation demonstrates how to upgrade from CN >=4.2 LDAP to 4.5 Postgre
               - -c
               - |
                 /tmp/mycustomldif.sh
-              image: gluufederation/persistence:4.5.3_dev
+              image: gluufederation/persistence:4.5.3-2
               volumeMounts:
                 - name: my-custom-ldif
                   mountPath: /tmp/mycustomldif.sh
