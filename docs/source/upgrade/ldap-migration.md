@@ -1,10 +1,10 @@
 # Overview
 
-This documentation demonstrates how to upgrade from CN >=4.2 LDAP to 4.5 PostgreSQL.
+This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 LDAP to 4.5 PostgreSQL.
 
 ## Prerequisites
 
-   CN >=4.2 is already installed.
+   Gluu Kubernetes (CN) >=4.2 is already installed.
 
 ## Upgrading Installation
 
@@ -153,22 +153,24 @@ This documentation demonstrates how to upgrade from CN >=4.2 LDAP to 4.5 Postgre
                     - name: GLUU_SQL_DB_SCHEMA
                       value: "public" # [default value] adjust according to your setup
         ```
-     If the ldif file is larger then 1MB:
+    
+    If the ldif file is larger then 1MB:
 
-    - Create a file named `mycustomldif.sh` which basically  contains instructions to pull the ldif file:
+    1.  Create a file named `mycustomldif.sh` which basically  contains instructions to pull the ldif file:
 
-      ```
-        #!/bin/sh
-        # This script will pull the ldif file from a remote location
-        # and place it in the correct location for the Persistence job to use it
-        mkdir -p /app/custom_ldif 
-        wget -O /app/custom_ldif/01_gluu.ldif https://<ldif-file-location/01_gluu.ldif
-      ```
+        ```
+           #!/bin/sh
+           # This script will pull the ldif file from a remote location
+           # and place it in the correct location for the Persistence job to use it
+           mkdir -p /app/custom_ldif 
+           wget -O /app/custom_ldif/01_gluu.ldif https://<ldif-file-location/01_gluu.ldif
+        ```
 
-    - Create a configmap:
-      `kubectl -n <namespace> create cm my-custom-ldif --from-file=mycustomldif.sh`
+    1.  Create a configmap:
+        `kubectl -n <namespace> create cm my-custom-ldif --from-file=mycustomldif.sh`
 
-    -  Edit the job yaml to mount the configmap:
+    1.  Edit the job yaml to mount the configmap:
+       
         ```
           volumes:
             - name: my-custom-ldif
@@ -194,9 +196,9 @@ This documentation demonstrates how to upgrade from CN >=4.2 LDAP to 4.5 Postgre
     
   1.  Deploy the job:
 
-        ```
-        kubectl -n <namespace> apply -f offline-persistence-load.yaml
-        ```
+      ```
+      kubectl -n <namespace> apply -f offline-persistence-load.yaml
+      ```
     
   1.  Make sure there's no error while running the job before proceeding to the next step. If there's no error, the job and secret can be deleted safely:
 
@@ -243,5 +245,3 @@ This documentation demonstrates how to upgrade from CN >=4.2 LDAP to 4.5 Postgre
     If you faced this, you should switch `global.upgrade.enabled: false` and rerun the `helm upgrade` command again, so that it’s registered with the helm lifecycle that the upgrade was successful.
     
 1.  Interception scripts are not upgraded automatically. They need to be upgraded manually.
-
-## Troubleshooting
