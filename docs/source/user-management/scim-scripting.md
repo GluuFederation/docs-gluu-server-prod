@@ -164,6 +164,45 @@ for user in results.getEntries():
 
 Ensure no addresses are returned anymore in your SCIM user searches. Happy testing!
 
+
+### Example: User notification over SCIM
+
+We can manipulate new user entry notification system via scim custom script. When the user account created in Gluu over SCIM, User receive a welcome email with the temporary password. Let's see a diagram 
+
+![Screenshot from 2024-03-06 03-25-31](https://github.com/GluuFederation/docs-gluu-server-prod/assets/43112579/2fa620a9-fdd2-482d-991e-b1b5a9914a76)
+
+#### Configuring the scirpt 
+
+Let's modify `postCreatUser` methods on SCIM custom script  
+```
+    def postCreateUser(self, user, configurationAttributes):
+        print("POST CREATE USER: post create user")        
+        inum = user.getInum()
+        userPersistenceHelper = CdiUtil.bean(UserPersistenceHelper)        
+        scimCustomePerson = userPersistenceHelper.getPersonByInum(inum)                   
+        otp = Otp()      
+        password = str(otp.generateOtp(self.length))                 
+        scimCustomePerson.setUserPassword(password)  
+        userPersistenceHelper.updatePerson(scimCustomePerson)  
+           
+        mails = scimCustomePerson.getAttributeList("mail")        
+        for mail in mails:
+            print("POST CREATE USER: user mail : %s"%mail)           
+            sender = EmailSender()       
+            sender.sendEmail(mail, subject, body)
+            break                
+        return True
+```
+In the `Otp` class, the `generateOtp()` method creates an OTP, with the OTP length configurable as a key-value pair in the custom script. The `sendEmail()` method in the `EmailSender()` class is responsible for notifying the user with relevant email details. See [email2FA](https://github.com/GluuFederation/oxAuth/blob/master/Server/integrations/email2FA/email2FAExternalAuthenticator.py#L316) for SMTP configuration.
+
+Navigate to the OxTrust Admin UI and configure the following items
+
+* Make sure you have your **SMTP** settings correctly Gluu Server - `Navigate to Configuration > Organization Configuration > SMTP Server Configuration`
+* Set up the OTP length- Navigate to `Configuration > Other Custom Scripts`, choose the **SCIM** script and set a custom attribute with key `otp_length`.
+* Enable the custom script.
+
+[N.B] You can customize it according to your needs.
+
 ## Controlling execution of SCIM operations
 
 With the `manageResourceOperation` and `manageSearchOperation` methods you can make complex decisions on how processing should take place based on contextual data and the incoming payload.
