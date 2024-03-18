@@ -38,7 +38,7 @@ Since enrollment of a mobile device is attempted in the three-stepped flow, this
 
 The following sequence diagram depicts a successful sample journey in the context of a 3-stepped flow and illustrates the entities involved in the solution.
 
-![flow](https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/pingid/flow.png)
+![flow](https://github.com/GluuFederation/oxAuth/raw/version_4.5.0/Server/integrations/pingid/flow.png)
 
 Note that PingID may detect the recipient device for a push is not reachable (eg. due to network problems). In this case, the user is prompted for the OTP code appearing in the screen of the mobile application. This may also happen when the user has explicitly disabled the swipe gesture in the app.
 
@@ -91,13 +91,13 @@ This section describes configurations to be carried out in Gluu Server.
     
     ### Transfer script assets
 
-    Extract [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/pingid/bundle.zip) to the root (ie. `/`) of your Gluu server. In a standard CE installation this means extraction should take place under `/opt/gluu-server`.
+    Extract [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.5.0/Server/integrations/pingid/bundle.zip) to the root (ie. `/`) of your Gluu server. In a standard CE installation this means extraction should take place under `/opt/gluu-server`.
     
     The zip file contains UI pages (forms) and other miscellaneous files. When extracting use the `root` user.
     
     ### Deploy oxauth-pingid library
     
-    1. Transfer this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/pingid/oxauth-pingid-1.0.jar) to your Gluu instance inside folder `/opt/gluu/jetty/oxauth/custom/libs`. 
+    1. Transfer this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.5.0/Server/integrations/pingid/oxauth-pingid-1.0.jar) to your Gluu instance inside folder `/opt/gluu/jetty/oxauth/custom/libs`. 
     
     1. Navigate to `/opt/gluu/jetty/oxauth/webapps` and edit the file `oxauth.xml` so that in the `extraClasspath` section the following path is added: `oxauth-pingid-1.0.jar`
     
@@ -112,16 +112,16 @@ This section describes configurations to be carried out in Gluu Server.
     
     There are two methods of loading files into the deployment which can be used to load the files from the two steps below:
     
-    -   Extract script assets from [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/pingid/bundle.zip).
+    -   Extract script assets from [this file](https://github.com/GluuFederation/oxAuth/raw/version_4.5.0/Server/integrations/pingid/bundle.zip).
     
         ```bash
-        wget https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/pingid/bundle.zip && unzip bundle.zip -d bundle
+        wget https://github.com/GluuFederation/oxAuth/raw/version_4.5.0/Server/integrations/pingid/bundle.zip && unzip bundle.zip -d bundle
         ```
     
-    - Get oxauth-pingid library from this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/pingid/oxauth-pingid-1.0.jar). If you want to generate the jar file on your own (and possibly inspect the source code) follow the steps [below](#building-oxauth-pingid-library)
+    - Get oxauth-pingid library from this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.5.0/Server/integrations/pingid/oxauth-pingid-1.0.jar). If you want to generate the jar file on your own (and possibly inspect the source code) follow the steps [below](#building-oxauth-pingid-library)
     
         ```bash
-        wget https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/pingid/oxauth-pingid-1.0.jar
+        wget https://github.com/GluuFederation/oxAuth/raw/version_4.5.0/Server/integrations/pingid/oxauth-pingid-1.0.jar
         ```
     
              
@@ -238,7 +238,7 @@ This section describes configurations to be carried out in Gluu Server.
 
     - For `name` use a meaningful identifier, like `pingid`
     
-    - In the `script` field use the contents of this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.4.0/Server/integrations/pingid/pingIDAuthenticator.py)
+    - In the `script` field use the contents of this [file](https://github.com/GluuFederation/oxAuth/raw/version_4.5.0/Server/integrations/pingid/pingIDAuthenticator.py)
     
     - Tick the `enabled` checkbox
     
@@ -258,7 +258,7 @@ This section describes configurations to be carried out in Gluu Server.
 
 If you want to generate the jar file on your own (and possibly inspect the source code) follow the steps below:
 
-1.  In a development machine, ensure Java 8+ and Maven build tool are installed. [Download](https://github.com/GluuFederation/oxAuth/archive/refs/heads/version_4.4.0.zip) oxAuth project  and extract it to a temporary location
+1.  In a development machine, ensure Java 8+ and Maven build tool are installed. [Download](https://github.com/GluuFederation/oxAuth/archive/refs/heads/version_4.5.0.zip) oxAuth project  and extract it to a temporary location
 
 1.  `cd` to `Server/integrations/pingid`
 

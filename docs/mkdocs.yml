@@ -1,15 +1,15 @@
 # Project information
-site_name: Gluu Server 4.4 Docs
+site_name: Gluu Server 4.5 Docs
 site_description: Documentation for Gluu Server
 
 # Copyright
-copyright: Copyright &copy; 2021, Gluu, Inc.
+copyright: Copyright &copy; 2022, Gluu, Inc.
 
 # Repository
 docs_dir: source
 repo_name: GluuFederation/docs-gluu-server-prod
 repo_url: https://github.com/GluuFederation/docs-gluu-server-prod/
-edit_uri: edit/4.4/docs/source
+edit_uri: edit/4.5/docs/source
 
 # Configuration
 theme:
@@ -20,8 +20,10 @@ theme:
         accent: 'green'
     logo: 'gluu.jpg'
     favicon: 'favicon.ico'
+    features:
+      - content.code.copy
 extra:
-    version: '4.4'
+    version: '4.5'
 extra_css:
   - css/tabs.css
 
@@ -43,12 +45,9 @@ markdown_extensions:
 # Navigation
 nav:
 - 'Versions':
+    - '4.5': 'https://gluu.org/docs/gluu-server/4.5/'
     - '4.4': 'https://gluu.org/docs/gluu-server/4.4/'
     - '4.3': 'https://gluu.org/docs/gluu-server/4.3/'
-#   - '5.0': 'https://gluu.org/docs/gluu-server/5.0/'
-    - '4.2': 'https://gluu.org/docs/gluu-server/4.2/'
-    - '4.1': 'https://gluu.org/docs/gluu-server/4.1/'
-    - '4.0': 'https://gluu.org/docs/gluu-server/4.0/'
     - 'EOL Versions': 'https://gluu.org/docs/eol/'
 - ' ': 'https://gluu.org/docs'
 - ' ': 'https://gluu.org/docs'
@@ -67,7 +66,8 @@ nav:
             - 'CentOS': 'installation-guide/install-centos.md'
             - 'SUSE': 'installation-guide/install-suse.md'
         - 'Setup Script Options': 'installation-guide/setup_py.md'
-        - 'Upgrade to 4.4': 'upgrade/index.md'
+        - 'Upgrade to 4.5': 'upgrade/index.md'
+        - 'Migration >=4.2 LDAP to 4.5 SQL': 'upgrade/ldap-migration.md'
         - 'Clustering': 'installation-guide/cluster.md'
 - Administration Guide:
         - 'oxTrust admin UI': 'admin-guide/oxtrust-ui.md'
@@ -95,7 +95,7 @@ nav:
             - 'FIDO U2F': 'authn-guide/U2F.md'
             - 'Certificate Authentication': 'authn-guide/cert-auth.md'
             - 'Account Lockout': 'authn-guide/lockout.md'
-            - 'Forgot Password': 'authn-guide/pw-reset.md'
+            - 'Password Reset': 'authn-guide/pw-reset.md'
             - 'Custom Script Tutorial': 'authn-guide/customauthn.md'
         - Inbound Identity:
             - 'Introduction': 'authn-guide/passport.md'
@@ -139,6 +139,7 @@ nav:
             - 'GitHub Enterprise': 'integration/saas/github-enterprise.md'
             - 'Cisco WebEx': 'integration/saas/webex.md'
             - 'Amazon Web Services (AWS)': 'integration/saas/aws.md'
+            - 'Azure': 'integration/saas/azure.md'
             - 'Rocketchat': 'integration/saas/rocketchat.md'
             - 'SAMLtest.id': 'integration/saas/saml_test_id.md'
             - 'ThousandEyes': 'integration/saas/thousandeyes.md'
@@ -155,21 +156,25 @@ nav:
             - 'Cache Provider Configuration': 'reference/cache-provider-prop.md'
         - 'Persistence Strategies':
             - 'Persistence Mechanisms': 'reference/persistence.md'
+            - 'MySQL Schema': 'reference/mysql-schema.md'
+            - 'PostgreSQL Schema': 'reference/postgres-schema.md'
             - 'oxLDAP Properties': 'reference/oxldap.md'
-            - 'LDAP Schema': 'reference/schema.md'
+            - 'LDAP Schema': 'reference/ldap-schema.md'
         - 'Kubernetes and Containers Technical Reference':
             - 'Config and Secret Keys': 'reference/container-configs.md'
             - 'Image References': 'reference/container-image-refs.md'
 - Operation Guide:
+        - 'Health Checks': 'operation/health-check.md'
         - 'Service Commands': 'operation/services.md'
 #        - 'Patches': 'upgrade/patches.md'
         - 'Backups': 'operation/backup.md'
         - 'CE to CN Migration': 'operation/ce_to_cn_migration.md'
+        - 'CN External Secrets and Configmaps': 'operation/external-secrets-configmaps.md'
         - 'Security tips': 'operation/security.md'
         - 'Performance tuning': 'operation/fine-tuning.md'
         - 'Ports': 'operation/ports.md'
         - 'Logout': 'operation/logout.md'
-        - 'Log Management' : 'operation/logs.md'
+        - 'Log Management': 'operation/logs.md'
         - 'Customize Public Pages': 'operation/custom-design.md'
         - 'Change IP Address': 'operation/changeip.md'
         - 'Server Clean-up': 'operation/cleanup.md'

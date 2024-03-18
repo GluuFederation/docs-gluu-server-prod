@@ -1,400 +1,273 @@
-# Upgrade to Gluu Server 4.4
+# Upgrade to Gluu Server 4.5
 
 === "Community Edition"
     
     ## Overview
-    The Gluu Server **cannot** be upgraded with a simple `apt-get upgrade`. You will need to either use our in-place upgrade script or explicitly install the new version and export/import your data. Find the existing version below for upgrade instructions to Gluu Server 4.4. 
+    The Gluu Server **cannot** be upgraded with a simple `apt-get upgrade`. You will need to either use our in-place upgrade script or explicitly install the new version and export/import your data. Find the existing version below for upgrade instructions to Gluu Server 4.5. 
     
-    ### Pre-requisites
+    ## Pre-requisites
     
     - Before upgrading, make sure to [back up](../operation/backup.md) the Gluu container or LDAP LDIF. 
     - Upgrades should always be thoroughly scoped and tested on a development environment *first*.
-    - This upgrade process only upgrades versions 4.0.x through 4.3.1. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
+    - This upgrade process only upgrades versions 4.0.x through 4.5.0. To upgrade from a previous version, first [upgrade to 4.0](https://gluu.org/docs/gluu-server/4.0/upgrade/).
         
     - Upgrade script runs on Python 3. You need to install Python 3 before running the script.
         * On CentoOS/RHEL: `yum install -y python3`
         * On Ubuntu/Debian: `apt-get update && apt-get install -y python3`
     
     
-    #### Online Upgrade from 4.x to 4.4.0
-  
+    ## Online Upgrade from 4.x to 4.5.0
+    
     The upgrade script downloads all needed software and applications from the internet. You can perform an online upgrade by following these steps:
     
     * Download the upgrade script
     
     ```
-    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.4.0/upg4xto440.py
+    wget https://raw.githubusercontent.com/GluuFederation/community-edition-package/master/update/4.5.0/upg4xto450.py
     ```
     
     * Execute the script:
     
     ```
-    python3 upg4xto431.py
+    python3 upg4xto450.py
     ```
     
-    Your upgrade directory will be the `/opt/upd/4.4.0/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.4.0`.
+    Your upgrade directory will be the `/opt/upd/4.5.0/dist`. The script will create these sub directories: `app`, `gluu`, and `tmp`. It also downloads latest setup files to `/install/community_edition_setup_4.5.0`.
 
-    #### Offline Upgrade from 4.x to 4.4.0
+    ## Offline Upgrade from 4.x to 4.5.0
     
-    If your machine is not open to public internet, you can download self extracting upgrade script form https://repo.gluu.org/upd/4.4-0.upg.run and you can run inside Gluu CE container as
+    If your machine is not open to public internet, you can download self extracting upgrade script form https://repo.gluu.org/upd/4.5-0.upg.run and you can run inside Gluu CE container as
 
     ```
-    sh 4.4-0.upg.run
+    sh 4.5-0.upg.run
     ```
     
-    The script extracts contents to `/opt/upd/4.4.0/dist`, and writes latest setup files to `/install/community_edition_setup_4.4.0`
+    The script extracts contents to `/opt/upd/4.5.0/dist`, and writes latest setup files to `/install/community_edition_setup_4.5.0`
     
 === "Cloud Native Edition"
  
     ## Overview
     
-    This guide introduces how to upgrade cloud native edition from one version to another.
+    This guide introduces how to upgrade cloud native edition from one version to another. 
+    We support both upgrading from different versions, for example 4.4 to 4.5, or doing a patch upgrade of the same version. 
+    You can upgrade using either `pygluu` or `helm`.
 
-    ### Upgrade
-    
-    #### Helm
 
     === "LDAP"
-    
-        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-         
-            ```yaml
-            apiVersion: v1
-            data:
-              DOMAIN: FQDN #<-- Change this to your FQDN
-              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-              GLUU_CONFIG_ADAPTER: kubernetes
-              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-              GLUU_LDAP_URL: opendj:1636
-              GLUU_PERSISTENCE_TYPE: ldap
-              GLUU_SECRET_ADAPTER: kubernetes
-              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-            kind: ConfigMap
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: upgrade-cm
-            ---
-            apiVersion: batch/v1
-            kind: Job
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: gluu-upgrade-job
-            spec:
-              template:
-                metadata:
-                  annotations:
-                     sidecar.istio.io/inject: "false"                
-                  labels:
-                    app: gluu-upgrade
-                spec:
-                  containers:
-                  - args:
-                    - --source
-                    - "4.3"
-                    - --target
-                    - "4.4"
-                    envFrom:
-                    - configMapRef:
-                        name: upgrade-cm
-                    image: gluufederation/upgrade:4.4.0-01
-                    name: gluu-upgrade-job
-                  restartPolicy: Never
-            ```
-            
+        ### pygluu upgrade
+        In order to upgrade your deployment using `pygluu`, you have to first [install](https://github.com/GluuFederation/cloud-native-edition/releases) and [build](https://gluu.org/docs/gluu-server/4.5/installation-guide/install-kubernetes/#build-pygluu-kubernetespyz-manually) the `pygluu` tool.
+        
         1.  Clone latest stable manifests.
         
             ```bash
-            git clone --recursive --depth 1 --branch 4.4 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
+            git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd cloud-native-edition/pygluu/kubernetes/templates/helm/gluu
             ```
             
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. Also make sure your current `values.yaml` other options are moved correctly to the new values.yaml.
-            Move old `settings.json` that was used in 4.3 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
-            
+        1.  Modify all images inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`.
+        1.  Move the old `settings.json` that was used in the 4.4 installation into the same directory `pygluu-kubernetes.pyz` exists in.  The `json` file can be generated  using `./pygluu-kubernetes.pyz generate-settings`.
+
+        1.  Execute the following command:
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
-            
-            Go over your `values.yaml` and make sure it reflects all current information.
-            
-        1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
-        
-        1.  Create configmap for `101-ox.ldif` file.
-        
-            ```bash
-            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/ldap/101-ox.yaml
+        ### helm upgrade
+
+        Another way to upgrade your deployment is by simply going over your `override.yaml` used in 4.4 and adjust it according to the 4.5 [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml).
+                    
+        1.  Inside your new `override.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
+            ``` yaml
+            global:
+                upgrade:
+                    enabled: true
+                    sourceVersion: "4.4"
+                    targetVersion: "4.5"  
+                persistence:
+                    enabled: false
             ```
-            
+            To perform a patch upgrade, where the source and target version are the same, your `override.yaml` will be:
+
+            ``` yaml
+                global:
+                    upgrade:
+                        enabled: true
+                        sourceVersion: "4.5"
+                        targetVersion: "4.5"  
+                    persistence:
+                        enabled: true
+            ```
         1.  Delete `oxAuthExpiration` index
         
             ```bash
-            kubectl exec -ti gluu-opendj-0 -n <gluu-namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4444 --bindDN 'cn=Directory Manager' --trustAll -f
+            kubectl exec -ti gluu-opendj-0 -n <namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4444 --bindDN 'cn=Directory Manager' --trustAll -f
             ```
-            
-        1.  Mount 101-ox.ldif in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset gluu-opendj -n gluu`
-        
-            ```yaml
-              volumes:
-              - name: ox-ldif-cm
-                configMap:
-                  name: oxldif
-              containers:
-                image: gluufederation/opendj:4.4.0-1
-                ...
-                ...
-                volumeMounts:
-                - name: ox-ldif-cm
-                  mountPath: /opt/opendj/config/schema/101-ox.ldif
-                  subPath: 101-ox.ldif
-        
-            ```
-            
-        1. Apply `upgrade.yaml`
+
+            You will be prompted to enter the `LDAP password` and confirm the deletion.
+
+        1.  Run `helm upgrade`
         
             ```bash
-            kubectl create -f upgrade.yaml -n <gluu-namespace>
+            helm upgrade <helm-release-name> gluu/gluu -f override.yaml -n <namespace>   
             ```
-           
-            Wait until upgrade job is finished and tail the logs of the upgrade pod.
-                   
-        1.  Run upgrade `Helm`
-        
-            ```bash
-            helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
-            ```
-             
+
+        1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.             
         
     === "Couchbase"
-      
-        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-         
-            ```yaml
-            apiVersion: v1
-            data:
-              DOMAIN: FQDN #<-- Change this to your FQDN
-              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-              GLUU_CONFIG_ADAPTER: kubernetes
-              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-              GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
-              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password #<-- super user password
-              GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
-              GLUU_COUCHBASE_USER: admin #<-- Change super user if necessary .
-              GLUU_COUCHBASE_BUCKET_PREFIX: gluu #<-- Change if necessary .
-              GLUU_PERSISTENCE_TYPE: couchbase
-              GLUU_SECRET_ADAPTER: kubernetes
-              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-            kind: ConfigMap
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: upgrade-cm
-            ---
-            apiVersion: batch/v1
-            kind: Job
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: gluu-upgrade-job
-            spec:
-              template:
-                metadata:
-                  annotations:
-                     sidecar.istio.io/inject: "false"              
-                  labels:
-                    app: gluu-upgrade
-                spec:
-                  containers:
-                  - args:
-                    - --source
-                    - "4.3"
-                    - --target
-                    - "4.4"
-                    envFrom:
-                    - configMapRef:
-                        name: upgrade-cm
-                    image: gluufederation/upgrade:4.4.0-1
-                    name: gluu-upgrade-job                 
-                    volumeMounts:
-                    - mountPath: /etc/gluu/conf/couchbase_password
-                      name: cb-pass
-                      subPath: couchbase_password
-                    - mountPath: /etc/certs/couchbase.crt
-                      name: cb-crt
-                      subPath: couchbase.crt
-                  restartPolicy: Never
-                  volumes:
-                  - name: cb-pass
-                    secret:
-                      secretName: cb-pass #<-- Change this to the secret name holding couchbase superuser pass
-                  - name: cb-crt
-                    secret:
-                      secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
-            ```
-
-                                
+       
+        ### pygluu upgrade
+        In order to upgrade your deployment using `pygluu`, you have to first [install](https://github.com/GluuFederation/cloud-native-edition/releases) and [build](https://gluu.org/docs/gluu-server/4.5/installation-guide/install-kubernetes/#build-pygluu-kubernetespyz-manually) the `pygluu` tool.
+        
         1.  Clone latest stable manifests.
         
             ```bash
-            git clone --recursive --depth 1 --branch 4.4 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
+            git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd cloud-native-edition/pygluu/kubernetes/templates/helm/gluu
             ```
-                        
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
-            Move old `settings.json` that was used in 4.3 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
             
+        1.  Modify all images inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`. For example, make sure your couchbase url, crt and other configurations are filled and correctly.
+
+        1.  Move the old `settings.json` that was used in the 4.4 installation into the same directory `pygluu-kubernetes.pyz` exists in.  The `json` file can be generated  using `./pygluu-kubernetes.pyz generate-settings`.
+
+        1.  Execute the following command:
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
-            
-            Go over your `values.yaml` and make sure it reflects all current information. Forexample, make sure your couchbase url and crt are filled and correct. Also make sure that your couchbase user and password are the new ones which you created in a previous step,  and that the couchbase superuser and superuser password are filled correctly.
-            
-        1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
-                        
-        1.  Apply `upgrade.yaml`
+        ### helm upgrade
+
+        Another way to upgrade your deployment is by simply going over your `override.yaml` used in 4.4 and adjust it according to the 4.5 [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml).
+                    
+        1.  Inside your new `override.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
+            ``` yaml
+            global:
+                upgrade:
+                    enabled: true
+                    sourceVersion: "4.4"
+                    targetVersion: "4.5"  
+                persistence:
+                    enabled: false
+            ```
+            To perform a patch upgrade, where the source and target version are the same, your `override.yaml` will be:
+
+            ``` yaml
+                global:
+                    upgrade:
+                        enabled: true
+                        sourceVersion: "4.5"
+                        targetVersion: "4.5"  
+                    persistence:
+                        enabled: true
+            ```
+
+        1.  Run `helm upgrade`
         
             ```bash
-            kubectl create -f upgrade.yaml -n <gluu-namespace>
+            helm upgrade <helm-release-name> gluu/gluu -f override.yaml -n <namespace>   
             ```
-           
-            Wait until upgrade job is finished and tail the logs of the upgrade pod.
-           
-        1.  Run upgrade `Helm`
-        
-            ```bash
-            helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
-            ```
+
+        1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.             
 
     === "Hybrid"
-      
-        1.  Copy the following yaml into `upgrade.yaml` and adjust all entries marked below:
-         
-            ```yaml
-            apiVersion: v1
-            data:
-              DOMAIN: FQDN #<-- Change this to your FQDN
-              GLUU_CACHE_TYPE: NATIVE_PERSISTENCE #<-- Change this if necessary
-              GLUU_CONFIG_ADAPTER: kubernetes
-              GLUU_CONFIG_KUBERNETES_NAMESPACE: gluu  #<-- Change this to Gluus namespace
-              GLUU_COUCHBASE_CERT_FILE: /etc/certs/couchbase.crt
-              GLUU_COUCHBASE_PASSWORD_FILE: /etc/gluu/conf/couchbase_password #<-- super user password
-              GLUU_COUCHBASE_URL: cbgluu.cbns.svc.cluster.local #<-- Change this if necessary
-              GLUU_COUCHBASE_USER: admin #<-- Change this if necessary
-              GLUU_COUCHBASE_BUCKET_PREFIX: gluu #<-- Change if necessary .
-              GLUU_LDAP_URL: opendj:1636
-              GLUU_PERSISTENCE_LDAP_MAPPING: "default" #<-- Change this if needed
-              GLUU_PERSISTENCE_TYPE: couchbase
-              GLUU_SECRET_ADAPTER: kubernetes
-              GLUU_SECRET_KUBERNETES_NAMESPACE: gluu #<-- Change this to Gluus namespace
-            kind: ConfigMap
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: upgrade-cm
-            ---
-            apiVersion: batch/v1
-            kind: Job
-            metadata:
-              labels:
-                app: gluu-upgrade
-              name: gluu-upgrade-job
-            spec:
-              template:
-                metadata:
-                  annotations:
-                     sidecar.istio.io/inject: "false"                      
-                  labels:
-                    app: gluu-upgrade
-                spec:
-                  containers:
-                  - args:
-                    - --source
-                    - "4.3"
-                    - --target
-                    - "4.4"
-                    envFrom:
-                    - configMapRef:
-                        name: upgrade-cm
-                    image: gluufederation/upgrade:4.4.0-1
-                    name: gluu-upgrade-job                    
-                    volumeMounts:
-                    - mountPath: /etc/gluu/conf/couchbase_password
-                      name: cb-pass
-                      subPath: couchbase_password
-                    - mountPath: /etc/certs/couchbase.crt
-                      name: cb-crt
-                      subPath: couchbase.crt
-                  restartPolicy: Never
-                  volumes:
-                  - name: cb-pass
-                    secret:
-                      secretName: cb-pass #<-- Change this to the secret name holding couchbase pass
-                  - name: cb-crt
-                    secret:
-                      secretName: cb-crt #<-- Change this to the secret name holding couchbase cert
-            ```
-                                    
+       
+        ### pygluu upgrade
+        In order to upgrade your deployment using `pygluu`, you have to first [install](https://github.com/GluuFederation/cloud-native-edition/releases) and [build](https://gluu.org/docs/gluu-server/4.5/installation-guide/install-kubernetes/#build-pygluu-kubernetespyz-manually) the `pygluu` tool.
+        
         1.  Clone latest stable manifests.
         
             ```bash
-            git clone --recursive --depth 1 --branch 4.4 https://github.com/GluuFederation/cloud-native-edition && cd pygluu/kubernetes/templates/helm/gluu
+            git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd cloud-native-edition/pygluu/kubernetes/templates/helm/gluu
             ```
-                        
-        1.  Modify all images  inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/helm/gluu/values.yaml) to latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.4/pygluu/kubernetes/templates/gluu_versions.json) according to upgrade target version. 
-            Move old `settings.json` that was used in 4.3 installation into the same directory `pygluu-kubernetes` exists in and execute the following command :
             
+        1.  Modify all images inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`. For example, make sure your couchbase url, crt and other configurations are filled and correctly.
+
+        1.  Move the old `settings.json` that was used in the 4.4 installation into the same directory `pygluu-kubernetes.pyz` exists in.  The `json` file can be generated  using `./pygluu-kubernetes.pyz generate-settings`.
+
+        1.  Execute the following command:
             ```bash
             ./pygluu-kubernetes.pyz upgrade-values-yaml
             ```
-            
-            Go over your `values.yaml` and make sure it reflects all current information. Forexample, make sure your couchbase url and crt are filled and correct. Also make sure that your couchbase user and password are the new ones which you created in a previous step,  and that the couchbase superuser and superuser password are filled correctly.
-            
-            Go over your `values.yaml` and make sure it reflects all current information. Forexample, make sure your couchbase url and crt are filled and correct. Also make sure that your couchbase user and password are the new ones which you created in a previous step,  and that the couchbase superuser and superuser password are filled correctly.
+        ### helm upgrade
 
-        1.  Inside `values.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
-            
-        1.  Create configmap for `101-ox.ldif` file.
-        
-            ```bash
-            kubectl -n <gluu-namespace> create -f https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/v1.2.6/pygluu/kubernetes/templates/ldap/base/101-ox.yaml
-            ```
-            
-        1.  Delete `oxAuthExpiration` index
-        
-            ```bash
-            kubectl exec -ti gluu-opendj-0 -n <gluu-namespace> -- /opt/opendj/bin/dsconfig delete-backend-index --backend-name userRoot --index-name oxAuthExpiration --hostName 0.0.0.0 --port 4444 --bindDN 'cn=Directory Manager' --trustAll -f
-            ```
-            
-        1.  Mount 101-ox.ldif in opendj-pods. Open opendj yaml or edit the statefulset directly `kubectl edit statefulset opendj -n gluu`
-        
-            ```yaml
-              volumes:
-              - name: ox-ldif-cm
-                configMap:
-                  name: oxldif
-              containers:
-                image: gluufederation/opendj:4.4.0-01
-                ...
-                ...
-                volumeMounts:
-                - name: ox-ldif-cm
-                  mountPath: /opt/opendj/config/schema/101-ox.ldif
-                  subPath: 101-ox.ldif
-        
-            ```
+        Another way to upgrade your deployment is by simply going over your `override.yaml` used in 4.4 and adjust it according to the 4.5 [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml).
                     
-        1. Apply `upgrade.yaml`
-        
-            ```bash
-            kubectl create -f upgrade.yaml -n <gluu-namespace>
+        1.  Inside your new `override.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
+            ``` yaml
+            global:
+                upgrade:
+                    enabled: true
+                    sourceVersion: "4.4"
+                    targetVersion: "4.5"  
+                persistence:
+                    enabled: false
             ```
-           
-            Wait until upgrade job is finished and tail the logs of the upgrade pod.
-           
-        1.  Run upgrade `Helm`
+            To perform a patch upgrade, where the source and target version are the same, your `override.yaml` will be:
+
+            ``` yaml
+                global:
+                    upgrade:
+                        enabled: true
+                        sourceVersion: "4.5"
+                        targetVersion: "4.5"  
+                    persistence:
+                        enabled: true
+            ```
+
+        1.  Run `helm upgrade`
         
             ```bash
-            helm upgrade <release-name> . -f ./values.yaml -n <namespace>   
-            ``` 
+            helm upgrade <helm-release-name> gluu/gluu -f override.yaml -n <namespace>   
+            ```
+
+        1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.    
+
+    === "SQL"
+
+        ### pygluu upgrade
+        In order to upgrade your deployment using `pygluu`, you have to first [install](https://github.com/GluuFederation/cloud-native-edition/releases) and [build](https://gluu.org/docs/gluu-server/4.5/installation-guide/install-kubernetes/#build-pygluu-kubernetespyz-manually) the `pygluu` tool.
+        
+        1.  Clone latest stable manifests.
+        
+            ```bash
+            git clone --recursive --depth 1 --branch 4.5 https://github.com/GluuFederation/cloud-native-edition && cd cloud-native-edition/pygluu/kubernetes/templates/helm/gluu
+            ```
+            
+        1.  Modify all images inside main [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml) to the latest [images](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/gluu_versions.json) according to the upgrade target version. Also make sure your `override.yaml` other options are moved correctly to the new `values.yaml`.
+        1.  Move the old `settings.json` that was used in the 4.4 installation into the same directory `pygluu-kubernetes.pyz` exists in.  The `json` file can be generated  using `./pygluu-kubernetes.pyz generate-settings`.
+
+        1.  Execute the following command:
+            ```bash
+            ./pygluu-kubernetes.pyz upgrade-values-yaml
+            ```
+        ### helm upgrade
+
+        Another way to upgrade your deployment is by simply going over your `override.yaml` used in 4.4 and adjust it according to the 4.5 [`values.yaml`](https://raw.githubusercontent.com/GluuFederation/cloud-native-edition/4.5/pygluu/kubernetes/templates/helm/gluu/values.yaml).
+                    
+        1.  Inside your new `override.yaml` set `global.upgrade.enabled` to `true` and `global.persistence.enabled` to `false`.
+            ``` yaml
+            global:
+                upgrade:
+                    enabled: true
+                    sourceVersion: "4.4"
+                    targetVersion: "4.5"  
+                persistence:
+                    enabled: false
+            ```
+            To perform a patch upgrade, where the source and target version are the same, your `override.yaml` will be:
+
+            ``` yaml
+                global:
+                    upgrade:
+                        enabled: true
+                        sourceVersion: "4.5"
+                        targetVersion: "4.5"  
+                    persistence:
+                        enabled: true
+            ```
+
+        1.  Run `helm upgrade`
+        
+            ```bash
+            helm upgrade <helm-release-name> gluu/gluu -f override.yaml -n <namespace>   
+            ```
+
+        1.  Once done revert `global.upgrade.enabled` to `false` and `global.persistence.enabled` to `true`.
 
 
     ### Exporting Data

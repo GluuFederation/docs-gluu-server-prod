@@ -1,7 +1,7 @@
 # Customizing Public Pages
 
 Most organizations will want to edit and customize the look and feel of public-facing Gluu Server pages to match their own corporate branding. 
-The following documentation provides the file locations of public facing pages, as well as instructions for adding custom HTML, CSS, and Javascript files to your Gluu Server. 
+The following documentation provides the file locations of public-facing pages, as well as instructions for adding custom HTML, CSS, and Javascript files to your Gluu Server. 
 
 Public pages include:  
 
@@ -15,9 +15,9 @@ Public pages include:
 
 ## Overview
 
-The Gluu Server's public facing pages are `xhtml` files. Each Gluu Server component is deployed as a separate archive in WAR format. When any component's service is started, its archive is unpacked ("exploded") to Jetty's temporary file directory located under `/opt/jetty-<VERSION>/temp/` before it'll be able to start serving requests for associated functionality. 
+The Gluu Server's public-facing pages are `xhtml` files. Each Gluu Server component is deployed as a separate archive in WAR format. When any component's service is started, its archive is unpacked ("exploded") to Jetty's temporary file directory located under `/opt/jetty-<VERSION>/temp/` before it'll be able to start serving requests for associated functionality. 
 
-To customize any files used by a component, they need to be changed either at that temporary location, or inside the corresponding archive itself. Note that changes made directly to unpacked files under `/opt/jetty-<VERSION>/temp/` won't be persisted--each time a component's service is restarted its WAR archive will be re-exploded, overwritting the existing content on the disk.
+To customize any files used by a component, they need to be changed either at that temporary location, or inside the corresponding archive itself. Note that changes made directly to unpacked files under `/opt/jetty-<VERSION>/temp/` won't be persisted--each time a component's service is restarted its WAR archive will be re-exploded, overwriting the existing content on the disk.
 
 A typical example would be customizing oxAuth's login page. There are two ways to achieve this:
 
@@ -68,9 +68,9 @@ Customized `i18n` should be placed in the following directories:
 Resources from this folder will be loaded at the next service restart.
 
 !!! Note
-    This can only customize oxAuth/Identity resources. New messages bundles applications not read automatically.
+    This can only customize oxAuth/Identity resources. New messages bundles applications are not read automatically.
 
-Sub-directory `custom/pages` have a special purpose. They enable overriding exploded `xhtml` pages from the unpacked WAR archive. The path to the exploded WAR conforms to following scheme:
+Sub-directory `custom/pages` have a special purpose. They enable overriding exploded `xhtml` pages from the unpacked WAR archive. The path to the exploded WAR conforms to the following scheme:
 
 ```
 /opt/jetty-<VERSION>/temp/jetty-localhost-<PORT_NUMBER>-<COMPONENT_NAME>.war-_<COMPONENT_NAME>-any-<RANDOM_TAG>.dir/webapp/
@@ -85,7 +85,7 @@ So, for example, the path to an exploded oxAuth's WAR archive directory may look
 Thus, a modified `login.xhtml` page put under `custom/pages/` will be used instead of the `webapp/login.xhtml` file from the exploded archive. You can use files unpacked there as a base for your own customized files.
 
 !!! Warning 
-    Jetty included in earlier Gluu 3.x packages is known to create duplicated directories under `/opt/jetty-<VERSION>/temp/` for each of its components. In case of encountering this issue, it's recommended to stop corresponding service and remove all subdirectories related to it from the `temp/` directory. After starting service again its WAR archive will be unpacked there again.
+    Jetty included in earlier Gluu 3.x packages are known to create duplicated directories under `/opt/jetty-<VERSION>/temp/` for each of its components. In case of encountering this issue, it's recommended to stop the corresponding service and remove all subdirectories related to it from the `temp/` directory. After starting service again its WAR archive will be unpacked there again.
 
 !!! Note
     This approach is for XHTML pages only. Other resources like `faces-config.xml` cannot be overridden with this method.
@@ -113,7 +113,7 @@ So, for example, a CSS file placed at this path:
 https://your.gluu.host/oxauth/ext/resources/stylesheet/theme.css
 ```
 
-...and should be referenced from inside of source codes of customized files by path like this:
+...and should be referenced from inside of source codes of customized files by a path like this:
 
 ```
 /oxauth/ext/resources/stylesheet/theme.css
@@ -126,7 +126,7 @@ All images should be placed under:
 !!! Note
     You can change the logo on every public-facing page here. Place your image in `/static/img` and name it `logo.png`.
 
-And all CSS are inside:
+And all CSS is inside:
 
 `/opt/gluu/jetty/oxauth/custom/static/stylesheet`
 
@@ -135,7 +135,7 @@ And all CSS are inside:
 If the above customization approach does not help to resolve customization issues, it's possible to explode WAR files and instruct Jetty to use the exploded folder instead of a WAR file. The following is a sample for oxAuth:
 
 1. Unpack oxauth.war into `/opt/gluu/jetty/oxauth/webapps/oxauth` folder
-1. Put updated `/opt/gluu/jetty/oxauth/webapps/oxauth.xml` with next content:
+1. Put updated `/opt/gluu/jetty/oxauth/webapps/oxauth.xml` with the following content:
 
     ```
     <Configure class="org.eclipse.jetty.webapp.WebAppContext">
@@ -183,7 +183,7 @@ Base directory:
 
 ## Applying changes
 
-To apply the customizations just set, [restart](./services.md#restart) the `oxauth` and `oxtrust` services. 
+To apply the customizations just set, and [restart](./services.md#restart) the `oxauth` and `oxtrust` services. 
 
 !!! Note
     It'll take about ten seconds for page modifications to reload.
@@ -204,7 +204,7 @@ at the bottom of oxAuth's login page. You can follow these steps to achieve this
 
 1. Log in to the Gluu container   
 
-1. Create a new directory structure under `custom/pages/` to accomodate new customized page:
+1. Create a new directory structure under `custom/pages/` to accommodate the new customized page:
 
     ```
     # mkdir -p /opt/gluu/jetty/oxauth/custom/pages/WEB-INF/incl/layout/`    
@@ -238,64 +238,120 @@ cp /opt/jetty-9.3/temp/jetty-localhost-8081-oxauth.war-_oxauth-any-9071517269463
 
 This guide will show how to customize HTML pages and CSS in oxAuth for Gluu Server cloud native edition.
 
-Here's the screenshot of the default oxAuth login page.
+As an example, we're going to:
 
-![Screenshot](../img/kubernetes/oxauth-default-login.png)
+1. add text to the top of the login form (and apply styling)
+1. add text in the footer
 
-As an example, add text to the top of the form and change the color of the button by following these steps:
+### Preparing custom files for oxAuth
+
+!!! Note
+
+    The pod namespace and name are set to `gluu` and `oxauth` respectively.
+
+1.  Locate the directory containing exploded oxAuth WAR
+
+    ```sh
+    kubectl -n gluu exec oxauth -- ls /opt/jetty/temp
+    ```
+
+    Output example:
+
+    ```
+    jetty-0_0_0_0-8080-oxauth_war-_oxauth-any-6467019887303284828
+    ```
+
+1.  Get the `login.xhtml` from oxAuth pod:
+
+    ```sh
+    kubectl -n gluu cp oxauth:opt/jetty/temp/jetty-0_0_0_0-8080-oxauth_war-_oxauth-any-6467019887303284828/webapp/login.xhtml ./login.xhtml
+    ```
+
+    Modify the file locally:
+
+    ```html
+    <h:form id="loginForm" style="padding:30px;">
+        <!-- customization -->
+        <div class="row"><p id="creds-title">Enter Credentials</p></div>
+        <!-- end of customization -->
+        <div class="row">
+            <div class="col-sm-3 col-md-3">
+                <h:outputText value="#{msgs['login.username']}" />
+            </div>
+    ```
+
+1.  Get the `login-template.xhtml` from oxAuth pod:
+
+    ```sh
+    kubectl -n gluu cp oxauth:opt/jetty/temp/jetty-0_0_0_0-8080-oxauth_war-_oxauth-any-6467019887303284828/webapp/WEB-INF/incl/layout/login-template.xhtml ./login-template.xhtml
+    ```
+
+    Modify the file locally:
+
+    ```html
+    <h:head>
+        <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" />
+        <!-- customization -->
+        <link rel="stylesheet" href="/oxauth/ext/resources/stylesheet/custom.css" />
+        <!-- end of customization -->
+    </h:head>
+
+    <footer class="footer" id="appFooter">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6 centered" style="text-align: center;">
+                <p class="centered">
+                    &copy; <a target="_blank" href="https://github.com/GluuFederation/oxAuth/blob/master/LICENSE">
+                        <h:outputText value="#{msgs['common.gluuInc']}" escape="false" />
+                    </a> | <a target="_blank" escape="false">Custom Footer goes here</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    ```
+
+1.  Copy the following text and save it as `custom.css`:
+
+    ```css
+    #creds-title {
+        font-style: italic;
+        font-weight: bolder;
+    }
+    ```
+
+1.  Use `configmaps` or `jackrabbit` (deprecated since Gluu v4.5.2) to upload customization.
 
 === "ConfigMaps"
 
-    !!! Note
-
-        The pod namespace and name is set to `gluu` and `oxauth` respectively.
-
-    1.  Locate the directory contains exploded oxAuth WAR
-
-        ```sh
-        kubectl -n gluu exec oxauth -- ls /opt/jetty/temp
-        ```
-
-        Output example:
-
-        ```
-        jetty-0_0_0_0-8080-oxauth_war-_oxauth-any-6467019887303284828
-        ```
-
-    1.  Get the `login.xhtml` from oxAuth pod:
-
-        ```sh
-        kubectl -n gluu cp oxauth:/opt/jetty/temp/jetty-0_0_0_0-8080-oxauth_war-_oxauth-any-6467019887303284828/webapp/login.xhtml ./login.xhtml
-        ```
-
-    1.  Copy the following text and save it as `./custom.css`:
-
-        ```css
-        #loginForm .btn-primary {
-            background: #1a9db2
-        }
-        ```
-
-    1.  Create a config file to store the content of `login.xhtml` and `custom.css`.
+    1.  Create configmaps to store the content of the modified `login.xhtml`, `login-template.xhtml`, and `custom.css` files.
 
         ```sh
         kubectl -n gluu create cm oxauth-custom-html --from-file=login.xhtml
+        kubectl -n gluu create cm oxauth-custom-layout-html --from-file=login-template.xhtml
         kubectl -n gluu create cm oxauth-custom-css --from-file=custom.css
         ```
 
-    1.  Mount file in your values.yaml under `oxauth.volumes` and `oxauth.volumeMounts`:
+    1.  Mount these files in your `values.yaml` under `oxauth.volumes` and `oxauth.volumeMounts`:
 
         ```yaml
         oxauth:
            volumeMounts:
              - name: oxauth-pages-volume
                mountPath: /opt/gluu/jetty/oxauth/custom/pages # login.xthml will be mounted under this directory
+             - name: oxauth-layout-volume
+               mountPath: /opt/gluu/jetty/oxauth/custom/pages/WEB-INF/incl/layout # login-template.xthml will be mounted under this directory
              - name: oxauth-static-volume
-               mountPath: /opt/gluu/jetty/oxauth/custom/static # custom.css will be mounted under this directory
+               mountPath:  /tmp/static #custom.css will be mounted in the temporary location
+            lifecycle:
+                postStart:
+                    exec:
+                        command: [ "sh", "-c", "mkdir /opt/gluu/jetty/oxauth/custom/static/stylesheet/ && cp /tmp/static/custom.css /opt/gluu/jetty/oxauth/custom/static/stylesheet"] # custom.css will be copied from the temporary to the desired location   
            volumes:
              - name: oxauth-pages-volume
                configMap:
                  name: oxauth-custom-html
+             - name: oxauth-layout-volume
+               configMap:
+                 name: oxauth-custom-layout-html
              - name: oxauth-static-volume
                configMap:
                  name: oxauth-custom-css
@@ -304,24 +360,25 @@ As an example, add text to the top of the form and change the color of the butto
     1.  Run helm install or helm upgrade if Gluu has been already installed.
 
         ```bash
-        helm upgrade gluu gluu/gluu -n gluu --version=1.6.x -f override.yaml
+        helm upgrade gluu gluu/gluu -n gluu --version=1.8.x -f values.yaml
         ```
 
 === "Jackrabbit"
 
+    !!! warning
+        Jackrabbit is deprecated since Gluu v4.5.2 and users are recommended to use ConfigMaps instead.
+
     1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
 
-    1. After connecting to  Jackrabbit create  directories `/opt/gluu/jetty/identity/custom/pages` and `/opt/gluu/jetty/identity/custom/static`.
+    1. After connecting to  Jackrabbit create the following directories: `opt/gluu/jetty/oxauth/custom/pages/WEB-INF/incl/layout` and `opt/gluu/jetty/oxauth/custom/static/stylesheet`.
 
-    1. Place the following `custom.css` in `/opt/gluu/jetty/identity/custom/static`.
+    1. Put `login.xhtml` under `opt/gluu/jetty/oxauth/custom/pages` directory.
 
-        ```css
-        .lockscreen-wrapper .btn-primary {
-            background-color: #b79933 !important;
-        }
-        ```
+    1. Put `login-template.xhtml` under `opt/gluu/jetty/oxauth/custom/pages/WEB-INF/incl/layout` directory
 
-    1. Place a custom `login.xhtml` which you may find in `opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml` inside your oxauth pod  at `/opt/gluu/jetty/identity/custom/pages` in Jackrabbit.
+    1. Put `custom.css` under `opt/gluu/jetty/oxauth/custom/static/stylesheet` directory.
+
+    1. Custom files will be pulled by oxAuth pod after few minutes.
 
 Here's the screenshot of customized oxAuth login page.
 
@@ -331,90 +388,90 @@ Here's the screenshot of customized oxAuth login page.
 
 This guide will show examples of how to customize HTML pages and CSS in oxTrust for Gluu Server cloud native edition.
 
-Here's the screenshot of default oxTrust logout page.
+As an example, we're going to add text to the logout form.
 
-![Screenshot](../img/kubernetes/oxtrust-default-logout.png)
+### Preparing custom files for oxTrust
 
-As an example, add text to the top of the form and change the color of the button by following these steps:
+!!! Note
+
+    The pod namespace and name are set to `gluu` and `oxtrust` respectively.
+
+1.  Locate the directory containing exploded oxTrust WAR
+
+    ```sh
+    kubectl -n gluu exec oxtrust -- ls /opt/jetty/temp
+    ```
+
+    Output example:
+
+    ```
+    jetty-0_0_0_0-8080-identity_war-_identity-any-6467019887303284828
+    ```
+
+1.  Get the `finishlogout.xhtml` from oxTrust pod:
+
+    ```sh
+    kubectl -n gluu cp oxtrust:opt/jetty/temp/jetty-0_0_0_0-8080-identity_war-_identity-any-6467019887303284828/webapp/finishlogout.xhtml ./finishlogout.xhtml
+    ```
+
+    Modify the file locally:
+
+    ```html
+    <ui:define name="body">
+        <div class="lockscreen-wrapper" style="text-align: center;">
+            <div class="lockscreen-name"
+                style="text-align: center; font-size: 1.2em !important; margin-top: 10px; margin-bottom: 10px;">
+                Thank you for using <b>GLUU</b>.
+            </div>
+            <a class="btn btn-block btn-primary" href="login.htm" style="width: 50%;">#{msgs['finishLogout.signIn']}</a>
+            <!-- customization -->
+            <div style="font-style: italic; font-weight: bolder; margin-top: 20px;">See your later!!</div>
+            <!-- end of customization -->
+        </div>
+    </ui:define>
+    ```
+
+1. Use `configmaps` or `jackrabbit` to upload customization.
 
 === "ConfigMaps"
 
-    !!! Note
-
-        The pod namespace and name is set to `gluu` and `oxtrust` respectively.
-
-    1.  Locate the directory contains exploded oxTrust WAR
-
-        ```sh
-        kubectl -n gluu exec oxtrust -- ls /opt/jetty/temp
-        ```
-
-        Output example:
-
-        ```
-        jetty-0_0_0_0-8080-identity_war-_identity-any-6467019887303284828
-        ```
-
-    1.  Get the `finishlogout.xhtml` from oxTrust pod:
-
-        ```sh
-        kubectl -n gluu cp oxtrust:/opt/jetty/temp/jetty-0_0_0_0-8080-identity_war-_identity-any-6467019887303284828/webapp/finishlogout.xhtml ./finishlogout.xhtml
-        ```
-
-    1.  Copy the following text and save it as `./custom.css`:
-
-        ```css
-        .lockscreen-wrapper .btn-primary {
-            background-color: #b79933 !important;
-        }
-        ```
-
-    1.  Create a config file to store the contents of `finishlogout.xhtml` and `custom.css`.
+    1.  Create a configmap to store the contents of the `finishlogout.xhtml` file.
 
         ```sh
         kubectl -n gluu create cm oxtrust-custom-html --from-file=finishlogout.xhtml
-        kubectl -n gluu create cm oxtrust-custom-css --from-file=custom.css
         ```
 
-    1.  Mount file in your values.yaml under `oxtrust.volumes` and `oxtrust.volumeMounts`:
+    1.  Mount this file in your `values.yaml` under `oxtrust.volumes` and `oxtrust.volumeMounts`:
 
         ```yaml
         oxtrust:
           volumeMounts:
             - name: oxtrust-pages-volume
               mountPath: /opt/gluu/jetty/identity/custom/pages # finishlogout.xthml will be mounted under this directory
-            - name: oxtrust-static-volume
-              mountPath: /opt/gluu/jetty/identity/custom/static # custom.css will be mounted under this directory
           volumes:
             - name: oxtrust-pages-volume
               configMap:
                 name: oxtrust-custom-html
-            - name: oxtrust-static-volume
-              configMap:
-                name: oxtrust-custom-css
         ```
 
     1.  Run helm install or helm upgrade if Gluu has been already installed.
 
         ```bash
-        helm upgrade gluu gluu/gluu -n gluu --version=1.6.x -f override.yaml
+        helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f values.yaml
         ```
 
 === "Jackrabbit"
 
+    !!! warning
+        Jackrabbit is deprecated since Gluu v4.5.2 and users are recommended to use ConfigMaps instead.
+
     1. Connect to your [Jackrabbit](../installation-guide/install-kubernetes.md#working-with-jackrabbit)
 
-    1. After connecting to  Jackrabbit create  directories `/opt/gluu/jetty/identity/custom/pages` and `/opt/gluu/jetty/identity/custom/static`.
+    1. After connecting to  Jackrabbit create the following directories: `opt/gluu/jetty/identity/custom/pages`.
 
-    1. Place the following `custom.css` in `/opt/gluu/jetty/identity/custom/static`.
+    1. Put `finishlogout.xhtml` under `opt/gluu/jetty/identity/custom/pages` directory.
 
-        ```css
-        .lockscreen-wrapper .btn-primary {
-            background-color: #b79933 !important;
-        }
-        ```
-
-    1. Place a custom `login.xhtml` which you may find in `opt/gluu/jetty/oxauth/webapps/oxauth/login.xhtml` inside your oxauth pod  at `/opt/gluu/jetty/identity/custom/pages` in Jackrabbit.
+    1. Custom files will be pulled by oxTrust pod after few minutes.
 
 Here's the screenshot of customized oxTrust logout page.
 
@@ -428,9 +485,9 @@ This guide will show examples of how to customize pages in oxShibboleth (SAML ID
 
     !!! Note
 
-        The pod namespace and name is set to `gluu` and `oxshibboleth` respectively.
+        The pod namespace and name are set to `gluu` and `oxshibboleth` respectively.
 
-    1.  Locate the directory contains web pages
+    1.  Locate the directory containing web pages
 
         ```bash
         kubectl -n gluu exec oxshibboleth -- ls /opt/shibboleth-idp/views
@@ -445,18 +502,18 @@ This guide will show examples of how to customize pages in oxShibboleth (SAML ID
     1.  Get the `error.vm` from oxShibboleth pod:
 
         ```bash
-        kubectl -n gluu cp oxshibboleth:/opt/shibboleth-idp/views/error.vm ./error.vm
+        kubectl -n gluu cp oxshibboleth:opt/shibboleth-idp/views/error.vm ./error.vm
         ```
 
     1.  Modify the copied `error.vm` local file
 
-    1.  Create a config file to store the contents of modified `error.vm`.
+    1.  Create a configmap to store the contents of modified `error.vm`.
 
         ```bash
         kubectl -n gluu create cm oxshibboleth-custom-vm --from-file=error.vm
         ```
 
-    1.  Mount file by adding to the `values.yaml` or your `override.yaml` under `oxshibboleth.volumes` and `oxshibboleth.volumeMounts`:
+    1.  Mount this file by adding to the `values.yaml` under `oxshibboleth.volumes` and `oxshibboleth.volumeMounts`:
 
         ```yaml
         oxshibboleth:
@@ -472,5 +529,5 @@ This guide will show examples of how to customize pages in oxShibboleth (SAML ID
     1.  Run helm install or helm upgrade if Gluu has been already installed.
 
         ```bash
-        helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f override.yaml
+        helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f values.yaml
         ```

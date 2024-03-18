@@ -27,6 +27,7 @@ openIdDiscoveryEndpoint                            | Discovery endpoint URL
 idGenerationEndpoint                               | ID Generation endpoint URL
 introspectionEndpoint                              | Introspection endpoint URL
 introspectionAccessTokenMustHaveUmaProtectionScope | If True, rejects introspection requests if access_token does not have the uma_protection scope in its authorization header
+introspectionRestrictBasicAuthnToOwnTokens         | If True, allow client request only own tokens. Otherwise allow to introspect all tokens. Default value is false.
 umaConfigurationEndpoint                           | UMA Configuration endpoint URL
 sectorIdentifierEndpoint                           | Sector Identifier endpoint URL
 oxElevenGenerateKeyEndpoint                        | oxEleven Generate Key endpoint URL
@@ -106,11 +107,13 @@ sessionIdLifetime                                  | The lifetime of session id 
 serverSessionIdLifetime                            | Dedicated property to control lifetime of the server side OP session object in seconds. Overrides `sessionIdLifetime`. By default value is 0, so object lifetime equals `sessionIdLifetime` (which sets both cookie and object expiration). It can be useful if goal is to keep different values for client cookie and server object.
 sessionIdRequestParameterEnabled                   | Boolean value specifying whether to enable session_id HTTP request parameter
 sessionIdPersistOnPromptNone                       | Boolean value specifying whether to persist session ID on prompt none
+sessionIdPersistInCache                            | Boolean value specifying whether sessions are stored in the cache. If false, sessions are stored in database.
 fapiCompatibility                                  | Boolean value specifying whether to turn on FAPI compatibility mode. If true AS behaves in more strict mode.
 consentGatheringScriptBackwardCompatibility        | Boolean value specifying whether to turn on Consent Gathering Script backward compatibility mode. If true AS will pick up script with higher level globally. If false (default) AS will pick up script based on client configuration.
 introspectionScriptBackwardCompatibility           | Boolean value specifying whether switch off client's introspection scripts (true value) and run all scripts that exists on server. Default value is false.
 clientAuthorizationBackwardCompatibility           | Boolean value specifying whether switch to old way of fetching client authorizations (querying by `userInum=<v>&clientId=<c>` filter instead of getting by key `v_c` introduced in 4.2.1 which impacts performance). 
 rejectJwtWithNoneAlg                               | Boolean value specifying whether reject JWT requested or validated with algorithm None. Default value is true.
+allowBlankValuesInDiscoveryResponse                | Boolean value specifying whether to allow blank values in Discovery Response. Default value is false.
 spontaneousScopeLifetime                           | The lifetime of spontaneous scope in seconds.
 configurationUpdateInterval                        | The interval for configuration update in seconds
 cssLocation                                        | The location for CSS files
@@ -140,6 +143,7 @@ invalidateSessionCookiesAfterAuthorizationFlow     | Boolean value to specify wh
 updateUserLastLogonTime                            | Choose if application should update oxLastLogonTime attribute upon user authentication
 updateClientAccessTime                             | Choose if application should update oxLastAccessTime/oxLastLogonTime attributes upon client authentication
 enableClientGrantTypeUpdate                        | Choose if client can update Grant Type values
+logNotFoundEntityAsError                           | Specify whether to log not found entity exception as error or as trace. Default value is false (trace).
 loggingLevel                                       | Specify the logging level for oxAuth loggers
 corsConfigurationFilters                           | This list specifies the CORS configuration filters
 logClientIdOnClientAuthentication                  | Choose if application should log the Client ID on client authentication
@@ -162,6 +166,7 @@ changeSessionIdOnAuthentication                    | Boolean value specifying wh
 forceOfflineAccessScopeToEnableRefreshToken        | Boolean value specifying whether force offline_access scope to enable refresh_token grant type. Default value is true.
 errorReasonEnabled                                 | Boolean value specifying whether to return detailed reason of the error from AS. Default value is false.
 removeRefreshTokensForClientOnLogout               | Boolean value specifying whether to remove Refresh Tokens on logout. Default value is false.
+forceRopcInAuthorizationEndpoint                   | Boolean value specifying whether to enabled ROPC custom script on Authorization Endpoint. Default value is false.
 
 ### Brute Force Protection
 

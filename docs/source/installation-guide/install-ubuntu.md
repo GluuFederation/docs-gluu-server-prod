@@ -1,6 +1,12 @@
+!!! Attention
+    All Linux assets, packages, and binaries require a support contract for access.
+    Contact sales@gluu.org for more information. For free up-to-date binaries,
+    check out the latest releases at [The Linux Foundation Janssen Project](https://docs.jans.io),
+    the new upstream open source project.
+
 # Ubuntu Installation 
 ## Overview
-Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 18.04.x. Follow the instructions below: 
+Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 22.x. Follow the instructions below: 
 
 1. [Install the Linux package](#install-the-package)
 2. [Start the Server and log in to the container](#start-the-server-and-log-in)
@@ -13,13 +19,40 @@ Single-node Gluu Server Linux packages are available for Ubuntu 20.x, 18.04.x. F
 
 ## Prerequisites
 - Make sure the target server or VM meets **all minimum requirements** specified in the [VM Preparation Guide](../installation-guide/index.md). 
-- **Ubuntu 18 or 20**: The Universe repository must be enabled.
+- **Ubuntu 20 or 22**: The Universe repository must be enabled.
 
 ## Instructions
 
 ### Install the package
 The Gluu Server will create its file system under `/root/` and will be installed under `/opt`. File size and [minimum requirements](../installation-guide/index.md) remain the same as the host.
 
+For **Ubuntu 22.x** run the following commands: 
+
+```
+echo "deb https://repo.gluu.org/ubuntu/ jammy main" > /etc/apt/sources.list.d/gluu-repo.list
+```
+
+```
+curl --user "your-username:your-password" https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+
+```
+Create a file named /etc/apt/auth.conf.d/99repo with content:
+
+machine https://repo.gluu.org
+login your-username
+password your-password
+```
+
+```
+apt update
+```
+
+```
+apt install gluu-server
+```
+
+<!-- When the next version is released, this version should be changed to the most current 4.5.x package in repo.gluu.org, replacing the `_` between `gluu-server` and the version number with an `=` -->
 
 For **Ubuntu 20.x** run the following commands: 
 
@@ -28,7 +61,15 @@ echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gl
 ```
 
 ```
-curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+curl --user "your-username:your-password" https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+
+```
+Create a file named /etc/apt/auth.conf.d/99repo with content:
+
+machine https://repo.gluu.org
+login your-username
+password your-password
 ```
 
 ```
@@ -38,31 +79,7 @@ apt update
 ```
 apt install gluu-server
 ```
-
-After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
-
-```
-apt-mark hold gluu-server
-```
-
-
-For **Ubuntu 18.04.x** run the following commands: 
-
-```
-echo "deb https://repo.gluu.org/ubuntu/ bionic main" > /etc/apt/sources.list.d/gluu-repo.list
-```
-
-```
-curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
-```
-
-```
-apt update
-```
-
-```
-apt install gluu-server
-```
+<!-- When the next version is released, this version should be changed to the most current 4.5.x package in repo.gluu.org, replacing the `_` between `gluu-server` and the version number with an `=` -->
 
 After installation, the `gluu-server` package needs to be excluded from automatic updates with the following command.
 
@@ -74,7 +91,7 @@ apt-mark hold gluu-server
 
 The Gluu Server is a chroot container, which must be started to proceed. 
 
-For **Ubuntu 20.x and 18.04.x** run the following commands: 
+For **Ubuntu 20.x and 22.x** run the following commands: 
 
 ```
 /sbin/gluu-serverd enable
@@ -123,7 +140,7 @@ Sometimes things go wrong! It can be difficult to troubleshoot issues if the ste
 
 ## Uninstallation
 
-For **Ubuntu Server 20.x and Ubuntu Server 18.04.x**, run the following commands:
+For **Ubuntu Server 20.x and Ubuntu Server 22.x**, run the following commands:
 
 ```
 /sbin/gluu-serverd disable

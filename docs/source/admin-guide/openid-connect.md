@@ -231,10 +231,30 @@ A user's associated Pairwise IDs can be viewed and managed directly in the datab
 
 ### Add Sector Identifier
 
+If the redirect URI to be added to a client is in the same domain as the server, the URI can be added via the Add Redirect URI field in the Client Registration form.
+If the URI is in a different domain, it must be added via a sector identifier.
+
 oxAuth provides an easy way to manage and publish a `sector_identifier_uri`. The Gluu admin can use this feature to select certain clients or even add ad-hoc `redirect_uri` values. oxAuth will publish a valid sector identifier JSON object as defined in OpenID Connect dynamic client registration spec. A client could then register this sector identifier URI in addition to redirect URIs.
 
 Follow these steps to add a sector identifier:
 
+1. First, let's gather all client URIs which will be used by the RP of this client.
+   
+1. Create a file named "abc.json" and put it inside `/var/www/html/sectoridentifier/` location of your Gluu Server's chroot container. 
+   For our case as the name of our client is "testClient" so we created "testClient.json" and saved it inside above location of our demo server. 
+   Content of that json looks like below: 
+   ```
+        root@localhost:/var/www/html/sectoridentifier# cat testClient.json 
+        [
+          "https://testapp.mohib.gluu.info/secure/callback",
+          "https://localhost:8091/secure/callback",
+          "appscheme://com.example.test"
+        ]
+        root@localhost:/var/www/html/sectoridentifer#
+   ```
+1. Now our "Sector URI" is ready and we are going to use `https://[hostname_of_Gluu_Server]/sectoridentifier/testClient.json` as our "Sector URI"
+
+<!--
 1. In oxTrust, navigate to `OpenID Connect` > `Sector Identifier`.
 ![Sector](../img/admin-guide/openid/sectoridentifier.png)
 
@@ -247,6 +267,7 @@ Follow these steps to add a sector identifier:
 1. Add clients that uses the `Sector Identifier`.
 ![add client](../img/admin-guide/openid/sectoridentifieraddclient.png)
 
+-->
 
 ## Authentication
 

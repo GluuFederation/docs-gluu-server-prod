@@ -10,6 +10,7 @@ This API defines a method for a protected resource to query an OAuth 2.0 authori
 Configuration properties: 
 
 * `introspectionAccessTokenMustHaveUmaProtectionScope` - oxauth configuration which defines whether `access_token` used in Authorization header must have `uma_protection` scope or not. If set to true and `access_token` in Authorization header does not have `uma_protection` scope then request is rejected with 403 forbidden HTTP code with appropriate log message in oxauth.log file. 
+* `introspectionRestrictBasicAuthnToOwnTokens` - oxauth configuration which defines whether allow client request only own tokens introspection or all tokens. Default value is `false` (introspect all tokens). 
 
 ### Path
 `/restv1/introspection`

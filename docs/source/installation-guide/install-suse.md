@@ -1,4 +1,12 @@
-# Suse Installation 
+
+!!! Attention
+    All Linux assets, packages, and binaries require a support contract for access.
+    Contact sales@gluu.org for more information. For free up-to-date binaries,
+    check out the latest releases at [The Linux Foundation Janssen Project](https://docs.jans.io),
+    the new upstream open source project.
+
+# SUSE Installation 
+
 ## Overview
 Single-node Gluu Server Linux package are available for SUSE Linux Enterprise Server 15. Follow the instructions below: 
 
@@ -26,7 +34,7 @@ The Gluu Server will be installed under `/opt`. File size and [minimum requireme
 For **SUSE Linux Enterprise Server 15**, run the following commands to install:
 
 ```
-wget https://repo.gluu.org/suse/RPM-GPG-KEY-GLUU -O RPM-GPG-KEY-GLUU
+wget --user="your-username" --password="your-password" https://repo.gluu.org/suse/RPM-GPG-KEY-GLUU -O RPM-GPG-KEY-GLUU
 ```
 
 ```

@@ -3,13 +3,13 @@
 ## Notice
 
 This document, also known as the Gluu Release Note, 
-relates to the Gluu Server Release versioned 4.4. The work is licensed under “[The Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) License” allowing the use, copy, modify, merge, publish, distribute, sub-license and sale without limitation and liability. This document extends only to the aforementioned release version in the heading.
+relates to the Gluu Server Release versioned 4.5. The work is licensed under “[The Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) License” allowing the use, copy, modify, merge, publish, distribute, sub-license and sale without limitation and liability. This document extends only to the aforementioned release version in the heading.
 
 UNLESS IT HAS BEEN EXPRESSLY AGREED UPON BY ANY WRITTEN AGREEMENT BEFOREHAND, THE WORK/RELEASE IS PROVIDED “AS IS”, WITHOUT ANY WARRANTY OR GUARANTEE OF ANY KIND EXPRESS OR IMPLIED. UNDER NO CIRCUMSTANCE, THE AUTHOR, OR GLUU SHALL BE LIABLE FOR ANY CLAIMS OR DAMAGES CAUSED DIRECTLY OR INDIRECTLY TO ANY PROPERTY OR LIFE WHILE INSTALLING OR USING THE RELEASE.
 
 ## Purpose
 
-The document is released with the Version 4.4 of the Gluu Software. The purpose of this document is to provide the changes made/new features included in this release of the Gluu Software. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered. 
+The document is released with the Version 4.5 of the Gluu Software. The purpose of this document is to provide the changes made/new features included in this release of the Gluu Software. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered. 
 
 ## Background
 
@@ -22,10 +22,10 @@ The most common use cases for the Gluu Server include single sign-on (SSO), mobi
 Please visit the [Gluu Documentation Page](http://www.gluu.org/docs/ce) for the complete 
 documentation and administrative guide. 
 
-## Available components in Gluu Server 4.4
-- oxAuth, oxTrust, oxCore v4.4
+## Available components in Gluu Server 4.5
+- oxAuth, oxTrust, oxCore v4.5
 - Gluu OpenDJ v4.4.11 (with Bouncy Castle FIPS 140-2 crypto package 1.0.2.1 and Bouncy Castle Java APIs for the TLS 1.0.9)
-- Shibboleth v4.1.4
+- Shibboleth v4.3.1
 - Passport v4.1
 - Java v1.8.0_112
 - Node.js v9.9.0
@@ -34,6 +34,132 @@ documentation and administrative guide.
 - Weld 3.0.0
 - FluentD 3.5
 - Redis
+
+## 4.5.3 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
+
+- [#1859](https://github.com/GluuFederation/oxAuth/issues/1859) fix(stat-exporter): if run stat exporter against jans-auth-server it is trying to connect to wrong endpoint and fail
+- [#1878](https://github.com/GluuFederation/oxAuth/issues/1878) fix(stat-exporter): stat exporter can't run against jans-auth-server
+- [#1879 ](https://github.com/GluuFederation/oxAuth/issues/1879) fix(oxauth): re-authentication doesn't happen for OIDC authz request with the higher "level" acr requested anymore 
+- [#1880](https://github.com/GluuFederation/oxAuth/pull/1880) fix(oxauth): client secret printed on logs
+- [#1883](https://github.com/GluuFederation/oxAuth/issues/1883) feat: implement Saml router script
+- [#1861](https://github.com/GluuFederation/oxAuth/issues/1861) fix(oxauth) : add exclusion to authentication filter for "/token" and "public client" when PKCE is used
+- [#1867](https://github.com/GluuFederation/oxAuth/issues/1867) Unable to add multiple case sensitive redirect URI
+- [#1869](https://github.com/GluuFederation/oxAuth/issues/1868) fix(oxauth): cnf introspection response is null even when valid cert is send during MTLS #6343 #1868
+  
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+ - [#2371](https://github.com/GluuFederation/oxTrust/issues/2371) feat: Add Search Field for Scopes Selection in OpenID Client
+
+
+### [GluuFederation/casa](https://github.com/GluuFederation/casa/issues?q=is%3Aissue+is%3Aclosed)
+
+  - [#265](https://github.com/GluuFederation/casa/issues/265) fix: error while enrolling OTP
+
+  
+
+## 4.5.2 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
+
+- [#1849 ](https://github.com/GluuFederation/oxAuth/issues/1849) Explicit user consent is required when up-scope within client authorized scopes 
+- [#1850](https://github.com/GluuFederation/oxAuth/issues/1850) create MAU exporter
+- [#1853](https://github.com/GluuFederation/oxAuth/issues/1853) scopes are missed in grant_type=refresh_token AS must take scopes from previous grant
+- [#1857](https://github.com/GluuFederation/oxAuth/issues/1857) state is not always returned on redirect from /end_session endpoint
+- [#1862](https://github.com/GluuFederation/oxAuth/issues/1862) added client_id parameter support to /end_session
+  
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#2346](https://github.com/GluuFederation/oxTrust/issues/2346) Added MAU Report to oxTrust
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#996](https://github.com/GluuFederation/community-edition-setup/issues/996) Make jans_stat a default oauth scope
+
+## 4.5.1 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
+
+- [#1849 ](https://github.com/GluuFederation/oxAuth/issues/1849) Explicit user consent is required when up-scope within client authorized scopes 
+- [#1365](https://github.com/GluuFederation/oxAuth/issues/1365) Login Page blank value error message is not user friendly
+- [#1838](https://github.com/GluuFederation/oxAuth/issues/1838) Failed to initialize resteasy proxy from script at server startup
+- [#1774](https://github.com/GluuFederation/oxAuth/issues/1774) Make not found exception logging level configurable
+- [#1830](https://github.com/GluuFederation/oxAuth/issues/1830) Upgrade nimbus
+- [#1828](https://github.com/GluuFederation/oxAuth/issues/1828) Unnecessary "session not found" error messages during refresh token flow 
+- [#1826](https://github.com/GluuFederation/oxAuth/issues/1826) Upgrade dependencies
+- [#1827](https://github.com/GluuFederation/oxAuth/issues/1827) Jettison 1.5.2 -> 1.5.4 
+- [#1728](https://github.com/GluuFederation/oxAuth/issues/1728) Introduce new UpdateToken methods in oxauth which exist in jans
+- [#1825](https://github.com/GluuFederation/oxAuth/issues/1825) Introduce new UpdateToken methods
+- [#1818](https://github.com/GluuFederation/oxAuth/issues/1818) We should strive to let RP handle error instead of showing Ooops page
+- [#1820](https://github.com/GluuFederation/oxAuth/issues/1820) Apply  client WhiteList  when session is valid (allowPostLogoutRedirectWithoutValidation=true )
+- [#1821](https://github.com/GluuFederation/oxAuth/issues/1821) Corrected post_logout_redirect_uri validation 
+- [#1812](https://github.com/GluuFederation/oxAuth/issues/1812) oxAuth still searches custom script using it's acr_value while it should be its inum
+- [#1805](https://github.com/GluuFederation/oxAuth/issues/1805) oxAuth seems to drop parts of url query string when comparing redirect_uri during request authorization
+- [#1660](https://github.com/GluuFederation/oxAuth/issues/1660) Login page doesn't display the correct localized characters
+- [#1747](https://github.com/GluuFederation/oxAuth/issues/1747) Do not log WebApplicationException as error since it's expected behavior
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#2343](https://github.com/GluuFederation/oxTrust/issues/2343) Password reset page showing success even when passwords mismatching
+- [#2311](https://github.com/GluuFederation/oxTrust/issues/2311) User self-registration page doesn't seem to enforce custom validation rules for attributes
+- [#2307](https://github.com/GluuFederation/oxTrust/issues/2307) Reset password page error handling / Strong password policy
+- [#2310](https://github.com/GluuFederation/oxTrust/issues/2310) Regex pattern validation on Password attributes causes error when creating user
+- [#2321](https://github.com/GluuFederation/oxTrust/issues/2321) oxTrust won't allow to set several postlogout redirect uris for OIDC client
+- [#2295](https://github.com/GluuFederation/oxTrust/issues/2295) It's hard to browse list of OIDC scopes when configuring client's properties, it's cluttered too much and not organized enough
+- [#2320](https://github.com/GluuFederation/oxTrust/issues/2320) oxTrust won't allow for multiple acrs set as "Default ACR value" for OIDC client
+
+## 4.5 Fixes / Enhancements
+
+### [GluuFederation/oxOrm](https://github.com/GluuFederation/oxOrm/issues?utf8=?&q=is%3Aissue+milestone%3A4.5+)
+
+- [#25](https://github.com/GluuFederation/oxOrm/issues/25) Add PostgreSQL support
+- [#24](https://github.com/GluuFederation/oxOrm/issues/24) update to conform Couchbase SDK 3.x
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=?&q=is%3Aissue+milestone%3A4.5+)
+
+- [#1748](https://github.com/GluuFederation/oxAuth/issues/1748) Duplicate iss and aud on introspection as jwt
+- [#1760](https://github.com/GluuFederation/oxAuth/issues/1760) add ability to return error out of introspection and update_token custom script 
+- [#1763](https://github.com/GluuFederation/oxAuth/issues/1763) end session - if id_token is expired but signature is correct, look up session by sid claim
+- [#1758](https://github.com/GluuFederation/oxAuth/issues/1758) log WebApplicationException in debug log level
+- [#1735](https://github.com/GluuFederation/oxAuth/issues/1735) add convenient idTokenLifetime client property
+- [#1733](https://github.com/GluuFederation/oxAuth/issues/1733) PKCE parameters from first SSO request retains in futher calls
+- [#1730](https://github.com/GluuFederation/oxAuth/issues/1730) do not unauthenticate session on prompt=login if there was no at least 1 successful redirect to rp
+- [#1727](https://github.com/GluuFederation/oxAuth/issues/1727) fixed request file method failure
+- [#1725](https://github.com/GluuFederation/oxAuth/issues/1725) SpontaneousScopeHttpTest fails during build 
+- [#1723](https://github.com/GluuFederation/oxAuth/issues/1723) fix NPE in JwtAuthorizationRequest
+- [#1721](https://github.com/GluuFederation/oxAuth/issues/1721) allow end session with expired id_token_hint (by checking signature and aud/sid)
+- [#1714](https://github.com/GluuFederation/oxAuth/issues/1714) allow authentication for max_age=0
+- [#1705](https://github.com/GluuFederation/oxAuth/issues/1705) Auth Server JSON config for allowSpontaneousScopes 
+- [#1701](https://github.com/GluuFederation/oxAuth/issues/1701) CIBA has hardcoded false for includeIdTokenClaims
+- [#1537](https://github.com/GluuFederation/oxAuth/issues/1537) add custom script method to get device registration token. 
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxtrust/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#2282](https://github.com/GluuFederation/oxtrust/issues/2282) Not possible to add a deep link as redirect_uri
+- [#2262](https://github.com/GluuFederation/oxtrust/issues/2262) oxTrust with 100+ SAML trust relationships
+- [#2209](https://github.com/GluuFederation/oxtrust/issues/2209) Cache refresh should remove persons sub entries on removal
+- [#2225](https://github.com/GluuFederation/oxtrust/issues/2225) Remove files in /var/gluu/identity/removed 
+- [#1704](https://github.com/GluuFederation/oxtrust/issues/1704) Support SAML MDQ as alternative to downloading federation metadata
+- [#2226](https://github.com/GluuFederation/oxtrust/issues/2226) make languages configurable in properties
+- [#2176](https://github.com/GluuFederation/oxtrust/issues/2176) remove deprecated caCertsLocation, caCertsPassphrase properties
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#961](https://github.com/GluuFederation/community-edition-setup/issues/961) Gluu radius post installation failed when the backend is spanner.
+- [#950](https://github.com/GluuFederation/community-edition-setup/issues/950) Apply persistence update to all CE projects to conform jetty 10
+- [#946](https://github.com/GluuFederation/community-edition-setup/issues/946) Incorrect JDBC driver class in SAML IDP [postgresql]
+- [#937](https://github.com/GluuFederation/community-edition-setup/issues/937) Install CB/Spanner DB libraries from separated archive
+
+### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxShibboleth/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#155](https://github.com/GluuFederation/oxShibboleth/issues/155) No attributes released in saml sso.
+
+### [GluuFederation/scim](https://github.com/GluuFederation/scim/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#47](https://github.com/GluuFederation/scim/issues/47) include the name of problematic attribute part of extension in the error response
 
 ## 4.4.1 Fixes / Enhancements
 
