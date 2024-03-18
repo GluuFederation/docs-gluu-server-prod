@@ -81,7 +81,7 @@ In order to create SSO to certain applications you may need to add custom attrib
 
 === "Cloud Native Setup"
 
-    - Create a file named 77-customAttributes.ldif and load it with the custom attributes that you want.
+    - Create a file with a distinct name detailing the custome attribute, here we will call it `customTest.ldif` and load it with the custom attributes that you want.
 
         - In the below example, `customTest` is our custom attribute. Kindly note this is just an example.
  
@@ -108,7 +108,7 @@ In order to create SSO to certain applications you may need to add custom attrib
           MAY ( customTest $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title )
         ```
 
-        - The complete `77-customAttributes.ldif` will look like this:
+        - The complete `customTest.ldif` will look like this:
       
         ```
         dn: cn=schema
@@ -131,10 +131,10 @@ In order to create SSO to certain applications you may need to add custom attrib
         !!!warning
             Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
 
-    - Create a kubernetes configmap called `ldap-custom-attributes` targeting the content of the file you created above.
+    - Create a kubernetes configmap called `ldap-custom-test-attributes` targeting the content of the file you created above.
 
         ```sh
-        kubectl create cm ldap-custom-attributes -n <namespace> --from-file=/path/to/77-customAttributes.ldif
+        kubectl create cm ldap-custom-test-attributes -n <namespace> --from-file=/path/to/customTest.ldif
         ```
 
         - Check if the configmap has been created by running the following command:
@@ -148,14 +148,14 @@ In order to create SSO to certain applications you may need to add custom attrib
     
         ```yaml
         opendj: 
-            volumes:
-              - name: ldap-custom-attributes
-                configMap:
-                  name: ldap-custom-attributes
-            volumeMounts:
-              - name: ldap-custom-attributes
-                mountPath: "/opt/opendj/config/schema/77-customAttributes.ldif"
-                subPath: 77-customAttributes.ldif    
+          volumes:
+            - name: ldap-custom-test-attributes
+              configMap:
+                name: ldap-custom-test-attributes
+          volumeMounts:
+            - name: ldap-custom-test-attributes
+              mountPath: "/app/schemas/customTest.ldif"
+              subPath: customTest.ldif    
         ```
         
     - Navigate to the folder where the values.yaml is `helm/gluu` and do the helm upgrade with the following command

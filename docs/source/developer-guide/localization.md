@@ -28,8 +28,13 @@ login.register=Registre
 ```
 Notice that the values to the right side of the equal sign have been translated but that the keys on the left side have not been changed. These keys must not change, because they will be referenced when oxAuth fetches the translated text.
 
+
+## How to apply localization in Gluu Server
+
+<!--
 To add translation for not yet supported languages, just create new properties file in [resource](https://github.com/GluuFederation/oxAuth/tree/master/Server/src/main/resources) folder and name it messages_[language_code].properties, then add language code as supported-locale to the [faces-config.xml](https://github.com/GluuFederation/oxAuth/blob/master/Server/src/main/webapp/WEB-INF/faces-config.xml#L9).
+-->
 
-
-
-
+- Get your properties file named "oxauth_LANGUAGE.properties" and put it inside `/opt/gluu/jetty/oxauth/custom/i18n`
+- Add this language in Gluu Server's language setting: `JSON Configuration` > `oxAuth Configuration` > Search for `uiLocalesSupported` > Add new language as new "Item".
+- If you want to make this language as default, make sure to move it up at the top of supported language list. 

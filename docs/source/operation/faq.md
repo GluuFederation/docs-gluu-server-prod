@@ -277,6 +277,7 @@ In such a situation, you can use the following methods to revert back to the pre
 
 ### Manual Method: 
 
+#### LDAP: 
 This method relies on an LDIF file to change the authentication mode in LDAP directly.
     
 - Create an `LDIF` file with the contents below:
@@ -296,7 +297,18 @@ This method relies on an LDIF file to change the authentication mode in LDAP dir
     /opt/opendj/bin/ldapmodify -h localhost -p 1636 -Z -X -D "cn=directory manager" -w "{password provided during setup}" -f changeAuth.ldif 
     ```
 
+#### RDBMS: 
+
+- SSH into your Gluu Server chroot environment
+- Log into mysql console with: `mysql` command
+- To list existing value of `oxAuthenticationMode` and `oxTrustAuthenticationMode`: `select * from gluuConfiguration n\G;`
+- Change oxTrustAuthenticationMode to `simple_password_auth`: `update gluudb.gluuConfiguration set oxTrustAuthenticationMode='simple_password_auth';`
+- If you want to change `oxAuthenticationMode` value, you have to use that set value as well like above. 
+
 <!---
+
+
+
 ### Graphical method:
 
 Alternatively, this can be accomplished in an LDAP browser.

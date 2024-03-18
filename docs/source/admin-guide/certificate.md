@@ -240,7 +240,7 @@
             # License terms and conditions for Gluu Cloud Native Edition:
             # https://www.apache.org/licenses/LICENSE-2.0
             kind: CronJob
-            apiVersion: batch/v1beta1
+            apiVersion: batch/v1
             metadata:
               name: oxauth-key-rotation
             spec:
