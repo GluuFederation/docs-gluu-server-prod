@@ -531,3 +531,60 @@ This guide will show examples of how to customize pages in oxShibboleth (SAML ID
         ```bash
         helm upgrade gluu gluu/gluu -n gluu --version=1.7.x -f values.yaml
         ```
+## Custom Jar file for scripts 
+
+### for JARs less than 1MB
+1.  Create a configmap with the custom jar file: 
+    `kubectl -n <namespace> create cm my-custom-jar --from-file=mycustom.jar`
+
+1.  Mount the configmap in your values.yaml under `oxauth.volumes` and `oxauth.volumeMounts`
+
+    ```
+    oxauth:
+      volumeMounts:
+        - name: my-custom-jar-volume
+          mountPath: /opt/gluu/jetty/oxauth/custom/libs/mycustom.jar
+          subPath: mycustom.jar
+      volumes:
+        - name: my-custom-jar-volume
+          configMap:
+            name: my-custom-jar
+    ```
+        
+1.  Run helm install or helm upgrade if Gluu has been already installed.
+    ```bash
+    helm upgrade <helm-release-name> gluu/gluu -n <namespace> -f values.yaml --version=4.5.x
+    ```
+
+### For JARs greater than 1MB
+1.  Create a configmap or secret for a shell script that contains instructions to pull the custom jar file:
+
+    ```shell
+    #!/bin/sh
+    # This script will pull the custom jar file from a remote location
+    # and place it in the correct location for oxAuth to use it
+    wget -O /opt/gluu/jetty/oxauth/custom/libs/mycustom.jar https://mydomain.com/mycustom.jar
+    ```
+    `kubectl -n <namespace> create cm my-custom-jar --from-file=mycustomjar.sh`
+
+1.  Mount the configmap or secret in your values.yaml under `oxauth.volumes` and `oxauth.volumeMounts`
+
+    ```
+    oxauth:
+      volumeMounts:
+        - name: my-custom-jar-volume
+          mountPath: /tmp/mycustomjar.sh
+          subPath: mycustomjar.sh
+      volumes:
+        - name: my-custom-jar-volume
+          configMap:
+            name: my-custom-jar
+            defaultMode: 0755
+      customScripts:
+        - /tmp/mycustomjar.sh
+    ```
+        
+1.  Run helm install or helm upgrade if Gluu has been already installed.
+    ```bash
+    helm upgrade <helm-release-name> gluu/gluu -n <namespace> -f values.yaml --version=4.5.x
+    ```
