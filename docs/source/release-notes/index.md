@@ -53,6 +53,33 @@ documentation and administrative guide.
 - [#2418](https://github.com/GluuFederation/oxTrust/issues/2418) getting password mismatch error on registration of a user on register.htm
 - [#2423](https://github.com/GluuFederation/oxTrust/issues/2423) Unable to select different introspection script in OpenID Client
 
+### [GluuFederation/oxd](https://github.com/GluuFederation/oxd/issues?utf8=%3F&q=is:issue+milestone:4.5+)TODO
+
+- [TODO](https://github.com/GluuFederation/oxd/commit/0f84bbeddfb4cc46f022a035831d180285584d92) update bouncycastle libs
+
+### [GluuFederation/casa](https://github.com/GluuFederation/casa/issues?utf8=%3F&q=is:issue+milestone:4.5+)TODO
+
+- [#284](https://github.com/GluuFederation/casa/issues/284) fix: a variety of errors with the email_2fa_core plugin 
+- [TODO](https://github.com/GluuFederation/casa/commit/1cf35b49855208d9db020e84347c54eac0789eb9) chore: udpdate bc libs
+
+### [GluuFederation/oxShibboleth
+](https://github.com/GluuFederation/oxshibboleth/issues?utf8=%3F&q=is:issue+milestone:4.5+)TODO
+
+- [#182](https://github.com/GluuFederation/oxShibboleth/pull/182) feat(oxshib): slo redirect 
+- [TODO](https://github.com/GluuFederation/oxShibboleth/commit/f859feb749b88981c056f96f6f663202d0ab06eb) fix: exclude second library version
+
+### [GluuFederation/gluu-passport
+](https://github.com/GluuFederation/gluu-passport/issues?utf8=%3F&q=is:issue+milestone:4.5+)TODO
+
+- [TODO](https://github.com/GluuFederation/gluu-passport/issues?utf8=%3F&q=is:issue+milestone:4.5+) fix(package-lock): update package lock json
+
+### [GluuFederation/fido2
+](https://github.com/GluuFederation/fido2/issues?utf8=%3F&q=is:issue+milestone:4.5+)TODO
+
+- [TODO](https://github.com/GluuFederation/fido2/commit/c301fbb258a12d5d07103a673f84e96501dc8860) fix(fido2): update attribute names in search filters
+- [TODO](https://github.com/GluuFederation/fido2/commit/b41405fdb692747b0f45c68b754515f4faabae3e) fix(fido2): remove weld dependencies
+- [TODO](https://github.com/GluuFederation/fido2/commit/5f4529f310bda827ffee3aeb7c6ec172e64cae3f) feat: update maven repo URL
+
 ## 4.5.3 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
