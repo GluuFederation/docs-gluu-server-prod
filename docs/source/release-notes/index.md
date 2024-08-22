@@ -35,6 +35,17 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
+## 4.5.5 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)TODO
+
+- [TODO](https://github.com/GluuFederation/oxAuth/commit/d4cbc4f9d5e4de385012a2d2657ebca8b5017b89) feat(oxAuth): check if UMA group already added
+- [#1903](https://github.com/GluuFederation/oxAuth/issues/1903)feat(oxauth): uppercased typ=JWT
+- [TODO](https://github.com/GluuFederation/oxAuth/commit/73e8a0248ab1de756d3aecc3e08d2c56808defb1)feat(jans-auth): remove dulicate import from SG script
+- [#1916](https://github.com/GluuFederation/oxAuth/issues/1916)fix(oxauth): introspection endpoint returns error for valid basic client authentication and invalid token
+- [TODO](https://github.com/GluuFederation/oxAuth/commit/39b98cc207811c462f68d192a2e89729baf95d01)fix(oxauth): update method to calculate user devices
+- [#1907](https://github.com/GluuFederation/oxAuth/pull/1907)Removed whitespace from login.xhtml login button value attribute and empty login.login property from oxauth.properties
+
 ## 4.5.3 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
