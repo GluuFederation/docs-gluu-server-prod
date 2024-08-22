@@ -46,6 +46,13 @@ documentation and administrative guide.
 - [TODO](https://github.com/GluuFederation/oxAuth/commit/39b98cc207811c462f68d192a2e89729baf95d01)fix(oxauth): update method to calculate user devices
 - [#1907](https://github.com/GluuFederation/oxAuth/pull/1907)Removed whitespace from login.xhtml login button value attribute and empty login.login property from oxauth.properties
 
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=%3F&q=is:issue+milestone:4.5+)TODO
+
+- [#2431](https://github.com/GluuFederation/oxTrust/pull/2431)feat(oxtrust): added support for sp logout return url 
+- [#2419](https://github.com/GluuFederation/oxTrust/issues/2419)Cache refresh first page and source backend server page merged
+- [#2418](https://github.com/GluuFederation/oxTrust/issues/2418) getting password mismatch error on registration of a user on register.htm
+- [#2423](https://github.com/GluuFederation/oxTrust/issues/2423) Unable to select different introspection script in OpenID Client
+
 ## 4.5.3 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
