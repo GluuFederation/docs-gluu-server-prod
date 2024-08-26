@@ -35,6 +35,57 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
+## 4.5.5 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [d4cbc4f](https://github.com/GluuFederation/oxAuth/commit/d4cbc4f9d5e4de385012a2d2657ebca8b5017b89) feat(oxAuth): check if UMA group already added
+- [#1903](https://github.com/GluuFederation/oxAuth/issues/1903) feat(oxauth): uppercased typ=JWT
+- [73e8a02](https://github.com/GluuFederation/oxAuth/commit/73e8a0248ab1de756d3aecc3e08d2c56808defb1) feat(jans-auth): remove dulicate import from SG script
+- [#1916](https://github.com/GluuFederation/oxAuth/issues/1916) fix(oxauth): introspection endpoint returns error for valid basic client authentication and invalid token
+- [39b98cc](https://github.com/GluuFederation/oxAuth/commit/39b98cc207811c462f68d192a2e89729baf95d01) fix(oxauth): update method to calculate user devices
+- [#1907](https://github.com/GluuFederation/oxAuth/pull/1907) Removed whitespace from login.xhtml login button value attribute and empty login.login property from oxauth.properties
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [#2431](https://github.com/GluuFederation/oxTrust/pull/2431) feat(oxtrust): added support for sp logout return url 
+- [#2419](https://github.com/GluuFederation/oxTrust/issues/2419) Cache refresh first page and source backend server page merged
+- [#2418](https://github.com/GluuFederation/oxTrust/issues/2418) getting password mismatch error on registration of a user on register.htm
+- [#2423](https://github.com/GluuFederation/oxTrust/issues/2423) Unable to select different introspection script in OpenID Client
+
+### [GluuFederation/oxd](https://github.com/GluuFederation/oxd/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [0f84bbe](https://github.com/GluuFederation/oxd/commit/0f84bbeddfb4cc46f022a035831d180285584d92) update bouncycastle libs
+
+### [GluuFederation/casa](https://github.com/GluuFederation/casa/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [#284](https://github.com/GluuFederation/casa/issues/284) fix: a variety of errors with the email_2fa_core plugin 
+- [1cf35b4](https://github.com/GluuFederation/casa/commit/1cf35b49855208d9db020e84347c54eac0789eb9) chore: udpdate bc libs
+- [#276](https://github.com/GluuFederation/casa/issues/276) fix: alternative options not working
+
+### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxshibboleth/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [#182](https://github.com/GluuFederation/oxShibboleth/pull/182) feat(oxshib): slo redirect 
+- [f859feb](https://github.com/GluuFederation/oxShibboleth/commit/f859feb749b88981c056f96f6f663202d0ab06eb) fix: exclude second library version
+
+### [GluuFederation/gluu-passport](https://github.com/GluuFederation/gluu-passport/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [a0b73e7](https://github.com/GluuFederation/gluu-passport/commit/a0b73e78676e80275396620f595478f15af5018a) fix(package-lock): update package lock json
+
+### [GluuFederation/fido2](https://github.com/GluuFederation/fido2/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [c301fbb](https://github.com/GluuFederation/fido2/commit/c301fbb258a12d5d07103a673f84e96501dc8860) fix(fido2): update attribute names in search filters
+- [b41405f](https://github.com/GluuFederation/fido2/commit/b41405fdb692747b0f45c68b754515f4faabae3e) fix(fido2): remove weld dependencies
+- [5f4529f](https://github.com/GluuFederation/fido2/commit/5f4529f310bda827ffee3aeb7c6ec172e64cae3f) feat: update maven repo URL
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#1041](https://github.com/GluuFederation/community-edition-setup/pull/1041) fix: casa default file
+- [9220025](https://github.com/GluuFederation/community-edition-setup/commit/9220025abe7b65a0efabd46a4fe6b4c29a78eb76) feat(jans-auth): remove dulicate import from SG script
+- [#1042](https://github.com/GluuFederation/community-edition-setup/issues/1042) Make creation of /etc/certs optional if it already existscreate
+- [#1044](https://github.com/GluuFederation/community-edition-setup/issues/1044) fix: casa copy of super gluu script crashes upon load
+- [#1048](https://github.com/GluuFederation/community-edition-setup/pull/1048) feat(fido2): add fido2 conf error
+
 ## 4.5.3 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
