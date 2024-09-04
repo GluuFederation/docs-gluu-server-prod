@@ -88,7 +88,6 @@ documentation and administrative guide.
 
 ## 4.5.4 Fixes / Enhancements
 
-
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
 
 - [#1763](https://github.com/GluuFederation/oxAuth/pull/1763) feat(oxauth): end 
@@ -137,51 +136,28 @@ documentation and administrative guide.
 
 ### [GluuFederation/oxd](https://github.com/GluuFederation/oxd/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
 
-- []() 
-- []() 
-- []() 
-- []() 
-- []() 
+- [#3ad3f89](https://github.com/GluuFederation/oxd/commit/3ad3f8957463cd2bb9461cf492eef715709bb0f1) feat(jans-orm): update dropwizard-core
 
 ### [GluuFederation/casa](https://github.com/GluuFederation/casa/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
 
-- []() 
-- []() 
-- []() 
-- []() 
-- []() 
+- [#254](https://github.com/GluuFederation/casa/issues/254) feat: support custom location of .administrable file
+- [#278](https://github.com/GluuFederation/casa/issues/278) feat: allow usage of 2fa when user has no password
+- [#276](https://github.com/GluuFederation/casa/issues/276) fix: alternative options not working
 
 ### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxshibboleth/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
 
-- []() 
-- []() 
-- []() 
-- []() 
-- []() 
-
-### [GluuFederation/gluu-passport](https://github.com/GluuFederation/gluu-passport/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
-
-- []() 
-- []() 
-- []() 
-- []() 
-- []() 
-
-### [GluuFederation/fido2](https://github.com/GluuFederation/fido2/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
-
-- []() 
-- []() 
-- []() 
-- []() 
-- []() 
+- [#56f4ac3](https://github.com/GluuFederation/oxShibboleth/commit/56f4ac3eda95163cc56de24e9eb6f1e76101ae33) feat(idp): update java-support
 
 ### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
 
-- []() 
-- []() 
-- []() 
-- []() 
-- []() 
+- [#976](https://github.com/GluuFederation/community-edition-setup/pull/976) Change response status 200 (Ok) by 201 (Created) for Client Registration
+- [#977](https://github.com/GluuFederation/community-edition-setup/pull/977) feat: Added new settings for date formatting
+- [#988](https://github.com/GluuFederation/community-edition-setup/issues/988) fix(community-edition-setup): Post-install possiblity to add certificates needed for Passwurd API
+- [#9e12c20](https://github.com/GluuFederation/community-edition-setup/commit/9e12c20b443066fb6188fc05e82d8d6c9172954b) feat: add options to validation connections
+- [#1001](https://github.com/GluuFederation/community-edition-setup/pull/1001) feat: support for EL 9
+- [#f4feac2](https://github.com/GluuFederation/community-edition-setup/commit/f4feac2192ec9b7bcf3d0783bf07a138bdf03407) feat: RHEL 9 support
+- [#1030](https://github.com/GluuFederation/community-edition-setup/pull/1030) feat: cache cleaning script
+- [#4d16b43](https://github.com/GluuFederation/community-edition-setup/commit/4d16b4325a592d4154c2d58d94bdaac02f7802ae) fix casa startup
 
 ## 4.5.3 Fixes / Enhancements
 
