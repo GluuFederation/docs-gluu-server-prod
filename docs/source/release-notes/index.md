@@ -86,6 +86,79 @@ documentation and administrative guide.
 - [#1044](https://github.com/GluuFederation/community-edition-setup/issues/1044) fix: casa copy of super gluu script crashes upon load
 - [#1048](https://github.com/GluuFederation/community-edition-setup/pull/1048) feat(fido2): add fido2 conf error
 
+## 4.5.4 Fixes / Enhancements
+
+### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [#1763](https://github.com/GluuFederation/oxAuth/pull/1763) feat(oxauth): end 
+  session - if id_token is expired but signature is correct, look up session by 
+  sid claim
+- [#6ae16bb](https://github.com/GluuFederation/oxAuth/commits/6ae16bb3441b9e55d09b028abd2ab2c1774213e5) fix: 
+  catch org.eclipse.jetty.http.BadMessageException: in jans #3330
+- [#1760](https://github.com/GluuFederation/oxAuth/issues/1760) feat(oxauth): 
+  add ability to return error out of introspection and 
+  update_token custom script
+- [#1772](https://github.com/GluuFederation/oxAuth/issues/1772) feat: custom 
+  script: skip step for authentication flow
+- [#1767](https://github.com/GluuFederation/oxAuth/issues/1767) Custom script: 
+  Captcha on oxAuth login
+- [#1760](https://github.com/GluuFederation/oxAuth/issues/1760) feat(oxauth): add ability to return error out of introspection and update_token custom script
+- [#1790](https://github.com/GluuFederation/oxAuth/pull/1790) Feature: Change response status 200 (Ok) by 201 (Created) for Client Registration
+- [#1791](https://github.com/GluuFederation/oxAuth/pull/1791) Feature: Birthdate formatting added, respecting backward compatibility
+- [#1793](https://github.com/GluuFederation/oxAuth/issues/1793) When trying to get a claims name, oxAuth does not return it
+- [#80f850d](https://github.com/GluuFederation/oxAuth/commit/80f850df7643f4200c76ba4e1507363edd336bc6) feat: add HttpService2 based on new API and connection pool
+- [#1818](https://github.com/GluuFederation/oxAuth/issues/1818) feat(oxauth): we should strive to let RP handle error instead of showing Ooops page 
+- [#1728](https://github.com/GluuFederation/oxAuth/issues/1728) feat: introduce new UpdateToken methods
+- [#1774](https://github.com/GluuFederation/oxAuth/issues/1774) feat(oxauth): make not found exception logging level configurable
+- [#fed0d02](https://github.com/GluuFederation/oxAuth/commit/fed0d020674b253f07e1937a7759ea4ecbce819e) feat: add method to allow modify headers
+- [#83a663d](https://github.com/GluuFederation/oxAuth/commit/83a663d599aeee70da9fe3d29433834e3af43456)  feat: add authorization headers needed to access scan API from SG script
+- [#1839](https://github.com/GluuFederation/oxAuth/issues/1839) feat: add proxy support to HttpService2 (apache http client) 
+- [#1f5a737](https://github.com/GluuFederation/oxAuth/commit/1f5a737c8d58694b4e5f3d0971886adc344f6eaa) feat: add option to HttpService2 to allow configure connection timeouts
+- [#1850](https://github.com/GluuFederation/oxAuth/issues/1850) feat(oxauth): create MAU exporter
+- []() 
+- [#1850](https://github.com/GluuFederation/oxAuth/issues/1850) feat(oxauth): stat exporter - added dynamic client registration
+- [#1849](https://github.com/GluuFederation/oxAuth/issues/1849) fix(oxauth): explicit user consent is required when up-scope within client authorized scopes 
+- [#1853](https://github.com/GluuFederation/oxAuth/issues/1853) fix(oxauth): if scopes are missed in grant_type=refresh_token AS must take scopes from previous grant
+- [#1860](https://github.com/GluuFederation/oxAuth/issues/1860) Support passing custom parameters in the body of POST authorization request
+- [#1865](https://github.com/GluuFederation/oxAuth/issues/1865) feat: add configuration property to AS which will allow to bypass basic client authentication restriction to query only own tokens
+- [#1891](https://github.com/GluuFederation/oxAuth/issues/1891) fix(oxauth): the `requestUriParameterSupported` and `requestParameterSupported` should be involved in request processing
+- [#9dc5697](https://github.com/GluuFederation/oxAuth/commit/9dc5697d94b3318eccb28714884e67d0aa3a4a1b) feat(fido2): allow to update device data in SG authentication response
+
+### [GluuFederation/oxTrust](https://github.com/GluuFederation/oxTrust/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [#2287](https://github.com/GluuFederation/oxTrust/issues/2287) fix : Remove Locale dropdown from to top menu
+- [#2282](https://github.com/GluuFederation/oxTrust/issues/2282) Not possible to add a deep link as redirect_uri
+- [#2261](https://github.com/GluuFederation/oxTrust/issues/2261) fix(api-server): Deleting trust relationship has no response from server
+- [#2266](https://github.com/GluuFederation/oxTrust/issues/2266) Audit Log for All Config Changes
+- [#c2445d2](https://github.com/GluuFederation/oxTrust/commit/c2445d23ef187b0c25ccd1e76e77bfa0e81a7d64) feat: added search box to filter scopes
+- [#2333](https://github.com/GluuFederation/oxTrust/issues/2333) feat CR should support person loads from AD servers with different primary key attribute names
+- [#2346](https://github.com/GluuFederation/oxTrust/issues/2346) feat: Add MAU Report to oxTrust
+
+### [GluuFederation/oxd](https://github.com/GluuFederation/oxd/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [#3ad3f89](https://github.com/GluuFederation/oxd/commit/3ad3f8957463cd2bb9461cf492eef715709bb0f1) feat(jans-orm): update dropwizard-core
+
+### [GluuFederation/casa](https://github.com/GluuFederation/casa/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [#254](https://github.com/GluuFederation/casa/issues/254) feat: support custom location of .administrable file
+- [#278](https://github.com/GluuFederation/casa/issues/278) feat: allow usage of 2fa when user has no password
+- [#276](https://github.com/GluuFederation/casa/issues/276) fix: alternative options not working
+
+### [GluuFederation/oxShibboleth](https://github.com/GluuFederation/oxshibboleth/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
+
+- [#56f4ac3](https://github.com/GluuFederation/oxShibboleth/commit/56f4ac3eda95163cc56de24e9eb6f1e76101ae33) feat(idp): update java-support
+
+### [GluuFederation/community-edition-setup](https://github.com/GluuFederation/community-edition-setup/issues?utf8=?&q=is%3Aissue+milestone%3A4.5.0+)
+
+- [#976](https://github.com/GluuFederation/community-edition-setup/pull/976) Change response status 200 (Ok) by 201 (Created) for Client Registration
+- [#977](https://github.com/GluuFederation/community-edition-setup/pull/977) feat: Added new settings for date formatting
+- [#988](https://github.com/GluuFederation/community-edition-setup/issues/988) fix(community-edition-setup): Post-install possiblity to add certificates needed for Passwurd API
+- [#9e12c20](https://github.com/GluuFederation/community-edition-setup/commit/9e12c20b443066fb6188fc05e82d8d6c9172954b) feat: add options to validation connections
+- [#1001](https://github.com/GluuFederation/community-edition-setup/pull/1001) feat: support for EL 9
+- [#f4feac2](https://github.com/GluuFederation/community-edition-setup/commit/f4feac2192ec9b7bcf3d0783bf07a138bdf03407) feat: RHEL 9 support
+- [#1030](https://github.com/GluuFederation/community-edition-setup/pull/1030) feat: cache cleaning script
+- [#4d16b43](https://github.com/GluuFederation/community-edition-setup/commit/4d16b4325a592d4154c2d58d94bdaac02f7802ae) fix casa startup
+
 ## 4.5.3 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+)
