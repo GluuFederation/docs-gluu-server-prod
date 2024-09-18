@@ -6,13 +6,13 @@ Gluu Server offers REST APIs for the [oxTrust Admin GUI](https://gluu.org/docs/g
 
 ## VM Installation instructions
 
-Add the REST API extension to an existing Gluu 4.4.x deployment by following these steps:
+Add the REST API extension to an existing Gluu 4.5.x deployment by following these steps:
 
-1. Inside the Gluu chroot, navigate to `/custom/libs/`.
+1. Inside the Gluu chroot, navigate to `/opt/gluu/jetty/identity/custom/libs/`.
 
-1. In this folder, download the .jar file corresponding to the Gluu Server 4.4 version currently installed:
+1. In this folder, download the .jar file corresponding to the Gluu Server 4.5 version currently installed:
 2. 
-    - [4.4.1.Final](https://maven.gluu.org/maven/org/gluu/oxtrust-api-server/4.4.1.Final/oxtrust-api-server-4.4.1.Final.jar)
+    - [4.5.5.Final](https://maven.gluu.org/maven/org/gluu/oxtrust-api-server/4.5.5.Final/oxtrust-api-server-4.5.5.Final.jar)
 
 1. Navigate to `/opt/gluu/jetty/identity/webapps/`.
 
@@ -35,7 +35,7 @@ Add the REST API extension to an existing Gluu 4.4.x deployment by following the
 
 1. On the second to last line, replace `[jarName]` with the name of the `.jar` file downloaded in step 2.
 
-1. [Restart](https://gluu.org/docs/gluu-server/4.4/operation/services/#restart) the `identity` service.
+1. [Restart](https://gluu.org/docs/gluu-server/4.5/operation/services/#restart) the `identity` service.
 
 ## Kubernetes and Docker instructions
 
@@ -395,7 +395,7 @@ Follow these steps to configure the test mode:
     
     - Client Name: **whatever you want**
     - Client secret: **a memorable secret**
-    - scopes: **openid**,**permission**
+    - scopes: **openid**,**permission**, **https://gluu.org/auth/oxtrust.authenticationmethod.read** [ you might need more scopes to be released depending on your target operation. See the oxtrust.log for further instructions if something doesn't work. Log is pretty straight forward and verbose ] 
     - grand types: **client_credentials**
     - Response type: **token**
     - NB: After pressing the save button, take note of the client ID generated and the secret. We need them for next step.
@@ -407,6 +407,16 @@ Follow these steps to configure the test mode:
     ```
     
 1. Use that accesss token as Bearer token when making api calls.
+
+  - GET: `https://yourhostname/identity/restv1/api/v1/acrs`
+  - Auth Type: Bearer Token
+  - Response: 
+     ```
+        {
+            "defaultAcr": "simple_password_auth",
+            "oxtrustAcr": "simple_password_auth"
+        }
+     ```
    
 ### UMA Mode for VM
   
