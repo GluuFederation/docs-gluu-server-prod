@@ -403,7 +403,7 @@ Follow these steps to configure the test mode:
 1. Run the command below from a terminal to request an access token from Gluu Server
 
     ```
-    curl -k -u 'testClientId:testClientSecert' -d grant_type=client_credentials https://yourhostname/oxauth/restv1/token
+    curl -k -u 'testClientId:testClientSecert' -d grant_type=client_credentials -d scope='https://gluu.org/auth/oxtrust.authenticationmethod.read' https://yourhostname/oxauth/restv1/token
     ```
     
 1. Use that accesss token as Bearer token when making api calls.
