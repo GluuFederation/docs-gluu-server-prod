@@ -1,38 +1,35 @@
-# Test Gluu Server with SAMLTest.id
-
-## Configuration in SAMLTest.ID website
-
-  - Navigate to the SAMLTest website: `https://samltest.id`
-  - Upload or Fetch your Gluu Server Shibboleth metadata with the following link: `https://[hostname_of_gluu_server]/idp/shibboleth` 
-  
-  ![image](../../img/samltest_id/SAMLTestID_upload_fetch_metadata.PNG)
-  
-  - After successful upload, you will see the following confirmation: 
-  
-  ![image](../../img/samltest_id/SAMLTESTID_METADATA_PARSED.PNG)
+# Test Gluu Server with SPTEST.IAMSHOWCASE.COM
 
 ## Configuration in Gluu Server
 
- - From `https://samltest.id/download/`, grab the SAMLTest.ID SP link: `https://samltest.id/saml/sp`
- - Move to create Trust Relationship in Gluu Server. [Here](../../admin-guide/saml.md#trust-relationship-requirements) is how you can create SAML Trust Relationship in Gluu Server.
- ![image](../../img/samltest_id/SAMLTestID_Gluu_TR.PNG)
+* From https://sptest.iamshowcase.com/instructions#start, grab the sptest.iamshowcase.com SP metadata, link: https://sptest.iamshowcase.com/testsp_metadata.xml
 
-## Test
+* Move to create Trust Relationship in Gluu Server. Here is how you can create SAML Trust Relationship in Gluu Server. 
 
- - Go to `https://samltest.id/start-idp-test/`
- - Login Initiator: `https://[hostname_of_gluu_server]/idp/shibboleth`
- - If everything goes well, you will your Gluu Server's login page
- - Log in there
- - You will be redirected to the SAMLTest.ID page.
- 
- ![image](../../img/samltest_id/SAMLTestID_success.PNG)
- 
-### Logout Testing
 
- - To test logout from SAMLTest.ID, you need to enable the `SAML2Logout` Profile from the Trust Relationship like below. 
- 
- ![image](../../img/samltest_id/SAMLTestID_Gluu_logout_TR.PNG)
- 
- - Update it, then test after 5 mins from SAMLTest.ID 
- 
- ![image](../../img/samltest_id/SAMLTestID_sp_logout.PNG)
+![Screenshot from 2024-09-18 00-51-38](https://github.com/user-attachments/assets/f2983b9e-dd61-48ff-98a9-dcc44279e7bb)
+
+
+## Configuration in SPTEST.IAMSHOWCASE.COM website
+
+* Navigate to the SAMLTest website: https://sptest.iamshowcase.com/instructions#spinit
+* Upload your Gluu Server Shibboleth metadata. Collect your IDP metadata with the following link: https://<server_name>/idp/shibboleth
+
+  
+![Screenshot from 2024-09-20 02-16-59](https://github.com/user-attachments/assets/860d98eb-d319-4fb0-82a5-34b1a45dc544)
+
+* After successful upload, you will see the following confirmation URL
+
+  
+![Screenshot from 2024-09-20 02-20-17](https://github.com/user-attachments/assets/a2064296-6518-437d-a898-7da966251e09)
+
+
+## Test 
+
+- Copy the confirmation URL.
+- Open a new tab and paste it.
+- After successful authentication, you will be redirected to the protected page of the SPTEST.IAMSHOWCASE.COM website.
+
+
+![Screenshot from 2024-09-20 02-44-24](https://github.com/user-attachments/assets/bd84a976-0aa1-48c9-bf5d-32f065d5083d)
+
