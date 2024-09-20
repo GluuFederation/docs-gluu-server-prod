@@ -30,6 +30,8 @@
 - Open a new tab and paste it.
 - After successful authentication, you will be redirected to the protected page of the SPTEST.IAMSHOWCASE.COM website.
 
+![Screenshot from 2024-09-20 23-57-10](https://github.com/user-attachments/assets/ee18badf-b28b-4f26-929b-45ab0dd5a987)
 
-![Screenshot from 2024-09-20 02-44-24](https://github.com/user-attachments/assets/bd84a976-0aa1-48c9-bf5d-32f065d5083d)
+
+// ![Screenshot from 2024-09-20 02-44-24](https://github.com/user-attachments/assets/bd84a976-0aa1-48c9-bf5d-32f065d5083d)
 
