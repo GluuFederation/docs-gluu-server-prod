@@ -6,13 +6,15 @@ Gluu Server offers REST APIs for the [oxTrust Admin GUI](https://gluu.org/docs/g
 
 ## VM Installation instructions
 
-Add the REST API extension to an existing Gluu 4.4.x deployment by following these steps:
+Add the REST API extension to an existing Gluu 4.5.x deployment by following these steps:
 
-1. Inside the Gluu chroot, navigate to `/custom/libs/`.
+1. Inside the Gluu chroot, navigate to `/opt/gluu/jetty/identity/custom/libs/`.
 
-1. In this folder, download the .jar file corresponding to the Gluu Server 4.4 version currently installed:
-2. 
-    - [4.4.1.Final](https://maven.gluu.org/maven/org/gluu/oxtrust-api-server/4.4.1.Final/oxtrust-api-server-4.4.1.Final.jar)
+1. In this folder, download the .jar file corresponding to the Gluu Server 4.4 version currently installed: 
+
+    - [4.5.5.Final](https://maven.gluu.org/maven/org/gluu/oxtrust-api-server/4.5.5.Final/oxtrust-api-server-4.5.5.Final.jar)
+
+1. Change permission of this jar to `jetty:gluu`
 
 1. Navigate to `/opt/gluu/jetty/identity/webapps/`.
 
@@ -386,16 +388,13 @@ Follow these steps to configure the test mode:
 1. Edit `identity.xml` as mentioned [above](#vm-installation-instructions)
 1. [Restart](../operation/services.md#commands) the `identity` service
 1. Log into Gluu Admin UI
-1. Navigate to `Configuration` > `Manage Custom Scripts`
-1. Under `UMA RPT Policies`, select and enable the custom script named `oxtrust_api_access_policy`
-1. Save the custom script
 1. Navigate to `Configuration` > `JSON Configuration`, select `oxTrust Configuration` tab
 1. Search for the field named `oxTrustApiTestMode`, set it to `True` and save the change.
 1. Add an OpenId Connect client for testing:
     
     - Client Name: **whatever you want**
     - Client secret: **a memorable secret**
-    - scopes: **openid**,**permission**
+    - scopes: **openid**,**permission**, ** https://gluu.org/auth/oxtrust.authenticationmethod.read** [ you might need more scopes to be released depending on your target operation. See the oxtrust.log for further instructions if something doesn't work. Log is pretty straight forward and verbose ]
     - grand types: **client_credentials**
     - Response type: **token**
     - NB: After pressing the save button, take note of the client ID generated and the secret. We need them for next step.
