@@ -21,23 +21,22 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
 1.  Compare `values-4.2.yaml` with the new `values.yaml`, and then modify `values.yaml`:
 
     ```yaml
+    # some contents are redacted
     global:
       jackrabbit:
         enabled: true
       upgrade:
         enabled: true
-        image:
-          tag: 4.5.3-2
-        sourceVersion: "4.2" #current chart version
-        targetVersion: "4.5"
+        sourceVersion: "4.2" # old Gluu version (major.minor format)
+        targetVersion: "4.5" # new Gluu version (major.minor format)
         pullSecrets:
           - name: regcred
       gluuPersistenceType: ldap
-      
+
     config:
       configmap:
         gluuDocumentStoreType: JCA
-        
+
     jackrabbit:
       secrets:
         gluuJackrabbitAdminPass: admin # make sure the value is equal to the one in old values.yaml
@@ -118,7 +117,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
                     secretName: offline-sql-pass # adjust the value according to your setup
               containers:
                 - name: offline-persistence-load
-                  image: gluufederation/persistence:4.5.3-2
+                  image: gluufederation/persistence:4.5.5-1
                   volumeMounts:
                     - name: custom-gluu-ldif
                       mountPath: /app/custom_ldif/01_gluu.ldif
@@ -187,7 +186,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
               - -c
               - |
                 /tmp/mycustomldif.sh
-              image: gluufederation/persistence:4.5.3-2
+              image: gluufederation/persistence:4.5.5-1
               volumeMounts:
                 - name: my-custom-ldif
                   mountPath: /tmp/mycustomldif.sh
