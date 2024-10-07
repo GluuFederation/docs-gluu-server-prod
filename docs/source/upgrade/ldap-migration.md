@@ -27,7 +27,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
       upgrade:
         enabled: true
         image:
-          tag: 4.5.3-2
+          tag: 4.5.5-1
         sourceVersion: "4.2" #current chart version
         targetVersion: "4.5"
         pullSecrets:
@@ -42,7 +42,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
       secrets:
         gluuJackrabbitAdminPass: admin # make sure the value is equal to the one in old values.yaml
     ```
-1.  In order for the upgrade job to complete, opendj image tag has to be 4.5.
+1.  In order for the upgrade job to complete, opendj image tag has to be `4.5.5-x`
 
 1.  Make sure that the completed `gluu-config` and `gluu-persistence` jobs are deleted. 
 
