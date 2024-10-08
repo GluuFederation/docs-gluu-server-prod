@@ -27,7 +27,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
       upgrade:
         enabled: true
         image:
-          tag: 4.5.3-2
+          tag: 4.5.5-1
         sourceVersion: "4.2" #current chart version
         targetVersion: "4.5"
         pullSecrets:
@@ -42,6 +42,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
       secrets:
         gluuJackrabbitAdminPass: admin # make sure the value is equal to the one in old values.yaml
     ```
+1.  In order for the upgrade job to complete, opendj image tag has to be `4.5.5-x`
 
 1.  Make sure that the completed `gluu-config` and `gluu-persistence` jobs are deleted. 
 
@@ -56,7 +57,9 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
     ```
     mkdir -p custom_ldif
     kubectl -n <namespace> exec -ti <opendj-pod> -- /opt/opendj/bin/ldapsearch -D "cn=directory manager" -p 1636 --useSSL -w <ldap-password> --trustAll -b "o=gluu" -s sub objectClass=* > custom_ldif/01_gluu.ldif
+
     kubectl -n <namespace> exec -ti <opendj-pod> -- /opt/opendj/bin/ldapsearch -D "cn=directory manager" -p 1636 --useSSL -w <ldap-password> --trustAll -b "o=site" -s sub objectClass=* > custom_ldif/02_site.ldif
+    
     kubectl -n <namespace> exec -ti <opendj-pod> -- /opt/opendj/bin/ldapsearch -D "cn=directory manager" -p 1636 --useSSL -w <ldap-password> --trustAll -b "o=metric" -s sub objectClass=* > custom_ldif/03_metric.ldif
     ```
     
@@ -118,7 +121,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
                     secretName: offline-sql-pass # adjust the value according to your setup
               containers:
                 - name: offline-persistence-load
-                  image: gluufederation/persistence:4.5.3-2
+                  image: gluufederation/persistence:4.5.5-1
                   volumeMounts:
                     - name: custom-gluu-ldif
                       mountPath: /app/custom_ldif/01_gluu.ldif
@@ -187,7 +190,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
               - -c
               - |
                 /tmp/mycustomldif.sh
-              image: gluufederation/persistence:4.5.3-2
+              image: gluufederation/persistence:4.5.5-1
               volumeMounts:
                 - name: my-custom-ldif
                   mountPath: /tmp/mycustomldif.sh
