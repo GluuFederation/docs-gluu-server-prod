@@ -121,7 +121,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
                     secretName: offline-sql-pass # adjust the value according to your setup
               containers:
                 - name: offline-persistence-load
-                  image: gluufederation/persistence:4.5.3-2
+                  image: gluufederation/persistence:4.5.5-1
                   volumeMounts:
                     - name: custom-gluu-ldif
                       mountPath: /app/custom_ldif/01_gluu.ldif
@@ -190,7 +190,7 @@ This documentation demonstrates how to upgrade a kubernetes setup of Gluu >=4.2 
               - -c
               - |
                 /tmp/mycustomldif.sh
-              image: gluufederation/persistence:4.5.3-2
+              image: gluufederation/persistence:4.5.5-1
               volumeMounts:
                 - name: my-custom-ldif
                   mountPath: /tmp/mycustomldif.sh
