@@ -1,3 +1,4 @@
+# Moved to [Gluu4 monorepo](https://github.com/GluuFederation/gluu4/tree/main/docs-gluu-server-prod)
 # docs-ce-prod 
 
 This repo is holds all versions of CE docs and includes scripts to publish.  All docs are processed using mkdocs. This Repo is organized with branches for each version of the documentation.
