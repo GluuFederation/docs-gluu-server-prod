@@ -105,7 +105,7 @@ Search for the field named `oxTrustApiTestMode`, set it to `True` and save the c
     ```sh
     curl -k -u '0008-b52a8524-35b2-4835-968e-481a366be8cd:TVtZwLZxp25XFDelMJNDQsa8' \
         https://demoexample.gluu.org/oxauth/restv1/token \
-        -d grant_type=client_credentials
+        -d 'grant_type=client_credentials&scope=https://gluu.org/auth/oxtrust.group.read'
     ```
 
     The response example:
