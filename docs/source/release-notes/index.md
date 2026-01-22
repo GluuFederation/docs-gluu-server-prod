@@ -35,6 +35,9 @@ documentation and administrative guide.
 - FluentD 3.5
 - Redis
 
+!!! Note
+    The release notes for releases after `4.5.5` are documented in the [Release Notes](https://github.com/GluuFederation/gluu4/releases).
+
 ## 4.5.5 Fixes / Enhancements
 
 ### [GluuFederation/oxAuth](https://github.com/GluuFederation/oxAuth/issues?utf8=%3F&q=is:issue+milestone:4.5+) 
