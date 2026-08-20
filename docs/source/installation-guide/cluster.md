@@ -11,7 +11,7 @@ A few notes before getting started:
 
 - For [VIP Customers](https://www.gluu.org/pricing/#vip), there are two alternatives to the "manual clustering" documentation below: 
 
-    1. For VM-based clustered deployments, we offer a tool called [Cluster Manager](https://gluu.org/docs/cm) to automate the steps below. 
+    1. For VM-based clustered deployments, we offer a tool called [Cluster Manager](https://docs-4.gluu.org/cm/) to automate the steps below. 
 
     1. For multi-node container deployments (i.e. Docker Swarm & Kubernetes), we offer [separate guides and documentation](https://gluu.org/docs/gluu-server/latest/installation-guide/install-kubernetes/). 
 
